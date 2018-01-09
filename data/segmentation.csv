@@ -1,0 +1,5 @@
+task	model	date	size	memory	paper
+segmentation	fcn				
+segmentation	mask r-cnn				
+segmentation	deepLab				
+segmentation	u-net				
