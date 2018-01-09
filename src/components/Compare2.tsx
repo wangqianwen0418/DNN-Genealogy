@@ -89,7 +89,7 @@ export default class Compare2 extends React.Component<{}, State>{
             .attr("r", function (d) { return 8; })
             .attr("fill", function (d) { return getColor("dot")})
             .on("click", function(d){
-                d3.select(this).classed("selected", true)
+                d3.select(this).classed("selected", selected.indexOf(d.name)==-1)
                 selectNode(d)
             })
 
