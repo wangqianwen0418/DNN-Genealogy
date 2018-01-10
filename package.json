@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/antd": "^1.0.0",
-    "@types/d3": "^4.12.0",
-    "@types/dagre": "^0.7.38",
-    "@types/react-redux": "^5.0.13",
     "antd": "^2.13.10",
+    "axios": "^0.17.1",
     "d3": "^4.12.2",
     "dagre": "^0.7.4",
     "react": "^16.1.1",
@@ -23,6 +20,10 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/antd": "^1.0.0",
+    "@types/d3": "^4.12.0",
+    "@types/dagre": "^0.7.38",
+    "@types/react-redux": "^5.0.13",
     "@types/enzyme-adapter-react-16": "^1.0.1",
     "@types/jest": "^21.1.6",
     "@types/node": "^8.0.53",
