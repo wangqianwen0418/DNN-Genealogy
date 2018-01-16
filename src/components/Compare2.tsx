@@ -12,11 +12,11 @@ export interface Dot {
 }
 export interface State {
     selected: string[],
-    nns:Dot[],
+    nns: Dot[],
     attr_names: string[]
 }
-export interface Props{
-    drawDag: (name:string, task:string)=>void
+export interface Props {
+    drawDag: (name: string, task: string) => void
 }
 
 // let datum: Dot[] = [
@@ -28,19 +28,20 @@ export interface Props{
 // ]
 
 let simulation = d3.forceSimulation()
+    .force("charge", d3.forceManyBody().strength(-5))
 
 
 
 export default class Compare2 extends React.Component<Props, State>{
-    public nodes: any; r: number = 150; node_r =4
+    public nodes: any; r: number = 150; node_r = 4
     constructor(props: Props) {
         super(props)
         this.arc = this.arc.bind(this)
-        this.state = { 
+        this.state = {
             selected: [],
-            nns:[],
-            attr_names:[]
-         }
+            nns: [],
+            attr_names: []
+        }
     }
     arc(x: number = 0, y: number = 0, r: number, startAngle: number, endAngle: number) {
         var start = this.polarToCartesian(x, y, r, endAngle);
@@ -74,29 +75,30 @@ export default class Compare2 extends React.Component<Props, State>{
         let y: number = attr.map((d: number, idx: number) => d * Math.sin(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
         return y / len
     }
-    async getData(){
+    async getData() {
         let res = await axios.get('../../data/recognition.csv')
         let datum = res.data
         let lines = datum.split('\n')
         let attr_names = lines[0].split('|').slice(4, 9)
         // console.info(attr_names)
-        lines = lines.slice(1) 
-        let nns:Dot[] = []
-        lines.forEach((line:string)=>{
-            let attrs:string[] =  line.split('|')
+        lines = lines.slice(1)
+        let nns: Dot[] = []
+        lines.forEach((line: string) => {
+            let attrs: string[] = line.split('|')
             nns.push(
                 {
-                    name:attrs[1], 
+                    name: attrs[1],
                     attr: attrs.slice(4, 9)
-                    .map((d:string)=>{
-                        return d=="na"?0:100-parseFloat(d)
-                    })})
+                        .map((d: string) => {
+                            return d == "na" ? 0 : 100 - parseFloat(d)
+                        })
+                })
 
         })
-        this.setState({nns, attr_names})
+        this.setState({ nns, attr_names })
 
     }
-    componentWillMount(){
+    componentWillMount() {
         this.getData()
     }
     componentDidUpdate() {
@@ -115,33 +117,39 @@ export default class Compare2 extends React.Component<Props, State>{
             this.props.drawDag(d.name, "recognition")
         }
         selectNode = selectNode.bind(this)
-
+        let node_r = this.node_r
         this.nodes = d3.select(".compareView")
             .selectAll(".dot")
             .attr("class", "dot")
             .data(nns)
             .enter().append("circle")
-            .attr("r", this.node_r)
-            .attr("cx", (d,i)=>this.getForceX(d.attr)||0)
-            .attr("cy", (d,i)=>this.getForceY(d.attr)||0)
-            .attr("fill", function (d) { return getColor("dot") })
-            .attr("title", d=>d.name)
+            .attr("r", node_r)
+            .attr("cx", (d, i) => this.getForceX(d.attr) || 0)
+            .attr("cy", (d, i) => this.getForceY(d.attr) || 0)
+            .attr("fill", (d) => "#666")
+            .attr("title", d => d.name)
             .on("click", function (d) {
-                d3.select(this).classed("selected", selected.indexOf(d.name) == -1)
+                // d3.select(this).classed("selected", selected.indexOf(d.name) == -1)
+                let selected_idx: number = selected.indexOf(d.name)
+                d3.select(this)
+                    .attr("fill", (d: Dot) => selected_idx == -1 ? getColor(d.name) : "#666")
+                    .attr("r", (d) => selected_idx == -1 ? node_r * 1.3 : node_r)
+                    .style("z-index", selected_idx == -1 ? 100 : 3)
+                // .style("stroke", (d:Dot)=>selected_idx==-1?"blue":"none")
                 selectNode(d)
             })
 
 
         simulation
             .nodes(nns)
-            .force("collide", d3.forceCollide().strength(.5).radius(this.node_r).iterations(3))
+            .force("collide", d3.forceCollide().strength(.5).radius(this.node_r * 1.1).iterations(3))
             .force("forceX", d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
             .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on("tick", ticked);
         let nodes = this.nodes
         function ticked() {
-            nodes.attr("cx", function (d: any) { return d.x||0; })
-                .attr("cy", function (d: any) { return d.y||0; })
+            nodes.attr("cx", function (d: any) { return d.x || 0; })
+                .attr("cy", function (d: any) { return d.y || 0; })
         }
     }
     render() {
@@ -150,17 +158,20 @@ export default class Compare2 extends React.Component<Props, State>{
         let bar_a: number = 360 / attr_names.length
         let bar_w: number = 15
 
-        let bars: JSX.Element[][] = nns
-            .filter((d: Dot) => selected.indexOf(d.name) != -1)
+        let selected_nns = selected.map((name: string) => {
+            return nns.filter((nn) => nn.name == name)[0]
+        })
+
+        let bars: JSX.Element[][] = selected_nns
             .map((data: Dot, idx: number) => {
                 return data.attr.map((attr: number, attr_i: number) => {
                     return <g>
                         <path key={`point_${idx}_attr_${attr_i}_bg`}
                             d={
-                                this.arc(0, 0, 
-                                this.r + margin + (bar_w + margin) * idx + bar_w/2, 
-                                bar_a * attr_i, 
-                                bar_a * (attr_i + 1)-margin)
+                                this.arc(0, 0,
+                                    this.r + margin + (bar_w + margin) * idx + bar_w / 2,
+                                    bar_a * attr_i,
+                                    bar_a * (attr_i + 1) - margin)
                             }
                             fill="none"
                             strokeWidth={bar_w}
@@ -169,26 +180,36 @@ export default class Compare2 extends React.Component<Props, State>{
                         </path>
                         <path key={`point_${idx}_attr_${attr_i}`}
                             d={
-                                this.arc(0, 0, 
-                                this.r + margin + (bar_w + margin) * idx + bar_w/2, 
-                                bar_a * attr_i, 
-                                bar_a * attr_i + (bar_a-margin) * attr / 100)
+                                this.arc(0, 0,
+                                    this.r + margin + (bar_w + margin) * idx + bar_w / 2,
+                                    bar_a * attr_i,
+                                    bar_a * attr_i + (bar_a - margin) * attr / 100)
                             }
                             fill="none"
                             strokeWidth={bar_w}
-                            stroke={getColor(attr_i.toString())}>
+                            stroke={getColor(data.name)}>
                         </path>
                     </g>
                 })
             })
 
         let axis: JSX.Element[] = attr_names.map((attr: string, i: number) => {
-            return <path key={`axis_${attr}`}
-                d={this.arc(0, 0, this.r + margin, bar_a * i, bar_a * (i + 1)-margin)}
-                fill="none"
-                strokeWidth={2}
-                stroke={getColor(i.toString())}>
-            </path>
+            return <g>
+                <path key={`axis_${attr}`}
+                    d={this.arc(0, 0, this.r + margin, bar_a * i, bar_a * (i + 1) - margin)}
+                    fill="none"
+                    strokeWidth={2}
+                    stroke="gray"
+                // stroke={getColor(i.toString())}
+                >
+                </path>
+                <text 
+                x={(this.r) * Math.cos((bar_a*i-45)/180*Math.PI)} 
+                y={(this.r) * Math.sin((bar_a*i-45)/180*Math.PI)}
+                >
+                {attr}
+                </text>
+            </g>
         })
         // let dots: JSX.Element[] = datum.map((data: { [key: string]: any }, i: number) => {
         //     return <circle

@@ -2,7 +2,7 @@ import * as React from "react";
 import "./Graph.css";
 import { IRNode } from "../types";
 import * as dagre from 'dagre';
-import { Node, Edge, GraphEdge } from 'dagre';
+import { Node, GraphEdge } from 'dagre';
 import { getColor } from "../helper";
 
 // export interface Node {
@@ -36,36 +36,42 @@ export default class Network extends React.Component<Props, State> {
         }
         this.shiftDown = false
     }
-    getDag(IRnodes: IRNode[]) {
-
-        const g = new dagre.graphlib.Graph();
-        g.setGraph({ ranksep: 10, marginx: margin, marginy: margin, rankdir: "BT" });
-        g.setDefaultEdgeLabel((edge: Edge) => { return {} });
-        IRnodes.forEach((node: any) => {
-            g.setNode(node.name, { label: node.name, width: node_w, height: node_h, op: node.op })
-            if (node.input) {
-                node.input.forEach((input: string) => {
-                    g.setEdge(input, node.name)
+    getDag(layers: IRNode[]) {
+        const nodeH = 10, nodeW = 200
+        let g = new dagre.graphlib.Graph();
+        g.setGraph({ 
+            ranksep: nodeH*2.5, 
+            marginx: margin, 
+            marginy: margin, 
+            rankdir: 'TB',
+            edgesep: nodeW*0.02 
+        });
+        g.setDefaultEdgeLabel(() => { return {}; });
+        layers.forEach(layer => {
+            // let label = `${layer.name}:${layer.class_name}`
+            g.setNode(layer.name, { label: layer.name, width: nodeW, height: nodeH })
+            //IR model or keras model
+            if (layer.inbound_nodes.length > 0) {
+                let inputs = layer.inbound_nodes[0]
+                inputs.forEach((input:string[]|any[]) => {
+                    g.setEdge(input[0], layer.name)
                 })
             }
         })
         dagre.layout(g)
-        let nodes: Node[] = []
-        let edges: GraphEdge[] = []
+        let nodes:Node[] = [], edges:any[] = []
         g.nodes().forEach((v) => {
             if (g.node(v)) {
                 nodes.push(g.node(v))
             }
         })
         g.edges().forEach((e) => {
-            let edge: GraphEdge = g.edge(e)
-            edge['from'] = e.v
-            edge['to'] = e.w
-            edges.push(edge)
+            
+            edges.push(g.edge(e))
         });
-        let h = Number(g.graph().height),
-            w = Number(g.graph().width)
-        return { nodes, edges, h, w }
+        let height = g.graph().height,
+            width = g.graph().width
+        return { nodes, edges, height, width }
     }
     drawNodes(nodes: Node[]) {
         return (<g className="nodes" >
@@ -95,13 +101,12 @@ export default class Network extends React.Component<Props, State> {
 
         }
         let pathData = `${start}  ${vias.join(' ')}`
-        return <g className='link' key={`${from}->${to}`}>
+        return <g className='link' key={`${i}_${from}->${to}`}>
             <path
-                key={`${edge.from}->${edge.to}`}
                 d={pathData}
-                stroke="yellow"
-                fill='transparent'
-                strokeWidth="3"
+                stroke="gray"
+                fill='none'
+                strokeWidth="2"
             // markerEnd="url(#arrow)" 
             />
             {/* <path
@@ -121,19 +126,19 @@ export default class Network extends React.Component<Props, State> {
             })}
         </g>)
     }
-    scroll(e: any) {
-        if (this.shiftDown) {
-            this.zoom(e.deltaY)
-        } else {
-            let { y } = this.state
-            this.setState({ y: y + e.deltaY })
-        }
-    }
-    zoom(delta: number) {
-        let { scale } = this.state
-        scale *= (delta > 0 ? 1.1 : 0.9)
-        this.setState({ scale })
-    }
+    // scroll(e: any) {
+    //     if (this.shiftDown) {
+    //         this.zoom(e.deltaY)
+    //     } else {
+    //         let { y } = this.state
+    //         this.setState({ y: y + e.deltaY })
+    //     }
+    // }
+    // zoom(delta: number) {
+    //     let { scale } = this.state
+    //     scale *= (delta > 0 ? 1.1 : 0.9)
+    //     this.setState({ scale })
+    // }
     componentWillReceiveProps(nextProps: Readonly<Props>, nextContext: any) {
         if (this.props.nodes.length != nextProps.nodes.length) {
             let { nodes: IRnodes } = nextProps
@@ -166,10 +171,10 @@ export default class Network extends React.Component<Props, State> {
             // let svg_h = this.graphWindow.clientHeight
             // let svg_w = this.graphWindow.clientWidth
             return <g className="graph"
-                transform={`translate(${x}, ${y}) scale(${scale})`}
+                transform={`translate(${x+40}, ${y}) scale(${scale})`}
             >
-                {this.drawNodes(nodes)}
                 {this.drawEdges(edges)}
+                {this.drawNodes(nodes)}
             </g>
         } else {
             return <div className="graphWindow" ref={(ref) => { this.graphWindow = ref }} />

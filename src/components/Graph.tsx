@@ -1,8 +1,9 @@
 import * as React from "react";
 import "./Graph.css";
-import Compare from "./Compare"
-import Compare2  from "./Compare2"
-import Network from "./Network"
+// import Compare from "./Compare"
+// import Compare  from "./Compare2"
+// import Network from "./Network"
+import Overview from "./Overview"
 // import * as d3 from "d3";
 import { IRNode } from "../types";
 import axios from "axios";
@@ -35,9 +36,9 @@ export default class Graph extends React.Component<Props, State> {
     render() {
             return (
                 <svg className="graphWindow">
-                    <Compare/>
-                    <Compare2 drawDag={this.drawDag.bind(this)}/>
-                    <Network nodes={this.state.selectedNN}/>
+                    {/* <Compare drawDag={this.drawDag.bind(this)}/> */}
+                    {/* <Network nodes={this.state.selectedNN}/> */}
+                    <Overview/>
                 </svg>
             )
         }

@@ -1,1 +1,9 @@
-task|model|date|size |memory |voc2012 mAP|COCO mAP@0.5|COCO mAP@0.75|COCO mAP@[0.5:0.95]|voc2007 fps|citation|paperlocalization|r-cnn|2013.11.11|||62.4|||||4275|http://arxiv.org/abs/1311.2524localization|SPP_net|2014.06.18||||||||889|http://arxiv.org/abs/1406.4729localization|fast r-cnn|2015.04.30|||68.4|||||1797|http://arxiv.org/abs/1504.08083localization|faster r-cnn|2015.06.04|||70.4||||7|2395|Êhttp://arxiv.org/abs/1506.01497localization|SSD|2015.12.08|||74.9||||59|640|https://arxiv.org/abs/1311.2524localization|YOLO|2015.06.08|||57.9||||155|881|http://arxiv.org/abs/1506.02640
+task|model|date|size |memory |voc2007 mAP (train on 07 + 12 )|voc2012 mAP|COCO mAP@0.5 (test-dev)|COCO mAP@[0.5:0.95]|voc2007 fps|citation|paper
+detection|r-cnn|2013.11.11|||66|53.3||||4309|http://arxiv.org/abs/1311.2524
+detection|SPP_net|2014.06.18|||59.2|||||889|http://arxiv.org/abs/1406.4729
+detection|fast r-cnn|2015.04.30|||71.8|68.4|||0.5|1823|http://arxiv.org/abs/1504.08083
+detection|faster r-cnn(rpn, 300)|2015.06.04|||73.2|70.4|42.7|21.9|7|2395|http://arxiv.org/abs/1506.01497
+detection|SSD|2015.12.08|||77.2|74.9|46.5|26.8|59|654|https://arxiv.org/abs/1512.02325
+detection|YOLO|2015.06.08|||66.4|57.9|||155|881|http://arxiv.org/abs/1506.02640
+detection|YOLO+fast-rcnn|2015.06.08||||70.7||||881|http://arxiv.org/abs/1506.02640
+detection|R-FCN|2016.05.20|||80.5|77.6|53.2|31.5||264|https://arxiv.org/abs/1605.06409
