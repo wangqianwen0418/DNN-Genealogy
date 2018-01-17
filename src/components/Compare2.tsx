@@ -218,12 +218,8 @@ export default class Compare2 extends React.Component<Props, State>{
         //         key={`point_${i}`}>
         //     </circle>
         // })
-
-
-
-
-
-        return <g
+        return <svg>
+            <g
             className="compareView"
             transform={`translate(${this.r * 6}, ${this.r * 3}) `}
         >
@@ -232,6 +228,7 @@ export default class Compare2 extends React.Component<Props, State>{
             {bars}
             {axis}
             {/* {dots} */}
-        </g>
+            </g>
+        </svg>
     }
 }

@@ -9,14 +9,13 @@ export interface Arc {
 export interface Arc_props {
     data: Arc,
     pos: number[],
+    radius:number,
     tittle: string
 }
 
 export default class SunBurst extends React.Component<Arc_props, {}> {
     render() {
-        let radius = 100
-        // let donutWidth = 30
-        let { pos, tittle, data } = this.props
+        let { pos, tittle, data, radius } = this.props
 
         let arc = d3.arc()
 

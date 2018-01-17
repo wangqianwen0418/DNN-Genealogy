@@ -1,0 +1,63 @@
+[{
+    "name": "Application",
+    "children": [
+        {
+            "name": "Computer Vision ",
+            "children": [
+                { "name": "recognition", "value": 8 },
+                { "name": "segmentation", "value": 9 },
+                { "name": "detection", "value": 13 }
+            ]
+        },
+        { "name": "NLP ", "value": 25 },
+        { "name": "Audio", "value": 50 }
+    ]
+}, {
+    "name": "Architecture",
+    "children": [
+        {
+            "name": "feed-forward ",
+            "children": [
+                { "name": "convolution", "value": 50 },
+                { "name": "", "value": 30 }
+            ]
+        },
+        { "name": "recurrent", "value": 55 },
+        { "name": "", "value": 20 }
+    ]
+}, {
+    "name": "Training",
+    "children": [
+        {
+            "name": "pre-processing", "value": 30
+        },
+        {
+            "name": "processing",
+            "children": [
+                {
+                    "name": "dropout",
+                    "value": 12
+                }, {
+                    "name": "batch-normalization",
+                    "value": 10
+                }, {
+                    "name": "drop-path",
+                    "value": 3
+                }
+            ]
+        },
+        { "name": "post-processing", "value": 20 }
+    ]
+},
+{
+    "name": "corpus",
+    "children": [
+        {
+            "name": "image & video", "value": 30
+        },
+        {
+            "name": "text", "value": 50
+        },
+        { "name": "speech", "value": 20 }
+    ]
+}]

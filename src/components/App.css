@@ -16,7 +16,7 @@
     /* width:100vw; */
     height: 70px;
     background-color: #49a9ee;
-    box-shadow: 0 4px 2px 0 rgba(0,0,0,0.16);
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.12), 0px 6px 6px 0px rgba(0,0,0,0.24);
     color:#ffffff;
     position: relative;
     z-index: 10;
