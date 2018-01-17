@@ -42,35 +42,28 @@ export default class SunBurst extends React.Component<Arc_props, {}> {
             let d = arc(node2arc(arc_d))
             let name = arc_d.data.name
 
-            let startAngle = arc_d.x0
-            let endAngle = arc_d.x1
+            // let startAngle = arc_d.x0
+            // let endAngle = arc_d.x1
             return <g className="arc">
                 <path
                     d={d || ""}
                     fill={getColor(name)}
                 >
                 </path>
-                {/* <rect
-                    width={10}
-                    height={10}
-                    y={(i + 1) * 12}
-                    fill={getColor(name)}
-                >
-                </rect> */}
-                <text
+                {/* <text
                     textAnchor="middle"
                     x={radius * Math.cos((startAngle + endAngle) / 2 - Math.PI / 2)}
                     y={radius * Math.sin((startAngle + endAngle) / 2 - Math.PI / 2)}
                 >
                     {name}
-                </text>
+                </text> */}
             </g>
         })
 
 
         return <g className="donut" transform={`translate(${pos[0]}, ${pos[1]})`}>
             {arcs}
-            <text fontSize="22" textAnchor="middle">{tittle}</text>
+            <text fontSize="20" textAnchor="middle">{tittle}</text>
         </g>
     }
 }
