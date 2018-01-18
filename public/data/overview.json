@@ -6,30 +6,76 @@
             "children": [
                 { "name": "recognition", "value": 8 },
                 { "name": "segmentation", "value": 9 },
-                { "name": "detection", "value": 13 }
+                { "name": "detection", "value": 13 },
+                { "name": "visual answering", "value":4}
             ]
         },
-        { "name": "NLP ", "value": 25 },
-        { "name": "Audio", "value": 50 }
+        { 
+            "name": "NLP ", 
+            "children":[
+             {
+                 "name":"Q&A",
+                 "value":7
+             }, {
+                 "name":"sentiment",
+                 "value": 8
+             }, {
+                 "name":"opinion-mining",
+                 "value":11
+             }, {
+                 "name":"prediction"
+             }   
+            ]
+        },
+        { 
+            "name": "Audio", 
+            "children":[
+             {
+                 "name":"recognition",
+                 "value":4
+             }   
+            ]
+        }
     ]
 }, {
     "name": "Architecture",
     "children": [
         {
             "name": "feed-forward ",
-            "children": [
-                { "name": "convolution", "value": 50 },
-                { "name": "", "value": 30 }
+            "children":[
+                {
+                    "name":"convolution",
+                    "value":6
+                }
             ]
         },
-        { "name": "recurrent", "value": 55 },
-        { "name": "", "value": 20 }
+        { 
+            "name": "recurrent", 
+            "children":[
+             {
+                 "name":"simple RNN",
+                 "value":4
+             },{
+                 "name":"LSTM",
+                 "value":7
+             },{
+                 "name":"GRU",
+                 "value":8
+             }   
+            ]
+        }
     ]
 }, {
     "name": "Training",
     "children": [
         {
-            "name": "pre-processing", "value": 30
+            "name": "pre-processing", 
+            "children":[
+                {
+                    "name":"data-augmentation",
+                    "value":18
+                }
+            ]
         },
         {
             "name": "processing",
@@ -46,18 +92,60 @@
                 }
             ]
         },
-        { "name": "post-processing", "value": 20 }
+        { 
+            "name": "post-processing", 
+            "children":[
+                {
+                    "name":"CRF",
+                    "value":7
+                }
+            ]
+         }
     ]
 },
 {
-    "name": "corpus",
+    "name": "Corpus",
     "children": [
         {
-            "name": "image & video", "value": 30
+            "name": "image & video",
+            "children":[
+                {
+                    "name":"nature images", 
+                    "value":10
+                },
+                {
+                    "name": "artificial images",
+                    "value":10
+                },
+                {
+                    "name":"video", 
+                    "value":10
+                }
+            ]
         },
         {
-            "name": "text", "value": 50
+            "name": "text", 
+            "children":[
+                {
+                    "name":"Q&A",
+                    "value":10
+                },{
+                    "name":"sentiment",
+                    "value":17
+                }
+            ]
         },
-        { "name": "speech", "value": 20 }
+        { 
+            "name": "speech", 
+            "children":[
+             {
+                 "name":"t",
+                 "value":7
+             },{
+                 "name":"music",
+                 "value":3
+             }
+            ]
+         }
     ]
 }]

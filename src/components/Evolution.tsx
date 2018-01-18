@@ -3,7 +3,9 @@ import * as dagre from "dagre"
 import { Node, GraphEdge } from "dagre"
 import "./Evolution.css"
 import axios from "axios"
+import * as d3 from "d3"
 import { EvoNode, EvoLink } from "../types"
+import { getColor } from "../helper/index";
 
 export interface State {
     nodes: Node[],
@@ -46,7 +48,7 @@ export default class Evolution extends React.Component<{}, State>{
             //IR model or keras model
             if (node.inputs.length > 0) {
                 node.inputs.forEach((input: EvoLink) => {
-                    g.setEdge(input.name, node.name)
+                    g.setEdge(input.name, node.name, {label:input.link})
                 })
             }
         })
@@ -57,7 +59,7 @@ export default class Evolution extends React.Component<{}, State>{
                 nodes.push(g.node(v))
             }
         })
-        g.edges().forEach((e) => {
+        g.edges().forEach((e, i) => {
             edges.push(g.edge(e))
         });
         let height = g.graph().height,
@@ -67,11 +69,28 @@ export default class Evolution extends React.Component<{}, State>{
     drawNodes(nodes: Node[]) {
         return (<g className="nodes" >
             {nodes.map((node: Node) => {
+                let pie=d3.pie()
+                let arc=d3.arc()
+                let pie2arc = (d: any) => {
+                    let arc = d
+                    arc.innerRadius=0
+                    arc.outerRadius = 20
+                    return arc
+                }
+                let arc_paths = pie([Math.random(),Math.random(), Math.random()]).map((pie)=>{
+                    return arc(pie2arc(pie))
+                })
                 return <g key={node.label} transform={`translate (${node.x}, ${node.y})`}>
-                    <circle r={node.width/2}
-                        style={{ fill: "transparent", strokeWidth: 3, stroke: "gray" }} />
+
+                    {/* <circle r={node.width/2}
+                        style={{ fill: "transparent", strokeWidth: 3, stroke: "gray" }} /> */}
+                    {arc_paths.map((d, i)=>{
+                        return <path d={d||''} fill={getColor(i.toString(),1)} stroke="white" strokeWidth="3">
+                        </path>
+                    })}
+
                     <text textAnchor="middle"
-                        fontSize={node.height}
+                        // fontSize={node.height}
                         x={node.width / 2}
                         y={ 1.5*node.height }>
                         {node.label}
@@ -81,7 +100,7 @@ export default class Evolution extends React.Component<{}, State>{
         </g>)
     }
     oneEdge(edge: GraphEdge, i: number) {
-        let { points, from, to } = edge
+        let { points, from, to, label } = edge
         let len = points.length
         if (len == 0) { return }
         let start = `M ${points[0].x} ${points[0].y}`
@@ -98,7 +117,11 @@ export default class Evolution extends React.Component<{}, State>{
                 stroke="gray"
                 fill='none'
                 strokeWidth="2"
-            />
+            >
+            <title>
+                {label}
+            </title>
+            </path>
         </g>
 
     }
@@ -116,7 +139,7 @@ export default class Evolution extends React.Component<{}, State>{
     render() {
         let { nodes, edges,w,  h} = this.state
         let screen_w = window.innerWidth - 2*margin
-        let screen_h = (window.innerHeight-70)*0.6 - margin
+        let screen_h = (window.innerHeight-70)*0.7 - margin
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         return <div className="Evolution">
             <svg width={screen_w} height={screen_h} viewBox={`0 0 ${w} ${h}`}>
