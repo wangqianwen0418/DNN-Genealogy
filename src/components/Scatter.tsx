@@ -65,7 +65,7 @@ export default class DAG extends React.Component<{}, State>{
                 <title>{dot.name}</title>
             </circle>
         })
-        return <div className="DAG">
+        return <div className="Scatter">
             <svg height={height} width={width}>
                 {dot_chart}
             </svg>

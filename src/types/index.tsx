@@ -10,3 +10,13 @@ export interface Model {
 export interface IRNode {
     [key:string]:any
 }
+
+export interface EvoNode {
+    name:string,
+    inputs:EvoLink[]
+}
+
+export interface EvoLink {
+    name:string,
+    link:string
+}

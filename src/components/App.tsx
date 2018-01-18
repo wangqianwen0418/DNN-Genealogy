@@ -3,7 +3,7 @@ import * as React from 'react';
 import "./App.css";
 // import SiderBar from "../containers/SideBar";
 import MultiSunBurst from "./MultiSunBurst";
-import DAG from "./DAG";
+import Evolution from "./Evolution";
 
 // import { Row, Col} from 'antd';
 
@@ -12,7 +12,7 @@ class App extends React.Component{
         return (
             <div className="app" >
                 <div className="header" style={{ width: "100vw", height: "70px" }}>DNN Genealogy</div>
-                <DAG/>
+                <Evolution/>
                 <MultiSunBurst/>
             </div>
         );

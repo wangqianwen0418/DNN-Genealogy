@@ -30,8 +30,8 @@ export default class MultiSunBurst extends React.Component<{}, State> {
         let {datum} = this.state
         let margin = 10
         let sunBurst_h = (window.innerHeight - 70)*0.4-2*margin
-        let sunBurst_r = sunBurst_h/2 - margin
-        let sunBurst_y = sunBurst_r + margin
+        let sunBurst_r = sunBurst_h/3
+        let sunBurst_y = sunBurst_h/2 + margin
         let sunBurst_w = window.innerWidth - 2*margin
         let sunBursts = datum.map(
             (d, i) => <SunBurst data={d}
