@@ -88,7 +88,7 @@ export default class SunBurst extends React.Component<Arc_props, {}> {
                 <g className="donut" transform={`translate(${pos[0]}, ${pos[1]})`}>
                     {arcs}
                 </g>
-                <text fontSize="20" textAnchor="middle"
+                <text fontSize="10" textAnchor="middle"
                     transform={`translate(${pos[0]}, ${radius * 1.3 + pos[3] / 2})`}
                 >
                     {tittle}

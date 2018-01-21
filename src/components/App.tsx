@@ -4,6 +4,7 @@ import "./App.css";
 // import SiderBar from "../containers/SideBar";
 import MultiSunBurst from "./MultiSunBurst";
 import Evolution from "./Evolution";
+import {Col} from "antd";
 
 // import { Row, Col} from 'antd';
 
@@ -12,8 +13,14 @@ class App extends React.Component{
         return (
             <div className="app" >
                 <div className="header" style={{ width: "100vw", height: "70px" }}>DNN Genealogy</div>
-                <Evolution/>
-                <MultiSunBurst/>
+                <div>
+                <Col span={4}>
+                    <MultiSunBurst/>
+                </Col>
+                <Col span={20} style={{float: "left"}}>
+                    <Evolution/>
+                </Col>
+                </div>
             </div>
         );
     }

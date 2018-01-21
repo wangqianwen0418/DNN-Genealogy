@@ -29,19 +29,19 @@ export default class MultiSunBurst extends React.Component<{}, State> {
     }
     render() {
         let { datum } = this.state
-        let margin = 7
-        let sunBurst_h = (window.innerHeight - 70) * 0.3 - 2 * margin
+        let margin = 26
+        let sunBurst_h = (window.innerHeight - 70) * 0.25 - margin
         let sunBurst_r = sunBurst_h / 3
         let sunBurst_y = sunBurst_r * 1.5
-        let sunBurst_w = (window.innerWidth - 2 * margin)/4 -margin
+        let sunBurst_w = (window.innerWidth - 2 * margin) / 6 - margin
         let sunBursts = datum.map(
-            (d, i) => <Col span={6}>
+            (d, i) => <Col className="SidebarItem" span={4}>
                 <SunBurst data={d}
                     radius={sunBurst_r}
                     idx={i}
                     key={d.name}
                     pos={
-                        [   sunBurst_w/2,
+                        [   sunBurst_w / 2,
                             sunBurst_y,
                             sunBurst_w,
                             sunBurst_h
