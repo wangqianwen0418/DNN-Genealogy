@@ -1,0 +1,138 @@
+application domains:
+    computer vision:
+        image:
+            classification
+            segmentation
+            detection
+            keypoints
+            caption
+            pose estimation
+        video:
+            classification
+            caption
+    NLP:
+        translation
+        Q&A
+        prediction
+        sentiment
+        inference
+    Audio:
+        speech:
+            recognition
+        music:
+            classification
+
+
+architecture:
+    feed-forward:
+        MLP:
+            unfinished
+        CNN:
+            topology??:
+                plain:
+                    AlexNet
+                    VGG (16 layers, deeper than AlexNet, conv7*7=> 2*conv3*3)
+                    DiracNets (train a 34-layer deep plain network without residual connection, surpass ResNet1001)
+                residual connection:
+                    ResNet (introduce residual connection, easy to train deep model, improve results on imageNet)
+                    ResNet v2 (improve v1 by redesigning residual units)
+                    Inception-ResNet (add residual connection to inception)
+                    wide ResNet (improve resnet performance)
+                    ResNet in ResNet (improve resnet performance)
+                    ConvS2S (introduce a convolutional sequence to sequence model)
+                    DenseNet (dense residual connection, improve the state-pf-art performance created by ResNet.
+                    Without data augmentation, DenseNet performs better by a large margin.)
+                parallel:
+                    inception (introduce inception module, improve the state-pf-art performance created by VGG)
+                    FractalNet (ultra-deep without residual)
+                    NasNet (an architecture learnt by ML, improve the state-of-art performance created by DenseNet)
+                    SqueezeNet (reduced size with comparable performance )
+                FCN?:
+                    fully convolutional network
+                    U-net
+                seq2seq?:
+                    ConvS2S
+                others:
+                    capsule (introduce capsule, dynamic routing)
+            
+            layers & mechanism:
+                conv: 
+                    vanilla conv:
+                    depthwise conv: 
+                        Xception
+                        mobile net 
+                    bottleneck:
+                        ResNet
+                        DenseNet
+                        Inception
+                    dilated conv:
+                        dilated conv
+                        DeepLab
+                        PSPNet
+                    deconv/transposed conv:
+                        ZF-Net
+                        FCN
+                        (DCGAN)
+                pooling:
+                    SPP
+                    ASPP
+                    global pooling
+                attention:
+                    ConvS2S
+
+
+    recurrent:
+        vanilla RNN:
+        gated(motivated by the vanishing gradient problem in vanilla):
+            LSTM (usually outperform GRU):
+                vanilla LSTM 
+                stacked LSTM (deeper)
+                MDLSTM (enable high dimensional sequence learning)
+                bidirectional LSTM (use future informantion for current prediction)
+                SLSTM  (extend LSTM to tree structures, enable analysis of hierarchical structured info)
+            GRU (similar performance to LSTM, but fewer performance):
+                gated recurrent unit
+                gated orthogonal recurrent unit
+        memory: 
+            unfinished  
+        attention:
+            soft attention (more popular than hard)
+            hard attention
+            global attention (more popular than local)
+            local attention
+            self attention (consider correlation between inputs)
+
+training:
+    data preprocessing:
+        augmentation
+        normalization
+        whitening
+    model training??:
+        initilization
+        optimization:
+            SGD
+            RMSprop
+            Adam
+            Adamax
+            Adadelta
+        
+        regularization:
+            dropout
+            drop path:
+                ResNet with stochastic length
+                FractalNet
+            batch normalization
+            shake-shake
+        ensemble:
+            combining models
+            combining views 
+        deep supervision:
+            inception v1
+            FitNets
+            Deeply Supervised Networks
+            knowledge distilling
+    data post-processing:
+        conditional random field
+        median filter
+
+
