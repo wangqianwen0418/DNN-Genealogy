@@ -47,7 +47,7 @@ export default class MultiSunBurst extends React.Component<{}, State> {
                             sunBurst_h
                         ]
                     }
-                    tittle={d.name} />
+                    title={d.name} />
             </Col>)
 
         return <div className="MultiSunBurst">
