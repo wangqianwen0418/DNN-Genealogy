@@ -12,7 +12,8 @@ export interface Arc_props {
     pos: number[],
     radius: number,
     title: string,
-    idx: number
+    idx: number,
+    callbackParent: (filter:string, name: string) => void
 }
 
 export interface State {
@@ -30,10 +31,14 @@ export default class SunBurst extends React.Component<Arc_props, State> {
     }
 
     handleClick(name: string) {
-        if (this.state.selected !== name)
+        var newState = name
+        if (this.state.selected !== name) {
             this.setState({ selected: name })
-        else
+        } else {
             this.setState({ selected: '' })
+            newState = ''
+        }
+        this.props.callbackParent(this.props.title, newState)        
     }
 
     render() {

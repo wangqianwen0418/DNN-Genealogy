@@ -10,11 +10,14 @@ import { Col } from "antd";
 
 import SunBurst from "./SunBurst"
 // import axios from "axios";
+export interface Props {
+    callbackParent: (filter: string, newState: string) => void
+}
 export interface State {
     datum: Arc[]
 }
-export default class MultiSunBurst extends React.Component<{}, State> {
-    constructor(props: {}) {
+export default class MultiSunBurst extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props)
         this.state = { datum: [] }
         this.getData = this.getData.bind(this)
@@ -26,6 +29,9 @@ export default class MultiSunBurst extends React.Component<{}, State> {
     }
     componentWillMount() {
         this.getData()
+    }
+    onChildrenChanged(filter: string, newState: string) {
+        this.props.callbackParent(filter, newState)
     }
     render() {
         let { datum } = this.state
@@ -47,7 +53,8 @@ export default class MultiSunBurst extends React.Component<{}, State> {
                             sunBurst_h
                         ]
                     }
-                    title={d.name} />
+                    title={d.name}
+                    callbackParent={(filter, name)=>{this.onChildrenChanged(filter, name)}} />
             </Col>)
 
         return <div className="MultiSunBurst">
