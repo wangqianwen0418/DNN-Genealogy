@@ -73,6 +73,15 @@ architecture:
                         ZF-Net
                         FCN
                         (DCGAN)
+                
+                activation:
+                    sigmoid
+                    tanh
+                    relu:
+                        relu 
+                        soft relu 
+                        crelu 
+                        leaky relu
                 pooling:
                     SPP
                     ASPP
@@ -92,11 +101,22 @@ architecture:
                 SLSTM  (extend LSTM to tree structures, enable analysis of hierarchical structured info)
             GRU (similar performance to LSTM, but fewer performance):
                 gated recurrent unit
-                gated orthogonal recurrent unit
+                stacked GRU
+        multiple time scale:
+            add skip connections through time ()
+            leaky units
+            removing connections
+        stacked:
+        bidirectional:
+        recursive:
+        MD:
         memory: 
-            unfinished  
+            memory network
+            neural turing machine
+            recurrent memory network
+            end-to-end memory network
         attention:
-            soft attention (more popular than hard)
+            soft attention (allowing back propagation, more popular than hard)
             hard attention
             global attention (more popular than local)
             local attention
@@ -115,7 +135,7 @@ training:
             Adam
             Adamax
             Adadelta
-        
+            gradient clip??
         regularization:
             dropout
             drop path:
