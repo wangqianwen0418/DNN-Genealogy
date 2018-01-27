@@ -138,8 +138,8 @@ export default class Evolution extends React.Component<{}, State>{
     }
     render() {
         let { nodes, edges,w,  h} = this.state
-        let screen_w = window.innerWidth - 2*margin
-        let screen_h = (window.innerHeight-70)*0.7 - margin
+        let screen_w = window.innerWidth * 5/6 - 2 * margin
+        let screen_h = (window.innerHeight - 100) - margin
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         return <div className="Evolution">
             <svg width={screen_w} height={screen_h} viewBox={`0 0 ${w} ${h}`}>
