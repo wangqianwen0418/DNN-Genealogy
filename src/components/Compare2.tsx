@@ -15,9 +15,9 @@ export interface State {
     nns: Dot[],
     attr_names: string[]
 }
-export interface Props {
-    drawDag: (name: string, task: string) => void
-}
+// export interface Props {
+//     drawDag: (name: string, task: string) => void
+// }
 
 // let datum: Dot[] = [
 //     { name: "a", attr: [98, 76, 65, 66, 87, 90] },
@@ -32,9 +32,9 @@ let simulation = d3.forceSimulation()
 
 
 
-export default class Compare2 extends React.Component<Props, State>{
+export default class Compare2 extends React.Component<{}, State>{
     public nodes: any; r: number = 150; node_r = 4
-    constructor(props: Props) {
+    constructor(props: {}) {
         super(props)
         this.arc = this.arc.bind(this)
         this.state = {
@@ -114,7 +114,7 @@ export default class Compare2 extends React.Component<Props, State>{
                 selected.splice(name_idx, 1)
             }
             this.setState({ selected })
-            this.props.drawDag(d.name, "recognition")
+            // this.props.drawDag(d.name, "recognition")
         }
         selectNode = selectNode.bind(this)
         let node_r = this.node_r

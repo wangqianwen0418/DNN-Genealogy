@@ -11,13 +11,38 @@ export interface Arc_props {
     data: Arc,
     pos: number[],
     radius: number,
-    tittle: string,
-    idx: number
+    title: string,
+    idx: number,
+    callbackParent: (filter:string, name: string) => void
 }
 
-export default class SunBurst extends React.Component<Arc_props, {}> {
+export interface State {
+    selected: string,
+}
+
+export default class SunBurst extends React.Component<Arc_props, State> {
+    pieChart: any
+    constructor(props: Arc_props) {
+        super(props)
+        this.state = {
+            selected: '',
+        }
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick(name: string) {
+        var newState = name
+        if (this.state.selected !== name) {
+            this.setState({ selected: name })
+        } else {
+            this.setState({ selected: '' })
+            newState = ''
+        }
+        this.props.callbackParent(this.props.title, newState)        
+    }
+
     render() {
-        let { pos, tittle, data, radius, idx } = this.props
+        let { pos, title, data, radius, idx } = this.props
 
         let arc = d3.arc()
 
@@ -42,10 +67,11 @@ export default class SunBurst extends React.Component<Arc_props, {}> {
         let arcs = arc_datum.map((arc_d: any, i) => {
             let d = arc(node2arc(arc_d))
             let name = arc_d.data.name
-
+            
             // let startAngle = arc_d.x0
             // let endAngle = arc_d.x1
-            return <g className="arc">
+            return <g className={(this.state.selected === arc_d.data.name || this.state.selected === '' ? "": "mask ") + "arc"}
+                onClick={this.handleClick.bind(this, arc_d.data.name)}>
                 <path
                     d={d || ""}
                     fill={getColor(name, idx + 1)}
@@ -68,7 +94,7 @@ export default class SunBurst extends React.Component<Arc_props, {}> {
         })
 
 
-        return <div className="SunBurst">
+        this.pieChart = <div className="SunBurst">
             <svg width={pos[2]} height={pos[3]}>
                 <defs>
                     <filter id="shadow">
@@ -88,13 +114,14 @@ export default class SunBurst extends React.Component<Arc_props, {}> {
                 <g className="donut" transform={`translate(${pos[0]}, ${pos[1]})`}>
                     {arcs}
                 </g>
-                <text fontSize="20" textAnchor="middle"
+                <text fontSize="10" textAnchor="middle"
                     transform={`translate(${pos[0]}, ${radius * 1.3 + pos[3] / 2})`}
                 >
-                    {tittle}
+                    {title}
                 </text>
             </svg>
         </div>
+        return this.pieChart
     }
 }
 

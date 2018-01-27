@@ -1,15 +1,12 @@
-
-
-  .resizer-col{
+.resizer-col{
     cursor: col-resize;
     width:40px;
     height: calc(100vh - 70px);
     position: absolute;
     top:70px;
-
 }
 
-  .header{
+.header{
     padding: 10px 20px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 40px;
@@ -20,4 +17,4 @@
     color:#ffffff;
     position: relative;
     z-index: 10;
-  }
+}
