@@ -1,24 +1,28 @@
 application domains:
     computer vision:
-        image:
-            classification
-            segmentation
-            detection
-            keypoints
-            caption
-            pose estimation
-        video:
-            classification
-            caption
+        classification
+        segmentation
+        detection
+        keypoints
+        caption
+        pose estimation
     NLP:
-        translation
-        Q&A
-        prediction
-        sentiment
-        inference
+        language modeling:
+            translation 
+            prediction
+        acoustic modeling
+        POS Tagging	x
+        Chunking	
+        Named Entity Recognition	x
+        Semantic Role Labeling	x
+        Parsing	x
+        Sentiment analysis	x
+        Question Answering	x	
     Audio:
         speech:
+        POS Tagging
             recognition
+            synthesis
         music:
             classification
 
@@ -26,9 +30,9 @@ application domains:
 architecture:
     feed-forward:
         MLP:
-            unfinished
+            fully connected layers
         CNN:
-            topology??:
+            topology:
                 plain:
                     AlexNet
                     VGG (16 layers, deeper than AlexNet, conv7*7=> 2*conv3*3)
@@ -37,7 +41,7 @@ architecture:
                     ResNet (introduce residual connection, easy to train deep model, improve results on imageNet)
                     ResNet v2 (improve v1 by redesigning residual units)
                     Inception-ResNet (add residual connection to inception)
-                    wide ResNet (improve resnet performance)
+                    wide ResNet (improve resnet performance, dropout wiht batch normalization)
                     ResNet in ResNet (improve resnet performance)
                     ConvS2S (introduce a convolutional sequence to sequence model)
                     DenseNet (dense residual connection, improve the state-pf-art performance created by ResNet.
@@ -47,10 +51,10 @@ architecture:
                     FractalNet (ultra-deep without residual)
                     NasNet (an architecture learnt by ML, improve the state-of-art performance created by DenseNet)
                     SqueezeNet (reduced size with comparable performance )
-                FCN?:
+                FCN:
                     fully convolutional network
                     U-net
-                seq2seq?:
+                seq2seq:
                     ConvS2S
                 others:
                     capsule (introduce capsule, dynamic routing)
@@ -72,8 +76,7 @@ architecture:
                     deconv/transposed conv:
                         ZF-Net
                         FCN
-                        (DCGAN)
-                
+                        (DCGAN)              
                 activation:
                     sigmoid
                     tanh
@@ -106,10 +109,7 @@ architecture:
             add skip connections through time ()
             leaky units
             removing connections
-        stacked:
-        bidirectional:
         recursive:
-        MD:
         memory: 
             memory network
             neural turing machine
@@ -123,36 +123,26 @@ architecture:
             self attention (consider correlation between inputs)
 
 training:
-    data preprocessing:
-        augmentation
-        normalization
-        whitening
-    model training??:
-        initilization
-        optimization:
-            SGD
-            RMSprop
-            Adam
-            Adamax
-            Adadelta
-            gradient clip??
-        regularization:
-            dropout
-            drop path:
-                ResNet with stochastic length
-                FractalNet
-            batch normalization
-            shake-shake
-        ensemble:
-            combining models
-            combining views 
-        deep supervision:
-            inception v1
-            FitNets
-            Deeply Supervised Networks
-            knowledge distilling
-    data post-processing:
-        conditional random field
-        median filter
+    initialization
+    optimization:
+        SGD
+        RMSprop
+        Adam
+        Adamax
+        Adadelta
+        gradient clip
+    loss functions:
+    regularization:
+        dropout
+        drop path:
+            ResNet with stochastic length
+            FractalNet
+        batch normalization
+        shake-shake
+    deep supervision:
+        inception v1
+        FitNets
+        Deeply Supervised Networks
+        knowledge distilling
 
 
