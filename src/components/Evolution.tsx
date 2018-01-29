@@ -6,6 +6,7 @@ import axios from "axios"
 import * as d3 from "d3"
 import { EvoNode, EvoLink } from "../types"
 import { getColor } from "../helper/index";
+import { Menu, Dropdown, Icon } from "antd"
 
 export interface State {
     nodes: Node[],
@@ -137,11 +138,27 @@ export default class Evolution extends React.Component<{}, State>{
         this.getData()
     }
     render() {
-        let { nodes, edges,w,  h} = this.state
-        let screen_w = window.innerWidth * 5/6 - 2 * margin
-        let screen_h = (window.innerHeight - 100) - margin
+        let { nodes, edges, w, h} = this.state
+        let headerHeight = 64
+        let screen_w = (window.innerWidth - 2 * margin) / 2
+        let screen_h = (window.innerHeight - headerHeight - 2 * margin) / 2
+        let menu = (
+            <Menu>
+              <Menu.Item key="1">1st menu item</Menu.Item>
+              <Menu.Item key="2">2nd memu item</Menu.Item>
+              <Menu.Item key="3">3rd menu item</Menu.Item>
+            </Menu>
+          )
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         return <div className="Evolution">
+            <div style={{position: "absolute", left: "10px"}}>
+                Title
+            </div>
+            <Dropdown overlay={menu} trigger={['hover']}>
+                <a className="ant-dropdown-link" href="#" style={{position: "absolute", right: "10px"}}>
+                    Hover me <Icon type="down" />
+                </a>
+            </Dropdown>
             <svg width={screen_w} height={screen_h} viewBox={`0 0 ${w} ${h}`}>
                 {this.drawEdges(edges)}
                 {this.drawNodes(nodes)}

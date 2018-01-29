@@ -2,12 +2,12 @@
 import * as React from 'react';
 import "./App.css";
 // import SiderBar from "../containers/SideBar";
-import MultiSunBurst from "./MultiSunBurst";
+// import MultiSunBurst from "./MultiSunBurst";
 import Evolution from "./Evolution";
-import Navi from "./Navi";
-import { Col } from "antd";
-
-// import { Row, Col} from 'antd';
+import SimpleTree from "./SimpleTree";
+// import Navi from "./Navi";
+import { Col, Layout } from 'antd';
+const { Header, Content } = Layout;
 
 class App extends React.Component{
     selectedFilters = ['', '', '', '']
@@ -19,8 +19,8 @@ class App extends React.Component{
     }
     render() {
         return (
-            <div className="app" >
-                <div className="header" style={{ width: "100vw", height: "70px" }}>DNN Genealogy</div>
+            <div className="app">
+                {/* <div className="header" style={{ width: "100vw", height: "70px" }}>DNN Genealogy</div>
                 <div>
                 <Col span={4}>
                     <MultiSunBurst callbackParent={(filter, newState) => this.onChildrenChanged(filter, newState)}/>
@@ -29,7 +29,20 @@ class App extends React.Component{
                     <Navi selected={this.selectedFilters}/>
                     <Evolution/>
                 </Col>
-                </div>
+                </div> */}
+                <Header><div className="header">DNN Genealogy</div></Header>
+                <Content>
+                    <Col span={12}> <SimpleTree treeType="Architecture" /> </Col>
+                    <Col span={12}> <Evolution /> </Col>
+                </Content>
+                <Content>
+                    <Col span={10}> <Evolution /> </Col>
+                    <Col span={10}> <Evolution /> </Col>
+                    <Col span={4}> <Evolution /> </Col>
+                </Content>
+                {/* <Content>
+                    <SimpleTree treeType="test" />
+                </Content> */}
             </div>
         );
     }
