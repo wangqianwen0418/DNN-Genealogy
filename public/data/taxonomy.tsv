@@ -1,0 +1,79 @@
+1.application domains	1.1.computer vision	1.1.1.classification			
+		1.1.2.segmentation			
+		1.1.3.detection			
+		1.1.4.keypoints			
+		1.1.5.pose estimation			
+		1.1.6.caption			
+	1.2.NLP	1.2.1.translation			
+		1.2.2.named entity recognition			
+		1.2.3.semantic role labeling			
+		1.2.4.parsing			
+		1.2.5.sentiment analysis			
+		1.2.6.question answering			
+	1.3.Audio	1.3.1.speech recognition			
+		1.3.2.POS tagging			
+		1.3.3.speech synthesis			
+2.architecture	2.1.MLP				
+	2.2.CNN	2.2.1.topology	2.2.1.1.plain	2.2.1.1.1.AlexNet	
+				2.2.1.1.2.VGG	
+				2.2.1.1.3.DiracNet	
+			2.2.1.2.residual	2.2.1.2.1.ResNet	
+				2.2.1.2.2.ResNet_v2	
+				2.2.1.2.3.wide ResNet	
+				2.2.1.2.4.inception-ResNet	
+			2.2.1.3.parallel	2.2.1.3.1.inception	
+				2.2.1.3.2.FracNet	
+				2.2.1.3.3.SqueezeNet	
+				2.2.1.3.4.inception-BN	
+		2.2.2.layers&mechanism	2.2.2.1.conv	2.2.2.1.1.vanilla conv	
+				2.2.2.1.2.depthwise conv	
+				2.2.2.1.3.dilated conv	
+				2.2.2.1.4.deconv	
+				2.2.2.1.5.bottleneck	
+			2.2.2.2.activation	2.2.2.2.1.relu	2.2.2.2.1.1.relu
+					2.2.2.2.1.2.soft relu
+					2.2.2.2.1.3.leaky relu
+					2.2.2.2.1.4.CRelu
+					...
+				2.2.2.2.2.sigmoid	
+				2.2.2.2.3.tanh	
+			2.2.2.3.pooling	2.2.2.3.1.max pooling	
+				2.2.2.3.2.global pooling	
+				2.2.2.3.3.global average pooling	
+				2.2.2.3.4.SPP	
+				2.2.2.3.5.second-order pooling	
+			2.2.2.4.attention		
+	2.3.RNN	2.3.1.vanilla RNN	2.3.1.1.gated	2.3.1.1.1.LSTM	2.3.1.1.1.1.vanilla LSTM
+					2.3.1.1.1.2.stacked LSTM
+					2.3.1.1.1.3.bidirectional LSTM
+				2.3.1.1.2.GRU	2.3.1.1.2.1.vanilla GRU
+					2.3.1.1.2.2.stacked GRU
+					2.3.1.1.2.3.bidirectional GRU
+			2.3.1.2.multiple time scale	2.3.1.2.1.skip connection	
+				2.3.1.2.2.leaky units	
+			2.3.1.3.recursive		
+			2.3.1.4.attention	2.3.1.4.1.soft attention	
+				2.3.1.4.2.hard attention	
+				2.3.1.4.3.global attention	
+				2.3.1.4.4.local attention	
+				2.3.1.4.5.self attention	
+			2.3.1.5.memory		
+3.training	3.1.initialization	3.1.1.randomUniform			
+		3.1.2.TruncatedNormal			
+		3.1.3.RandomNormal			
+		3.1.4.VarianceScaling			
+		...			
+	3.2.optimization	3.2.1.SGD			
+		3.2.2.Adam			
+		3.2.3.RMSprop			
+	3.3.loss function				
+					
+					
+					
+	3.4.regularization	3.4.1.dropout			
+		3.4.2.drop path			
+		3.4.3.batch normalization			
+		3.4.4.shake-shake			
+	3.5.deep supervison	3.5.1.knowledge distilling			
+		3.5.2.Deeply supervised			
+		3.5.3.FitNets			
