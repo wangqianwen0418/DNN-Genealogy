@@ -23,7 +23,9 @@ export default class SimpleTree extends React.Component<Props, State>{
         let res = await axios.get("../../data/tree_sample.json")
         let datum = res.data
         this.setState({ datum })
+    }
 
+    componentDidUpdate() {
         const divMargin = 30
 
         let headerHeight = 64,
@@ -36,10 +38,6 @@ export default class SimpleTree extends React.Component<Props, State>{
             duration = 750,
             i = 0,
             root: any;
-
-        // let svg = <svg width={width + margin.right + margin.left} height={height + margin.top + margin.bottom}>
-        //     <g transform={`translate(${margin.left},${margin.top})`}></g>
-        // </svg>
 
         let svg = d3.select(".SimpleTree").insert("svg")
             .attr("width", width + margin.right + margin.left)
@@ -154,7 +152,6 @@ export default class SimpleTree extends React.Component<Props, State>{
                 }
                 update(d)
             }
-
         }
     }
 
