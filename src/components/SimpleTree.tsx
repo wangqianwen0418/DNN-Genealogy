@@ -20,8 +20,8 @@ export default class SimpleTree extends React.Component<Props, State>{
     }
 
     async getData() {
-        let res = await axios.get("../../data/tree_sample.json")
-        let datum = res.data
+        let res = await axios.get("../../data/taxonomy.json")
+        let datum = res.data["children"][1]
         this.setState({ datum })
     }
 
