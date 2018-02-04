@@ -24,7 +24,7 @@ class App extends React.Component{
                 <Header><div className="header">DNN Genealogy</div></Header>
                 <Content>
                     <Col span={12}> <SimpleTree treeType="Architecture" /> </Col>
-                    <Col span={12}> <Evolution /> </Col>
+                    <Col span={12}> <SimpleTree treeType="Training" /> </Col>
                 </Content>
                 <Content>
                     <Col span={10}> <CorpusCompare models={[]}/> </Col>

@@ -21,8 +21,12 @@ export default class SimpleTree extends React.Component<Props, State>{
 
     async getData() {
         let res = await axios.get("../../data/taxonomy.json")
-        let datum = res.data["children"][1]
-        this.setState({ datum })
+        let datum = res.data["children"]
+        if (this.props["treeType"] === "Architecture") {
+            this.setState({ datum: datum[1] })
+        } else {
+            this.setState({ datum: datum[2] })
+        }
     }
 
     componentDidUpdate() {
@@ -39,7 +43,7 @@ export default class SimpleTree extends React.Component<Props, State>{
             i = 0,
             root: any;
 
-        let svg = d3.select(".SimpleTree").insert("svg")
+        let svg = d3.select(".SimpleTree#" + this.props["treeType"]).insert("svg")
             .attr("width", width + margin.right + margin.left)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -160,7 +164,6 @@ export default class SimpleTree extends React.Component<Props, State>{
     }
 
     render() {
-        return <div className="SimpleTree">
-        </div>
+        return <div className="SimpleTree" id={this.props["treeType"]} />
     }
 }
