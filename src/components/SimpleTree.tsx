@@ -12,6 +12,12 @@ export interface State {
     datum: any
 }
 
+export interface TreeNode extends d3.HierarchyNode<any>{
+    x0:number,
+    y0:number,
+    [key:string]:any
+}
+
 export default class SimpleTree extends React.Component<Props, State>{
     private ref:HTMLDivElement|null
     constructor(props: Props) {
@@ -46,11 +52,14 @@ export default class SimpleTree extends React.Component<Props, State>{
 
     draw() {
         let margin = {top: 40, right: 10, bottom: 10, left: 10},
+            nodeSize:[number, number] = [80, 20],
+            node_margin = 10,
             width = (this.ref?this.ref.clientWidth:50) - margin.right - margin.left,
-            height = (this.ref?this.ref.clientHeight:30) - margin.top - margin.bottom,
+            // height = (this.ref?this.ref.clientHeight:30) - margin.top - margin.bottom,
             duration = 750,
             i = 0,
-            root: any;
+            root:TreeNode,
+            depth_th = (this.props["treeType"] === "Architecture"?2:1)
 
         d3.select(".SimpleTree#" + this.props["treeType"])
             .select('svg')
@@ -60,33 +69,39 @@ export default class SimpleTree extends React.Component<Props, State>{
             .attr("width", "100%")
             .attr("height", "100%")
             .append("g")
-            .attr("transform", `translate(${ margin.left },${ margin.top })`)
+            .attr("transform", `translate(${ margin.left + width/2},${ margin.top })`)
             .append('g')
             .attr("class", "svg")
 
-        let treemap = d3.tree().size([width, height])
+        let treemap = d3.tree().nodeSize([nodeSize[0]+node_margin, nodeSize[1]])
 
-        root = d3.hierarchy(this.state.datum, d => d.children)
-        root.x0 = height / 2
-        root.y0 = 0
+        let root_:any = d3.hierarchy(this.state.datum, d => d.children)
+        root_.x0 = width / 2
+        root_.y0 = 0
+        root = root_
+        console.info(root)
+
         function collapse(d: any) {
-            if (d.children) {
+            if (d.depth<depth_th && d.children) {
+                d.children.forEach(collapse)
+            }else if (d.children){
                 d._children = d.children
                 d._children.forEach(collapse)
                 d.children = null
             }
         }
-
-        // root.children.forEach(collapse)
+        if(root.children){
+            root.children.forEach(collapse)
         update(root)
+        }
         
         function update(source: any) {
             let treeData = treemap(root)
             let nodes = treeData.descendants(),
                 links = treeData.descendants().slice(1);
             
-            let max_depth = Math.max(...nodes.map(d=>d.depth))+1
-            nodes.forEach((d: any) => {d.y = d.depth * height/max_depth})
+            // let max_depth = Math.max(...nodes.map(d=>d.depth))+1
+            nodes.forEach((d: any) => {d.y = d.depth * nodeSize[1]* 3})
 
             // Node Section
             let node = svg.selectAll('g.node')
@@ -96,13 +111,29 @@ export default class SimpleTree extends React.Component<Props, State>{
                 .attr('class', 'node')
                 .attr('transform', (d: any) => "translate(" + source.x0 + "," + source.y0 + ")")
                 .on('click', click)
-            nodeEnter.append('circle')
+
+            nodeEnter.append('rect')
+                .attr('class', 'node_bg')
+                .attr("width", nodeSize[0])
+                .attr("height", nodeSize[1])
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr("fill", "none")
+                .style('opacity', (d: any) => (d._children ? 1 : 0))
+                .attr('transform', (d)=>`translate(${-nodeSize[0]/2 + 3}, ${-nodeSize[1]/2 - 3})`)
+
+            nodeEnter.append('rect')
                 .attr('class', 'node')
-                .attr('r', 1e-6)
-                .style('fill', (d: any) => (d._children ? "lightsteelblue" : "white"))
+                .attr("width", nodeSize[0])
+                .attr("height", nodeSize[1])
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr('transform', (d)=>`translate(${-nodeSize[0]/2}, ${-nodeSize[1]/2})`)
+                .style('fill', "white")
+            
+
             nodeEnter.append('text')
-                // .attr('dx', '.45em')
-                .attr('y', (d: any) => ( d.children || d._childrean ? '-1.5em' : '1.5em'))
+                .attr('y', '0.7em')
                 .attr("text-anchor", "middle")
                 // .attr('text-anchor', (d: any) => ( d.children || d._childrean ? "end" : "start"))
                 .text((d: any) => ((d.depth<3||d.centered)?d.data.name:""))
@@ -111,19 +142,19 @@ export default class SimpleTree extends React.Component<Props, State>{
             nodeUpdate.transition()
                 .duration(duration)
                 .attr('transform', (d: any) => "translate(" + d.x + "," + d.y + ")")
-            nodeUpdate.select('circle.node')
-                .attr('r', 4.5)
-                .style('fill', (d: any) => (d._children ? "lightsteelblue" : "white"))
+            nodeUpdate.select('rect.node')
                 .attr('cursor', 'pointer')
-            nodeUpdate.select('text')
-            .text((d: any) => ((d.depth<3||d.centered)?d.data.name:""))
+            nodeUpdate.select('rect.node_bg')
+                .style('opacity', (d: any) => (d._children ? 1 : 0))
+            // nodeUpdate.select('text')
+            // .text((d: any) => ((d.depth<3||d.centered)?d.data.name:""))
 
             let nodeExit = node.exit().transition()
                 .duration(duration)
                 .attr('transform', (d: any) => "translate(" + source.x + "," + source.y + ")")
                 .remove()
-            nodeExit.select('circle')
-                .attr('r', 1e-6)
+            nodeExit.select('rect')
+                .attr('opacity', 1e-6)
             nodeExit.select('text')
                 .style('fill-opacity', 1e-6)
 
@@ -162,30 +193,31 @@ export default class SimpleTree extends React.Component<Props, State>{
                 //               ${(s.x + d.x) / 2} ${s.y},
                 //               ${d.x} ${d.y}`
                 let path = `M ${d.x} ${d.y}
-                C ${d.x} ${(d.y + s.y) / 2},
-                  ${s.x} ${(d.y + s.y) / 2} 
-                  ${s.x} ${s.y}`
+                L ${d.x} ${(d.y + s.y) / 2},
+                L  ${s.x} ${(d.y + s.y) / 2} 
+                L ${s.x} ${s.y}`
                 return path
             }
 
             function click(d: any) {
-                if(!d.centered){
-                    d.centered = true
-                }else{
-                    d.centered = false
-                }
-
-                if(d.children){
-                    d.children.forEach(click)
-                }
-                
-                // if (d.children) {
-                //     d._children = d.children
-                //     d.children = null
-                // } else {
-                //     d.children = d._children
-                //     d._children = null
+                // if(!d.centered){
+                //     d.centered = true
+                // }else{
+                //     d.centered = false
                 // }
+
+                // if(d.children){
+                //     d.children.forEach(click)
+                // }
+                if (d.children) {
+                    d._children = d.children
+                    d.children = null
+                } else {
+                    d.children = d._children
+                    d._children = null
+                }
+                let box=find_box(d, [Infinity,0, Infinity,0])
+                console.info("box", box, d)
                 update(d)
             }
         }
@@ -200,4 +232,25 @@ export default class SimpleTree extends React.Component<Props, State>{
         ref={(ref)=>{this.ref=ref}}
         id={this.props["treeType"]} />
     }
+}
+
+
+function find_box(parent:TreeNode, box:number[]){
+    box=compare(parent, box)
+    let children = parent.children||parent._children
+    
+    if(children){
+        children.forEach((child:TreeNode)=>{
+            box=find_box(child, box)
+        })
+    }
+    
+    return box
+}
+function compare(node:TreeNode, box:number[]){
+    box[0]=node.x<box[0]?node.x:box[0]
+    box[1]=node.x>box[1]?node.x:box[1]
+    box[2]=node.y<box[2]?node.y:box[2]
+    box[3]=node.y>box[3]?node.y:box[3]
+    return box
 }

@@ -375,7 +375,7 @@
                   "size": 0
                 }
               ], 
-              "name": "layers&mechanism", 
+              "name": "layers", 
               "size": 0
             }
           ], 
@@ -389,7 +389,7 @@
             {
               "id": "2.3.1.", 
               "depth": 3, 
-              "name": "vanilla RNN", 
+              "name": "vanilla", 
               "size": 0
             }, 
             {
