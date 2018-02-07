@@ -1,8 +1,7 @@
 [
-    {"area": "Central ", "value": 18000},
-    {"area": "Riverside ", "value": 17000},
-    {"area": "Picton ", "value": 80000},
-    {"area": "Everton ", "value": 55000},
-    {"area": "Kensington ", "value": 100000},
-    {"area": "Kirkdale", "value": 50000}
+    {"dataset": "Central ", "A": 18, "B": 12.123},
+    {"dataset": "Riverside ", "A": 17, "B": 23.456},
+    {"dataset": "Picton ", "A": 80, "B": 21.412},
+    {"dataset": "Everton ", "A": 55, "B": 87.777},
+    {"dataset": "Kensington ", "A": 100, "B": 56.533}
 ]

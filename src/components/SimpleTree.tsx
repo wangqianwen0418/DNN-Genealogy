@@ -33,10 +33,13 @@ export default class SimpleTree extends React.Component<Props, State>{
         }
     }
     componentDidMount(){
-        
         window.addEventListener("resize", this.draw)
-        
     }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.draw)
+    }
+
     componentDidUpdate(){
         this.draw()
     }
@@ -49,9 +52,7 @@ export default class SimpleTree extends React.Component<Props, State>{
             i = 0,
             root: any;
 
-
-            d3
-            .select(".SimpleTree#" + this.props["treeType"])
+        d3.select(".SimpleTree#" + this.props["treeType"])
             .select('svg')
             .remove()
 
