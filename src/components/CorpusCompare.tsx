@@ -32,6 +32,7 @@ export default class CorpusCompare extends React.Component<Props, State> {
         let res = await axios.get("../../data/corpus_sample.json")
         let datum = res.data
         this.setState({ datum })
+
     }
 
     componentWillMount() {
@@ -40,49 +41,91 @@ export default class CorpusCompare extends React.Component<Props, State> {
 
     componentDidUpdate() {
         let svg = d3.select("#corpus"),
-            margin = {top: 20, right: 50, bottom: 30, left: 100},
+            margin = {top: 35, right: 60, bottom: 30, left: 80},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom;
         
         let tooltip = d3.select("body").append("div").attr("class", "toolTip")
 
         let x = d3.scaleLinear().range([0, width]),
-            y = d3.scaleBand().range([height, 0])
+            y = d3.scaleBand().range([height, 0]),
+            y_group = d3.scaleBand().padding(0.05),
+            color = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
         
         let g = svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         
-        let data = this.state.datum
+        let data = this.state.datum,
+            keys = this.props.models
 
-        // data.sort((a: any, b: any) => (a.value - b.value))
-        x.domain([0, 100000])
-        y.domain(data.map(((d: any) => d.area))).padding(0.1)
-
+        x.domain([0, 100])
+        y.domain(data.map(((d: any) => d.dataset))).padding(0.1)
+        y_group.domain(keys).rangeRound([0, y.bandwidth()])
+        
+        // axis
         g.append("g")
             .attr("class", "x axis")
        	    .attr("transform", "translate(0," + height + ")")
       	    .call(d3.axisBottom(x).ticks(5).tickFormat(null).tickSizeInner(-height))
-
         g.append("g")
             .attr("class", "y axis")
             .call(d3.axisLeft(y))
-
-        g.selectAll(".bar")
+        
+        // bar
+        g.append("g")
+            .selectAll("g")
             .data(data)
+            .enter().append("g")
+            .attr("transform", (d: any) => "translate(0," + y(d.dataset) + ")")
+            .selectAll("rect")
+            .data(function(d) { return keys.map(function(key: string) { return {key: key, value: d[key]}; }); })
             .enter().append("rect")
-            .attr("class", "bar")
-            .attr("x", 0)
-            .attr("height", y.bandwidth())
-            .attr("y", (d: any) => String(y(d.area)))
-            .attr("width", (d: any) => String(x(d.value)))
+                .attr("class", (d: any) => "bar " + String(d.key))
+                .attr("x", 0)
+                .attr("height", y_group.bandwidth())
+                .attr("y", (d: any) => String(y_group(d.key)))
+                .attr("width", (d: any) => String(x(d.value)))
+                .attr("fill", (d: any) => String(color(d.key)))
+                .on("mousemove", (d: any) => {
+                    tooltip
+                        .style("left", d3.event.pageX - 30 + "px")
+                        .style("top", d3.event.pageY - 60 + "px")
+                        .style("display", "inline-block")
+                        .html((d.key) + "<br><span>" + (d.value) + "</span>")
+                })
+                .on("mouseout", (d: any) => tooltip.style("display", "none"))
+
+        var labels = g.append("g")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 10)
+            .attr("text-anchor", "end")
+            .selectAll("g")
+            .data(keys)
+            .enter().append("g")
+            .attr("transform", (d: any, i: number) => "translate(50," + i * 10 + ")")
+        labels.append("rect")
+            .attr("class", (d: any) => "label")
+            .attr("x", width - 9)
+            .attr("width", 9)
+            .attr("height", 9)
+            .attr("fill", (d: any) => String(color(d)))
             .on("mousemove", (d: any) => {
-                tooltip
-                    .style("left", d3.event.pageX - 50 + "px")
-                    .style("top", d3.event.pageY - 90 + "px")
-                    .style("display", "inline-block")
-                    .html((d.area) + "<br><span>" + (d.value) + "</span>")
+                d3.selectAll(".bar")
+                    .attr("opacity", (model: any) => {
+                        if (model.key === d)
+                            return 1
+                        else
+                            return 0.4
+                    })
             })
-            .on("mouseout", (d: any) => tooltip.style("display", "none"))
+            .on("mouseout", () => {
+                d3.selectAll(".bar").attr("opacity", 1)
+            })
+        labels.append("text")
+            .attr("x", width - 14)
+            .attr("y", 6.5)
+            .attr("dy", "0.15em")
+            .text((d: any) => d)
     }
 
     render() {

@@ -1,14 +1,10 @@
-.bar {
-    fill: #6F257F;
-}
-.bar:hover {
+.bar:hover, .label:hover {
     fill: #CC0058;
     transition: fill 0.15s;
 }
 text {
     font-family: 'Fira Sans', sans-serif;
     font-weight: 500;
-    font-size: 15px;
     color: #081F2C;
 }
 .axis path,

@@ -27,7 +27,7 @@ class App extends React.Component{
                     <Col span={12}> <Evolution /> </Col>
                 </Content>
                 <Content>
-                    <Col span={10}> <CorpusCompare models={[]}/> </Col>
+                    <Col span={10}> <CorpusCompare models={["A", "B"]}/> </Col>
                     <Col span={10}> <Evolution /> </Col>
                     <Col span={4}> <Evolution /> </Col>
                 </Content>
