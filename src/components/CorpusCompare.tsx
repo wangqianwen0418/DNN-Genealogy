@@ -45,6 +45,11 @@ export default class CorpusCompare extends React.Component<Props, State> {
         window.addEventListener("resize", this.draw)
         d3.select("body").append("div").attr("class", "toolTip")
     }
+    
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.draw)
+        d3.select(".toolTip").remove()
+    }
 
     componentDidUpdate() {
         this.draw()

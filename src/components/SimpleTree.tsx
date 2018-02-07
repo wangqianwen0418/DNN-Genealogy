@@ -33,10 +33,13 @@ export default class SimpleTree extends React.Component<Props, State>{
         }
     }
     componentDidMount(){
-        
         window.addEventListener("resize", this.draw)
-        
     }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.draw)
+    }
+
     componentDidUpdate(){
         this.draw()
     }
