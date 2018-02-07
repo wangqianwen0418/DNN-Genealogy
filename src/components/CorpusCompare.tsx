@@ -130,7 +130,7 @@ export default class CorpusCompare extends React.Component<Props, State> {
 
     render() {
         let headerHeight = 64
-        let screen_w = (window.innerWidth - 2 * margin) * 5 / 12
+        let screen_w = (window.innerWidth - 2 * margin) * 2 / 3
         let screen_h = (window.innerHeight - headerHeight - 2 * margin) / 2
         let menu = (
             <Menu>

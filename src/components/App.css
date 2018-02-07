@@ -1,13 +1,13 @@
-.resizer-col{
-    cursor: col-resize;
-    width:40px;
-    height: calc(100vh - 70px);
-    position: absolute;
-    top:70px;
-}
 
 .header{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 40px;
     color:#ffffff;
+    height:var(--header-h)!important;
+}
+
+.View{
+    background-color: white;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.12), 0px 4px 4px 0px rgba(0,0,0,0.24);
+    margin:10px 8px;
 }

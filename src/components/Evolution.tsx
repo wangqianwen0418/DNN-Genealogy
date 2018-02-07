@@ -2,11 +2,13 @@ import * as React from "react"
 import * as dagre from "dagre"
 import { Node, GraphEdge } from "dagre"
 import "./Evolution.css"
+import "./App.css"
 import axios from "axios"
 import * as d3 from "d3"
 import { EvoNode, EvoLink } from "../types"
 import { getColor } from "../helper/index";
 import { Menu, Dropdown, Icon } from "antd"
+// import {HEADER_H} from "../constants"
 
 export interface State {
     nodes: Node[],
@@ -139,9 +141,8 @@ export default class Evolution extends React.Component<{}, State>{
     }
     render() {
         let { nodes, edges, w, h} = this.state
-        let headerHeight = 64
-        let screen_w = (window.innerWidth - 2 * margin) / 2
-        let screen_h = (window.innerHeight - headerHeight - 2 * margin) / 2
+        // let screen_w = (window.innerWidth - 2 * margin) / 2
+        // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
         let menu = (
             <Menu>
               <Menu.Item key="1">1st menu item</Menu.Item>
@@ -150,7 +151,7 @@ export default class Evolution extends React.Component<{}, State>{
             </Menu>
           )
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
-        return <div className="Evolution">
+        return <div className="Evolution View">
             <div style={{position: "absolute", left: "10px"}}>
                 Title
             </div>
@@ -159,7 +160,7 @@ export default class Evolution extends React.Component<{}, State>{
                     Hover me <Icon type="down" />
                 </a>
             </Dropdown>
-            <svg width={screen_w} height={screen_h} viewBox={`0 0 ${w} ${h}`}>
+            <svg width="100%" height="100%" viewBox={`0 0 ${w} ${h}`}>
                 {this.drawEdges(edges)}
                 {this.drawNodes(nodes)}
             </svg>
