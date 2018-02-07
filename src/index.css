@@ -2,13 +2,16 @@
   --bk-color: #ffffff;
   --fg-color: #00bcd4;
   --scroll-bar: #7dc1f2;
+  --header-h:64px;
+  --ratio-up:0.4;
+  --div-margin:30px;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color:rgb(238,238,238)!important;
 }
 
