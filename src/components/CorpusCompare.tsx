@@ -12,8 +12,9 @@ export interface State {
     selected: string[],
     datum: any
 }
-const margin = 30
+//const margin = 30
 export default class CorpusCompare extends React.Component<Props, State> {
+    private ref:HTMLDivElement|null
     constructor(props: Props) {
         super(props)
         this.state = {
@@ -21,6 +22,7 @@ export default class CorpusCompare extends React.Component<Props, State> {
             datum: {}
         }
         this.selectDataset = this.selectDataset.bind(this)
+        this.draw = this.draw.bind(this)
     }
 
     selectDataset(name: string) {
@@ -39,13 +41,31 @@ export default class CorpusCompare extends React.Component<Props, State> {
         this.getData()
     }
 
+    componentDidMount() {
+        window.addEventListener("resize", this.draw)
+        d3.select("body").append("div").attr("class", "toolTip")
+    }
+
     componentDidUpdate() {
-        let svg = d3.select("#corpus"),
-            margin = {top: 35, right: 60, bottom: 30, left: 80},
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom;
+        this.draw()
+    }
+
+    draw() {
+
+        d3.select(".CorpusCompare")
+            .select('svg')
+            .remove()
+
+        let margin = {top: 35, right: 60, bottom: 30, left: 80},
+            width = (this.ref?this.ref.clientWidth:50) - margin.left - margin.right,
+            height = (this.ref?this.ref.clientHeight:30) - margin.top - margin.bottom;
         
-        let tooltip = d3.select("body").append("div").attr("class", "toolTip")
+        let svg = d3.select(".CorpusCompare").insert("svg")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .append("g")
+
+        let tooltip = d3.select(".toolTip")
 
         let x = d3.scaleLinear().range([0, width]),
             y = d3.scaleBand().range([height, 0]),
@@ -129,9 +149,9 @@ export default class CorpusCompare extends React.Component<Props, State> {
     }
 
     render() {
-        let headerHeight = 64
-        let screen_w = (window.innerWidth - 2 * margin) * 2 / 3
-        let screen_h = (window.innerHeight - headerHeight - 2 * margin) / 2
+        // /let headerHeight = 64
+        //let screen_w = (window.innerWidth - 2 * margin) / 3
+        //let screen_h = (window.innerHeight - headerHeight - 2 * margin) / 2
         let menu = (
             <Menu>
               <Menu.Item key="1">1st menu item</Menu.Item>
@@ -139,8 +159,8 @@ export default class CorpusCompare extends React.Component<Props, State> {
               <Menu.Item key="3">3rd menu item</Menu.Item>
             </Menu>
           )
-        return <div className="CorpusCompare">
-            <svg id="corpus" width={screen_w} height={screen_h}> </svg>
+        return <div className="CorpusCompare View" ref={(ref)=>{this.ref=ref}}>
+            {/* <svg id="corpus" width="100%" height="100%"> </svg> */}
             <Dropdown overlay={menu} trigger={['hover']}>
                 <a className="ant-dropdown-link" href="#" style={{position: "absolute", right: "10px"}}>
                     Hover me <Icon type="down" />
