@@ -60,6 +60,8 @@ export default class SimpleTree extends React.Component<Props, State>{
             .attr("height", "100%")
             .append("g")
             .attr("transform", `translate(${ margin.left },${ margin.top })`)
+            .append('g')
+            .attr("class", "svg")
 
         let treemap = d3.tree().size([width, height])
 
@@ -74,7 +76,7 @@ export default class SimpleTree extends React.Component<Props, State>{
             }
         }
 
-        root.children.forEach(collapse)
+        // root.children.forEach(collapse)
         update(root)
         
         function update(source: any) {
@@ -82,7 +84,8 @@ export default class SimpleTree extends React.Component<Props, State>{
             let nodes = treeData.descendants(),
                 links = treeData.descendants().slice(1);
             
-            nodes.forEach((d: any) => {d.y = d.depth * 100})
+            let max_depth = Math.max(...nodes.map(d=>d.depth))+1
+            nodes.forEach((d: any) => {d.y = d.depth * height/max_depth})
 
             // Node Section
             let node = svg.selectAll('g.node')
@@ -101,7 +104,7 @@ export default class SimpleTree extends React.Component<Props, State>{
                 .attr('y', (d: any) => ( d.children || d._childrean ? '-1.5em' : '1.5em'))
                 .attr("text-anchor", "middle")
                 // .attr('text-anchor', (d: any) => ( d.children || d._childrean ? "end" : "start"))
-                .text((d: any) => d.data.name)
+                .text((d: any) => ((d.depth<3||d.centered)?d.data.name:""))
             
             let nodeUpdate = nodeEnter.merge(node)
             nodeUpdate.transition()
@@ -111,6 +114,8 @@ export default class SimpleTree extends React.Component<Props, State>{
                 .attr('r', 4.5)
                 .style('fill', (d: any) => (d._children ? "lightsteelblue" : "white"))
                 .attr('cursor', 'pointer')
+            nodeUpdate.select('text')
+            .text((d: any) => ((d.depth<3||d.centered)?d.data.name:""))
 
             let nodeExit = node.exit().transition()
                 .duration(duration)
@@ -163,13 +168,23 @@ export default class SimpleTree extends React.Component<Props, State>{
             }
 
             function click(d: any) {
-                if (d.children) {
-                    d._children = d.children
-                    d.children = null
-                } else {
-                    d.children = d._children
-                    d._children = null
+                if(!d.centered){
+                    d.centered = true
+                }else{
+                    d.centered = false
                 }
+
+                if(d.children){
+                    d.children.forEach(click)
+                }
+                
+                // if (d.children) {
+                //     d._children = d.children
+                //     d.children = null
+                // } else {
+                //     d.children = d._children
+                //     d._children = null
+                // }
                 update(d)
             }
         }
