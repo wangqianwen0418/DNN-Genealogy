@@ -8,7 +8,13 @@ import * as d3 from "d3"
 import { EvoNode, EvoLink } from "../types"
 import { getColor } from "../helper/index";
 import { Menu, Dropdown, Icon } from "antd"
-// import {HEADER_H} from "../constants"
+
+export interface Props{
+    arc:string,
+    app:string,
+    train:string,
+    onSelect:(nns:string[])=>void
+}
 
 export interface State {
     nodes: Node[],
@@ -17,8 +23,8 @@ export interface State {
     w: number | undefined
 }
 const margin = 30
-export default class Evolution extends React.Component<{}, State>{
-    constructor(props: {}) {
+export default class Evolution extends React.Component<Props, State>{
+    constructor(props: Props) {
         super(props)
         this.getData = this.getData.bind(this)
         this.state = {
@@ -151,9 +157,10 @@ export default class Evolution extends React.Component<{}, State>{
             </Menu>
           )
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
+        let{train, arc}=this.props
         return <div className="Evolution View">
             <div style={{position: "absolute", left: "10px"}}>
-                Title
+                Training methods:{train} + Architecture:{arc}
             </div>
             <Dropdown overlay={menu} trigger={['hover']}>
                 <a className="ant-dropdown-link" href="#" style={{position: "absolute", right: "10px"}}>

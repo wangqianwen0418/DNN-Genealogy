@@ -5,7 +5,7 @@ import * as d3 from "d3"
 import { Dropdown, Icon, Menu } from "antd"
 
 export interface Props {
-    models: string[]
+    nns: string[],
 }
 
 export interface State {
@@ -81,7 +81,7 @@ export default class CorpusCompare extends React.Component<Props, State> {
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         
         let data = this.state.datum,
-            keys = this.props.models
+            keys = this.props.nns
 
         x.domain([0, 100])
         y.domain(data.map(((d: any) => d.dataset))).padding(0.1)

@@ -2,7 +2,7 @@
 
 import { AllActions } from '../actions';
 import { StoreState } from '../types';
-import { IMPORT_MODEL, SELECT_LAYER } from '../constants';
+import { SELECT_APP, SELECT_ARC, SELECT_TRAIN } from '../constants';
 
 export function reducer(state: StoreState, action: AllActions): StoreState {
   switch (action.type) {
@@ -11,10 +11,12 @@ export function reducer(state: StoreState, action: AllActions): StoreState {
     //   return { ...state, enthusiasmLevel:state.enthusiasmLevel+1 };
     // case DECREMENT_ENTHUSIASM:
     //   return { ...state, enthusiasmLevel:state.enthusiasmLevel-1 };
-    case IMPORT_MODEL:  
-      return { ...state, model:action.model}
-    case SELECT_LAYER:
-      return { ...state, selectedLayer: action.name}
+    case SELECT_APP:  
+      return { ...state, app:action.node}
+    case SELECT_ARC:  
+      return { ...state, arc:action.node}
+    case SELECT_TRAIN:  
+      return { ...state, train:action.node}
     default:
       return state;
   }

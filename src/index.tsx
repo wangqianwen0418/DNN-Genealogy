@@ -11,7 +11,7 @@ import './index.css';
 import 'antd/dist/antd.css';
 
 
-let initState:StoreState = {model:{node:[]}, selectedLayer:undefined}
+let initState:StoreState = {arc:"", app:"", train:"", nns:[]}
 const store = createStore<StoreState>(reducer, initState );
 
 ReactDOM.render(

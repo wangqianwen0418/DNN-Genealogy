@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./Graph.css";
-import { IRNode } from "../types";
+import { EvoNode } from "../types";
 import * as dagre from 'dagre';
 import { Node, GraphEdge } from 'dagre';
 import { getColor } from "../helper";
@@ -10,7 +10,7 @@ import { getColor } from "../helper";
 // }
 const node_w: number = 110, node_h: number = 20, margin: number = 10;
 export interface Props {
-    nodes: IRNode[]
+    nodes: EvoNode[]
 }
 export interface State {
     x: number,
@@ -36,7 +36,7 @@ export default class Network extends React.Component<Props, State> {
         }
         this.shiftDown = false
     }
-    getDag(layers: IRNode[]) {
+    getDag(layers: EvoNode[]) {
         const nodeH = 10, nodeW = 200
         let g = new dagre.graphlib.Graph();
         g.setGraph({ 
@@ -141,8 +141,8 @@ export default class Network extends React.Component<Props, State> {
     // }
     componentWillReceiveProps(nextProps: Readonly<Props>, nextContext: any) {
         if (this.props.nodes.length != nextProps.nodes.length) {
-            let { nodes: IRnodes } = nextProps
-            let { nodes, edges } = this.getDag(IRnodes)
+            let { nodes: EvoNodes } = nextProps
+            let { nodes, edges } = this.getDag(EvoNodes)
             // let scale: number = Math.min((this.graphWindow.clientHeight - 2 * margin) / h, (this.graphWindow.clientWidth - 2 * margin) / w)
             // let x: number = margin + 0.5 * this.graphWindow.clientWidth - 0.5 * w
             // let y: number = margin
@@ -165,7 +165,7 @@ export default class Network extends React.Component<Props, State> {
     render() {
         let { nodes, edges, x, y, scale } = this.state
         if (nodes.length > 0) {
-            // let { nodes, edges} = this.getDag(IRnodes)
+            // let { nodes, edges} = this.getDag(EvoNodes)
             // let svg_h = Math.max(h, this.graphWindow.clientHeight)
             // let svg_w = Math.max(w, this.graphWindow.clientWidth)
             // let svg_h = this.graphWindow.clientHeight

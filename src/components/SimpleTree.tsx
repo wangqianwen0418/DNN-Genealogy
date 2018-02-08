@@ -1,11 +1,12 @@
-import * as React from "react"
-import "./SimpleTree.css"
-import axios from "axios"
-import * as d3 from "d3"
-import "./App.css"
+import * as React from 'react'
+import './SimpleTree.css'
+import axios from 'axios'
+import * as d3 from 'd3'
+import './App.css'
 
 export interface Props {
     treeType: string
+    onSelect:(node:string)=>void
 }
 
 export interface State {
@@ -30,20 +31,20 @@ export default class SimpleTree extends React.Component<Props, State>{
     }
 
     async getData() {
-        let res = await axios.get("../../data/taxonomy.json")
-        let datum = res.data["children"]
-        if (this.props["treeType"] === "Architecture") {
+        let res = await axios.get('../../data/taxonomy.json')
+        let datum = res.data['children']
+        if (this.props['treeType'] === 'Architecture') {
             this.setState({ datum: datum[1] })
         } else {
             this.setState({ datum: datum[2] })
         }
     }
     componentDidMount(){
-        window.addEventListener("resize", this.draw)
+        window.addEventListener('resize', this.draw)
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this.draw)
+        window.removeEventListener('resize', this.draw)
     }
 
     componentDidUpdate(){
@@ -51,6 +52,8 @@ export default class SimpleTree extends React.Component<Props, State>{
     }
 
     draw() {
+
+        let {onSelect} = this.props
         let margin = {top: 40, right: 10, bottom: 10, left: 10},
             nodeSize:[number, number] = [80, 20],
             node_margin = 10,
@@ -59,19 +62,19 @@ export default class SimpleTree extends React.Component<Props, State>{
             duration = 750,
             i = 0,
             root:TreeNode,
-            depth_th = (this.props["treeType"] === "Architecture"?2:1)
+            depth_th = (this.props['treeType'] === 'Architecture'?2:1)
 
-        d3.select(".SimpleTree#" + this.props["treeType"])
+        d3.select('.SimpleTree#' + this.props['treeType'])
             .select('svg')
             .remove()
 
-        let svg = d3.select(".SimpleTree#" + this.props["treeType"]).insert("svg")
-            .attr("width", "100%")
-            .attr("height", "100%")
-            .append("g")
-            .attr("transform", `translate(${ margin.left + width/2},${ margin.top })`)
+        let svg = d3.select('.SimpleTree#' + this.props['treeType']).insert('svg')
+            .attr('width', '100%')
+            .attr('height', '100%')
             .append('g')
-            .attr("class", "svg")
+            .attr('transform', `translate(${ margin.left + width/3},${ margin.top })`)
+            .append('g')
+            .attr('class', 'svg')
 
         let treemap = d3.tree().nodeSize([nodeSize[0]+node_margin, nodeSize[1]])
 
@@ -79,7 +82,6 @@ export default class SimpleTree extends React.Component<Props, State>{
         root_.x0 = width / 2
         root_.y0 = 0
         root = root_
-        console.info(root)
 
         function collapse(d: any) {
             if (d.depth<depth_th && d.children) {
@@ -109,49 +111,50 @@ export default class SimpleTree extends React.Component<Props, State>{
 
             let nodeEnter = node.enter().append('g')
                 .attr('class', 'node')
-                .attr('transform', (d: any) => "translate(" + source.x0 + "," + source.y0 + ")")
+                .attr('transform', (d: any) => 'translate(' + source.x0 + ',' + source.y0 + ')')
                 .on('click', click)
 
             nodeEnter.append('rect')
                 .attr('class', 'node_bg')
-                .attr("width", nodeSize[0])
-                .attr("height", nodeSize[1])
-                .attr("stroke", "black")
-                .attr("stroke-width", 1)
-                .attr("fill", "none")
+                .attr('width', nodeSize[0])
+                .attr('height', nodeSize[1])
+                .attr('stroke', 'black')
+                .attr('stroke-width', 1)
+                .attr('fill', 'none')
                 .style('opacity', (d: any) => (d._children ? 1 : 0))
                 .attr('transform', (d)=>`translate(${-nodeSize[0]/2 + 3}, ${-nodeSize[1]/2 - 3})`)
 
             nodeEnter.append('rect')
                 .attr('class', 'node')
-                .attr("width", nodeSize[0])
-                .attr("height", nodeSize[1])
-                .attr("stroke", "black")
-                .attr("stroke-width", 1)
+                .attr('width', nodeSize[0])
+                .attr('height', nodeSize[1])
+                .attr('stroke', 'black')
+                .attr('stroke-width', 1)
                 .attr('transform', (d)=>`translate(${-nodeSize[0]/2}, ${-nodeSize[1]/2})`)
-                .style('fill', "white")
+                .style('fill', 'white')
             
 
             nodeEnter.append('text')
                 .attr('y', '0.7em')
-                .attr("text-anchor", "middle")
-                // .attr('text-anchor', (d: any) => ( d.children || d._childrean ? "end" : "start"))
-                .text((d: any) => ((d.depth<3||d.centered)?d.data.name:""))
+                .attr('text-anchor', 'middle')
+                .text((d:any)=>d.data.name)
+                // .attr('text-anchor', (d: any) => ( d.children || d._childrean ? 'end' : 'start'))
+                // .text((d: any) => ((d.depth<3||d.centered)?d.data.name:''))
             
             let nodeUpdate = nodeEnter.merge(node)
             nodeUpdate.transition()
                 .duration(duration)
-                .attr('transform', (d: any) => "translate(" + d.x + "," + d.y + ")")
+                .attr('transform', (d: any) => 'translate(' + d.x + ',' + d.y + ')')
             nodeUpdate.select('rect.node')
                 .attr('cursor', 'pointer')
             nodeUpdate.select('rect.node_bg')
                 .style('opacity', (d: any) => (d._children ? 1 : 0))
             // nodeUpdate.select('text')
-            // .text((d: any) => ((d.depth<3||d.centered)?d.data.name:""))
+            // .text((d: any) => ((d.depth<3||d.centered)?d.data.name:''))
 
             let nodeExit = node.exit().transition()
                 .duration(duration)
-                .attr('transform', (d: any) => "translate(" + source.x + "," + source.y + ")")
+                .attr('transform', (d: any) => 'translate(' + source.x + ',' + source.y + ')')
                 .remove()
             nodeExit.select('rect')
                 .attr('opacity', 1e-6)
@@ -209,6 +212,7 @@ export default class SimpleTree extends React.Component<Props, State>{
                 // if(d.children){
                 //     d.children.forEach(click)
                 // }
+                onSelect(d.data.name)
                 if (d.children) {
                     d._children = d.children
                     d.children = null
@@ -217,7 +221,7 @@ export default class SimpleTree extends React.Component<Props, State>{
                     d._children = null
                 }
                 let box=find_box(d, [Infinity,0, Infinity,0])
-                console.info("box", box, d)
+                console.info('box', box, d)
                 update(d)
             }
         }
@@ -228,9 +232,9 @@ export default class SimpleTree extends React.Component<Props, State>{
     }
 
     render() {
-        return <div className="SimpleTree View" 
+        return <div className='SimpleTree View' 
         ref={(ref)=>{this.ref=ref}}
-        id={this.props["treeType"]} />
+        id={this.props['treeType']} />
     }
 }
 

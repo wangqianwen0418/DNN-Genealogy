@@ -4,9 +4,11 @@ import "./App.css";
 // import SiderBar from "../containers/SideBar";
 // import MultiSunBurst from "./MultiSunBurst";
 import TextInfo from "./TextInfo";
-import Evolution from "./Evolution";
-import SimpleTree from "./SimpleTree";
-import CorpusCompare from "./CorpusCompare";
+import Evolution from "../containers/Evolution";
+// import SimpleTree from "./SimpleTree";
+import ArcTree from "../containers/ArcTree";
+import TrainTree from "../containers/TrainTree";
+import CorpusCompare from "../containers/CorpusCompare";
 // import Navi from "./Navi";
 import { Col, Layout } from 'antd';
 const { Header, Content } = Layout;
@@ -24,12 +26,12 @@ class App extends React.Component{
             <div className="app">
                 <Header className="header">DNN Genealogy</Header>
                 <Content>
-                    <Col span={12}> <SimpleTree treeType="Architecture" /> </Col>
-                    <Col span={12}> <SimpleTree treeType="Training" /> </Col>
+                    <Col span={12}> <ArcTree /> </Col>
+                    <Col span={12}> <TrainTree /> </Col>
                 </Content>
                 <Content>
-                    <Col span={12}> <Evolution /> </Col>
-                    <Col span={8}> <CorpusCompare models={["A", "B"]}/> </Col>
+                    <Col span={14}> <Evolution /> </Col>
+                    <Col span={6}> <CorpusCompare /> </Col>
                     <Col span={4}> <TextInfo title="title" content="" /> </Col>
                 </Content>
             </div>

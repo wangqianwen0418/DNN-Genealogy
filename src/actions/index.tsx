@@ -1,50 +1,49 @@
 import * as constants from '../constants'
-import {Model} from "../types"
-
-// export interface IncrementEnthusiasmAction {
-//     type: constants.INCREMENT_ENTHUSIASM;
-// }
-
-// export interface DecrementEnthusiasmAction {
-//     type: constants.DECREMENT_ENTHUSIASM;
-// }
 
 
-// export function incrementEnthusiasm(): IncrementEnthusiasmAction {
-//     return {
-//         type: constants.INCREMENT_ENTHUSIASM
-//     }
-// }
 
-// export function decrementEnthusiasm(): DecrementEnthusiasmAction {
-//     return {
-//         type: constants.DECREMENT_ENTHUSIASM
-//     }
-// }
-
-
-// 
-export interface ImportModelAction {
-    type: constants.IMPORT_MODEL,
-    model:Model
-
+export interface SelectArc{
+    type:constants.SELECT_ARC,
+    node:string
 }
-export function importModel(json:Model):ImportModelAction{
+export function selectArc(node:string):SelectArc{
     return {
-        type:constants.IMPORT_MODEL,
-        model:json
-    }
-}
-export interface SelectLayerAction {
-    type: constants.SELECT_LAYER,
-    name:string
-}
-export function selectLayer(name: string):SelectLayerAction{
-    return {
-        type:constants.SELECT_LAYER,
-        name
+        type:constants.SELECT_ARC,
+        node
     }
 }
 
+export interface SelectTrain{
+    type:constants.SELECT_TRAIN,
+    node:string
+}
+export function selectTrain(node:string):SelectTrain{
+    return {
+        type:constants.SELECT_TRAIN,
+        node
+    }
+}
+
+export interface SelectApp{
+    type:constants.SELECT_APP,
+    node:string
+}
+export function selectApp(node:string):SelectApp{
+    return {
+        type:constants.SELECT_APP,
+        node
+    }
+}
+
+export interface SelectNN{
+    type:constants.SELECT_NN,
+    nns:string[]
+}
+export function selectNN(nns:string[]):SelectNN{
+    return {
+        type:constants.SELECT_NN,
+        nns
+    }
+}
 // export type EnthusiasmAction = IncrementEnthusiasmAction | DecrementEnthusiasmAction
-export type AllActions = ImportModelAction|SelectLayerAction
+export type AllActions = SelectApp|SelectArc|SelectTrain
