@@ -58,7 +58,7 @@ class SurveyParser:
                     'url': datum[1],
                     'date': datum[2],
                     'citation': datum[3],
-                    'application': datum[4],
+                    'application': self.get_split_data(datum[4]),
                     'training': self.get_split_data(datum[5]),
                     'architecture': self.get_split_data(datum[6]),
                     'names': list(),
@@ -95,6 +95,75 @@ class SurveyParser:
         f.close()
 
 
+class SurveyRegularizer:
+    """
+    Regularize the format of survey tsv.
+    e.g. Semicolon split application & training & architecture
+         Add id corresponded to sprcific architecture
+    """
+    def __init__(self, file_tax, file_sur):
+        data_tax = list(csv.reader(open(file_tax, 'r'), delimiter='\t'))
+        self.data_tax = dict()
+        for line in data_tax:
+            for grid in line:
+                if grid:
+                    identity = re.findall('^((?:[0-9]+\.)+)(.+)$', grid)
+                    if not identity:
+                        continue
+                    identity = identity[0]
+                    self.data_tax[identity[1]] = identity[0]
+        
+        self.data_sur = list(csv.reader(open(file_sur, 'r'), delimiter='\t'))
+        title_line = []
+        for _, line in enumerate(self.data_sur):
+            if 'application' and 'training' and 'architecture' in line:
+                title_line = line
+                continue
+            
+            in_dataset = False
+            for i in range(len(line)):
+                grid = line[i]
+                if title_line[i] == 'application':
+                    grid = ';'.join([datum.strip() for datum in grid.split(';') if datum])
+                elif title_line[i] in ['training', 'architecture']:
+                    new_grid = list()
+                    for datum in grid.split(';'):
+                        if not datum:
+                            continue
+                        datum = datum.strip()
+                        identity = re.findall('^((?:[0-9]+\.)+)(.+)$', datum)
+                        if not identity:
+                            if datum in self.data_tax:
+                                new_grid.append('%s%s' % (self.data_tax[datum], datum))
+                            else:
+                                print('Error in (%s%d) %s: ID not exists.' % (chr(65 + i), _ + 1, datum))
+                                new_grid.append(datum)
+                        else:
+                            identity = identity[0]
+                            if identity[1] in self.data_tax and self.data_tax[identity[1]] == identity[0]:
+                                new_grid.append(datum)
+                            else:
+                                print('Error in (%s%d) %s: ID not matches label.' % (chr(65 + i), _ + 1, datum))
+                                new_grid.append(datum)
+                    line[i] = ';'.join(new_grid)
+                elif title_line[i] == 'params(M)':
+                    in_dataset = True
+                elif title_line[i] == 'model path':
+                    in_dataset = False
+                elif in_dataset:
+                    if not grid:
+                        line[i] = 'na'
+    
+    def save_tsv(self, filepath):
+        f = open(filepath, 'w')
+        for line in self.data_sur:
+            f.write('\t'.join(line))
+            f.write('\n')
+        f.close()
+
+
 if __name__ == '__main__':
-    parser = SurveyParser('../../public/data/survey(modified).tsv')
+    parser = SurveyParser('../../public/data/survey(regularized).tsv')
     parser.save_json('../../public/data/survey.json')
+    # regularizer = SurveyRegularizer('../../public/data/taxonomy.tsv', '../../public/data/survey(modified).tsv')
+    # regularizer.save_tsv('../../public/data/survey(regularized).tsv')

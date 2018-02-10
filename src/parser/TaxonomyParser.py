@@ -39,7 +39,7 @@ class TaxonomyParser:
                 if grid == '...':
                     dfs_pos.next()
                     continue
-                identity = re.findall('^((?:[0-9]\.)+)(.+)$', grid)
+                identity = re.findall('^((?:[0-9]+\.)+)(.+)$', grid)
                 if len(identity) != 1:
                     print('Error in (%s): Format error.' % grid)
                     return False

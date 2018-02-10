@@ -229,7 +229,7 @@
                       "size": 0
                     }
                   ], 
-                  "name": "parallel", 
+                  "name": "multi-branch", 
                   "size": 0
                 }
               ], 
@@ -273,6 +273,18 @@
                       "depth": 5, 
                       "name": "bottleneck", 
                       "size": 0
+                    }, 
+                    {
+                      "id": "2.2.2.1.6.", 
+                      "depth": 5, 
+                      "name": "mlpconv", 
+                      "size": 0
+                    }, 
+                    {
+                      "id": "2.2.2.1.7.", 
+                      "depth": 5, 
+                      "name": "deformable conv", 
+                      "size": 0
                     }
                   ], 
                   "name": "conv", 
@@ -289,7 +301,7 @@
                         {
                           "id": "2.2.2.2.1.1.", 
                           "depth": 6, 
-                          "name": "relu", 
+                          "name": "standard relu", 
                           "size": 0
                         }, 
                         {
@@ -308,6 +320,18 @@
                           "id": "2.2.2.2.1.4.", 
                           "depth": 6, 
                           "name": "CRelu", 
+                          "size": 0
+                        }, 
+                        {
+                          "id": "2.2.2.2.1.5.", 
+                          "depth": 6, 
+                          "name": "PRelu", 
+                          "size": 0
+                        }, 
+                        {
+                          "id": "2.2.2.2.1.6.", 
+                          "depth": 6, 
+                          "name": "ELU", 
                           "size": 0
                         }
                       ], 
@@ -363,6 +387,12 @@
                       "depth": 5, 
                       "name": "second-order pooling", 
                       "size": 0
+                    }, 
+                    {
+                      "id": "2.2.2.3.6.", 
+                      "depth": 5, 
+                      "name": "fractional max-pooling", 
+                      "size": 0
                     }
                   ], 
                   "name": "pooling", 
@@ -375,7 +405,7 @@
                   "size": 0
                 }
               ], 
-              "name": "layers", 
+              "name": "layers&mechanism", 
               "size": 0
             }
           ], 
@@ -389,7 +419,7 @@
             {
               "id": "2.3.1.", 
               "depth": 3, 
-              "name": "vanilla", 
+              "name": "vanilla RNN", 
               "size": 0
             }, 
             {
@@ -561,6 +591,48 @@
               "depth": 3, 
               "name": "VarianceScaling", 
               "size": 0
+            }, 
+            {
+              "id": "3.1.5.", 
+              "depth": 3, 
+              "name": "Xavier_normal", 
+              "size": 0
+            }, 
+            {
+              "id": "3.1.6.", 
+              "depth": 3, 
+              "name": "Xavier_uniform", 
+              "size": 0
+            }, 
+            {
+              "id": "3.1.7.", 
+              "depth": 3, 
+              "name": "he_normal", 
+              "size": 0
+            }, 
+            {
+              "id": "3.1.8.", 
+              "depth": 3, 
+              "name": "he_uniform", 
+              "size": 0
+            }, 
+            {
+              "id": "3.1.9.", 
+              "depth": 3, 
+              "name": "lecun_normal", 
+              "size": 0
+            }, 
+            {
+              "id": "3.1.10.", 
+              "depth": 3, 
+              "name": "lecun_uniform", 
+              "size": 0
+            }, 
+            {
+              "id": "3.1.11.", 
+              "depth": 3, 
+              "name": "dirac", 
+              "size": 0
             }
           ], 
           "name": "initialization", 
@@ -595,6 +667,38 @@
         {
           "id": "3.3.", 
           "depth": 2, 
+          "children": [
+            {
+              "id": "3.3.1.", 
+              "depth": 3, 
+              "name": "L1", 
+              "size": 0
+            }, 
+            {
+              "id": "3.3.2.", 
+              "depth": 3, 
+              "name": "L2", 
+              "size": 0
+            }, 
+            {
+              "id": "3.3.3.", 
+              "depth": 3, 
+              "name": "hinge", 
+              "size": 0
+            }, 
+            {
+              "id": "3.3.4.", 
+              "depth": 3, 
+              "name": "cosine", 
+              "size": 0
+            }, 
+            {
+              "id": "3.3.5.", 
+              "depth": 3, 
+              "name": "crossentropy", 
+              "size": 0
+            }
+          ], 
           "name": "loss function", 
           "size": 0
         }, 
@@ -611,19 +715,37 @@
             {
               "id": "3.4.2.", 
               "depth": 3, 
-              "name": "drop path", 
+              "name": "weight decay", 
               "size": 0
             }, 
             {
               "id": "3.4.3.", 
               "depth": 3, 
-              "name": "batch normalization", 
+              "name": "drop path", 
               "size": 0
             }, 
             {
               "id": "3.4.4.", 
               "depth": 3, 
+              "name": "batch normalization", 
+              "size": 0
+            }, 
+            {
+              "id": "3.4.5.", 
+              "depth": 3, 
               "name": "shake-shake", 
+              "size": 0
+            }, 
+            {
+              "id": "3.4.6.", 
+              "depth": 3, 
+              "name": "LSR", 
+              "size": 0
+            }, 
+            {
+              "id": "3.4.7.", 
+              "depth": 3, 
+              "name": "pre-activation", 
               "size": 0
             }
           ], 
@@ -643,17 +765,17 @@
             {
               "id": "3.5.2.", 
               "depth": 3, 
-              "name": "Deeply supervised", 
+              "name": "auxiliar classifier", 
               "size": 0
             }, 
             {
               "id": "3.5.3.", 
               "depth": 3, 
-              "name": "FitNets", 
+              "name": "intermediate hints", 
               "size": 0
             }
           ], 
-          "name": "deep supervison", 
+          "name": " ", 
           "size": 0
         }
       ], 
