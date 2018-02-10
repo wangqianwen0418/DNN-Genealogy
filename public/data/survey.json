@@ -12,8 +12,8 @@
       "2.2.1.1.plain",
       "2.2.2.2.2.sigmoid"
     ],
-    "names": null,
-    "parents": null
+    "names": [],
+    "parents": []
   },
   {
     "ID": "alexNet",
@@ -31,14 +31,7 @@
       "2.2.1.1.plain",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "leNet",
-        "link_info": ""
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "alexNet",
         "params": 60.0,
@@ -47,6 +40,12 @@
         "SVHN": null,
         "imageNet val top1": 36.7,
         "imagenet val top5": 15.4
+      }
+    ],
+    "parents": [
+      {
+        "ID": "leNet",
+        "link_info": ""
       }
     ]
   },
@@ -66,14 +65,16 @@
       "2.2.1.1.plain",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
+    "names": [
       {
-        "ID": "alexNet",
-        "link_info": "deeper;conv7=>2*conv3"
-      }
-    ],
-    "name": [
+        "name": "vgg19",
+        "params": 144.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 25.5,
+        "imagenet val top5": 7.3
+      },
       {
         "name": "vgg16",
         "params": 138.0,
@@ -82,6 +83,12 @@
         "SVHN": null,
         "imageNet val top1": 25.6,
         "imagenet val top5": 8.1
+      }
+    ],
+    "parents": [
+      {
+        "ID": "alexNet",
+        "link_info": "deeper;conv7=>2*conv3"
       }
     ]
   },
@@ -103,14 +110,7 @@
       "2.2.2.1.6.mlpconv",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "alexNet",
-        "link_info": "conv=>mlpconv;FCN=>global average pooling"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "network in network",
         "params": 0.0,
@@ -119,6 +119,12 @@
         "SVHN": 2.35,
         "imageNet val top1": null,
         "imagenet val top5": null
+      }
+    ],
+    "parents": [
+      {
+        "ID": "alexNet",
+        "link_info": "conv=>mlpconv;FCN=>global average pooling"
       }
     ]
   },
@@ -138,18 +144,7 @@
       "2.2.1.3.multi-branch",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "alexNet",
-        "link_info": ""
-      },
-      {
-        "ID": "VGG",
-        "link_info": "less computation cost"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "inception",
         "params": 6.8,
@@ -158,6 +153,16 @@
         "SVHN": null,
         "imageNet val top1": null,
         "imagenet val top5": 6.67
+      }
+    ],
+    "parents": [
+      {
+        "ID": "alexNet",
+        "link_info": ""
+      },
+      {
+        "ID": "VGG",
+        "link_info": "less computation cost"
       }
     ]
   },
@@ -177,9 +182,7 @@
       "2.2.1.1.plain",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "deeply supervised nets",
         "params": 0.0,
@@ -189,7 +192,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "inception_rethink",
@@ -207,14 +211,16 @@
       "2.2.1.3.multi-branch",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
+    "names": [
       {
-        "ID": "inception",
-        "link_info": "easy to scale up"
-      }
-    ],
-    "name": [
+        "name": "inception_v3",
+        "params": 23.8,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 18.77,
+        "imagenet val top5": 4.2
+      },
       {
         "name": "inception_v2",
         "params": 0.0,
@@ -223,6 +229,12 @@
         "SVHN": null,
         "imageNet val top1": null,
         "imagenet val top5": null
+      }
+    ],
+    "parents": [
+      {
+        "ID": "inception",
+        "link_info": "easy to scale up"
       }
     ]
   },
@@ -243,14 +255,7 @@
       "2.2.1.1.plain",
       "2.2.2.2.1.5.PRelu"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "VGG",
-        "link_info": "enables to train extremely deep rectified models directly from scratch"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "PRule-nets",
         "params": 0.0,
@@ -259,6 +264,12 @@
         "SVHN": null,
         "imageNet val top1": null,
         "imagenet val top5": 4.94
+      }
+    ],
+    "parents": [
+      {
+        "ID": "VGG",
+        "link_info": "enables to train extremely deep rectified models directly from scratch"
       }
     ]
   },
@@ -276,14 +287,7 @@
       "2.2.1.1.plain",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "DSN",
-        "link_info": " a smoother hint"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "fitNets",
         "params": 2.5,
@@ -292,6 +296,12 @@
         "SVHN": null,
         "imageNet val top1": null,
         "imagenet val top5": null
+      }
+    ],
+    "parents": [
+      {
+        "ID": "DSN",
+        "link_info": " a smoother hint"
       }
     ]
   },
@@ -306,7 +316,17 @@
       "2.2.1.2.residual",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
+    "names": [
+      {
+        "name": "highwayNets",
+        "params": 2.3,
+        "cifar10": 7.76,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ],
     "parents": [
       {
         "ID": "LSTM",
@@ -319,17 +339,6 @@
       {
         "ID": "VGG",
         "link_info": "enables to train extremely deep models directly from scratch"
-      }
-    ],
-    "name": [
-      {
-        "name": "highwayNets",
-        "params": 2.3,
-        "cifar10": 7.76,
-        "cifar100": null,
-        "SVHN": null,
-        "imageNet val top1": null,
-        "imagenet val top5": null
       }
     ]
   },
@@ -349,18 +358,34 @@
       "2.2.1.2.residual",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
+    "names": [
       {
-        "ID": "VGG",
-        "link_info": "add residual connections, deeper"
+        "name": "resNet_v1_56_cifar",
+        "params": 0.86,
+        "cifar10": 6.97,
+        "cifar100": 25.16,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
       },
       {
-        "ID": "highwayNets",
-        "link_info": "no gate"
-      }
-    ],
-    "name": [
+        "name": "resNet_v1_110_cifar",
+        "params": 1.7,
+        "cifar10": 6.43,
+        "cifar100": 25.16,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "resNet_v1_50",
+        "params": 25.6,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 24.1,
+        "imagenet val top5": 7.1
+      },
       {
         "name": "resNet_v1_152",
         "params": 60.4,
@@ -369,6 +394,16 @@
         "SVHN": null,
         "imageNet val top1": 21.43,
         "imagenet val top5": 5.71
+      }
+    ],
+    "parents": [
+      {
+        "ID": "VGG",
+        "link_info": "add residual connections, deeper"
+      },
+      {
+        "ID": "highwayNets",
+        "link_info": "no gate"
       }
     ]
   },
@@ -388,14 +423,25 @@
       "2.2.1.2.residual",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
+    "names": [
       {
-        "ID": "resNet_v1",
-        "link_info": "pre-activation makes training easier and improves generalization"
-      }
-    ],
-    "name": [
+        "name": "resNet_v2",
+        "params": 0.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 35.29,
+        "imagenet val top5": null
+      },
+      {
+        "name": "resNet_v2_56_cifar",
+        "params": 1.6,
+        "cifar10": 6.99,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
       {
         "name": "resNet_v2_110_cifar",
         "params": 3.3,
@@ -404,6 +450,12 @@
         "SVHN": null,
         "imageNet val top1": null,
         "imagenet val top5": null
+      }
+    ],
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "pre-activation makes training easier and improves generalization"
       }
     ]
   },
@@ -425,18 +477,7 @@
       "2.2.1.3.multi-branch",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "inception_rethink",
-        "link_info": "combine resnet with inception"
-      },
-      {
-        "ID": "resNet_v1",
-        "link_info": "combine resnet with inception"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "inception_resNet",
         "params": 55.8,
@@ -445,6 +486,16 @@
         "SVHN": null,
         "imageNet val top1": 17.8,
         "imagenet val top5": 3.7
+      }
+    ],
+    "parents": [
+      {
+        "ID": "inception_rethink",
+        "link_info": "combine resnet with inception"
+      },
+      {
+        "ID": "resNet_v1",
+        "link_info": "combine resnet with inception"
       }
     ]
   },
@@ -464,14 +515,25 @@
       "2.2.1.2.residual",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
+    "names": [
       {
-        "ID": "resNet_v1",
-        "link_info": "wider instead of deeper for computation efficiency"
-      }
-    ],
-    "name": [
+        "name": "wideResNet_16_4",
+        "params": 2.9,
+        "cifar10": 5.24,
+        "cifar100": 23.91,
+        "SVHN": 1.64,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "wideResNet_28_10",
+        "params": 36.0,
+        "cifar10": 3.89,
+        "cifar100": 18.85,
+        "SVHN": 1.64,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
       {
         "name": "wideResNet-50-2",
         "params": 0.0,
@@ -480,6 +542,12 @@
         "SVHN": null,
         "imageNet val top1": 21.9,
         "imagenet val top5": 5.79
+      }
+    ],
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "wider instead of deeper for computation efficiency"
       }
     ]
   },
@@ -499,14 +567,7 @@
       "2.2.1.2.residual",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "resNet_v1",
-        "link_info": "generalizes ResNets and standard CNNs"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "resNet-in-resent",
         "params": 0.0,
@@ -515,6 +576,12 @@
         "SVHN": null,
         "imageNet val top1": null,
         "imagenet val top5": null
+      }
+    ],
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "generalizes ResNets and standard CNNs"
       }
     ]
   },
@@ -535,14 +602,16 @@
       "2.2.1.3.multi-branch",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
+    "names": [
       {
-        "ID": "resNet_v1",
-        "link_info": "shows that explicit residual learning is not a requirement for building ultra-deep neural networks"
-      }
-    ],
-    "name": [
+        "name": "fractalNet-40",
+        "params": 22.9,
+        "cifar10": 5.24,
+        "cifar100": 22.49,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
       {
         "name": "fractalNet-20",
         "params": 38.6,
@@ -551,6 +620,12 @@
         "SVHN": null,
         "imageNet val top1": null,
         "imagenet val top5": null
+      }
+    ],
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "shows that explicit residual learning is not a requirement for building ultra-deep neural networks"
       }
     ]
   },
@@ -571,18 +646,7 @@
       "2.2.1.3.multi-branch",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "resNet_v1",
-        "link_info": "add a new dimension called \"\u201ccardinality\""
-      },
-      {
-        "ID": "inception",
-        "link_info": "exploiting the split-transform-merge strategy in an easy, extensible way"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "ResNeXt",
         "params": 25.0,
@@ -591,6 +655,16 @@
         "SVHN": null,
         "imageNet val top1": 20.4,
         "imagenet val top5": 5.3
+      }
+    ],
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "add a new dimension called \"\u201ccardinality\""
+      },
+      {
+        "ID": "inception",
+        "link_info": "exploiting the split-transform-merge strategy in an easy, extensible way"
       }
     ]
   },
@@ -610,14 +684,70 @@
       "2.2.1.2.residual",
       "2.2.2.2.1.1.standard relu"
     ],
-    "names": null,
-    "parents": [
+    "names": [
       {
-        "ID": "resNet_v1",
-        "link_info": "dense residual connection; change add to concate "
-      }
-    ],
-    "name": [
+        "name": "denseNet_40_12",
+        "params": 1.0,
+        "cifar10": 5.24,
+        "cifar100": 24.42,
+        "SVHN": 1.79,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "denseNet_100_12",
+        "params": 7.2,
+        "cifar10": 4.1,
+        "cifar100": 20.2,
+        "SVHN": 1.67,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "denseNet_100_24",
+        "params": 27.2,
+        "cifar10": 3.74,
+        "cifar100": 19.25,
+        "SVHN": 1.59,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "denseNet-BC(l=100, k=12)",
+        "params": 0.8,
+        "cifar10": 4.51,
+        "cifar100": 22.27,
+        "SVHN": 1.76,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "denseNet-BC(l=250, k=24)",
+        "params": 15.3,
+        "cifar10": 3.62,
+        "cifar100": 17.6,
+        "SVHN": 1.74,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "denseNet-BC(l=190, k=40)",
+        "params": 25.6,
+        "cifar10": 3.46,
+        "cifar100": 17.18,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "denseNet_121",
+        "params": 8.1,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 25.02,
+        "imagenet val top5": 7.71
+      },
       {
         "name": "denseNet_201",
         "params": 20.2,
@@ -626,6 +756,12 @@
         "SVHN": null,
         "imageNet val top1": 22.58,
         "imagenet val top5": 6.34
+      }
+    ],
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "dense residual connection; change add to concate "
       }
     ]
   },
@@ -645,18 +781,7 @@
       "2.2.2.2.1.1.standard relu",
       "2.2.1.2.residual"
     ],
-    "names": null,
-    "parents": [
-      {
-        "ID": "alexNet",
-        "link_info": "same performance with 50x less parameters"
-      },
-      {
-        "ID": "inception",
-        "link_info": "exploiting the split-transform-merge strategy in an easy, extensible way"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "squeezeNet",
         "params": 1.24,
@@ -665,6 +790,16 @@
         "SVHN": null,
         "imageNet val top1": 39.6,
         "imagenet val top5": 17.5
+      }
+    ],
+    "parents": [
+      {
+        "ID": "alexNet",
+        "link_info": "same performance with 50x less parameters"
+      },
+      {
+        "ID": "inception",
+        "link_info": "exploiting the split-transform-merge strategy in an easy, extensible way"
       }
     ]
   },
@@ -685,14 +820,34 @@
       "2.2.1.1.plain",
       "2.2.2.2.1.4.CRelu"
     ],
-    "names": null,
-    "parents": [
+    "names": [
       {
-        "ID": "resNet_v1",
-        "link_info": "train a deep network without residual connections"
-      }
-    ],
-    "name": [
+        "name": "diracNet-28-5",
+        "params": 9.1,
+        "cifar10": 3.16,
+        "cifar100": 23.44,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "diracNet-28-10",
+        "params": 36.5,
+        "cifar10": 4.75,
+        "cifar100": 21.54,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "diracNet-18",
+        "params": 11.7,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 30.37,
+        "imagenet val top5": 10.88
+      },
       {
         "name": "diracNet-34",
         "params": 21.8,
@@ -701,6 +856,12 @@
         "SVHN": null,
         "imageNet val top1": 27.79,
         "imagenet val top5": 9.34
+      }
+    ],
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "train a deep network without residual connections"
       }
     ]
   },
@@ -717,9 +878,25 @@
       "2.2.1.2.residual",
       "2.2.1.3.multi-branch"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
+      {
+        "name": "nasNet_cifar",
+        "params": 3.3,
+        "cifar10": 2.65,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      },
+      {
+        "name": "nasNet_small",
+        "params": 88.9,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 17.3,
+        "imagenet val top5": 3.8
+      },
       {
         "name": "nasNet_large",
         "params": 5.3,
@@ -729,7 +906,8 @@
         "imageNet val top1": 26.0,
         "imagenet val top5": 8.4
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "Elu",
@@ -745,14 +923,7 @@
       "3.4.1.dropout"
     ],
     "architecture": [],
-    "names": null,
-    "parents": [
-      {
-        "ID": "PRule-nets",
-        "link_info": " a noise-robust deactivation state"
-      }
-    ],
-    "name": [
+    "names": [
       {
         "name": "exponential linear unit",
         "params": 0.0,
@@ -761,6 +932,12 @@
         "SVHN": null,
         "imageNet val top1": null,
         "imagenet val top5": null
+      }
+    ],
+    "parents": [
+      {
+        "ID": "PRule-nets",
+        "link_info": " a noise-robust deactivation state"
       }
     ]
   },
@@ -772,8 +949,8 @@
     "application": "",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null
+    "names": [],
+    "parents": []
   },
   {
     "ID": "fcn",
@@ -783,9 +960,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "fcn",
         "params": 0.0,
@@ -795,7 +970,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "mask r-cnn",
@@ -805,9 +981,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "mask r-cnn",
         "params": 0.0,
@@ -817,7 +991,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "deepLab_v1",
@@ -827,9 +1002,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "deepLab_v1",
         "params": 0.0,
@@ -839,7 +1012,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "deepLab_v2",
@@ -849,9 +1023,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "deepLab_v2",
         "params": 0.0,
@@ -861,7 +1033,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "uNet",
@@ -871,9 +1044,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "uNet",
         "params": 0.0,
@@ -883,7 +1054,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "segNet",
@@ -893,9 +1065,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "segNet",
         "params": 0.0,
@@ -905,7 +1075,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "dilated conv",
@@ -915,9 +1086,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "dilated conv",
         "params": 0.0,
@@ -927,7 +1096,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "refineNet",
@@ -937,9 +1107,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "refineNet",
         "params": 0.0,
@@ -949,7 +1117,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "PSPNet",
@@ -959,9 +1128,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "PSPNet",
         "params": 0.0,
@@ -971,7 +1138,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "GCN",
@@ -981,9 +1149,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "GCN",
         "params": 0.0,
@@ -993,7 +1159,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "deepLab_v3",
@@ -1003,9 +1170,7 @@
     "application": "CV=>segmentation",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "deepLab_v3",
         "params": 0.0,
@@ -1015,7 +1180,8 @@
         "imageNet val top1": null,
         "imagenet val top5": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "r-cnn",
@@ -1025,9 +1191,7 @@
     "application": "CV=>detection",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "r-cnn",
         "params": 0.0,
@@ -1037,7 +1201,8 @@
         "COCO mAP@[0.5:0.95]": null,
         "voc2007 fps": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "SPP_net",
@@ -1047,9 +1212,7 @@
     "application": "CV=>detection",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "SPP_net",
         "params": 0.0,
@@ -1059,7 +1222,8 @@
         "COCO mAP@[0.5:0.95]": null,
         "voc2007 fps": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "fast r-cnn",
@@ -1069,9 +1233,7 @@
     "application": "CV=>detection",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "fast r-cnn",
         "params": 0.0,
@@ -1081,7 +1243,8 @@
         "COCO mAP@[0.5:0.95]": null,
         "voc2007 fps": 0.5
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "faster r-cnn(rpn, 300)",
@@ -1091,9 +1254,7 @@
     "application": "CV=>detection",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "faster r-cnn(rpn, 300)",
         "params": 0.0,
@@ -1103,7 +1264,8 @@
         "COCO mAP@[0.5:0.95]": 21.9,
         "voc2007 fps": 7.0
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "SSD",
@@ -1113,9 +1275,7 @@
     "application": "CV=>detection",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "SSD",
         "params": 0.0,
@@ -1125,7 +1285,8 @@
         "COCO mAP@[0.5:0.95]": 26.8,
         "voc2007 fps": 59.0
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "YOLO",
@@ -1135,9 +1296,16 @@
     "application": "CV=>detection",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
+      {
+        "name": "YOLO",
+        "params": 0.0,
+        "voc2007 mAP (train on 07 + 12 )": 66.4,
+        "voc2012 mAP": 57.9,
+        "COCO mAP@0.5 (test-dev)": null,
+        "COCO mAP@[0.5:0.95]": null,
+        "voc2007 fps": 155.0
+      },
       {
         "name": "YOLO+fast-rcnn",
         "params": 0.0,
@@ -1147,7 +1315,8 @@
         "COCO mAP@[0.5:0.95]": null,
         "voc2007 fps": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "R-FCN",
@@ -1157,9 +1326,7 @@
     "application": "CV=>detection",
     "training": [],
     "architecture": [],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "R-FCN",
         "params": 0.0,
@@ -1169,7 +1336,8 @@
         "COCO mAP@[0.5:0.95]": 31.5,
         "voc2007 fps": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "Seq2Seq",
@@ -1181,9 +1349,7 @@
     "architecture": [
       "stacked LSTM"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "Seq2Seq",
         "params": 0.0,
@@ -1191,7 +1357,8 @@
         "BLEU WMT14 English2French": 34.81,
         "BELU WMT16 English2Romanian": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "GNMT",
@@ -1205,9 +1372,7 @@
       "attention",
       "residual"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "GNMT",
         "params": 0.0,
@@ -1215,7 +1380,8 @@
         "BLEU WMT14 English2French": 38.39,
         "BELU WMT16 English2Romanian": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "conv seq2seq",
@@ -1228,9 +1394,7 @@
       "conv",
       "attention"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "conv seq2seq",
         "params": 0.0,
@@ -1238,7 +1402,8 @@
         "BLEU WMT14 English2French": 40.51,
         "BELU WMT16 English2Romanian": 30.02
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "RNNsearch",
@@ -1253,9 +1418,7 @@
       "bidirectional",
       "GRU"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "RNNsearch",
         "params": 0.0,
@@ -1263,7 +1426,8 @@
         "BLEU WMT14 English2French": 33.3,
         "BELU WMT16 English2Romanian": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "RNNencdec",
@@ -1275,9 +1439,7 @@
     "architecture": [
       "GRU"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "RNNencdec",
         "params": 0.0,
@@ -1285,7 +1447,8 @@
         "BLEU WMT14 English2French": 26.71,
         "BELU WMT16 English2Romanian": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "LTC-CNN",
@@ -1298,9 +1461,7 @@
       "plain",
       "3D conv"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "LTC-CNN",
         "params": 0.0,
@@ -1310,7 +1471,8 @@
         "Sports-1M": null,
         "MPII": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "3D conv+LSTM",
@@ -1324,9 +1486,7 @@
       "3D conv",
       "LSTM"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "3D conv+LSTM",
         "params": 0.0,
@@ -1336,7 +1496,8 @@
         "Sports-1M": null,
         "MPII": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "deepVideo",
@@ -1349,9 +1510,7 @@
       "conv",
       "fusion strategy"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "deepVideo",
         "params": 0.0,
@@ -1361,7 +1520,8 @@
         "Sports-1M": 63.9,
         "MPII": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "AttnP+R101",
@@ -1374,9 +1534,7 @@
       "attentional pooling",
       "resnet101"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "AttnP+R101",
         "params": 0.0,
@@ -1386,7 +1544,8 @@
         "Sports-1M": null,
         "MPII": 30.3
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "AttnP+I_V2",
@@ -1399,9 +1558,7 @@
       "attentional pooling",
       "inception_BN"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "AttnP+I_V2",
         "params": 0.0,
@@ -1411,7 +1568,8 @@
         "Sports-1M": null,
         "MPII": 26.2
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "two-stream",
@@ -1424,9 +1582,7 @@
       "plain",
       "two-stream"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "two-stream",
         "params": 0.0,
@@ -1436,7 +1592,8 @@
         "Sports-1M": null,
         "MPII": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "3D conv",
@@ -1448,9 +1605,7 @@
     "architecture": [
       "3D conv"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "3D conv",
         "params": 0.0,
@@ -1460,7 +1615,8 @@
         "Sports-1M": null,
         "MPII": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "LRCN",
@@ -1473,9 +1629,7 @@
       "2d conv",
       "LSTM"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "LRCN",
         "params": 0.0,
@@ -1485,7 +1639,8 @@
         "Sports-1M": null,
         "MPII": null
       }
-    ]
+    ],
+    "parents": []
   },
   {
     "ID": "ST-ResNet",
@@ -1498,9 +1653,7 @@
       "resnet",
       "two-stream"
     ],
-    "names": null,
-    "parents": null,
-    "name": [
+    "names": [
       {
         "name": "ST-ResNet",
         "params": 0.0,
@@ -1510,6 +1663,7 @@
         "Sports-1M": null,
         "MPII": null
       }
-    ]
+    ],
+    "parents": []
   }
 ]

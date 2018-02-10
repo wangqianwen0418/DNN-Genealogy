@@ -61,14 +61,12 @@ class SurveyParser:
                     'application': datum[4],
                     'training': self.get_split_data(datum[5]),
                     'architecture': self.get_split_data(datum[6]),
-                    'names': None,
-                    'parents': None,
+                    'names': list(),
+                    'parents': list(),
                 })
 
             # add a parent to current model
             if datum[7]:
-                if not result[-1]['parents']:
-                    result[-1]['parents'] = list()
                 if datum[7] not in models:
                     print('Error in line %d: Parent "%s" not exists.' % (label, datum[7]))
                 result[-1]['parents'].append({
@@ -78,12 +76,9 @@ class SurveyParser:
 
             # add datasets to current model
             if datum[dataset_start]:
-                if not result[-1]['names']:
-                    result[-1]['name'] = list()
-
                 cur_name = {
                     'name': datum[dataset_start],
-                    'params': 0.0 if not datum[dataset_start + 1] or datum[dataset_start + 1] == 'na'   else float(datum[dataset_start + 1]),
+                    'params': 0.0 if not datum[dataset_start + 1] or datum[dataset_start + 1] == 'na' else float(datum[dataset_start + 1]),
                 }
                 for i in range(dataset_start + 2, len(datum)):
                     if not title_line[i] or title_line[i] == 'model path':
@@ -92,7 +87,7 @@ class SurveyParser:
                         cur_name[title_line[i]] = None
                     else:
                         cur_name[title_line[i]] = float(datum[i])
-                result[-1]['name'].append(cur_name)
+                result[-1]['names'].append(cur_name)
 
         result_json = json.dumps(result, indent=2)
         f = open(filepath, 'w')
