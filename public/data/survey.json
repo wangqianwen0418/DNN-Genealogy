@@ -1,0 +1,1515 @@
+[
+  {
+    "ID": "leNet",
+    "url": "http://ieeexplore.ieee.org/abstract/document/726791/",
+    "date": "1998.11.01",
+    "citation": "10831",
+    "application": "CV=>recognition",
+    "training": [
+      "3.2.1.SGD"
+    ],
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.2.2.sigmoid"
+    ],
+    "names": null,
+    "parents": null
+  },
+  {
+    "ID": "alexNet",
+    "url": "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks",
+    "date": "2012.12.03",
+    "citation": "18438",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "leNet",
+        "link_info": ""
+      }
+    ],
+    "name": [
+      {
+        "name": "alexNet",
+        "params": 60.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 36.7,
+        "imagenet val top5": 15.4
+      }
+    ]
+  },
+  {
+    "ID": "VGG",
+    "url": "https://arxiv.org/abs/1409.1556",
+    "date": "2014.09.04",
+    "citation": "8205",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "alexNet",
+        "link_info": "deeper;conv7=>2*conv3"
+      }
+    ],
+    "name": [
+      {
+        "name": "vgg16",
+        "params": 138.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 25.6,
+        "imagenet val top5": 8.1
+      }
+    ]
+  },
+  {
+    "ID": "NIN",
+    "url": "https://arxiv.org/abs/1312.4400",
+    "date": "2013.12.16",
+    "citation": "1159",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "3.5.2.auxiliar classifier",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.1.6.mlpconv",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "alexNet",
+        "link_info": "conv=>mlpconv;FCN=>global average pooling"
+      }
+    ],
+    "name": [
+      {
+        "name": "network in network",
+        "params": 0.0,
+        "cifar10": 8.81,
+        "cifar100": 35.68,
+        "SVHN": 2.35,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "inception",
+    "url": "https://arxiv.org/abs/1409.4842",
+    "date": "2014.09.17",
+    "citation": "5591",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "architecture": [
+      "2.2.1.3.multi-branch",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "alexNet",
+        "link_info": ""
+      },
+      {
+        "ID": "VGG",
+        "link_info": "less computation cost"
+      }
+    ],
+    "name": [
+      {
+        "name": "inception",
+        "params": 6.8,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": 6.67
+      }
+    ]
+  },
+  {
+    "ID": "DSN",
+    "url": "https://arxiv.org/abs/1409.5185",
+    "date": "2014.09.18",
+    "citation": "558",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "3.5.2.auxiliar classifier"
+    ],
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "deeply supervised nets",
+        "params": 0.0,
+        "cifar10": 8.22,
+        "cifar100": 34.57,
+        "SVHN": 1.92,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "inception_rethink",
+    "url": "https://arxiv.org/abs/1512.00567",
+    "date": "2015.12.02",
+    "citation": "794",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.6.LSR",
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay"
+    ],
+    "architecture": [
+      "2.2.1.3.multi-branch",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "inception",
+        "link_info": "easy to scale up"
+      }
+    ],
+    "name": [
+      {
+        "name": "inception_v2",
+        "params": 0.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "PRule-nets",
+    "url": "https://arxiv.org/abs/1502.01852",
+    "date": "2015.02.06",
+    "citation": "1981",
+    "application": "CV=>recognition",
+    "training": [
+      "3.1.7.he_normal",
+      "2.2.2.3.4.SPP",
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay"
+    ],
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.2.1.5.PRelu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "VGG",
+        "link_info": "enables to train extremely deep rectified models directly from scratch"
+      }
+    ],
+    "name": [
+      {
+        "name": "PRule-nets",
+        "params": 0.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": 4.94
+      }
+    ]
+  },
+  {
+    "ID": "fitNets",
+    "url": "https://arxiv.org/abs/1412.6550",
+    "date": "2014.12.19",
+    "citation": "274",
+    "application": "CV=>recognition",
+    "training": [
+      "3.5.1.knowledge distilling",
+      "3.5.3.intermediate hints"
+    ],
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "DSN",
+        "link_info": " a smoother hint"
+      }
+    ],
+    "name": [
+      {
+        "name": "fitNets",
+        "params": 2.5,
+        "cifar10": 8.39,
+        "cifar100": 35.04,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "highwayNets",
+    "url": "https://arxiv.org/pdf/1505.00387.pdf",
+    "date": "2015.11.03",
+    "citation": "320",
+    "application": "CV=>recognition",
+    "training": [],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "LSTM",
+        "link_info": "strongly inspired by it"
+      },
+      {
+        "ID": "fitNets",
+        "link_info": "easier to train"
+      },
+      {
+        "ID": "VGG",
+        "link_info": "enables to train extremely deep models directly from scratch"
+      }
+    ],
+    "name": [
+      {
+        "name": "highwayNets",
+        "params": 2.3,
+        "cifar10": 7.76,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "resNet_v1",
+    "url": "https://arxiv.org/abs/1512.03385",
+    "date": "2015.12.10",
+    "citation": "5464",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "3.1.7.he_normal"
+    ],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "VGG",
+        "link_info": "add residual connections, deeper"
+      },
+      {
+        "ID": "highwayNets",
+        "link_info": "no gate"
+      }
+    ],
+    "name": [
+      {
+        "name": "resNet_v1_152",
+        "params": 60.4,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 21.43,
+        "imagenet val top5": 5.71
+      }
+    ]
+  },
+  {
+    "ID": "resNet_v2",
+    "url": "https://arxiv.org/abs/1603.05027",
+    "date": "2016.05.16",
+    "citation": "575",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.7.pre-activation",
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay"
+    ],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "pre-activation makes training easier and improves generalization"
+      }
+    ],
+    "name": [
+      {
+        "name": "resNet_v2_110_cifar",
+        "params": 3.3,
+        "cifar10": 6.38,
+        "cifar100": 24.64,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "inception_resNet",
+    "url": "https://arxiv.org/abs/1602.07261",
+    "date": "2016.02.23",
+    "citation": "480",
+    "application": "CV=>recognition",
+    "training": [
+      "3.2.3.RMSprop",
+      "scaling of the residuals",
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay"
+    ],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.1.3.multi-branch",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "inception_rethink",
+        "link_info": "combine resnet with inception"
+      },
+      {
+        "ID": "resNet_v1",
+        "link_info": "combine resnet with inception"
+      }
+    ],
+    "name": [
+      {
+        "name": "inception_resNet",
+        "params": 55.8,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 17.8,
+        "imagenet val top5": 3.7
+      }
+    ]
+  },
+  {
+    "ID": "WRN",
+    "url": "https://arxiv.org/abs/1605.07146",
+    "date": "2016.05.23",
+    "citation": "285",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "3.4.1.dropout"
+    ],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "wider instead of deeper for computation efficiency"
+      }
+    ],
+    "name": [
+      {
+        "name": "wideResNet-50-2",
+        "params": 0.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 21.9,
+        "imagenet val top5": 5.79
+      }
+    ]
+  },
+  {
+    "ID": "RIR",
+    "url": "https://arxiv.org/abs/1603.08029",
+    "date": "2016.05.25",
+    "citation": "37",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "3.4.1.dropout"
+    ],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "generalizes ResNets and standard CNNs"
+      }
+    ],
+    "name": [
+      {
+        "name": "resNet-in-resent",
+        "params": 0.0,
+        "cifar10": 5.01,
+        "cifar100": 22.9,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "fractalNet",
+    "url": "https://arxiv.org/abs/1605.07648",
+    "date": "2016.05.24",
+    "citation": "71",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.3.drop path",
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "3.4.1.dropout"
+    ],
+    "architecture": [
+      "2.2.1.3.multi-branch",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "shows that explicit residual learning is not a requirement for building ultra-deep neural networks"
+      }
+    ],
+    "name": [
+      {
+        "name": "fractalNet-20",
+        "params": 38.6,
+        "cifar10": 5.22,
+        "cifar100": 23.3,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "resNeXt",
+    "url": "https://arxiv.org/abs/1611.05431",
+    "date": "2016.11.16",
+    "citation": "134",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.7.pre-activation",
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay"
+    ],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.1.3.multi-branch",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "add a new dimension called \"\u201ccardinality\""
+      },
+      {
+        "ID": "inception",
+        "link_info": "exploiting the split-transform-merge strategy in an easy, extensible way"
+      }
+    ],
+    "name": [
+      {
+        "name": "ResNeXt",
+        "params": 25.0,
+        "cifar10": 3.58,
+        "cifar100": 17.31,
+        "SVHN": null,
+        "imageNet val top1": 20.4,
+        "imagenet val top5": 5.3
+      }
+    ]
+  },
+  {
+    "ID": "denseNet",
+    "url": "https://arxiv.org/abs/1608.06993",
+    "date": "2016.08.25",
+    "citation": "378",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with nesterov momentum",
+      "3.4.2.weight decay",
+      "3.1.7.he_normal"
+    ],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "dense residual connection; change add to concate "
+      }
+    ],
+    "name": [
+      {
+        "name": "denseNet_201",
+        "params": 20.2,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 22.58,
+        "imagenet val top5": 6.34
+      }
+    ]
+  },
+  {
+    "ID": "squeezeNet",
+    "url": "https://arxiv.org/abs/1602.07360",
+    "date": "2016.02.24",
+    "citation": "264",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay"
+    ],
+    "architecture": [
+      "2.2.1.3.multi-branch",
+      "2.2.2.2.1.1.standard relu",
+      "2.2.1.2.residual"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "alexNet",
+        "link_info": "same performance with 50x less parameters"
+      },
+      {
+        "ID": "inception",
+        "link_info": "exploiting the split-transform-merge strategy in an easy, extensible way"
+      }
+    ],
+    "name": [
+      {
+        "name": "squeezeNet",
+        "params": 1.24,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 39.6,
+        "imagenet val top5": 17.5
+      }
+    ]
+  },
+  {
+    "ID": "diracNet",
+    "url": "https://arxiv.org/abs/1706.00388",
+    "date": "2017.06.07",
+    "citation": "",
+    "application": "CV=>recognition",
+    "training": [
+      "3.1.11.dirac",
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "3.4.1.dropout"
+    ],
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.2.1.4.CRelu"
+    ],
+    "names": null,
+    "parents": [
+      {
+        "ID": "resNet_v1",
+        "link_info": "train a deep network without residual connections"
+      }
+    ],
+    "name": [
+      {
+        "name": "diracNet-34",
+        "params": 21.8,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 27.79,
+        "imagenet val top5": 9.34
+      }
+    ]
+  },
+  {
+    "ID": "nasNet",
+    "url": "https://arxiv.org/abs/1707.07012",
+    "date": "2017.12.01",
+    "citation": "17",
+    "application": "CV=>recognition",
+    "training": [
+      "neural architecture search by reinforcement learning"
+    ],
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.1.3.multi-branch"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "nasNet_large",
+        "params": 5.3,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": 26.0,
+        "imagenet val top5": 8.4
+      }
+    ]
+  },
+  {
+    "ID": "Elu",
+    "url": "https://arxiv.org/abs/1511.07289",
+    "date": "2015.11.23",
+    "citation": "493",
+    "application": "CV=>recognition",
+    "training": [
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "2.2.2.3.4.SPP",
+      "3.4.1.dropout"
+    ],
+    "architecture": [],
+    "names": null,
+    "parents": [
+      {
+        "ID": "PRule-nets",
+        "link_info": " a noise-robust deactivation state"
+      }
+    ],
+    "name": [
+      {
+        "name": "exponential linear unit",
+        "params": 0.0,
+        "cifar10": 6.55,
+        "cifar100": 24.28,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "FMP",
+    "url": "",
+    "date": "",
+    "citation": "",
+    "application": "",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null
+  },
+  {
+    "ID": "fcn",
+    "url": "https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Long_Fully_Convolutional_Networks_2015_CVPR_paper.pdf",
+    "date": "2015.06.01",
+    "citation": "3141",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "fcn",
+        "params": 0.0,
+        "cifar10": 67.2,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "mask r-cnn",
+    "url": "https://arxiv.org/abs/1703.06870",
+    "date": "2017.04.05",
+    "citation": "88",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "mask r-cnn",
+        "params": 0.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "deepLab_v1",
+    "url": "https://arxiv.org/abs/1412.7062",
+    "date": "2014.12.22",
+    "citation": "1183",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "deepLab_v1",
+        "params": 0.0,
+        "cifar10": 71.6,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "deepLab_v2",
+    "url": "https://arxiv.org/abs/1606.00915",
+    "date": "2016.06.02",
+    "citation": "1183",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "deepLab_v2",
+        "params": 0.0,
+        "cifar10": 79.7,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "uNet",
+    "url": "https://arxiv.org/abs/1505.04597",
+    "date": "2015.05.18",
+    "citation": "994",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "uNet",
+        "params": 0.0,
+        "cifar10": null,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "segNet",
+    "url": "https://arxiv.org/abs/1511.00561",
+    "date": "2015.11.02",
+    "citation": "464",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "segNet",
+        "params": 0.0,
+        "cifar10": 59.9,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "dilated conv",
+    "url": "https://arxiv.org/abs/1511.07122",
+    "date": "2015.11.23",
+    "citation": "508",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "dilated conv",
+        "params": 0.0,
+        "cifar10": 75.3,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "refineNet",
+    "url": "https://arxiv.org/abs/1611.06612",
+    "date": "2016.11.20",
+    "citation": "60",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "refineNet",
+        "params": 0.0,
+        "cifar10": 84.2,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "PSPNet",
+    "url": "https://arxiv.org/abs/1612.01105",
+    "date": "2016.12.04",
+    "citation": "129",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "PSPNet",
+        "params": 0.0,
+        "cifar10": 85.4,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "GCN",
+    "url": "https://arxiv.org/abs/1703.02719",
+    "date": "2017.03.08",
+    "citation": "15",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "GCN",
+        "params": 0.0,
+        "cifar10": 83.6,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "deepLab_v3",
+    "url": "https://arxiv.org/abs/1706.05587",
+    "date": "2017.06.17",
+    "citation": "17",
+    "application": "CV=>segmentation",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "deepLab_v3",
+        "params": 0.0,
+        "cifar10": 85.7,
+        "cifar100": null,
+        "SVHN": null,
+        "imageNet val top1": null,
+        "imagenet val top5": null
+      }
+    ]
+  },
+  {
+    "ID": "r-cnn",
+    "url": "http://arxiv.org/abs/1311.2524",
+    "date": "2013.11.11",
+    "citation": "4309",
+    "application": "CV=>detection",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "r-cnn",
+        "params": 0.0,
+        "voc2007 mAP (train on 07 + 12 )": 66.0,
+        "voc2012 mAP": 53.3,
+        "COCO mAP@0.5 (test-dev)": null,
+        "COCO mAP@[0.5:0.95]": null,
+        "voc2007 fps": null
+      }
+    ]
+  },
+  {
+    "ID": "SPP_net",
+    "url": "http://arxiv.org/abs/1406.4729",
+    "date": "2014.06.18",
+    "citation": "889",
+    "application": "CV=>detection",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "SPP_net",
+        "params": 0.0,
+        "voc2007 mAP (train on 07 + 12 )": 59.2,
+        "voc2012 mAP": null,
+        "COCO mAP@0.5 (test-dev)": null,
+        "COCO mAP@[0.5:0.95]": null,
+        "voc2007 fps": null
+      }
+    ]
+  },
+  {
+    "ID": "fast r-cnn",
+    "url": "http://arxiv.org/abs/1504.08083",
+    "date": "2015.04.30",
+    "citation": "1823",
+    "application": "CV=>detection",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "fast r-cnn",
+        "params": 0.0,
+        "voc2007 mAP (train on 07 + 12 )": 71.8,
+        "voc2012 mAP": 68.4,
+        "COCO mAP@0.5 (test-dev)": null,
+        "COCO mAP@[0.5:0.95]": null,
+        "voc2007 fps": 0.5
+      }
+    ]
+  },
+  {
+    "ID": "faster r-cnn(rpn, 300)",
+    "url": "http://arxiv.org/abs/1506.01497",
+    "date": "2015.06.04",
+    "citation": "2395",
+    "application": "CV=>detection",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "faster r-cnn(rpn, 300)",
+        "params": 0.0,
+        "voc2007 mAP (train on 07 + 12 )": 73.2,
+        "voc2012 mAP": 70.4,
+        "COCO mAP@0.5 (test-dev)": 42.7,
+        "COCO mAP@[0.5:0.95]": 21.9,
+        "voc2007 fps": 7.0
+      }
+    ]
+  },
+  {
+    "ID": "SSD",
+    "url": "https://arxiv.org/abs/1512.02325",
+    "date": "2015.12.08",
+    "citation": "654",
+    "application": "CV=>detection",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "SSD",
+        "params": 0.0,
+        "voc2007 mAP (train on 07 + 12 )": 77.2,
+        "voc2012 mAP": 74.9,
+        "COCO mAP@0.5 (test-dev)": 46.5,
+        "COCO mAP@[0.5:0.95]": 26.8,
+        "voc2007 fps": 59.0
+      }
+    ]
+  },
+  {
+    "ID": "YOLO",
+    "url": "http://arxiv.org/abs/1506.02640",
+    "date": "2015.06.08",
+    "citation": "881",
+    "application": "CV=>detection",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "YOLO+fast-rcnn",
+        "params": 0.0,
+        "voc2007 mAP (train on 07 + 12 )": null,
+        "voc2012 mAP": 70.7,
+        "COCO mAP@0.5 (test-dev)": null,
+        "COCO mAP@[0.5:0.95]": null,
+        "voc2007 fps": null
+      }
+    ]
+  },
+  {
+    "ID": "R-FCN",
+    "url": "https://arxiv.org/abs/1605.06409",
+    "date": "2016.05.20",
+    "citation": "264",
+    "application": "CV=>detection",
+    "training": [],
+    "architecture": [],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "R-FCN",
+        "params": 0.0,
+        "voc2007 mAP (train on 07 + 12 )": 80.5,
+        "voc2012 mAP": 77.6,
+        "COCO mAP@0.5 (test-dev)": 53.2,
+        "COCO mAP@[0.5:0.95]": 31.5,
+        "voc2007 fps": null
+      }
+    ]
+  },
+  {
+    "ID": "Seq2Seq",
+    "url": "https://arxiv.org/abs/1409.3215",
+    "date": "2014.09.10",
+    "citation": "2829",
+    "application": "NLP=>translation",
+    "training": [],
+    "architecture": [
+      "stacked LSTM"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "Seq2Seq",
+        "params": 0.0,
+        "BLEU WMT2014 English2German": null,
+        "BLEU WMT14 English2French": 34.81,
+        "BELU WMT16 English2Romanian": null
+      }
+    ]
+  },
+  {
+    "ID": "GNMT",
+    "url": "https://arxiv.org/abs/1609.08144",
+    "date": "2016.09.26",
+    "citation": "369",
+    "application": "NLP=>translation",
+    "training": [],
+    "architecture": [
+      "stacked LSTM",
+      "attention",
+      "residual"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "GNMT",
+        "params": 0.0,
+        "BLEU WMT2014 English2German": 24.17,
+        "BLEU WMT14 English2French": 38.39,
+        "BELU WMT16 English2Romanian": null
+      }
+    ]
+  },
+  {
+    "ID": "conv seq2seq",
+    "url": "https://arxiv.org/abs/1705.03122",
+    "date": "2017.05.08",
+    "citation": "73",
+    "application": "NLP=>translation",
+    "training": [],
+    "architecture": [
+      "conv",
+      "attention"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "conv seq2seq",
+        "params": 0.0,
+        "BLEU WMT2014 English2German": 25.13,
+        "BLEU WMT14 English2French": 40.51,
+        "BELU WMT16 English2Romanian": 30.02
+      }
+    ]
+  },
+  {
+    "ID": "RNNsearch",
+    "url": "https://arxiv.org/abs/1409.0473",
+    "date": "2014.09.01",
+    "citation": "2362",
+    "application": "NLP=>translation",
+    "training": [],
+    "architecture": [
+      "soft attention",
+      "stacked",
+      "bidirectional",
+      "GRU"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "RNNsearch",
+        "params": 0.0,
+        "BLEU WMT2014 English2German": null,
+        "BLEU WMT14 English2French": 33.3,
+        "BELU WMT16 English2Romanian": null
+      }
+    ]
+  },
+  {
+    "ID": "RNNencdec",
+    "url": "https://arxiv.org/abs/1406.1078",
+    "date": "2014.06.03",
+    "citation": "1942",
+    "application": "NLP=>translation",
+    "training": [],
+    "architecture": [
+      "GRU"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "RNNencdec",
+        "params": 0.0,
+        "BLEU WMT2014 English2German": null,
+        "BLEU WMT14 English2French": 26.71,
+        "BELU WMT16 English2Romanian": null
+      }
+    ]
+  },
+  {
+    "ID": "LTC-CNN",
+    "url": "https://arxiv.org/abs/1604.04494v1",
+    "date": "2016.04.15",
+    "citation": "69",
+    "application": "CV=>action",
+    "training": [],
+    "architecture": [
+      "plain",
+      "3D conv"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "LTC-CNN",
+        "params": 0.0,
+        "KTH1": null,
+        "UCF101(RGB based, video)": 81.5,
+        "HMDB51": 67.2,
+        "Sports-1M": null,
+        "MPII": null
+      }
+    ]
+  },
+  {
+    "ID": "3D conv+LSTM",
+    "url": "https://link.springer.com/chapter/10.1007/978-3-642-25446-8_4",
+    "date": "2011.01.01",
+    "citation": "251",
+    "application": "CV=>action",
+    "training": [],
+    "architecture": [
+      "plain",
+      "3D conv",
+      "LSTM"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "3D conv+LSTM",
+        "params": 0.0,
+        "KTH1": 94.39,
+        "UCF101(RGB based, video)": null,
+        "HMDB51": null,
+        "Sports-1M": null,
+        "MPII": null
+      }
+    ]
+  },
+  {
+    "ID": "deepVideo",
+    "url": "http://ieeexplore.ieee.org/document/6909619/",
+    "date": "2014.06.23",
+    "citation": "1669",
+    "application": "CV=>action",
+    "training": [],
+    "architecture": [
+      "conv",
+      "fusion strategy"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "deepVideo",
+        "params": 0.0,
+        "KTH1": null,
+        "UCF101(RGB based, video)": null,
+        "HMDB51": null,
+        "Sports-1M": 63.9,
+        "MPII": null
+      }
+    ]
+  },
+  {
+    "ID": "AttnP+R101",
+    "url": "https://arxiv.org/abs/1711.01467",
+    "date": "2017.11.14",
+    "citation": "3",
+    "application": "CV=>action",
+    "training": [],
+    "architecture": [
+      "attentional pooling",
+      "resnet101"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "AttnP+R101",
+        "params": 0.0,
+        "KTH1": null,
+        "UCF101(RGB based, video)": null,
+        "HMDB51": 50.8,
+        "Sports-1M": null,
+        "MPII": 30.3
+      }
+    ]
+  },
+  {
+    "ID": "AttnP+I_V2",
+    "url": "https://arxiv.org/abs/1711.01468",
+    "date": "2017.11.14",
+    "citation": "3",
+    "application": "CV=>action",
+    "training": [],
+    "architecture": [
+      "attentional pooling",
+      "inception_BN"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "AttnP+I_V2",
+        "params": 0.0,
+        "KTH1": null,
+        "UCF101(RGB based, video)": null,
+        "HMDB51": null,
+        "Sports-1M": null,
+        "MPII": 26.2
+      }
+    ]
+  },
+  {
+    "ID": "two-stream",
+    "url": "https://arxiv.org/abs/1406.2199",
+    "date": "2014.06.29",
+    "citation": "1185",
+    "application": "CV=>action",
+    "training": [],
+    "architecture": [
+      "plain",
+      "two-stream"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "two-stream",
+        "params": 0.0,
+        "KTH1": null,
+        "UCF101(RGB based, video)": 87.0,
+        "HMDB51": 55.4,
+        "Sports-1M": null,
+        "MPII": null
+      }
+    ]
+  },
+  {
+    "ID": "3D conv",
+    "url": "ieeexplore.ieee.org/document/6165309/",
+    "date": "2013.03.06",
+    "citation": "1252",
+    "application": "CV=>action",
+    "training": [],
+    "architecture": [
+      "3D conv"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "3D conv",
+        "params": 0.0,
+        "KTH1": null,
+        "UCF101(RGB based, video)": null,
+        "HMDB51": null,
+        "Sports-1M": null,
+        "MPII": null
+      }
+    ]
+  },
+  {
+    "ID": "LRCN",
+    "url": "https://arxiv.org/abs/1411.4389",
+    "date": "2014.11.17",
+    "citation": "1278",
+    "application": "CV=>action;CV=>caption",
+    "training": [],
+    "architecture": [
+      "2d conv",
+      "LSTM"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "LRCN",
+        "params": 0.0,
+        "KTH1": null,
+        "UCF101(RGB based, video)": 82.66,
+        "HMDB51": null,
+        "Sports-1M": null,
+        "MPII": null
+      }
+    ]
+  },
+  {
+    "ID": "ST-ResNet",
+    "url": "https://arxiv.org/abs/1611.02155",
+    "date": "2016.11.07",
+    "citation": "67",
+    "application": "CV=>action",
+    "training": [],
+    "architecture": [
+      "resnet",
+      "two-stream"
+    ],
+    "names": null,
+    "parents": null,
+    "name": [
+      {
+        "name": "ST-ResNet",
+        "params": 0.0,
+        "KTH1": null,
+        "UCF101(RGB based, video)": 93.46,
+        "HMDB51": 66.41,
+        "Sports-1M": null,
+        "MPII": null
+      }
+    ]
+  }
+]

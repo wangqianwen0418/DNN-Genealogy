@@ -2,6 +2,7 @@ import csv
 import re
 import json
 
+
 class DfsPos:
     def __init__(self, imax, jmax):
         self.imax = imax
