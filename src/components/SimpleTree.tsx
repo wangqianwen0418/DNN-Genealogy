@@ -20,7 +20,7 @@ export interface TreeNode extends d3.HierarchyNode<any>{
 }
 
 export default class SimpleTree extends React.Component<Props, State>{
-    private ref:HTMLDivElement|null
+    private ref:HTMLDivElement|null; reset:boolean=true
     constructor(props: Props) {
         super(props)
         // this.update = this.update.bind(this)
@@ -54,6 +54,7 @@ export default class SimpleTree extends React.Component<Props, State>{
     draw() {
 
         let {onSelect} = this.props
+        let this_ = this
         let margin = {top: 40, right: 10, bottom: 10, left: 10},
             nodeSize:[number, number] = [80, 20],
             node_margin = 10,
@@ -76,7 +77,8 @@ export default class SimpleTree extends React.Component<Props, State>{
             .append('g')
             .attr('class', 'svg')
 
-        let treemap = d3.tree().nodeSize([nodeSize[0]+node_margin, nodeSize[1]])
+        let treemap = d3.tree()
+            .nodeSize([nodeSize[0]+node_margin, nodeSize[1]])
 
         let root_:any = d3.hierarchy(this.state.datum, d => d.children)
         root_.x0 = width / 2
@@ -121,7 +123,7 @@ export default class SimpleTree extends React.Component<Props, State>{
                 .attr('stroke', 'black')
                 .attr('stroke-width', 1)
                 .attr('fill', 'none')
-                .style('opacity', (d: any) => (d._children ? 1 : 0))
+                .style('opacity', (d: any) => (d._children ? 1 : (d.centered0)))
                 .attr('transform', (d)=>`translate(${-nodeSize[0]/2 + 3}, ${-nodeSize[1]/2 - 3})`)
 
             nodeEnter.append('rect')
@@ -130,7 +132,10 @@ export default class SimpleTree extends React.Component<Props, State>{
                 .attr('height', nodeSize[1])
                 .attr('stroke', 'black')
                 .attr('stroke-width', 1)
-                .attr('transform', (d)=>`translate(${-nodeSize[0]/2}, ${-nodeSize[1]/2})`)
+                .attr('transform', (d:any)=>{
+                    d.centered = false
+                    return `translate(${-nodeSize[0]/2}, ${-nodeSize[1]/2})`
+            })
                 .style('fill', 'white')
             
 
@@ -147,8 +152,13 @@ export default class SimpleTree extends React.Component<Props, State>{
                 .attr('transform', (d: any) => 'translate(' + d.x + ',' + d.y + ')')
             nodeUpdate.select('rect.node')
                 .attr('cursor', 'pointer')
+                // .style("opacity", (d:any)=>this_.reset?1:(d.centered?1:0.5))
             nodeUpdate.select('rect.node_bg')
-                .style('opacity', (d: any) => (d._children ? 1 : 0))
+                .transition()
+                .duration(duration)
+                .style('opacity', (d: any) => {
+                    return (d._children ? 1 : 0)
+                })
             // nodeUpdate.select('text')
             // .text((d: any) => ((d.depth<3||d.centered)?d.data.name:''))
 
@@ -203,21 +213,18 @@ export default class SimpleTree extends React.Component<Props, State>{
             }
 
             function click(d: any) {
-                // if(!d.centered){
-                //     d.centered = true
-                // }else{
-                //     d.centered = false
-                // }
-
-                // if(d.children){
-                //     d.children.forEach(click)
-                // }
                 onSelect(d.data.name)
+                this_.reset = !this_.reset
+                const center=(d:any)=>d.centered = !d.centered
+                center(d)
+                
+
                 if (d.children) {
                     d._children = d.children
                     d.children = null
-                } else {
+                } else if(d._children) {
                     d.children = d._children
+                    d._children.forEach(center)
                     d._children = null
                 }
                 let box=find_box(d, [Infinity,0, Infinity,0])

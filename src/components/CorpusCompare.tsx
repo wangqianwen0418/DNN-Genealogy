@@ -2,7 +2,7 @@ import * as React from "react"
 import "./CorpusCompare.css"
 import axios from "axios"
 import * as d3 from "d3"
-import { Dropdown, Icon, Menu } from "antd"
+// import { Dropdown, Icon, Menu } from "antd"
 
 export interface Props {
     nns: string[],
@@ -157,20 +157,20 @@ export default class CorpusCompare extends React.Component<Props, State> {
         // /let headerHeight = 64
         //let screen_w = (window.innerWidth - 2 * margin) / 3
         //let screen_h = (window.innerHeight - headerHeight - 2 * margin) / 2
-        let menu = (
-            <Menu>
-              <Menu.Item key="1">1st menu item</Menu.Item>
-              <Menu.Item key="2">2nd memu item</Menu.Item>
-              <Menu.Item key="3">3rd menu item</Menu.Item>
-            </Menu>
-          )
+        // let menu = (
+        //     <Menu>
+        //       <Menu.Item key="1">1st menu item</Menu.Item>
+        //       <Menu.Item key="2">2nd memu item</Menu.Item>
+        //       <Menu.Item key="3">3rd menu item</Menu.Item>
+        //     </Menu>
+        //   )
         return <div className="CorpusCompare View" ref={(ref)=>{this.ref=ref}}>
             {/* <svg id="corpus" width="100%" height="100%"> </svg> */}
-            <Dropdown overlay={menu} trigger={['hover']}>
+            {/* <Dropdown overlay={menu} trigger={['hover']}>
                 <a className="ant-dropdown-link" href="#" style={{position: "absolute", right: "10px"}}>
                     Hover me <Icon type="down" />
                 </a>
-            </Dropdown>
+            </Dropdown> */}
         </div>
     }
 }
