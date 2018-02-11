@@ -5,10 +5,13 @@ import "./Evolution.css"
 import "./App.css"
 import axios from "axios"
 import * as d3 from "d3"
-// import { EvoNode, EvoLink } from "../types"
-// import { getColor } from "../helper/index";
-import { TreeSelect } from "antd"
+import { NN, Parent } from "../types"
+import { getColor } from "../helper/index"
+import { TreeSelect, Tooltip } from "antd"
+import moment from "moment"
+
 // const {TreeNode} = TreeSelect
+let apps: string[] = []
 export interface Props {
     arc: string,
     app: string,
@@ -16,52 +19,47 @@ export interface Props {
     onSelect: (nns: string[]) => void
 }
 
-// const appData = [{
-//     label: 'Node1',
-//     value: '0-0',
-//     key: '0-0',
-//     children: [{
-//       label: 'Child Node1',
-//       value: '0-0-1',
-//       key: '0-0-1',
-//     }, {
-//       label: 'Child Node2',
-//       value: '0-0-2',
-//       key: '0-0-2',
-//     }],
-//   }, {
-//     label: 'Node2',
-//     value: '0-1',
-//     key: '0-1',
-//   }];
 
 export interface State {
-    nodes: Node[],
-    edges: GraphEdge[],
-    h: number | undefined,
-    w: number | undefined,
+    nns: NNS,
     appValue: string | undefined,
-    appData: any
+    appData: any,
+    selectedNN: NN|undefined
 }
+
+export interface NNS {
+    nodes: NN[],
+    links: NNLink[]
+}
+
+export interface NNLink {
+    source: any,
+    target: any,
+    [key: string]: any
+}
+
+
+const margin = { top: 10, left: 10, bottom: 0, right: 0 }
+const get_r = (r: number) => Math.log(r / 100 + 1) / Math.log(2)
+
 export default class Evolution extends React.Component<Props, State>{
-    private ref: HTMLElement | null
+    private ref: HTMLElement | null; simulation: any
     constructor(props: Props) {
         super(props)
-        this.getData = this.getData.bind(this)
+        this.getAppData = this.getAppData.bind(this)
+        this.getNodeData = this.getNodeData.bind(this)
         this.state = {
-            nodes: [],
-            edges: [],
-            w: 0,
-            h: 0,
+            nns: { nodes: [], links: [] },
             appValue: undefined,
-            appData: []
+            appData: [],
+            selectedNN: undefined
         }
+
     }
-    async getData() {
+    async getAppData() {
 
         let appRes = await axios.get('../../data/taxonomy.json')
         let appData = appRes.data.children[0]
-
         const label = (d: any) => {
             d.label = d.name
             d.value = d.name
@@ -69,121 +67,153 @@ export default class Evolution extends React.Component<Props, State>{
                 d.children.forEach(label)
             }
         }
-
         label(appData)
-
         this.setState({ appData })
     }
-    componentWillMount() {
-        this.getData()
-    }
-    componentDidUpdate() {
-        let width = this.ref ? this.ref.clientWidth : 0,
-            height = this.ref ? this.ref.clientHeight : 0,
-            margin = { top: 10, left: 10, bottom: 0, right: 0 },
-            chartWidth = width - (margin.left + margin.right),
-            chartHeight = height - (margin.top + margin.bottom)
-
-        let foci = [{ x: 0, y: 150 }, { x: 300, y: 450 }, { x: 600, y: 150 }];
-
-        let svg = d3.select(".Evolution")
-            .append("svg")
-            .attr("width", "100%")
-            .attr("height", "100%")
-            .append("g")
-            .attr("class", "pan")
-
-        svg.call(d3.zoom().on("zoom", function () {
-            svg.attr("transform", d3.event.transform)
-        }))
-        let chartLayer = svg
-            .append("g")
-            .classed("chartLayer", true)
-            .attr("transform", `translate(${margin.left}, ${margin.top})`)
-
-        var range = 20
-        var data = {
-            nodes: d3.range(0, range).map(function (d: number) {
-                return { label: "l" + d, r: 3 + d, date: d }
-            }),
-            links: d3.range(0, range).map(function () {
-                return {
-                    source: ~~d3.randomUniform(range)(),
-                    target: ~~d3.randomUniform(range)()
-                }
+    async getNodeData() {
+        let res = await axios.get('../../data/survey.json')
+        let data = res.data
+        let nns: NNS = { nodes: data, links: [] }
+        if (data.length > 0) {
+            data.forEach((nn: NN) => {
+                nn.r = get_r(nn.citation)
+                nn.parents.forEach((parent: Parent) => {
+                    nns.links.push({
+                        source: nn.ID,
+                        target: parent.ID
+                    })
+                })
             })
         }
 
+        let width = this.ref ? this.ref.clientWidth : 0,
+            height = this.ref ? this.ref.clientHeight : 0,
+            chartWidth = width - (margin.left + margin.right),
+            chartHeight = height - (margin.top + margin.bottom)
 
-
-
-
-        var simulation: any = d3.forceSimulation()
-            .force("link", d3.forceLink().id((d: any) => d.index).strength(0.001))
-            .force("collide", d3.forceCollide((d: any) => (d.r + 8)).iterations(3))
+        this.simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id((d: any) => d.ID).strength(0))
+            .force("collide", d3.forceCollide(
+                (d: any) => (d.r + 8)).iterations(3)
+            )
             .force("charge", d3.forceManyBody())
             .force("center", d3.forceCenter(chartWidth / 2, chartHeight / 2))
             .force("y", d3.forceY((d: any, i: number) => {
-                return foci[i % foci.length].y
+                return this.get_foci(d.application[0]).y
             }).strength(1))
             .force("x", d3.forceX((d: any, i: number) => {
-                return foci[i % foci.length].x + d.date * 3
-            }).strength(1))
+                let pub_date = moment(d.date, 'YYYY-MM-DD')
+                let dif = pub_date.diff(moment(), "years")
+                return this.get_foci(d.application[0]).x + dif * 20
+            }).strength(10))
 
-        var link = svg.append("g")
-            .attr("class", "links")
-            .selectAll("line")
-            .data(data.links)
-            .enter()
-            .append("line")
-            .attr("stroke", "black")
+        this.calc(chartWidth, chartHeight, nns)
 
-        var node = svg.append("g")
-            .attr("class", "nodes")
-            .selectAll("circle")
-            .data(data.nodes)
-            .enter().append("circle")
-            .attr("r", function (d: any) { return d.r })
-            .attr("fill", "gray")
-
-
-
-        var ticked = function (e: any) {
-            // let k = 0.1*e.alpha
-            // data.nodes.forEach(function(o:any, i) {
-            //     let id = i%foci.length
-            //     o.y += (foci[id].y - o.y) * 0.1;
-            //     o.x += (foci[id].x - o.x) * 0.1;
-            //   });
-
-            link
-                .attr("x1", function (d: any) { return d.source.x; })
-                .attr("y1", function (d: any) { return d.source.y; })
-                .attr("x2", function (d: any) { return d.target.x; })
-                .attr("y2", function (d: any) { return d.target.y; });
-
-            node
-                .attr("cx", function (d: any) { return d.x; })
-                .attr("cy", function (d: any) { return d.y; });
+    }
+    componentWillMount() {
+        this.getAppData()
+    }
+    componentDidMount() {
+        this.getNodeData()
+    }
+    calc(chartWidth: number, chartHeight: number, nns: NNS) {
+        this.simulation
+            .nodes(nns.nodes)
+        this.simulation.force("link")
+            .links(nns.links)
+        for (var i = 0, n = Math.ceil(Math.log(this.simulation.alphaMin()) / Math.log(1 - this.simulation.alphaDecay())); i < n; ++i) {
+            this.simulation.tick();
+            nns.nodes = this.simulation.nodes()
+            nns.links = this.simulation.force("link").links()
+            if (i == n - 1) {
+                this.setState({ nns })
+            }
+        }
+    }
+    get_foci(app: string) {
+        let foci = [
+            { x: 150, y: 250 },
+            { x: 100, y: 450 },
+            { x: 400, y: 250 },
+            { x: 500, y: 450 },
+            { x: 300, y: 450 }
+        ];
+        if (apps.indexOf(app) == -1) {
+            apps.push(app)
+            return foci[apps.length - 1]
+        } else {
+            return foci[apps.indexOf(app)]
         }
 
-        simulation
-            .nodes(data.nodes)
-            .on("tick", ticked);
 
-        simulation.force("link")
-            .links(data.links)
     }
+
     onChange = (appValue: string) => {
         d3.select('g.pan')
-        .attr("transform", (d) => {
-            console.info(d)
-            return `translate(200, 0)`
-        })
+            .attr("transform", (d) => {
+                return `translate(200, 0)`
+            })
         this.setState({ appValue });
     }
+    clickNode(nn:NN){
+        console.info("click")
+        this.setState({selectedNN:nn})
+    }
+    getNodes() {
+        if (this.simulation) {
+            let { nodes } = this.state.nns
+            let { selectedNN } = this.state
+            let nnChain:string[]=[]
+            let selectedID:string = ''
+            if(selectedNN!=undefined){
+                selectedID = selectedNN.ID
+                let nn_arr = nodes.filter((node:NN)=>{
+                    return node.ID == selectedID
+                    ||node.parents.map(d=>d.ID).indexOf(selectedID)!=-1
+                    // ||selectedNN.parents.map(d=>d.ID).indexOf(node.ID)!=-1
+                })
+            }
+    
+            return <g className="Nodes">
+                {nodes.map((node: NN) => {
+                    let tip = `${node.ID}: ${node.url}`
+                    let selectedNN
+                    return <Tooltip title={tip}>
+                    <circle
+                        key={node.ID}
+                        cx={node.x}
+                        cy={node.y}
+                        fill={nnChain.indexOf(node.ID)==-1?getColor(node.application[0]):"gray"}
+                        opacity={nnChain.indexOf(node.ID)==-1?1:0.2}
+                        r={node.r}
+                        onClick={()=>this.clickNode(node)}
+                    />
+                    </Tooltip>
+                })}
+            </g>
+        }
+        return <g className="Nodes" />
+    }
+    getLinks() {
+        if (this.simulation) {
+            let { links } = this.state.nns
+            return <g className="links">
+                {links.map((link: NNLink) => {
+                    return <line
+                        key={`${link.source.ID}=>${link.target.ID}`}
+                        x1={link.source.x}
+                        y1={link.source.y}
+                        x2={link.target.x}
+                        y2={link.target.y}
+                        strokeWidth="1" stroke="gray"
+                    />
+                })}
+            </g>
+        }
+        return <g className="links" />
+    }
     render() {
-        let { w, h, appValue } = this.state
+        let { appValue } = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
@@ -207,8 +237,10 @@ export default class Evolution extends React.Component<Props, State>{
                 onChange={this.onChange}
             />
 
-            {/* <svg width="100%" height="100%" viewBox={`0 0 ${w} ${h}`} className="Evolution">
-            </svg> */}
+            <svg width="100%" height="100%" className="Evolution">
+                {this.getLinks()}
+                {this.getNodes()}
+            </svg>
         </div>
     }
 }

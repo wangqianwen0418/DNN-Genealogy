@@ -25,16 +25,19 @@ export interface NN{
     application:Array<string>,
     training:Array<string>,
     architecture:Array<string>,
-    names:Array<name>,
-    parents:Array<parent>
+    names:Array<Name>,
+    parents:Array<Parent>,
+    [key:string]:any
 }
 
-interface parent{
+
+export interface Parent{
     ID:string,
-    link_info:string
+    link_info:string,
+    [key:string]:any
 }
 
-interface name{
+interface Name{
     name:string,
     [datasets:string]:number|any,
     params:number
