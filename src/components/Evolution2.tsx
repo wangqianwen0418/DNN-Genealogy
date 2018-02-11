@@ -93,9 +93,9 @@ export default class Evolution extends React.Component<Props, State>{
             .append("g")
             .attr("class", "pan")
 
-            svg.call(d3.zoom().on("zoom", function () {
-                svg.attr("transform", d3.event.transform)
-             }))
+        svg.call(d3.zoom().on("zoom", function () {
+            svg.attr("transform", d3.event.transform)
+        }))
         let chartLayer = svg
             .append("g")
             .classed("chartLayer", true)
@@ -103,28 +103,32 @@ export default class Evolution extends React.Component<Props, State>{
 
         var range = 20
         var data = {
-            nodes: d3.range(0, range).map(function (d: any) { 
-                return { label: "l" + d, r: ~~d3.randomUniform(8, 28)() } 
+            nodes: d3.range(0, range).map(function (d: number) {
+                return { label: "l" + d, r: 3 + d, date: d }
             }),
-            links: d3.range(0, range).map(function () { 
-                return { 
-                    source: ~~d3.randomUniform(range)(), 
-                    target: ~~d3.randomUniform(range)() 
-                } 
+            links: d3.range(0, range).map(function () {
+                return {
+                    source: ~~d3.randomUniform(range)(),
+                    target: ~~d3.randomUniform(range)()
+                }
             })
         }
 
-        
+
 
 
 
         var simulation: any = d3.forceSimulation()
-            .force("link", d3.forceLink().id((d: any) => d.index))
+            .force("link", d3.forceLink().id((d: any) => d.index).strength(0.001))
             .force("collide", d3.forceCollide((d: any) => (d.r + 8)).iterations(3))
             .force("charge", d3.forceManyBody())
             .force("center", d3.forceCenter(chartWidth / 2, chartHeight / 2))
-            .force("y", d3.forceY(0))
-            .force("x", d3.forceX(0))
+            .force("y", d3.forceY((d: any, i: number) => {
+                return foci[i % foci.length].y
+            }).strength(1))
+            .force("x", d3.forceX((d: any, i: number) => {
+                return foci[i % foci.length].x + d.date * 3
+            }).strength(1))
 
         var link = svg.append("g")
             .attr("class", "links")
@@ -146,11 +150,11 @@ export default class Evolution extends React.Component<Props, State>{
 
         var ticked = function (e: any) {
             // let k = 0.1*e.alpha
-            data.nodes.forEach(function(o:any, i) {
-                let id = i%foci.length
-                o.y += (foci[id].y - o.y) * 0.01;
-                o.x += (foci[id].x - o.x) * 0.01;
-              });
+            // data.nodes.forEach(function(o:any, i) {
+            //     let id = i%foci.length
+            //     o.y += (foci[id].y - o.y) * 0.1;
+            //     o.x += (foci[id].x - o.x) * 0.1;
+            //   });
 
             link
                 .attr("x1", function (d: any) { return d.source.x; })
@@ -171,7 +175,11 @@ export default class Evolution extends React.Component<Props, State>{
             .links(data.links)
     }
     onChange = (appValue: string) => {
-        console.info('onchage', appValue)
+        d3.select('g.pan')
+        .attr("transform", (d) => {
+            console.info(d)
+            return `translate(200, 0)`
+        })
         this.setState({ appValue });
     }
     render() {
