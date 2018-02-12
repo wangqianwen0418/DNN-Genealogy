@@ -21,10 +21,10 @@ export interface Props {
 
 
 export interface State {
-    nns: NNS,
+    node_link: NNS,
     appValue: string | undefined,
     appData: any,
-    selectedNN: NN|undefined
+    nnChain: string[]
 }
 
 export interface NNS {
@@ -40,19 +40,22 @@ export interface NNLink {
 
 
 const margin = { top: 10, left: 10, bottom: 0, right: 0 }
-const get_r = (r: number) => Math.log(r / 100 + 1) / Math.log(2)
+const get_r = (r: number) => Math.log(r / 100 + 1) / Math.log(1.5) + 5
 
 export default class Evolution extends React.Component<Props, State>{
-    private ref: HTMLElement | null; simulation: any
+    private ref: HTMLElement | null; simulation: any; clicked:boolean=false
     constructor(props: Props) {
         super(props)
         this.getAppData = this.getAppData.bind(this)
         this.getNodeData = this.getNodeData.bind(this)
+        this.unHover = this.unHover.bind(this)
+        this.hoverNode = this.hoverNode.bind(this)
+        this.selectNode = this.selectNode.bind(this)
         this.state = {
-            nns: { nodes: [], links: [] },
+            node_link: { nodes: [], links: [] },
             appValue: undefined,
             appData: [],
-            selectedNN: undefined
+            nnChain: []
         }
 
     }
@@ -73,12 +76,12 @@ export default class Evolution extends React.Component<Props, State>{
     async getNodeData() {
         let res = await axios.get('../../data/survey.json')
         let data = res.data
-        let nns: NNS = { nodes: data, links: [] }
+        let node_link: NNS = { nodes: data, links: [] }
         if (data.length > 0) {
             data.forEach((nn: NN) => {
                 nn.r = get_r(nn.citation)
                 nn.parents.forEach((parent: Parent) => {
-                    nns.links.push({
+                    node_link.links.push({
                         source: nn.ID,
                         target: parent.ID
                     })
@@ -92,22 +95,25 @@ export default class Evolution extends React.Component<Props, State>{
             chartHeight = height - (margin.top + margin.bottom)
 
         this.simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id((d: any) => d.ID).strength(0))
+            .force("link", d3.forceLink().id((d: any) => d.ID).strength(0.1))
             .force("collide", d3.forceCollide(
                 (d: any) => (d.r + 8)).iterations(3)
             )
-            .force("charge", d3.forceManyBody())
+            .force("charge", d3.forceManyBody().distanceMax(40))
             .force("center", d3.forceCenter(chartWidth / 2, chartHeight / 2))
             .force("y", d3.forceY((d: any, i: number) => {
                 return this.get_foci(d.application[0]).y
             }).strength(1))
             .force("x", d3.forceX((d: any, i: number) => {
                 let pub_date = moment(d.date, 'YYYY-MM-DD')
-                let dif = pub_date.diff(moment(), "years")
-                return this.get_foci(d.application[0]).x + dif * 20
+                let dif = pub_date.diff(moment(), "months")
+                return this.get_foci(d.application[0]).x + dif * 3
             }).strength(10))
 
-        this.calc(chartWidth, chartHeight, nns)
+        let nnChain = data.map((d: NN) => d.ID)
+        this.setState({ nnChain })
+
+        this.calc(node_link)
 
     }
     componentWillMount() {
@@ -115,28 +121,33 @@ export default class Evolution extends React.Component<Props, State>{
     }
     componentDidMount() {
         this.getNodeData()
+        let svg = d3.select("svg.Evolution")
+        svg.call(d3.zoom().on("zoom", function () {
+            svg.attr("transform", d3.event.transform)
+        }))
     }
-    calc(chartWidth: number, chartHeight: number, nns: NNS) {
+    calc(node_link: NNS) {
         this.simulation
-            .nodes(nns.nodes)
+            .nodes(node_link.nodes)
         this.simulation.force("link")
-            .links(nns.links)
+            .links(node_link.links)
+        this.simulation.alpha(1).restart()
         for (var i = 0, n = Math.ceil(Math.log(this.simulation.alphaMin()) / Math.log(1 - this.simulation.alphaDecay())); i < n; ++i) {
             this.simulation.tick();
-            nns.nodes = this.simulation.nodes()
-            nns.links = this.simulation.force("link").links()
             if (i == n - 1) {
-                this.setState({ nns })
+                node_link.nodes = this.simulation.nodes()
+                node_link.links = this.simulation.force("link").links()
+                this.setState({ node_link })
             }
         }
     }
     get_foci(app: string) {
         let foci = [
-            { x: 150, y: 250 },
-            { x: 100, y: 450 },
-            { x: 400, y: 250 },
+            { x: 800, y: 250 },
+            { x: 300, y: 450 },
+            { x: 1000, y: 250 },
             { x: 500, y: 450 },
-            { x: 300, y: 450 }
+            { x: 800, y: 450 }
         ];
         if (apps.indexOf(app) == -1) {
             apps.push(app)
@@ -148,64 +159,100 @@ export default class Evolution extends React.Component<Props, State>{
 
     }
 
-    onChange = (appValue: string) => {
+    onChange (appValue: string) {
         d3.select('g.pan')
             .attr("transform", (d) => {
                 return `translate(200, 0)`
             })
         this.setState({ appValue });
     }
-    clickNode(nn:NN){
-        console.info("click")
-        this.setState({selectedNN:nn})
+    hoverNode(nn: NN) {
+        if(!this.clicked){
+            let { node_link } = this.state
+            let selectedID = nn.ID
+            let nnChain = node_link.nodes.filter((node: NN) => {
+                return node.ID == selectedID
+                    || node.parents.map(d => d.ID).indexOf(selectedID) != -1
+                    || nn.parents.map(d => d.ID).indexOf(node.ID) != -1
+            }).map(d => d.ID)
+            this.setState({nnChain})
+        }
     }
-    getNodes() {
-        if (this.simulation) {
-            let { nodes } = this.state.nns
-            let { selectedNN } = this.state
-            let nnChain:string[]=[]
-            let selectedID:string = ''
-            if(selectedNN!=undefined){
-                selectedID = selectedNN.ID
-                let nn_arr = nodes.filter((node:NN)=>{
-                    return node.ID == selectedID
-                    ||node.parents.map(d=>d.ID).indexOf(selectedID)!=-1
-                    // ||selectedNN.parents.map(d=>d.ID).indexOf(node.ID)!=-1
-                })
+    unHover() {
+        if(!this.clicked){
+            let {nnChain, node_link} = this.state
+            
+                    nnChain = node_link.nodes.map(d=>d.ID)
+                    this.setState({nnChain})
+        }
+    }
+    selectNode(nn:NN){
+        let {node_link} = this.state
+        this.clicked = !this.clicked
+        
+        let selectedID = nn.ID
+        let nnChain = node_link.nodes.filter((node: NN) => {
+            return node.ID == selectedID
+                || node.parents.map(d => d.ID).indexOf(selectedID) != -1
+                || nn.parents.map(d => d.ID).indexOf(node.ID) != -1
+        }).map(d => d.ID)
+
+        node_link.nodes.forEach((node:NN)=>{
+            if(nnChain.indexOf(node.ID)!=-1){
+                if(node._r){
+                    node.r=node._r 
+                    node._r = null
+                }else{
+                    node._r = node.r
+                    node.r = 80
+                }
             }
-    
+        })
+        this.calc(node_link)
+    }
+    drawNodes() {
+        if (this.simulation) {
+            let { nodes } = this.state.node_link
+            let { nnChain } = this.state
+
             return <g className="Nodes">
                 {nodes.map((node: NN) => {
-                    let tip = `${node.ID}: ${node.url}`
+                    let tip = `${node.ID}`
                     let selectedNN
                     return <Tooltip title={tip}>
-                    <circle
-                        key={node.ID}
-                        cx={node.x}
-                        cy={node.y}
-                        fill={nnChain.indexOf(node.ID)==-1?getColor(node.application[0]):"gray"}
-                        opacity={nnChain.indexOf(node.ID)==-1?1:0.2}
-                        r={node.r}
-                        onClick={()=>this.clickNode(node)}
-                    />
+                        <circle
+                            key={node.ID}
+                            cx={node.x}
+                            cy={node.y}
+                            fill={getColor(node.application[0])}
+                            opacity={nnChain.indexOf(node.ID) == -1 ? 0.2 : 1}
+                            r={node.r}
+                            onMouseEnter={() => this.hoverNode(node)}
+                            onMouseLeave={this.unHover}
+                            onClick={()=>this.selectNode(node)}
+                        />
                     </Tooltip>
                 })}
             </g>
         }
         return <g className="Nodes" />
     }
-    getLinks() {
+    drawLinks() {
         if (this.simulation) {
-            let { links } = this.state.nns
+            let { links } = this.state.node_link
+            let {nnChain} = this.state
             return <g className="links">
                 {links.map((link: NNLink) => {
+                    let show:boolean = nnChain.indexOf(link.source.ID)!=-1
+                    &&nnChain.indexOf(link.target.ID)!=-1 
                     return <line
                         key={`${link.source.ID}=>${link.target.ID}`}
                         x1={link.source.x}
                         y1={link.source.y}
                         x2={link.target.x}
                         y2={link.target.y}
-                        strokeWidth="1" stroke="gray"
+                        strokeWidth="1" 
+                        stroke={show?"gray":"transparent"}
                     />
                 })}
             </g>
@@ -238,8 +285,8 @@ export default class Evolution extends React.Component<Props, State>{
             />
 
             <svg width="100%" height="100%" className="Evolution">
-                {this.getLinks()}
-                {this.getNodes()}
+                {this.drawLinks()}
+                {this.drawNodes()}
             </svg>
         </div>
     }
