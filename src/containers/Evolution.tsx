@@ -1,4 +1,4 @@
-import Evolution from '../components/Evolution2';
+import Evolution from '../components/Evolution3';
 import * as actions from '../actions/';
 import { StoreState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';

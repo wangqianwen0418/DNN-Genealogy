@@ -73,7 +73,7 @@ export default class SimpleTree extends React.Component<Props, State>{
             .attr('width', '100%')
             .attr('height', '100%')
             .append('g')
-            .attr('transform', `translate(${ margin.left + width/3},${ margin.top })`)
+            .attr('transform', `translate(${ margin.left + width/2},${ margin.top })`)
             .append('g')
             .attr('class', 'svg')
 

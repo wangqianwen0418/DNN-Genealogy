@@ -19,5 +19,5 @@
 }
 
 .SimpleTree{
-    height: calc((100vh - var(--header-h)) * var(--ratio-up) - var(--div-margin))
+    height: calc((100vh - var(--header-h)) * (1 - var(--ratio-up)) - var(--div-margin))
 }

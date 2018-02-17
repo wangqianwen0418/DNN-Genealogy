@@ -26,13 +26,12 @@ class App extends React.Component{
             <div className="app">
                 <Header className="header">DNN Genealogy</Header>
                 <Content>
-                    <Col span={12}> <ArcTree /> </Col>
-                    <Col span={12}> <TrainTree /> </Col>
+                    <Col span={24}> <Evolution />  </Col>
                 </Content>
                 <Content>
-                    <Col span={14}> <Evolution /> </Col>
-                    <Col span={6}> <CorpusCompare /> </Col>
-                    <Col span={4}> <TextInfo title="title" content="" /> </Col>
+                    <Col span={8}><TrainTree/> </Col>
+                    <Col span={8}> <CorpusCompare /> </Col>
+                    <Col span={8}> <TextInfo title="title" content="" /> </Col>
                 </Content>
             </div>
         );

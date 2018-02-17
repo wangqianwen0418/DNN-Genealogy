@@ -43,14 +43,18 @@ const margin = { top: 10, left: 10, bottom: 0, right: 0 }
 const get_r = (r: number) => Math.log(r / 100 + 1) / Math.log(1.5) + 5
 
 export default class Evolution extends React.Component<Props, State>{
-    private ref: HTMLElement | null; simulation: any; clicked:boolean=false
+    private ref: HTMLElement | null;
+    simulation: any;
+    clicked: boolean = false;
+    zoom_r: number = 80;
+
     constructor(props: Props) {
         super(props)
         this.getAppData = this.getAppData.bind(this)
         this.getNodeData = this.getNodeData.bind(this)
         this.unHover = this.unHover.bind(this)
         this.hoverNode = this.hoverNode.bind(this)
-        this.selectNode = this.selectNode.bind(this)
+        this.clickNode = this.clickNode.bind(this)
         this.state = {
             node_link: { nodes: [], links: [] },
             appValue: undefined,
@@ -159,52 +163,51 @@ export default class Evolution extends React.Component<Props, State>{
 
     }
 
-    onChange (appValue: string) {
+    onChange(appValue: string) {
         d3.select('g.pan')
             .attr("transform", (d) => {
                 return `translate(200, 0)`
             })
         this.setState({ appValue });
     }
+    getChain(nodes:NN[], selectedNN:NN){
+        let selectedID = selectedNN.ID
+        let nnChain = nodes.filter((node: NN) => {
+            return node.ID == selectedID
+                || node.parents.map(d => d.ID).indexOf(selectedID) != -1
+                || selectedNN.parents.map(d => d.ID).indexOf(node.ID) != -1
+        }).map(d => d.ID)
+        return nnChain
+    }
     hoverNode(nn: NN) {
-        if(!this.clicked){
+        if (!this.clicked) {
             let { node_link } = this.state
-            let selectedID = nn.ID
-            let nnChain = node_link.nodes.filter((node: NN) => {
-                return node.ID == selectedID
-                    || node.parents.map(d => d.ID).indexOf(selectedID) != -1
-                    || nn.parents.map(d => d.ID).indexOf(node.ID) != -1
-            }).map(d => d.ID)
-            this.setState({nnChain})
+            let nnChain = this.getChain(node_link.nodes, nn)
+            this.setState({ nnChain })
         }
     }
     unHover() {
-        if(!this.clicked){
-            let {nnChain, node_link} = this.state
-            
-                    nnChain = node_link.nodes.map(d=>d.ID)
-                    this.setState({nnChain})
+        if (!this.clicked) {
+            let { nnChain, node_link } = this.state
+
+            nnChain = node_link.nodes.map(d => d.ID)
+            this.setState({ nnChain })
         }
     }
-    selectNode(nn:NN){
-        let {node_link} = this.state
+    clickNode(nn: NN) {
+        let { node_link } = this.state
         this.clicked = !this.clicked
-        
-        let selectedID = nn.ID
-        let nnChain = node_link.nodes.filter((node: NN) => {
-            return node.ID == selectedID
-                || node.parents.map(d => d.ID).indexOf(selectedID) != -1
-                || nn.parents.map(d => d.ID).indexOf(node.ID) != -1
-        }).map(d => d.ID)
 
-        node_link.nodes.forEach((node:NN)=>{
-            if(nnChain.indexOf(node.ID)!=-1){
-                if(node._r){
-                    node.r=node._r 
+        let nnChain = this.getChain(node_link.nodes, nn)
+
+        node_link.nodes.forEach((node: NN) => {
+            if (nnChain.indexOf(node.ID) != -1) {
+                if (node._r) {
+                    node.r = node._r
                     node._r = null
-                }else{
+                } else {
                     node._r = node.r
-                    node.r = 80
+                    node.r = this.zoom_r
                 }
             }
         })
@@ -220,17 +223,30 @@ export default class Evolution extends React.Component<Props, State>{
                     let tip = `${node.ID}`
                     let selectedNN
                     return <Tooltip title={tip}>
-                        <circle
-                            key={node.ID}
-                            cx={node.x}
-                            cy={node.y}
-                            fill={getColor(node.application[0])}
-                            opacity={nnChain.indexOf(node.ID) == -1 ? 0.2 : 1}
-                            r={node.r}
+                        <g className={node.ID}
                             onMouseEnter={() => this.hoverNode(node)}
                             onMouseLeave={this.unHover}
-                            onClick={()=>this.selectNode(node)}
-                        />
+                            onClick={() => this.clickNode(node)}
+                            transform={`translate(${node.x - node.r * 0.9}, ${node.y - node.r * 0.9})`}
+                        >
+                            <circle
+                                key={node.ID}
+                                fill={getColor(node.application[0])}
+                                opacity={nnChain.indexOf(node.ID) == -1 ? 0.2 : 1}
+                                r={node.r}
+                                cx={node.r * 0.9}
+                                cy={node.r * 0.9}
+
+                            />
+                            {node._r ? <foreignObject>
+                                <img src={`../../images/${node.ID}.png`}
+                                    height={this.zoom_r * 1.8}
+                                    width={this.zoom_r * 1.8}
+                                    style={{ borderRadius: "50%" }}
+                                />
+                            </foreignObject> : <span />}
+
+                        </g>
                     </Tooltip>
                 })}
             </g>
@@ -240,19 +256,19 @@ export default class Evolution extends React.Component<Props, State>{
     drawLinks() {
         if (this.simulation) {
             let { links } = this.state.node_link
-            let {nnChain} = this.state
+            let { nnChain } = this.state
             return <g className="links">
                 {links.map((link: NNLink) => {
-                    let show:boolean = nnChain.indexOf(link.source.ID)!=-1
-                    &&nnChain.indexOf(link.target.ID)!=-1 
+                    let show: boolean = nnChain.indexOf(link.source.ID) != -1
+                        && nnChain.indexOf(link.target.ID) != -1
                     return <line
                         key={`${link.source.ID}=>${link.target.ID}`}
                         x1={link.source.x}
                         y1={link.source.y}
                         x2={link.target.x}
                         y2={link.target.y}
-                        strokeWidth="1" 
-                        stroke={show?"gray":"transparent"}
+                        strokeWidth="1"
+                        stroke={show ? "gray" : "transparent"}
                     />
                 })}
             </g>

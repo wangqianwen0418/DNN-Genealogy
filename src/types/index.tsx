@@ -30,6 +30,17 @@ export interface NN{
     [key:string]:any
 }
 
+export interface NNS {
+    nodes: NN[],
+    links: NNLink[]
+}
+
+export interface NNLink {
+    source: any,
+    target: any,
+    [key: string]: any
+}
+
 
 export interface Parent{
     ID:string,
