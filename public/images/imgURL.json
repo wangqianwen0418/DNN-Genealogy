@@ -31,6 +31,18 @@
     ],
     "fractalNet":[
         "https://arxiv.org/pdf/1605.07648.pdf"
+    ],
+    "resNeXt":[
+        "https://arxiv.org/pdf/1611.05431.pdf"
+    ],
+    "denseNet":[
+        "https://arxiv.org/pdf/1608.06993.pdf"
+    ],
+    "squeezeNet":[
+        "http://songhan.github.io/SqueezeNet-Residual/figure/type2.jpg"
+    ],
+    "WRN":[
+        "https://arxiv.org/pdf/1605.07146.pdf"
     ]
 }
 

@@ -1,12 +1,19 @@
 .Evolution{
-    height: calc((100vh - var(--header-h))*var(--ratio-up) - var(--div-margin))
+    height: calc((100vh - var(--header-h))*var(--ratio-up) - var(--div-margin));
+    overflow: auto;
+}
+.Node {
+    /* -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color; */
+    -webkit-transition-duration: 1.0s;
+    -webkit-transition-timing-function: ease-in-out;
+    /* transition-property: width height background-color font-size left top transform -webkit-transformv color; */
+    transition-duration: 1.0s;
+    transition-timing-function: ease-in-out;
 }
 
 .infoButton, .ant-btn{
     position: inherit!important;
-}
-i.anticon, i.anticon::before{
-    /* float: left; */
+    margin-top:2px;
 }
 .ant-btn > span{
     font-size: 1.4em;
