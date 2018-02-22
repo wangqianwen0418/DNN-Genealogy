@@ -1,3 +1,13 @@
 .Evolution{
     height: calc((100vh - var(--header-h))*var(--ratio-up) - var(--div-margin))
 }
+
+.infoButton, .ant-btn{
+    position: inherit!important;
+}
+i.anticon, i.anticon::before{
+    /* float: left; */
+}
+.ant-btn > span{
+    font-size: 1.4em;
+}

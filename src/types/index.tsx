@@ -27,6 +27,8 @@ export interface NN{
     architecture:Array<string>,
     names:Array<Name>,
     parents:Array<Parent>,
+    api?:number,
+    interest?:number,
     [key:string]:any
 }
 
@@ -39,6 +41,22 @@ export interface NNLink {
     source: any,
     target: any,
     [key: string]: any
+}
+
+export interface GraphEdge {
+    points: Array<{x: number, y: number}>;
+    [key: string]: any;
+}
+
+export interface Node {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    ID?:string;
+    doi?:number;
+    api?:number;
+    [key: string]: any;
 }
 
 

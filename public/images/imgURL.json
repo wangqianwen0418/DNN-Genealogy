@@ -1,0 +1,36 @@
+{
+    "leNet": [
+        "https://cdn-images-1.medium.com/max/1600/1*BqkU9O6T8lwNbJJN-bS0yw.png"
+    ],
+    "alexNet": [
+        "https://cdn-images-1.medium.com/max/1200/1*qyc21qM0oxWEuRaj-XJKcw.png",
+        "https://software.intel.com/sites/default/files/managed/63/20/mkl-dnn-part-2-fig-05-alexnet.png",
+        "https://arxiv.org/pdf/1312.4400.pdf"
+    ],
+    "NIN":[
+        "https://arxiv.org/pdf/1312.4400.pdf"
+    ],
+    "VGG": [
+        "https://static.wixstatic.com/media/3c6d20_d485f152a74b4df8b3d4b0bf4484196e~mv2.png"
+    ],
+    "inception": [
+        "https://arxiv.org/pdf/1409.4842.pdf",
+        "https://arxiv.org/pdf/1512.00567.pdf"
+    ],
+    "inception_rethink":[
+        "https://arxiv.org/pdf/1512.00567.pdf"   
+    ],
+    "inception_resNet":[
+        "https://arxiv.org/pdf/1602.07261.pdf"
+    ],
+    "DSN":[
+        "https://arxiv.org/pdf/1409.5185.pdf"
+    ],
+    "highwayNets":[
+        "http://tonywangx.github.io/PIC/Highway.png"
+    ],
+    "fractalNet":[
+        "https://arxiv.org/pdf/1605.07648.pdf"
+    ]
+}
+
