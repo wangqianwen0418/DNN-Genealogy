@@ -36,13 +36,20 @@
         "https://arxiv.org/pdf/1611.05431.pdf"
     ],
     "denseNet":[
-        "https://arxiv.org/pdf/1608.06993.pdf"
+        // "https://arxiv.org/pdf/1608.06993.pdf"
+        "https://arxiv.org/pdf/1802.01808.pdf"
     ],
     "squeezeNet":[
         "http://songhan.github.io/SqueezeNet-Residual/figure/type2.jpg"
     ],
     "WRN":[
         "https://arxiv.org/pdf/1605.07146.pdf"
+    ],
+    "RIR":[
+        "https://arxiv.org/pdf/1603.08029.pdf"
+    ],
+    "mixNet":[
+        "https://arxiv.org/pdf/1802.01808.pdf"
     ]
 }
 

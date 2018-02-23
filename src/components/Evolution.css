@@ -11,6 +11,13 @@
     transition-timing-function: ease-in-out;
 }
 
+.link_info{
+    fill:black;
+    stroke:none;
+    stroke-width:1px;
+    text-anchor: middle;
+}
+
 .infoButton, .ant-btn{
     position: inherit!important;
     margin-top:2px;

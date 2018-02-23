@@ -9,6 +9,7 @@ import { NN, NNLink, Node, GraphEdge } from "../types"
 import { getColor } from "../helper/index";
 import { TreeSelect, Button, Dropdown, Menu } from "antd"
 import moment from 'moment';
+import BoxPlot from "./BoxPlot"
 // const {TreeNode} = TreeSelect
 export interface Props {
     arc: string,
@@ -46,6 +47,7 @@ export interface State {
 }
 const margin = 30, nodeH = 20, nodeW = 100, labelL = 8,
     expandH = 300, expandW = 400,
+    boxH = 10,
     r_api = 1, r_dist = -100, r_diff = 0.01 //factors for DOI calculation
 export default class Evolution extends React.Component<Props, State>{
     constructor(props: Props) {
@@ -264,15 +266,15 @@ export default class Evolution extends React.Component<Props, State>{
                         cursor="pointer"
                     ></rect>
                     <text textAnchor="middle"
-                            fontSize={0.7 * nodeH}
-                            cursor="pointer"
-                            x={node.width / 2}
-                            y={node.height - 0.1 * nodeH}
-                        >
-                            {
-                                (node.label.length < labelL) ?
-                                    node.label : (node.label.slice(0, labelL) + '...')
-                            }
+                        fontSize={0.7 * nodeH}
+                        cursor="pointer"
+                        x={node.width / 2}
+                        y={node.height - 0.1 * nodeH}
+                    >
+                        {
+                            (node.label.length < labelL) ?
+                                node.label : (node.label.slice(0, labelL) + '...')
+                        }
                     </text>
                     <foreignObject>
                         <div style={{ height: node.height }}>
@@ -287,8 +289,15 @@ export default class Evolution extends React.Component<Props, State>{
                             <Dropdown overlay={menu} className="infoButton">
                                 <Button>{node.label}</Button>
                             </Dropdown>
-                        : <span/>}
+                            : <span />}
                     </foreignObject>
+                    <BoxPlot
+                        width={nodeW} height={boxH}
+                        datum={this.state.nodes.map(d => d.api || 0).sort(d3.ascending)}
+                        key={node.label}
+                        value={node.api || 0}
+                        offset={[0, nodeH + boxH / 2]}
+                    />
                 </g>
             })}
         </g>)
@@ -315,6 +324,7 @@ export default class Evolution extends React.Component<Props, State>{
         let highlight: boolean = ((from == selectedID) || (to == selectedID))
         return <g className='link' key={`${i}_${from}->${to}`}>
             <path
+                id={`${from}->${to}`}
                 strokeLinecap="round"
                 d={pathData}
                 stroke={highlight ? "gray" : "gray"}
@@ -322,10 +332,12 @@ export default class Evolution extends React.Component<Props, State>{
                 strokeWidth={highlight ? 2 : 1}
                 className="Edge"
             >
-                <title>
-                    {label}
-                </title>
             </path>
+            <text className="link_info" >
+                <textPath xlinkHref={`#${from}->${to}`}>
+                    {label}
+                </textPath>
+            </text>
         </g>
 
     }
@@ -383,14 +395,14 @@ export default class Evolution extends React.Component<Props, State>{
         let { train, arc } = this.props
 
         return <div className="Evolution View">
-            <div style={{ position: "absolute", left: "20px", top: "20px" }}>
+            {/* <div style={{ position: "absolute", left: "20px", top: "20px" }}>
                 Training methods:{train}
             </div>
             <div style={{ position: "absolute", left: "20px", top: "40px" }}>
                 Architecture:{arc}
-            </div>
+            </div> */}
             <TreeSelect
-                style={{ position: "absolute", width: 180, left: "20px", top: "60px" }}
+                style={{ position: "absolute", width: 180, left: "20px", top: "20px" }}
                 value={appValue}
                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                 //treeData = {this.state.appData}
