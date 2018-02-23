@@ -15,7 +15,7 @@
     fill:black;
     stroke:none;
     stroke-width:1px;
-    text-anchor: middle;
+    text-anchor: start;
 }
 
 .infoButton, .ant-btn{

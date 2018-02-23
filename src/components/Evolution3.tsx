@@ -47,7 +47,9 @@ export interface State {
 }
 const margin = 30, nodeH = 20, nodeW = 100, labelL = 8,
     expandH = 300, expandW = 400,
-    boxH = 10,
+    boxH = 10, 
+    labelFont=10,
+    textMargin = 20,
     r_api = 1, r_dist = -100, r_diff = 0.01 //factors for DOI calculation
 export default class Evolution extends React.Component<Props, State>{
     constructor(props: Props) {
@@ -320,8 +322,17 @@ export default class Evolution extends React.Component<Props, State>{
         // let pathData = `${start}  ${vias.join(' ')}`
         //change curve path to straight line
         let pathData = `M ${points[0].x} ${points[0].y} 
-        L ${points[points.length - 1].x} ${points[points.length - 1].y}`
-        let highlight: boolean = ((from == selectedID) || (to == selectedID))
+                        L ${points[points.length - 1].x} ${points[points.length - 1].y}`, 
+            highlight: boolean = ((from == selectedID) || (to == selectedID)),
+            k = (points[points.length - 1].y - points[0].y)/(points[points.length - 1].x - points[0].x), 
+            textPathData = `M ${points[0].x+ textMargin} 
+                              ${points[0].y + textMargin*k} 
+                            L ${points[points.length - 1].x - textMargin} 
+                              ${points[points.length - 1].y - textMargin*k}
+                            M ${points[0].x+ textMargin - labelFont*k/Math.sqrt(1+k*k) } 
+                              ${points[0].y + textMargin*k + labelFont*1/Math.sqrt(1+k*k)} 
+                            L ${points[points.length - 1].x - textMargin - labelFont*k/Math.sqrt(1+k*k) } 
+                              ${points[points.length - 1].y - textMargin*k + labelFont*1/Math.sqrt(1+k*k)}`
         return <g className='link' key={`${i}_${from}->${to}`}>
             <path
                 id={`${from}->${to}`}
@@ -331,10 +342,14 @@ export default class Evolution extends React.Component<Props, State>{
                 fill='none'
                 strokeWidth={highlight ? 2 : 1}
                 className="Edge"
-            >
-            </path>
-            <text className="link_info" >
-                <textPath xlinkHref={`#${from}->${to}`}>
+            />
+            <path
+                id={`label_${from}->${to}`}
+                opacity={0}
+                d={textPathData}
+            />
+            <text className="link_info" style={{fontSize: labelFont}}>
+                <textPath xlinkHref={`#label_${from}->${to}`}>
                     {label}
                 </textPath>
             </text>
