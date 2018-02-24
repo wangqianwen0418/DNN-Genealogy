@@ -1,5 +1,6 @@
 import * as React from "react"
 import * as dagre from "dagre"
+import { Transition } from "react-transition-group"
 // import * as graphlib from "graphlib"
 import "./Evolution.css"
 import "./App.css"
@@ -45,13 +46,32 @@ export interface State {
     topParent: Node | undefined,
     topChild: Node | undefined
 }
+
 const margin = 30, nodeH = 20, nodeW = 100, labelL = 8,
     expandH = 300, expandW = 400,
-    boxH = 10, 
-    labelFont=10,
+    boxH = 10,
+    labelFont = 12,
     textMargin = 20,
     r_api = 1, r_dist = -100, r_diff = 0.01 //factors for DOI calculation
+
+// for the lablel animiation 
+const duration = 1000;
+
+const defaultStyle = {
+    transition: `opacity ${duration}ms ease-in-out`,
+    opacity: 0
+}
+
+const transitionStyles = {
+    entering: { opacity: 0 },
+    entered: { opacity: 1 },
+    exited: { opacity: 0 }
+};
+
+
+
 export default class Evolution extends React.Component<Props, State>{
+    private updateEdge: boolean = true
     constructor(props: Props) {
         super(props)
         this.getData = this.getData.bind(this)
@@ -294,14 +314,14 @@ export default class Evolution extends React.Component<Props, State>{
                             : <span />}
                     </foreignObject>
                     {node.height > nodeH ?
-                    <g/>:
-                    <BoxPlot
-                        width={nodeW} height={boxH}
-                        datum={this.state.nodes.map(d => d.api || 0).sort(d3.ascending)}
-                        key={node.label}
-                        value={node.api || 0}
-                        offset={[0, nodeH + boxH / 2]}
-                    />
+                        <g /> :
+                        <BoxPlot
+                            width={nodeW} height={boxH}
+                            datum={this.state.nodes.map(d => d.api || 0).sort(d3.ascending)}
+                            key={node.label}
+                            value={node.api || 0}
+                            offset={[0, nodeH + boxH / 2]}
+                        />
                     }
                 </g>
             })}
@@ -325,17 +345,17 @@ export default class Evolution extends React.Component<Props, State>{
         // let pathData = `${start}  ${vias.join(' ')}`
         //change curve path to straight line
         let pathData = `M ${points[0].x} ${points[0].y} 
-                        L ${points[points.length - 1].x} ${points[points.length - 1].y}`, 
+                        L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
             highlight: boolean = ((from == selectedID) || (to == selectedID)),
-            k = (points[points.length - 1].y - points[0].y)/(points[points.length - 1].x - points[0].x), 
-            textPathData = `M ${points[0].x+ textMargin} 
-                              ${points[0].y + textMargin*k} 
+            k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x),
+            textPathData = `M ${points[0].x + textMargin} 
+                              ${points[0].y + textMargin * k} 
                             L ${points[points.length - 1].x - textMargin} 
-                              ${points[points.length - 1].y - textMargin*k}
-                            M ${points[0].x+ textMargin - labelFont*k/Math.sqrt(1+k*k) } 
-                              ${points[0].y + textMargin*k + labelFont*1/Math.sqrt(1+k*k)} 
-                            L ${points[points.length - 1].x - textMargin - labelFont*k/Math.sqrt(1+k*k) } 
-                              ${points[points.length - 1].y - textMargin*k + labelFont*1/Math.sqrt(1+k*k)}`
+                              ${points[points.length - 1].y - textMargin * k}
+                            M ${points[0].x + textMargin - labelFont * k / Math.sqrt(1 + k * k)} 
+                              ${points[0].y + textMargin * k + labelFont * 1 / Math.sqrt(1 + k * k)} 
+                            L ${points[points.length - 1].x - textMargin - labelFont * k / Math.sqrt(1 + k * k)} 
+                              ${points[points.length - 1].y - textMargin * k + labelFont * 1 / Math.sqrt(1 + k * k)}`
         return <g className='link' key={`${i}_${from}->${to}`}>
             <path
                 id={`${from}->${to}`}
@@ -351,11 +371,38 @@ export default class Evolution extends React.Component<Props, State>{
                 opacity={0}
                 d={textPathData}
             />
-            <text className="link_info Edge" style={{fontSize: labelFont}}>
-                <textPath xlinkHref={`#label_${from}->${to}`}>
-                    {label}
-                </textPath>
-            </text>
+            {/* a trick, two transition: one for fade in, one for fade out */}
+            <Transition in={this.updateEdge} timeout={{enter:duration, exit:10}}>
+                {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
+                    console.info(status)
+                    return <text className="link_info fadeIn"
+                        style={{
+                            fontSize: labelFont,
+                            ...defaultStyle,
+                            ...transitionStyles[status]
+                        }}>
+                        <textPath xlinkHref={`#label_${from}->${to}`}>
+                            {label}
+                        </textPath>
+                    </text>
+                }}
+            </Transition>
+
+            <Transition in={!this.updateEdge} timeout={{enter:duration, exit:10}}>
+                {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
+                    console.info(status)
+                    return <text className="link_info fadeIn"
+                        style={{
+                            fontSize: labelFont,
+                            ...defaultStyle,
+                            ...transitionStyles[status]
+                        }}>
+                        <textPath xlinkHref={`#label_${from}->${to}`}>
+                            {label}
+                        </textPath>
+                    </text>
+                }}
+            </Transition>
         </g>
 
     }
@@ -384,6 +431,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     selectNode(selectedNode: Node) {
         let { datum } = this.state
+        this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
         //     if (nodeID == d.ID) {
         //         if (!d._width) {

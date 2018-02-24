@@ -19,7 +19,6 @@ export default class BoxPlot extends React.Component<Props, {}> {
     }
     render() {
         let { height, width, datum, offset, value } = this.props
-        console.info("boxplot", datum)
         let boxW = this.scale((this.getQuartiles(datum, 0.75) - this.getQuartiles(datum, 0.25)))
         return <g className="boxplot" transform={`translate(${offset[0]}, ${offset[1]})`}>
             {/* max and min value */}
