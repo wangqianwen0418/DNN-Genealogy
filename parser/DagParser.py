@@ -163,7 +163,7 @@ class SurveyRegularizer:
 
 
 if __name__ == '__main__':
-    parser = SurveyParser('../../public/data/survey(regularized).tsv')
-    parser.save_json('../../public/data/survey.json')
+    parser = SurveyParser('../public/data/survey(regularized).tsv')
+    parser.save_json('../public/data/survey.json')
     # regularizer = SurveyRegularizer('../../public/data/taxonomy.tsv', '../../public/data/survey(modified).tsv')
     # regularizer.save_tsv('../../public/data/survey(regularized).tsv')

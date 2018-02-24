@@ -102,5 +102,5 @@ class TaxonomyParser:
 
 
 if __name__ == '__main__':
-    parser = TaxonomyParser('../../public/data/taxonomy.tsv')
-    parser.save_json('../../public/data/taxonomy.json')
+    parser = TaxonomyParser('../public/data/taxonomy.tsv')
+    parser.save_json('../public/data/taxonomy.json')

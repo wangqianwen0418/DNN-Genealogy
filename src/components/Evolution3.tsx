@@ -374,7 +374,7 @@ export default class Evolution extends React.Component<Props, State>{
             {/* a trick, two transition: one for fade in, one for fade out */}
             <Transition in={this.updateEdge} timeout={{enter:duration, exit:10}}>
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
-                    console.info(status)
+                    // console.info(status)
                     return <text className="link_info fadeIn"
                         style={{
                             fontSize: labelFont,
@@ -390,7 +390,6 @@ export default class Evolution extends React.Component<Props, State>{
 
             <Transition in={!this.updateEdge} timeout={{enter:duration, exit:10}}>
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
-                    console.info(status)
                     return <text className="link_info fadeIn"
                         style={{
                             fontSize: labelFont,

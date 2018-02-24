@@ -50,6 +50,60 @@
     ],
     "mixNet":[
         "https://arxiv.org/pdf/1802.01808.pdf"
+    ],
+    "SPP_net":[
+        "https://images2015.cnblogs.com/blog/587139/201606/587139-20160617111414667-885404339.jpg"
+    ],
+    "uNet":[
+        "from original paper"
+    ],
+    "":[
+
+    ],
+    "r-cnn":[
+        "https://lilianweng.github.io/lil-log/assets/images/rcnn-family-summary.png"
+    ],
+    "fast r-cnn":[
+        "https://lilianweng.github.io/lil-log/assets/images/rcnn-family-summary.png"
+    ],
+    "faster r-cnn":[
+        "https://lilianweng.github.io/lil-log/assets/images/rcnn-family-summary.png"
+    ],
+    "mask r-cnn":[
+        "https://lilianweng.github.io/lil-log/assets/images/rcnn-family-summary.png"
+    ],
+    "RNN":[
+        "https://i.stack.imgur.com/hzZ4m.png"
+    ],
+    "BRNN":[
+        "https://cdn-images-1.medium.com/max/1600/0*PNdnDJ2N-aodfSqa.BRNN"
+    ],
+    "LSTM":[
+        "https://acheremskoy.files.wordpress.com/2017/01/lstm.png"
+    ],
+    "GRU":[
+        "https://cdnpythonmachinelearning.azureedge.net/wp-content/uploads/2017/11/GRU.png?x64257"
+    ],
+    "seq2seq":[
+        "www.deeplearningbook.org/contents/rnn.html"
+    ],
+    "recursive":[
+        "https://www.deeplearningbook.org/contents/rnn.html Figure10.14"
+    ],
+    "ESE":[
+        "https://ars.els-cdn.com/content/image/1-s2.0-S0925231213006206-gr1.jpgESN"
+    ],
+    "stacked RNN":[
+        "https://qph.fs.quoracdn.net/main-qimg-b522e948f5d273af253a8a102d716680S"
+    ],
+    "attention":[
+        "original paper"
+    ],
+    "MTRNN":[
+        "DIY"
+    ],
+    "MLP_RNN":[
+        "DIY"
     ]
 }
 
