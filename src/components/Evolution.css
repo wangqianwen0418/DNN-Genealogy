@@ -2,7 +2,7 @@
     height: calc((100vh - var(--header-h))*var(--ratio-up) - var(--div-margin));
     overflow: auto;
 }
-.Node {
+.Node, .Edge {
     /* -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color; */
     -webkit-transition-duration: 1.0s;
     -webkit-transition-timing-function: ease-in-out;

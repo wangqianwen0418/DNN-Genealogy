@@ -252,7 +252,7 @@ export default class Evolution extends React.Component<Props, State>{
             {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1
-                return <g key={node.label}
+                return <g key={node.label} className="Node"
                     transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
                     onClick={() => this.selectNode(node)}
 
@@ -293,6 +293,8 @@ export default class Evolution extends React.Component<Props, State>{
                             </Dropdown>
                             : <span />}
                     </foreignObject>
+                    {node.height > nodeH ?
+                    <g/>:
                     <BoxPlot
                         width={nodeW} height={boxH}
                         datum={this.state.nodes.map(d => d.api || 0).sort(d3.ascending)}
@@ -300,6 +302,7 @@ export default class Evolution extends React.Component<Props, State>{
                         value={node.api || 0}
                         offset={[0, nodeH + boxH / 2]}
                     />
+                    }
                 </g>
             })}
         </g>)
@@ -348,7 +351,7 @@ export default class Evolution extends React.Component<Props, State>{
                 opacity={0}
                 d={textPathData}
             />
-            <text className="link_info" style={{fontSize: labelFont}}>
+            <text className="link_info Edge" style={{fontSize: labelFont}}>
                 <textPath xlinkHref={`#label_${from}->${to}`}>
                     {label}
                 </textPath>
@@ -422,7 +425,7 @@ export default class Evolution extends React.Component<Props, State>{
                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                 //treeData = {this.state.appData}
                 treeData={appData}
-                placeholder="select your task"
+                placeholder="select your data type"
                 //multiple
                 treeDefaultExpandAll
                 onChange={this.onChange}
