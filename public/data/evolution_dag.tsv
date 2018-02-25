@@ -82,22 +82,22 @@ fast r-cnn	http://arxiv.org/abs/1504.08083	2015.04.30	1823	1.1.3.detection			r-c
 							SPP_net									
 faster r-cnn	http://arxiv.org/abs/1506.01497	2015.06.04	2395	1.1.3.detection			fast r-cnn	integrate the region proposal algorithm into the CNN model	faster r-cnn(rpn, 300)		73.2	70.4	42.7	21.9	7	
 SSD	https://arxiv.org/abs/1512.02325	2015.12.08	654	1.1.3.detection					SSD		77.2	74.9	46.5	26.8	59	
-YOLO	http://arxiv.org/abs/1506.02640	2015.06.08	881	1.1.3.detection			FCN	no region proposa step and thus it is faster	YOLO		66.4	57.9	na	na	155	
+YOLO	http://arxiv.org/abs/1506.02640	2015.06.08	881	1.1.3.detection			fcn	no region proposa step and thus it is faster	YOLO		66.4	57.9	na	na	155	
 									YOLO+fast-rcnn		na	70.7	na	na	na	
 R-FCN	https://arxiv.org/abs/1605.06409	2016.05.20	264	1.1.3.detection			fcn		R-FCN		80.5	77.6	53.2	31.5	na	
 							faster r-cnn	region-based detector is fully convolutional with almost all computation shared on the entire image								
-																
+											na	na	na	na	na	
 ID	url	date	citation	application	training	architecture	parent	link_info	name							
-RNN							recursive	tree-like structure to chain-like structure	recurrent neural network							
-LSTM	https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735	1997.12.15	8136				RNN		long short term memory							
-GRU	https://arxiv.org/abs/1406.1078						RNN		gated recurrent unit							
-							LSTM									
-BRNN	http://ieeexplore.ieee.org/abstract/document/650093/	1997.12.01	984				RNN		bidirectional recurrent neural network							
-stacked RNN	https://arxiv.org/abs/1308.0850	2013.08.04	972													
-attention RNN	https://arxiv.org/abs/1409.0473	2014.09.01	2081													
-recursive	https://www.sciencedirect.com/science/article/pii/000437029090005K	1990.11.01	1050													
-MTRNN									multi time scale recurrent neural network							
-seq2seq	https://arxiv.org/abs/1409.3215	2014.09.10	2829													
-conv seq2seq	https://arxiv.org/abs/1705.03122	2017.05.08	73													
-MLP_RNN	https://arxiv.org/abs/1312.6026	2013.12.20	269				stacked RNN									
-ESN	http://science.sciencemag.org/content/304/5667/78	2004.04.02	1517				RNN		echo state network							
+RNN	https://www.nature.com/articles/323533a0	1986.12.01	13951	1.2.NLP					recurrent neural network							
+LSTM	https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735	1997.12.15	8136	1.2.NLP			RNN	learn gates to solve the challenge of long term dependencies 	long short term memory							
+							MTRNN	also learn how to forget previous input								
+GRU	https://arxiv.org/abs/1406.1078	2014.06.03	2069	1.2.NLP			LSTM	input, forget, output gates=>reset, update gates	gated recurrent unit							
+BRNN	http://ieeexplore.ieee.org/abstract/document/650093/	1997.12.01	984	1.2.NLP			RNN	future information cannot be reached from current state => get information from both past and future	bidirectional recurrent neural network							
+stacked RNN	https://arxiv.org/abs/1308.0850	2013.08.04	972	1.2.NLP			RNN	increase deepth to improve performance								
+attention RNN	https://arxiv.org/abs/1409.0473	2014.09.01	2081	1.2.NLP			seq2seq	attention mechanism to search relevant parts in the context								
+recursive	https://www.sciencedirect.com/science/article/pii/000437029090005K	1990.11.01	1050	1.2.NLP			RNN	generalize RNN from chain-like structure to tree-like structure	recursive neural network							
+MTRNN				1.2.NLP			RNN	build both ﬁne and coarse time scales	multi time scale recurrent neural network							
+seq2seq	https://arxiv.org/abs/1409.3215	2014.09.10	2829	1.2.NLP			RNN	introduce a RNN to map squence to sequence								
+conv seq2seq	https://arxiv.org/abs/1705.03122	2017.05.08	73	1.2.NLP			seq2seq	introduce a CNN to map sequence to sequence								
+MLP_RNN	https://arxiv.org/abs/1312.6026	2013.12.20	269	1.2.NLP			stacked RNN	decomposing the state of an RNN into multiple layers								
+ESN	http://science.sciencemag.org/content/304/5667/78	2004.04.02	1517	1.2.NLP			RNN	reservior computing to set the recurrent weights and only learn the output weights	echo state network							
