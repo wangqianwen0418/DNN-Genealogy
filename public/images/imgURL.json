@@ -85,7 +85,8 @@
         "https://cdnpythonmachinelearning.azureedge.net/wp-content/uploads/2017/11/GRU.png?x64257"
     ],
     "seq2seq":[
-        "www.deeplearningbook.org/contents/rnn.html"
+        // "www.deeplearningbook.org/contents/rnn.html"
+        "DIY"
     ],
     "recursive":[
         "https://www.deeplearningbook.org/contents/rnn.html Figure10.14"

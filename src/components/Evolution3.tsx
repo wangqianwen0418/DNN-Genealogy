@@ -21,13 +21,17 @@ export interface Props {
 
 const appData = [
     {
+        label: "all",
+        key: "nonsequence data",
+        value: "1."
+    },{
         label: "sequence data",
         key: "sequence data",
-        value: "0-0"
+        value: "1.1."
     }, {
         label: "nonsequence data",
-        value: "nonsequence data",
-        key: "2"
+        key: "nonsequence data",
+        value: "1.2."
     }
 ]
 
@@ -40,7 +44,7 @@ export interface State {
     selectedNode: Node | undefined,
     h: number | undefined,
     w: number | undefined,
-    appValue: string | undefined,
+    appValue: "1.1." | "1.2.",
     // appData: any,
     topDoi: Node[],
     topParent: Node | undefined,
@@ -82,7 +86,7 @@ export default class Evolution extends React.Component<Props, State>{
             selectedNode: undefined,
             w: 0,
             h: 0,
-            appValue: undefined,
+            appValue: "1.2.",
             // appData: [],
             topDoi: [],
             topChild: undefined,
@@ -90,16 +94,18 @@ export default class Evolution extends React.Component<Props, State>{
         }
     }
     async getData() {
-        let res = await axios.get('../../data/survey.json')
-        let datum: NN[] = res.data
-        datum = datum.filter((d: NN) => d.application[0] === "1.1.1.general recognition")
+        let res = await axios.get('../../data/evolution_dag.json'),
+            datum: NN[] = res.data,
+            { appValue } = this.state
+
+        datum = datum.filter((d: NN) => d.application[0].startsWith(appValue))
         datum.forEach((d: NN) => {
             d.width = nodeW
             d.height = nodeH
 
             let pub_date = moment(d.date, 'YYYY-MM-DD'),
                 dif = moment().diff(pub_date, "months")
-            d.api = d.citation / dif
+            d.api = (d.citation / dif) || 0
         })
         let { nodes, edges, width: w, height: h, topDoi } = this.getDag(datum)
 
@@ -165,7 +171,7 @@ export default class Evolution extends React.Component<Props, State>{
 
 
 
-        const getEdgeWeight = (e: dagre.Edge) => dag.node(e.v).api + dag.node(e.w).api
+        // const getEdgeWeight = (e: dagre.Edge) => dag.node(e.v).api + dag.node(e.w).api
         // const getEdgeWeight = (e:dagre.Edge)=>1
         const getEI = (v: dagre.Edge) => 1
         let distanceDict: any
@@ -182,6 +188,7 @@ export default class Evolution extends React.Component<Props, State>{
             if (dag.node(v)) {
                 let node: Node = dag.node(v),
                     distance = selectedNode ? distanceDict[v].distance : 0
+
                 node.api_diff = Math.max(
                     node.api || 0,
                     Math.max(...(dag.neighbors(v) || []).map((neighbor: Node) => {
@@ -193,7 +200,7 @@ export default class Evolution extends React.Component<Props, State>{
         })
         dag.edges().forEach((e, i) => {
             let edge: GraphEdge = dag.edge(e)
-            edge.weight = getEdgeWeight(e)
+            // edge.weight = getEdgeWeight(e)
         });
 
         //calculate the top N doi nodes, and update their size
@@ -251,10 +258,21 @@ export default class Evolution extends React.Component<Props, State>{
         //calculate layout
         dagre.layout(dag)
 
-        let nodes: Node[] = dag.nodes().map(v => dag.node(v)),
-            edges: GraphEdge[] = dag.edges().map(e => dag.edge(e)),
+        let nodes: Node[] = [], edges: GraphEdge[] = [],
             height = dag.graph().height,
             width = dag.graph().width
+        dag.nodes().forEach(v => {
+            if (dag.node(v)) {
+                nodes.push(dag.node(v))
+            }
+        }),
+            dag.edges().forEach(e => {
+                if (dag.edge(e)) {
+                    edges.push(dag.edge(e))
+                }
+            })
+
+
         return { nodes, edges, height, width, topDoi, topParent, topChild }
     }
     drawNodes(nodes: Node[]) {
@@ -287,17 +305,7 @@ export default class Evolution extends React.Component<Props, State>{
                         strokeWidth={selected ? 3 : (isTop ? 3 : 1)}
                         cursor="pointer"
                     ></rect>
-                    <text textAnchor="middle"
-                        fontSize={0.7 * nodeH}
-                        cursor="pointer"
-                        x={node.width / 2}
-                        y={node.height - 0.1 * nodeH}
-                    >
-                        {
-                            (node.label.length < labelL) ?
-                                node.label : (node.label.slice(0, labelL) + '...')
-                        }
-                    </text>
+
                     <foreignObject>
                         <div style={{ height: node.height }}>
                             <img
@@ -314,7 +322,19 @@ export default class Evolution extends React.Component<Props, State>{
                             : <span />}
                     </foreignObject>
                     {node.height > nodeH ?
-                        <g /> :
+                        <g/> :
+                        <g>
+                        <text textAnchor="middle"
+                            fontSize={0.7 * nodeH}
+                            cursor="pointer"
+                            x={node.width / 2}
+                            y={node.height - 0.1 * nodeH}
+                        >
+                            {
+                                (node.label.length < labelL) ?
+                                    node.label : (node.label.slice(0, labelL) + '...')
+                            }
+                        </text>
                         <BoxPlot
                             width={nodeW} height={boxH}
                             datum={this.state.nodes.map(d => d.api || 0).sort(d3.ascending)}
@@ -322,6 +342,7 @@ export default class Evolution extends React.Component<Props, State>{
                             value={node.api || 0}
                             offset={[0, nodeH + boxH / 2]}
                         />
+                        </g>
                     }
                 </g>
             })}
@@ -333,19 +354,19 @@ export default class Evolution extends React.Component<Props, State>{
             selectedID = selectedNode ? selectedNode.label : undefined
 
 
-        // let len = points.length
-        // if (len == 0) { return }
-        // let start = `M ${points[0].x} ${points[0].y}`
-        // let vias = [];
-        // for (let i = 0; i < len - 2; i += 2) {
-        //     let cPath = [0, 1, 2].map(k => `${points[i + k].x} ${points[i + k].y}`)
-        //     vias.push(`M ${points[i].x} ${points[i].y} C ${cPath}`)
+        let len = points.length
+        if (len == 0) { return }
+        let start = `M ${points[0].x} ${points[0].y}`
+        let vias = [];
+        for (let i = 0; i < len - 2; i += 2) {
+            let cPath = [0, 1, 2].map(k => `${points[i + k].x} ${points[i + k].y}`)
+            vias.push(`M ${points[i].x} ${points[i].y} C ${cPath}`)
 
-        // }
-        // let pathData = `${start}  ${vias.join(' ')}`
+        }
+        let pathData = `${start}  ${vias.join(' ')}`,
         //change curve path to straight line
-        let pathData = `M ${points[0].x} ${points[0].y} 
-                        L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
+        // let pathData = `M ${points[0].x} ${points[0].y} 
+        //                 L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
             highlight: boolean = ((from == selectedID) || (to == selectedID)),
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x),
             textPathData = `M ${points[0].x + textMargin} 
@@ -369,10 +390,10 @@ export default class Evolution extends React.Component<Props, State>{
             <path
                 id={`label_${from}->${to}`}
                 opacity={0}
-                d={textPathData}
+                d={pathData}
             />
             {/* a trick, two transition: one for fade in, one for fade out */}
-            <Transition in={this.updateEdge} timeout={{enter:duration, exit:10}}>
+            <Transition in={this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                     // console.info(status)
                     return <text className="link_info fadeIn"
@@ -388,7 +409,7 @@ export default class Evolution extends React.Component<Props, State>{
                 }}
             </Transition>
 
-            <Transition in={!this.updateEdge} timeout={{enter:duration, exit:10}}>
+            <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                     return <text className="link_info fadeIn"
                         style={{
@@ -425,8 +446,9 @@ export default class Evolution extends React.Component<Props, State>{
             .call(d3.zoom().on("zoom", zoomed));
 
     }
-    onChange = (appValue: string) => {
+    onChange = (appValue: "1.1." | "1.2.") => {
         this.setState({ appValue });
+        this.getData()
     }
     selectNode(selectedNode: Node) {
         let { datum } = this.state
