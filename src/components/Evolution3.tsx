@@ -315,14 +315,13 @@ export default class Evolution extends React.Component<Props, State>{
                                 width={node.width > nodeW ? node.width : 0}
                             />
                         </div>
-                        {node.height > nodeH ?
+                    </foreignObject>
+                    {node.height > nodeH ?
+                        <foreignObject>
                             <Dropdown overlay={menu} className="infoButton">
                                 <Button>{node.label}</Button>
                             </Dropdown>
-                            : <span />}
-                    </foreignObject>
-                    {node.height > nodeH ?
-                        <g/> :
+                        </foreignObject> :
                         <g>
                         <text textAnchor="middle"
                             fontSize={0.7 * nodeH}

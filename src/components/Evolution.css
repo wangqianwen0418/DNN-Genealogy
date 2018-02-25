@@ -21,7 +21,7 @@
 
 .infoButton, .ant-btn{
     position: inherit!important;
-    margin-top:2px;
+    margin: 5px;
 }
 .ant-btn > span{
     font-size: 1.4em;
