@@ -1,103 +1,58 @@
-ID	url	date	citation	application	training	architecture	parent	link_info	name	params(M)	cifar10	cifar100	SVHN	imageNet val top1	imagenet val top5	model path
-leNet	http://ieeexplore.ieee.org/abstract/document/726791/	1998.11.01	10831	1.1.1.general recognition	3.2.1.SGD	2.2.1.1.plain;2.2.2.2.2.sigmoid					na	na	na	na	na	
-alexNet	https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks	2012.12.03	18438	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.2.1.1.standard relu	leNet		alexNet	60	na	na	na	36.7	15.4	
-																
-																
-NIN	https://arxiv.org/abs/1312.4400	2013.12.16	1159	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;3.5.2.auxiliar classifier;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.1.6.mlpconv;2.2.2.2.1.1.standard relu	alexNet	conv=>mlpconv;FCN=>global average pooling	network in network		8.81	35.68	2.35	na	na	
-SPP_net	http://arxiv.org/abs/1406.4729	2014.06.18	889	1.1.1.general recognition					SPP_net		59.2	na	na	na	na	
-inception	https://arxiv.org/abs/1409.4842	2014.09.17	5591	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	alexNet		inception	6.8	na	na	na	na	6.67	
-							VGG	less computation cost			na	na	na	na	na	
-DSN	https://arxiv.org/abs/1409.5185	2014.09.18	558	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;3.5.2.auxiliar classifier	2.2.1.1.plain;2.2.2.2.1.1.standard relu			deeply supervised nets		8.22	34.57	1.92	na	na	
-VGG	https://arxiv.org/abs/1409.1556	2014.09.04	8205	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.2.1.1.standard relu	alexNet	deeper;conv7=>2*conv3	vgg19	144	na	na	na	25.5	7.3	x
-									vgg16	138	na	na	na	25.6	8.1	
-fitNets	https://arxiv.org/abs/1412.6550	2014.12.19	274	1.1.1.general recognition	3.5.1.knowledge distilling;3.5.3.intermediate hints	2.2.1.1.plain;2.2.2.2.1.1.standard relu	DSN	a smoother hint	fitNets	2.5	8.39	35.04	na	na	na	
-inception_rethink	https://arxiv.org/abs/1512.00567	2015.12.02	794	1.1.1.general recognition	3.4.6.LSR;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	inception	easy to scale up	inception_v3	23.8	na	na	na	18.77	4.2	x
-									inception_v2		na	na	na	na	na	
-PRule-nets	https://arxiv.org/abs/1502.01852	2015.02.06	1981	1.1.1.general recognition	3.1.7.he_normal;2.2.2.3.4.SPP;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.1.plain;2.2.2.2.1.5.PRelu	VGG	enables to train extremely deep rectified models directly from scratch	PRule-nets		na	na	na	na	4.94	
-																
-highwayNets	https://arxiv.org/pdf/1505.00387.pdf	2015.11.03	320	1.1.1.general recognition		2.2.1.2.residual;2.2.2.2.1.1.standard relu	LSTM	strongly inspired by it	highwayNets	2.3	7.76	na	na	na	na	
-							fitNets	easier to train			na	na	na	na	na	
-							VGG	enables to train extremely deep models directly from scratch			na	na	na	na	na	
-resNet_v1	https://arxiv.org/abs/1512.03385	2015.12.10	5464	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.1.7.he_normal	2.2.1.2.residual;2.2.2.2.1.1.standard relu	VGG	add residual connections, deeper	resNet_v1_56_cifar	0.86	6.97	25.16	na	na	na	x
-							highwayNets	no gate	resNet_v1_110_cifar	1.7	6.43	25.16	na	na	na	x
-									resNet_v1_50	25.6	na	na	na	24.1	7.1	x
-									resNet_v1_152	60.4	na	na	na	21.43	5.71	x
-resNet_v2	https://arxiv.org/abs/1603.05027	2016.05.16	575	1.1.1.general recognition	3.4.7.pre-activation;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet_v1	pre-activation makes training easier and improves generalization	resNet_v2	na	na	na	na	35.29	na	
-									resNet_v2_56_cifar	1.6	6.99	na	na	na	na	
-									resNet_v2_110_cifar	3.3	6.38	24.64	na	na	na	
-inception_resNet	https://arxiv.org/abs/1602.07261	2016.02.23	480	1.1.1.general recognition	3.2.3.RMSprop;scaling of the residuals;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	inception_rethink	combine resnet with inception	inception_resNet	55.8	na	na	na	17.8	3.7	x
-							resNet_v1	combine resnet with inception			na	na	na	na	na	
-WRN	https://arxiv.org/abs/1605.07146	2016.05.23	285	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet_v1	wider instead of deeper for computation efficiency	wideResNet_16_4	2.9	5.24	23.91	1.64	na	na	x
-									wideResNet_28_10	36	3.89	18.85	1.64	na	na	x
-									wideResNet-50-2	na	na	na	na	21.9	5.79	
-RIR	https://arxiv.org/abs/1603.08029	2016.05.25	37	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet_v1	generalizes ResNets and standard CNNs	resNet-in-resent	na	5.01	22.9	na	na	na	
-fractalNet	https://arxiv.org/abs/1605.07648	2016.05.24	71	1.1.1.general recognition	3.4.3.drop path;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	resNet_v1	shows that explicit residual learning is not a requirement for building ultra-deep neural networks	fractalNet-40	22.9	5.24	22.49	na	na	na	x
-									fractalNet-20	38.6	5.22	23.3	na	na	na	
-resNeXt	https://arxiv.org/abs/1611.05431	2016.11.16	134	1.1.1.general recognition	3.4.7.pre-activation;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	resNet_v2	add a new dimension called "“cardinality"	ResNeXt	25	3.58	17.31	na	20.4	5.3	
-							inception	exploiting the split-transform-merge strategy in an easy, extensible way			na	na	na	na	na	
-denseNet	https://arxiv.org/abs/1608.06993	2016.08.25	378	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with nesterov momentum;3.4.2.weight decay;3.1.7.he_normal	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet_v2	dense residual connection; change add to concate	denseNet_40_12	1	5.24	24.42	1.79	na	na	x
-									denseNet_100_12	7.2	4.1	20.2	1.67	na	na	x
-									denseNet_100_24	27.2	3.74	19.25	1.59	na	na	x
-									denseNet-BC(l=100, k=12)	0.8	4.51	22.27	1.76	na	na	
-									denseNet-BC(l=250, k=24)	15.3	3.62	17.6	1.74	na	na	
-									denseNet-BC(l=190, k=40)	25.6	3.46	17.18	na	na	na	
-									denseNet_121	8.1	na	na	na	25.02	7.71	x
-									denseNet_201	20.2	na	na	na	22.58	6.34	x
-squeezeNet	https://arxiv.org/abs/1602.07360	2016.02.24	264	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu;2.2.1.2.residual	alexNet	same performance with 50x less parameters	squeezeNet	1.24	na	na	na	39.6	17.5	x
-							inception	exploiting the split-transform-merge strategy in an easy, extensible way			na	na	na	na	na	
-diracNet	https://arxiv.org/abs/1706.00388	2017.06.07	4	1.1.1.general recognition	3.1.11.dirac;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.1.plain;2.2.2.2.1.4.CRelu	resNet_v2	train a deep network without residual connections	diracNet-28-5	9.1	3.16	23.44	na	na	na	
-									diracNet-28-10	36.5	4.75	21.54	na	na	na	
-									diracNet-18	11.7	na	na	na	30.37	10.88	
-									diracNet-34	21.8	na	na	na	27.79	9.34	
-nasNet	https://arxiv.org/abs/1707.07012	2017.12.01	17	1.1.1.general recognition	neural architecture search by reinforcement learning	2.2.1.2.residual;2.2.1.3.multi-branch			nasNet_cifar	3.3	2.65	na	na	na	na	x
-									nasNet_small	88.9	na	na	na	17.3	3.8	x
-									nasNet_large	5.3	na	na	na	26	8.4	x
-Elu	https://arxiv.org/abs/1511.07289	2015.11.23	493	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.3.4.SPP;3.4.1.dropout		PRule-nets	a noise-robust deactivation state	exponential linear unit	na	6.55	24.28	na	na	na	
-mixNet	https://arxiv.org/abs/1802.01808	2018.02.06	0	1.1.1.general recognition		2.2.1.2.residual;2.2.1.3.multi-branch	resNet_v2		mixNet							
-							denseNet									
-capsule	https://arxiv.org/abs/1710.09829	2017.10.26	24	1.1.1.general recognition												
-											na	na	na	na	na	
-ID	url	date	citation	application	training	architecture	parent	link_info	name	params(M)	cifar10	cifar100	SVHN	imageNet val top1	imagenet val top5	model path
-fcn	https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Long_Fully_Convolutional_Networks_2015_CVPR_paper.pdf	2015.06.01	3141	1.1.2.segmentation					fcn		67.2	na	na	na	na	
-mask r-cnn	https://arxiv.org/abs/1703.06870	2017.04.05	88	1.1.2.segmentation			faster r-cnn	it added a third parallel branch for predicting an object mask to each ROI	mask r-cnn		na	na	na	na	na	
-deepLab_v1	https://arxiv.org/abs/1412.7062	2014.12.22	1183	1.1.2.segmentation					deepLab_v1		71.6	na	na	na	na	
-deepLab_v2	https://arxiv.org/abs/1606.00915	2016.06.02	1183	1.1.2.segmentation			deepLab_v1		deepLab_v2		79.7	na	na	na	na	
-deconvNet	https://arxiv.org/abs/1505.04366	2015.05.17	732	1.1.2.segmentation			fcn	directly learn the deconv								
-							VGG	borrow the conv parts of VGG								
-uNet	https://arxiv.org/abs/1505.04597	2015.05.18	994	1.1.2.segmentation			fcn	contracting path are combined with the upsampled outputs	uNet		na	na	na	na	na	
-segNet	https://arxiv.org/abs/1511.00561	2015.11.02	464	1.1.2.segmentation			fcn		segNet		59.9	na	na	na	na	
-							deconvNet									
-							uNet									
-dilated conv	https://arxiv.org/abs/1511.07122	2015.11.23	508	1.1.2.segmentation					dilated conv		75.3	na	na	na	na	
-refineNet	https://arxiv.org/abs/1611.06612	2016.11.20	60	1.1.2.segmentation					refineNet		84.2	na	na	na	na	
-PSPNet	https://arxiv.org/abs/1612.01105	2016.12.04	129	1.1.2.segmentation					PSPNet		85.4	na	na	na	na	
-GCN	https://arxiv.org/abs/1703.02719	2017.03.08	15	1.1.2.segmentation					GCN		83.6	na	na	na	na	
-deepLab_v3	https://arxiv.org/abs/1706.05587	2017.06.17	17	1.1.2.segmentation			deepLab_v2		deepLab_v3		85.7	na	na	na	na	
-tiramisu	https://arxiv.org/abs/1611.09326	2016.11.28	47	1.1.2.segmentation			denseNet	extend denseNet to FCN for segmentation task								
-											na	na	na	na	na	
-											na	na	na	na	na	
-ID	url	date	citation	application	training	architecture	parent	link_info	name	params(M)	voc2007 mAP (train on 07 + 12 )	voc2012 mAP	COCO mAP@0.5 (test-dev)	COCO mAP@[0.5:0.95]	voc2007 fps	model path
-r-cnn	http://arxiv.org/abs/1311.2524	2013.11.11	4309	1.1.3.detection					r-cnn		66	53.3	na	na	na	
-fast r-cnn	http://arxiv.org/abs/1504.08083	2015.04.30	1823	1.1.3.detection			r-cnn	classifirt and box regresot share the same feature matrix	fast r-cnn		71.8	68.4	na	na	0.5	
-							SPP_net									
-faster r-cnn	http://arxiv.org/abs/1506.01497	2015.06.04	2395	1.1.3.detection			fast r-cnn	integrate the region proposal algorithm into the CNN model	faster r-cnn(rpn, 300)		73.2	70.4	42.7	21.9	7	
-SSD	https://arxiv.org/abs/1512.02325	2015.12.08	654	1.1.3.detection					SSD		77.2	74.9	46.5	26.8	59	
-YOLO	http://arxiv.org/abs/1506.02640	2015.06.08	881	1.1.3.detection			fcn	no region proposa step and thus it is faster	YOLO		66.4	57.9	na	na	155	
-									YOLO+fast-rcnn		na	70.7	na	na	na	
-R-FCN	https://arxiv.org/abs/1605.06409	2016.05.20	264	1.1.3.detection			fcn		R-FCN		80.5	77.6	53.2	31.5	na	
-							faster r-cnn	region-based detector is fully convolutional with almost all computation shared on the entire image								
-											na	na	na	na	na	
-ID	url	date	citation	application	training	architecture	parent	link_info	name							
-RNN	https://www.nature.com/articles/323533a0	1986.12.01	13951	1.2.NLP					recurrent neural network							
-LSTM	https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735	1997.12.15	8136	1.2.NLP			RNN	learn gates to solve the challenge of long term dependencies 	long short term memory							
-							MTRNN	also learn how to forget previous input								
-GRU	https://arxiv.org/abs/1406.1078	2014.06.03	2069	1.2.NLP			LSTM	input, forget, output gates=>reset, update gates	gated recurrent unit							
-BRNN	http://ieeexplore.ieee.org/abstract/document/650093/	1997.12.01	984	1.2.NLP			RNN	future information cannot be reached from current state => get information from both past and future	bidirectional recurrent neural network							
-stacked RNN	https://arxiv.org/abs/1308.0850	2013.08.04	972	1.2.NLP			RNN	increase deepth to improve performance								
-attention RNN	https://arxiv.org/abs/1409.0473	2014.09.01	2081	1.2.NLP			seq2seq	attention mechanism to search relevant parts in the context								
-recursive	https://www.sciencedirect.com/science/article/pii/000437029090005K	1990.11.01	1050	1.2.NLP			RNN	generalize RNN from chain-like structure to tree-like structure	recursive neural network							
-MTRNN				1.2.NLP			RNN	build both ﬁne and coarse time scales	multi time scale recurrent neural network							
-seq2seq	https://arxiv.org/abs/1409.3215	2014.09.10	2829	1.2.NLP			RNN	introduce a RNN to map squence to sequence								
-conv seq2seq	https://arxiv.org/abs/1705.03122	2017.05.08	73	1.2.NLP			seq2seq	introduce a CNN to map sequence to sequence								
-MLP_RNN	https://arxiv.org/abs/1312.6026	2013.12.20	269	1.2.NLP			stacked RNN	decomposing the state of an RNN into multiple layers								
-ESN	http://science.sciencemag.org/content/304/5667/78	2004.04.02	1517	1.2.NLP			RNN	reservior computing to set the recurrent weights and only learn the output weights	echo state network							
+ID	url	date	citation	application	training	architecture	parent	link_info_l	link_info_s	name	params(M)	cifar10	cifar100	SVHN	imageNet val top1	imagenet val top5	model path
+leNet	http://ieeexplore.ieee.org/abstract/document/726791/	1998.11.01	10831	1.1.1.general recognition	3.2.1.SGD	2.2.1.1.plain;2.2.2.2.2.sigmoid						na	na	na	na	na	
+alexNet	https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks	2012.12.03	18438	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.2.1.1.standard relu	leNet			alexNet	60	na	na	na	36.7	15.4	
+inception	https://arxiv.org/abs/1409.4842	2014.09.17	5591	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	VGG	less computation cost	less computation cost	inception	6.8	na	na	na	na	6.67	
+VGG	https://arxiv.org/abs/1409.1556	2014.09.04	8205	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.2.1.1.standard relu	alexNet	deeper;conv7=>2*conv3	deeper;conv7=>2*conv3	vgg19	144	na	na	na	25.5	7.3	x
+										vgg16	138	na	na	na	25.6	8.1	
+inception_rethink	https://arxiv.org/abs/1512.00567	2015.12.02	794	1.1.1.general recognition	3.4.6.LSR;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	inception	easy to scale up	easy to scale up	inception_v3	23.8	na	na	na	18.77	4.2	x
+										inception_v2		na	na	na	na	na	
+highwayNets	https://arxiv.org/pdf/1505.00387.pdf	2015.11.03	320	1.1.1.general recognition		2.2.1.2.residual;2.2.2.2.1.1.standard relu	LSTM	inspired by its gate mechanism	inspired by its gate mechanism	highwayNets	2.3	7.76	na	na	na	na	
+							VGG	enables to train extremely deep models directly from scratch	enables to train extremely deep models directly from scratch			na	na	na	na	na	
+resNet	https://arxiv.org/abs/1512.03385	2015.12.10	5464	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.1.7.he_normal	2.2.1.2.residual;2.2.2.2.1.1.standard relu	VGG	add residual connections	add residual connections	resNet_v1_56_cifar	0.86	6.97	25.16	na	na	na	x
+							highwayNets	remove gate	remove gate	resNet_v1_110_cifar	1.7	6.43	25.16	na	na	na	x
+										resNet_v1_50	25.6	na	na	na	24.1	7.1	x
+										resNet_v1_152	60.4	na	na	na	21.43	5.71	x
+inception_resNet	https://arxiv.org/abs/1602.07261	2016.02.23	480	1.1.1.general recognition	3.2.3.RMSprop;scaling of the residuals;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	inception_rethink	combine resnet with inception	combine resnet with inception	inception_resNet	55.8	na	na	na	17.8	3.7	x
+							resNet	combine resnet with inception	combine resnet with inception			na	na	na	na	na	
+WRN	https://arxiv.org/abs/1605.07146	2016.05.23	285	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet	wider instead of deeper	wider instead of deeper for computation efficiency	wideResNet_16_4	2.9	5.24	23.91	1.64	na	na	x
+										wideResNet_28_10	36	3.89	18.85	1.64	na	na	x
+										wideResNet-50-2	na	na	na	na	21.9	5.79	
+RIR	https://arxiv.org/abs/1603.08029	2016.05.25	37	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet	generalizes ResNets and standard CNNs	generalizes ResNets and standard CNNs	resNet-in-resent	na	5.01	22.9	na	na	na	
+fractalNet	https://arxiv.org/abs/1605.07648	2016.05.24	71	1.1.1.general recognition	3.4.3.drop path;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	resNet	shows that explicit residual learning is not a requirement for building ultra-deep neural networks	shows that explicit residual learning is not a requirement for building ultra-deep neural networks	fractalNet-40	22.9	5.24	22.49	na	na	na	x
+										fractalNet-20	38.6	5.22	23.3	na	na	na	
+resNeXt	https://arxiv.org/abs/1611.05431	2016.11.16	134	1.1.1.general recognition	3.4.7.pre-activation;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	resNet	add a new dimension called "“cardinality"	add a new dimension called "“cardinality"	ResNeXt	25	3.58	17.31	na	20.4	5.3	
+							inception	exploiting the split-transform-merge strategy in an easy, extensible way	exploiting the split-transform-merge strategy in an easy, extensible way			na	na	na	na	na	
+denseNet	https://arxiv.org/abs/1608.06993	2016.08.25	378	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with nesterov momentum;3.4.2.weight decay;3.1.7.he_normal	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet	dense residual connection; change add to concate	dense residual connection; change add to concate	denseNet_40_12	1	5.24	24.42	1.79	na	na	x
+										denseNet_100_12	7.2	4.1	20.2	1.67	na	na	x
+										denseNet_100_24	27.2	3.74	19.25	1.59	na	na	x
+										denseNet-BC(l=100, k=12)	0.8	4.51	22.27	1.76	na	na	
+										denseNet-BC(l=250, k=24)	15.3	3.62	17.6	1.74	na	na	
+										denseNet-BC(l=190, k=40)	25.6	3.46	17.18	na	na	na	
+										denseNet_121	8.1	na	na	na	25.02	7.71	x
+										denseNet_201	20.2	na	na	na	22.58	6.34	x
+squeezeNet	https://arxiv.org/abs/1602.07360	2016.02.24	264	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu;2.2.1.2.residual	alexNet	same performance with 50x less parameters		squeezeNet	1.24	na	na	na	39.6	17.5	x
+							inception	exploiting the split-transform-merge strategy in an easy, extensible way				na	na	na	na	na	
+diracNet	https://arxiv.org/abs/1706.00388	2017.06.07	4	1.1.1.general recognition	3.1.11.dirac;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.1.plain;2.2.2.2.1.4.CRelu	resNet	train a deep network without residual connections		diracNet-28-5	9.1	3.16	23.44	na	na	na	
+										diracNet-28-10	36.5	4.75	21.54	na	na	na	
+										diracNet-18	11.7	na	na	na	30.37	10.88	
+										diracNet-34	21.8	na	na	na	27.79	9.34	
+nasNet	https://arxiv.org/abs/1707.07012	2017.12.01	17	1.1.1.general recognition	neural architecture search by reinforcement learning	2.2.1.2.residual;2.2.1.3.multi-branch	resNet	offer guides for the predeterimined structures		nasNet_cifar	3.3	2.65	na	na	na	na	x
+							inception			nasNet_small	88.9	na	na	na	17.3	3.8	x
+										nasNet_large	5.3	na	na	na	26	8.4	x
+mixNet	https://arxiv.org/abs/1802.01808	2018.02.06	0	1.1.1.general recognition		2.2.1.2.residual;2.2.1.3.multi-branch	resNet			mixNet							
+							denseNet										
+												na	na	na	na	na	
+												na	na	na	na	na	
+ID	url	date	citation	application	training	architecture	parent	link_info_l	link_info_s	name							
+RNN	https://www.nature.com/articles/323533a0	1986.12.01	13951	1.2.NLP						recurrent neural network							
+LSTM	https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735	1997.12.15	8136	1.2.NLP			MTRNN	also learn how to forget previous input		long short term memory							
+GRU	https://arxiv.org/abs/1406.1078	2014.06.03	2069	1.2.NLP			LSTM	input, forget, output gates=>reset, update gates		gated recurrent unit							
+BRNN	http://ieeexplore.ieee.org/abstract/document/650093/	1997.12.01	984	1.2.NLP			RNN	future information cannot be reached from current state => get information from both past and future		bidirectional recurrent neural network							
+stacked RNN	https://arxiv.org/abs/1308.0850	2013.08.04	972	1.2.NLP			RNN	increase deepth to improve performance									
+attention RNN	https://arxiv.org/abs/1409.0473	2014.09.01	2081	1.2.NLP			seq2seq	attention mechanism to search relevant parts in the context									
+recursive	https://www.sciencedirect.com/science/article/pii/000437029090005K	1990.11.01	1050	1.2.NLP			RNN	generalize RNN from chain-like structure to tree-like structure		recursive neural network							
+MTRNN				1.2.NLP			RNN	build both ﬁne and coarse time scales		multi time scale recurrent neural network							
+seq2seq	https://arxiv.org/abs/1409.3215	2014.09.10	2829	1.2.NLP			RNN	introduce a RNN to map squence to sequence									
+conv seq2seq	https://arxiv.org/abs/1705.03122	2017.05.08	73	1.2.NLP			seq2seq	introduce a CNN to map sequence to sequence									
+MLP_RNN	https://arxiv.org/abs/1312.6026	2013.12.20	269	1.2.NLP			stacked RNN	decomposing the state of an RNN into multiple layers									
+ESN	http://science.sciencemag.org/content/304/5667/78	2004.04.02	1517	1.2.NLP			RNN	reservior computing to set the recurrent weights and only learn the output weights		echo state network							
