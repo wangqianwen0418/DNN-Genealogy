@@ -45,14 +45,14 @@ mixNet	https://arxiv.org/abs/1802.01808	2018.02.06	0	1.1.1.general recognition		
 												na	na	na	na	na	
 ID	url	date	citation	application	training	architecture	parent	link_info_l	link_info_s	name							
 RNN	https://www.nature.com/articles/323533a0	1986.12.01	13951	1.2.NLP						recurrent neural network							
-LSTM	https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735	1997.12.15	8136	1.2.NLP			MTRNN	also learn how to forget previous input		long short term memory							
-GRU	https://arxiv.org/abs/1406.1078	2014.06.03	2069	1.2.NLP			LSTM	input, forget, output gates=>reset, update gates		gated recurrent unit							
-BRNN	http://ieeexplore.ieee.org/abstract/document/650093/	1997.12.01	984	1.2.NLP			RNN	future information cannot be reached from current state => get information from both past and future		bidirectional recurrent neural network							
-stacked RNN	https://arxiv.org/abs/1308.0850	2013.08.04	972	1.2.NLP			RNN	increase deepth to improve performance									
-attention RNN	https://arxiv.org/abs/1409.0473	2014.09.01	2081	1.2.NLP			seq2seq	attention mechanism to search relevant parts in the context									
-recursive	https://www.sciencedirect.com/science/article/pii/000437029090005K	1990.11.01	1050	1.2.NLP			RNN	generalize RNN from chain-like structure to tree-like structure		recursive neural network							
-MTRNN				1.2.NLP			RNN	build both ﬁne and coarse time scales		multi time scale recurrent neural network							
-seq2seq	https://arxiv.org/abs/1409.3215	2014.09.10	2829	1.2.NLP			RNN	introduce a RNN to map squence to sequence									
-conv seq2seq	https://arxiv.org/abs/1705.03122	2017.05.08	73	1.2.NLP			seq2seq	introduce a CNN to map sequence to sequence									
-MLP_RNN	https://arxiv.org/abs/1312.6026	2013.12.20	269	1.2.NLP			stacked RNN	decomposing the state of an RNN into multiple layers									
-ESN	http://science.sciencemag.org/content/304/5667/78	2004.04.02	1517	1.2.NLP			RNN	reservior computing to set the recurrent weights and only learn the output weights		echo state network							
+LSTM	https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735	1997.12.15	8136	1.2.NLP			MTRNN	also learn how to forget previous input	also learn how to forget previous input	long short term memory							
+GRU	https://arxiv.org/abs/1406.1078	2014.06.03	2069	1.2.NLP			LSTM	input, forget, output gates=>reset, update gates	input, forget, output gates=>reset, update gates	gated recurrent unit							
+BRNN	http://ieeexplore.ieee.org/abstract/document/650093/	1997.12.01	984	1.2.NLP			RNN	future information cannot be reached from current state => get information from both past and future	future information cannot be reached from current state => get information from both past and future	bidirectional recurrent neural network							
+stacked RNN	https://arxiv.org/abs/1308.0850	2013.08.04	972	1.2.NLP			RNN	increase deepth to improve performance	increase deepth to improve performance								
+attention RNN	https://arxiv.org/abs/1409.0473	2014.09.01	2081	1.2.NLP			seq2seq	attention mechanism to search relevant parts in the context	attention mechanism to search relevant parts in the context								
+recursive	https://www.sciencedirect.com/science/article/pii/000437029090005K	1990.11.01	1050	1.2.NLP			RNN	generalize RNN from chain-like structure to tree-like structure	generalize RNN from chain-like structure to tree-like structure	recursive neural network							
+MTRNN				1.2.NLP			RNN	build both ﬁne and coarse time scales	build both ﬁne and coarse time scales	multi time scale recurrent neural network							
+seq2seq	https://arxiv.org/abs/1409.3215	2014.09.10	2829	1.2.NLP			RNN	introduce a RNN to map squence to sequence	introduce a RNN to map squence to sequence								
+conv seq2seq	https://arxiv.org/abs/1705.03122	2017.05.08	73	1.2.NLP			seq2seq	introduce a CNN to map sequence to sequence	introduce a CNN to map sequence to sequence								
+MLP_RNN	https://arxiv.org/abs/1312.6026	2013.12.20	269	1.2.NLP			stacked RNN	decomposing the state of an RNN into multiple layers	decomposing the state of an RNN into multiple layers								
+ESN	http://science.sciencemag.org/content/304/5667/78	2004.04.02	1517	1.2.NLP			RNN	reservior computing to set the recurrent weights and only learn the output weights	reservior computing to set the recurrent weights and only learn the output weights	echo state network							

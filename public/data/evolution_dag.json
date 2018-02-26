@@ -841,7 +841,7 @@
       {
         "link_info_l": "also learn how to forget previous input", 
         "ID": "MTRNN", 
-        "link_info_s": ""
+        "link_info_s": "also learn how to forget previous input"
       }
     ], 
     "architecture": [], 
@@ -865,7 +865,7 @@
       {
         "link_info_l": "input, forget, output gates=>reset, update gates", 
         "ID": "LSTM", 
-        "link_info_s": ""
+        "link_info_s": "input, forget, output gates=>reset, update gates"
       }
     ], 
     "architecture": [], 
@@ -889,7 +889,7 @@
       {
         "link_info_l": "future information cannot be reached from current state => get information from both past and future", 
         "ID": "RNN", 
-        "link_info_s": ""
+        "link_info_s": "future information cannot be reached from current state => get information from both past and future"
       }
     ], 
     "architecture": [], 
@@ -913,7 +913,7 @@
       {
         "link_info_l": "increase deepth to improve performance", 
         "ID": "RNN", 
-        "link_info_s": ""
+        "link_info_s": "increase deepth to improve performance"
       }
     ], 
     "architecture": [], 
@@ -932,7 +932,7 @@
       {
         "link_info_l": "attention mechanism to search relevant parts in the context", 
         "ID": "seq2seq", 
-        "link_info_s": ""
+        "link_info_s": "attention mechanism to search relevant parts in the context"
       }
     ], 
     "architecture": [], 
@@ -951,7 +951,7 @@
       {
         "link_info_l": "generalize RNN from chain-like structure to tree-like structure", 
         "ID": "RNN", 
-        "link_info_s": ""
+        "link_info_s": "generalize RNN from chain-like structure to tree-like structure"
       }
     ], 
     "architecture": [], 
@@ -975,7 +975,7 @@
       {
         "link_info_l": "build both \ufb01ne and coarse time scales", 
         "ID": "RNN", 
-        "link_info_s": ""
+        "link_info_s": "build both \ufb01ne and coarse time scales"
       }
     ], 
     "architecture": [], 
@@ -999,7 +999,7 @@
       {
         "link_info_l": "introduce a RNN to map squence to sequence", 
         "ID": "RNN", 
-        "link_info_s": ""
+        "link_info_s": "introduce a RNN to map squence to sequence"
       }
     ], 
     "architecture": [], 
@@ -1018,7 +1018,7 @@
       {
         "link_info_l": "introduce a CNN to map sequence to sequence", 
         "ID": "seq2seq", 
-        "link_info_s": ""
+        "link_info_s": "introduce a CNN to map sequence to sequence"
       }
     ], 
     "architecture": [], 
@@ -1037,7 +1037,7 @@
       {
         "link_info_l": "decomposing the state of an RNN into multiple layers", 
         "ID": "stacked RNN", 
-        "link_info_s": ""
+        "link_info_s": "decomposing the state of an RNN into multiple layers"
       }
     ], 
     "architecture": [], 
@@ -1056,7 +1056,7 @@
       {
         "link_info_l": "reservior computing to set the recurrent weights and only learn the output weights", 
         "ID": "RNN", 
-        "link_info_s": ""
+        "link_info_s": "reservior computing to set the recurrent weights and only learn the output weights"
       }
     ], 
     "architecture": [], 

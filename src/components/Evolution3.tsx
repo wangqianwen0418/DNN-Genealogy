@@ -6,9 +6,9 @@ import "./Evolution.css"
 import "./App.css"
 import axios from "axios"
 import * as d3 from "d3"
-import { NN, NNLink, Node, GraphEdge } from "../types"
+import { NN, NNLink, Node, GraphEdge, Point } from "../types"
 import { getColor } from "../helper/index";
-import { TreeSelect, Button, Dropdown, Menu } from "antd"
+import { TreeSelect, Button, Dropdown, Menu, Tooltip } from "antd"
 import moment from 'moment';
 import BoxPlot from "./BoxPlot"
 // const {TreeNode} = TreeSelect
@@ -159,7 +159,8 @@ export default class Evolution extends React.Component<Props, State>{
                         parent.ID,
                         node.ID,
                         {
-                            label: parent.link_info,
+                            label_s: parent.link_info_s,
+                            label_l: parent.link_info_l,
                             from: parent.ID,
                             to: node.ID
                         }
@@ -267,7 +268,7 @@ export default class Evolution extends React.Component<Props, State>{
             }
         }),
             dag.edges().forEach(e => {
-                if (dag.edge(e)) {
+                if (dag.node(e.v) && dag.node(e.w)) {
                     edges.push(dag.edge(e))
                 }
             })
@@ -348,7 +349,7 @@ export default class Evolution extends React.Component<Props, State>{
         </g>)
     }
     oneEdge(edge: GraphEdge, i: number) {
-        let { points, from, to, label } = edge,
+        let { points, from, to, label_s, label_l } = edge,
             { selectedNode } = this.state,
             selectedID = selectedNode ? selectedNode.label : undefined
 
@@ -357,11 +358,44 @@ export default class Evolution extends React.Component<Props, State>{
         if (len == 0) { return }
         let start = `M ${points[0].x} ${points[0].y}`
         let vias = [];
-        for (let i = 0; i < len - 2; i += 2) {
-            let cPath = [0, 1, 2].map(k => `${points[i + k].x} ${points[i + k].y}`)
-            vias.push(`M ${points[i].x} ${points[i].y} C ${cPath}`)
+        // // curve
+        // for (let i = 0; i < len - 2; i += 2) {
+        //     let cPath = [0, 1, 2].map(k => `${points[i + k].x} ${points[i + k].y}`)
+        //     vias.push(`C ${cPath}`)
+
+        // }
+        // // straight
+        // for (let i = 0; i < len; i ++) {
+            
+        //     vias.push(`L ${points[i].x} ${points[i].y}`)
+
+        // }
+        //refined curve
+        const getInter = (p1:Point, p2:Point, n:number)=>{
+            return `${p1.x*n + p2.x*(1-n)} ${p1.y*n + p2.y*(1-n)}`
+        }
+        const ratio = 0.7
+        for (let i = 0; i < len - 2; i++) {
+            let p1, p2, p3, p4, p5;
+            if(i==0){
+                p1=`${points[i].x} ${points[i].y}`
+            }else{
+                p1 = getInter(points[i], points[i+1], ratio)
+            }
+            p2 = getInter(points[i], points[i+1], 1-ratio)
+            p3 = `${points[i+1].x} ${points[i+1].y}`
+            p4 = getInter(points[i+1], points[i+2], ratio)
+            if(i==len-3){
+                p5=`${points[i+2].x} ${points[i+2].y}`
+            }else{
+                p5 = getInter(points[i+1], points[i+2], 1-ratio)
+            }
+
+            let cPath = `M ${p1} L${p2} Q${p3} ${p4} L${p5}`
+            vias.push(cPath)
 
         }
+        console.info(vias)
         let pathData = `${start}  ${vias.join(' ')}`,
         //change curve path to straight line
         // let pathData = `M ${points[0].x} ${points[0].y} 
@@ -385,7 +419,8 @@ export default class Evolution extends React.Component<Props, State>{
                 fill='none'
                 strokeWidth={highlight ? 2 : 1}
                 className="Edge"
-            />
+            /> 
+
             <path
                 id={`label_${from}->${to}`}
                 opacity={0}
@@ -402,7 +437,7 @@ export default class Evolution extends React.Component<Props, State>{
                             ...transitionStyles[status]
                         }}>
                         <textPath xlinkHref={`#label_${from}->${to}`}>
-                            {label}
+                            {label_s}
                         </textPath>
                     </text>
                 }}
@@ -417,11 +452,21 @@ export default class Evolution extends React.Component<Props, State>{
                             ...transitionStyles[status]
                         }}>
                         <textPath xlinkHref={`#label_${from}->${to}`}>
-                            {label}
+                            {label_s}
                         </textPath>
                     </text>
                 }}
             </Transition>
+            {/* mask over edge for better hover responsive */}
+            <Tooltip title={label_l}>
+            <path
+                strokeWidth={10}
+                // opacity={0}
+                stroke="transparent"
+                fill="none"
+                d={pathData}
+            />
+            </Tooltip>
         </g>
 
     }

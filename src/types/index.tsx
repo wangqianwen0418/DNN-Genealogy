@@ -44,8 +44,12 @@ export interface NNLink {
 }
 
 export interface GraphEdge {
-    points: Array<{x: number, y: number}>;
+    points: Array<Point>;
     [key: string]: any;
+}
+
+export interface Point {
+    x: number, y: number
 }
 
 export interface Node {
