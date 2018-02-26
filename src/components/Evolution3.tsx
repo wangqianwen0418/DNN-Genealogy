@@ -22,15 +22,15 @@ export interface Props {
 const appData = [
     {
         label: "all",
-        key: "nonsequence data",
+        key: "all",
         value: "1."
     },{
-        label: "sequence data",
-        key: "sequence data",
+        label: "non sequence data",
+        key: "non sequence data",
         value: "1.1."
     }, {
-        label: "nonsequence data",
-        key: "nonsequence data",
+        label: "sequence data",
+        key: "sequence data",
         value: "1.2."
     }
 ]
