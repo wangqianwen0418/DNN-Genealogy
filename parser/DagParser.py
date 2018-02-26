@@ -71,7 +71,8 @@ class DagParser:
                     print('Error in line %d: Parent "%s" not exists.' % (label, datum[7]))
                 result[-1]['parents'].append({
                     'ID': datum[7],
-                    'link_info': datum[8],
+                    'link_info_l': datum[8],
+                    'link_info_s': datum[9]
                 })
 
             # add datasets to current model
