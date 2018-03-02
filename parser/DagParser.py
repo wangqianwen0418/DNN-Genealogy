@@ -63,6 +63,7 @@ class DagParser:
                     'architecture': self.get_split_data(datum[6]),
                     'names': list(),
                     'parents': list(),
+                    'variants': list()
                 })
 
             # add a parent to current model
@@ -90,7 +91,7 @@ class DagParser:
                         cur_name[title_line[i]] = float(datum[i])
                 result[-1]['names'].append(cur_name)
 
-        result_json = json.dumps(result, indent=2)
+        result_json = json.dumps(result, indent=2, sort_keys=True)
         f = open(filepath, 'w')
         f.write(result_json)
         f.close()

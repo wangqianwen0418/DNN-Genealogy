@@ -8,9 +8,9 @@ import axios from "axios"
 import * as d3 from "d3"
 import { NN, NNLink, Node, GraphEdge, Point } from "../types"
 import { getColor } from "../helper/index";
-import { TreeSelect, Button, Dropdown, Menu, Tooltip } from "antd"
+import { TreeSelect, Button, Dropdown, Menu, Tooltip} from "antd"
 import moment from 'moment';
-import BoxPlot from "./BoxPlot"
+import NNNode from "./NNNode"
 // const {TreeNode} = TreeSelect
 export interface Props {
     arc: string,
@@ -52,7 +52,7 @@ export interface State {
 }
 
 const margin = 40, nodeH = 20, nodeW = 100, labelL = 10,
-    expandH = 300, expandW = 400,
+    expandH = 150, expandW = 200,
     boxH = 10,
     labelFont = 12,
     textMargin = 20,
@@ -79,6 +79,7 @@ export default class Evolution extends React.Component<Props, State>{
     constructor(props: Props) {
         super(props)
         this.getData = this.getData.bind(this)
+        this.selectNode = this.selectNode.bind(this)
         this.state = {
             datum: [],
             nodes: [],
@@ -150,7 +151,8 @@ export default class Evolution extends React.Component<Props, State>{
                     width: selected ? expandW : nodeW,
                     height: selected ? expandH : nodeH,
                     ID: node.ID,
-                    api: node.api
+                    api: node.api,
+                    variants: node.variants
                 }
             )
             //IR model or keras model
@@ -218,7 +220,8 @@ export default class Evolution extends React.Component<Props, State>{
                     width: expandW,
                     height: expandH,
                     ID: topParent.ID,
-                    api: topParent.api
+                    api: topParent.api,
+                    variants: topParent.variants
                 })
             }
             if (children && children.length != 0) {
@@ -228,7 +231,8 @@ export default class Evolution extends React.Component<Props, State>{
                     width: expandW,
                     height: expandH,
                     ID: topChild.ID,
-                    api: topChild.api
+                    api: topChild.api,
+                    variants: topChild.variants
                 })
             }
 
@@ -279,73 +283,23 @@ export default class Evolution extends React.Component<Props, State>{
     }
     drawNodes(nodes: Node[]) {
         let { selectedNode, topDoi } = this.state,
-            selectedID = selectedNode ? selectedNode.ID : undefined
-        const menu = (
-            <Menu >
-                <Menu.Item key="1">text intro</Menu.Item>
-                <Menu.Item key="2">compare performance</Menu.Item>
-                <Menu.Item key="3">detailed structure</Menu.Item>
-            </Menu>
-        );
+            selectedID = selectedNode ? selectedNode.ID : undefined,
+            apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
         return (<g className="nodes" >
             {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
-                    isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1
-                return <g key={node.label} className="Node"
-                    transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
-                    onClick={() => this.selectNode(node)}
+                    isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
+                    zoomed:boolean = node.width>nodeW
+                    
 
-                >
-
-                    <rect width={node.width} height={node.height}
-                        className="Node"
-                        rx={2}
-                        ry={2}
-                        fill="transparent"
-                        stroke={selected ? "red" : (isTop ? "#7dc1f2" : "gray")}
-                        strokeWidth={selected ? 3 : (isTop ? 3 : 1)}
-                        cursor="pointer"
-                    ></rect>
-
-                    <foreignObject>
-                        <div style={{ height: node.height }}>
-                            <img
-                                className="abstract Node"
-                                src={`../../images/${node.label}.png`}
-                                //    height={node.height}
-                                width={node.width > nodeW ? node.width : 0}
-                            />
-                        </div>
-                    </foreignObject>
-                    {node.height > nodeH ?
-                        <foreignObject>
-                            <Dropdown overlay={menu} className="infoButton">
-                                <Button>{node.label}</Button>
-                            </Dropdown>
-                        </foreignObject> :
-                        <g>
-                            <text textAnchor="middle"
-                                fontSize={0.7 * nodeH}
-                                cursor="pointer"
-                                x={node.width / 2}
-                                y={node.height - 0.1 * nodeH}
-                            >
-                                {
-                                    (node.label.length < labelL) ?
-                                        node.label : (node.label.slice(0, labelL) + '...')
-                                }
-                            </text>
-                            <BoxPlot
-                                width={nodeW} height={boxH}
-                                datum={this.state.nodes.map(d => d.api || 0).sort(d3.ascending)}
-                                key={node.label}
-                                value={node.api || 0}
-                                offset={[0, nodeH + boxH / 2]}
-                            />
-                        </g>
-                    }
-                </g>
+                return <NNNode 
+                   node = {node}
+                   selected={selected} 
+                   isTop={isTop} 
+                   zoomed={zoomed} 
+                   apiArr={apiArr} 
+                   selectNode={this.selectNode}/>
             })}
         </g>)
     }
@@ -376,7 +330,7 @@ export default class Evolution extends React.Component<Props, State>{
             return `${p1.x * n + p2.x * (1 - n)} ${p1.y * n + p2.y * (1 - n)}`
         }
         const getCurve = (points: Point[]) => {
-            let vias = [],len = points.length
+            let vias = [], len = points.length
             const ratio = 0.5
             for (let i = 0; i < len - 2; i++) {
                 let p1, p2, p3, p4, p5;
@@ -407,15 +361,15 @@ export default class Evolution extends React.Component<Props, State>{
             // let pathData = `M ${points[0].x} ${points[0].y} 
             //                 L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
             highlight: boolean = ((from == selectedID) || (to == selectedID)),
-            k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x),
-            textPathData = `M ${points[0].x + textMargin} 
-                              ${points[0].y + textMargin * k} 
-                            L ${points[points.length - 1].x - textMargin} 
-                              ${points[points.length - 1].y - textMargin * k}
-                            M ${points[0].x + textMargin - labelFont * k / Math.sqrt(1 + k * k)} 
-                              ${points[0].y + textMargin * k + labelFont * 1 / Math.sqrt(1 + k * k)} 
-                            L ${points[points.length - 1].x - textMargin - labelFont * k / Math.sqrt(1 + k * k)} 
-                              ${points[points.length - 1].y - textMargin * k + labelFont * 1 / Math.sqrt(1 + k * k)}`
+            k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
+            // textPathData = `M ${points[0].x + textMargin} 
+            //                   ${points[0].y + textMargin * k} 
+            //                 L ${points[points.length - 1].x - textMargin} 
+            //                   ${points[points.length - 1].y - textMargin * k}
+            //                 M ${points[0].x + textMargin - labelFont * k / Math.sqrt(1 + k * k)} 
+            //                   ${points[0].y + textMargin * k + labelFont * 1 / Math.sqrt(1 + k * k)} 
+            //                 L ${points[points.length - 1].x - textMargin - labelFont * k / Math.sqrt(1 + k * k)} 
+            //                   ${points[points.length - 1].y - textMargin * k + labelFont * 1 / Math.sqrt(1 + k * k)}`
         return <g className='link' key={`${i}_${from}->${to}`}>
             <path
                 id={`${from}->${to}`}
@@ -443,9 +397,9 @@ export default class Evolution extends React.Component<Props, State>{
                             ...defaultStyle,
                             ...transitionStyles[status]
                         }}>
-                        <textPath 
-                        xlinkHref={`#label_${from}->${to}`}
-                        startOffset="50%"
+                        <textPath
+                            xlinkHref={`#label_${from}->${to}`}
+                            startOffset="50%"
                         >
                             {label_s}
                         </textPath>
@@ -463,7 +417,7 @@ export default class Evolution extends React.Component<Props, State>{
                             ...transitionStyles[status]
                         }}>
                         <textPath xlinkHref={`#label_${from}->${to}`}
-                        startOffset="50%">
+                            startOffset="50%">
                             {label_s}
                         </textPath>
                     </text>

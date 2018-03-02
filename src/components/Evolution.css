@@ -2,7 +2,7 @@
     height: calc((100vh - var(--header-h))*var(--ratio-up) - var(--div-margin));
     overflow: auto;
 }
-.Node, .Edge {
+.Node, .Edge, .NodeBg {
     /* -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color; */
     -webkit-transition-duration: 1.0s;
     -webkit-transition-timing-function: ease-in-out;
@@ -20,8 +20,16 @@
 
 .infoButton, .ant-btn{
     position: inherit!important;
-    margin: 5px;
+    margin: 2px 0px;
 }
+/* dropdown button */
 .ant-btn > span{
-    font-size: 1.4em;
+    font-size: 1.2em;
+}
+/* variants */
+.variants:before{
+    content: "\2609";
+}
+.variants:first-child{
+    margin-left: 5px;
 }
