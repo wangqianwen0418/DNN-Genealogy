@@ -395,7 +395,6 @@ export default class Evolution extends React.Component<Props, State>{
             vias.push(cPath)
 
         }
-        console.info(vias)
         let pathData = `${start}  ${vias.join(' ')}`,
         //change curve path to straight line
         // let pathData = `M ${points[0].x} ${points[0].y} 
