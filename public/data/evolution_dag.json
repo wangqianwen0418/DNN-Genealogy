@@ -1,1075 +1,995 @@
 [
   {
-    "date": "1998.11.01", 
+    "application": [
+      "1.1.1.general recognition"
+    ],
+    "parents": [],
+    "ID": "leNet",
+    "architecture": [
+      "2.2.1.1.plain",
+      "2.2.2.2.2.sigmoid"
+    ],
+    "url": "http://ieeexplore.ieee.org/abstract/document/726791/",
     "training": [
       "3.2.1.SGD"
-    ], 
-    "parents": [], 
-    "architecture": [
-      "2.2.1.1.plain", 
-      "2.2.2.2.2.sigmoid"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "http://ieeexplore.ieee.org/abstract/document/726791/", 
-    "citation": "10831", 
-    "ID": "leNet", 
+    ],
+    "date": "1998.11.01",
+    "citation": "10831",
     "names": []
-  }, 
+  },
   {
-    "date": "2012.12.03", 
-    "training": [
-      "3.4.1.dropout", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
-    "parents": [
-      {
-        "link_info_l": "", 
-        "ID": "leNet", 
-        "link_info_s": ""
-      }
-    ], 
-    "architecture": [
-      "2.2.1.1.plain", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
     "application": [
       "1.1.1.general recognition"
-    ], 
-    "url": "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks", 
-    "citation": "18438", 
-    "ID": "alexNet", 
-    "names": [
-      {
-        "imagenet val top5": 15.4, 
-        "imageNet val top1": 36.7, 
-        "name": "alexNet", 
-        "cifar10": null, 
-        "params": 60.0, 
-        "cifar100": null, 
-        "SVHN": null
-      }
-    ]
-  }, 
-  {
-    "date": "2014.09.17", 
-    "training": [
-      "3.4.1.dropout", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
+    ],
     "parents": [
       {
-        "link_info_l": "less computation cost", 
-        "ID": "VGG", 
-        "link_info_s": "less computation cost"
+        "link_info_l": "add regularization: dropout, data augmentation; change activication: relu; ",
+        "link_info_s": "based on it",
+        "ID": "leNet"
       }
-    ], 
+    ],
+    "ID": "alexNet",
     "architecture": [
-      "2.2.1.3.multi-branch", 
+      "2.2.1.1.plain",
       "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1409.4842", 
-    "citation": "5591", 
-    "ID": "inception", 
+    ],
+    "url": "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "date": "2012.12.03",
+    "citation": "18438",
     "names": [
       {
-        "imagenet val top5": 6.67, 
-        "imageNet val top1": null, 
-        "name": "inception", 
-        "cifar10": null, 
-        "params": 6.8, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "alexNet",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 15.4,
+        "cifar10": null,
+        "params": 60.0,
+        "imageNet val top1": 36.7
       }
     ]
-  }, 
+  },
   {
-    "date": "2014.09.04", 
-    "training": [
-      "3.4.1.dropout", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
+    "application": [
+      "1.1.1.general recognition"
+    ],
     "parents": [
       {
-        "link_info_l": "deeper;conv7=>2*conv3", 
-        "ID": "alexNet", 
-        "link_info_s": "deeper;conv7=>2*conv3"
+        "link_info_l": "less computation cost",
+        "link_info_s": "improve",
+        "ID": "VGG"
       }
-    ], 
+    ],
+    "ID": "inception",
     "architecture": [
-      "2.2.1.1.plain", 
+      "2.2.1.3.multi-branch",
       "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1409.1556", 
-    "citation": "8205", 
-    "ID": "VGG", 
+    ],
+    "url": "https://arxiv.org/abs/1409.4842",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "date": "2014.09.17",
+    "citation": "5591",
     "names": [
       {
-        "imagenet val top5": 7.3, 
-        "imageNet val top1": 25.5, 
-        "name": "vgg19", 
-        "cifar10": null, 
-        "params": 144.0, 
-        "cifar100": null, 
-        "SVHN": null
-      }, 
-      {
-        "imagenet val top5": 8.1, 
-        "imageNet val top1": 25.6, 
-        "name": "vgg16", 
-        "cifar10": null, 
-        "params": 138.0, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "inception",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 6.67,
+        "cifar10": null,
+        "params": 6.8,
+        "imageNet val top1": null
       }
     ]
-  }, 
+  },
   {
-    "date": "2015.12.02", 
-    "training": [
-      "3.4.6.LSR", 
-      "3.4.1.dropout", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay"
-    ], 
+    "application": [
+      "1.1.1.general recognition"
+    ],
     "parents": [
       {
-        "link_info_l": "easy to scale up", 
-        "ID": "inception", 
-        "link_info_s": "easy to scale up"
+        "link_info_l": "increasing depth using an architecture with very small (3x3) convolution filters",
+        "link_info_s": "deeper",
+        "ID": "alexNet"
       }
-    ], 
+    ],
+    "ID": "VGG",
     "architecture": [
-      "2.2.1.3.multi-branch", 
+      "2.2.1.1.plain",
       "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1512.00567", 
-    "citation": "794", 
-    "ID": "inception_rethink", 
+    ],
+    "url": "https://arxiv.org/abs/1409.1556",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "date": "2014.09.04",
+    "citation": "8205",
     "names": [
       {
-        "imagenet val top5": 4.2, 
-        "imageNet val top1": 18.77, 
-        "name": "inception_v3", 
-        "cifar10": null, 
-        "params": 23.8, 
-        "cifar100": null, 
-        "SVHN": null
-      }, 
+        "name": "vgg19",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 7.3,
+        "cifar10": null,
+        "params": 144.0,
+        "imageNet val top1": 25.5
+      },
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "inception_v2", 
-        "cifar10": null, 
-        "params": 0.0, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "vgg16",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 8.1,
+        "cifar10": null,
+        "params": 138.0,
+        "imageNet val top1": 25.6
       }
     ]
-  }, 
+  },
   {
-    "date": "2015.11.03", 
-    "training": [], 
+    "application": [
+      "1.1.1.general recognition"
+    ],
     "parents": [
       {
-        "link_info_l": "inspired by its gate mechanism", 
-        "ID": "LSTM", 
-        "link_info_s": "inspired by its gate mechanism"
-      }, 
+        "link_info_l": "inspired by its gate mechanism",
+        "link_info_s": "inspired by it",
+        "ID": "LSTM"
+      },
       {
-        "link_info_l": "enables to train extremely deep models directly from scratch", 
-        "ID": "VGG", 
-        "link_info_s": "enables to train extremely deep models directly from scratch"
+        "link_info_l": "introduce gated skip connections to train extremely deep models directly from scratch",
+        "link_info_s": "deeper",
+        "ID": "VGG"
       }
-    ], 
+    ],
+    "ID": "highwayNets",
     "architecture": [
-      "2.2.1.2.residual", 
+      "2.2.1.2.residual",
       "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/pdf/1505.00387.pdf", 
-    "citation": "320", 
-    "ID": "highwayNets", 
+    ],
+    "url": "https://arxiv.org/pdf/1505.00387.pdf",
+    "training": [],
+    "date": "2015.11.03",
+    "citation": "320",
     "names": [
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "highwayNets", 
-        "cifar10": 7.76, 
-        "params": 2.3, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "highwayNets",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": null,
+        "cifar10": 7.76,
+        "params": 2.3,
+        "imageNet val top1": null
       }
     ]
-  }, 
+  },
   {
-    "date": "2015.12.10", 
+    "application": [
+      "1.1.1.general recognition"
+    ],
+    "parents": [
+      {
+        "link_info_l": "introduce residual connections",
+        "link_info_s": "introduce residual connections",
+        "ID": "VGG"
+      },
+      {
+        "link_info_l": "remove gate",
+        "link_info_s": "remove gate",
+        "ID": "highwayNets"
+      }
+    ],
+    "ID": "resNet",
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "url": "https://arxiv.org/abs/1512.03385",
     "training": [
-      "3.4.4.batch normalization", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay", 
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
       "3.1.7.he_normal"
-    ], 
-    "parents": [
-      {
-        "link_info_l": "add residual connections", 
-        "ID": "VGG", 
-        "link_info_s": "add residual connections"
-      }, 
-      {
-        "link_info_l": "remove gate", 
-        "ID": "highwayNets", 
-        "link_info_s": "remove gate"
-      }
-    ], 
-    "architecture": [
-      "2.2.1.2.residual", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1512.03385", 
-    "citation": "5464", 
-    "ID": "resNet", 
+    ],
+    "date": "2015.12.10",
+    "citation": "5464",
     "names": [
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "resNet_v1_56_cifar", 
-        "cifar10": 6.97, 
-        "params": 0.86, 
-        "cifar100": 25.16, 
-        "SVHN": null
-      }, 
+        "name": "resNet_v1_56_cifar",
+        "SVHN": null,
+        "cifar100": 25.16,
+        "imagenet val top5": null,
+        "cifar10": 6.97,
+        "params": 0.86,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "resNet_v1_110_cifar", 
-        "cifar10": 6.43, 
-        "params": 1.7, 
-        "cifar100": 25.16, 
-        "SVHN": null
-      }, 
+        "name": "resNet_v1_110_cifar",
+        "SVHN": null,
+        "cifar100": 25.16,
+        "imagenet val top5": null,
+        "cifar10": 6.43,
+        "params": 1.7,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": 7.1, 
-        "imageNet val top1": 24.1, 
-        "name": "resNet_v1_50", 
-        "cifar10": null, 
-        "params": 25.6, 
-        "cifar100": null, 
-        "SVHN": null
-      }, 
+        "name": "resNet_v1_50",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 7.1,
+        "cifar10": null,
+        "params": 25.6,
+        "imageNet val top1": 24.1
+      },
       {
-        "imagenet val top5": 5.71, 
-        "imageNet val top1": 21.43, 
-        "name": "resNet_v1_152", 
-        "cifar10": null, 
-        "params": 60.4, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "resNet_v1_152",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 5.71,
+        "cifar10": null,
+        "params": 60.4,
+        "imageNet val top1": 21.43
       }
     ]
-  }, 
+  },
   {
-    "date": "2016.02.23", 
+    "application": [
+      "1.1.1.general recognition"
+    ],
+    "parents": [
+      {
+        "link_info_l": "combine resnet with inception",
+        "link_info_s": "combine resnet with inception",
+        "ID": "inception"
+      },
+      {
+        "link_info_l": "combine resnet with inception",
+        "link_info_s": "combine resnet with inception",
+        "ID": "resNet"
+      }
+    ],
+    "ID": "inception_resNet",
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.1.3.multi-branch",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "url": "https://arxiv.org/abs/1602.07261",
     "training": [
-      "3.2.3.RMSprop", 
-      "scaling of the residuals", 
-      "3.4.1.dropout", 
-      "3.2.1.SGD with momentum", 
+      "3.2.3.RMSprop",
+      "scaling of the residuals",
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
       "3.4.2.weight decay"
-    ], 
-    "parents": [
-      {
-        "link_info_l": "combine resnet with inception", 
-        "ID": "inception_rethink", 
-        "link_info_s": "combine resnet with inception"
-      }, 
-      {
-        "link_info_l": "combine resnet with inception", 
-        "ID": "resNet", 
-        "link_info_s": "combine resnet with inception"
-      }
-    ], 
-    "architecture": [
-      "2.2.1.2.residual", 
-      "2.2.1.3.multi-branch", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1602.07261", 
-    "citation": "480", 
-    "ID": "inception_resNet", 
+    ],
+    "date": "2016.02.23",
+    "citation": "480",
     "names": [
       {
-        "imagenet val top5": 3.7, 
-        "imageNet val top1": 17.8, 
-        "name": "inception_resNet", 
-        "cifar10": null, 
-        "params": 55.8, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "inception_resNet",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 3.7,
+        "cifar10": null,
+        "params": 55.8,
+        "imageNet val top1": 17.8
       }
     ]
-  }, 
+  },
   {
-    "date": "2016.05.23", 
-    "training": [
-      "3.4.4.batch normalization", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay", 
-      "3.4.1.dropout"
-    ], 
-    "parents": [
-      {
-        "link_info_l": "wider instead of deeper", 
-        "ID": "resNet", 
-        "link_info_s": "wider instead of deeper for computation efficiency"
-      }
-    ], 
-    "architecture": [
-      "2.2.1.2.residual", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
     "application": [
       "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1605.07146", 
-    "citation": "285", 
-    "ID": "WRN", 
-    "names": [
-      {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "wideResNet_16_4", 
-        "cifar10": 5.24, 
-        "params": 2.9, 
-        "cifar100": 23.91, 
-        "SVHN": 1.64
-      }, 
-      {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "wideResNet_28_10", 
-        "cifar10": 3.89, 
-        "params": 36.0, 
-        "cifar100": 18.85, 
-        "SVHN": 1.64
-      }, 
-      {
-        "imagenet val top5": 5.79, 
-        "imageNet val top1": 21.9, 
-        "name": "wideResNet-50-2", 
-        "cifar10": null, 
-        "params": 0.0, 
-        "cifar100": null, 
-        "SVHN": null
-      }
-    ]
-  }, 
-  {
-    "date": "2016.05.25", 
-    "training": [
-      "3.4.4.batch normalization", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay", 
-      "3.4.1.dropout"
-    ], 
+    ],
     "parents": [
       {
-        "link_info_l": "generalizes ResNets and standard CNNs", 
-        "ID": "resNet", 
-        "link_info_s": "generalizes ResNets and standard CNNs"
+        "link_info_l": "add a new dimension called \"cardinality\"",
+        "link_info_s": "based on it",
+        "ID": "resNet"
+      },
+      {
+        "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
+        "link_info_s": "based on it",
+        "ID": "inception"
       }
-    ], 
+    ],
+    "ID": "resNeXt",
     "architecture": [
-      "2.2.1.2.residual", 
+      "2.2.1.2.residual",
+      "2.2.1.3.multi-branch",
       "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1603.08029", 
-    "citation": "37", 
-    "ID": "RIR", 
-    "names": [
-      {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "resNet-in-resent", 
-        "cifar10": 5.01, 
-        "params": 0.0, 
-        "cifar100": 22.9, 
-        "SVHN": null
-      }
-    ]
-  }, 
-  {
-    "date": "2016.05.24", 
+    ],
+    "url": "https://arxiv.org/abs/1611.05431",
     "training": [
-      "3.4.3.drop path", 
-      "3.4.4.batch normalization", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay", 
-      "3.4.1.dropout"
-    ], 
-    "parents": [
-      {
-        "link_info_l": "shows that explicit residual learning is not a requirement for building ultra-deep neural networks", 
-        "ID": "resNet", 
-        "link_info_s": "shows that explicit residual learning is not a requirement for building ultra-deep neural networks"
-      }
-    ], 
-    "architecture": [
-      "2.2.1.3.multi-branch", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1605.07648", 
-    "citation": "71", 
-    "ID": "fractalNet", 
-    "names": [
-      {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "fractalNet-40", 
-        "cifar10": 5.24, 
-        "params": 22.9, 
-        "cifar100": 22.49, 
-        "SVHN": null
-      }, 
-      {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "fractalNet-20", 
-        "cifar10": 5.22, 
-        "params": 38.6, 
-        "cifar100": 23.3, 
-        "SVHN": null
-      }
-    ]
-  }, 
-  {
-    "date": "2016.11.16", 
-    "training": [
-      "3.4.7.pre-activation", 
-      "3.4.4.batch normalization", 
-      "3.2.1.SGD with momentum", 
+      "3.4.7.pre-activation",
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
       "3.4.2.weight decay"
-    ], 
-    "parents": [
-      {
-        "link_info_l": "add a new dimension called \"\u201ccardinality\"", 
-        "ID": "resNet", 
-        "link_info_s": "add a new dimension called \"\u201ccardinality\""
-      }, 
-      {
-        "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way", 
-        "ID": "inception", 
-        "link_info_s": "exploiting the split-transform-merge strategy in an easy, extensible way"
-      }
-    ], 
-    "architecture": [
-      "2.2.1.2.residual", 
-      "2.2.1.3.multi-branch", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1611.05431", 
-    "citation": "134", 
-    "ID": "resNeXt", 
+    ],
+    "date": "2016.11.16",
+    "citation": "134",
     "names": [
       {
-        "imagenet val top5": 5.3, 
-        "imageNet val top1": 20.4, 
-        "name": "ResNeXt", 
-        "cifar10": 3.58, 
-        "params": 25.0, 
-        "cifar100": 17.31, 
-        "SVHN": null
+        "name": "ResNeXt",
+        "SVHN": null,
+        "cifar100": 17.31,
+        "imagenet val top5": 5.3,
+        "cifar10": 3.58,
+        "params": 25.0,
+        "imageNet val top1": 20.4
       }
     ]
-  }, 
+  },
   {
-    "date": "2016.08.25", 
+    "application": [
+      "1.1.1.general recognition"
+    ],
+    "parents": [
+      {
+        "link_info_l": "dense residual connection; change add to concate",
+        "link_info_s": "based on it",
+        "ID": "resNet"
+      }
+    ],
+    "ID": "denseNet",
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.2.2.1.1.standard relu"
+    ],
+    "url": "https://arxiv.org/abs/1608.06993",
     "training": [
-      "3.4.1.dropout", 
-      "3.2.1.SGD with nesterov momentum", 
-      "3.4.2.weight decay", 
+      "3.4.1.dropout",
+      "3.2.1.SGD with nesterov momentum",
+      "3.4.2.weight decay",
       "3.1.7.he_normal"
-    ], 
-    "parents": [
-      {
-        "link_info_l": "dense residual connection; change add to concate", 
-        "ID": "resNet", 
-        "link_info_s": "dense residual connection; change add to concate"
-      }
-    ], 
-    "architecture": [
-      "2.2.1.2.residual", 
-      "2.2.2.2.1.1.standard relu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1608.06993", 
-    "citation": "378", 
-    "ID": "denseNet", 
+    ],
+    "date": "2016.08.25",
+    "citation": "378",
     "names": [
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "denseNet_40_12", 
-        "cifar10": 5.24, 
-        "params": 1.0, 
-        "cifar100": 24.42, 
-        "SVHN": 1.79
-      }, 
+        "name": "denseNet_40_12",
+        "SVHN": 1.79,
+        "cifar100": 24.42,
+        "imagenet val top5": null,
+        "cifar10": 5.24,
+        "params": 1.0,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "denseNet_100_12", 
-        "cifar10": 4.1, 
-        "params": 7.2, 
-        "cifar100": 20.2, 
-        "SVHN": 1.67
-      }, 
+        "name": "denseNet_100_12",
+        "SVHN": 1.67,
+        "cifar100": 20.2,
+        "imagenet val top5": null,
+        "cifar10": 4.1,
+        "params": 7.2,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "denseNet_100_24", 
-        "cifar10": 3.74, 
-        "params": 27.2, 
-        "cifar100": 19.25, 
-        "SVHN": 1.59
-      }, 
+        "name": "denseNet_100_24",
+        "SVHN": 1.59,
+        "cifar100": 19.25,
+        "imagenet val top5": null,
+        "cifar10": 3.74,
+        "params": 27.2,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "denseNet-BC(l=100, k=12)", 
-        "cifar10": 4.51, 
-        "params": 0.8, 
-        "cifar100": 22.27, 
-        "SVHN": 1.76
-      }, 
+        "name": "denseNet-BC(l=100, k=12)",
+        "SVHN": 1.76,
+        "cifar100": 22.27,
+        "imagenet val top5": null,
+        "cifar10": 4.51,
+        "params": 0.8,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "denseNet-BC(l=250, k=24)", 
-        "cifar10": 3.62, 
-        "params": 15.3, 
-        "cifar100": 17.6, 
-        "SVHN": 1.74
-      }, 
+        "name": "denseNet-BC(l=250, k=24)",
+        "SVHN": 1.74,
+        "cifar100": 17.6,
+        "imagenet val top5": null,
+        "cifar10": 3.62,
+        "params": 15.3,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "denseNet-BC(l=190, k=40)", 
-        "cifar10": 3.46, 
-        "params": 25.6, 
-        "cifar100": 17.18, 
-        "SVHN": null
-      }, 
+        "name": "denseNet-BC(l=190, k=40)",
+        "SVHN": null,
+        "cifar100": 17.18,
+        "imagenet val top5": null,
+        "cifar10": 3.46,
+        "params": 25.6,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": 7.71, 
-        "imageNet val top1": 25.02, 
-        "name": "denseNet_121", 
-        "cifar10": null, 
-        "params": 8.1, 
-        "cifar100": null, 
-        "SVHN": null
-      }, 
+        "name": "denseNet_121",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 7.71,
+        "cifar10": null,
+        "params": 8.1,
+        "imageNet val top1": 25.02
+      },
       {
-        "imagenet val top5": 6.34, 
-        "imageNet val top1": 22.58, 
-        "name": "denseNet_201", 
-        "cifar10": null, 
-        "params": 20.2, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "denseNet_201",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 6.34,
+        "cifar10": null,
+        "params": 20.2,
+        "imageNet val top1": 22.58
       }
     ]
-  }, 
+  },
   {
-    "date": "2016.02.24", 
-    "training": [
-      "3.4.1.dropout", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay"
-    ], 
+    "application": [
+      "1.1.1.general recognition"
+    ],
     "parents": [
       {
-        "link_info_l": "same performance with 50x less parameters", 
-        "ID": "alexNet", 
-        "link_info_s": ""
-      }, 
+        "link_info_l": "same performance with 50x less parameters",
+        "link_info_s": "comparing",
+        "ID": "alexNet"
+      },
       {
-        "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way", 
-        "ID": "inception", 
-        "link_info_s": ""
+        "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
+        "link_info_s": "inspired by it",
+        "ID": "inception"
       }
-    ], 
+    ],
+    "ID": "squeezeNet",
     "architecture": [
-      "2.2.1.3.multi-branch", 
-      "2.2.2.2.1.1.standard relu", 
+      "2.2.1.3.multi-branch",
+      "2.2.2.2.1.1.standard relu",
       "2.2.1.2.residual"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1602.07360", 
-    "citation": "264", 
-    "ID": "squeezeNet", 
+    ],
+    "url": "https://arxiv.org/abs/1602.07360",
+    "training": [
+      "3.4.1.dropout",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay"
+    ],
+    "date": "2016.02.24",
+    "citation": "264",
     "names": [
       {
-        "imagenet val top5": 17.5, 
-        "imageNet val top1": 39.6, 
-        "name": "squeezeNet", 
-        "cifar10": null, 
-        "params": 1.24, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "squeezeNet",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 17.5,
+        "cifar10": null,
+        "params": 1.24,
+        "imageNet val top1": 39.6
       }
     ]
-  }, 
+  },
   {
-    "date": "2017.06.07", 
-    "training": [
-      "3.1.11.dirac", 
-      "3.4.4.batch normalization", 
-      "3.2.1.SGD with momentum", 
-      "3.4.2.weight decay", 
-      "3.4.1.dropout"
-    ], 
+    "application": [
+      "1.1.1.general recognition"
+    ],
     "parents": [
       {
-        "link_info_l": "train a deep network without residual connections", 
-        "ID": "resNet", 
-        "link_info_s": ""
+        "link_info_l": "train a very deep network from scratch without residual connections",
+        "link_info_s": "comparing",
+        "ID": "resNet"
       }
-    ], 
+    ],
+    "ID": "diracNet",
     "architecture": [
-      "2.2.1.1.plain", 
+      "2.2.1.1.plain",
       "2.2.2.2.1.4.CRelu"
-    ], 
-    "application": [
-      "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1706.00388", 
-    "citation": "4", 
-    "ID": "diracNet", 
+    ],
+    "url": "https://arxiv.org/abs/1706.00388",
+    "training": [
+      "3.1.11.dirac",
+      "3.4.4.batch normalization",
+      "3.2.1.SGD with momentum",
+      "3.4.2.weight decay",
+      "3.4.1.dropout"
+    ],
+    "date": "2017.06.07",
+    "citation": "4",
     "names": [
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "diracNet-28-5", 
-        "cifar10": 3.16, 
-        "params": 9.1, 
-        "cifar100": 23.44, 
-        "SVHN": null
-      }, 
+        "name": "diracNet-28-5",
+        "SVHN": null,
+        "cifar100": 23.44,
+        "imagenet val top5": null,
+        "cifar10": 3.16,
+        "params": 9.1,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "diracNet-28-10", 
-        "cifar10": 4.75, 
-        "params": 36.5, 
-        "cifar100": 21.54, 
-        "SVHN": null
-      }, 
+        "name": "diracNet-28-10",
+        "SVHN": null,
+        "cifar100": 21.54,
+        "imagenet val top5": null,
+        "cifar10": 4.75,
+        "params": 36.5,
+        "imageNet val top1": null
+      },
       {
-        "imagenet val top5": 10.88, 
-        "imageNet val top1": 30.37, 
-        "name": "diracNet-18", 
-        "cifar10": null, 
-        "params": 11.7, 
-        "cifar100": null, 
-        "SVHN": null
-      }, 
+        "name": "diracNet-18",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 10.88,
+        "cifar10": null,
+        "params": 11.7,
+        "imageNet val top1": 30.37
+      },
       {
-        "imagenet val top5": 9.34, 
-        "imageNet val top1": 27.79, 
-        "name": "diracNet-34", 
-        "cifar10": null, 
-        "params": 21.8, 
-        "cifar100": null, 
-        "SVHN": null
+        "name": "diracNet-34",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 9.34,
+        "cifar10": null,
+        "params": 21.8,
+        "imageNet val top1": 27.79
       }
     ]
-  }, 
+  },
   {
-    "date": "2017.12.01", 
+    "application": [
+      "1.1.1.general recognition"
+    ],
+    "parents": [
+      {
+        "link_info_l": "offer guides for the predeterimined architectures",
+        "link_info_s": "based on it",
+        "ID": "resNet"
+      },
+      {
+        "link_info_l": "offer guides for the predeterimined architectures",
+        "link_info_s": "based on it",
+        "ID": "inception"
+      }
+    ],
+    "ID": "nasNet",
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.1.3.multi-branch"
+    ],
+    "url": "https://arxiv.org/abs/1707.07012",
     "training": [
       "neural architecture search by reinforcement learning"
-    ], 
-    "parents": [
+    ],
+    "date": "2017.12.01",
+    "citation": "35",
+    "names": [
       {
-        "link_info_l": "offer guides for the predeterimined structures", 
-        "ID": "resNet", 
-        "link_info_s": ""
-      }, 
+        "name": "nasNet_cifar",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": null,
+        "cifar10": 2.65,
+        "params": 3.3,
+        "imageNet val top1": null
+      },
       {
-        "link_info_l": "", 
-        "ID": "inception", 
-        "link_info_s": ""
+        "name": "nasNet_small",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 3.8,
+        "cifar10": null,
+        "params": 11.1,
+        "imageNet val top1": 17.3
+      },
+      {
+        "name": "nasNet_large",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 8.4,
+        "cifar10": null,
+        "params": 5.3,
+        "imageNet val top1": 26.0
       }
-    ], 
-    "architecture": [
-      "2.2.1.2.residual", 
-      "2.2.1.3.multi-branch"
-    ], 
+    ]
+  },
+  {
     "application": [
       "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1707.07012", 
-    "citation": "17", 
-    "ID": "nasNet", 
-    "names": [
-      {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "nasNet_cifar", 
-        "cifar10": 2.65, 
-        "params": 3.3, 
-        "cifar100": null, 
-        "SVHN": null
-      }, 
-      {
-        "imagenet val top5": 3.8, 
-        "imageNet val top1": 17.3, 
-        "name": "nasNet_small", 
-        "cifar10": null, 
-        "params": 88.9, 
-        "cifar100": null, 
-        "SVHN": null
-      }, 
-      {
-        "imagenet val top5": 8.4, 
-        "imageNet val top1": 26.0, 
-        "name": "nasNet_large", 
-        "cifar10": null, 
-        "params": 5.3, 
-        "cifar100": null, 
-        "SVHN": null
-      }
-    ]
-  }, 
-  {
-    "date": "2018.02.06", 
-    "training": [], 
+    ],
     "parents": [
       {
-        "link_info_l": "", 
-        "ID": "resNet", 
-        "link_info_s": ""
-      }, 
+        "link_info_l": "use identify mapping",
+        "link_info_s": "",
+        "ID": "resNet"
+      },
       {
-        "link_info_l": "", 
-        "ID": "denseNet", 
-        "link_info_s": ""
+        "link_info_l": "manipulation on channels",
+        "link_info_s": "",
+        "ID": "mobileNet"
       }
-    ], 
-    "architecture": [
-      "2.2.1.2.residual", 
-      "2.2.1.3.multi-branch"
-    ], 
+    ],
+    "ID": "SENet",
+    "architecture": [],
+    "url": "https://arxiv.org/abs/1709.01507",
+    "training": [],
+    "date": "2017.09.05",
+    "citation": "48",
+    "names": [
+      {
+        "name": "seNet_inception_resnetv2",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": 4.79,
+        "cifar10": null,
+        "params": 65.6,
+        "imageNet val top1": 19.8
+      },
+      {
+        "name": "seNet_inception_resnetv2",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": null,
+        "cifar10": null,
+        "params": 50.0,
+        "imageNet val top1": null
+      }
+    ]
+  },
+  {
     "application": [
       "1.1.1.general recognition"
-    ], 
-    "url": "https://arxiv.org/abs/1802.01808", 
-    "citation": "0", 
-    "ID": "mixNet", 
-    "names": [
-      {
-        "imagenet val top5": null, 
-        "imageNet val top1": null, 
-        "name": "mixNet", 
-        "cifar10": null, 
-        "params": 0.0, 
-        "cifar100": null, 
-        "SVHN": null
-      }
-    ]
-  }, 
-  {
-    "date": "1986.12.01", 
-    "training": [], 
-    "parents": [], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "https://www.nature.com/articles/323533a0", 
-    "citation": "13951", 
-    "ID": "RNN", 
-    "names": [
-      {
-        "params": 0.0, 
-        "name": "recurrent neural network"
-      }
-    ]
-  }, 
-  {
-    "date": "1997.12.15", 
-    "training": [], 
+    ],
     "parents": [
       {
-        "link_info_l": "also learn how to forget previous input", 
-        "ID": "MTRNN", 
-        "link_info_s": "also learn how to forget previous input"
+        "link_info_l": "densely conected,  mix the connections in ResNet and DenseNet",
+        "link_info_s": "based on it",
+        "ID": "resNet"
+      },
+      {
+        "link_info_l": " mix the connections in ResNet and DenseNet",
+        "link_info_s": "based on it",
+        "ID": "denseNet"
       }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735", 
-    "citation": "8136", 
-    "ID": "LSTM", 
+    ],
+    "ID": "mixNet",
+    "architecture": [
+      "2.2.1.2.residual",
+      "2.2.1.3.multi-branch"
+    ],
+    "url": "https://arxiv.org/abs/1802.01808",
+    "training": [],
+    "date": "2018.02.06",
+    "citation": "0",
     "names": [
       {
-        "params": 0.0, 
-        "name": "long short term memory"
+        "name": "mixNet",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": null,
+        "cifar10": null,
+        "params": 0.0,
+        "imageNet val top1": null
       }
     ]
-  }, 
+  },
   {
-    "date": "2014.06.03", 
-    "training": [], 
+    "application": [
+      "1.1.1.general recognition"
+    ],
     "parents": [
       {
-        "link_info_l": "input, forget, output gates=>reset, update gates", 
-        "ID": "LSTM", 
-        "link_info_s": "input, forget, output gates=>reset, update gates"
+        "link_info_l": "the inception modules are replaced with depthwise separable convolutions, leading to a more efficient use of model parameters",
+        "link_info_s": "based on it",
+        "ID": "inception"
       }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "https://arxiv.org/abs/1406.1078", 
-    "citation": "2069", 
-    "ID": "GRU", 
-    "names": [
-      {
-        "params": 0.0, 
-        "name": "gated recurrent unit"
-      }
-    ]
-  }, 
-  {
-    "date": "1997.12.01", 
-    "training": [], 
-    "parents": [
-      {
-        "link_info_l": "future information cannot be reached from current state => get information from both past and future", 
-        "ID": "RNN", 
-        "link_info_s": "future information cannot be reached from current state => get information from both past and future"
-      }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "http://ieeexplore.ieee.org/abstract/document/650093/", 
-    "citation": "984", 
-    "ID": "BRNN", 
-    "names": [
-      {
-        "params": 0.0, 
-        "name": "bidirectional recurrent neural network"
-      }
-    ]
-  }, 
-  {
-    "date": "2013.08.04", 
-    "training": [], 
-    "parents": [
-      {
-        "link_info_l": "increase deepth to improve performance", 
-        "ID": "RNN", 
-        "link_info_s": "increase deepth to improve performance"
-      }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "https://arxiv.org/abs/1308.0850", 
-    "citation": "972", 
-    "ID": "stacked RNN", 
+    ],
+    "ID": "xception",
+    "architecture": [],
+    "url": "https://arxiv.org/abs/1610.02357",
+    "training": [],
+    "date": "2016.10.07",
+    "citation": "114",
     "names": []
-  }, 
+  },
   {
-    "date": "2014.09.01", 
-    "training": [], 
+    "application": [
+      "1.1.1.general recognition"
+    ],
     "parents": [
       {
-        "link_info_l": "attention mechanism to search relevant parts in the context", 
-        "ID": "seq2seq", 
-        "link_info_s": "attention mechanism to search relevant parts in the context"
+        "link_info_l": "better performance with less parameters",
+        "link_info_s": "comparing",
+        "ID": "squeezeNet"
       }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "https://arxiv.org/abs/1409.0473", 
-    "citation": "2081", 
-    "ID": "attention RNN", 
-    "names": []
-  }, 
-  {
-    "date": "1990.11.01", 
-    "training": [], 
-    "parents": [
-      {
-        "link_info_l": "generalize RNN from chain-like structure to tree-like structure", 
-        "ID": "RNN", 
-        "link_info_s": "generalize RNN from chain-like structure to tree-like structure"
-      }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "https://www.sciencedirect.com/science/article/pii/000437029090005K", 
-    "citation": "1050", 
-    "ID": "recursive", 
+    ],
+    "ID": "mobileNet",
+    "architecture": [],
+    "url": "https://arxiv.org/abs/1704.04861",
+    "training": [],
+    "date": "2017.04.17",
+    "citation": "149",
     "names": [
       {
-        "params": 0.0, 
-        "name": "recursive neural network"
+        "name": "mobileNet-224",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": null,
+        "cifar10": null,
+        "params": 4.2,
+        "imageNet val top1": 29.4
+      },
+      {
+        "name": "mobileNet-160",
+        "SVHN": null,
+        "cifar100": null,
+        "imagenet val top5": null,
+        "cifar10": null,
+        "params": 1.32,
+        "imageNet val top1": 39.8
       }
     ]
-  }, 
+  },
   {
-    "date": "", 
-    "training": [], 
-    "parents": [
-      {
-        "link_info_l": "build both \ufb01ne and coarse time scales", 
-        "ID": "RNN", 
-        "link_info_s": "build both \ufb01ne and coarse time scales"
-      }
-    ], 
-    "architecture": [], 
     "application": [
       "1.2.NLP"
-    ], 
-    "url": "", 
-    "citation": "", 
-    "ID": "MTRNN", 
+    ],
+    "parents": [],
+    "ID": "vanilla RNN",
+    "architecture": [],
+    "url": "https://www.nature.com/articles/323533a0",
+    "training": [],
+    "date": "1986.12.01",
+    "citation": "13951",
     "names": [
       {
-        "params": 0.0, 
-        "name": "multi time scale recurrent neural network"
+        "name": "recurrent neural network",
+        "params": 0.0
       }
     ]
-  }, 
+  },
   {
-    "date": "2014.09.10", 
-    "training": [], 
-    "parents": [
-      {
-        "link_info_l": "introduce a RNN to map squence to sequence", 
-        "ID": "RNN", 
-        "link_info_s": "introduce a RNN to map squence to sequence"
-      }
-    ], 
-    "architecture": [], 
     "application": [
       "1.2.NLP"
-    ], 
-    "url": "https://arxiv.org/abs/1409.3215", 
-    "citation": "2829", 
-    "ID": "seq2seq", 
-    "names": []
-  }, 
-  {
-    "date": "2017.05.08", 
-    "training": [], 
+    ],
     "parents": [
       {
-        "link_info_l": "introduce a CNN to map sequence to sequence", 
-        "ID": "seq2seq", 
-        "link_info_s": "introduce a CNN to map sequence to sequence"
+        "link_info_l": "Besides accumulating previous info, as MTRNN can also do, gated RNNs allow the neural network to forget the old states.",
+        "link_info_s": "gated units",
+        "ID": "MTRNN"
       }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "https://arxiv.org/abs/1705.03122", 
-    "citation": "73", 
-    "ID": "conv seq2seq", 
-    "names": []
-  }, 
-  {
-    "date": "2013.12.20", 
-    "training": [], 
-    "parents": [
-      {
-        "link_info_l": "decomposing the state of an RNN into multiple layers", 
-        "ID": "stacked RNN", 
-        "link_info_s": "decomposing the state of an RNN into multiple layers"
-      }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "https://arxiv.org/abs/1312.6026", 
-    "citation": "269", 
-    "ID": "MLP_RNN", 
-    "names": []
-  }, 
-  {
-    "date": "2004.04.02", 
-    "training": [], 
-    "parents": [
-      {
-        "link_info_l": "reservior computing to set the recurrent weights and only learn the output weights", 
-        "ID": "RNN", 
-        "link_info_s": "reservior computing to set the recurrent weights and only learn the output weights"
-      }
-    ], 
-    "architecture": [], 
-    "application": [
-      "1.2.NLP"
-    ], 
-    "url": "http://science.sciencemag.org/content/304/5667/78", 
-    "citation": "1517", 
-    "ID": "ESN", 
+    ],
+    "ID": "LSTM",
+    "architecture": [],
+    "url": "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735",
+    "training": [],
+    "date": "1997.12.15",
+    "citation": "8136",
     "names": [
       {
-        "params": 0.0, 
-        "name": "echo state network"
+        "name": "long short term memory",
+        "params": 0.0
+      }
+    ]
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "To improve computation effiency, the gates of a recureent uit is redesigned in GRU. input, forget, output gates=>reset, update gates",
+        "link_info_s": "redesign gates",
+        "ID": "LSTM"
+      }
+    ],
+    "ID": "GRU",
+    "architecture": [],
+    "url": "https://arxiv.org/abs/1406.1078",
+    "training": [],
+    "date": "2014.06.03",
+    "citation": "2069",
+    "names": [
+      {
+        "name": "gated recurrent unit",
+        "params": 0.0
+      }
+    ]
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "Bidirectional inputs enable the current state to get information from both past and future input.",
+        "link_info_s": "bidirectional inputs",
+        "ID": "vanilla RNN"
+      }
+    ],
+    "ID": "BRNN",
+    "architecture": [],
+    "url": "http://ieeexplore.ieee.org/abstract/document/650093/",
+    "training": [],
+    "date": "1997.12.01",
+    "citation": "984",
+    "names": [
+      {
+        "name": "bidirectional recurrent neural network",
+        "params": 0.0
+      }
+    ]
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "Increase deepth to improve  the representational capacity",
+        "link_info_s": "deeper",
+        "ID": "vanilla RNN"
+      }
+    ],
+    "ID": "stacked RNN",
+    "architecture": [],
+    "url": "http://ieeexplore.ieee.org/document/6795261/",
+    "training": [],
+    "date": "1992.03.01",
+    "citation": "263",
+    "names": []
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "Attention mechanism allows  to search relevant parts in the context at each step of the output generation.",
+        "link_info_s": "add attention",
+        "ID": "seq2seq"
+      }
+    ],
+    "ID": "attention RNN",
+    "architecture": [],
+    "url": "https://arxiv.org/abs/1409.0473",
+    "training": [],
+    "date": "2014.09.01",
+    "citation": "2081",
+    "names": []
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "Generalize RNN from chain-like structure to tree-like structure",
+        "link_info_s": "generalize to a tree",
+        "ID": "vanilla RNN"
+      }
+    ],
+    "ID": "recursive",
+    "architecture": [],
+    "url": "https://www.sciencedirect.com/science/article/pii/000437029090005K",
+    "training": [],
+    "date": "1990.11.01",
+    "citation": "1050",
+    "names": [
+      {
+        "name": "recursive neural network",
+        "params": 0.0
+      }
+    ]
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "To solve the challenge of long-dependencies, build both \ufb01ne and coarse time scales ",
+        "link_info_s": "multi-time scales",
+        "ID": "vanilla RNN"
+      }
+    ],
+    "ID": "MTRNN",
+    "architecture": [],
+    "url": "http://papers.nips.cc/paper/522-induction-of-multiscale-temporal-structure.pdf",
+    "training": [],
+    "date": "1992.01.01",
+    "citation": "135",
+    "names": [
+      {
+        "name": "multi time scale recurrent neural network",
+        "params": 0.0
+      }
+    ]
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "introduce a RNN architecture to map squence to sequence",
+        "link_info_s": "sequence to sequence",
+        "ID": "vanilla RNN"
+      }
+    ],
+    "ID": "seq2seq",
+    "architecture": [],
+    "url": "https://arxiv.org/abs/1409.3215",
+    "training": [],
+    "date": "2014.09.10",
+    "citation": "2829",
+    "names": [
+      {
+        "name": "squence to sequence",
+        "params": 0.0
+      }
+    ]
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "Introduce a CNN structure to map sequence to sequence.  Compared previous RNN architecture, it has a faster speed with a high accuracy.",
+        "link_info_s": "CNN for high speed",
+        "ID": "seq2seq"
+      }
+    ],
+    "ID": "conv seq2seq",
+    "architecture": [],
+    "url": "https://arxiv.org/abs/1705.03122",
+    "training": [],
+    "date": "2017.05.08",
+    "citation": "73",
+    "names": []
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "Decomposing the state of an RNN into multiple layers to improve representational capacity",
+        "link_info_s": "add MLP",
+        "ID": "stacked RNN"
+      }
+    ],
+    "ID": "MLP_RNN",
+    "architecture": [],
+    "url": "https://arxiv.org/abs/1312.6026",
+    "training": [],
+    "date": "2013.12.20",
+    "citation": "269",
+    "names": []
+  },
+  {
+    "application": [
+      "1.2.NLP"
+    ],
+    "parents": [
+      {
+        "link_info_l": "ESN useo reservior computing to set the recurrent weights such that the recurrent hidden units do a good job of capturing the history of past inputs.  Only the output weights need to be learnt.",
+        "link_info_s": "only learn the output weights",
+        "ID": "vanilla RNN"
+      }
+    ],
+    "ID": "ESN",
+    "architecture": [],
+    "url": "http://science.sciencemag.org/content/304/5667/78",
+    "training": [],
+    "date": "2004.04.02",
+    "citation": "1517",
+    "names": [
+      {
+        "name": "echo state network",
+        "params": 0.0
       }
     ]
   }
