@@ -2,7 +2,7 @@ export interface StoreState {
     arc:string,
     train:string,
     app:string,
-    nns:string[]
+    nn:NN
 }
 
 export interface EvoNode {

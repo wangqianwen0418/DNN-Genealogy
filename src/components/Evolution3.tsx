@@ -16,7 +16,7 @@ export interface Props {
     arc: string,
     app: string,
     train: string,
-    onSelect: (nns: string[]) => void
+    onSelectNN: (nn: NN) => void
 }
 
 const appData = [
@@ -278,7 +278,6 @@ export default class Evolution extends React.Component<Props, State>{
                 }
             })
 
-
         return { nodes, edges, height, width, topDoi, topParent, topChild }
     }
     drawNodes(nodes: Node[]) {
@@ -462,6 +461,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     selectNode(selectedNode: Node) {
         let { datum } = this.state
+        let { onSelectNN } = this.props
         this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
         //     if (nodeID == d.ID) {
@@ -482,6 +482,10 @@ export default class Evolution extends React.Component<Props, State>{
         // })
         let { nodes, edges, width: w, height: h, topChild, topParent, topDoi } = this.getDag(datum, selectedNode)
         this.setState({ nodes, edges, w, h, datum, selectedNode, topChild, topParent, topDoi })
+        for (let nn of datum)
+            if (nn.ID === selectedNode.label) {
+                onSelectNN(nn)                
+            }
     }
     render() {
         let { nodes, edges, w, h, appValue } = this.state

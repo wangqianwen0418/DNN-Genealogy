@@ -2,17 +2,21 @@ import * as React from "react"
 import "./CorpusCompare.css"
 import axios from "axios"
 import * as d3 from "d3"
+import { NN } from "../types"
 // import { Dropdown, Icon, Menu } from "antd"
 
 export interface Props {
-    nns: string[],
+    nn: NN,
 }
 
 export interface State {
     selected: string[],
     datum: any
 }
-//const margin = 30
+
+const sequenceDatasets = [],
+      nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top 5']
+
 export default class CorpusCompare extends React.Component<Props, State> {
     private ref:HTMLDivElement|null
     constructor(props: Props) {
@@ -35,6 +39,8 @@ export default class CorpusCompare extends React.Component<Props, State> {
         let datum = res.data
         this.setState({ datum })
 
+        let res1 = await axios.get("../../data/survey.json")
+        console.log(res1.data)
     }
 
     componentWillMount() {
@@ -52,6 +58,7 @@ export default class CorpusCompare extends React.Component<Props, State> {
     }
 
     componentDidUpdate() {
+        console.log(this.props)
         this.draw()
     }
 
@@ -81,7 +88,8 @@ export default class CorpusCompare extends React.Component<Props, State> {
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         
         let data = this.state.datum,
-            keys = this.props.nns
+        //    keys = this.props.nn
+            keys = ["A", "B"]
 
         x.domain([0, 100])
         y.domain(data.map(((d: any) => d.dataset))).padding(0.1)

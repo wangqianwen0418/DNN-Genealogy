@@ -5,8 +5,7 @@ import { connect, Dispatch } from 'react-redux';
 
 export function mapStateToProps(state:StoreState) {
     return {
-        nns:state.nns.length==0?["A","B"]:state.nns
-
+        nn:state.nn
     };
 }
 

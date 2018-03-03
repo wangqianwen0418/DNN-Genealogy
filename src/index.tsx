@@ -3,15 +3,24 @@ import * as ReactDOM from 'react-dom';
 import App from './components/App';
 import { createStore } from 'redux';
 import { reducer } from './reducers/index';
-import { StoreState } from './types/index';
+import { StoreState, NN } from './types/index';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 import 'antd/dist/antd.css';
 
-
-let initState:StoreState = {arc:"", app:"", train:"", nns:[]}
+let initNN: NN = {
+  ID:"",
+  url:"",
+  date:"",
+  application:[],
+  training:[],
+  architecture:[],
+  names:[],
+  parents:[]
+}
+let initState:StoreState = {arc:"", app:"", train:"", nn: initNN}
 const store = createStore<StoreState>(reducer, initState );
 
 ReactDOM.render(

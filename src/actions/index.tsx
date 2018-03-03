@@ -1,5 +1,5 @@
 import * as constants from '../constants'
-
+import { NN } from '../types'
 
 
 export interface SelectArc{
@@ -37,13 +37,13 @@ export function selectApp(node:string):SelectApp{
 
 export interface SelectNN{
     type:constants.SELECT_NN,
-    nns:string[]
+    nn:NN
 }
-export function selectNN(nns:string[]):SelectNN{
+export function selectNN(nn:NN):SelectNN{
     return {
         type:constants.SELECT_NN,
-        nns
+        nn
     }
 }
 // export type EnthusiasmAction = IncrementEnthusiasmAction | DecrementEnthusiasmAction
-export type AllActions = SelectApp|SelectArc|SelectTrain
+export type AllActions = SelectApp|SelectArc|SelectTrain|SelectNN
