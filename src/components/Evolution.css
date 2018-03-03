@@ -29,6 +29,7 @@
 /* variants */
 .variants:before{
     content: "\2609";
+    font-size: 2em;
 }
 .variants:first-child{
     margin-left: 5px;

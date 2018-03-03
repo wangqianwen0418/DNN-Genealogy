@@ -52,7 +52,7 @@ export interface State {
 }
 
 const nodeH = 20, nodeW = 100, margin=nodeW*0.5, labelL = 10,
-    expandH = 150, expandW = 200,
+    expandH = 300, expandW = 400,
     boxH = 10,
     labelFont = 12,
     textMargin = 20,
@@ -130,11 +130,11 @@ export default class Evolution extends React.Component<Props, State>{
         let selectedID = selectedNode ? selectedNode.ID : undefined
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: nodeW * 2,
+            ranksep: nodeW * 1.5,
             marginx: margin,
             marginy: margin,
             rankdir: 'LR',
-            edgesep: nodeH,
+            edgesep: nodeH * 2,
             nodesep: nodeH * 2
             // ranker: "tight-tree"
             // ranker: "longest-path"

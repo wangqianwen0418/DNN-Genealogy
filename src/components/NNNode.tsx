@@ -51,7 +51,7 @@ export default class NNNode extends React.Component<Props, {}>{
                 ry={1}
                 fill="white"
                 stroke={selected ? "red" : (isTop ? "#7dc1f2" : "gray")}
-                strokeWidth={selected ? 4 : (isTop ? 4 : 1.5)}
+                strokeWidth={selected ? 3 : (isTop ? 3 : 1.5)}
                 cursor="pointer"
             ></rect>
 
@@ -89,13 +89,13 @@ export default class NNNode extends React.Component<Props, {}>{
                         }
                     </text>
                     </Tooltip>
-                    <BoxPlot
+                    {/* <BoxPlot
                         width={nodeW} height={boxH}
                         datum={apiArr}
                         key={node.label}
                         value={node.api || 0}
                         offset={[0, nodeH + boxH / 2]}
-                    />
+                    /> */}
                 </g>
             }
         </g>
