@@ -1,6 +1,6 @@
 .Evolution{
     height: calc((100vh - var(--header-h))*var(--ratio-up) - var(--div-margin));
-    overflow: auto;
+    overflow: hidden;
 }
 .Node, .Edge, .NodeBg {
     /* -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color; */

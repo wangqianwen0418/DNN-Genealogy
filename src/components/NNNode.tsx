@@ -38,6 +38,7 @@ export default class NNNode extends React.Component<Props, {}>{
                 ry={1}
                 fill="white"
                 stroke={"gray"}
+                strokeWidth={1.5}
             /> : []
 
         return <g key={node.label} className="Node"
@@ -50,7 +51,7 @@ export default class NNNode extends React.Component<Props, {}>{
                 ry={1}
                 fill="white"
                 stroke={selected ? "red" : (isTop ? "#7dc1f2" : "gray")}
-                strokeWidth={selected ? 3 : (isTop ? 3 : 1)}
+                strokeWidth={selected ? 4 : (isTop ? 4 : 1.5)}
                 cursor="pointer"
             ></rect>
 
