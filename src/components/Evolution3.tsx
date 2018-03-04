@@ -16,7 +16,8 @@ export interface Props {
     arc: string,
     app: string,
     train: string,
-    onSelectNN: (nn: NN) => void
+    onSelectNN: (nn: NN) => void,
+    onSelectDatabase: (db: string) => void
 }
 
 const appData = [
@@ -458,6 +459,13 @@ export default class Evolution extends React.Component<Props, State>{
     onChange = (appValue: "1.1." | "1.2.") => {
         this.setState({ appValue });
         this.getData()
+        let { onSelectDatabase } = this.props
+        if (appValue === '1.1.')
+            onSelectDatabase('nonsequence')
+        else if (appValue === '1.2.')
+            onSelectDatabase('sequence')
+        else
+            onSelectDatabase('all')
     }
     selectNode(selectedNode: Node) {
         let { datum } = this.state

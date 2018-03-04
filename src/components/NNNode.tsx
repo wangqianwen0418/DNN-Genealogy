@@ -10,7 +10,7 @@ const margin = 40, nodeH = 20, nodeW = 100, labelL = 10,
     labelFont = 12
 
 const menu = (
-    <Menu >
+    <Menu>
         <Menu.Item key="1">text intro</Menu.Item>
         <Menu.Item key="2">compare performance</Menu.Item>
         <Menu.Item key="3">detailed structure</Menu.Item>

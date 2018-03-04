@@ -6,6 +6,9 @@ export type IMPORT_MODEL = typeof IMPORT_MODEL
 export const SELECT_LAYER = "SELECT_LAYER" 
 export type SELECT_LAYER = typeof SELECT_LAYER
 
+export const SELECT_DATABASE = "SELECT_DATABASE"
+export type SELECT_DATABASE = typeof SELECT_DATABASE
+
 export const SELECT_ARC = "SELECT_ARC" 
 export type SELECT_ARC = typeof SELECT_ARC 
 

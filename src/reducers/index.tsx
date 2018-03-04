@@ -2,7 +2,7 @@
 
 import { AllActions } from '../actions';
 import { StoreState } from '../types';
-import { SELECT_APP, SELECT_ARC, SELECT_TRAIN, SELECT_NN } from '../constants';
+import { SELECT_DATABASE, SELECT_APP, SELECT_ARC, SELECT_TRAIN, SELECT_NN } from '../constants';
 
 export function reducer(state: StoreState, action: AllActions): StoreState {
   switch (action.type) {
@@ -11,6 +11,8 @@ export function reducer(state: StoreState, action: AllActions): StoreState {
     //   return { ...state, enthusiasmLevel:state.enthusiasmLevel+1 };
     // case DECREMENT_ENTHUSIASM:
     //   return { ...state, enthusiasmLevel:state.enthusiasmLevel-1 };
+    case SELECT_DATABASE:
+      return { ...state, database:action.db}
     case SELECT_APP:  
       return { ...state, app:action.node}
     case SELECT_ARC:  

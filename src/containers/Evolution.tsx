@@ -12,9 +12,10 @@ export function mapStateToProps(state:StoreState) {
     };
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.SelectNN>) {
+export function mapDispatchToProps(dispatch: Dispatch<actions.SelectNN|actions.SelectDatabase>) {
     return {
-        onSelectNN:(nn:NN)=>{dispatch(actions.selectNN(nn))}
+        onSelectNN:(nn:NN)=>{dispatch(actions.selectNN(nn))},
+        onSelectDatabase:(db:string)=>{dispatch(actions.selectDatabase(db))}
     }
 }
 

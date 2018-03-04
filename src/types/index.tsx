@@ -1,4 +1,5 @@
 export interface StoreState {
+    database:string,
     arc:string,
     train:string,
     app:string,

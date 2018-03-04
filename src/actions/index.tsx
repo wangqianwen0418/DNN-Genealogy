@@ -1,6 +1,16 @@
 import * as constants from '../constants'
 import { NN } from '../types'
 
+export interface SelectDatabase{
+    type:constants.SELECT_DATABASE,
+    db:string
+}
+export function selectDatabase(db:string):SelectDatabase{
+    return {
+        type:constants.SELECT_DATABASE,
+        db
+    }
+}
 
 export interface SelectArc{
     type:constants.SELECT_ARC,
@@ -46,4 +56,4 @@ export function selectNN(nn:NN):SelectNN{
     }
 }
 // export type EnthusiasmAction = IncrementEnthusiasmAction | DecrementEnthusiasmAction
-export type AllActions = SelectApp|SelectArc|SelectTrain|SelectNN
+export type AllActions = SelectDatabase|SelectApp|SelectArc|SelectTrain|SelectNN
