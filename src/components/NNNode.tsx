@@ -10,13 +10,7 @@ const margin = 40, nodeH = 20, nodeW = 100, labelL = 10,
     boxH = 10,
     labelFont = 12
 
-const menu = (
-    <Menu >
-        <Menu.Item key="1">text intro</Menu.Item>
-        <Menu.Item key="2">compare performance</Menu.Item>
-        <Menu.Item key="3">detailed structure</Menu.Item>
-    </Menu>
-);
+
 
 export interface Props {
     node: Node,
@@ -32,7 +26,7 @@ export default class NNNode extends React.Component<Props, {}>{
     render() {
         let { node, zoomed, selected, isTop, selectNode, apiArr } = this.props,
             tooLong: boolean = node.label.length > labelL,
-            bg: JSX.Element | any = node.variants.length > 0 ? <rect width={node.width} height={node.height}
+            bg: JSX.Element | any = (node.variants.length > 0 && !zoomed)? <rect width={node.width} height={node.height}
                 className="NodeBg"
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
                 rx={1}
@@ -44,52 +38,22 @@ export default class NNNode extends React.Component<Props, {}>{
 
         return <g key={node.label} className="Node"
             transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
-            onClick={() => selectNode(node)}>
+            onClick={(e:React.MouseEvent<any>) => {
+                e.stopPropagation()
+                selectNode(node)
+            }}>
             {bg}
             <rect width={node.width} height={node.height}
                 className="Node"
                 rx={1}
                 ry={1}
                 fill="white"
-                stroke={selected ? "red" : (isTop ? "#7dc1f2" : "gray")}
+                stroke={zoomed ? "none" : (isTop ? "#7dc1f2" : "gray")}
                 strokeWidth={selected ? 3 : (isTop ? 3 : 1.5)}
                 cursor="pointer"
             ></rect>
-
-            <foreignObject>
-                {/* <div style={{ height: node.height }}>
-                    <img
-                        className="abstract Node"
-                        src={`../../images/${node.label}.png`}
-                        //    height={node.height}
-                        width={zoomed ? node.width : 0}
-                    />
-
-                </div> */}
-                <Tabs defaultActiveKey="1" style={{ height: node.height, width: node.width}}>
-                    <TabPane tab="Tab 1" key="1">
-                        <img
-                            className="abstract Node"
-                            src={`../../images/${node.label}.png`}
-                               height={node.height}
-                            width={node.height}
-                        />
-                    </TabPane>
-                    <TabPane tab="Tab 2" key="2">Tab 2</TabPane>
-                    <TabPane tab="Tab 3" key="3">Tab 3</TabPane>
-                </Tabs>
-                {zoomed ?
-                    <Dropdown overlay={menu} className="infoButton">
-                        <Button>{node.label}</Button>
-                    </Dropdown> : <span />
-                }
-            </foreignObject>
             {zoomed ?
-                <foreignObject>
-                    {node.variants.map((d: any) => (<Tooltip title={d.ID}>
-                        <span className="variants"></span>
-                    </Tooltip>))}
-                </foreignObject> :
+                <g/>:
                 <g>
                     <Tooltip title={tooLong ? node.label : null}><text textAnchor="middle"
                         fontSize={0.7 * nodeH}
