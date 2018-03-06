@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Node } from "../types";
 import BoxPlot from "./BoxPlot";
-import { TreeSelect, Button, Dropdown, Menu, Tooltip } from "antd";
+import { Button, Dropdown, Menu, Tooltip, Tabs } from "antd";
 import * as d3 from "d3";
+const TabPane = Tabs.TabPane
 
 const margin = 40, nodeH = 20, nodeW = 100, labelL = 10,
     expandH = 150, expandW = 200,
@@ -30,7 +31,7 @@ export interface Props {
 export default class NNNode extends React.Component<Props, {}>{
     render() {
         let { node, zoomed, selected, isTop, selectNode, apiArr } = this.props,
-            tooLong:boolean = node.label.length>labelL,
+            tooLong: boolean = node.label.length > labelL,
             bg: JSX.Element | any = node.variants.length > 0 ? <rect width={node.width} height={node.height}
                 className="NodeBg"
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
@@ -56,7 +57,7 @@ export default class NNNode extends React.Component<Props, {}>{
             ></rect>
 
             <foreignObject>
-                <div style={{ height: node.height }}>
+                {/* <div style={{ height: node.height }}>
                     <img
                         className="abstract Node"
                         src={`../../images/${node.label}.png`}
@@ -64,7 +65,19 @@ export default class NNNode extends React.Component<Props, {}>{
                         width={zoomed ? node.width : 0}
                     />
 
-                </div>
+                </div> */}
+                <Tabs defaultActiveKey="1" style={{ height: node.height, width: node.width}}>
+                    <TabPane tab="Tab 1" key="1">
+                        <img
+                            className="abstract Node"
+                            src={`../../images/${node.label}.png`}
+                               height={node.height}
+                            width={node.height}
+                        />
+                    </TabPane>
+                    <TabPane tab="Tab 2" key="2">Tab 2</TabPane>
+                    <TabPane tab="Tab 3" key="3">Tab 3</TabPane>
+                </Tabs>
                 {zoomed ?
                     <Dropdown overlay={menu} className="infoButton">
                         <Button>{node.label}</Button>
@@ -78,14 +91,14 @@ export default class NNNode extends React.Component<Props, {}>{
                     </Tooltip>))}
                 </foreignObject> :
                 <g>
-                    <Tooltip title={tooLong?node.label:null}><text textAnchor="middle"
+                    <Tooltip title={tooLong ? node.label : null}><text textAnchor="middle"
                         fontSize={0.7 * nodeH}
                         cursor="pointer"
                         x={node.width / 2}
                         y={node.height - 0.1 * nodeH}
                     >
                         {
-                            tooLong?(node.label.slice(0, labelL) + '...'):node.label 
+                            tooLong ? (node.label.slice(0, labelL) + '...') : node.label
                         }
                     </text>
                     </Tooltip>
