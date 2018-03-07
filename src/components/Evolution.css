@@ -1,5 +1,6 @@
 .Evolution{
     height: calc((100vh - var(--header-h))*var(--ratio-up) - var(--div-margin));
+    position: relative;
     /* overflow: auto; */
 }
 .Node, .Edge, .NodeBg {
@@ -38,7 +39,7 @@
 
 .container{
     height:100%;
-    position:relative;
+    /* position:relative; */
 }
 .ant-tabs-bar{
     margin:0px!important;

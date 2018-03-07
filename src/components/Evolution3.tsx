@@ -80,13 +80,16 @@ const transitionStyles = {
 
 
 export default class Evolution extends React.Component<Props, State>{
-    private updateEdge: boolean = true; ref: any
+    private updateEdge: boolean = true; ref: any;x0:number;y0:number;
     constructor(props: Props) {
         super(props)
         this.getData = this.getData.bind(this)
         this.selectNode = this.selectNode.bind(this)
         this.pinNode = this.pinNode.bind(this)
         this.handleMouseWheel = this.handleMouseWheel.bind(this)
+        this.pan = this.pan.bind(this)
+        this.mouseDown = this.mouseDown.bind(this)
+        this.mouseUp = this.mouseUp.bind(this)
         this.state = {
             datum: [],
             nodes: [],
@@ -139,7 +142,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     getDag(datum: NN[], selectedNode: Node | undefined = undefined) {
         let selectedID = selectedNode ? selectedNode.ID : undefined
-        let { pinNodes } = this.state
+        let { pinNodes, scale, transX, transY } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
             ranksep: nodeW * 1.5,
@@ -278,7 +281,7 @@ export default class Evolution extends React.Component<Props, State>{
         dagre.layout(dag)
 
         let nodes: Node[] = [], edges: GraphEdge[] = [],
-            height = dag.graph().height || 0,
+            height = (dag.graph().height || 0) + 2 * margin,
             width = dag.graph().width || 0
         dag.nodes().forEach(v => {
             if (dag.node(v)) {
@@ -292,13 +295,15 @@ export default class Evolution extends React.Component<Props, State>{
             })
 
         let scaleX = this.ref.clientWidth / (width),
-            scaleY = this.ref.clientHeight / (height),
+            scaleY = this.ref.clientHeight / (height)
+        if(scale==1){
             scale = Math.min(
                 scaleX,
                 scaleY
             ),
             transX = scaleX > scaleY ? (this.ref.clientWidth - width * scale) / 2 : 0,
             transY = scaleY > scaleX ? (this.ref.clientHeight - height * scale) / 2 : 0
+        }
         return { nodes, edges, height, width, topDoi, topParent, topChild, scale, transX, transY }
     }
     drawNodes(nodes: Node[]) {
@@ -511,13 +516,13 @@ export default class Evolution extends React.Component<Props, State>{
     }
     pinNode(pinNode: Node) {
         let { pinNodes } = this.state,
-        index = pinNodes.indexOf(pinNode.label)
-        if(index==-1){
+            index = pinNodes.indexOf(pinNode.label)
+        if (index == -1) {
             pinNodes.push(pinNode.label)
-        }else{
+        } else {
             pinNodes.splice(index, 1)
         }
-        
+
         this.setState({ pinNodes })
     }
     selectNode(selectedNode: Node | undefined) {
@@ -547,6 +552,27 @@ export default class Evolution extends React.Component<Props, State>{
             transX, transY
         })
     }
+    mouseDown(e:React.MouseEvent<any>){
+        e.stopPropagation()
+        e.preventDefault()
+        console.info("graph mouse down")
+        document.addEventListener("mousemove", this.pan)
+        this.x0 = e.clientX
+        this.y0 = e.clientY
+    }
+    pan(e:any){
+        let {transX, transY } = this.state
+        transX += e.clientX - this.x0
+        transY += e.clientY - this.y0
+        this.x0 = e.clientX
+        this.y0 = e.clientY
+        this.setState({transX, transY})
+    }
+    mouseUp(e:React.MouseEvent<any>){
+        e.stopPropagation()
+        e.preventDefault()
+        document.removeEventListener("mousemove", this.pan)
+    }
     render() {
         let { nodes, edges, w, h, appValue, scale } = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
@@ -558,7 +584,9 @@ export default class Evolution extends React.Component<Props, State>{
         return <div
             className="Evolution View"
             onWheel={this.handleMouseWheel}
-
+            onMouseDown = {this.mouseDown}
+            onMouseUp={this.mouseUp}
+            onMouseLeave={this.mouseUp}
             ref={(ref) => this.ref = ref}>
             {/* <div style={{ position: "absolute", left: "20px", top: "20px" }}>
                 Training methods:{train}
@@ -585,7 +613,14 @@ export default class Evolution extends React.Component<Props, State>{
                 Reset
             </Button>
             <div className="container">
-                {this.drawExtendNodes(nodes)}
+                <div className="extendNodes" 
+                style={{
+                    height:this.ref?this.ref.clientHeight:0, 
+                    width:this.ref?this.ref.clientWidth:0,
+                    overflow:"hidden",position:"absolute"
+                }}>
+                    {this.drawExtendNodes(nodes)}
+                </div>
                 <svg
                     //alway show the whole dag
                     width="100%" height="100%"

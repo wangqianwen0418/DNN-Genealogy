@@ -65,6 +65,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 return <div className="ExtendNode Node"
                     onClick={(e:React.MouseEvent<any>) => {
                         e.stopPropagation()
+                        e.preventDefault()
                         selectNode(node)
                     }}
                     onMouseEnter={()=>this.setState({showpin:true})}
@@ -113,6 +114,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                     onClick={(e:React.MouseEvent<any>)=>{
                         let {pin} = this.state
                         e.stopPropagation()
+                        e.preventDefault()
                         this.setState({pin:!pin})
                         pinNode(node)
                         

@@ -40,6 +40,7 @@ export default class NNNode extends React.Component<Props, {}>{
             transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
             onClick={(e:React.MouseEvent<any>) => {
                 e.stopPropagation()
+                e.preventDefault()
                 selectNode(node)
             }}>
             {bg}
