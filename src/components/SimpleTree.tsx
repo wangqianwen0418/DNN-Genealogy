@@ -228,7 +228,6 @@ export default class SimpleTree extends React.Component<Props, State>{
                     d._children = null
                 }
                 let box=find_box(d, [Infinity,0, Infinity,0])
-                console.info('box', box, d)
                 update(d)
             }
         }

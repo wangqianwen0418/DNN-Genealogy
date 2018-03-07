@@ -8,9 +8,10 @@ import axios from "axios"
 import * as d3 from "d3"
 import { NN, NNLink, Node, GraphEdge, Point } from "../types"
 import { getColor } from "../helper/index";
-import { TreeSelect, Button, Dropdown, Menu, Tooltip} from "antd"
+import { TreeSelect, Button, Dropdown, Menu, Tooltip } from "antd"
 import moment from 'moment';
 import NNNode from "./NNNode"
+import ExtendNode from "./ExtendNode"
 // const {TreeNode} = TreeSelect
 export interface Props {
     arc: string,
@@ -49,11 +50,15 @@ export interface State {
     // appData: any,
     topDoi: Node[],
     topParent: Node | undefined,
-    topChild: Node | undefined
+    topChild: Node | undefined,
+    pinNodes: string[],
+    scale: number,
+    transX: number,
+    transY: number
 }
 
-const nodeH = 20, nodeW = 100, margin=nodeW*0.5, labelL = 10,
-    expandH = 300, expandW = 400,
+const nodeH = 20, nodeW = 100, margin = nodeW * 0.5, labelL = 10, tabH = 32,
+    expandH = 300 + tabH, expandW = 400,
     boxH = 10,
     labelFont = 12,
     textMargin = 20,
@@ -76,12 +81,17 @@ const transitionStyles = {
 
 
 export default class Evolution extends React.Component<Props, State>{
-    private updateEdge: boolean = true
+    private updateEdge: boolean = true; ref: any;x0:number;y0:number;
     constructor(props: Props) {
         super(props)
         this.getData = this.getData.bind(this)
         this.selectNode = this.selectNode.bind(this)
         this.onclickMenu = this.onclickMenu.bind(this)
+        this.pinNode = this.pinNode.bind(this)
+        this.handleMouseWheel = this.handleMouseWheel.bind(this)
+        this.pan = this.pan.bind(this)
+        this.mouseDown = this.mouseDown.bind(this)
+        this.mouseUp = this.mouseUp.bind(this)
         this.state = {
             datum: [],
             nodes: [],
@@ -93,7 +103,11 @@ export default class Evolution extends React.Component<Props, State>{
             // appData: [],
             topDoi: [],
             topChild: undefined,
-            topParent: undefined
+            topParent: undefined,
+            scale: 1,
+            pinNodes: [],
+            transX: 0,
+            transY: 0
         }
     }
     async getData() {
@@ -110,7 +124,7 @@ export default class Evolution extends React.Component<Props, State>{
                 dif = moment().diff(pub_date, "months")
             d.api = (d.citation / dif) || 0
         })
-        let { nodes, edges, width: w, height: h, topDoi } = this.getDag(datum)
+        let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum)
 
         // let appRes = await axios.get('../../data/taxonomy.json')
         // let appData = appRes.data.children[0]
@@ -126,10 +140,11 @@ export default class Evolution extends React.Component<Props, State>{
         // label(appData)
 
 
-        this.setState({ nodes, edges, w, h, datum, topDoi })
+        this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
     }
     getDag(datum: NN[], selectedNode: Node | undefined = undefined) {
         let selectedID = selectedNode ? selectedNode.ID : undefined
+        let { pinNodes, scale, transX, transY } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
             ranksep: nodeW * 1.5,
@@ -146,12 +161,13 @@ export default class Evolution extends React.Component<Props, State>{
 
         datum.forEach((node: NN) => {
             // let label = `${layer.name}:${layer.class_name}`
-            let selected: boolean = (node.ID == selectedID)
+            let selected: boolean = (node.ID == selectedID),
+                pinned: boolean = (pinNodes.indexOf(node.ID) != -1)
             dag.setNode(node.ID,
                 {
                     label: node.ID,
-                    width: selected ? expandW : nodeW,
-                    height: selected ? expandH : nodeH,
+                    width: selected || pinned ? expandW : nodeW,
+                    height: selected || pinned ? expandH : nodeH,
                     ID: node.ID,
                     api: node.api,
                     variants: node.variants
@@ -267,8 +283,8 @@ export default class Evolution extends React.Component<Props, State>{
         dagre.layout(dag)
 
         let nodes: Node[] = [], edges: GraphEdge[] = [],
-            height = dag.graph().height,
-            width = dag.graph().width
+            height = (dag.graph().height || 0) + 2 * margin,
+            width = dag.graph().width || 0
         dag.nodes().forEach(v => {
             if (dag.node(v)) {
                 nodes.push(dag.node(v))
@@ -280,20 +296,28 @@ export default class Evolution extends React.Component<Props, State>{
                 }
             })
 
-        console.info(height)
-        return { nodes, edges, height, width, topDoi, topParent, topChild }
+        let scaleX = this.ref.clientWidth / (width),
+            scaleY = this.ref.clientHeight / (height)
+        if(scale==1){
+            scale = Math.min(
+                scaleX,
+                scaleY
+            ),
+            transX = scaleX > scaleY ? (this.ref.clientWidth - width * scale) / 2 : 0,
+            transY = scaleY > scaleX ? (this.ref.clientHeight - height * scale) / 2 : 0
+        }
+        return { nodes, edges, height, width, topDoi, topParent, topChild, scale, transX, transY }
     }
     drawNodes(nodes: Node[]) {
-        let { selectedNode, topDoi } = this.state,
+        let { selectedNode, topDoi, scale, transX, transY } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
-        return (<g className="nodes" >
+        return (<g className="nodes" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
             {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
-                    zoomed:boolean = node.width>nodeW
-                    
+                    zoomed:boolean = node.width > nodeW
 
                 return <NNNode 
                    node = {node}
@@ -301,10 +325,32 @@ export default class Evolution extends React.Component<Props, State>{
                    isTop={isTop} 
                    zoomed={zoomed} 
                    apiArr={apiArr} 
-                   selectNode={this.selectNode}
-                   onclickMenu={this.onclickMenu}/>
+                   selectNode={this.selectNode}/>
             })}
         </g>)
+    }
+    drawExtendNodes(nodes: Node[]) {
+        let { selectedNode, topDoi, scale, transX, transY } = this.state,
+            selectedID = selectedNode ? selectedNode.ID : undefined,
+            apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
+
+        return nodes.map((node: Node) => {
+            let selected: boolean = (node.ID === selectedID),
+                zoomed: boolean = node.width > nodeW
+            return <ExtendNode
+                zoomed={zoomed}
+                scale={scale}
+                transX={transX}
+                transY={transY}
+                margin={tabH}
+                node={node}
+                selected={selected}
+                selectNode={this.selectNode}
+                onclickMenu={this.onclickMenu}
+                pinNode={this.pinNode}
+                duration={duration}
+            />
+        })
     }
     oneEdge(edge: GraphEdge, i: number) {
         let { points, from, to, label_s, label_l } = edge,
@@ -365,7 +411,7 @@ export default class Evolution extends React.Component<Props, State>{
             //                 L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
             highlight: boolean = ((from == selectedID) || (to == selectedID)),
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
-      
+
         return <g className='link' key={`${i}_${from}->${to}`}>
             <path
                 id={`${from}->${to}`}
@@ -433,25 +479,40 @@ export default class Evolution extends React.Component<Props, State>{
 
     }
     drawEdges(edges: GraphEdge[]) {
-        return (<g className="edges">
+        let { scale, transX, transY } = this.state
+        return (<g className="edges" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
             {edges.map((edge: GraphEdge, i: number) => {
                 return this.oneEdge(edge, i)
 
             })}
         </g>)
     }
-    componentWillMount() {
-        this.getData()
+    handleMouseWheel(evt: React.WheelEvent<any>) {
+        let { scale } = this.state
+        if (evt.deltaY > 0) {
+            this.setState({ scale: scale * 1.1 });
+        } else if (evt.deltaY < 0) {
+            this.setState({
+                scale: (scale * 0.9)
+            });
+        }
     }
     componentDidMount() {
-
-        const zoomed = () => {
-            svg.attr("transform", d3.event.transform);
-        }
-        let svg = d3.select('svg')
-            .call(d3.zoom().on("zoom", zoomed));
-
+        this.getData()
     }
+    // componentDidMount() {
+
+    //     const zoomed = () => {
+    //         svg.attr("transform", d3.event.transform);
+    //     }
+    //     let svg = d3.select('svg')
+    //         .call(
+    //             d3.zoom()
+    //                 .on("zoom", zoomed))
+    //                 .on("mousedown.zoom", null)
+    //                 .on("touchstart.zoom", null)
+
+    // }
     onChange = (appValue: "1.1." | "1.2.") => {
         this.setState({ appValue });
         this.getData()
@@ -463,7 +524,18 @@ export default class Evolution extends React.Component<Props, State>{
         else
             onSelectDatabase('all')
     }
-    selectNode(selectedNode: Node) {
+    pinNode(pinNode: Node) {
+        let { pinNodes } = this.state,
+            index = pinNodes.indexOf(pinNode.label)
+        if (index == -1) {
+            pinNodes.push(pinNode.label)
+        } else {
+            pinNodes.splice(index, 1)
+        }
+
+        this.setState({ pinNodes })
+    }
+    selectNode(selectedNode: Node | undefined) {
         let { datum } = this.state
         this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
@@ -483,8 +555,33 @@ export default class Evolution extends React.Component<Props, State>{
         //         }
         //     }
         // })
-        let { nodes, edges, width: w, height: h, topChild, topParent, topDoi } = this.getDag(datum, selectedNode)
-        this.setState({ nodes, edges, w, h, datum, selectedNode, topChild, topParent, topDoi })
+        let { nodes, edges, width: w, height: h, topChild, topParent, topDoi, scale, transX, transY } = this.getDag(datum, selectedNode)
+        this.setState({
+            nodes, edges, w, h, datum, selectedNode,
+            topChild, topParent, topDoi, scale,
+            transX, transY
+        })
+    }
+    mouseDown(e:React.MouseEvent<any>) {
+        e.stopPropagation()
+        e.preventDefault()
+        console.info("graph mouse down")
+        document.addEventListener("mousemove", this.pan)
+        this.x0 = e.clientX
+        this.y0 = e.clientY
+    }
+    pan(e:any) {
+        let {transX, transY } = this.state
+        transX += e.clientX - this.x0
+        transY += e.clientY - this.y0
+        this.x0 = e.clientX
+        this.y0 = e.clientY
+        this.setState({transX, transY})
+    }
+    mouseUp(e:React.MouseEvent<any>) {
+        e.stopPropagation()
+        e.preventDefault()
+        document.removeEventListener("mousemove", this.pan)
     }
     onclickMenu(selectedNode: Node, menu: string) {
         let { datum } = this.state
@@ -505,22 +602,29 @@ export default class Evolution extends React.Component<Props, State>{
         }
     }
     render() {
-        let { nodes, edges, w, h, appValue } = this.state
+        let { nodes, edges, w, h, appValue, scale } = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         let { train, arc } = this.props
 
-        return <div className="Evolution View">
+        return <div
+            className="Evolution View"
+            onWheel={this.handleMouseWheel}
+            onMouseDown = {this.mouseDown}
+            onMouseUp={this.mouseUp}
+            onMouseLeave={this.mouseUp}
+            ref={(ref) => this.ref = ref}>
             {/* <div style={{ position: "absolute", left: "20px", top: "20px" }}>
                 Training methods:{train}
             </div>
             <div style={{ position: "absolute", left: "20px", top: "40px" }}>
                 Architecture:{arc}
             </div> */}
+
             <TreeSelect
-                style={{ position: "absolute", width: 180, left: "20px", top: "20px", zIndex:100 }}
+                style={{ position: "absolute", width: 180, left: "20px", top: "20px", zIndex: 100 }}
                 value={appValue}
                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                 //treeData = {this.state.appData}
@@ -530,18 +634,34 @@ export default class Evolution extends React.Component<Props, State>{
                 treeDefaultExpandAll
                 onChange={this.onChange}
             />
-
-            <svg
-                //alway show the whole dag
-                width="100%" height="100%"
-                viewBox={`0 0 ${w} ${h}`}
-            //or show part and let the users pan and zoom
-            // width={w} height={h}
+            <Button
+                onClick={() => this.selectNode(undefined)}
+                style={{ position: "absolute", left: "20px", top: "60px", zIndex: 100 }}
             >
+                Reset
+            </Button>
+            <div className="container">
+                <div className="extendNodes" 
+                style={{
+                    height:this.ref?this.ref.clientHeight:0, 
+                    width:this.ref?this.ref.clientWidth:0,
+                    overflow:"hidden",position:"absolute"
+                }}>
+                    {this.drawExtendNodes(nodes)}
+                </div>
+                <svg
+                    //alway show the whole dag
+                    width="100%" height="100%"
+                // viewBox={`0 0 ${w} ${h}`}
+                //or show part and let the users pan and zoom
+                // width={w||1*scale} height={h||1*scale}
 
-                {this.drawEdges(edges)}
-                {this.drawNodes(nodes)}
-            </svg>
+                >
+
+                    {this.drawEdges(edges)}
+                    {this.drawNodes(nodes)}
+                </svg>
+            </div>
         </div>
     }
 }

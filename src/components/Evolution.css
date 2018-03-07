@@ -1,6 +1,7 @@
 .Evolution{
     height: calc((100vh - var(--header-h))*var(--ratio-up) - var(--div-margin));
-    overflow: hidden;
+    position: relative;
+    /* overflow: auto; */
 }
 .Node, .Edge, .NodeBg {
     /* -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color; */
@@ -18,19 +19,33 @@
     stroke-width:1px;
 }
 
-.infoButton, .ant-btn{
-    position: inherit!important;
-    margin: 2px 0px;
+.infoTrigger{
+    position: relative!important;
+    top: -20px;
+    padding: 2px!important;
+}
+.pin{
+    position: relative;
+    float: right;
+    top:-20px;
+    padding: 2px!important;
+    /* z-index: 10; */
 }
 /* dropdown button */
 .ant-btn > span{
     font-size: 1.2em;
 }
 /* variants */
-.variants:before{
-    content: "\2609";
-    font-size: 2em;
+
+.container{
+    height:100%;
+    /* position:relative; */
 }
-.variants:first-child{
-    margin-left: 5px;
+.ant-tabs-bar{
+    margin:0px!important;
+}
+.ant-tabs-tab{
+    font-size: 6px;
+    padding: 2px 1px!important;
+    /* margin: 0px 0px 0px 10px!important; */
 }

@@ -185,7 +185,6 @@ export default class Evolution extends React.Component<Props, State>{
         this.getData()
     }
     onChange = (appValue:string) => {
-        console.info('onchage', appValue)
         this.setState({ appValue });
       }
     render() {
