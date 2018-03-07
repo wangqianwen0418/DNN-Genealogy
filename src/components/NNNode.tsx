@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Node } from "../types";
 import BoxPlot from "./BoxPlot";
-import { TreeSelect, Button, Dropdown, Menu, Tooltip } from "antd";
+import { TreeSelect, Button, Dropdown, Menu, Tooltip, message } from "antd";
 import * as d3 from "d3";
 
 const margin = 40, nodeH = 20, nodeW = 100, labelL = 10,
@@ -9,27 +9,20 @@ const margin = 40, nodeH = 20, nodeW = 100, labelL = 10,
     boxH = 10,
     labelFont = 12
 
-const menu = (
-    <Menu>
-        <Menu.Item key="1">text intro</Menu.Item>
-        <Menu.Item key="2">compare performance</Menu.Item>
-        <Menu.Item key="3">detailed structure</Menu.Item>
-    </Menu>
-);
-
 export interface Props {
     node: Node,
     selected: boolean,
     isTop: boolean,
     zoomed: boolean,
     apiArr: number[],
-    selectNode: (node: Node) => void
+    selectNode: (node: Node) => void,
+    onclickMenu: (node: Node, menu: string) => void
 }
 
 
 export default class NNNode extends React.Component<Props, {}>{
     render() {
-        let { node, zoomed, selected, isTop, selectNode, apiArr } = this.props,
+        let { node, zoomed, selected, isTop, selectNode, onclickMenu, apiArr } = this.props,
             tooLong:boolean = node.label.length>labelL,
             bg: JSX.Element | any = node.variants.length > 0 ? <rect width={node.width} height={node.height}
                 className="NodeBg"
@@ -38,7 +31,19 @@ export default class NNNode extends React.Component<Props, {}>{
                 ry={1}
                 fill="white"
                 stroke={"gray"}
+                strokeWidth={1.5}
             /> : []
+
+        let onclick = function(item :{ key: string }) {
+            onclickMenu(node, item.key)
+        }
+        const menu = (
+            <Menu onClick={onclick}>
+                <Menu.Item key="text">text intro</Menu.Item>
+                <Menu.Item key="compare">compare performance</Menu.Item>
+                <Menu.Item key="detailed">detailed structure</Menu.Item>
+            </Menu>
+        )
 
         return <g key={node.label} className="Node"
             transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
@@ -50,7 +55,7 @@ export default class NNNode extends React.Component<Props, {}>{
                 ry={1}
                 fill="white"
                 stroke={selected ? "red" : (isTop ? "#7dc1f2" : "gray")}
-                strokeWidth={selected ? 3 : (isTop ? 3 : 1)}
+                strokeWidth={selected ? 3 : (isTop ? 3 : 1.5)}
                 cursor="pointer"
             ></rect>
 
@@ -88,13 +93,13 @@ export default class NNNode extends React.Component<Props, {}>{
                         }
                     </text>
                     </Tooltip>
-                    <BoxPlot
+                    {/* <BoxPlot
                         width={nodeW} height={boxH}
                         datum={apiArr}
                         key={node.label}
                         value={node.api || 0}
                         offset={[0, nodeH + boxH / 2]}
-                    />
+                    /> */}
                 </g>
             }
         </g>

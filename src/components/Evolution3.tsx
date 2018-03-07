@@ -52,14 +52,14 @@ export interface State {
     topChild: Node | undefined
 }
 
-const margin = 40, nodeH = 20, nodeW = 100, labelL = 10,
-    expandH = 150, expandW = 200,
+const nodeH = 20, nodeW = 100, margin=nodeW*0.5, labelL = 10,
+    expandH = 300, expandW = 400,
     boxH = 10,
     labelFont = 12,
     textMargin = 20,
     r_api = 1, r_dist = -100, r_diff = 0.01 //factors for DOI calculation
 
-// for the lablel animiation 
+// for the lablel fade in/out animiation 
 const duration = 1000;
 
 const defaultStyle = {
@@ -81,6 +81,7 @@ export default class Evolution extends React.Component<Props, State>{
         super(props)
         this.getData = this.getData.bind(this)
         this.selectNode = this.selectNode.bind(this)
+        this.onclickMenu = this.onclickMenu.bind(this)
         this.state = {
             datum: [],
             nodes: [],
@@ -88,7 +89,7 @@ export default class Evolution extends React.Component<Props, State>{
             selectedNode: undefined,
             w: 0,
             h: 0,
-            appValue: "1.2.",
+            appValue: "1.1.",
             // appData: [],
             topDoi: [],
             topChild: undefined,
@@ -131,7 +132,7 @@ export default class Evolution extends React.Component<Props, State>{
         let selectedID = selectedNode ? selectedNode.ID : undefined
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: nodeW * 2,
+            ranksep: nodeW * 1.5,
             marginx: margin,
             marginy: margin,
             rankdir: 'LR',
@@ -279,6 +280,7 @@ export default class Evolution extends React.Component<Props, State>{
                 }
             })
 
+        console.info(height)
         return { nodes, edges, height, width, topDoi, topParent, topChild }
     }
     drawNodes(nodes: Node[]) {
@@ -299,7 +301,8 @@ export default class Evolution extends React.Component<Props, State>{
                    isTop={isTop} 
                    zoomed={zoomed} 
                    apiArr={apiArr} 
-                   selectNode={this.selectNode}/>
+                   selectNode={this.selectNode}
+                   onclickMenu={this.onclickMenu}/>
             })}
         </g>)
     }
@@ -362,14 +365,7 @@ export default class Evolution extends React.Component<Props, State>{
             //                 L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
             highlight: boolean = ((from == selectedID) || (to == selectedID)),
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
-            // textPathData = `M ${points[0].x + textMargin} 
-            //                   ${points[0].y + textMargin * k} 
-            //                 L ${points[points.length - 1].x - textMargin} 
-            //                   ${points[points.length - 1].y - textMargin * k}
-            //                 M ${points[0].x + textMargin - labelFont * k / Math.sqrt(1 + k * k)} 
-            //                   ${points[0].y + textMargin * k + labelFont * 1 / Math.sqrt(1 + k * k)} 
-            //                 L ${points[points.length - 1].x - textMargin - labelFont * k / Math.sqrt(1 + k * k)} 
-            //                   ${points[points.length - 1].y - textMargin * k + labelFont * 1 / Math.sqrt(1 + k * k)}`
+      
         return <g className='link' key={`${i}_${from}->${to}`}>
             <path
                 id={`${from}->${to}`}
@@ -469,7 +465,6 @@ export default class Evolution extends React.Component<Props, State>{
     }
     selectNode(selectedNode: Node) {
         let { datum } = this.state
-        let { onSelectNN } = this.props
         this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
         //     if (nodeID == d.ID) {
@@ -490,10 +485,24 @@ export default class Evolution extends React.Component<Props, State>{
         // })
         let { nodes, edges, width: w, height: h, topChild, topParent, topDoi } = this.getDag(datum, selectedNode)
         this.setState({ nodes, edges, w, h, datum, selectedNode, topChild, topParent, topDoi })
-        for (let nn of datum)
-            if (nn.ID === selectedNode.label) {
-                onSelectNN(nn)                
-            }
+    }
+    onclickMenu(selectedNode: Node, menu: string) {
+        let { datum } = this.state
+        let { onSelectNN } = this.props        
+        switch (menu) {
+            case 'text':
+                console.log('text')
+                break
+            case 'compare':
+                for (let nn of datum)
+                    if (nn.ID === selectedNode.label) {
+                        onSelectNN(nn)                
+                    }
+                break
+            case 'detailed':
+                console.log('detailed')
+                break
+        }
     }
     render() {
         let { nodes, edges, w, h, appValue } = this.state
@@ -511,7 +520,7 @@ export default class Evolution extends React.Component<Props, State>{
                 Architecture:{arc}
             </div> */}
             <TreeSelect
-                style={{ position: "absolute", width: 180, left: "20px", top: "20px" }}
+                style={{ position: "absolute", width: 180, left: "20px", top: "20px", zIndex:100 }}
                 value={appValue}
                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                 //treeData = {this.state.appData}
