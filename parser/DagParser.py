@@ -15,11 +15,14 @@ class DagParser:
         architecture: list(str),
         names: array(Name),
         parents: array(Parents),
+        variants: array(Model|{ID:str})
     }
 
     Parent {
         ID: str,
-        link_info: str,
+        link_info_s: str,
+        link_info_l: str,
+        link_category: str
     }
 
     Name {
@@ -73,7 +76,13 @@ class DagParser:
                 result[-1]['parents'].append({
                     'ID': datum[7],
                     'link_info_l': datum[8],
-                    'link_info_s': datum[9]
+                    'link_info_s': datum[9],
+                    'link_category': datum[10]
+                })
+            # add variants' ID to current model
+            if datum[11]:
+                result[-1]['variants'].append({
+                    'ID': datum[11]
                 })
 
             # add datasets to current model
@@ -90,6 +99,18 @@ class DagParser:
                     else:
                         cur_name[title_line[i]] = float(datum[i])
                 result[-1]['names'].append(cur_name)
+        # insert variants data
+        ID_arr = [model['ID'] for model in result]
+        for i, model in enumerate(result):
+            for j, variant in enumerate(model['variants']):
+                try:
+                   index = ID_arr.index(variant['ID'])
+                   result[i]['variants'][j] = result[index]
+                   ID_arr.remove(variant['ID'])
+                   result.remove(result[index])
+                except Exception:
+                    pass
+
 
         result_json = json.dumps(result, indent=2, sort_keys=True)
         f = open(filepath, 'w')
