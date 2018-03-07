@@ -17,7 +17,8 @@ export interface Props {
     arc: string,
     app: string,
     train: string,
-    onSelect: (nns: string[]) => void
+    onSelectNN: (nn: NN) => void,
+    onSelectDatabase: (db: string) => void
 }
 
 const appData = [
@@ -86,6 +87,7 @@ export default class Evolution extends React.Component<Props, State>{
         super(props)
         this.getData = this.getData.bind(this)
         this.selectNode = this.selectNode.bind(this)
+        this.onclickMenu = this.onclickMenu.bind(this)
         this.pinNode = this.pinNode.bind(this)
         this.handleMouseWheel = this.handleMouseWheel.bind(this)
         this.pan = this.pan.bind(this)
@@ -354,6 +356,7 @@ export default class Evolution extends React.Component<Props, State>{
                 node={node}
                 selected={selected}
                 selectNode={this.selectNode}
+                onclickMenu={this.onclickMenu}
                 pinNode={this.pinNode}
                 duration={duration}
             />
@@ -525,6 +528,13 @@ export default class Evolution extends React.Component<Props, State>{
     onChange = (appValue: "1.1." | "1.2.") => {
         this.setState({ appValue });
         this.getData()
+        let { onSelectDatabase } = this.props
+        if (appValue === '1.1.')
+            onSelectDatabase('nonsequence')
+        else if (appValue === '1.2.')
+            onSelectDatabase('sequence')
+        else
+            onSelectDatabase('all')
     }
     pinNode(pinNode: Node) {
         let { pinNodes } = this.state,
@@ -564,26 +574,44 @@ export default class Evolution extends React.Component<Props, State>{
             transX, transY
         })
     }
-    mouseDown(e: React.MouseEvent<any>) {
-        // e.stopPropagation()
-        // e.preventDefault()
+    mouseDown(e:React.MouseEvent<any>) {
+        e.stopPropagation()
+        e.preventDefault()
         console.info("graph mouse down")
         document.addEventListener("mousemove", this.pan)
         this.x0 = e.clientX
         this.y0 = e.clientY
     }
-    pan(e: any) {
-        let { transX, transY } = this.state
+    pan(e:any) {
+        let {transX, transY } = this.state
         transX += e.clientX - this.x0
         transY += e.clientY - this.y0
         this.x0 = e.clientX
         this.y0 = e.clientY
         this.setState({ transX, transY })
     }
-    mouseUp(e: React.MouseEvent<any>) {
-        // e.stopPropagation()
-        // e.preventDefault()
+    mouseUp(e:React.MouseEvent<any>) {
+        e.stopPropagation()
+        e.preventDefault()
         document.removeEventListener("mousemove", this.pan)
+    }
+    onclickMenu(selectedNode: Node, menu: string) {
+        let { datum } = this.state
+        let { onSelectNN } = this.props        
+        switch (menu) {
+            case 'text':
+                console.log('text')
+                break
+            case 'compare':
+                for (let nn of datum)
+                    if (nn.ID === selectedNode.label) {
+                        onSelectNN(nn)                
+                    }
+                break
+            case 'detailed':
+                console.log('detailed')
+                break
+        }
     }
     render() {
         let { nodes, edges, w, h, appValue, scale } = this.state
