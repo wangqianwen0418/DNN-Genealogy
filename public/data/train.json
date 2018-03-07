@@ -1,0 +1,197 @@
+[
+        {
+          "children": [
+            {
+              "depth": 3,
+              "id": "3.1.1.",
+              "name": "Orthogonal",
+              "size": 0,
+              "url": "http://arxiv.org/abs/1312.6120"
+            },
+            {
+              "depth": 3,
+              "id": "3.1.2.",
+              "name": "Xavier Normal",
+              "size": 0,
+              "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf"
+            },
+            {
+              "depth": 3,
+              "id": "3.1.3.",
+              "name": "Xavier Uniform",
+              "size": 0,
+              "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf"
+            },
+            {
+              "depth": 3,
+              "id": "3.1.4.",
+              "name": "He Normal",
+              "size": 0,
+              "url":"http://arxiv.org/abs/1502.01852"
+            },
+            {
+              "depth": 3,
+              "id": "3.1.5.",
+              "name": "He Uniform",
+              "size": 0,
+              "url":"http://arxiv.org/abs/1502.01852"
+            },
+            {
+              "depth": 3,
+              "id": "3.1.6.",
+              "name": "Lecun Normal",
+              "size": 0,
+              "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf"
+            },
+            {
+              "depth": 3,
+              "id": "3.1.7.",
+              "name": "Lecun Uniform",
+              "size": 0,
+              "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf"
+            }
+          ],
+          "depth": 2,
+          "id": "3.1.",
+          "name": "Initialization",
+          "size": 0
+        },
+        {
+          "children": [
+            {
+              "depth": 3,
+              "id": "3.2.1.",
+              "name": "SGD",
+              "size": 0,
+              "url":"http://ufldl.stanford.edu/tutorial/supervised/OptimizationStochasticGradientDescent/"
+            },
+            {
+              "depth": 3,
+              "id": "3.2.4.",
+              "name": "Momentum",
+              "size": 0,
+              "url":"http://proceedings.mlr.press/v28/sutskever13.html"
+            },
+            {
+              "depth": 3,
+              "id": "3.2.2.",
+              "name": "Adam",
+              "size": 0,
+              "url":"http://arxiv.org/abs/1412.6980v8"
+            },
+            {
+              "depth": 3,
+              "id": "3.2.3.",
+              "name": "RMSprop",
+              "size": 0,
+              "url":"http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf"
+            }
+          ],
+          "depth": 2,
+          "id": "3.2.",
+          "name": "Optimization",
+          "size": 0
+        },
+        {
+          "children": [
+            {
+              "depth": 3,
+              "id": "3.3.1.",
+              "name": "L1&L2",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.3.3.",
+              "name": "Hinge",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.3.4.",
+              "name": "Cosine",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.3.5.",
+              "name": "Cross Entropy",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.3.6.",
+              "name": "CTC",
+              "size": 0
+            }
+          ],
+          "depth": 2,
+          "id": "3.3.",
+          "name": "Loss Function",
+          "size": 0
+        },
+        {
+          "children": [
+            {
+              "depth": 3,
+              "id": "3.4.1.",
+              "name": "Dropout",
+              "size": 0,
+              "url": "http://www.jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf?utm_content=buffer79b43&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer"
+            },
+            {
+              "depth": 3,
+              "id": "3.4.2.",
+              "name": "Weight Decay",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.3.",
+              "name": "Drop Path",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.4.",
+              "name": "Data Augmentation",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.5.",
+              "name": "Batch Normalization",
+              "size": 0,
+              "url":"http://www.jmlr.org/proceedings/papers/v37/ioffe15.html"
+            },
+            {
+              "depth": 3,
+              "id": "3.4.6.",
+              "name": "Shake-Shake",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.7.",
+              "name": "LSR",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.8.",
+              "name": "DSD",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.9.",
+              "name": "Swapout",
+              "size": 0
+            }
+          ],
+          "depth": 2,
+          "id": "3.4.",
+          "name": "Regularization",
+          "size": 0
+        }
+      ]

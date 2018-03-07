@@ -51,5 +51,5 @@ text {
     color: #081F2C;
 }
 .CorpusCompare{
-    height: calc((100vh - var(--header-h))*(1 - var(--ratio-up)) - var(--div-margin))
+    overflow: hidden;
 }

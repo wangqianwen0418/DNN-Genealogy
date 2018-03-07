@@ -1,8 +1,8 @@
-1.application domains	1.1.computer vision	1.1.1.classification			
+1.application domains	1.1.computer vision	1.1.1.general recognition			
 		1.1.2.segmentation			
 		1.1.3.detection			
 		1.1.4.keypoints			
-		1.1.5.pose estimation			
+		1.1.5.action recognition in video			
 		1.1.6.caption			
 	1.2.NLP	1.2.1.translation			
 		1.2.2.named entity recognition			
@@ -63,32 +63,29 @@
 			2.3.5.4.local attention		
 			2.3.5.5.self attention		
 		2.3.6.memory			
-3.training	3.1.initialization	3.1.1.RandomNormal			
-		3.1.2.TruncatedNormal			
-		3.1.3.RandomNormal			
-		3.1.4.VarianceScaling			
-		3.1.5.Xavier_normal			
-		3.1.6.Xavier_uniform			
-		3.1.7.he_normal			
-		3.1.8.he_uniform			
-		3.1.9.lecun_normal			
-		3.1.10.lecun_uniform			
-		3.1.11.dirac			
-	3.2.optimization	3.2.1.SGD			
+3.training	3.1.Initialization	3.1.1.Orthogonal			
+		3.1.2.Xavier Normal			
+		3.1.3.Xavier Uniform			
+		3.1.4.He Normal			
+		3.1.5.He Uniform			
+		3.1.6.Lecun Normal			
+		3.1.7.Lecun Uniform			
+	3.2.Optimization	3.2.1.SGD			
 		3.2.2.Adam			
 		3.2.3.RMSprop			
-	3.3.loss function	3.3.1.L1			
+		3.2.4.Nesterov Momentu			
+	3.3.Loss Function	3.3.1.L1			
 		3.3.2.L2			
-		3.3.3.hinge			
-		3.3.4.cosine			
-		3.3.5.crossentropy			
-	3.4.regularization	3.4.1.dropout			
-		3.4.2.weight decay			
-		3.4.3.drop path			
-		3.4.4.batch normalization			
-		3.4.5.shake-shake			
-		3.4.6.LSR			
-		3.4.7.pre-activation			
-	3.5.	3.5.1.knowledge distilling			
-		3.5.2.auxiliar classifier			
-		3.5.3.intermediate hints			
+		3.3.3.Hinge			
+		3.3.4.Cosine			
+		3.3.5.Cross Entropy			
+		3.3.6.CTC			
+	3.4.Regularization	3.4.1.Dropout			
+		3.4.2.Weight Decay			
+		3.4.3.Drop Path			
+		3.4.4.Data Augmentation			
+		3.4.5.Batch Normalization			
+		3.4.6.Shake-Shake			
+		3.4.7.LSR			
+		3.4.8.DSD			
+		3.4.9.Swapout			

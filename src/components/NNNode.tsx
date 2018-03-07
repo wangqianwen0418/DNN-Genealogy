@@ -38,8 +38,7 @@ export default class NNNode extends React.Component<Props, {}>{
 
         return <g key={node.label} className="Node"
             transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
-            onClick={(e:React.MouseEvent<any>) => {
-                e.stopPropagation()
+            onClick={(e:any) => {
                 e.preventDefault()
                 selectNode(node)
             }}>
@@ -48,9 +47,10 @@ export default class NNNode extends React.Component<Props, {}>{
                 className="Node"
                 rx={1}
                 ry={1}
-                fill="white"
-                stroke={zoomed ? "none" : (isTop ? "#7dc1f2" : "gray")}
-                strokeWidth={selected ? 3 : (isTop ? 3 : 1.5)}
+                fill={"white"}
+                stroke="gray"
+                // stroke={zoomed ? "none" : (isTop ? "#7dc1f2" : "gray")}
+                strokeWidth={selected ? 3 : 1.5}
                 cursor="pointer"
             ></rect>
             {zoomed ?

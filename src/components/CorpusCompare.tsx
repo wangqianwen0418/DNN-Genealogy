@@ -164,7 +164,7 @@ export default class CorpusCompare extends React.Component<Props, State> {
         //       <Menu.Item key="3">3rd menu item</Menu.Item>
         //     </Menu>
         //   )
-        return <div className="CorpusCompare View" ref={(ref)=>{this.ref=ref}}>
+        return <div className="CorpusCompare View ViewBottom" ref={(ref)=>{this.ref=ref}}>
             {/* <svg id="corpus" width="100%" height="100%"> </svg> */}
             {/* <Dropdown overlay={menu} trigger={['hover']}>
                 <a className="ant-dropdown-link" href="#" style={{position: "absolute", right: "10px"}}>

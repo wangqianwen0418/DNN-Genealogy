@@ -90,7 +90,7 @@ class TaxonomyParser:
         dfs_pos = DfsPos(len(self.data) - 1, len(self.data[0]) - 1)
         judge = self.dfs(result, dfs_pos)
         if judge and not dfs_pos.has_next:
-            result_json = json.dumps(result, indent=2)
+            result_json = json.dumps(result, indent=2, sort_keys=True)
             f = open(filepath, 'w')
             f.write(result_json)
             # print(result_json, file=f)

@@ -1,0 +1,7 @@
+.spanInfo, .sub1{
+ font-size: 1.2em;
+ 
+}
+.ant-menu-submenu-title:hover{
+    color:gray !important;
+}

@@ -1,4 +1,4 @@
-import SimpleTree from '../components/SimpleTree';
+import Train from '../components/Train';
 import * as actions from '../actions/';
 import { StoreState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
@@ -16,4 +16,4 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.SelectTrain>) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SimpleTree);
+export default connect(mapStateToProps, mapDispatchToProps)(Train);

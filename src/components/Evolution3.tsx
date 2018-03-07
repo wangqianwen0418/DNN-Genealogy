@@ -26,12 +26,12 @@ const appData = [
         key: "all",
         value: "1."
     }, {
-        label: "non sequence data",
-        key: "non sequence data",
+        label: "Non-Sequential Data",
+        key: "Non-Sequential Data",
         value: "1.1."
     }, {
-        label: "sequence data",
-        key: "sequence data",
+        label: "Sequential Data",
+        key: "Sequential Data",
         value: "1.2."
     }
 ]
@@ -56,8 +56,9 @@ export interface State {
     transY: number
 }
 
-const nodeH = 20, nodeW = 100, margin = nodeW * 0.5, labelL = 10, tabH = 32,
+const nodeH = 60, nodeW = 300, margin = 30, labelL = 10, tabH = 32,
     expandH = 300 + tabH, expandW = 400,
+    r = nodeH/3,
     boxH = 10,
     labelFont = 12,
     textMargin = 20,
@@ -80,7 +81,7 @@ const transitionStyles = {
 
 
 export default class Evolution extends React.Component<Props, State>{
-    private updateEdge: boolean = true; ref: any;x0:number;y0:number;
+    private updateEdge: boolean = true; ref: any; x0: number; y0: number;
     constructor(props: Props) {
         super(props)
         this.getData = this.getData.bind(this)
@@ -122,8 +123,10 @@ export default class Evolution extends React.Component<Props, State>{
                 dif = moment().diff(pub_date, "months")
             d.api = (d.citation / dif) || 0
         })
+        //normalize the api value
+        let maxApi = Math.max(...datum.map(d=>d.api||1))
+        datum.forEach(d=>(d.api=Math.log((d.api||1)/maxApi)+1))
         let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum)
-
         // let appRes = await axios.get('../../data/taxonomy.json')
         // let appData = appRes.data.children[0]
 
@@ -142,21 +145,29 @@ export default class Evolution extends React.Component<Props, State>{
     }
     getDag(datum: NN[], selectedNode: Node | undefined = undefined) {
         let selectedID = selectedNode ? selectedNode.ID : undefined
-        let { pinNodes, scale, transX, transY } = this.state
+        let { pinNodes } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: nodeW * 1.5,
+            ranksep: nodeW / 2,
             marginx: margin,
             marginy: margin,
             rankdir: 'LR',
-            edgesep: nodeH * 2,
-            nodesep: nodeH * 2
+            edgesep: nodeH / 4,
+            nodesep: nodeH * 0.3
             // ranker: "tight-tree"
             // ranker: "longest-path"
         });
         dag.setDefaultEdgeLabel(() => { return {}; });
 
-
+        //control the min value after resizing the nodes, 
+        const resizeNode =(w:number, ratio:number)=>{
+            let newW =  w*ratio
+            if(newW>w/3){
+                return newW
+            }else{
+                return w/3
+            }
+        }
         datum.forEach((node: NN) => {
             // let label = `${layer.name}:${layer.class_name}`
             let selected: boolean = (node.ID == selectedID),
@@ -164,8 +175,8 @@ export default class Evolution extends React.Component<Props, State>{
             dag.setNode(node.ID,
                 {
                     label: node.ID,
-                    width: selected || pinned ? expandW : nodeW,
-                    height: selected || pinned ? expandH : nodeH,
+                    width: (selected || pinned) ? expandW : resizeNode(nodeW, node.api||1),
+                    height: (selected || pinned) ? expandH : resizeNode(nodeH, node.api||1),
                     ID: node.ID,
                     api: node.api,
                     variants: node.variants
@@ -281,7 +292,7 @@ export default class Evolution extends React.Component<Props, State>{
         dagre.layout(dag)
 
         let nodes: Node[] = [], edges: GraphEdge[] = [],
-            height = (dag.graph().height || 0) + 2 * margin,
+            height = (dag.graph().height || 0),
             width = dag.graph().width || 0
         dag.nodes().forEach(v => {
             if (dag.node(v)) {
@@ -295,15 +306,14 @@ export default class Evolution extends React.Component<Props, State>{
             })
 
         let scaleX = this.ref.clientWidth / (width),
-            scaleY = this.ref.clientHeight / (height)
-        if(scale==1){
+            scaleY = this.ref.clientHeight / (height),
             scale = Math.min(
                 scaleX,
                 scaleY
             ),
             transX = scaleX > scaleY ? (this.ref.clientWidth - width * scale) / 2 : 0,
             transY = scaleY > scaleX ? (this.ref.clientHeight - height * scale) / 2 : 0
-        }
+
         return { nodes, edges, height, width, topDoi, topParent, topChild, scale, transX, transY }
     }
     drawNodes(nodes: Node[]) {
@@ -312,10 +322,10 @@ export default class Evolution extends React.Component<Props, State>{
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
         return (<g className="nodes" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
-            {nodes.map((node: Node) => {
+            {nodes.filter(node=>node.width!=expandW).map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
-                    zoomed: boolean = node.width > nodeW
+                    zoomed: boolean = node.width == expandW
 
                 return <NNNode
                     node={node}
@@ -332,9 +342,9 @@ export default class Evolution extends React.Component<Props, State>{
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
-        return nodes.map((node: Node) => {
+        return nodes.filter(node=>node.width == expandW).map((node: Node) => {
             let selected: boolean = (node.ID === selectedID),
-                zoomed: boolean = node.width > nodeW
+                zoomed: boolean = node.width == expandW
             return <ExtendNode
                 zoomed={zoomed}
                 scale={scale}
@@ -357,8 +367,9 @@ export default class Evolution extends React.Component<Props, State>{
 
         let len = points.length
         if (len == 0) { return }
-        let start = `M ${points[0].x} ${points[0].y}`
-        let vias = [];
+        let start = `M ${points[0].x} ${points[0].y}`,
+            vias = [],
+            circles = []
         // // curve
         // for (let i = 0; i < len - 2; i += 2) {
         //     let cPath = [0, 1, 2].map(k => `${points[i + k].x} ${points[i + k].y}`)
@@ -412,13 +423,13 @@ export default class Evolution extends React.Component<Props, State>{
         return <g className='link' key={`${i}_${from}->${to}`}>
             <path
                 id={`${from}->${to}`}
-                strokeLinecap="round"
                 d={pathData}
                 stroke={highlight ? "gray" : "gray"}
                 fill='none'
-                strokeWidth={highlight ? 2 : 1}
+                strokeWidth={highlight ? 1 : 1}
                 className="Edge"
-            />
+            >
+            </path>
 
             <path
                 id={`label_${from}->${to}`}
@@ -467,6 +478,7 @@ export default class Evolution extends React.Component<Props, State>{
                 <path
                     strokeWidth={10}
                     // opacity={0}
+                    className="edgeMask"
                     stroke="transparent"
                     fill="none"
                     d={pathData}
@@ -552,25 +564,25 @@ export default class Evolution extends React.Component<Props, State>{
             transX, transY
         })
     }
-    mouseDown(e:React.MouseEvent<any>){
-        e.stopPropagation()
-        e.preventDefault()
+    mouseDown(e: React.MouseEvent<any>) {
+        // e.stopPropagation()
+        // e.preventDefault()
         console.info("graph mouse down")
         document.addEventListener("mousemove", this.pan)
         this.x0 = e.clientX
         this.y0 = e.clientY
     }
-    pan(e:any){
-        let {transX, transY } = this.state
+    pan(e: any) {
+        let { transX, transY } = this.state
         transX += e.clientX - this.x0
         transY += e.clientY - this.y0
         this.x0 = e.clientX
         this.y0 = e.clientY
-        this.setState({transX, transY})
+        this.setState({ transX, transY })
     }
-    mouseUp(e:React.MouseEvent<any>){
-        e.stopPropagation()
-        e.preventDefault()
+    mouseUp(e: React.MouseEvent<any>) {
+        // e.stopPropagation()
+        // e.preventDefault()
         document.removeEventListener("mousemove", this.pan)
     }
     render() {
@@ -584,7 +596,7 @@ export default class Evolution extends React.Component<Props, State>{
         return <div
             className="Evolution View"
             onWheel={this.handleMouseWheel}
-            onMouseDown = {this.mouseDown}
+            onMouseDown={this.mouseDown}
             onMouseUp={this.mouseUp}
             onMouseLeave={this.mouseUp}
             ref={(ref) => this.ref = ref}>
@@ -607,20 +619,22 @@ export default class Evolution extends React.Component<Props, State>{
                 onChange={this.onChange}
             />
             <Button
+                size="small"
                 onClick={() => this.selectNode(undefined)}
                 style={{ position: "absolute", left: "20px", top: "60px", zIndex: 100 }}
             >
                 Reset
             </Button>
             <div className="container">
-                <div className="extendNodes" 
-                style={{
-                    height:this.ref?this.ref.clientHeight:0, 
-                    width:this.ref?this.ref.clientWidth:0,
-                    overflow:"hidden",position:"absolute"
-                }}>
+                <div className="extendNodes"
+                    style={{
+                        // height:this.ref?this.ref.clientHeight:0, 
+                        // width:this.ref?this.ref.clientWidth:0,
+                        position:"relative"
+                    }}>
                     {this.drawExtendNodes(nodes)}
                 </div>
+                {/* {this.drawExtendNodes(nodes)} */}
                 <svg
                     //alway show the whole dag
                     width="100%" height="100%"
@@ -630,9 +644,27 @@ export default class Evolution extends React.Component<Props, State>{
 
                 >
 
+                    <defs>
+                        <marker id='red' orient='auto' markerWidth={4*r} markerHeight={4*r}
+                            refX={2*r} refY={2*r}>
+                            <circle r={r} fill='red' />
+                        </marker>
+                        <marker id='blue' orient='auto' markerWidth={4*r} markerHeight={4*r}
+                            refX={2*r} refY={2*r}>
+                            <circle r={r} fill='blue' />
+                        </marker>
+                        <marker id='black' orient='auto' markerWidth={4*r} markerHeight={4*r}
+                            refX={2*r} refY={2*r}>
+                            <circle r={r} fill='black' />
+                        </marker>
+                    </defs>
+                                        
                     {this.drawEdges(edges)}
                     {this.drawNodes(nodes)}
+
                 </svg>
+                
+
             </div>
         </div>
     }

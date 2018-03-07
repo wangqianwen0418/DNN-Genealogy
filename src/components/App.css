@@ -9,6 +9,11 @@
 .View{
     background-color: white;
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.12), 0px 4px 4px 0px rgba(0,0,0,0.24);
-    margin:10px 8px;
+    margin:8px;
     z-index: 5;
+}
+
+.ViewBottom {
+    overflow: auto;
+    height: calc((100vh - var(--header-h))*(1 - var(--ratio-up)))
 }

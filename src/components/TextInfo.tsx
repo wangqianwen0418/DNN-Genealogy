@@ -1,6 +1,5 @@
 import  * as React from "react";
 import {Card} from "antd";
-import "./TextInfo.css";
 import "./App.css";
 
 export interface Props{
@@ -13,7 +12,7 @@ export default class TextInfo extends React.Component<Props, {}>{
         return <Card 
         bordered={false}
         title={title} 
-        className="TextInfo View"
+        className="TextInfo View ViewBottom"
         >
             {content}
         </Card>
