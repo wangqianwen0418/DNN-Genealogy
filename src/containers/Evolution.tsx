@@ -1,7 +1,8 @@
 import Evolution from '../components/Evolution3';
 import * as actions from '../actions/';
 import { StoreState } from '../types/index';
-import { connect, Dispatch } from 'react-redux';
+import { connect, Dispatch } from 'react-redux'
+import { NN } from '../types'
 
 export function mapStateToProps(state:StoreState) {
     return {
@@ -11,9 +12,10 @@ export function mapStateToProps(state:StoreState) {
     };
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.SelectNN>) {
+export function mapDispatchToProps(dispatch: Dispatch<actions.SelectNN|actions.SelectDatabase>) {
     return {
-        onSelect:(nns:string[])=>{dispatch(actions.selectNN(nns))}
+        onSelectNN:(nn:NN)=>{dispatch(actions.selectNN(nn))},
+        onSelectDatabase:(db:string)=>{dispatch(actions.selectDatabase(db))}
     }
 }
 

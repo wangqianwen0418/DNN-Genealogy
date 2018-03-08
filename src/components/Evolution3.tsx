@@ -155,9 +155,9 @@ export default class Evolution extends React.Component<Props, State>{
             marginy: margin,
             rankdir: 'LR',
             edgesep: nodeH / 4,
-            nodesep: nodeH * 0.3
+            nodesep: nodeH * 0.3,
             // ranker: "tight-tree"
-            // ranker: "longest-path"
+            ranker: "longest-path"
         });
         dag.setDefaultEdgeLabel(() => { return {}; });
 
@@ -440,10 +440,13 @@ export default class Evolution extends React.Component<Props, State>{
                 d={pathData}
             />
             {/* a trick, two transition: one for fade in, one for fade out */}
+            <Tooltip title={label_l}>
+            <g className="edgeLable" cursor="pointer">
             <Transition in={this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                     // console.info(status)
                     return <text className="link_info fadeIn"
+                        dy="-2"
                         textAnchor="middle"
                         style={{
                             fontSize: labelFont,
@@ -476,8 +479,10 @@ export default class Evolution extends React.Component<Props, State>{
                     </text>
                 }}
             </Transition>
+            </g>
+            </Tooltip>
             {/* mask over edge for better hover responsive */}
-            <Tooltip title={label_l}>
+            {/* <Tooltip title={label_l}>
                 <path
                     strokeWidth={10}
                     // opacity={0}
@@ -486,7 +491,7 @@ export default class Evolution extends React.Component<Props, State>{
                     fill="none"
                     d={pathData}
                 />
-            </Tooltip>
+            </Tooltip> */}
         </g>
 
     }

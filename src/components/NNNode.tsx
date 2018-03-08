@@ -36,6 +36,9 @@ export default class NNNode extends React.Component<Props, {}>{
                 strokeWidth={1.5}
             /> : []
 
+        let capFirstLetter = (name:string)=>{
+            return name.charAt(0).toUpperCase() + name.slice(1)
+        }
         return <g key={node.label} className="Node"
             transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
             onClick={(e:any) => {
@@ -57,13 +60,13 @@ export default class NNNode extends React.Component<Props, {}>{
                 <g/>:
                 <g>
                     <Tooltip title={tooLong ? node.label : null}><text textAnchor="middle"
-                        fontSize={0.7 * nodeH}
+                        fontSize={0.7 * node.height}
                         cursor="pointer"
                         x={node.width / 2}
                         y={node.height - 0.1 * nodeH}
                     >
                         {
-                            tooLong ? (node.label.slice(0, labelL) + '...') : node.label
+                            capFirstLetter(tooLong ? (node.label.slice(0, labelL) + '...') : node.label) 
                         }
                     </text>
                     </Tooltip>

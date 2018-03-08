@@ -12,14 +12,8 @@ const transitionStyles = {
     entering: { opacity: 0 },
     entered: { opacity: 1 },
     exited: { opacity: 0 }
-};
-const menu = (
-    <Menu>
-        <Menu.Item key="1">text intro</Menu.Item>
-        <Menu.Item key="2">compare performance</Menu.Item>
-        <Menu.Item key="3">detailed structure</Menu.Item>
-    </Menu>
-);
+}
+
 export interface Props {
     node: Node,
     selected: boolean,
@@ -32,6 +26,7 @@ export interface Props {
     transY:number,
     // apiArr: number[],
     selectNode: (node: Node) => void,
+    onclickMenu: (node: Node, menu: string) => void,    
     pinNode:(node:Node)=>void
 }
 
@@ -49,7 +44,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         }
     }
     render() {
-        let { node, margin, selected, scale, duration, zoomed, selectNode, pinNode, transX, transY } = this.props
+        let { node, margin, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY } = this.props
         {/* <div style={{ height: node.height }}>
             <img
                 className="abstract Node"
@@ -60,6 +55,19 @@ export default class ExtendNode extends React.Component<Props, State>{
 
         </div> */}
         let {showpin, pin} = this.state
+
+        let onclick = function(item :{ key: string }) {
+            console.log('click')
+            onclickMenu(node, item.key)
+        }
+        const menu = (
+            <Menu onClick={onclick}>
+                <Menu.Item key="text">text intro</Menu.Item>
+                <Menu.Item key="compare">compare performance</Menu.Item>
+                <Menu.Item key="detailed">detailed structure</Menu.Item>
+            </Menu>
+        )
+
         return <Transition in={zoomed} timeout={duration}>
             {(status: any) => {
                 return <div className="ExtendNode Node"

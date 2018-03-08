@@ -2,43 +2,46 @@ import * as React from "react"
 import "./CorpusCompare.css"
 import axios from "axios"
 import * as d3 from "d3"
+import { NN } from "../types"
 // import { Dropdown, Icon, Menu } from "antd"
 
 export interface Props {
-    nns: string[],
+    database: string,
+    nn: NN,
 }
 
 export interface State {
-    selected: string[],
-    datum: any
+    datum: any,
+    database: string,
+    nns: string[],
+    performance: any[],
 }
-//const margin = 30
+
+const sequenceDatasets = [],
+      nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top 5']
+
 export default class CorpusCompare extends React.Component<Props, State> {
     private ref:HTMLDivElement|null
     constructor(props: Props) {
         super(props)
         this.state = {
-            selected: [],
+            database: "nonsequence",
+            nns: [],
+            performance: [],
             datum: {}
         }
-        this.selectDataset = this.selectDataset.bind(this)
         this.draw = this.draw.bind(this)
-    }
-
-    selectDataset(name: string) {
-        if (this.state.selected.indexOf(name) === -1)
-            this.state.selected.push(name)
+        this.updateData = this.updateData.bind(this)
     }
 
     async getData() {
-        let res = await axios.get("../../data/corpus_sample.json")
+        let res = await axios.get("../../data/survey.json")
         let datum = res.data
         this.setState({ datum })
-
     }
 
     componentWillMount() {
-        this.getData()
+        // this.getData()
     }
 
     componentDidMount() {
@@ -51,8 +54,32 @@ export default class CorpusCompare extends React.Component<Props, State> {
         d3.select(".toolTip").remove()
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps: Props, prevState: State) {
+        if (prevProps.nn === this.props.nn)
+            return
+        this.updateData()
         this.draw()
+    }
+
+    updateData() {
+        let database = this.props.database, nns = this.state.nns, performance = this.state.performance
+        if (database === 'nonsequence') {
+            if (performance.length === 0) {
+                console.log('aaaa')
+                for (let dataset of nonsequenceDatasets)
+                    performance.push({'dataset': dataset})
+            }
+        }
+        for (let name of this.props.nn.names) {
+            if (nns.indexOf(name.name) === -1) {
+                nns.push(name.name)
+                for (let index in nonsequenceDatasets) {
+                    performance[index][name.name] = name[nonsequenceDatasets[index]] ? name[nonsequenceDatasets[index]] : 0
+                }
+            }
+        }
+        console.log(performance, '123456')        
+        this.setState({ database, nns, performance})        
     }
 
     draw() {
@@ -80,8 +107,9 @@ export default class CorpusCompare extends React.Component<Props, State> {
         let g = svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         
-        let data = this.state.datum,
-            keys = this.props.nns
+        let data = this.state.performance,
+            keys = this.state.nns
+        //    keys = ["A", "B"]
 
         x.domain([0, 100])
         y.domain(data.map(((d: any) => d.dataset))).padding(0.1)
