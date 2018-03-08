@@ -17,6 +17,7 @@ export interface Props {
     selected: boolean,
     isTop: boolean,
     zoomed: boolean,
+    hovered: boolean,
     apiArr: number[],
     selectNode: (node: Node) => void
 }
@@ -24,15 +25,15 @@ export interface Props {
 
 export default class NNNode extends React.Component<Props, {}>{
     render() {
-        let { node, zoomed, selected, isTop, selectNode, apiArr } = this.props,
+        let { node, zoomed, selected, isTop, hovered, selectNode, apiArr } = this.props,
             tooLong: boolean = node.label.length > labelL,
             bg: JSX.Element | any = (node.variants.length > 0 && !zoomed)? <rect width={node.width} height={node.height}
-                className="NodeBg"
+                className={`Node NodeBg ${hovered?"pop":'no'}`}
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
                 rx={1}
                 ry={1}
                 fill="white"
-                stroke={"gray"}
+                stroke={hovered?"#111":"gray"}
                 strokeWidth={1.5}
             /> : []
 
@@ -46,14 +47,14 @@ export default class NNNode extends React.Component<Props, {}>{
                 selectNode(node)
             }}>
             {bg}
-            <rect width={node.width} height={node.height}
-                className="Node"
+            <rect width={node.width} height={node.height}             
+                className={`Node ${hovered?"pop":'no'}`}
                 rx={1}
                 ry={1}
                 fill={"white"}
-                stroke="gray"
+                stroke={hovered?"#111":"gray"}
                 // stroke={zoomed ? "none" : (isTop ? "#7dc1f2" : "gray")}
-                strokeWidth={selected ? 3 : 1.5}
+                strokeWidth={hovered ? 3 : 1.5}
                 cursor="pointer"
             ></rect>
             {zoomed ?
@@ -63,7 +64,7 @@ export default class NNNode extends React.Component<Props, {}>{
                         fontSize={0.7 * node.height}
                         cursor="pointer"
                         x={node.width / 2}
-                        y={node.height - 0.1 * nodeH}
+                        y={node.height - 0.15 * node.height}
                     >
                         {
                             capFirstLetter(tooLong ? (node.label.slice(0, labelL) + '...') : node.label) 
