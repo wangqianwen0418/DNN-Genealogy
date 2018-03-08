@@ -2,7 +2,7 @@
 
 import { AllActions } from '../actions';
 import { StoreState } from '../types';
-import { SELECT_DATABASE, SELECT_APP, SELECT_ARC, SELECT_TRAIN, SELECT_NN } from '../constants';
+import { SELECT_DATABASE, SELECT_APP, SELECT_ARC, SELECT_TRAIN, SELECT_NN, SELECT_NNMOTION} from '../constants';
 
 export function reducer(state: StoreState, action: AllActions): StoreState {
   switch (action.type) {
@@ -20,7 +20,9 @@ export function reducer(state: StoreState, action: AllActions): StoreState {
     case SELECT_TRAIN:  
       return { ...state, train:action.node}
     case SELECT_NN:
-      return { ...state, nn:action.nn}
+      return { ...state, nn:action.nn, op:0}
+    case SELECT_NNMOTION:
+      return { ...state, op:action.op}
     default:
       return state;
   }

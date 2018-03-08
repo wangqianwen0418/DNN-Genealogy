@@ -18,6 +18,7 @@ export interface Props {
     app: string,
     train: string,
     onSelectNN: (nn: NN) => void,
+    onSelectNNMotion: (op: number) => void,
     onSelectDatabase: (db: string) => void
 }
 
@@ -554,6 +555,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     selectNode(selectedNode: Node | undefined) {
         let { datum } = this.state
+        let { onSelectNN } = this.props
         this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
         //     if (nodeID == d.ID) {
@@ -578,6 +580,18 @@ export default class Evolution extends React.Component<Props, State>{
             topChild, topParent, topDoi, scale,
             transX, transY
         })
+        
+        if (selectedNode) {
+            for (let nn of datum) {
+                if (nn.ID === selectedNode.label) {
+                    onSelectNN(nn)
+                    console.log('selected a node')
+                }
+            }
+        }
+        else {
+            console.log('select undefined')
+        }
     }
     mouseDown(e:React.MouseEvent<any>) {
         e.stopPropagation()
@@ -602,19 +616,22 @@ export default class Evolution extends React.Component<Props, State>{
     }
     onclickMenu(selectedNode: Node, menu: string) {
         let { datum } = this.state
-        let { onSelectNN } = this.props        
+        
         switch (menu) {
             case 'text':
                 console.log('text')
                 break
             case 'compare':
-                for (let nn of datum)
+                for (let nn of datum) {
                     if (nn.ID === selectedNode.label) {
-                        onSelectNN(nn)                
+                        // do nothing
                     }
+                }
                 break
             case 'detailed':
                 console.log('detailed')
+                break
+            default:
                 break
         }
     }

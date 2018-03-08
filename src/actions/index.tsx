@@ -55,5 +55,17 @@ export function selectNN(nn:NN):SelectNN{
         nn
     }
 }
+
+export interface SelectNNMotion{
+    type:constants.SELECT_NNMOTION,
+    op:number
+}
+export function selectNNMotion(op:number):SelectNNMotion{
+    return {
+        type:constants.SELECT_NNMOTION,
+        op
+    }
+}
+
 // export type EnthusiasmAction = IncrementEnthusiasmAction | DecrementEnthusiasmAction
-export type AllActions = SelectDatabase|SelectApp|SelectArc|SelectTrain|SelectNN
+export type AllActions = SelectDatabase|SelectApp|SelectArc|SelectTrain|SelectNN|SelectNNMotion

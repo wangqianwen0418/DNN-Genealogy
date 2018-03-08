@@ -1,20 +1,26 @@
-import  * as React from "react";
+import * as React from "react";
 import {Card} from "antd";
 import "./App.css";
+import { NN } from "../types"
 
 export interface Props{
-    title:string,
-    content: string
+    database: string,
+    nn: NN
 }
+
 export default class TextInfo extends React.Component<Props, {}>{
+    constructor(props: Props) {
+        super(props)
+    }
+
     render(){
-        let {title, content}=this.props
+        console.log('render!')
         return <Card 
         bordered={false}
-        title={title} 
+        title="Neural Network" 
         className="TextInfo View ViewBottom"
         >
-            {content}
+        hello
         </Card>
     }
 }

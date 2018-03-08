@@ -8,6 +8,7 @@ import { NN } from "../types"
 export interface Props {
     database: string,
     nn: NN,
+    op: number
 }
 
 export interface State {
@@ -55,7 +56,7 @@ export default class CorpusCompare extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
-        if (prevProps.nn === this.props.nn)
+        if (prevProps.nn === this.props.nn || this.props.op !== 1)
             return
         this.updateData()
         this.draw()

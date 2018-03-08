@@ -1,5 +1,3 @@
-
-
 export const IMPORT_MODEL = "IMPORT_MODEL" 
 export type IMPORT_MODEL = typeof IMPORT_MODEL
 
@@ -20,6 +18,10 @@ export type SELECT_APP = typeof SELECT_APP
 
 export const SELECT_NN = "SELECT_NN" 
 export type SELECT_NN = typeof SELECT_NN
+
+export const SELECT_NNMOTION = "SELECT_NNMOTION"
+export type SELECT_NNMOTION = typeof SELECT_NNMOTION
+
 // style config
 export const BG_COLOR="#333";
 export const FG_COLOR=["#49a9ee", "#F29C30", "#75C277", "#DA5246"] 
