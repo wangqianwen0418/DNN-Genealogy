@@ -69,7 +69,7 @@ const nodeH = 60, nodeW = 300, margin = 30, labelL = 10, tabH = 32,
 const duration = 1000;
 
 const defaultStyle = {
-    transition: `opacity ${duration}ms ease-in-out`,
+    transition: `opacity 100ms ease-in-out`,
     opacity: 0
 }
 
@@ -582,7 +582,6 @@ export default class Evolution extends React.Component<Props, State>{
     mouseDown(e:React.MouseEvent<any>) {
         e.stopPropagation()
         e.preventDefault()
-        console.info("graph mouse down")
         document.addEventListener("mousemove", this.pan)
         this.x0 = e.clientX
         this.y0 = e.clientY
