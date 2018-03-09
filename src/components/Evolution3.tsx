@@ -38,8 +38,6 @@ const appData = [
     }
 ]
 
-
-
 export interface State {
     datum: NN[],
     nodes: Node[],
@@ -581,7 +579,7 @@ export default class Evolution extends React.Component<Props, State>{
             transX, transY
         })
         
-        if (selectedNode) {
+        /*if (selectedNode) {
             for (let nn of datum) {
                 if (nn.ID === selectedNode.label) {
                     onSelectNN(nn)
@@ -591,7 +589,7 @@ export default class Evolution extends React.Component<Props, State>{
         }
         else {
             console.log('select undefined')
-        }
+        }*/
     }
     mouseDown(e:React.MouseEvent<any>) {
         e.stopPropagation()
@@ -616,17 +614,23 @@ export default class Evolution extends React.Component<Props, State>{
     }
     onclickMenu(selectedNode: Node, menu: string) {
         let { datum } = this.state
-        
+        let { onSelectNN } = this.props
+        let { onSelectNNMotion } = this.props
+
+        for (let nn of datum) {
+            if (nn.ID === selectedNode.label) {
+                onSelectNN(nn)
+            }
+        }
+
         switch (menu) {
             case 'text':
                 console.log('text')
+                onSelectNNMotion(2)
                 break
             case 'compare':
-                for (let nn of datum) {
-                    if (nn.ID === selectedNode.label) {
-                        // do nothing
-                    }
-                }
+                console.log('compare')
+                onSelectNNMotion(1)
                 break
             case 'detailed':
                 console.log('detailed')
