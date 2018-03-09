@@ -53,7 +53,8 @@ export interface State {
     pinNodes: string[],
     scale: number,
     transX: number,
-    transY: number
+    transY: number,
+    hoverEdge: string
 }
 
 const nodeH = 60, nodeW = 300, margin = 30, labelL = 10, tabH = 32,
@@ -68,7 +69,7 @@ const nodeH = 60, nodeW = 300, margin = 30, labelL = 10, tabH = 32,
 const duration = 1000;
 
 const defaultStyle = {
-    transition: `opacity ${duration}ms ease-in-out`,
+    transition: `opacity 100ms ease-in-out`,
     opacity: 0
 }
 
@@ -107,7 +108,8 @@ export default class Evolution extends React.Component<Props, State>{
             scale: 1,
             pinNodes: [],
             transX: 0,
-            transY: 0
+            transY: 0,
+            hoverEdge: ''
         }
     }
     async getData() {
@@ -153,8 +155,8 @@ export default class Evolution extends React.Component<Props, State>{
             marginx: margin,
             marginy: margin,
             rankdir: 'LR',
-            edgesep: nodeH / 4,
-            nodesep: nodeH * 0.3,
+            edgesep: nodeH * .3,
+            nodesep: nodeH * .5,
             // ranker: "tight-tree"
             ranker: "longest-path"
         });
@@ -318,21 +320,24 @@ export default class Evolution extends React.Component<Props, State>{
         return { nodes, edges, height, width, topDoi, topParent, topChild, scale, transX, transY }
     }
     drawNodes(nodes: Node[]) {
-        let { selectedNode, topDoi, scale, transX, transY } = this.state,
+        let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
-
+            
         return (<g className="nodes" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
             {nodes.filter(node=>node.width!=expandW).map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
-                    zoomed: boolean = node.width == expandW
+                    zoomed: boolean = node.width == expandW,
+                    hoverNodes = hoverEdge.split("->"),
+                    hovered = hoverNodes.indexOf(node.label)!=-1
 
                 return <NNNode
                     node={node}
                     selected={selected}
                     isTop={isTop}
                     zoomed={zoomed}
+                    hovered={hovered}
                     apiArr={apiArr}
                     selectNode={this.selectNode} />
             })}
@@ -363,7 +368,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     oneEdge(edge: GraphEdge, i: number) {
         let { points, from, to, label_s, label_l } = edge,
-            { selectedNode } = this.state,
+            { selectedNode, hoverEdge } = this.state,
             selectedID = selectedNode ? selectedNode.label : undefined
 
 
@@ -420,15 +425,16 @@ export default class Evolution extends React.Component<Props, State>{
             // let pathData = `M ${points[0].x} ${points[0].y} 
             //                 L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
             highlight: boolean = ((from == selectedID) || (to == selectedID)),
+            hovered: boolean = hoverEdge==`${from}->${to}`,
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
 
         return <g className='link' key={`${i}_${from}->${to}`}>
             <path
                 id={`${from}->${to}`}
                 d={pathData}
-                stroke={highlight ? "gray" : "gray"}
+                stroke={hovered ? "#111" : "gray"}
                 fill='none'
-                strokeWidth={highlight ? 1 : 1}
+                strokeWidth={hovered ? 2 : 1}
                 className="Edge"
             >
             </path>
@@ -440,12 +446,15 @@ export default class Evolution extends React.Component<Props, State>{
             />
             {/* a trick, two transition: one for fade in, one for fade out */}
             <Tooltip title={label_l}>
-            <g className="edgeLable" cursor="pointer">
+            <g className="edgeLable" cursor="pointer"
+            onMouseOver={(e:React.MouseEvent<any>)=>this.setState({hoverEdge:`${from}->${to}`})}
+            onMouseLeave={(e:React.MouseEvent<any>)=>this.setState({hoverEdge:``})}
+            >
             <Transition in={this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                     // console.info(status)
                     return <text className="link_info fadeIn"
-                        dy="-2"
+                        dy="-3"
                         textAnchor="middle"
                         style={{
                             fontSize: labelFont,
@@ -594,7 +603,6 @@ export default class Evolution extends React.Component<Props, State>{
     mouseDown(e:React.MouseEvent<any>) {
         e.stopPropagation()
         e.preventDefault()
-        console.info("graph mouse down")
         document.addEventListener("mousemove", this.pan)
         this.x0 = e.clientX
         this.y0 = e.clientY

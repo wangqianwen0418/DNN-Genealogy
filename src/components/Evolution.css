@@ -4,10 +4,7 @@
     /* overflow: auto; */
 }
 .Node, .Edge, .NodeBg {
-    /* -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color; */
-    -webkit-transition-duration: 1.0s;
-    -webkit-transition-timing-function: ease-in-out;
-    /* transition-property: width height background-color font-size left top transform -webkit-transformv color; */
+    transition-property: width height font-size left top;
     transition-duration: 1.0s;
     transition-timing-function: ease-in-out;
 }
@@ -49,4 +46,27 @@
     font-size: 6px;
     padding: 2px 1px!important;
     /* margin: 0px 0px 0px 10px!important; */
+}
+
+
+/* css highlight animation */
+@keyframes bumb{
+    0% {
+        transform: translate(0px, 0px);
+        animation-timing-function:ease-in-out
+    }
+ 
+    50% {
+        transform: translate(0px, -2px);
+        animation-timing-function:ease-in-out
+    }
+ 
+    100% {
+        transform: translate(0px, 0px);
+        animation-timing-function:ease-in-out
+    }
+}
+
+.pop{
+    animation: bumb 800ms;
 }
