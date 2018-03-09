@@ -24,11 +24,34 @@ export interface Props {
 
 
 export default class NNNode extends React.Component<Props, {}>{
+    private dragFlag:boolean=false
+    constructor(props:Props){
+        super(props)
+        this.mouseDown = this.mouseDown.bind(this)
+        this.mouseMove = this.mouseMove.bind(this)
+        this.mouseUp = this.mouseUp.bind(this)
+    }
+    //prevent drag trigger the onclick event
+    mouseDown(e:React.MouseEvent<any>){
+        this.dragFlag = false
+        document.addEventListener("mousemove", this.mouseMove)
+    }
+    mouseMove(e:MouseEvent){
+        this.dragFlag = true
+    }
+    mouseUp(e:React.MouseEvent<any>, node:Node){
+        document.removeEventListener("mousemove", this.mouseMove)
+        if(!this.dragFlag){
+            this.props.selectNode(node)
+        }else{
+            this.dragFlag = false
+        }
+    }
     render() {
         let { node, zoomed, selected, isTop, hovered, selectNode, apiArr } = this.props,
             tooLong: boolean = node.label.length > labelL,
             bg: JSX.Element | any = (node.variants.length > 0 && !zoomed)? <rect width={node.width} height={node.height}
-                className={`Node NodeBg ${hovered?"pop":'no'}`}
+                className="NodeBg"
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
                 rx={1}
                 ry={1}
@@ -42,10 +65,10 @@ export default class NNNode extends React.Component<Props, {}>{
         }
         return <g key={node.label} className="Node"
             transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
-            onClick={(e:any) => {
-                e.preventDefault()
-                selectNode(node)
-            }}>
+            onMouseDown={this.mouseDown}
+            onMouseUp={(e)=>{this.mouseUp(e, node)}}
+
+            >
             {bg}
             <rect width={node.width} height={node.height}             
                 className={`Node ${hovered?"pop":'no'}`}

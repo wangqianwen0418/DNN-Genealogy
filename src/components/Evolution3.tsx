@@ -129,7 +129,10 @@ export default class Evolution extends React.Component<Props, State>{
         })
         //normalize the api value
         let maxApi = Math.max(...datum.map(d=>d.api||1))
-        datum.forEach(d=>(d.api=Math.log((d.api||1)/maxApi)+1))
+        datum.forEach(d=>{
+            d.api=Math.log((d.api||1)/maxApi)+1
+            d.doi = d.api
+        })
         let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum)
         // let appRes = await axios.get('../../data/taxonomy.json')
         // let appData = appRes.data.children[0]
@@ -153,7 +156,7 @@ export default class Evolution extends React.Component<Props, State>{
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
             ranksep: nodeW / 2,
-            marginx: margin,
+            marginx: margin*2,
             marginy: margin,
             rankdir: 'LR',
             edgesep: nodeH * .3,
@@ -179,8 +182,8 @@ export default class Evolution extends React.Component<Props, State>{
             dag.setNode(node.ID,
                 {
                     label: node.ID,
-                    width: (selected || pinned) ? expandW : resizeNode(nodeW, node.api||1),
-                    height: (selected || pinned) ? expandH : resizeNode(nodeH, node.api||1),
+                    width: (selected || pinned) ? expandW : resizeNode(nodeW, node.doi||1),
+                    height: (selected || pinned) ? expandH : resizeNode(nodeH, node.doi||1),
                     ID: node.ID,
                     api: node.api,
                     variants: node.variants
@@ -563,6 +566,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     selectNode(selectedNode: Node | undefined) {
         let { datum } = this.state
+        console.info("select node")
         this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
         //     if (nodeID == d.ID) {
