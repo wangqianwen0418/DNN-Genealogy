@@ -21,7 +21,7 @@ export interface State {
 }
 
 let simulation = d3.forceSimulation()
-    .force("charge", d3.forceManyBody().strength(-10))
+    .force("charge", d3.forceManyBody().strength(-1))
 
 const sequenceDatasets = ['abc'],
       nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top 5']
@@ -36,6 +36,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             nns: [],
             attr_names: nonsequenceDatasets
         }
+        this.selectNode = this.selectNode.bind(this)
     }
 
     arc(x: number = 0, y: number = 0, r: number, startAngle: number, endAngle: number) {
@@ -70,9 +71,19 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         return y / len
     }
 
+    selectNode(d: Dot) {
+        let { selected } = this.state
+        let name_idx = selected.indexOf(d.name)
+        if (name_idx === -1) {
+            selected.push(d.name)
+        } else {
+            selected.splice(name_idx, 1)
+        }
+        this.setState({ selected })
+    }
+
     componentWillReceiveProps(nextProps: Props) {
-        console.log('will receive props', this.props, nextProps)
-        if (nextProps.op !== 1)
+        if (nextProps.op !== 1 || this.props === nextProps)
             return
         this.updateData(nextProps.nn)
     }
@@ -88,51 +99,47 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         } else {
             attr_names = sequenceDatasets
         }
+        let newnns: Dot[] = []
         for (let name of nn.names) {
             let tmpAttr: number[] = []
             for (let index in attr_names) {
                 tmpAttr[index] = name[attr_names[index]] ? name[attr_names[index]] : 0
             }
-            nns.push({
+            newnns.push({
                 name: name.name,
                 attr: tmpAttr
             })
         }
-        this.setState({ attr_names, nns })
-    }
 
-    draw() {
-        let { selected, nns } = this.state
-        let selectNode = (d: Dot) => {
-            let name_idx = selected.indexOf(d.name)
-            if (name_idx === -1) {
-                selected.push(d.name)
-            } else {
-                selected.splice(name_idx, 1)
-            }
-            this.setState({ selected })
-        }
-        selectNode  = selectNode.bind(this)
-        let node_r = this.node_r
-
+        let that = this
         this.nodes = d3.select('.compareView')
             .selectAll('.dot')
             .attr('class', 'dot')
-            .data(nns)
+            .data(newnns)
             .enter().append('circle')
-            .attr('r', node_r)
+            .attr('r', that.node_r)
             .attr('cx', (d, i) => this.getForceX(d.attr) || 0)
             .attr('cy', (d, i) => this.getForceY(d.attr) || 0)
             .attr('fill', (d) => '#666')
             .attr('title', d => d.name)
             .on('click', function(d) {
-                let selected_idx: number = selected.indexOf(d.name)
+                let selected_idx: number = that.state.selected.indexOf(d.name)
                 d3.select(this)
                     .attr('fill', (d: Dot) => selected_idx === -1 ? getColor(d.name) : '#666')
-                    .attr('r', (d) => selected_idx === -1 ? node_r * 1.3 : node_r)
+                    .attr('r', (d) => selected_idx === -1 ? that.node_r * 1.3 : that.node_r)
                     .style('z-index', selected_idx === -1 ? 100 : 3)
-                selectNode(d)
+                that.selectNode(d)
             })
+
+        nns = nns.concat(newnns)
+
+        this.setState({ attr_names, nns })
+    }
+
+    draw() {
+        let { selected, nns } = this.state
+        let node_r = this.node_r
+
         simulation
             .nodes(nns)
             .force('collide', d3.forceCollide().strength(.5).radius(this.node_r * 1.1).iterations(3))
