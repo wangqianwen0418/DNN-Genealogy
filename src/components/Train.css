@@ -1,7 +1,10 @@
 .spanInfo, .sub1{
- font-size: 1.2em;
+ font-size: 0.8em;
  
 }
 .ant-menu-submenu-title:hover{
     color:gray !important;
+}
+.ant-card-body{
+    padding:4px;
 }

@@ -58,13 +58,13 @@ export interface State {
     hoverEdge: string
 }
 
-const nodeH = 60, nodeW = 300, margin = 30, labelL = 10, tabH = 32,
-    expandH = 300 + tabH, expandW = 400,
+const nodeH = 40, nodeW = 200, margin = 30, labelL = 20, tabH = 32,
+    expandH = 180 + tabH, expandW = 240,
     r = nodeH/3,
     boxH = 10,
-    labelFont = 12,
+    labelFont = 10,
     textMargin = 20,
-    r_api = 1, r_dist = -100, r_diff = 0.01 //factors for DOI calculation
+    r_api = 1, r_dist = -0.1, r_diff = 0 //factors for DOI calculation
 
 // for the lablel fade in/out animiation 
 const duration = 1000;
@@ -120,8 +120,6 @@ export default class Evolution extends React.Component<Props, State>{
 
         datum = datum.filter((d: NN) => d.application[0].startsWith(appValue))
         datum.forEach((d: NN) => {
-            d.width = nodeW
-            d.height = nodeH
 
             let pub_date = moment(d.date, 'YYYY-MM-DD'),
                 dif = moment().diff(pub_date, "months")
@@ -130,7 +128,7 @@ export default class Evolution extends React.Component<Props, State>{
         //normalize the api value
         let maxApi = Math.max(...datum.map(d=>d.api||1))
         datum.forEach(d=>{
-            d.api=Math.log((d.api||1)/maxApi)+1
+            d.api=Math.log2((d.api||1)/maxApi+1)
             d.doi = d.api
         })
         let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum)
@@ -169,26 +167,23 @@ export default class Evolution extends React.Component<Props, State>{
         //control the min value after resizing the nodes, 
         const resizeNode =(w:number, ratio:number)=>{
             let newW =  w*ratio
-            if(newW>w/3){
+            if(newW>w * 0.3){
                 return newW
             }else{
-                return w/3
+                return w * 0.3
             }
         }
         datum.forEach((node: NN) => {
             // let label = `${layer.name}:${layer.class_name}`
-            let selected: boolean = (node.ID == selectedID),
-                pinned: boolean = (pinNodes.indexOf(node.ID) != -1)
-            dag.setNode(node.ID,
-                {
-                    label: node.ID,
-                    width: (selected || pinned) ? expandW : resizeNode(nodeW, node.doi||1),
-                    height: (selected || pinned) ? expandH : resizeNode(nodeH, node.doi||1),
-                    ID: node.ID,
-                    api: node.api,
-                    variants: node.variants
-                }
-            )
+            
+            dag.setNode(node.ID, {
+                label: node.ID,
+                ID: node.ID,
+                api: node.api,
+                variants: node.variants,
+                width: nodeW,
+                height: nodeH,
+            })
             //IR model or keras model
             if (node.parents.length > 0) {
                 node.parents.forEach((parent: any) => {
@@ -221,19 +216,31 @@ export default class Evolution extends React.Component<Props, State>{
         // console.info(tree.edges)
 
 
-        //calculate doi for each node
+        //calculate doi and size for each node
         dag.nodes().forEach((v) => {
             if (dag.node(v)) {
                 let node: Node = dag.node(v),
-                    distance = selectedNode ? distanceDict[v].distance : 0
+                    api = node.api||1,
+                    distance = selectedNode ? distanceDict[v].distance : 0,
+                    selected: boolean = (v == selectedID),
+                    pinned: boolean = (pinNodes.indexOf(v) != -1)
 
-                node.api_diff = Math.max(
-                    node.api || 0,
+                let api_diff = Math.max(
+                    api,
                     Math.max(...(dag.neighbors(v) || []).map((neighbor: Node) => {
                         return r_diff * (neighbor.api || 0) / getEI({ v, w: neighbor.label })
                     }))
-                )
-                node.doi = node.api_diff + r_dist * distance
+                ),
+                doi = api_diff + r_dist * distance
+                dag.setNode(v, {
+                    label: v,
+                    ID: v,
+                    api: api,
+                    doi: doi,
+                    variants: node.variants,
+                    width: (selected || pinned) ? expandW : resizeNode(nodeW, doi),
+                    height: (selected || pinned) ? expandH : resizeNode(nodeH, doi),
+                })
             }
         })
         dag.edges().forEach((e, i) => {
@@ -255,6 +262,7 @@ export default class Evolution extends React.Component<Props, State>{
                     height: expandH,
                     ID: topParent.ID,
                     api: topParent.api,
+                    doi: topParent.doi,
                     variants: topParent.variants
                 })
             }
@@ -266,6 +274,7 @@ export default class Evolution extends React.Component<Props, State>{
                     height: expandH,
                     ID: topChild.ID,
                     api: topChild.api,
+                    doi: topChild.doi,
                     variants: topChild.variants
                 })
             }
@@ -303,6 +312,7 @@ export default class Evolution extends React.Component<Props, State>{
             width = dag.graph().width || 0
         dag.nodes().forEach(v => {
             if (dag.node(v)) {
+                console.info(dag.node(v))
                 nodes.push(dag.node(v))
             }
         }),
@@ -458,10 +468,10 @@ export default class Evolution extends React.Component<Props, State>{
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                     // console.info(status)
                     return <text className="link_info fadeIn"
-                        dy="-3"
+                        dy={-0.2*labelFont/this.state.scale}
                         textAnchor="middle"
                         style={{
-                            fontSize: labelFont,
+                            fontSize: labelFont/this.state.scale,
                             ...defaultStyle,
                             ...transitionStyles[status]
                         }}>
@@ -478,9 +488,10 @@ export default class Evolution extends React.Component<Props, State>{
             <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                     return <text className="link_info fadeIn"
+                        dy={-0.2*labelFont/this.state.scale}
                         textAnchor="middle"
                         style={{
-                            fontSize: labelFont,
+                            fontSize: labelFont/this.state.scale,
                             ...defaultStyle,
                             ...transitionStyles[status]
                         }}>
