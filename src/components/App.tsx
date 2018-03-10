@@ -3,7 +3,7 @@ import * as React from 'react';
 import "./App.css";
 // import SiderBar from "../containers/SideBar";
 // import MultiSunBurst from "./MultiSunBurst";
-import TextInfo from "./TextInfo";
+import TextInfo from "../containers/TextInfo";
 import Evolution from "../containers/Evolution";
 // import SimpleTree from "./SimpleTree";
 import ArcTree from "../containers/ArcTree";
@@ -31,7 +31,7 @@ class App extends React.Component{
                 <Content>
                     <Col span={8}><TrainTree/> </Col>
                     <Col span={8}> <CorpusCompare /> </Col>
-                    <Col span={8}> <TextInfo title="title" content="" /> </Col>
+                    <Col span={8}> <TextInfo /> </Col>
                 </Content>
             </div>
         );

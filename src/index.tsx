@@ -20,7 +20,7 @@ let initNN: NN = {
   names:[],
   parents:[]
 }
-let initState:StoreState = {database:"nonsequence", arc:"", app:"", train:"", nn: initNN}
+let initState:StoreState = {database:"nonsequence", arc:"", app:"", train:"", nn: initNN, op: 0}
 const store = createStore<StoreState>(reducer, initState );
 
 ReactDOM.render(

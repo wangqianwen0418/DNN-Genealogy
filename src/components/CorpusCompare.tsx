@@ -8,6 +8,7 @@ import { NN } from "../types"
 export interface Props {
     database: string,
     nn: NN,
+    op: number
 }
 
 export interface State {
@@ -55,8 +56,10 @@ export default class CorpusCompare extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
-        if (prevProps.nn === this.props.nn)
+        if (this.props.op !== 1) {
             return
+        }
+        console.log('corpus update')
         this.updateData()
         this.draw()
     }
@@ -65,7 +68,6 @@ export default class CorpusCompare extends React.Component<Props, State> {
         let database = this.props.database, nns = this.state.nns, performance = this.state.performance
         if (database === 'nonsequence') {
             if (performance.length === 0) {
-                console.log('aaaa')
                 for (let dataset of nonsequenceDatasets)
                     performance.push({'dataset': dataset})
             }
@@ -78,12 +80,12 @@ export default class CorpusCompare extends React.Component<Props, State> {
                 }
             }
         }
-        console.log(performance, '123456')        
-        this.setState({ database, nns, performance})        
+        if (performance !== this.state.performance) {
+            this.setState({database, nns, performance})
+        }
     }
 
     draw() {
-
         d3.select(".CorpusCompare")
             .select('svg')
             .remove()
@@ -182,6 +184,7 @@ export default class CorpusCompare extends React.Component<Props, State> {
     }
 
     render() {
+        console.log('corpus render')
         // /let headerHeight = 64
         //let screen_w = (window.innerWidth - 2 * margin) / 3
         //let screen_h = (window.innerHeight - headerHeight - 2 * margin) / 2

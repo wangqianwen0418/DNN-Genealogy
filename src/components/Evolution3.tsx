@@ -18,6 +18,7 @@ export interface Props {
     app: string,
     train: string,
     onSelectNN: (nn: NN) => void,
+    onSelectNNMotion: (op: number) => void,
     onSelectDatabase: (db: string) => void
 }
 
@@ -36,8 +37,6 @@ const appData = [
         value: "1.2."
     }
 ]
-
-
 
 export interface State {
     datum: NN[],
@@ -577,7 +576,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     selectNode(selectedNode: Node | undefined) {
         let { datum } = this.state
-        console.info("select node")
+        let { onSelectNN } = this.props
         this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
         //     if (nodeID == d.ID) {
@@ -602,6 +601,18 @@ export default class Evolution extends React.Component<Props, State>{
             topChild, topParent, topDoi, scale,
             transX, transY
         })
+        
+        /*if (selectedNode) {
+            for (let nn of datum) {
+                if (nn.ID === selectedNode.label) {
+                    onSelectNN(nn)
+                    console.log('selected a node')
+                }
+            }
+        }
+        else {
+            console.log('select undefined')
+        }*/
     }
     mouseDown(e:React.MouseEvent<any>) {
         e.stopPropagation()
@@ -625,19 +636,28 @@ export default class Evolution extends React.Component<Props, State>{
     }
     onclickMenu(selectedNode: Node, menu: string) {
         let { datum } = this.state
-        let { onSelectNN } = this.props        
+        let { onSelectNN } = this.props
+        let { onSelectNNMotion } = this.props
+
+        for (let nn of datum) {
+            if (nn.ID === selectedNode.label) {
+                onSelectNN(nn)
+            }
+        }
+
         switch (menu) {
             case 'text':
                 console.log('text')
+                onSelectNNMotion(2)
                 break
             case 'compare':
-                for (let nn of datum)
-                    if (nn.ID === selectedNode.label) {
-                        onSelectNN(nn)                
-                    }
+                console.log('compare')
+                onSelectNNMotion(1)
                 break
             case 'detailed':
                 console.log('detailed')
+                break
+            default:
                 break
         }
     }

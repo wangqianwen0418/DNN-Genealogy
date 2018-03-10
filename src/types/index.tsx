@@ -3,7 +3,8 @@ export interface StoreState {
     arc:string,
     train:string,
     app:string,
-    nn:NN
+    nn:NN,
+    op:number // op=0:nothing 1:update corpus 2:update textinfo
 }
 
 export interface EvoNode {
