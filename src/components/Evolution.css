@@ -8,7 +8,7 @@
 
 }
 .Node, .Edge, .NodeBg {
-    transition-property: width height font-size left top translate scale opacity;
+    transition-property: opacity transform width height;
     transition-duration: 1.0s;
     transition-timing-function: ease-in-out;
 }

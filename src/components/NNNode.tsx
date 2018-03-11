@@ -19,6 +19,9 @@ export interface Props {
     zoomed: boolean,
     hovered: boolean,
     apiArr: number[],
+    transX:number,
+    transY:number,
+    scale:number,
     selectNode: (node: Node) => void
 }
 
@@ -48,9 +51,9 @@ export default class NNNode extends React.Component<Props, {}>{
         }
     }
     render() {
-        let { node, zoomed, selected, isTop, hovered, selectNode, apiArr } = this.props,
+        let { node, zoomed, selected, isTop, hovered, selectNode, apiArr, transX, transY, scale } = this.props,
             tooLong: boolean = node.label.length > labelL,
-            bg: JSX.Element | any = (node.variants.length > 0 && !zoomed)? <rect width={node.width} height={node.height}
+            bg: JSX.Element | any = (node.variants.length > 0 && !zoomed)? <rect width={node.width*scale} height={node.height*scale}
                 className="NodeBg"
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
                 rx={1}
@@ -62,14 +65,16 @@ export default class NNNode extends React.Component<Props, {}>{
         let capFirstLetter = (name:string)=>{
             return name.charAt(0).toUpperCase() + name.slice(1)
         }
+        //a trick. calculate position
+        //if assign transX, transY, scale to another group, the transition animiation will be wired
         return <g key={node.label} className="Node"
-            transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
+            transform={`translate (${(node.x - node.width / 2)*scale+transX}, ${(node.y - node.height / 2)*scale+transY})`}
             onMouseDown={this.mouseDown}
             onMouseUp={(e)=>{this.mouseUp(e, node)}}
 
             >
             {bg}
-            <rect width={node.width} height={node.height}                             
+            <rect width={node.width*scale} height={node.height*scale}                             
                 className={`Node ${hovered?"pop":'no'}`}
                 rx={1}
                 ry={1}
@@ -83,11 +88,14 @@ export default class NNNode extends React.Component<Props, {}>{
             {zoomed ?
                 <g/>:
                 <g>
-                    <Tooltip title={tooLong ? node.label : null}><text textAnchor="middle"
+                    <Tooltip title={tooLong ? node.label : null}>
+                    <text 
+                    className="Node"
+                    textAnchor="middle"
                         fontSize={0.7 * node.height}
                         cursor="pointer"
-                        x={node.width / 2}
-                        y={node.height - 0.15 * node.height}
+                        x={node.width*scale / 2}
+                        y={.85 * node.height * scale}
                     >
                         {
                             capFirstLetter(tooLong ? (node.label.slice(0, labelL) + '...') : node.label) 

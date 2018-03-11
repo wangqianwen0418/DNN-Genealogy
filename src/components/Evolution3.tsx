@@ -72,7 +72,7 @@ const nodeH = 40, nodeW = 200, margin = 30, labelL = 20, tabH = 32,
 const duration = 1000;
 
 const defaultStyle = {
-    transition: `opacity 100ms ease-in-out`,
+    transition: `opacity 500ms ease-in-out`,
     opacity: 0
 }
 
@@ -337,13 +337,17 @@ export default class Evolution extends React.Component<Props, State>{
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
             
-        return (<g className="nodes" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
+        return (<g className="nodes" >
             {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
                     zoomed: boolean = node.width == expandW,
                     hoverNodes = hoverEdge.split("->"),
                     hovered = hoverNodes.indexOf(node.label)!=-1
+
+                if(node.label=="VGG"){
+                    console.info("vgg", node.x, node.y, transX, transY, scale)
+                }
 
                 return <NNNode
                     node={node}
@@ -352,6 +356,9 @@ export default class Evolution extends React.Component<Props, State>{
                     zoomed={zoomed}
                     hovered={hovered}
                     apiArr={apiArr}
+                    transX={transX}
+                    transY={transY}
+                    scale={scale}
                     selectNode={this.selectNode} />
             })}
         </g>)
@@ -384,8 +391,14 @@ export default class Evolution extends React.Component<Props, State>{
     }
     oneEdge(edge: GraphEdge, i: number) {
         let { points, from, to, label_s, label_l } = edge,
-            { selectedNode, hoverEdge } = this.state,
+            { selectedNode, hoverEdge, transX, transY, scale } = this.state,
             selectedID = selectedNode ? selectedNode.label : undefined
+        
+            //a trick. if assign transX, transY, scale to a group, the transition animiation will be wired
+        const movePoint = (p:Point, x:number, y:number, s:number)=>{
+            return {x: p.x*s+x, y:p.y*s+y}
+        }
+        points = points.map(p=>movePoint(p, transX, transY, scale))
 
 
         let len = points.length
@@ -409,6 +422,7 @@ export default class Evolution extends React.Component<Props, State>{
         const getInter = (p1: Point, p2: Point, n: number) => {
             return `${p1.x * n + p2.x * (1 - n)} ${p1.y * n + p2.y * (1 - n)}`
         }
+        
         const getCurve = (points: Point[]) => {
             let vias = [], len = points.length
             const ratio = 0.5
@@ -444,14 +458,13 @@ export default class Evolution extends React.Component<Props, State>{
             hovered: boolean = hoverEdge==`${from}->${to}`,
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
 
-        return <g className='link' key={`${i}_${from}->${to}`}>
+        return <g className='Edge EdgeGroup' key={`${i}_${from}->${to}`}>
             <path
                 id={`${from}->${to}`}
                 d={pathData}
                 stroke={hovered ? "#111" : "gray"}
                 fill='none'
                 strokeWidth={hovered ? 2 : 1}
-                className="Edge"
             >
             </path>
 
@@ -461,7 +474,7 @@ export default class Evolution extends React.Component<Props, State>{
                 d={pathData}
             />
             {/* a trick, two transition: one for fade in, one for fade out */}
-            <Tooltip title={label_l}>
+            <Tooltip title={label_l} mouseEnterDelay={.3}>
             <g className="edgeLable" cursor="pointer"
             onMouseOver={(e:React.MouseEvent<any>)=>this.setState({hoverEdge:`${from}->${to}`})}
             onMouseLeave={(e:React.MouseEvent<any>)=>this.setState({hoverEdge:``})}
@@ -470,10 +483,11 @@ export default class Evolution extends React.Component<Props, State>{
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                     // console.info(status)
                     return <text className="link_info fadeIn"
-                        dy={-0.2*labelFont/this.state.scale}
+                        dy={-0.2*labelFont}
+                        scale={1/scale}
                         textAnchor="middle"
                         style={{
-                            fontSize: labelFont/this.state.scale,
+                            fontSize: labelFont,
                             ...defaultStyle,
                             ...transitionStyles[status]
                         }}>
@@ -490,10 +504,11 @@ export default class Evolution extends React.Component<Props, State>{
             <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
                 {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                     return <text className="link_info fadeIn"
-                        dy={-0.2*labelFont/this.state.scale}
+                        dy={-0.2*labelFont}
+                        scale={1/scale}
                         textAnchor="middle"
                         style={{
-                            fontSize: labelFont/this.state.scale,
+                            fontSize: labelFont,
                             ...defaultStyle,
                             ...transitionStyles[status]
                         }}>
@@ -522,7 +537,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     drawEdges(edges: GraphEdge[]) {
         let { scale, transX, transY } = this.state
-        return (<g className="edges" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
+        return (<g className="edges" >
             {edges.map((edge: GraphEdge, i: number) => {
                 return this.oneEdge(edge, i)
 
@@ -531,6 +546,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
         let { scale } = this.state
+        this.updateEdge = !this.updateEdge
         if (evt.deltaY > 0) {
             this.setState({ scale: scale * 1.1 });
         } else if (evt.deltaY < 0) {
@@ -668,8 +684,7 @@ export default class Evolution extends React.Component<Props, State>{
         }
     }
     render() {
-        let { nodes, edges, w, h, appValue, scale } = this.state
-        console.info("scale", scale)
+        let { nodes, edges, w, h, appValue} = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
@@ -717,7 +732,6 @@ export default class Evolution extends React.Component<Props, State>{
                     }}>
                     {this.drawExtendNodes(nodes)}
                 </div>
-                {/* {this.drawExtendNodes(nodes)} */}
                 <svg
                     //alway show the whole dag
                     width="100%" height="100%"
@@ -740,9 +754,7 @@ export default class Evolution extends React.Component<Props, State>{
                             refX={2*r} refY={2*r}>
                             <circle r={r} fill='black' />
                         </marker>
-                    </defs>
-                                        
-                    {this.drawEdges(edges)}
+                    </defs>{this.drawEdges(edges)}
                     {this.drawNodes(nodes)}
 
                 </svg>

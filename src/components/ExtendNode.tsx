@@ -1,12 +1,13 @@
 import * as React from "react";
-import { Button, Dropdown, Menu, Tooltip, Tabs, Icon} from "antd";
+import { Button, Dropdown, Menu, Tooltip, Tabs, Icon } from "antd";
 import { Transition } from "react-transition-group";
 import { Node } from "../types";
-import ImageModel from './ImageModel'
+import "./ExtendNode.css"
+// import ImageModel from './ImageModel'
 
 const TabPane = Tabs.TabPane
 const defaultStyle = {
-    transition: `opacity 100ms ease-in-out`,
+    transition: `opacity 500ms ease-in-out`,
     opacity: 0,
     visibility: "hidden"
 }
@@ -94,18 +95,13 @@ export default class ExtendNode extends React.Component<Props, State>{
         return <Transition in={zoomed} timeout={duration}>
             {(status: any) => {
                 return <div className="ExtendNode Node"
-                    onMouseDown={this.mouseDown}
-                    onMouseUp={(e) => { this.mouseUp(e, node) }}
 
-                    onMouseEnter={() => this.setState({ showpin: true })}
-                    onMouseLeave={() => this.setState({ showpin: false })}
                     // onMouseOut={()=>this.setState({showpin:false})}
                     style={{
                         position: "absolute",
                         left: transX + node.x * scale - node.width * scale / 2,
                         top: transY + node.y * scale - node.height * scale / 2,
                         backgroundColor: "white",
-
                         height: node.height * scale - margin,
                         width: node.width * scale,
                         ...defaultStyle,
@@ -120,8 +116,13 @@ export default class ExtendNode extends React.Component<Props, State>{
                                 style={{
                                     border: `1px solid ${selected ? "red" : "gray"}`,
                                 }}
-                                //   height={node.height}
+                                height={node.height * scale - margin}
                                 width={node.width * scale}
+                                onMouseDown={this.mouseDown}
+                                onMouseUp={(e) => { this.mouseUp(e, node) }}
+
+                                onMouseEnter={() => this.setState({ showpin: true })}
+                                onMouseLeave={() => this.setState({ showpin: false })}
                             />
                         </TabPane>
                         {node.variants.map((d: any, i: number) => {
