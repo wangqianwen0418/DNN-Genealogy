@@ -92,8 +92,8 @@ export default class ExtendNode extends React.Component<Props, State>{
         )
 
 
-        return <Transition in={zoomed} timeout={duration}>
-            {(status: any) => {
+        // return <Transition in={zoomed} timeout={duration}>
+        //     {(status: any) => {
                 return <div className="ExtendNode Node"
 
                     // onMouseOut={()=>this.setState({showpin:false})}
@@ -104,8 +104,10 @@ export default class ExtendNode extends React.Component<Props, State>{
                         backgroundColor: "white",
                         height: node.height * scale - margin,
                         width: node.width * scale,
-                        ...defaultStyle,
-                        ...transitionStyles[status]
+                        visibility: zoomed?"visible":"hidden",
+                        opacity: zoomed?1:0
+                        // ...defaultStyle,
+                        // ...transitionStyles[status]
                     }}
                 >
                     <Tabs defaultActiveKey="0">
@@ -154,7 +156,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         <a className="infoTrigger"> ...</a>
                     </Dropdown>
                 </div>
-            }}
-        </Transition>
+            // }}
+        {/* </Transition> */}
     }
 }

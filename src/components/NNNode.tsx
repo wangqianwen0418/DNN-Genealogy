@@ -80,9 +80,10 @@ export default class NNNode extends React.Component<Props, {}>{
                 ry={1}
                 fill={"white"}
                 stroke={hovered?"#111":"gray"}
-                opacity={zoomed?0:1}
+                // opacity={zoomed?0:1}
                 // stroke={zoomed ? "none" : (isTop ? "#7dc1f2" : "gray")}
-                strokeWidth={hovered ? 3 : 1.5}
+                // strokeWidth={hovered ? 2 : 1.5}
+                strokeWidth={1.5}
                 cursor="pointer"
             ></rect>
             {zoomed ?
@@ -92,7 +93,7 @@ export default class NNNode extends React.Component<Props, {}>{
                     <text 
                     className="Node"
                     textAnchor="middle"
-                        fontSize={0.7 * node.height}
+                        fontSize={0.7 * node.height*scale}
                         cursor="pointer"
                         x={node.width*scale / 2}
                         y={.85 * node.height * scale}
