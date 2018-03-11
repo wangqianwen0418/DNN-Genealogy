@@ -94,69 +94,71 @@ export default class ExtendNode extends React.Component<Props, State>{
 
         // return <Transition in={zoomed} timeout={duration}>
         //     {(status: any) => {
-                return <div className="ExtendNode Node"
+        return <div className="ExtendNode Node"
+            onMouseEnter={() => this.setState({ showpin: true })}
+            onMouseLeave={() => this.setState({ showpin: false })}
+            // onMouseOut={()=>this.setState({showpin:false})}
+            style={{
+                position: "absolute",
+                left: transX + node.x * scale - node.width * scale / 2,
+                top: transY + node.y * scale - node.height * scale / 2,
+                backgroundColor: "white",
+                height: node.height * scale - margin,
+                width: node.width * scale,
+                visibility: zoomed ? "visible" : "hidden",
+                opacity: zoomed ? 1 : 0
+                // ...defaultStyle,
+                // ...transitionStyles[status]
 
-                    // onMouseOut={()=>this.setState({showpin:false})}
-                    style={{
-                        position: "absolute",
-                        left: transX + node.x * scale - node.width * scale / 2,
-                        top: transY + node.y * scale - node.height * scale / 2,
-                        backgroundColor: "white",
-                        height: node.height * scale - margin,
-                        width: node.width * scale,
-                        visibility: zoomed?"visible":"hidden",
-                        opacity: zoomed?1:0
-                        // ...defaultStyle,
-                        // ...transitionStyles[status]
-                    }}
-                >
-                    <Tabs defaultActiveKey="0">
-                        <TabPane tab={node.label} key="0">
-                            <img
-                                className="abstract Node"
-                                src={`../../images/${node.label}.png`}
-                                style={{
-                                    border: `1px solid ${selected ? "red" : "gray"}`,
-                                }}
-                                height={node.height * scale - margin}
-                                width={node.width * scale}
-                                onMouseDown={this.mouseDown}
-                                onMouseUp={(e) => { this.mouseUp(e, node) }}
-
-                                onMouseEnter={() => this.setState({ showpin: true })}
-                                onMouseLeave={() => this.setState({ showpin: false })}
-                            />
-                        </TabPane>
-                        {node.variants.map((d: any, i: number) => {
-                            return <TabPane tab={d.ID} key={`${i + 1}`}>
-                                <img
-                                    className="abstract Node"
-                                    src={`../../images/${node.label}.png`}
-                                    style={{ border: `1px solid ${selected ? "red" : "none"}`, }}
-                                    //   height={node.height}
-                                    width={node.width * scale}
-                                />
-                            </TabPane>
-                        })}
-                    </Tabs>
-                    <Icon className="pin" type="pushpin"
+            }}
+        >
+            <Tabs defaultActiveKey="0"
+            >
+                <TabPane tab={node.label} key="0">
+                    <img
+                        className="abstract Node"
+                        src={`../../images/${node.label}.png`}
                         style={{
-                            opacity: pin || showpin ? 1 : 0,
-                            color: pin ? "red" : "gray"
+                            border: `1px solid ${selected ? "red" : "gray"}`,
                         }}
-                        onClick={(e: React.MouseEvent<any>) => {
-                            let { pin } = this.state
-                            e.stopPropagation()
-                            e.preventDefault()
-                            this.setState({ pin: !pin })
-                            pinNode(node)
+                        height={node.height * scale - margin}
+                        width={node.width * scale}
+                        onMouseDown={this.mouseDown}
+                        onMouseUp={(e) => { this.mouseUp(e, node) }}
 
-                        }} />
-                    <Dropdown overlay={menu} className="infoButton">
-                        <a className="infoTrigger"> ...</a>
-                    </Dropdown>
-                </div>
-            // }}
-        {/* </Transition> */}
+
+                    />
+                </TabPane>
+                {node.variants.map((d: any, i: number) => {
+                    return <TabPane tab={d.ID} key={`${i + 1}`}>
+                        <img
+                            className="abstract Node"
+                            src={`../../images/${node.label}.png`}
+                            style={{ border: `1px solid ${selected ? "red" : "none"}`, }}
+                            //   height={node.height}
+                            width={node.width * scale}
+                        />
+                    </TabPane>
+                })}
+            </Tabs>
+            <Icon className="pin" type="pushpin"
+                style={{
+                    opacity: pin || showpin ? 1 : 0,
+                    color: pin ? "red" : "gray"
+                }}
+                onClick={(e: React.MouseEvent<any>) => {
+                    let { pin } = this.state
+                    e.stopPropagation()
+                    e.preventDefault()
+                    this.setState({ pin: !pin })
+                    pinNode(node)
+
+                }} />
+            <Dropdown overlay={menu} className="infoButton">
+                <a className="infoTrigger"> ...</a>
+            </Dropdown>
+        </div>
+        // }}
+        {/* </Transition> */ }
     }
 }
