@@ -21,13 +21,13 @@ export interface State {
 }
 
 let simulation = d3.forceSimulation()
-    .force("charge", d3.forceManyBody().strength(-1))
+    .force("charge", d3.forceManyBody().strength(-30))
 
 const sequenceDatasets = ['abc'],
       nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top 5']
 
 export default class RadialBoxplot extends React.Component<Props, State> {
-    public nodes: any; r : number = 150; node_r = 4
+    public nodes: any; r : number = 100; node_dist = 10
     constructor(props: Props) {
         super(props)
         this.arc = this.arc.bind(this)
@@ -63,12 +63,13 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     getForceX(attr: number[]) {
         let len = attr.length
         let x: number = attr.map((d: number, idx: number) => d * Math.cos(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
-        return x / len
+        return x
     }
     getForceY(attr: number[]) {
         let len = attr.length
         let y: number = attr.map((d: number, idx: number) => d * Math.sin(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
-        return y / len
+        console.log('forcey', y)
+        return y
     }
 
     selectNode(d: Dot) {
@@ -85,8 +86,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     componentWillReceiveProps(nextProps: Props) {
         if (nextProps.op !== 1 || this.props === nextProps)
             return
+        console.log(nextProps.nn)
         this.updateData(nextProps.nn)
-    }
+        }
 
     componentDidUpdate() {
         this.draw()
@@ -106,18 +108,26 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 tmpAttr[index] = name[attr_names[index]] ? name[attr_names[index]] : 0
             }
             newnns.push({
+                r: name.params,
                 name: name.name,
                 attr: tmpAttr
             })
         }
-
+        // Update Nodes
         let that = this
         this.nodes = d3.select('.compareView')
             .selectAll('.dot')
             .attr('class', 'dot')
             .data(newnns)
             .enter().append('circle')
-            .attr('r', that.node_r)
+            .attr('r', (d) => {
+                let radius = Math.sqrt(d.r)
+                if (radius < 3)
+                    radius = 3
+                else if (radius > 10)
+                    radius = 10
+                return radius
+            })
             .attr('cx', (d, i) => this.getForceX(d.attr) || 0)
             .attr('cy', (d, i) => this.getForceY(d.attr) || 0)
             .attr('fill', (d) => '#666')
@@ -126,7 +136,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 let selected_idx: number = that.state.selected.indexOf(d.name)
                 d3.select(this)
                     .attr('fill', (d: Dot) => selected_idx === -1 ? getColor(d.name) : '#666')
-                    .attr('r', (d) => selected_idx === -1 ? that.node_r * 1.3 : that.node_r)
+                    // .attr('r', (d) => selected_idx === -1 ? that.node_r * 1.3 : that.node_r)
                     .style('z-index', selected_idx === -1 ? 100 : 3)
                 that.selectNode(d)
             })
@@ -138,11 +148,10 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     draw() {
         let { selected, nns } = this.state
-        let node_r = this.node_r
-
+        console.log(nns)
         simulation
             .nodes(nns)
-            .force('collide', d3.forceCollide().strength(.5).radius(this.node_r * 1.1).iterations(3))
+            .force('collide', d3.forceCollide().strength(.5).radius(this.node_dist).iterations(3))
             .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
             .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)
@@ -154,8 +163,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     }
 
     render() {
-        let { nns, attr_names, selected } = this.state,
-            margin: number = 5,
+        let { nns, attr_names, selected } = this.state
+        let margin: number = 5,
             bar_a: number = 360 / attr_names.length,
             bar_w: number = 15
         let selected_nns = selected.map((name: string) =>nns.filter((nn) => nn.name == name)[0])
@@ -178,12 +187,23 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             })
         let axis: JSX.Element[] = attr_names.map((attr: string, i: number) => {
             return <g>
-                <path key={`axis_${attr}`}
-                    d={this.arc(0, 0, this.r + margin, bar_a * i, bar_a * (i + 1) - margin)}
+                <path key={`axis_${attr}`} id={`axis_${attr}`}
+                    d={this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin)}
                     fill='none'
-                    strokeWidth={2}
+                    strokeWidth={1}
+                    stroke='grey'
+                    stroke-dasharray='5, 5'></path>
+                <path key={`axis_${attr}_start`}
+                    d={this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * i + 0.5)}
+                    fill='none'
+                    strokeWidth={bar_w}
                     stroke='grey'></path>
-                <path key={`aixs_${i}_bg`}
+                <path key={`axis_${attr}_end`}
+                    d={this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin - 1.5, bar_a * (i + 1) - margin)}
+                    fill='none'
+                    strokeWidth={bar_w}
+                    stroke='grey'></path>
+                {/* <path key={`aixs_${i}_bg`}
                     d={
                         this.arc(0, 0,
                         this.r + margin + bar_w / 2,
@@ -193,12 +213,15 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     fill='none'
                     strokeWidth={bar_w}
                     opacity='0.2'
-                    stroke='grey'></path>
-                <text 
-                    x={(this.r) * Math.cos((bar_a*i-45)/180*Math.PI)} 
-                    y={(this.r) * Math.sin((bar_a*i-45)/180*Math.PI)}>
+                    stroke='grey'></path> */}
+                <text textAnchor="middle" dy='-3' opacity='0.5'>
+                    <textPath
+                        xlinkHref={`#axis_${attr}`}
+                        startOffset='50%'>
                     {attr}
+                    </textPath>
                 </text>
+                
             </g>
         })
         
@@ -206,8 +229,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             <g className='compareView'
                transform='translate(300, 300)'>
                <circle r={this.r} fill='none' stroke='grey'></circle>
+               {axis}               
                {bars}
-               {axis}
             </g>
         </svg>
     }
