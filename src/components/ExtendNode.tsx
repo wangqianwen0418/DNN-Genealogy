@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Button, Dropdown, Menu, Tooltip, Tabs, Icon } from "antd";
+import { Button, Dropdown, Menu, Tooltip, Tabs, Icon} from "antd";
 import { Transition } from "react-transition-group";
 import { Node } from "../types";
+import ImageModel from './ImageModel'
+
 const TabPane = Tabs.TabPane
 const defaultStyle = {
     transition: `opacity 1000ms ease-in-out`,
@@ -56,7 +58,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         </div> */}
         let {showpin, pin} = this.state
 
-        let onclick = function(item :{ key: string }) {
+        let onclick = function(item:{ key: string }) {
             console.log('click')
             onclickMenu(node, item.key)
         }
@@ -68,9 +70,11 @@ export default class ExtendNode extends React.Component<Props, State>{
             </Menu>
         )
 
-        return <Transition in={zoomed} timeout={duration}>
+        return (
+        <Transition in={zoomed} timeout={duration}>
             {(status: any) => {
-                return <div className="ExtendNode Node"
+                return <div
+                    className="ExtendNode Node"
                     onClick={(e:React.MouseEvent<any>) => {
                         e.stopPropagation()
                         e.preventDefault()
@@ -89,18 +93,19 @@ export default class ExtendNode extends React.Component<Props, State>{
                         width: node.width * scale,
                         ...defaultStyle,
                         ...transitionStyles[status]
-                    }}>
-                    <Tabs defaultActiveKey="0" >
+                    }}
+                >
+                    <Tabs defaultActiveKey="0">
                         <TabPane tab={node.label} key="0">
-                            <img
-                                className="abstract"
-                                src={`../../images/${node.label}.png`}
-                                style={{
-                                    border: `1px solid ${selected?"red":"gray"}`,
-                                }}
-                                //   height={node.height}
-                                width={node.width * scale}
-                            />
+                        <img
+                            className="abstract"
+                            src={`../../images/${node.label}.png`}
+                            style={{
+                                border: `1px solid ${selected?"red":"gray"}`,
+                            }}
+                            //   height={node.height}
+                            width={node.width * scale}
+                        />
                         </TabPane>
                         {node.variants.map((d: any, i: number) => {
                             return <TabPane tab={d.ID} key={`${i + 1}`}>
@@ -114,25 +119,26 @@ export default class ExtendNode extends React.Component<Props, State>{
                             </TabPane>
                         })}
                     </Tabs>
-                    <Icon className="pin" type="pushpin" 
-                    style={{
-                        opacity: pin||showpin?1:0,
-                        color: pin?"red":"gray"
-                    }}
-                    onClick={(e:React.MouseEvent<any>)=>{
-                        let {pin} = this.state
-                        e.stopPropagation()
-                        e.preventDefault()
-                        this.setState({pin:!pin})
-                        pinNode(node)
-                        
-                        }}/>
+                    <Icon
+                        className="pin"
+                        type="pushpin" 
+                        style={{
+                            opacity: pin||showpin?1:0,
+                            color: pin?"red":"gray"
+                        }}
+                        onClick={(e:React.MouseEvent<any>)=>{
+                            let {pin} = this.state
+                            e.stopPropagation()
+                            e.preventDefault()
+                            this.setState({pin:!pin})
+                            pinNode(node)
+                        }}
+                    />
                     <Dropdown overlay={menu} className="infoButton">
-                    <a className="infoTrigger">more<Icon type="down" /></a>
-                </Dropdown> 
+                        <a className="infoTrigger">more<Icon type="down" /></a>
+                    </Dropdown>
                 </div>
             }}
-
-        </Transition>
+        </Transition>)
     }
 }
