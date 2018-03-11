@@ -14,6 +14,6 @@
 }
 
 .ViewBottom {
-    overflow: auto;
+    /* overflow: auto; */
     height: calc((100vh - var(--header-h))*(1 - var(--ratio-up)))
 }

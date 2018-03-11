@@ -1,10 +1,26 @@
-.spanInfo, .sub1{
+/* .spanInfo, .sub1{
  font-size: 0.8em;
  
-}
-.ant-menu-submenu-title:hover{
+} */
+/* .ant-menu-submenu-title:hover{
     color:gray !important;
-}
+} */
 .ant-card-body{
-    padding:4px;
+    padding-top:4px!important;
+}
+
+.ant-tabs-content {
+    width: 100%;
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0px 5px;
+}
+.ant-tabs-tab{
+    font-size: 0.8em!important;
+    /* margin: 2px; */
+}
+
+.ant-card-head{
+    border: none!important;
 }
