@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Button, Dropdown, Menu, Tooltip, Tabs, Icon } from "antd";
+import { Button, Dropdown, Menu, Tooltip, Tabs, Icon} from "antd";
 import { Transition } from "react-transition-group";
 import { Node } from "../types";
+import ImageModel from './ImageModel'
+
 const TabPane = Tabs.TabPane
 const defaultStyle = {
     transition: `opacity 100ms ease-in-out`,
@@ -108,8 +110,9 @@ export default class ExtendNode extends React.Component<Props, State>{
                         width: node.width * scale,
                         ...defaultStyle,
                         ...transitionStyles[status]
-                    }}>
-                    <Tabs defaultActiveKey="0" >
+                    }}
+                >
+                    <Tabs defaultActiveKey="0">
                         <TabPane tab={node.label} key="0">
                             <img
                                 className="abstract Node"
@@ -151,7 +154,6 @@ export default class ExtendNode extends React.Component<Props, State>{
                     </Dropdown>
                 </div>
             }}
-
         </Transition>
     }
 }

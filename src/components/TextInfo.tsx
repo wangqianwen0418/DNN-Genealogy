@@ -31,7 +31,7 @@ export default class TextInfo extends React.Component<Props, {}>{
             title={<span style={{fontSize:'1.2em'}}>{nn.ID}</span>}
             className="TextInfo View ViewBottom"
         >
-        {nn.url}
+        <a href={nn.url} target="_blank">{nn.url}</a>
         </Card>)
     }
 }

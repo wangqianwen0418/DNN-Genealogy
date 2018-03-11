@@ -12,7 +12,10 @@ import { TreeSelect, Button, Dropdown, Menu, Tooltip } from "antd"
 import moment from 'moment';
 import NNNode from "./NNNode"
 import ExtendNode from "./ExtendNode"
+import { showDetailedStructure } from './ImageModel'
+
 // const {TreeNode} = TreeSelect
+
 export interface Props {
     arc: string,
     app: string,
@@ -78,8 +81,6 @@ const transitionStyles = {
     entered: { opacity: 1 },
     exited: { opacity: 0 }
 };
-
-
 
 export default class Evolution extends React.Component<Props, State>{
     private updateEdge: boolean = true; ref: any; x0: number; y0: number;
@@ -640,12 +641,14 @@ export default class Evolution extends React.Component<Props, State>{
         let { datum } = this.state
         let { onSelectNN } = this.props
         let { onSelectNNMotion } = this.props
-
+        
         for (let nn of datum) {
             if (nn.ID === selectedNode.label) {
                 onSelectNN(nn)
             }
         }
+
+        console.log(selectedNode)
 
         switch (menu) {
             case 'text':
@@ -658,6 +661,7 @@ export default class Evolution extends React.Component<Props, State>{
                 break
             case 'detailed':
                 console.log('detailed')
+                showDetailedStructure(selectedNode.label)
                 break
             default:
                 break
