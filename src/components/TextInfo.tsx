@@ -24,9 +24,7 @@ export default class TextInfo extends React.Component<Props, {}>{
     }
 
     render(){
-        console.log('text info render')
         let nn = this.props.nn
-        console.log(nn)
         return (
         <Card
             bordered={false}

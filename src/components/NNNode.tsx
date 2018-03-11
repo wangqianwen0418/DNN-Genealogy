@@ -59,7 +59,6 @@ export default class NNNode extends React.Component<Props, {}>{
                 stroke={hovered?"#111":"gray"}
                 strokeWidth={1.5}
             /> : []
-        console.info(node.width, node.height)
         let capFirstLetter = (name:string)=>{
             return name.charAt(0).toUpperCase() + name.slice(1)
         }
@@ -70,12 +69,13 @@ export default class NNNode extends React.Component<Props, {}>{
 
             >
             {bg}
-            <rect width={node.width} height={node.height}             
+            <rect width={node.width} height={node.height}                             
                 className={`Node ${hovered?"pop":'no'}`}
                 rx={1}
                 ry={1}
                 fill={"white"}
                 stroke={hovered?"#111":"gray"}
+                opacity={zoomed?0:1}
                 // stroke={zoomed ? "none" : (isTop ? "#7dc1f2" : "gray")}
                 strokeWidth={hovered ? 3 : 1.5}
                 cursor="pointer"

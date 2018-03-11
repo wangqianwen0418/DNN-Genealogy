@@ -3,8 +3,12 @@
     position: relative;
     /* overflow: auto; */
 }
+
+@keyframes move {
+
+}
 .Node, .Edge, .NodeBg {
-    transition-property: width height font-size left top;
+    transition-property: width height font-size left top translate scale opacity;
     transition-duration: 1.0s;
     transition-timing-function: ease-in-out;
 }

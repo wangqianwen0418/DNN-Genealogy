@@ -156,7 +156,7 @@ export default class Evolution extends React.Component<Props, State>{
             marginx: margin*2,
             marginy: margin,
             rankdir: 'LR',
-            edgesep: nodeH * .3,
+            edgesep: nodeH*0.4,
             nodesep: nodeH * .5,
             // ranker: "tight-tree"
             ranker: "longest-path"
@@ -311,7 +311,6 @@ export default class Evolution extends React.Component<Props, State>{
             width = dag.graph().width || 0
         dag.nodes().forEach(v => {
             if (dag.node(v)) {
-                console.info(dag.node(v))
                 nodes.push(dag.node(v))
             }
         }),
@@ -338,7 +337,7 @@ export default class Evolution extends React.Component<Props, State>{
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
             
         return (<g className="nodes" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
-            {nodes.filter(node=>node.width!=expandW).map((node: Node) => {
+            {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
                     zoomed: boolean = node.width == expandW,
@@ -357,15 +356,18 @@ export default class Evolution extends React.Component<Props, State>{
         </g>)
     }
     drawExtendNodes(nodes: Node[]) {
-        let { selectedNode, topDoi, scale, transX, transY } = this.state,
+        let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
-        return nodes.filter(node=>node.width == expandW).map((node: Node) => {
+        return nodes.map((node: Node) => {
             let selected: boolean = (node.ID === selectedID),
-                zoomed: boolean = node.width == expandW
+                zoomed: boolean = node.width == expandW,
+                hoverNodes = hoverEdge.split("->"),
+                hovered = hoverNodes.indexOf(node.label)!=-1
             return <ExtendNode
                 zoomed={zoomed}
+                hovered={hovered}
                 scale={scale}
                 transX={transX}
                 transY={transY}
@@ -663,6 +665,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     render() {
         let { nodes, edges, w, h, appValue, scale } = this.state
+        console.info("scale", scale)
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
