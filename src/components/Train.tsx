@@ -48,10 +48,12 @@ export default class Train extends React.Component<Props, State>{
     render() {
         let panes = this.state.tabsData.map((tab: any, i: number) => {
             return <TabPane tab={tab.name} key={i} 
+            className="Train"
             style={{
                 overflowY:"auto",
                 height:"inherit"
                 }}>
+
                 <Collapse bordered={false} >
                 {tab.children.map((pane:any)=>{
                     return <Panel header={pane.name} key={pane.name}>
