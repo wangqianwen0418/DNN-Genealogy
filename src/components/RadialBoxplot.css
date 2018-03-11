@@ -1,0 +1,10 @@
+.selected{
+    stroke:blue;
+    stroke-width: 2px;
+    fill:white;
+    position: relative !important;
+    z-index: 100;
+}
+.dot{
+    position:relative;
+}
