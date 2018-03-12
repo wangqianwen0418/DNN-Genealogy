@@ -8,10 +8,12 @@
 .ant-card-body{
     padding-top:4px!important;
 }
-
-.ant-tabs-content { 
-    width: 100%;
+.ant-tabs-content{
     max-height: 200px;
-    overflow-y: auto;
-    overflow-x: hidden;
 }
+/* .ant-tabs-content { 
+    width: 100%;
+    
+    overflow-y: auto;
+    overflow-x: hidden; 
+} */

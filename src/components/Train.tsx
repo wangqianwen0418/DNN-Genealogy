@@ -52,10 +52,11 @@ export default class Train extends React.Component<Props, State>{
             style={{
                 overflowY:"auto",
                 height:"inherit"
-                }}>
-
+                }}
+                >
                 <Collapse bordered={false} >
                 {tab.children.map((pane:any)=>{
+                    console.info(tab.name, pane.name)
                     return <Panel header={pane.name} key={pane.name}>
                     <p>{pane.url}</p>
                 </Panel>
@@ -69,7 +70,7 @@ export default class Train extends React.Component<Props, State>{
                 title={<span style={{ fontSize: "1.2em" }}>Training</span>}
                 className="View ViewBottom"
             >
-                <Tabs onChange={this.changeTab} >
+                <Tabs onChange={this.changeTab}>
                     {panes}
                 </Tabs>
             </Card>
