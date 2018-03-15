@@ -377,7 +377,39 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         //         .attr('cy', (d: any) => d.y || 0)
         // }
 
-
+        // Legend
+        var legend = svg.append("g")
+            .attr("id", "legend")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 10)
+            .attr("text-anchor", "end")
+            .selectAll("g")
+            .data(this.state.selected)
+            .enter().append("g")
+            .attr("transform", (d: any, i: number) => "translate(-20," + (i * 15 + 20) + ")")
+        legend.append("rect")
+            .attr("class", (d: any) => "label")
+            .attr("x", this.width - 9)
+            .attr("width", 9)
+            .attr("height", 9)
+            .attr("fill", (d: any) => String(getColor(d)))
+            .on("mousemove", (d: any) => {
+                // d3.selectAll(".bar")
+                //     .attr("opacity", (model: any) => {
+                //         if (model.key === d)
+                //             return 1
+                //         else
+                //             return 0.4
+                //     })
+            })
+            .on("mouseout", () => {
+                d3.selectAll(".bar").attr("opacity", 1)
+            })
+        legend.append("text")
+            .attr("x", this.width - 14)
+            .attr("y", 6.5)
+            .attr("dy", "0.15em")
+            .text((d: any) => d)
 
     }
 
