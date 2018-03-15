@@ -45,7 +45,7 @@ const appData = [
 ]
 
 let CNN = ["streamlined", "skip connections", "multi-branch", "seperatable conv"]
-let RNN = ["stacked", "bidirectional", "gated", "attention"]
+let RNN = ["stacked", "multiple time scale", "gated"]
 
 let legend = (Names: string[]) => {
     let items = {}
@@ -206,6 +206,7 @@ export default class Evolution extends React.Component<Props, State>{
 
             dag.setNode(node.ID, {
                 label: node.ID,
+                fullname: node.fullname,
                 ID: node.ID,
                 api: node.api,
                 variants: node.variants,
@@ -223,7 +224,7 @@ export default class Evolution extends React.Component<Props, State>{
                             label_l: parent.link_info_l,
                             from: parent.ID,
                             to: node.ID,
-                            cate: parent.link_category.split('=>')[1],
+                            cate: parent.link_category.split('=>')[0],
                         }
                     )
                 })
@@ -263,6 +264,7 @@ export default class Evolution extends React.Component<Props, State>{
                     doi = api_diff + r_dist * distance
                 dag.setNode(v, {
                     label: v,
+                    fullname: node.fullname,
                     ID: v,
                     api: api,
                     doi: doi,
@@ -286,25 +288,17 @@ export default class Evolution extends React.Component<Props, State>{
             if (parents && parents.length != 0) {
                 topParent = parents.map(v => dag.node(v)).sort((a, b) => b.doi - a.doi)[0]
                 dag.setNode(topParent.label, {
-                    label: topParent.ID,
+                    ...topParent,
                     width: expandW,
-                    height: expandH,
-                    ID: topParent.ID,
-                    api: topParent.api,
-                    doi: topParent.doi,
-                    variants: topParent.variants
+                    height: expandH
                 })
             }
             if (children && children.length != 0) {
                 topChild = children.map(v => dag.node(v)).sort((a, b) => b.doi - a.doi)[0]
                 dag.setNode(topChild.label, {
-                    label: topChild.ID,
+                    ...topChild,
                     width: expandW,
-                    height: expandH,
-                    ID: topChild.ID,
-                    api: topChild.api,
-                    doi: topChild.doi,
-                    variants: topChild.variants
+                    height: expandH
                 })
             }
 

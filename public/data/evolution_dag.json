@@ -10,6 +10,7 @@
     ],
     "citation": "10831",
     "date": "1998.11.01",
+    "fullname": "leNet",
     "names": [],
     "parents": [],
     "training": [
@@ -29,6 +30,7 @@
     ],
     "citation": "18438",
     "date": "2012.12.03",
+    "fullname": "alexNet",
     "names": [
       {
         "SVHN": null,
@@ -68,6 +70,7 @@
     ],
     "citation": "5591",
     "date": "2014.09.17",
+    "fullname": "inception",
     "names": [
       {
         "SVHN": null,
@@ -135,6 +138,7 @@
     ],
     "citation": "8205",
     "date": "2014.09.04",
+    "fullname": "VGG",
     "names": [
       {
         "SVHN": null,
@@ -183,6 +187,7 @@
     ],
     "citation": "320",
     "date": "2015.11.03",
+    "fullname": "highwayNets",
     "names": [
       {
         "SVHN": null,
@@ -217,6 +222,7 @@
     ],
     "citation": "5464",
     "date": "2015.12.10",
+    "fullname": "Residual Networks",
     "names": [
       {
         "SVHN": null,
@@ -315,6 +321,7 @@
         ],
         "citation": "285",
         "date": "2016.05.23",
+        "fullname": "Wide ReseNet",
         "names": [
           {
             "SVHN": 1.64,
@@ -372,6 +379,7 @@
         ],
         "citation": "37",
         "date": "2016.05.25",
+        "fullname": "ResNet in ResNet",
         "names": [
           {
             "SVHN": null,
@@ -417,6 +425,7 @@
     ],
     "citation": "480",
     "date": "2016.02.23",
+    "fullname": "inception_resNet",
     "names": [
       {
         "SVHN": null,
@@ -463,6 +472,7 @@
     ],
     "citation": "71",
     "date": "2016.05.24",
+    "fullname": "fractalNet",
     "names": [
       {
         "SVHN": null,
@@ -513,6 +523,7 @@
     ],
     "citation": "134",
     "date": "2016.11.16",
+    "fullname": "resNeXt",
     "names": [
       {
         "SVHN": null,
@@ -564,6 +575,7 @@
     ],
     "citation": "378",
     "date": "2016.08.25",
+    "fullname": "Densely Connected Networks",
     "names": [
       {
         "SVHN": 1.79,
@@ -667,6 +679,7 @@
     ],
     "citation": "264",
     "date": "2016.02.24",
+    "fullname": "squeezeNet",
     "names": [
       {
         "SVHN": null,
@@ -711,6 +724,7 @@
     ],
     "citation": "4",
     "date": "2017.06.07",
+    "fullname": "diracNet",
     "names": [
       {
         "SVHN": null,
@@ -778,6 +792,7 @@
     ],
     "citation": "35",
     "date": "2017.12.01",
+    "fullname": "nasNet",
     "names": [
       {
         "SVHN": null,
@@ -841,6 +856,7 @@
     "architecture": [],
     "citation": "48",
     "date": "2017.09.05",
+    "fullname": "Squeeze-and-Excitation Networks",
     "names": [
       {
         "SVHN": null,
@@ -875,6 +891,7 @@
     ],
     "citation": "0",
     "date": "2018.02.06",
+    "fullname": "",
     "names": [
       {
         "SVHN": null,
@@ -918,6 +935,7 @@
     "architecture": [],
     "citation": "31",
     "date": "2017.06.06",
+    "fullname": "Dual Path Networks",
     "names": [
       {
         "SVHN": null,
@@ -955,6 +973,7 @@
     "architecture": [],
     "citation": "114",
     "date": "2016.10.07",
+    "fullname": "",
     "names": [],
     "parents": [
       {
@@ -976,6 +995,7 @@
     "architecture": [],
     "citation": "149",
     "date": "2017.04.17",
+    "fullname": "",
     "names": [
       {
         "SVHN": null,
@@ -1022,6 +1042,7 @@
     "architecture": [],
     "citation": "13951",
     "date": "1986.12.01",
+    "fullname": "vanilla RNN",
     "names": [
       {
         "name": "recurrent neural network",
@@ -1034,58 +1055,6 @@
     "variants": []
   },
   {
-    "ID": "LSTM",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "8136",
-    "date": "1997.12.15",
-    "names": [
-      {
-        "name": "long short term memory",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "MTRNN",
-        "link_category": "",
-        "link_info_l": "Besides accumulating previous info, as MTRNN can also do, gated RNNs allow the neural network to forget the old states.",
-        "link_info_s": "gated units"
-      }
-    ],
-    "training": [],
-    "url": "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735",
-    "variants": []
-  },
-  {
-    "ID": "GRU",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "2069",
-    "date": "2014.06.03",
-    "names": [
-      {
-        "name": "gated recurrent unit",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "LSTM",
-        "link_category": "",
-        "link_info_l": "To improve computation effiency, the gates of a recureent uit is redesigned in GRU. input, forget, output gates=>reset, update gates",
-        "link_info_s": "redesign gates"
-      }
-    ],
-    "training": [],
-    "url": "https://arxiv.org/abs/1406.1078",
-    "variants": []
-  },
-  {
     "ID": "BRNN",
     "application": [
       "1.2.NLP"
@@ -1093,6 +1062,7 @@
     "architecture": [],
     "citation": "984",
     "date": "1997.12.01",
+    "fullname": "bidirectional RNN",
     "names": [
       {
         "name": "bidirectional recurrent neural network",
@@ -1119,11 +1089,12 @@
     "architecture": [],
     "citation": "263",
     "date": "1992.03.01",
+    "fullname": "stacked RNN",
     "names": [],
     "parents": [
       {
         "ID": "vanilla RNN",
-        "link_category": "",
+        "link_category": "a",
         "link_info_l": "Increase deepth to improve  the representational capacity",
         "link_info_s": "deeper"
       }
@@ -1133,18 +1104,19 @@
     "variants": []
   },
   {
-    "ID": "attention RNN",
+    "ID": "soft attention",
     "application": [
       "1.2.NLP"
     ],
     "architecture": [],
     "citation": "2081",
     "date": "2014.09.01",
+    "fullname": "attention RNN",
     "names": [],
     "parents": [
       {
         "ID": "seq2seq",
-        "link_category": "",
+        "link_category": "d",
         "link_info_l": "Attention mechanism allows  to search relevant parts in the context at each step of the output generation.",
         "link_info_s": "add attention"
       }
@@ -1161,6 +1133,7 @@
     "architecture": [],
     "citation": "1050",
     "date": "1990.11.01",
+    "fullname": "recursive neural network",
     "names": [
       {
         "name": "recursive neural network",
@@ -1170,39 +1143,13 @@
     "parents": [
       {
         "ID": "vanilla RNN",
-        "link_category": "",
+        "link_category": " ",
         "link_info_l": "Generalize RNN from chain-like structure to tree-like structure",
         "link_info_s": "generalize to a tree"
       }
     ],
     "training": [],
     "url": "https://www.sciencedirect.com/science/article/pii/000437029090005K",
-    "variants": []
-  },
-  {
-    "ID": "MTRNN",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "135",
-    "date": "1992.01.01",
-    "names": [
-      {
-        "name": "multi time scale recurrent neural network",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "vanilla RNN",
-        "link_category": "",
-        "link_info_l": "To solve the challenge of long-dependencies, build both \ufb01ne and coarse time scales ",
-        "link_info_s": "multi-time scales"
-      }
-    ],
-    "training": [],
-    "url": "http://papers.nips.cc/paper/522-induction-of-multiscale-temporal-structure.pdf",
     "variants": []
   },
   {
@@ -1213,6 +1160,7 @@
     "architecture": [],
     "citation": "2829",
     "date": "2014.09.10",
+    "fullname": "sequence to sequence",
     "names": [
       {
         "name": "squence to sequence",
@@ -1239,6 +1187,7 @@
     "architecture": [],
     "citation": "73",
     "date": "2017.05.08",
+    "fullname": "conv seq2seq",
     "names": [],
     "parents": [
       {
@@ -1253,27 +1202,6 @@
     "variants": []
   },
   {
-    "ID": "MLP_RNN",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "269",
-    "date": "2013.12.20",
-    "names": [],
-    "parents": [
-      {
-        "ID": "stacked RNN",
-        "link_category": "",
-        "link_info_l": "Decomposing the state of an RNN into multiple layers to improve representational capacity",
-        "link_info_s": "add MLP"
-      }
-    ],
-    "training": [],
-    "url": "https://arxiv.org/abs/1312.6026",
-    "variants": []
-  },
-  {
     "ID": "ESN",
     "application": [
       "1.2.NLP"
@@ -1281,6 +1209,7 @@
     "architecture": [],
     "citation": "1517",
     "date": "2004.04.02",
+    "fullname": "echo state networks",
     "names": [
       {
         "name": "echo state network",
@@ -1300,6 +1229,34 @@
     "variants": []
   },
   {
+    "ID": "ESN with leaky units",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "414",
+    "date": "2007.04.01",
+    "fullname": "echo state networks with leaky integration units",
+    "names": [],
+    "parents": [
+      {
+        "ID": "ESN",
+        "link_category": "b",
+        "link_info_l": "An extension to echo state networks by leaky integration units",
+        "link_info_s": "leaky units"
+      },
+      {
+        "ID": "leaky units",
+        "link_category": "b=>b",
+        "link_info_l": "An extension to echo state networks by leaky integration units",
+        "link_info_s": "use it"
+      }
+    ],
+    "training": [],
+    "url": "https://www.sciencedirect.com/science/article/pii/S089360800700041x",
+    "variants": []
+  },
+  {
     "ID": "DB-LSTM",
     "application": [
       "1.2.NLP"
@@ -1307,6 +1264,7 @@
     "architecture": [],
     "citation": "1897",
     "date": "2013.03.22",
+    "fullname": "deep bidirectional LSTM",
     "names": [
       {
         "name": "deep bidirectional LSTM",
@@ -1316,7 +1274,7 @@
     "parents": [
       {
         "ID": "LSTM",
-        "link_category": "",
+        "link_category": "c=>c",
         "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
         "link_info_s": "combine with other methods"
       },
@@ -1328,13 +1286,273 @@
       },
       {
         "ID": "stacked RNN",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
         "link_info_s": "combine with other methods"
       }
     ],
     "training": [],
     "url": "https://arxiv.org/abs/1303.5778",
+    "variants": []
+  },
+  {
+    "ID": "time skip connections",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "15",
+    "date": "1998.10.15",
+    "fullname": "time skip connections",
+    "names": [],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": "b",
+        "link_info_l": " To address long-term dependency, it adds direct connections from variables in the distant past to variables in the present.",
+        "link_info_s": "add long time scale"
+      }
+    ],
+    "training": [],
+    "url": "https://drum.lib.umd.edu/handle/1903/745",
+    "variants": []
+  },
+  {
+    "ID": "removing connections",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "",
+    "date": "2013",
+    "fullname": "",
+    "names": [],
+    "parents": [
+      {
+        "ID": "time skip connections",
+        "link_category": "b=>b",
+        "link_info_l": "Time skip connections add edges, so the units can choose to operate on a long time scale or focus on a short one; Removing connections force units to operate the long time scale.  ",
+        "link_info_s": "force on long time scale"
+      }
+    ],
+    "training": [],
+    "url": "",
+    "variants": []
+  },
+  {
+    "ID": "leaky units",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "900",
+    "date": "2013.02.13",
+    "fullname": "leaky units",
+    "names": [],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": "b",
+        "link_info_l": " To address long-term dependency, it adds linear self connections with a weight near one.",
+        "link_info_s": "linear self connections"
+      },
+      {
+        "ID": "time skip connections",
+        "link_category": "b=>b",
+        "link_info_l": "Leaky units are units  with linear self-connections and a weight near one on these connections. Leaky units are more smooth and flexible than skip time connections since it adjust the real-valed weight rather than the integer-valued time skip.",
+        "link_info_s": "smooth and flexible"
+      }
+    ],
+    "training": [],
+    "url": "",
+    "variants": []
+  },
+  {
+    "ID": "LSTM",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "8136",
+    "date": "1997.12.15",
+    "fullname": "long short term memory",
+    "names": [],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": "c",
+        "link_info_l": "LSTM uses a gated self-loop to learn long-term dependencies more easily",
+        "link_info_s": "gated units"
+      },
+      {
+        "ID": "leaky units",
+        "link_category": "b=>c",
+        "link_info_l": "LSTM and leaky units adopt different methods to accumulate information through time. ",
+        "link_info_s": ""
+      }
+    ],
+    "training": [],
+    "url": "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735",
+    "variants": [
+      {
+        "ID": "add forget gate",
+        "application": [
+          "1.2.NLP"
+        ],
+        "architecture": [],
+        "citation": "848",
+        "date": "1999.09.07",
+        "fullname": "LSTM with forget",
+        "names": [],
+        "parents": [
+          {
+            "ID": "initial LSTM",
+            "link_category": "c=>c",
+            "link_info_l": "Add forget gate to LSTM cells.  These cells learn to reset themselves at appropriate times, thus releasing internal resources.",
+            "link_info_s": "forget gate"
+          }
+        ],
+        "training": [],
+        "url": "http://digital-library.theiet.org/content/conferences/10.1049/cp_19991218",
+        "variants": []
+      },
+      {
+        "ID": "add peephole",
+        "application": [
+          "1.2.NLP"
+        ],
+        "architecture": [],
+        "citation": "157",
+        "date": "2000.07.01",
+        "fullname": "LSTM with peephole",
+        "names": [],
+        "parents": [
+          {
+            "ID": "LSTM with forget",
+            "link_category": "c=>c",
+            "link_info_l": " Make the weights on the self-loop conditioned on the context, rather than \ufb01xed",
+            "link_info_s": "peephole connections"
+          }
+        ],
+        "training": [],
+        "url": "http://ieeexplore.ieee.org/abstract/document/861302/",
+        "variants": []
+      },
+      {
+        "ID": "with BPTT",
+        "application": [
+          "1.2.NLP"
+        ],
+        "architecture": [],
+        "citation": "777",
+        "date": "2005.07.01",
+        "fullname": "LSTM",
+        "names": [],
+        "parents": [
+          {
+            "ID": "LSTM with peephole",
+            "link_category": "c=>c",
+            "link_info_l": "use full backpropogation through time for training ",
+            "link_info_s": "BPTT"
+          }
+        ],
+        "training": [],
+        "url": "https://www.sciencedirect.com/science/article/pii/S0893608005001206",
+        "variants": []
+      }
+    ]
+  },
+  {
+    "ID": "GRU",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "2069",
+    "date": "2014.06.03",
+    "fullname": "gated recurrent unit",
+    "names": [
+      {
+        "name": "gated recurrent unit",
+        "params": 0.0
+      }
+    ],
+    "parents": [
+      {
+        "ID": "LSTM",
+        "link_category": "c=>c",
+        "link_info_l": "To improve computation effiency, the gates of a recureent uit is redesigned in GRU, input gate and forget gate are combined into one single gate. input, forget, output gates=>reset, update gates",
+        "link_info_s": "redesign gates"
+      }
+    ],
+    "training": [],
+    "url": "https://arxiv.org/abs/1406.1078",
+    "variants": []
+  },
+  {
+    "ID": "DGLSTM",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "15",
+    "date": "2015.08.01",
+    "fullname": "depth-gated LSTM",
+    "names": [],
+    "parents": [
+      {
+        "ID": "LSTM",
+        "link_category": "c=>c",
+        "link_info_l": "an extension of LSTM to use a depth gate to connect memory cells of adjacent layers",
+        "link_info_s": "add depth gate"
+      }
+    ],
+    "training": [],
+    "url": "https://pdfs.semanticscholar.org/d3e9/9f2f98ac361aded0b9b9d90b6f9fe8bbbc70.pdf",
+    "variants": []
+  },
+  {
+    "ID": "DT-RNN",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "269",
+    "date": "2013.12.20",
+    "fullname": "deep transition RNN",
+    "names": [],
+    "parents": [
+      {
+        "ID": "stacked RNN",
+        "link_category": "a=>a",
+        "link_info_l": "use MLP to increase the network depth",
+        "link_info_s": "add MLP"
+      }
+    ],
+    "training": [],
+    "url": "https://arxiv.org/abs/1312.6026",
+    "variants": []
+  },
+  {
+    "ID": "DT(S)-RNN",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "269",
+    "date": "2013.12.20",
+    "fullname": "deep transition RNN with skip connections",
+    "names": [],
+    "parents": [
+      {
+        "ID": "DT-RNN",
+        "link_category": "a=>a",
+        "link_info_l": "add skip connections",
+        "link_info_s": "skip connections"
+      }
+    ],
+    "training": [],
+    "url": "https://arxiv.org/abs/1312.6026",
     "variants": []
   }
 ]

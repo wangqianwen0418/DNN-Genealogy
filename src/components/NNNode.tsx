@@ -67,6 +67,8 @@ export default class NNNode extends React.Component<Props, {}>{
         }
         //a trick. calculate position
         //if assign transX, transY, scale to another group, the transition animiation will be wired
+        
+        console.info("node", node)
         return <g key={node.label} className="Node"
             transform={`translate (${(node.x - node.width / 2)*scale+transX}, ${(node.y - node.height / 2)*scale+transY})`}
             onMouseDown={this.mouseDown}
@@ -89,7 +91,10 @@ export default class NNNode extends React.Component<Props, {}>{
             {zoomed ?
                 <g/>:
                 <g>
-                    <Tooltip title={tooLong ? node.label : null}>
+                    <Tooltip 
+                    title={node.fullname}
+                    // title={tooLong ? node.label : null}
+                    >
                     <text 
                     className="Node"
                     textAnchor="middle"
