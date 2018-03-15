@@ -3,7 +3,7 @@ const COLORS: string[] = [
     // ' #9e0142',
     ' #fdae61',
     // ' #d53e4f',
-    ' #e6f598',
+    // ' #e6f598',
     ' #f46d43',
     // ' #ffffbf',
     ' #66c2a5',

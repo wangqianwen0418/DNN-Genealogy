@@ -56,7 +56,6 @@ export default class Train extends React.Component<Props, State>{
                 >
                 <Collapse bordered={false} >
                 {tab.children.map((pane:any)=>{
-                    console.info(tab.name, pane.name)
                     return <Panel header={pane.name} key={pane.name}>
                     <p>{pane.url}</p>
                 </Panel>

@@ -43,7 +43,7 @@
     "parents": [
       {
         "ID": "leNet",
-        "link_category": "",
+        "link_category": "a=>a",
         "link_info_l": "add regularization: dropout, data augmentation; change activication: relu; ",
         "link_info_s": "regularizer & activation"
       }
@@ -100,7 +100,7 @@
     "parents": [
       {
         "ID": "VGG",
-        "link_category": "",
+        "link_category": "a=>c",
         "link_info_l": "introduce multi-brach inception module=>less computation cost",
         "link_info_s": "inception module"
       }
@@ -114,28 +114,13 @@
     "url": "https://arxiv.org/abs/1409.4842",
     "variants": [
       {
-        "ID": "xception",
-        "application": [
-          "1.1.1.general recognition"
-        ],
-        "architecture": [],
-        "citation": "114",
-        "date": "2016.10.07",
-        "names": [],
-        "parents": [
-          {
-            "ID": "inception",
-            "link_category": "",
-            "link_info_l": "the inception modules are replaced with depthwise separable convolutions=>improve parameter efficiency",
-            "link_info_s": "depthwise seperable conv"
-          }
-        ],
-        "training": [],
-        "url": "https://arxiv.org/abs/1610.02357",
-        "variants": []
+        "ID": "inception_v2"
       },
       {
-        "ID": "inception_rethink"
+        "ID": "inception_v3"
+      },
+      {
+        "ID": "inception_v4"
       }
     ]
   },
@@ -173,8 +158,8 @@
     "parents": [
       {
         "ID": "alexNet",
-        "link_category": "",
-        "link_info_l": "increasing depth using an architecture with small (3x3) convolution filters",
+        "link_category": "a=>a",
+        "link_info_l": "increasing depth using an architecture with very small (3x3) convolution filters",
         "link_info_s": "small filter size & deeper"
       }
     ],
@@ -211,14 +196,8 @@
     ],
     "parents": [
       {
-        "ID": "LSTM",
-        "link_category": "",
-        "link_info_l": "inspired by its gate mechanism",
-        "link_info_s": ""
-      },
-      {
         "ID": "VGG",
-        "link_category": "",
+        "link_category": "a=>b",
         "link_info_l": "introduce gated skip connections to train extremely deep models directly from scratch",
         "link_info_s": "gated skip connections"
       }
@@ -306,13 +285,13 @@
     "parents": [
       {
         "ID": "VGG",
-        "link_category": "",
+        "link_category": "a=>b",
         "link_info_l": "introduce residual connections",
         "link_info_s": "residual connection"
       },
       {
         "ID": "highwayNets",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "skip connections without gate",
         "link_info_s": "remove gate"
       }
@@ -407,7 +386,7 @@
         "parents": [
           {
             "ID": "resNet",
-            "link_category": "",
+            "link_category": "b=>b",
             "link_info_l": "generalizes ResNets and standard CNNs",
             "link_info_s": "generalizes"
           }
@@ -420,6 +399,9 @@
         ],
         "url": "https://arxiv.org/abs/1603.08029",
         "variants": []
+      },
+      {
+        "ID": "resNet_v2"
       }
     ]
   },
@@ -448,14 +430,14 @@
     ],
     "parents": [
       {
-        "ID": "resNet",
-        "link_category": "",
+        "ID": "inception",
+        "link_category": "c=>c",
         "link_info_l": "combine resnet with inception",
         "link_info_s": "combine"
       },
       {
-        "ID": "inception",
-        "link_category": "",
+        "ID": "resNet",
+        "link_category": "b=>b",
         "link_info_l": "combine resnet with inception",
         "link_info_s": "combine"
       }
@@ -503,14 +485,8 @@
     ],
     "parents": [
       {
-        "ID": "resNet",
-        "link_category": "",
-        "link_info_l": "shows that explicit residual learning is not a requirement for building ultra-deep neural networks",
-        "link_info_s": "no residual connections"
-      },
-      {
         "ID": "inception",
-        "link_category": "",
+        "link_category": "c=>c",
         "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
         "link_info_s": "split-transfer-merge"
       }
@@ -550,16 +526,22 @@
     ],
     "parents": [
       {
+        "ID": "inception",
+        "link_category": "c=>c",
+        "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
+        "link_info_s": "split-transfer-merge"
+      },
+      {
         "ID": "resNet",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "add a new dimension called \"cardinality\"",
         "link_info_s": "residual connections"
       },
       {
-        "ID": "inception",
-        "link_category": "",
-        "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
-        "link_info_s": "split-transfer-merge"
+        "ID": "inception_resNet",
+        "link_category": "b+c=>b+c",
+        "link_info_l": "highly modulized",
+        "link_info_s": "highly modulized"
       }
     ],
     "training": [
@@ -659,7 +641,7 @@
     "parents": [
       {
         "ID": "resNet",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "dense residual connection; use concate instead of adding to combine mult-braches",
         "link_info_s": "residual connections"
       }
@@ -698,16 +680,16 @@
     ],
     "parents": [
       {
-        "ID": "inception",
-        "link_category": "",
-        "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
-        "link_info_s": "split-transfer-merge"
-      },
-      {
         "ID": "alexNet",
         "link_category": "",
         "link_info_l": "same performance with 50x less parameters",
         "link_info_s": "50x less parameters"
+      },
+      {
+        "ID": "inception",
+        "link_category": "c=>c",
+        "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
+        "link_info_s": "split-transfer-merge"
       }
     ],
     "training": [
@@ -770,7 +752,7 @@
     "parents": [
       {
         "ID": "resNet",
-        "link_category": "",
+        "link_category": "b=>a",
         "link_info_l": "parameterize weights as a residual of Dirac function",
         "link_info_s": "implicit residual"
       }
@@ -828,14 +810,20 @@
     "parents": [
       {
         "ID": "inception",
-        "link_category": "",
-        "link_info_l": "borrow the operations from Inception and let neural architecture search (NAS) select from it",
+        "link_category": "c=>c",
+        "link_info_l": "borrow the multi-brach, 1x7 then 7x1 convolution, 1x3 then 3x1 convolution from Inception and let neural architecture search (NAS) select from it",
         "link_info_s": "borrow operations"
       },
       {
         "ID": "resNet",
-        "link_category": "",
-        "link_info_l": "borrow the operations from ResNet and let neural architecture search (NAS) select from them",
+        "link_category": "b=>b",
+        "link_info_l": "borrow the skip connections from ResNet and let neural architecture search (NAS) select from them",
+        "link_info_s": "borrow operations"
+      },
+      {
+        "ID": "mobileNet",
+        "link_category": "d=>d",
+        "link_info_l": "borrow the depthwise separable conv from mobileNet and let neural architecture search (NAS) select from them",
         "link_info_s": "borrow operations"
       }
     ],
@@ -867,7 +855,7 @@
     "parents": [
       {
         "ID": "mobileNet",
-        "link_category": "",
+        "link_category": "a=>b",
         "link_info_l": "insipired by the manipulation on channels=>significant performance improvements with slight computional cost",
         "link_info_s": "manipulate channels"
       }
@@ -901,19 +889,19 @@
     "parents": [
       {
         "ID": "resNet",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
         "link_info_s": "generalize"
       },
       {
         "ID": "denseNet",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
         "link_info_s": "generalize"
       },
       {
         "ID": "DPN",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
         "link_info_s": "generalize"
       }
@@ -944,19 +932,40 @@
     "parents": [
       {
         "ID": "denseNet",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "combine the connections in DenseNet and ResNet",
         "link_info_s": "combine"
       },
       {
         "ID": "resNet",
-        "link_category": "",
+        "link_category": "b=>b",
         "link_info_l": "combine the connections in DenseNet and ResNet",
         "link_info_s": "combine"
       }
     ],
     "training": [],
     "url": "https://arxiv.org/pdf/1707.01629.pdf",
+    "variants": []
+  },
+  {
+    "ID": "xception",
+    "application": [
+      "1.1.1.general recognition"
+    ],
+    "architecture": [],
+    "citation": "114",
+    "date": "2016.10.07",
+    "names": [],
+    "parents": [
+      {
+        "ID": "inception",
+        "link_category": "c=>c+d",
+        "link_info_l": "the inception modules are replaced with depthwise separable convolutions=>improve parameter efficiency",
+        "link_info_s": "depthwise seperable conv"
+      }
+    ],
+    "training": [],
+    "url": "https://arxiv.org/abs/1610.02357",
     "variants": []
   },
   {
@@ -989,14 +998,14 @@
     ],
     "parents": [
       {
-        "ID": "inception",
-        "link_category": "",
-        "link_info_l": "borrow the depthwise seperable convolutions used in Inception models",
+        "ID": "xception",
+        "link_category": "d=>d",
+        "link_info_l": "borrow the depthwise seperable convolutions used",
         "link_info_s": "depthwise seperable conv"
       },
       {
         "ID": "VGG",
-        "link_category": "",
+        "link_category": "a=>a",
         "link_info_l": "apply the same streamlined architecture; add batch normalization; replace normal conv blocks with depthwise seperable conv blocks",
         "link_info_s": "same streamlined architecture"
       }

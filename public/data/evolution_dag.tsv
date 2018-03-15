@@ -1,31 +1,31 @@
 ID	url	date	citation	application	training	architecture	parent	link_info_l	link_info_s	link-category	variants	name	params(M)	cifar10	cifar100	SVHN	imageNet val top1	imagenet val top5	model path
 leNet	http://ieeexplore.ieee.org/abstract/document/726791/	1998.11.01	10831	1.1.1.general recognition	3.2.1.SGD	2.2.1.1.plain;2.2.2.2.2.sigmoid								na	na	na	na	na	
-alexNet	https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks	2012.12.03	18438	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.2.1.1.standard relu	leNet	add regularization: dropout, data augmentation; change activication: relu; 	regularizer & activation			alexNet	60	na	na	na	36.7	15.4	
-inception	https://arxiv.org/abs/1409.4842	2014.09.17	5591	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	VGG	introduce multi-brach inception module=>less computation cost	inception module		xception	inception	6.8	na	na	na	na	6.67	
-											inception_rethink	inception_v3	23.8	na	na	na	18.77	4.2	x
-												inception_v2		na	na	na	na	na	
-VGG	https://arxiv.org/abs/1409.1556	2014.09.04	8205	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.2.1.1.standard relu	alexNet	increasing depth using an architecture with very small (3x3) convolution filters	small filter size & deeper			vgg19	144	na	na	na	25.5	7.3	x
+alexNet	https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks	2012.12.03	18438	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.2.1.1.standard relu	leNet	add regularization: dropout, data augmentation; change activication: relu; 	regularizer & activation	a=>a		alexNet	60	na	na	na	36.7	15.4	
+inception	https://arxiv.org/abs/1409.4842	2014.09.17	5591	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	VGG	introduce multi-brach inception module=>less computation cost	inception module	a=>c	inception_v2	inception	6.8	na	na	na	na	6.67	
+											inception_v3	inception_v3	23.8	na	na	na	18.77	4.2	x
+											inception_v4	inception_v2		na	na	na	na	na	
+VGG	https://arxiv.org/abs/1409.1556	2014.09.04	8205	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	2.2.1.1.plain;2.2.2.2.1.1.standard relu	alexNet	increasing depth using an architecture with very small (3x3) convolution filters	small filter size & deeper	a=>a		vgg19	144	na	na	na	25.5	7.3	x
 												vgg16	138	na	na	na	25.6	8.1	
-highwayNets	https://arxiv.org/pdf/1505.00387.pdf	2015.11.03	320	1.1.1.general recognition		2.2.1.2.residual;2.2.2.2.1.1.standard relu	LSTM	inspired by its gate mechanism				highwayNets	2.3	7.76	na	na	na	na	
-							VGG	introduce gated skip connections to train extremely deep models directly from scratch	gated skip connections					na	na	na	na	na	
-resNet	https://arxiv.org/abs/1512.03385	2015.12.10	5464	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.1.7.he_normal	2.2.1.2.residual;2.2.2.2.1.1.standard relu	VGG	introduce residual connections	residual connection		WRN	resNet_v1_56_cifar	0.86	6.97	25.16	na	na	na	x
-							highwayNets	skip connections without gate	remove gate		RIR	resNet_v1_110_cifar	1.7	6.43	25.16	na	na	na	x
-												resNet_v1_50	25.6	na	na	na	24.1	7.1	x
+highwayNets	https://arxiv.org/pdf/1505.00387.pdf	2015.11.03	320	1.1.1.general recognition		2.2.1.2.residual;2.2.2.2.1.1.standard relu	VGG	introduce gated skip connections to train extremely deep models directly from scratch	gated skip connections	a=>b		highwayNets	2.3	7.76	na	na	na	na	
+resNet	https://arxiv.org/abs/1512.03385	2015.12.10	5464	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.1.7.he_normal	2.2.1.2.residual;2.2.2.2.1.1.standard relu	VGG	introduce residual connections	residual connection	a=>b	WRN	resNet_v1_56_cifar	0.86	6.97	25.16	na	na	na	x
+							highwayNets	skip connections without gate	remove gate	b=>b	RIR	resNet_v1_110_cifar	1.7	6.43	25.16	na	na	na	x
+											resNet_v2	resNet_v1_50	25.6	na	na	na	24.1	7.1	x
 												resNet_v1_152	60.4	na	na	na	21.43	5.71	x
 												resNet_v2	na	na	na	na	35.29	na	
 												resNet_v2_56_cifar	1.6	6.99	na	na	na	na	
 												resNet_v2_110_cifar	3.3	6.38	24.64	na	na	na	
-inception_resNet	https://arxiv.org/abs/1602.07261	2016.02.23	480	1.1.1.general recognition	3.2.3.RMSprop;scaling of the residuals;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	resNet	combine resnet with inception	combine			inception_resNet	55.8	na	na	na	17.8	3.7	x
-							inception	combine resnet with inception	combine					na	na	na	na	na	
+inception_resNet	https://arxiv.org/abs/1602.07261	2016.02.23	480	1.1.1.general recognition	3.2.3.RMSprop;scaling of the residuals;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	inception	combine resnet with inception	combine	c=>c		inception_resNet	55.8	na	na	na	17.8	3.7	x
+							resNet	combine resnet with inception	combine	b=>b				na	na	na	na	na	
 WRN	https://arxiv.org/abs/1605.07146	2016.05.23	285	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet	to increase the parameter efficiency, increase the number of channels and decrease the number of layers	wider and shallower			wideResNet_16_4	2.9	5.24	23.91	1.64	na	na	x
 												wideResNet_28_10	36	3.89	18.85	1.64	na	na	x
 												wideResNet-50-2	na	na	na	na	21.9	5.79	
-RIR	https://arxiv.org/abs/1603.08029	2016.05.25	37	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet	generalizes ResNets and standard CNNs	generalizes			resNet-in-resent	na	5.01	22.9	na	na	na	
-fractalNet	https://arxiv.org/abs/1605.07648	2016.05.24	71	1.1.1.general recognition	3.4.3.drop path;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	resNet	shows that explicit residual learning is not a requirement for building ultra-deep neural networks	no residual connections			fractalNet-40	22.9	5.24	22.49	na	na	na	x
-							inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge			fractalNet-20	38.6	5.22	23.3	na	na	na	
-resNeXt	https://arxiv.org/abs/1611.05431	2016.11.16	134	1.1.1.general recognition	3.4.7.pre-activation;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	resNet	add a new dimension called "cardinality"	residual connections			ResNeXt	25	3.58	17.31	na	20.4	5.3	
-							inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge					na	na	na	na	na	
-denseNet	https://arxiv.org/abs/1608.06993	2016.08.25	378	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with nesterov momentum;3.4.2.weight decay;3.1.7.he_normal	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet	dense residual connection; use concate instead of adding to combine mult-braches	residual connections			denseNet_40_12	1	5.24	24.42	1.79	na	na	x
+RIR	https://arxiv.org/abs/1603.08029	2016.05.25	37	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet	generalizes ResNets and standard CNNs	generalizes	b=>b		resNet-in-resent	na	5.01	22.9	na	na	na	
+fractalNet	https://arxiv.org/abs/1605.07648	2016.05.24	71	1.1.1.general recognition	3.4.3.drop path;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge	c=>c		fractalNet-40	22.9	5.24	22.49	na	na	na	x
+												fractalNet-20	38.6	5.22	23.3	na	na	na	
+resNeXt	https://arxiv.org/abs/1611.05431	2016.11.16	134	1.1.1.general recognition	3.4.7.pre-activation;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.2.residual;2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu	inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge	c=>c		ResNeXt	25	3.58	17.31	na	20.4	5.3	
+							resNet	add a new dimension called "cardinality"	residual connections	b=>b				na	na	na	na	na	
+							inception_resNet	highly modulized	highly modulized	b+c=>b+c									
+denseNet	https://arxiv.org/abs/1608.06993	2016.08.25	378	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with nesterov momentum;3.4.2.weight decay;3.1.7.he_normal	2.2.1.2.residual;2.2.2.2.1.1.standard relu	resNet	dense residual connection; use concate instead of adding to combine mult-braches	residual connections	b=>b		denseNet_40_12	1	5.24	24.42	1.79	na	na	x
 												denseNet_100_12	7.2	4.1	20.2	1.67	na	na	x
 												denseNet_100_24	27.2	3.74	19.25	1.59	na	na	x
 												denseNet-BC(l=100, k=12)	0.8	4.51	22.27	1.76	na	na	
@@ -33,24 +33,24 @@ denseNet	https://arxiv.org/abs/1608.06993	2016.08.25	378	1.1.1.general recogniti
 												denseNet-BC(l=190, k=40)	25.6	3.46	17.18	na	na	na	
 												denseNet_121	8.1	na	na	na	25.02	7.71	x
 												denseNet_201	20.2	na	na	na	22.58	6.34	x
-squeezeNet	https://arxiv.org/abs/1602.07360	2016.02.24	264	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu;2.2.1.2.residual	inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge			squeezeNet	1.24	na	na	na	39.6	17.5	x
-							alexNet	same performance with 50x less parameters	50x less parameters					na	na	na	na	na	
-diracNet	https://arxiv.org/abs/1706.00388	2017.06.07	4	1.1.1.general recognition	3.1.11.dirac;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.1.plain;2.2.2.2.1.4.CRelu	resNet	parameterize weights as a residual of Dirac function	implicit residual			diracNet-28-5	9.1	3.16	23.44	na	na	na	
+squeezeNet	https://arxiv.org/abs/1602.07360	2016.02.24	264	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	2.2.1.3.multi-branch;2.2.2.2.1.1.standard relu;2.2.1.2.residual	alexNet	same performance with 50x less parameters	50x less parameters			squeezeNet	1.24	na	na	na	39.6	17.5	x
+							inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge	c=>c				na	na	na	na	na	
+diracNet	https://arxiv.org/abs/1706.00388	2017.06.07	4	1.1.1.general recognition	3.1.11.dirac;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	2.2.1.1.plain;2.2.2.2.1.4.CRelu	resNet	parameterize weights as a residual of Dirac function	implicit residual	b=>a		diracNet-28-5	9.1	3.16	23.44	na	na	na	
 												diracNet-28-10	36.5	4.75	21.54	na	na	na	
 												diracNet-18	11.7	na	na	na	30.37	10.88	
 												diracNet-34	21.8	na	na	na	27.79	9.34	
-nasNet	https://arxiv.org/abs/1707.07012	2017.12.01	35	1.1.1.general recognition	neural architecture search by reinforcement learning	2.2.1.2.residual;2.2.1.3.multi-branch	inception	borrow the operations from Inception and let neural architecture search (NAS) select from it	borrow operations			nasNet_cifar	3.3	2.65	na	na	na	na	x
-							resNet	borrow the operations from ResNet and let neural architecture search (NAS) select from them	borrow operations			nasNet_small	11.1	na	na	na	17.3	3.8	x
-												nasNet_large	5.3	na	na	na	26	8.4	x
-SENet	https://arxiv.org/abs/1709.01507	2017.09.05	48	1.1.1.general recognition			mobileNet	insipired by the manipulation on channels=>significant performance improvements with slight computional cost	manipulate channels			seNet_inception_resnetv2	65.6	na	na	na	19.8	4.79	
-mixNet	https://arxiv.org/abs/1802.01808	2018.02.06	0	1.1.1.general recognition		2.2.1.2.residual;2.2.1.3.multi-branch	resNet	generalize the connections in ResNet, DenseNet and DPN	generalize			mixNet							
-							denseNet	generalize the connections in ResNet, DenseNet and DPN	generalize										
-							DPN	generalize the connections in ResNet, DenseNet and DPN	generalize										
-DPN	https://arxiv.org/pdf/1707.01629.pdf	2017.06.06	31	1.1.1.general recognition			denseNet	combine the connections in DenseNet and ResNet	combine			DPN-92	145	na	na	na	20.8	5.4	
-							resNet	combine the connections in DenseNet and ResNet	combine										
-xception	https://arxiv.org/abs/1610.02357	2016.10.07	114	1.1.1.general recognition			inception	the inception modules are replaced with depthwise separable convolutions=>improve parameter efficiency	depthwise seperable conv							21	5.5		
-mobileNet	https://arxiv.org/abs/1704.04861	2017.04.17	149	1.1.1.general recognition			inception	borrow the depthwise seperable convolutions used in Inception models	depthwise seperable conv			mobileNet-224	4.2				29.4		
-							VGG	apply the same streamlined architecture; add batch normalization; replace normal conv blocks with depthwise seperable conv blocks	same streamlined architecture										
+nasNet	https://arxiv.org/abs/1707.07012	2017.12.01	35	1.1.1.general recognition	neural architecture search by reinforcement learning	2.2.1.2.residual;2.2.1.3.multi-branch	inception	borrow the multi-brach, 1x7 then 7x1 convolution, 1x3 then 3x1 convolution from Inception and let neural architecture search (NAS) select from it	borrow operations	c=>c		nasNet_cifar	3.3	2.65	na	na	na	na	x
+							resNet	borrow the skip connections from ResNet and let neural architecture search (NAS) select from them	borrow operations	b=>b		nasNet_small	11.1	na	na	na	17.3	3.8	x
+							mobileNet	borrow the depthwise separable conv from mobileNet and let neural architecture search (NAS) select from them	borrow operations	d=>d		nasNet_large	5.3	na	na	na	26	8.4	x
+SENet	https://arxiv.org/abs/1709.01507	2017.09.05	48	1.1.1.general recognition			mobileNet	insipired by the manipulation on channels=>significant performance improvements with slight computional cost	manipulate channels	a=>b		seNet_inception_resnetv2	65.6	na	na	na	19.8	4.79	
+mixNet	https://arxiv.org/abs/1802.01808	2018.02.06	0	1.1.1.general recognition		2.2.1.2.residual;2.2.1.3.multi-branch	resNet	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b		mixNet							
+							denseNet	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b									
+							DPN	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b									
+DPN	https://arxiv.org/pdf/1707.01629.pdf	2017.06.06	31	1.1.1.general recognition			denseNet	combine the connections in DenseNet and ResNet	combine	b=>b		DPN-92	145	na	na	na	20.8	5.4	
+							resNet	combine the connections in DenseNet and ResNet	combine	b=>b									
+xception	https://arxiv.org/abs/1610.02357	2016.10.07	114	1.1.1.general recognition			inception	the inception modules are replaced with depthwise separable convolutions=>improve parameter efficiency	depthwise seperable conv	c=>c+d						21	5.5		
+mobileNet	https://arxiv.org/abs/1704.04861	2017.04.17	149	1.1.1.general recognition			xception	borrow the depthwise seperable convolutions used	depthwise seperable conv	d=>d		mobileNet-224	4.2				29.4		
+							VGG	apply the same streamlined architecture; add batch normalization; replace normal conv blocks with depthwise seperable conv blocks	same streamlined architecture	a=>a									
 												mobileNet-160	1.32				39.8		
 														na	na	na	na	na	
 ID	url	date	citation	application	training	architecture	parent	link_info_l	link_info_s			name							
