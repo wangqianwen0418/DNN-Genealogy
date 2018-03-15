@@ -133,7 +133,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                     return <TabPane tab={d.ID} key={`${i + 1}`}>
                         <img
                             className="abstract Node"
-                            src={`../../images/${node.label}.png`}
+                            src={`../../images/${d.ID}.png`}
                             style={{ border: `1px solid ${selected ? "red" : "none"}`, }}
                             //   height={node.height}
                             width={node.width * scale}

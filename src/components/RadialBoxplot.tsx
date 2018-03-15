@@ -322,16 +322,16 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             for (let mark of marks) {
                 if (mark) perf.push(mark)
             }
-            let tag = g.append('g')
+            let tags = g.append('g')
                 .attr('id', 'marks')
                 .selectAll('g')
                 .data(perf)
                 .enter().append('g')
                 .attr('transform', (d: any) => 'translate('  + (this.r + bar_w) * Math.cos(d.angle) + ',' + (this.r + bar_w) * Math.sin(d.angle) + ')')
-            tag.append('circle')
+            tags.append('circle')
                 .attr('r', 3)
                 .attr('fill', 'none')
-                .attr('stroke', (d: any) => getColor(d))
+                .attr('stroke', (d: any) => getColor(d.name))
         }
 
         // Nodes
