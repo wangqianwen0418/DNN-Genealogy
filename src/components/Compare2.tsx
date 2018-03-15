@@ -96,7 +96,7 @@ export default class Compare2 extends React.Component<{}, State>{
 
         })
         this.setState({ nns, attr_names })
-
+        console.log(this.state)
     }
     componentWillMount() {
         this.getData()
@@ -118,7 +118,7 @@ export default class Compare2 extends React.Component<{}, State>{
         }
         selectNode = selectNode.bind(this)
         let node_r = this.node_r
-        this.nodes = d3.select(".compareView")
+        this.nodes = d3.select(".compareView1")
             .selectAll(".dot")
             .attr("class", "dot")
             .data(nns)
@@ -211,6 +211,7 @@ export default class Compare2 extends React.Component<{}, State>{
                 </text>
             </g>
         })
+        console.log(selected_nns, this.state)
         // let dots: JSX.Element[] = datum.map((data: { [key: string]: any }, i: number) => {
         //     return <circle
         //         className="dot"
@@ -218,10 +219,10 @@ export default class Compare2 extends React.Component<{}, State>{
         //         key={`point_${i}`}>
         //     </circle>
         // })
-        return <svg>
+        return <svg width="1000" height="1000">
             <g
-            className="compareView"
-            transform={`translate(${this.r * 6}, ${this.r * 3}) `}
+            className="compareView1"
+            transform={`translate(${this.r * 2}, ${this.r * 2}) `}
         >
             <circle r={this.r} fill="none" stroke="gray">
             </circle>

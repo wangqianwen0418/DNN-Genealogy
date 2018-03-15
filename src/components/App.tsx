@@ -6,6 +6,7 @@ import "./App.css";
 import TextInfo from "../containers/TextInfo";
 import Evolution from "../containers/Evolution";
 // import SimpleTree from "./SimpleTree";
+import Compare2 from "./Compare2"
 import ArcTree from "../containers/ArcTree";
 import TrainTree from "../containers/TrainTree";
 import CorpusCompare from "../containers/CorpusCompare";

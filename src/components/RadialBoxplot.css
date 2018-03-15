@@ -8,3 +8,6 @@
 .dot{
     position:relative;
 }
+.RadialBoxplot {
+    overflow: hidden;
+}
