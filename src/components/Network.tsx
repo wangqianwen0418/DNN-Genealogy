@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./Graph.css";
+import "./Network.css";
 import { EvoNode } from "../types";
 import * as dagre from 'dagre';
 import { Node, GraphEdge } from 'dagre';
@@ -24,6 +24,7 @@ export interface State {
 export default class Network extends React.Component<Props, State> {
     public graphWindow: any; shiftDown: boolean
     constructor(props: Props) {
+        console.log('construct')
         super(props)
         this.state = {
             x: 1,
@@ -37,6 +38,8 @@ export default class Network extends React.Component<Props, State> {
         this.shiftDown = false
     }
     getDag(layers: EvoNode[]) {
+        console.log(layers)
+        console.log(layers.length)
         const nodeH = 10, nodeW = 200
         let g = new dagre.graphlib.Graph();
         g.setGraph({ 
@@ -92,7 +95,7 @@ export default class Network extends React.Component<Props, State> {
     oneEdge(edge: GraphEdge, i: number) {
         let { points, from, to } = edge
         let len = points.length
-        if (len == 0) { return }
+        if (len === 0) { return }
         let start = `M ${points[0].x} ${points[0].y}`
         let vias = [];
         for (let i = 0; i < len - 2; i += 2) {
@@ -139,15 +142,19 @@ export default class Network extends React.Component<Props, State> {
     //     scale *= (delta > 0 ? 1.1 : 0.9)
     //     this.setState({ scale })
     // }
-    componentWillReceiveProps(nextProps: Readonly<Props>, nextContext: any) {
-        if (this.props.nodes.length != nextProps.nodes.length) {
+    componentWillMount() {
+        console.log('will mount')
+        /*if (this.props.nodes.length !== nextProps.nodes.length) {
             let { nodes: EvoNodes } = nextProps
             let { nodes, edges } = this.getDag(EvoNodes)
             // let scale: number = Math.min((this.graphWindow.clientHeight - 2 * margin) / h, (this.graphWindow.clientWidth - 2 * margin) / w)
             // let x: number = margin + 0.5 * this.graphWindow.clientWidth - 0.5 * w
             // let y: number = margin
             this.setState({ nodes, edges })
-        }
+        }*/
+        let { nodes: EvoNodes } = this.props
+        let { nodes, edges } = this.getDag(EvoNodes)
+        this.setState({ nodes, edges })
     }
     // componentWillUpdate() {
     //     if(this.first && this.props.nodes.length > 0){
@@ -163,6 +170,8 @@ export default class Network extends React.Component<Props, State> {
     //     }
     // }
     render() {
+        console.log('will render')
+        console.log(this.state.nodes)
         let { nodes, edges, x, y, scale } = this.state
         if (nodes.length > 0) {
             // let { nodes, edges} = this.getDag(EvoNodes)
@@ -170,12 +179,21 @@ export default class Network extends React.Component<Props, State> {
             // let svg_w = Math.max(w, this.graphWindow.clientWidth)
             // let svg_h = this.graphWindow.clientHeight
             // let svg_w = this.graphWindow.clientWidth
-            return <g className="graph"
-                transform={`translate(${x+40}, ${y}) scale(${scale})`}
-            >
-                {this.drawEdges(edges)}
-                {this.drawNodes(nodes)}
-            </g>
+            return (
+            <div className="wrapped-graph">
+                <svg
+                    width="100%"
+                    height="auto"
+                >
+                    <g
+                        className="graph"
+                        // transform={`translate(${x+40}, ${y}) scale(${scale})`}
+                    >
+                        {this.drawEdges(edges)}
+                        {this.drawNodes(nodes)}
+                    </g>
+                </svg>
+            </div>)
         } else {
             return <div className="graphWindow" ref={(ref) => { this.graphWindow = ref }} />
         }

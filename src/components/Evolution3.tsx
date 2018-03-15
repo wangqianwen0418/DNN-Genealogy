@@ -8,11 +8,15 @@ import axios from "axios"
 import * as d3 from "d3"
 import { NN, NNLink, Node, GraphEdge, Point } from "../types"
 import { getColor } from "../helper/index";
-import { TreeSelect, Button, Dropdown, Menu, Tooltip } from "antd"
+import { TreeSelect, Button, Dropdown, Menu, Tooltip, Switch } from "antd"
 import moment from 'moment';
-import NNNode from "./NNNode"
-import ExtendNode from "./ExtendNode"
+import NNNode from "./NNNode";
+import Legend, { LegendProps } from "./Legend";
+import ExtendNode from "./ExtendNode";
+import { showDetailedStructure } from './ImageModel'
+
 // const {TreeNode} = TreeSelect
+
 export interface Props {
     arc: string,
     app: string,
@@ -23,20 +27,42 @@ export interface Props {
 }
 
 const appData = [
+    // {
+    //     label: "all",
+    //     key: "all",
+    //     value: "1."
+    // }, 
     {
-        label: "all",
-        key: "all",
-        value: "1."
-    }, {
         label: "Non-Sequential Data",
         key: "Non-Sequential Data",
         value: "1.1."
-    }, {
+    },
+    {
         label: "Sequential Data",
         key: "Sequential Data",
         value: "1.2."
     }
 ]
+
+let CNN = ["streamlined", "skip connections", "multi-branch", "seperatable conv"]
+let RNN = ["stacked", "bidirectional", "gated", "attention"]
+
+let legend = (Names: string[]) => {
+    let items = {}
+    Names.forEach((name: string, i: number) => {
+        let key = String.fromCharCode(i + 97)
+        let item = {
+            name,
+            key,
+            click: true,
+            hover: false
+        }
+        items[key] = item
+    })
+    return items
+}
+let legendCNN = legend(CNN)
+let legendRNN = legend(RNN)
 
 export interface State {
     datum: NN[],
@@ -54,35 +80,35 @@ export interface State {
     scale: number,
     transX: number,
     transY: number,
-    hoverEdge: string
+    hoverEdge: string,
+    showLabel: boolean,
+    legend: LegendProps['items']
 }
 
-const nodeH = 60, nodeW = 300, margin = 30, labelL = 10, tabH = 32,
-    expandH = 300 + tabH, expandW = 400,
-    r = nodeH/3,
+const nodeH = 40, nodeW = 200, margin = 30, labelL = 20, tabH = 32,
+    expandH = 180 + tabH, expandW = 240,
+    r = nodeH / 3,
     boxH = 10,
-    labelFont = 12,
+    labelFont = 10,
     textMargin = 20,
-    r_api = 1, r_dist = -100, r_diff = 0.01 //factors for DOI calculation
+    r_api = 1, r_dist = -0.1, r_diff = 0 //factors for DOI calculation
 
 // for the lablel fade in/out animiation 
 const duration = 1000;
 
 const defaultStyle = {
-    transition: `opacity 100ms ease-in-out`,
+    transition: `opacity ease-in-out`,
     opacity: 0
 }
 
 const transitionStyles = {
-    entering: { opacity: 0 },
+    entering: { opacity: 0, transition: `opacity 1000ms ease-in-out`, },
     entered: { opacity: 1 },
     exited: { opacity: 0 }
 };
 
-
-
 export default class Evolution extends React.Component<Props, State>{
-    private updateEdge: boolean = true; ref: any; x0: number; y0: number;
+    private updateEdge: boolean = true; ref: any; x0: number; y0: number; dragFlag = false
     constructor(props: Props) {
         super(props)
         this.getData = this.getData.bind(this)
@@ -93,6 +119,7 @@ export default class Evolution extends React.Component<Props, State>{
         this.pan = this.pan.bind(this)
         this.mouseDown = this.mouseDown.bind(this)
         this.mouseUp = this.mouseUp.bind(this)
+        this.selectItem = this.selectItem.bind(this)
         this.state = {
             datum: [],
             nodes: [],
@@ -109,7 +136,9 @@ export default class Evolution extends React.Component<Props, State>{
             pinNodes: [],
             transX: 0,
             transY: 0,
-            hoverEdge: ''
+            hoverEdge: '',
+            showLabel: false,
+            legend: legendCNN
         }
     }
     async getData() {
@@ -119,16 +148,17 @@ export default class Evolution extends React.Component<Props, State>{
 
         datum = datum.filter((d: NN) => d.application[0].startsWith(appValue))
         datum.forEach((d: NN) => {
-            d.width = nodeW
-            d.height = nodeH
 
             let pub_date = moment(d.date, 'YYYY-MM-DD'),
                 dif = moment().diff(pub_date, "months")
             d.api = (d.citation / dif) || 0
         })
         //normalize the api value
-        let maxApi = Math.max(...datum.map(d=>d.api||1))
-        datum.forEach(d=>(d.api=Math.log((d.api||1)/maxApi)+1))
+        let maxApi = Math.max(...datum.map(d => d.api || 1))
+        datum.forEach(d => {
+            d.api = Math.log2((d.api || 1) / maxApi + 1)
+            d.doi = d.api
+        })
         let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum)
         // let appRes = await axios.get('../../data/taxonomy.json')
         // let appData = appRes.data.children[0]
@@ -152,39 +182,36 @@ export default class Evolution extends React.Component<Props, State>{
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
             ranksep: nodeW / 2,
-            marginx: margin,
+            marginx: margin * 2,
             marginy: margin,
             rankdir: 'LR',
-            edgesep: nodeH * .3,
+            edgesep: nodeH * 0.4,
             nodesep: nodeH * .5,
             // ranker: "tight-tree"
-            ranker: "longest-path"
+            // ranker: "longest-path"
         });
         dag.setDefaultEdgeLabel(() => { return {}; });
 
         //control the min value after resizing the nodes, 
-        const resizeNode =(w:number, ratio:number)=>{
-            let newW =  w*ratio
-            if(newW>w/3){
+        const resizeNode = (w: number, ratio: number) => {
+            let newW = w * ratio
+            if (newW > w * 0.3) {
                 return newW
-            }else{
-                return w/3
+            } else {
+                return w * 0.3
             }
         }
         datum.forEach((node: NN) => {
             // let label = `${layer.name}:${layer.class_name}`
-            let selected: boolean = (node.ID == selectedID),
-                pinned: boolean = (pinNodes.indexOf(node.ID) != -1)
-            dag.setNode(node.ID,
-                {
-                    label: node.ID,
-                    width: (selected || pinned) ? expandW : resizeNode(nodeW, node.api||1),
-                    height: (selected || pinned) ? expandH : resizeNode(nodeH, node.api||1),
-                    ID: node.ID,
-                    api: node.api,
-                    variants: node.variants
-                }
-            )
+
+            dag.setNode(node.ID, {
+                label: node.ID,
+                ID: node.ID,
+                api: node.api,
+                variants: node.variants,
+                width: nodeW,
+                height: nodeH,
+            })
             //IR model or keras model
             if (node.parents.length > 0) {
                 node.parents.forEach((parent: any) => {
@@ -195,7 +222,8 @@ export default class Evolution extends React.Component<Props, State>{
                             label_s: parent.link_info_s,
                             label_l: parent.link_info_l,
                             from: parent.ID,
-                            to: node.ID
+                            to: node.ID,
+                            cate: parent.link_category.split('=>')[1],
                         }
                     )
                 })
@@ -217,19 +245,31 @@ export default class Evolution extends React.Component<Props, State>{
         // console.info(tree.edges)
 
 
-        //calculate doi for each node
+        //calculate doi and size for each node
         dag.nodes().forEach((v) => {
             if (dag.node(v)) {
                 let node: Node = dag.node(v),
-                    distance = selectedNode ? distanceDict[v].distance : 0
+                    api = node.api || 1,
+                    distance = selectedNode ? distanceDict[v].distance : 0,
+                    selected: boolean = (v == selectedID),
+                    pinned: boolean = (pinNodes.indexOf(v) != -1)
 
-                node.api_diff = Math.max(
-                    node.api || 0,
+                let api_diff = Math.max(
+                    api,
                     Math.max(...(dag.neighbors(v) || []).map((neighbor: Node) => {
                         return r_diff * (neighbor.api || 0) / getEI({ v, w: neighbor.label })
                     }))
-                )
-                node.doi = node.api_diff + r_dist * distance
+                ),
+                    doi = api_diff + r_dist * distance
+                dag.setNode(v, {
+                    label: v,
+                    ID: v,
+                    api: api,
+                    doi: doi,
+                    variants: node.variants,
+                    width: (selected || pinned) ? expandW : resizeNode(nodeW, doi),
+                    height: (selected || pinned) ? expandH : resizeNode(nodeH, doi),
+                })
             }
         })
         dag.edges().forEach((e, i) => {
@@ -251,6 +291,7 @@ export default class Evolution extends React.Component<Props, State>{
                     height: expandH,
                     ID: topParent.ID,
                     api: topParent.api,
+                    doi: topParent.doi,
                     variants: topParent.variants
                 })
             }
@@ -262,6 +303,7 @@ export default class Evolution extends React.Component<Props, State>{
                     height: expandH,
                     ID: topChild.ID,
                     api: topChild.api,
+                    doi: topChild.doi,
                     variants: topChild.variants
                 })
             }
@@ -323,15 +365,14 @@ export default class Evolution extends React.Component<Props, State>{
         let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
-            
-        return (<g className="nodes" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
-            {nodes.filter(node=>node.width!=expandW).map((node: Node) => {
+
+        return (<g className="nodes" >
+            {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
                     zoomed: boolean = node.width == expandW,
                     hoverNodes = hoverEdge.split("->"),
-                    hovered = hoverNodes.indexOf(node.label)!=-1
-
+                    hovered = hoverNodes.indexOf(node.label) != -1
                 return <NNNode
                     node={node}
                     selected={selected}
@@ -339,20 +380,26 @@ export default class Evolution extends React.Component<Props, State>{
                     zoomed={zoomed}
                     hovered={hovered}
                     apiArr={apiArr}
+                    transX={transX}
+                    transY={transY}
+                    scale={scale}
                     selectNode={this.selectNode} />
             })}
         </g>)
     }
     drawExtendNodes(nodes: Node[]) {
-        let { selectedNode, topDoi, scale, transX, transY } = this.state,
+        let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
-        return nodes.filter(node=>node.width == expandW).map((node: Node) => {
+        return nodes.map((node: Node) => {
             let selected: boolean = (node.ID === selectedID),
-                zoomed: boolean = node.width == expandW
+                zoomed: boolean = node.width == expandW,
+                hoverNodes = hoverEdge.split("->"),
+                hovered = hoverNodes.indexOf(node.label) != -1
             return <ExtendNode
                 zoomed={zoomed}
+                hovered={hovered}
                 scale={scale}
                 transX={transX}
                 transY={transY}
@@ -367,9 +414,18 @@ export default class Evolution extends React.Component<Props, State>{
         })
     }
     oneEdge(edge: GraphEdge, i: number) {
-        let { points, from, to, label_s, label_l } = edge,
-            { selectedNode, hoverEdge } = this.state,
-            selectedID = selectedNode ? selectedNode.label : undefined
+        let { points, from, to, label_s, label_l, cate } = edge,
+            { selectedNode, hoverEdge, transX, transY, scale, showLabel } = this.state,
+            selectedID = selectedNode ? selectedNode.label : undefined,
+            clickLegend = this.state.legend[cate] ? this.state.legend[cate].click : false,
+            hoverLegend = this.state.legend[cate] ? this.state.legend[cate].hover : false
+        // console.info(cate, this.state.legend)
+
+        //a trick. if assign transX, transY, scale to a group, the transition animiation will be wired
+        const movePoint = (p: Point, x: number, y: number, s: number) => {
+            return { x: p.x * s + x, y: p.y * s + y }
+        }
+        points = points.map(p => movePoint(p, transX, transY, scale))
 
 
         let len = points.length
@@ -393,6 +449,7 @@ export default class Evolution extends React.Component<Props, State>{
         const getInter = (p1: Point, p2: Point, n: number) => {
             return `${p1.x * n + p2.x * (1 - n)} ${p1.y * n + p2.y * (1 - n)}`
         }
+
         const getCurve = (points: Point[]) => {
             let vias = [], len = points.length
             const ratio = 0.5
@@ -425,17 +482,18 @@ export default class Evolution extends React.Component<Props, State>{
             // let pathData = `M ${points[0].x} ${points[0].y} 
             //                 L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
             highlight: boolean = ((from == selectedID) || (to == selectedID)),
-            hovered: boolean = hoverEdge==`${from}->${to}`,
+            hovered: boolean = hoverEdge == `${from}->${to}`,
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
 
-        return <g className='link' key={`${i}_${from}->${to}`}>
+        return <g className='Edge EdgeGroup' key={`${i}_${from}->${to}`}>
             <path
+                className="Edge"
                 id={`${from}->${to}`}
                 d={pathData}
-                stroke={hovered ? "#111" : "gray"}
+                stroke={hovered ? "#111" : (clickLegend ? getColor(edge.cate) : "gray")}
                 fill='none'
-                strokeWidth={hovered ? 2 : 1}
-                className="Edge"
+                strokeWidth={hoverLegend ? 4 : 2}
+                opacity={hoverLegend? 1: 0.8}
             >
             </path>
 
@@ -444,68 +502,72 @@ export default class Evolution extends React.Component<Props, State>{
                 opacity={0}
                 d={pathData}
             />
-            {/* a trick, two transition: one for fade in, one for fade out */}
-            <Tooltip title={label_l}>
-            <g className="edgeLable" cursor="pointer"
-            onMouseOver={(e:React.MouseEvent<any>)=>this.setState({hoverEdge:`${from}->${to}`})}
-            onMouseLeave={(e:React.MouseEvent<any>)=>this.setState({hoverEdge:``})}
-            >
-            <Transition in={this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
-                {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
-                    // console.info(status)
-                    return <text className="link_info fadeIn"
-                        dy="-3"
-                        textAnchor="middle"
-                        style={{
-                            fontSize: labelFont,
-                            ...defaultStyle,
-                            ...transitionStyles[status]
-                        }}>
-                        <textPath
-                            xlinkHref={`#label_${from}->${to}`}
-                            startOffset="50%"
-                        >
-                            {label_s}
-                        </textPath>
-                    </text>
-                }}
-            </Transition>
+            {/* a trick for the edge label, two transition: one for fade in, one for fade out */}
+            {showLabel ?
+                <Tooltip title={label_l} mouseEnterDelay={.3}>
+                    <g className="edgeLable" cursor="pointer"
+                        opacity={hoverLegend?1:0.8}
+                        onMouseOver={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `${from}->${to}` })}
+                        onMouseLeave={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `` })}
+                    >
+                        <Transition in={this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
+                            {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
+                                // console.info(status)
+                                return <text className="link_info fadeIn"
+                                    dy={-0.2 * labelFont}
+                                    scale={1 / scale}
+                                    textAnchor="middle"
+                                    style={{
+                                        fontSize: labelFont,
+                                        ...defaultStyle,
+                                        ...transitionStyles[status]
+                                    }}>
+                                    <textPath
+                                        xlinkHref={`#label_${from}->${to}`}
+                                        startOffset="50%"
+                                    >
+                                        {label_s}
+                                    </textPath>
+                                </text>
+                            }}
+                        </Transition>
 
-            <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
-                {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
-                    return <text className="link_info fadeIn"
-                        textAnchor="middle"
-                        style={{
-                            fontSize: labelFont,
-                            ...defaultStyle,
-                            ...transitionStyles[status]
-                        }}>
-                        <textPath xlinkHref={`#label_${from}->${to}`}
-                            startOffset="50%">
-                            {label_s}
-                        </textPath>
-                    </text>
-                }}
-            </Transition>
-            </g>
-            </Tooltip>
-            {/* mask over edge for better hover responsive */}
-            {/* <Tooltip title={label_l}>
-                <path
-                    strokeWidth={10}
-                    // opacity={0}
-                    className="edgeMask"
-                    stroke="transparent"
-                    fill="none"
-                    d={pathData}
-                />
-            </Tooltip> */}
+                        <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
+                            {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
+                                return <text className="link_info fadeIn"
+                                    dy={-0.2 * labelFont}
+                                    scale={1 / scale}
+                                    textAnchor="middle"
+                                    style={{
+                                        fontSize: labelFont,
+                                        ...defaultStyle,
+                                        ...transitionStyles[status]
+                                    }}>
+                                    <textPath xlinkHref={`#label_${from}->${to}`}
+                                        startOffset="50%">
+                                        {label_s}
+                                    </textPath>
+                                </text>
+                            }}
+                        </Transition>
+                    </g>
+                </Tooltip> : <g/>
+                // <path
+                //     className="EdgeMarker"
+                //     strokeWidth={10}
+                //     stroke="transparent"
+                //     fill="none"
+                //     d={pathData}
+                //     cursor="pointer"
+                // >
+                // </path>
+            }
         </g>
 
     }
     drawEdges(edges: GraphEdge[]) {
         let { scale, transX, transY } = this.state
-        return (<g className="edges" transform={`translate(${transX}, ${transY}) scale(${scale})`}>
+        return (<g className="edges" >
             {edges.map((edge: GraphEdge, i: number) => {
                 return this.oneEdge(edge, i)
 
@@ -514,6 +576,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
         let { scale } = this.state
+        this.updateEdge = !this.updateEdge
         if (evt.deltaY > 0) {
             this.setState({ scale: scale * 1.1 });
         } else if (evt.deltaY < 0) {
@@ -539,7 +602,8 @@ export default class Evolution extends React.Component<Props, State>{
 
     // }
     onChange = (appValue: "1.1." | "1.2.") => {
-        this.setState({ appValue });
+        let legend = appValue == "1.1." ? legendCNN : legendRNN
+        this.setState({ appValue, legend });
         this.getData()
         let { onSelectDatabase } = this.props
         if (appValue === '1.1.')
@@ -587,7 +651,7 @@ export default class Evolution extends React.Component<Props, State>{
             topChild, topParent, topDoi, scale,
             transX, transY
         })
-        
+
         /*if (selectedNode) {
             for (let nn of datum) {
                 if (nn.ID === selectedNode.label) {
@@ -600,24 +664,31 @@ export default class Evolution extends React.Component<Props, State>{
             console.log('select undefined')
         }*/
     }
-    mouseDown(e:React.MouseEvent<any>) {
+    mouseDown(e: React.MouseEvent<any>) {
         e.stopPropagation()
         e.preventDefault()
+
         document.addEventListener("mousemove", this.pan)
         this.x0 = e.clientX
         this.y0 = e.clientY
     }
-    pan(e:any) {
-        let {transX, transY } = this.state
+    pan(e: any) {
+        let { transX, transY } = this.state
         transX += e.clientX - this.x0
         transY += e.clientY - this.y0
         this.x0 = e.clientX
         this.y0 = e.clientY
+        this.dragFlag = true
         this.setState({ transX, transY })
     }
-    mouseUp(e:React.MouseEvent<any>) {
+    mouseUp(e: React.MouseEvent<any>) {
         e.stopPropagation()
         e.preventDefault()
+        if (this.dragFlag) {
+            this.updateEdge = !this.updateEdge
+            this.dragFlag = false
+        }
+
         document.removeEventListener("mousemove", this.pan)
     }
     onclickMenu(selectedNode: Node, menu: string) {
@@ -642,13 +713,19 @@ export default class Evolution extends React.Component<Props, State>{
                 break
             case 'detailed':
                 console.log('detailed')
+                showDetailedStructure(selectedNode.label)
                 break
             default:
                 break
         }
     }
+    selectItem(key: string, op:"click"|"hover") {
+        let { legend } = this.state
+        legend[key][op] = !legend[key][op]
+        this.setState({ legend })
+    }
     render() {
-        let { nodes, edges, w, h, appValue, scale } = this.state
+        let { nodes, edges, w, h, appValue, legend } = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
@@ -668,35 +745,51 @@ export default class Evolution extends React.Component<Props, State>{
             <div style={{ position: "absolute", left: "20px", top: "40px" }}>
                 Architecture:{arc}
             </div> */}
-
-            <TreeSelect
-                style={{ position: "absolute", width: 180, left: "20px", top: "20px", zIndex: 100 }}
-                value={appValue}
-                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                //treeData = {this.state.appData}
-                treeData={appData}
-                placeholder="select your data type"
-                //multiple
-                treeDefaultExpandAll
-                onChange={this.onChange}
-            />
-            <Button
-                size="small"
-                onClick={() => this.selectNode(undefined)}
-                style={{ position: "absolute", left: "20px", top: "60px", zIndex: 100 }}
+            <div className="controlPanel"
+                style={{
+                    position: "absolute",
+                    left: "20px",
+                    top: "10px",
+                    zIndex: 100,
+                    padding: "5px"
+                }}
             >
-                Reset
-            </Button>
+                <TreeSelect
+                    value={appValue}
+                    // dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    //treeData = {this.state.appData}
+                    style={{ width: 180 }}
+                    treeData={appData}
+                    placeholder="select your data type"
+                    //multiple
+                    treeDefaultExpandAll
+                    onChange={this.onChange}
+                />
+                <div>
+                    <Button
+                        size="small"
+                        onClick={() => this.selectNode(undefined)}
+                        style={{ position: "relative", top: "2px", marginRight: "3px" }}
+                    >
+                        Reset
+                </Button>
+                    <Switch
+                        // className="evoSwitch"
+                        checkedChildren="label" unCheckedChildren="no label"
+                        onChange={() => this.setState({ showLabel: !this.state.showLabel })}
+                    />
+                </div>
+                <Legend items={legend} selectItem={this.selectItem} />
+            </div>
             <div className="container">
                 <div className="extendNodes"
                     style={{
                         // height:this.ref?this.ref.clientHeight:0, 
                         // width:this.ref?this.ref.clientWidth:0,
-                        position:"relative"
+                        position: "relative"
                     }}>
                     {this.drawExtendNodes(nodes)}
                 </div>
-                {/* {this.drawExtendNodes(nodes)} */}
                 <svg
                     //alway show the whole dag
                     width="100%" height="100%"
@@ -707,27 +800,27 @@ export default class Evolution extends React.Component<Props, State>{
                 >
 
                     <defs>
-                        <marker id='red' orient='auto' markerWidth={4*r} markerHeight={4*r}
-                            refX={2*r} refY={2*r}>
+                        <marker id='red' orient='auto' markerWidth={4 * r} markerHeight={4 * r}
+                            refX={2 * r} refY={2 * r}>
                             <circle r={r} fill='red' />
                         </marker>
-                        <marker id='blue' orient='auto' markerWidth={4*r} markerHeight={4*r}
-                            refX={2*r} refY={2*r}>
+                        <marker id='blue' orient='auto' markerWidth={4 * r} markerHeight={4 * r}
+                            refX={2 * r} refY={2 * r}>
                             <circle r={r} fill='blue' />
                         </marker>
-                        <marker id='black' orient='auto' markerWidth={4*r} markerHeight={4*r}
-                            refX={2*r} refY={2*r}>
+                        <marker id='black' orient='auto' markerWidth={4 * r} markerHeight={4 * r}
+                            refX={2 * r} refY={2 * r}>
                             <circle r={r} fill='black' />
                         </marker>
-                    </defs>
-                                        
-                    {this.drawEdges(edges)}
+                    </defs>{this.drawEdges(edges)}
                     {this.drawNodes(nodes)}
 
                 </svg>
-                
+
 
             </div>
         </div>
     }
 }
+
+

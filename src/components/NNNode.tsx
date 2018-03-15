@@ -19,16 +19,42 @@ export interface Props {
     zoomed: boolean,
     hovered: boolean,
     apiArr: number[],
+    transX:number,
+    transY:number,
+    scale:number,
     selectNode: (node: Node) => void
 }
 
 
 export default class NNNode extends React.Component<Props, {}>{
+    private dragFlag:boolean=false
+    constructor(props:Props){
+        super(props)
+        this.mouseDown = this.mouseDown.bind(this)
+        this.mouseMove = this.mouseMove.bind(this)
+        this.mouseUp = this.mouseUp.bind(this)
+    }
+    //prevent drag trigger the onclick event
+    mouseDown(e:React.MouseEvent<any>){
+        this.dragFlag = false
+        document.addEventListener("mousemove", this.mouseMove)
+    }
+    mouseMove(e:MouseEvent){
+        this.dragFlag = true
+    }
+    mouseUp(e:React.MouseEvent<any>, node:Node){
+        document.removeEventListener("mousemove", this.mouseMove)
+        if(!this.dragFlag){
+            this.props.selectNode(node)
+        }else{
+            this.dragFlag = false
+        }
+    }
     render() {
-        let { node, zoomed, selected, isTop, hovered, selectNode, apiArr } = this.props,
+        let { node, zoomed, selected, isTop, hovered, selectNode, apiArr, transX, transY, scale } = this.props,
             tooLong: boolean = node.label.length > labelL,
-            bg: JSX.Element | any = (node.variants.length > 0 && !zoomed)? <rect width={node.width} height={node.height}
-                className={`Node NodeBg ${hovered?"pop":'no'}`}
+            bg: JSX.Element | any = (node.variants.length > 0 && !zoomed)? <rect width={node.width*scale} height={node.height*scale}
+                className="NodeBg"
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
                 rx={1}
                 ry={1}
@@ -36,35 +62,41 @@ export default class NNNode extends React.Component<Props, {}>{
                 stroke={hovered?"#111":"gray"}
                 strokeWidth={1.5}
             /> : []
-
         let capFirstLetter = (name:string)=>{
             return name.charAt(0).toUpperCase() + name.slice(1)
         }
+        //a trick. calculate position
+        //if assign transX, transY, scale to another group, the transition animiation will be wired
         return <g key={node.label} className="Node"
-            transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
-            onClick={(e:any) => {
-                e.preventDefault()
-                selectNode(node)
-            }}>
+            transform={`translate (${(node.x - node.width / 2)*scale+transX}, ${(node.y - node.height / 2)*scale+transY})`}
+            onMouseDown={this.mouseDown}
+            onMouseUp={(e)=>{this.mouseUp(e, node)}}
+
+            >
             {bg}
-            <rect width={node.width} height={node.height}             
+            <rect width={node.width*scale} height={node.height*scale}                             
                 className={`Node ${hovered?"pop":'no'}`}
                 rx={1}
                 ry={1}
                 fill={"white"}
                 stroke={hovered?"#111":"gray"}
+                // opacity={zoomed?0:1}
                 // stroke={zoomed ? "none" : (isTop ? "#7dc1f2" : "gray")}
-                strokeWidth={hovered ? 3 : 1.5}
+                // strokeWidth={hovered ? 2 : 1.5}
+                strokeWidth={1.5}
                 cursor="pointer"
             ></rect>
             {zoomed ?
                 <g/>:
                 <g>
-                    <Tooltip title={tooLong ? node.label : null}><text textAnchor="middle"
-                        fontSize={0.7 * node.height}
+                    <Tooltip title={tooLong ? node.label : null}>
+                    <text 
+                    className="Node"
+                    textAnchor="middle"
+                        fontSize={0.7 * node.height*scale}
                         cursor="pointer"
-                        x={node.width / 2}
-                        y={node.height - 0.15 * node.height}
+                        x={node.width*scale / 2}
+                        y={.85 * node.height * scale}
                     >
                         {
                             capFirstLetter(tooLong ? (node.label.slice(0, labelL) + '...') : node.label) 

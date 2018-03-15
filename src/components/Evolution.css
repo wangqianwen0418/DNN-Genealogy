@@ -3,15 +3,19 @@
     position: relative;
     /* overflow: auto; */
 }
+
+@keyframes move {
+
+}
 .Node, .Edge, .NodeBg {
-    transition-property: width height font-size left top;
+    /* transition-property: opacity transform width height; */
     transition-duration: 1.0s;
     transition-timing-function: ease-in-out;
 }
 
 
 .link_info{
-    fill:black;
+    fill:#333;
     stroke:none;
     stroke-width:1px;
 }
@@ -70,3 +74,4 @@
 .pop{
     animation: bumb 800ms;
 }
+

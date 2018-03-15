@@ -24,16 +24,14 @@ export default class TextInfo extends React.Component<Props, {}>{
     }
 
     render(){
-        console.log('text info render')
         let nn = this.props.nn
-        console.log(nn)
         return (
         <Card
             bordered={false}
             title={<span style={{fontSize:'1.2em'}}>{nn.ID}</span>}
             className="TextInfo View ViewBottom"
         >
-        {nn.url}
+        <a href={nn.url} target="_blank">{nn.url}</a>
         </Card>)
     }
 }
