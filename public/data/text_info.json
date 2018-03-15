@@ -1,0 +1,127 @@
+[
+    {
+        "ID": "vanilla RNN",
+        "info": "A recurrent neural network is used for processing sequences of variable length, in which a state contains information about the whole past sequence. It shares same parameters across different time steps of the sequence.",
+        "links": [
+            "http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/full",
+            "http://ieeexplore.ieee.org/abstract/document/6638947/",
+            "https://arxiv.org/abs/1506.00019",
+            "http://www.isca-speech.org/archive/interspeech_2010/i10_1045.html"
+        ]
+    },
+    {
+        "ID": "stacked RNN",
+        "info": "A stacked RNN is built up by stacking multiple recurrent hidden layers on top of the original RNN to make it deeper. It is also known as deep RNN.",
+        "links": [
+            "http://ieeexplore.ieee.org/document/6795261/",
+            "http://ieeexplore.ieee.org/abstract/document/6638947/",
+            "http://ieeexplore.ieee.org/abstract/document/7404790/",
+            "http://cal.cs.illinois.edu/papers/huang-ismir2014.pdf"
+        ]
+    },
+    {
+        "ID": "MLP_RNN",
+        "info": "An MLP_RNN is built up by applying an MLP with one or more layers to hidden-to-hidden transition in the original RNN.",
+        "links": [
+            "https://arxiv.org/abs/1312.6026"
+        ]
+    },
+    {
+        "ID": "BRNN",
+        "info": "A bidirectional RNN is used for making predictions that depend on the whole input sequence. It combines an RNN that moves forward with another RNN that moves backward.",
+        "links": [
+            "http://ieeexplore.ieee.org/abstract/document/650093/",
+            "http://ieeexplore.ieee.org/abstract/document/4531750/",
+            "https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Du_Hierarchical_Recurrent_Neural_2015_CVPR_paper.pdf",
+            "https://arxiv.org/abs/1409.0473",
+            "https://academic.oup.com/bioinformatics/article/15/11/937/249908"
+        ]
+    },
+    {
+        "ID": "recursive",
+        "info": "A recursive neural network is a generalization of recurrent network with a tree-like computational graph. The depth is reduced from n to log(n), which may help deal with long-term dependencies.",
+        "links": [
+            "https://www.sciencedirect.com/science/article/pii/000437029090005K",
+            "http://ieeexplore.ieee.org/abstract/document/712151/",
+            "https://dl.acm.org/citation.cfm?id=2145450",
+            "http://www.aclweb.org/anthology/D13-1170",
+            "https://nlp.stanford.edu/pubs/SocherLinNgManning_ICML2011.pdf"
+        ]
+    },
+    {
+        "ID": "ESN",
+        "info": "An echo state network is used for solving vanishing/exploding problems, in which recurrent hidden units are set and only output weight are learnt.",
+        "links": [
+            "http://science.sciencemag.org/content/304/5667/78",
+            "https://opus.jacobs-university.de/frontdoor/index/index/docId/638",
+            "http://ieeexplore.ieee.org/abstract/document/5629375/"
+        ]
+    },
+    {
+        "ID": "MTRNN",
+        "info": "A multiple timescale RNN adds direct connections from variables in the distant past to variables in the present, in order to transfer information more efficiently.",
+        "links": [
+            "http://papers.nips.cc/paper/522-induction-of-multiscale-temporal-structure.pdf",
+            "http://ieeexplore.ieee.org/abstract/document/6722152/",
+            "https://link.springer.com/chapter/10.1007/978-3-319-11179-7_25",
+            "https://link.springer.com/chapter/10.1007/978-3-319-09903-3_8"
+        ]
+    },
+    {
+        "ID": "LSTM",
+        "info": "A long short-team memory is one of the gated RNNs which allow the network to forget the old state besides accumulation infomation. The self-loop RNN in an LSTM is conditioned on the context by a group of layers.",
+        "links": [
+            "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735",
+            "http://papers.nips.cc/paper/3449-offline-handwriting-recognition-with-multidimensional-recurrent-neural-networks",
+            "http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural",
+            "http://ieeexplore.ieee.org/abstract/document/6638947/",
+            "https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/2A_101.pdf"
+        ]
+    },
+    {
+        "ID": "A deep bidirectional LSTM is built up by combine a deep bidirectional RNN and a LSTM.",
+        "info": "",
+        "links": [
+            "https://arxiv.org/abs/1303.5778",
+            "http://ieeexplore.ieee.org/abstract/document/6707742/",
+            "http://www.isca-speech.org/archive/interspeech_2014/i14_0338.html",
+            "http://proceedings.mlr.press/v32/graves14.pdf"
+        ]
+    },
+    {
+        "ID": "GRU",
+        "info": "A gated recurrent unit is one of the gated RNNs, including an update gate and a reset gate.",
+        "links": [
+            "https://arxiv.org/abs/1412.3555",
+            "http://proceedings.mlr.press/v37/jozefowicz15.pdf?utm_campaign=Revue%20newsletter&utm_medium=Newsletter&utm_source=revue",
+            "http://www.aclweb.org/anthology/D15-1167",
+            "https://www.cv-foundation.org/openaccess/content_cvpr_2016/app/S19-04.pdf"
+        ]
+    },
+    {
+        "ID": "seq2seq",
+        "info": "A sequence to sequence model is mainly used for translation. The model reads the input sentence into a vector C and decompose C into translation. It is also known as encoder-decoder model.",
+        "links": [
+            "https://arxiv.org/abs/1409.3215",
+            "https://arxiv.org/abs/1511.06114",
+            "https://arxiv.org/abs/1406.1078",
+            "https://arxiv.org/abs/1409.1259"
+        ]
+    },
+    {
+        "ID": "attention RNN",
+        "info": "An attention model is based on the seq2seq model, in which multiple vector Cs are used.",
+        "links": [
+            "https://arxiv.org/abs/1409.0473",
+            "https://arxiv.org/abs/1508.04025",
+            "http://ieeexplore.ieee.org/abstract/document/7472618/"
+        ]
+    },
+    {
+        "ID": "conv seq2seq",
+        "info": "",
+        "links": [
+            "https://arxiv.org/abs/1705.03122"
+        ]
+    }
+]

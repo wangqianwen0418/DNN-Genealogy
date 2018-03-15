@@ -1,8 +1,8 @@
 import * as React from "react";
 import {Card} from "antd";
 import "./App.css";
-import { NN } from "../types"
-import { State } from "./Evolution";
+import { NN, NodeTextInfo } from "../types"
+import axios from "axios"
 
 export interface Props{
     database: string,
@@ -10,9 +10,21 @@ export interface Props{
     op: number
 }
 
-export default class TextInfo extends React.Component<Props, {}>{
+export interface State{
+    textinfo: NodeTextInfo[]
+}
+
+export default class TextInfo extends React.Component<Props, State>{
     constructor(props: Props) {
         super(props)
+        this.state = { textinfo:[] }
+        this.getData = this.getData.bind(this)
+    }
+
+    async getData() {
+        let res = await axios.get('../../data/text_info.json'),
+            textinfo = res.data
+        this.setState({ textinfo })
     }
 
     shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -23,15 +35,54 @@ export default class TextInfo extends React.Component<Props, {}>{
         }
     }
 
+    componentWillMount() {
+        this.getData()
+    }
+
     render(){
         let nn = this.props.nn
-        return (
-        <Card
-            bordered={false}
-            title={<span style={{fontSize:'1.2em'}}>{nn.ID}</span>}
-            className="TextInfo View ViewBottom"
-        >
-        <a href={nn.url} target="_blank">{nn.url}</a>
-        </Card>)
+        console.log(this.state)
+
+        let p: number = -1
+        for (let i in this.state.textinfo) {
+            if (this.state.textinfo[i].ID === nn.ID) {
+                p = +i
+                break
+            }
+        }
+
+        if (p !== -1) {
+            let cur: NodeTextInfo = this.state.textinfo[p]
+            let links = this.state.textinfo[p].links.map(
+                (d, i) => <div key={i}><a href={d}>{d}</a></div>
+            )
+            return (
+                <Card
+                    bordered={false}
+                    title={<span style={{fontSize:'1.2em'}}>{nn.ID}</span>}
+                    className="TextInfo View ViewBottom"
+                >
+                <div>
+                    Information:
+                </div>
+                <div>
+                    <span>
+                        {cur.info}
+                    </span>
+                </div>
+                <div>
+                    Links:
+                </div>
+                <div>
+                    {links}
+                </div>
+                </Card>)
+        } else {
+            return (
+                <Card
+                    bordered={false}
+                    className="TextInfo View ViewBottom"
+                />)
+        }
     }
 }
