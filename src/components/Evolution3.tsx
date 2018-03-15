@@ -756,8 +756,9 @@ export default class Evolution extends React.Component<Props, State>{
             >
                 <TreeSelect
                     value={appValue}
-                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    // dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                     //treeData = {this.state.appData}
+                    style={{ width: 180 }}
                     treeData={appData}
                     placeholder="select your data type"
                     //multiple
