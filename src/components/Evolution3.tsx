@@ -44,7 +44,7 @@ const appData = [
     }
 ]
 
-let CNN = ["streamlined", "skip connections", "multi-branches", "seperatable conv"]
+let CNN = ["streamlined", "skip connections", "multi-branch", "seperatable conv"]
 let RNN = ["stacked", "bidirectional", "gated", "attention"]
 
 let legend = (Names: string[]) => {
