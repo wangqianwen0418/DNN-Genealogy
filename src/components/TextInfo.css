@@ -1,0 +1,14 @@
+.TextInfo-Description {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.TextInfo-Description::before {
+    content: "Description:\0A";
+    display: block;
+}
+
+.TextInfo-Links::before {
+    content: "Links:\0A";
+    display: block;
+}

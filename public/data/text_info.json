@@ -109,7 +109,7 @@
         ]
     },
     {
-        "ID": "attention RNN",
+        "ID": "soft attention",
         "info": "An attention model is based on the seq2seq model, in which multiple vector Cs are used.",
         "links": [
             "https://arxiv.org/abs/1409.0473",
