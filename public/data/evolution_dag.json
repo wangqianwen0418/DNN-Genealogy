@@ -1055,63 +1055,14 @@
     "variants": []
   },
   {
-    "ID": "BRNN",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "984",
-    "date": "1997.12.01",
-    "fullname": "bidirectional RNN",
-    "names": [
-      {
-        "name": "bidirectional recurrent neural network",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "vanilla RNN",
-        "link_category": "",
-        "link_info_l": "Bidirectional inputs enable the current state to get information from both past and future input.",
-        "link_info_s": "bidirectional inputs"
-      }
-    ],
-    "training": [],
-    "url": "http://ieeexplore.ieee.org/abstract/document/650093/",
-    "variants": []
-  },
-  {
-    "ID": "stacked RNN",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "263",
-    "date": "1992.03.01",
-    "fullname": "stacked RNN",
-    "names": [],
-    "parents": [
-      {
-        "ID": "vanilla RNN",
-        "link_category": "a",
-        "link_info_l": "Increase deepth to improve  the representational capacity",
-        "link_info_s": "deeper"
-      }
-    ],
-    "training": [],
-    "url": "http://ieeexplore.ieee.org/document/6795261/",
-    "variants": []
-  },
-  {
-    "ID": "soft attention",
+    "ID": "attention",
     "application": [
       "1.2.NLP"
     ],
     "architecture": [],
     "citation": "2081",
     "date": "2014.09.01",
-    "fullname": "attention RNN",
+    "fullname": "RNN with attention mechanism",
     "names": [],
     "parents": [
       {
@@ -1123,33 +1074,6 @@
     ],
     "training": [],
     "url": "https://arxiv.org/abs/1409.0473",
-    "variants": []
-  },
-  {
-    "ID": "recursive",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "1050",
-    "date": "1990.11.01",
-    "fullname": "recursive neural network",
-    "names": [
-      {
-        "name": "recursive neural network",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "vanilla RNN",
-        "link_category": " ",
-        "link_info_l": "Generalize RNN from chain-like structure to tree-like structure",
-        "link_info_s": "chain to tree"
-      }
-    ],
-    "training": [],
-    "url": "https://www.sciencedirect.com/science/article/pii/000437029090005K",
     "variants": []
   },
   {
@@ -1254,45 +1178,6 @@
     ],
     "training": [],
     "url": "https://www.sciencedirect.com/science/article/pii/S089360800700041x",
-    "variants": []
-  },
-  {
-    "ID": "DB-LSTM",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "1897",
-    "date": "2013.03.22",
-    "fullname": "deep bidirectional LSTM",
-    "names": [
-      {
-        "name": "deep bidirectional LSTM",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "LSTM",
-        "link_category": "c=>c",
-        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
-        "link_info_s": "combine with other methods"
-      },
-      {
-        "ID": "BRNN",
-        "link_category": "",
-        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
-        "link_info_s": "combine with other methods"
-      },
-      {
-        "ID": "stacked RNN",
-        "link_category": "b=>b",
-        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
-        "link_info_s": "combine with other methods"
-      }
-    ],
-    "training": [],
-    "url": "https://arxiv.org/abs/1303.5778",
     "variants": []
   },
   {
@@ -1463,34 +1348,6 @@
     ]
   },
   {
-    "ID": "tree-LSTM",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "549",
-    "date": "2015.02.28",
-    "fullname": "tree structured long short term memory",
-    "names": [],
-    "parents": [
-      {
-        "ID": "LSTM",
-        "link_category": "c=>c",
-        "link_info_l": "a generalization of LSTMs from chain-structured to tree-structured network topologies",
-        "link_info_s": "chain to tree"
-      },
-      {
-        "ID": "recursive",
-        "link_category": "",
-        "link_info_l": "build a recursive neural networks with LSTM cells",
-        "link_info_s": "use LSTM"
-      }
-    ],
-    "training": [],
-    "url": "https://arxiv.org/abs/1503.00075",
-    "variants": []
-  },
-  {
     "ID": "GRU",
     "application": [
       "1.2.NLP"
@@ -1537,6 +1394,149 @@
     ],
     "training": [],
     "url": "https://pdfs.semanticscholar.org/d3e9/9f2f98ac361aded0b9b9d90b6f9fe8bbbc70.pdf",
+    "variants": []
+  },
+  {
+    "ID": "recursive",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "1050",
+    "date": "1990.11.01",
+    "fullname": "recursive neural network",
+    "names": [
+      {
+        "name": "recursive neural network",
+        "params": 0.0
+      }
+    ],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": " ",
+        "link_info_l": "Generalize RNN from chain-like structure to tree-like structure",
+        "link_info_s": "chain to tree"
+      }
+    ],
+    "training": [],
+    "url": "https://www.sciencedirect.com/science/article/pii/000437029090005K",
+    "variants": []
+  },
+  {
+    "ID": "tree-LSTM",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "549",
+    "date": "2015.02.28",
+    "fullname": "tree structured long short term memory",
+    "names": [],
+    "parents": [
+      {
+        "ID": "LSTM",
+        "link_category": "c=>c",
+        "link_info_l": "a generalization of LSTMs from chain-structured to tree-structured network topologies",
+        "link_info_s": "chain to tree"
+      },
+      {
+        "ID": "recursive",
+        "link_category": "",
+        "link_info_l": "build a recursive neural networks with LSTM cells",
+        "link_info_s": "use LSTM"
+      }
+    ],
+    "training": [],
+    "url": "https://arxiv.org/abs/1503.00075",
+    "variants": []
+  },
+  {
+    "ID": "BRNN",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "984",
+    "date": "1997.12.01",
+    "fullname": "bidirectional RNN",
+    "names": [
+      {
+        "name": "bidirectional recurrent neural network",
+        "params": 0.0
+      }
+    ],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": "",
+        "link_info_l": "Bidirectional inputs enable the current state to get information from both past and future input.",
+        "link_info_s": "bidirectional inputs"
+      }
+    ],
+    "training": [],
+    "url": "http://ieeexplore.ieee.org/abstract/document/650093/",
+    "variants": []
+  },
+  {
+    "ID": "stacked RNN",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "263",
+    "date": "1992.03.01",
+    "fullname": "stacked RNN",
+    "names": [],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": "a",
+        "link_info_l": "Increase deepth to improve  the representational capacity",
+        "link_info_s": "deeper"
+      }
+    ],
+    "training": [],
+    "url": "http://ieeexplore.ieee.org/document/6795261/",
+    "variants": []
+  },
+  {
+    "ID": "DB-LSTM",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [],
+    "citation": "1897",
+    "date": "2013.03.22",
+    "fullname": "deep bidirectional LSTM",
+    "names": [
+      {
+        "name": "deep bidirectional LSTM",
+        "params": 0.0
+      }
+    ],
+    "parents": [
+      {
+        "ID": "LSTM",
+        "link_category": "c=>c",
+        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
+        "link_info_s": "combine with other methods"
+      },
+      {
+        "ID": "BRNN",
+        "link_category": "",
+        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
+        "link_info_s": "combine with other methods"
+      },
+      {
+        "ID": "stacked RNN",
+        "link_category": "b=>b",
+        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
+        "link_info_s": "combine with other methods"
+      }
+    ],
+    "training": [],
+    "url": "https://arxiv.org/abs/1303.5778",
     "variants": []
   },
   {
