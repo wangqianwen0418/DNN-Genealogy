@@ -20,6 +20,12 @@ export interface EvoLink {
 
 // models=Array<model>
 
+export interface NodeTextInfo{
+    ID:string,
+    info:string,
+    links:Array<string>
+}
+
 export interface NN{
     ID:string,
     url:string,
