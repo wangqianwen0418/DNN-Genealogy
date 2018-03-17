@@ -72,6 +72,25 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         return y
     }
 
+    polygon(d: Dot, num: number) {
+        var i = 0, edges = num + 2, radius: number, angle = (360 / edges) * Math.PI / 180
+        var points = ''
+        if (Math.sqrt(d.r) < 4) {
+            radius = 4
+        } else if (Math.sqrt(d.r) > 10) {
+            radius = 10
+        } else {
+            radius = Math.sqrt(d.r)
+        }
+        console.log(edges)
+        while (i < edges) {
+           points += Math.cos(angle * i) * radius + ',' + Math.sin(angle * i) * radius + ' '
+           console.log(i)
+           i += 1
+        }
+        return points
+    }
+
     selectNode(d: Dot) {
         let { selected } = this.state
         let name_idx = selected.indexOf(d.name)
@@ -91,10 +110,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     }
 
     componentDidUpdate() {
-        //this.drawPlot()
-        //this.drawNodes()
         this.draw()
-        //this.updateData(this.props.nn)
         
     }
 
@@ -309,9 +325,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     if (attr)
                         return {
                             name: d.name,
-                            angle: ((bar_a * attr_i + (bar_a - margin) * attr / 100) - 90) * Math.PI / 180.0,
-                            attr: attr,
-                            attr_i: attr_i
+                            angle: bar_a * attr_i + (bar_a - margin) * attr / 100
                         }
                     else
                         return null
@@ -327,41 +341,34 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 .selectAll('g')
                 .data(perf)
                 .enter().append('g')
-                .attr('transform', (d: any) => 'translate('  + (this.r + bar_w) * Math.cos(d.angle) + ',' + (this.r + bar_w) * Math.sin(d.angle) + ')')
-            tags.append('circle')
-                .attr('r', 3)
+                // .attr('transform', (d: any) => 'translate('  + (this.r + bar_w) * Math.cos(d.angle) + ',' + (this.r + bar_w) * Math.sin(d.angle) + ')')
+            // tags.append('circle')
+            //     .attr('r', 3)
+            //     .attr('fill', 'none')
+            //     .attr('stroke', (d: any) => getColor(d.name))
+            tags.append('path')
+                .attr('d', (d: any) => this.arc(0, 0, this.r + margin + bar_w / 2, d.angle - 0.5, d.angle + 0.5))
                 .attr('fill', 'none')
+                .attr('stroke-width', bar_w)
                 .attr('stroke', (d: any) => getColor(d.name))
         }
 
         // Nodes
+        console.log(nns)
         let that = this
         this.nodes = d3.select('.compareView')
+            .append('g')
+            .attr('id', 'nodes')
             .selectAll('.dot')
             .attr('class', 'dot')
             .data(nns)
-            .enter().append('circle')
-            .attr('r', (d) => {
-                let radius = Math.sqrt(d.r)
-                if (radius < 3)
-                    radius = 3
-                else if (radius > 10)
-                    radius = 10
-                return radius
-            })
-            .attr('cx', (d, i) => this.getForceX(d.attr) || 0)
-            .attr('cy', (d, i) => this.getForceY(d.attr) || 0)
-            //.attr('fill', (d) => '#666')
+            .enter().append('g')
+            .attr('transform', (d, i) => 'translate(' + (this.getForceX(d.attr) || 0) + ',' + (this.getForceY(d.attr) || 0) + ')')
+            .append('polygon')
             .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
-            .attr('title', d => d.name)
+            .attr('stroke-width', 1)
+            .attr('points', (d :Dot, idx: number) => this.polygon(d, idx))
             .on('click', function(d) {
-                let selected_idx: number = that.state.selected.indexOf(d.name)
-                console.log('aaaa', selected_idx)
-                console.log(this)
-                d3.select(this)
-                    .attr('fill', (d: Dot) => selected_idx === -1 ? getColor(d.name) : '#666')
-                    // .attr('r', (d) => selected_idx === -1 ? that.node_r * 1.3 : that.node_r)
-                    .style('z-index', selected_idx === -1 ? 100 : 3)
                 that.selectNode(d)
             })
 
