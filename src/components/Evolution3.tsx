@@ -85,7 +85,7 @@ export interface State {
     legend: LegendProps['items']
 }
 
-const nodeH = 40, nodeW = 200, margin = 30, labelL = 20, tabH = 32,
+const nodeH = 40, nodeW = 220, margin = 30, labelL = 20, tabH = 32,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
