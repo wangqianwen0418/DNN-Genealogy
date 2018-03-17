@@ -5,8 +5,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.1.plain",
-      "2.2.2.2.2.sigmoid"
+      "a"
     ],
     "citation": "10831",
     "date": "1998.11.01",
@@ -25,8 +24,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.1.plain",
-      "2.2.2.2.1.1.standard relu"
+      "a"
     ],
     "citation": "18438",
     "date": "2012.12.03",
@@ -65,8 +63,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.3.multi-branch",
-      "2.2.2.2.1.1.standard relu"
+      "c"
     ],
     "citation": "5591",
     "date": "2014.09.17",
@@ -133,8 +130,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.1.plain",
-      "2.2.2.2.1.1.standard relu"
+      "a"
     ],
     "citation": "8205",
     "date": "2014.09.04",
@@ -182,8 +178,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.2.residual",
-      "2.2.2.2.1.1.standard relu"
+      "b"
     ],
     "citation": "320",
     "date": "2015.11.03",
@@ -217,8 +212,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.2.residual",
-      "2.2.2.2.1.1.standard relu"
+      "b"
     ],
     "citation": "5464",
     "date": "2015.12.10",
@@ -316,8 +310,7 @@
           "1.1.1.general recognition"
         ],
         "architecture": [
-          "2.2.1.2.residual",
-          "2.2.2.2.1.1.standard relu"
+          "b"
         ],
         "citation": "285",
         "date": "2016.05.23",
@@ -374,8 +367,7 @@
           "1.1.1.general recognition"
         ],
         "architecture": [
-          "2.2.1.2.residual",
-          "2.2.2.2.1.1.standard relu"
+          "b"
         ],
         "citation": "37",
         "date": "2016.05.25",
@@ -419,9 +411,8 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.2.residual",
-      "2.2.1.3.multi-branch",
-      "2.2.2.2.1.1.standard relu"
+      "b",
+      "c"
     ],
     "citation": "480",
     "date": "2016.02.23",
@@ -467,8 +458,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.3.multi-branch",
-      "2.2.2.2.1.1.standard relu"
+      "c"
     ],
     "citation": "71",
     "date": "2016.05.24",
@@ -517,9 +507,8 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.2.residual",
-      "2.2.1.3.multi-branch",
-      "2.2.2.2.1.1.standard relu"
+      "b",
+      "c"
     ],
     "citation": "134",
     "date": "2016.11.16",
@@ -570,8 +559,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.2.residual",
-      "2.2.2.2.1.1.standard relu"
+      "b"
     ],
     "citation": "378",
     "date": "2016.08.25",
@@ -673,9 +661,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.3.multi-branch",
-      "2.2.2.2.1.1.standard relu",
-      "2.2.1.2.residual"
+      "c"
     ],
     "citation": "264",
     "date": "2016.02.24",
@@ -694,7 +680,7 @@
     "parents": [
       {
         "ID": "alexNet",
-        "link_category": "",
+        "link_category": "a=>c",
         "link_info_l": "same performance with 50x less parameters",
         "link_info_s": "50x less parameters"
       },
@@ -719,8 +705,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.1.plain",
-      "2.2.2.2.1.4.CRelu"
+      "a"
     ],
     "citation": "4",
     "date": "2017.06.07",
@@ -787,8 +772,9 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.2.residual",
-      "2.2.1.3.multi-branch"
+      "b",
+      "c",
+      "d"
     ],
     "citation": "35",
     "date": "2017.12.01",
@@ -853,7 +839,9 @@
     "application": [
       "1.1.1.general recognition"
     ],
-    "architecture": [],
+    "architecture": [
+      "b"
+    ],
     "citation": "48",
     "date": "2017.09.05",
     "fullname": "Squeeze-and-Excitation Networks",
@@ -886,8 +874,7 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "2.2.1.2.residual",
-      "2.2.1.3.multi-branch"
+      "b"
     ],
     "citation": "0",
     "date": "2018.02.06",
@@ -932,7 +919,9 @@
     "application": [
       "1.1.1.general recognition"
     ],
-    "architecture": [],
+    "architecture": [
+      "b"
+    ],
     "citation": "31",
     "date": "2017.06.06",
     "fullname": "Dual Path Networks",
@@ -970,7 +959,10 @@
     "application": [
       "1.1.1.general recognition"
     ],
-    "architecture": [],
+    "architecture": [
+      "c",
+      "d"
+    ],
     "citation": "114",
     "date": "2016.10.07",
     "fullname": "",
@@ -992,7 +984,10 @@
     "application": [
       "1.1.1.general recognition"
     ],
-    "architecture": [],
+    "architecture": [
+      "a",
+      "d"
+    ],
     "citation": "149",
     "date": "2017.04.17",
     "fullname": "",
@@ -1055,101 +1050,25 @@
     "variants": []
   },
   {
-    "ID": "BRNN",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "984",
-    "date": "1997.12.01",
-    "fullname": "bidirectional RNN",
-    "names": [
-      {
-        "name": "bidirectional recurrent neural network",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "vanilla RNN",
-        "link_category": "",
-        "link_info_l": "Bidirectional inputs enable the current state to get information from both past and future input.",
-        "link_info_s": "bidirectional inputs"
-      }
-    ],
-    "training": [],
-    "url": "http://ieeexplore.ieee.org/abstract/document/650093/",
-    "variants": []
-  },
-  {
-    "ID": "stacked RNN",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "263",
-    "date": "1992.03.01",
-    "fullname": "stacked RNN",
-    "names": [],
-    "parents": [
-      {
-        "ID": "vanilla RNN",
-        "link_category": "a",
-        "link_info_l": "Increase deepth to improve  the representational capacity",
-        "link_info_s": "deeper"
-      }
-    ],
-    "training": [],
-    "url": "http://ieeexplore.ieee.org/document/6795261/",
-    "variants": []
-  },
-  {
-    "ID": "soft attention",
+    "ID": "attention",
     "application": [
       "1.2.NLP"
     ],
     "architecture": [],
     "citation": "2081",
     "date": "2014.09.01",
-    "fullname": "attention RNN",
+    "fullname": "RNN with attention mechanism",
     "names": [],
     "parents": [
       {
         "ID": "seq2seq",
-        "link_category": "d",
+        "link_category": " ",
         "link_info_l": "Attention mechanism allows  to search relevant parts in the context at each step of the output generation.",
         "link_info_s": "add attention"
       }
     ],
     "training": [],
     "url": "https://arxiv.org/abs/1409.0473",
-    "variants": []
-  },
-  {
-    "ID": "recursive",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "1050",
-    "date": "1990.11.01",
-    "fullname": "recursive neural network",
-    "names": [
-      {
-        "name": "recursive neural network",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "vanilla RNN",
-        "link_category": " ",
-        "link_info_l": "Generalize RNN from chain-like structure to tree-like structure",
-        "link_info_s": "chain to tree"
-      }
-    ],
-    "training": [],
-    "url": "https://www.sciencedirect.com/science/article/pii/000437029090005K",
     "variants": []
   },
   {
@@ -1233,7 +1152,9 @@
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "c"
+    ],
     "citation": "414",
     "date": "2007.04.01",
     "fullname": "echo state networks with leaky integration units",
@@ -1241,13 +1162,13 @@
     "parents": [
       {
         "ID": "ESN",
-        "link_category": "b",
+        "link_category": "c",
         "link_info_l": "An extension to echo state networks by leaky integration units",
         "link_info_s": "leaky units"
       },
       {
         "ID": "leaky units",
-        "link_category": "b=>b",
+        "link_category": "c=>c",
         "link_info_l": "An extension to echo state networks by leaky integration units",
         "link_info_s": "use it"
       }
@@ -1257,50 +1178,13 @@
     "variants": []
   },
   {
-    "ID": "DB-LSTM",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "1897",
-    "date": "2013.03.22",
-    "fullname": "deep bidirectional LSTM",
-    "names": [
-      {
-        "name": "deep bidirectional LSTM",
-        "params": 0.0
-      }
-    ],
-    "parents": [
-      {
-        "ID": "LSTM",
-        "link_category": "c=>c",
-        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
-        "link_info_s": "combine with other methods"
-      },
-      {
-        "ID": "BRNN",
-        "link_category": "",
-        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
-        "link_info_s": "combine with other methods"
-      },
-      {
-        "ID": "stacked RNN",
-        "link_category": "b=>b",
-        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
-        "link_info_s": "combine with other methods"
-      }
-    ],
-    "training": [],
-    "url": "https://arxiv.org/abs/1303.5778",
-    "variants": []
-  },
-  {
     "ID": "time skip connections",
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "c"
+    ],
     "citation": "15",
     "date": "1998.10.15",
     "fullname": "recurrent neural units with time skip connections",
@@ -1308,7 +1192,7 @@
     "parents": [
       {
         "ID": "vanilla RNN",
-        "link_category": "b",
+        "link_category": "c",
         "link_info_l": " To address long-term dependency, it adds direct connections from variables in the distant past to variables in the present.",
         "link_info_s": "add long time scale"
       }
@@ -1322,7 +1206,9 @@
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "c"
+    ],
     "citation": "",
     "date": "2013",
     "fullname": "",
@@ -1330,7 +1216,7 @@
     "parents": [
       {
         "ID": "time skip connections",
-        "link_category": "b=>b",
+        "link_category": "c=>c",
         "link_info_l": "Time skip connections add edges, so the units can choose to operate on a long time scale or focus on a short one; Removing connections force units to operate the long time scale.  ",
         "link_info_s": "force on long time scale"
       }
@@ -1344,7 +1230,9 @@
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "c"
+    ],
     "citation": "900",
     "date": "2013.02.13",
     "fullname": "recurrent neural units  leaky units",
@@ -1352,13 +1240,13 @@
     "parents": [
       {
         "ID": "vanilla RNN",
-        "link_category": "b",
+        "link_category": "c",
         "link_info_l": " To address long-term dependency, it adds linear self connections with a weight near one.",
         "link_info_s": "linear self connections"
       },
       {
         "ID": "time skip connections",
-        "link_category": "b=>b",
+        "link_category": "c=>c",
         "link_info_l": "Leaky units are units  with linear self-connections and a weight near one on these connections. Leaky units are more smooth and flexible than skip time connections since it adjust the real-valed weight rather than the integer-valued time skip.",
         "link_info_s": "smooth and flexible"
       }
@@ -1372,7 +1260,9 @@
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "d"
+    ],
     "citation": "8136",
     "date": "1997.12.15",
     "fullname": "long short term memory",
@@ -1380,13 +1270,13 @@
     "parents": [
       {
         "ID": "vanilla RNN",
-        "link_category": "c",
+        "link_category": "d",
         "link_info_l": "LSTM uses a gated self-loop to learn long-term dependencies more easily",
         "link_info_s": "gated units"
       },
       {
         "ID": "leaky units",
-        "link_category": "b=>c",
+        "link_category": "c=>d",
         "link_info_l": "LSTM and leaky units adopt different methods to accumulate information through time. ",
         "link_info_s": ""
       }
@@ -1399,7 +1289,9 @@
         "application": [
           "1.2.NLP"
         ],
-        "architecture": [],
+        "architecture": [
+          "d"
+        ],
         "citation": "848",
         "date": "1999.09.07",
         "fullname": "LSTM with forget gate",
@@ -1407,7 +1299,7 @@
         "parents": [
           {
             "ID": "initial LSTM",
-            "link_category": "c=>c",
+            "link_category": "d=>d",
             "link_info_l": "Add forget gate to LSTM cells.  These cells learn to reset themselves at appropriate times, thus releasing internal resources.",
             "link_info_s": "forget gate"
           }
@@ -1421,7 +1313,9 @@
         "application": [
           "1.2.NLP"
         ],
-        "architecture": [],
+        "architecture": [
+          "d"
+        ],
         "citation": "157",
         "date": "2000.07.01",
         "fullname": "LSTM with peephole connetions",
@@ -1429,7 +1323,7 @@
         "parents": [
           {
             "ID": "LSTM with forget",
-            "link_category": "c=>c",
+            "link_category": "d=>d",
             "link_info_l": " Make the weights on the self-loop conditioned on the context, rather than \ufb01xed",
             "link_info_s": "peephole connections"
           }
@@ -1443,7 +1337,9 @@
         "application": [
           "1.2.NLP"
         ],
-        "architecture": [],
+        "architecture": [
+          "d"
+        ],
         "citation": "777",
         "date": "2005.07.01",
         "fullname": "the modern long short-term memory",
@@ -1451,7 +1347,7 @@
         "parents": [
           {
             "ID": "LSTM with peephole",
-            "link_category": "c=>c",
+            "link_category": "d=>d",
             "link_info_l": "use full backpropogation through time for training ",
             "link_info_s": "BPTT"
           }
@@ -1463,39 +1359,13 @@
     ]
   },
   {
-    "ID": "tree-LSTM",
-    "application": [
-      "1.2.NLP"
-    ],
-    "architecture": [],
-    "citation": "549",
-    "date": "2015.02.28",
-    "fullname": "tree structured long short term memory",
-    "names": [],
-    "parents": [
-      {
-        "ID": "LSTM",
-        "link_category": "c=>c",
-        "link_info_l": "a generalization of LSTMs from chain-structured to tree-structured network topologies",
-        "link_info_s": "chain to tree"
-      },
-      {
-        "ID": "recursive",
-        "link_category": "",
-        "link_info_l": "build a recursive neural networks with LSTM cells",
-        "link_info_s": "use LSTM"
-      }
-    ],
-    "training": [],
-    "url": "https://arxiv.org/abs/1503.00075",
-    "variants": []
-  },
-  {
     "ID": "GRU",
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "d"
+    ],
     "citation": "2069",
     "date": "2014.06.03",
     "fullname": "gated recurrent unit",
@@ -1508,7 +1378,7 @@
     "parents": [
       {
         "ID": "LSTM",
-        "link_category": "c=>c",
+        "link_category": "d=>d",
         "link_info_l": "To improve computation effiency, the gates of a recureent uit is redesigned in GRU, input gate and forget gate are combined into one single gate. input, forget, output gates=>reset, update gates",
         "link_info_s": "redesign gates"
       }
@@ -1518,11 +1388,74 @@
     "variants": []
   },
   {
+    "ID": "recursive",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [
+      "e"
+    ],
+    "citation": "1050",
+    "date": "1990.11.01",
+    "fullname": "recursive neural network",
+    "names": [
+      {
+        "name": "recursive neural network",
+        "params": 0.0
+      }
+    ],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": "e",
+        "link_info_l": "Generalize RNN from chain-like structure to tree-like structure",
+        "link_info_s": "chain to tree"
+      }
+    ],
+    "training": [],
+    "url": "https://www.sciencedirect.com/science/article/pii/000437029090005K",
+    "variants": []
+  },
+  {
+    "ID": "tree-LSTM",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [
+      "e",
+      "d"
+    ],
+    "citation": "549",
+    "date": "2015.02.28",
+    "fullname": "tree structured long short term memory",
+    "names": [],
+    "parents": [
+      {
+        "ID": "LSTM",
+        "link_category": "d=>d",
+        "link_info_l": "a generalization of LSTMs from chain-structured to tree-structured network topologies",
+        "link_info_s": "chain to tree"
+      },
+      {
+        "ID": "recursive",
+        "link_category": "e=>e",
+        "link_info_l": "build a recursive neural networks with LSTM cells",
+        "link_info_s": "use LSTM"
+      }
+    ],
+    "training": [],
+    "url": "https://arxiv.org/abs/1503.00075",
+    "variants": []
+  },
+  {
     "ID": "DGLSTM",
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "a",
+      "d"
+    ],
     "citation": "15",
     "date": "2015.08.01",
     "fullname": "depth-gated long short-term memory",
@@ -1530,9 +1463,15 @@
     "parents": [
       {
         "ID": "LSTM",
-        "link_category": "c=>c",
+        "link_category": "d=>d",
         "link_info_l": "an extension of LSTM to use a depth gate to connect memory cells of adjacent layers",
         "link_info_s": "add depth gate"
+      },
+      {
+        "ID": "stacked RNN",
+        "link_category": "a=>d",
+        "link_info_l": "add gated skip connection",
+        "link_info_s": "gated skip connection"
       }
     ],
     "training": [],
@@ -1540,11 +1479,109 @@
     "variants": []
   },
   {
+    "ID": "BRNN",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [
+      "b"
+    ],
+    "citation": "984",
+    "date": "1997.12.01",
+    "fullname": "bidirectional RNN",
+    "names": [
+      {
+        "name": "bidirectional recurrent neural network",
+        "params": 0.0
+      }
+    ],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": "b=>b",
+        "link_info_l": "Bidirectional inputs enable the current state to get information from both past and future input.",
+        "link_info_s": "bidirectional inputs"
+      }
+    ],
+    "training": [],
+    "url": "http://ieeexplore.ieee.org/abstract/document/650093/",
+    "variants": []
+  },
+  {
+    "ID": "stacked RNN",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [
+      "a"
+    ],
+    "citation": "263",
+    "date": "1992.03.01",
+    "fullname": "stacked RNN",
+    "names": [],
+    "parents": [
+      {
+        "ID": "vanilla RNN",
+        "link_category": "a",
+        "link_info_l": "Increase deepth to improve  the representational capacity",
+        "link_info_s": "deeper"
+      }
+    ],
+    "training": [],
+    "url": "http://ieeexplore.ieee.org/document/6795261/",
+    "variants": []
+  },
+  {
+    "ID": "DB-LSTM",
+    "application": [
+      "1.2.NLP"
+    ],
+    "architecture": [
+      "a",
+      "b",
+      "d"
+    ],
+    "citation": "1897",
+    "date": "2013.03.22",
+    "fullname": "deep bidirectional LSTM",
+    "names": [
+      {
+        "name": "deep bidirectional LSTM",
+        "params": 0.0
+      }
+    ],
+    "parents": [
+      {
+        "ID": "LSTM",
+        "link_category": "d=>d",
+        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
+        "link_info_s": "combine with other methods"
+      },
+      {
+        "ID": "BRNN",
+        "link_category": "b=>b",
+        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
+        "link_info_s": "combine with other methods"
+      },
+      {
+        "ID": "stacked RNN",
+        "link_category": "a=>a",
+        "link_info_l": "combine it with other methods and successfully use RNN in speech recognition",
+        "link_info_s": "combine with other methods"
+      }
+    ],
+    "training": [],
+    "url": "https://arxiv.org/abs/1303.5778",
+    "variants": []
+  },
+  {
     "ID": "DT-RNN",
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "a"
+    ],
     "citation": "269",
     "date": "2013.12.20",
     "fullname": "deep transition RNN",
@@ -1566,7 +1603,9 @@
     "application": [
       "1.2.NLP"
     ],
-    "architecture": [],
+    "architecture": [
+      "a"
+    ],
     "citation": "269",
     "date": "2013.12.20",
     "fullname": "deep transition RNN with skip connections",

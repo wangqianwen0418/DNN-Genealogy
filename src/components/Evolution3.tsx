@@ -45,7 +45,7 @@ const appData = [
 ]
 
 let CNN = ["streamlined", "skip connections", "multi-branch", "seperatable conv"]
-let RNN = ["stacked", "multiple time scale", "gated"]
+let RNN = ["stacked", "bidirectional", "multiple time scale", "gated", "recursive"]
 
 let legend = (Names: string[]) => {
     let items = {}
@@ -85,7 +85,7 @@ export interface State {
     legend: LegendProps['items']
 }
 
-const nodeH = 40, nodeW = 200, margin = 30, labelL = 20, tabH = 32,
+const nodeH = 40, nodeW = 220, margin = 30, labelL = 20, tabH = 32,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -209,6 +209,7 @@ export default class Evolution extends React.Component<Props, State>{
                 fullname: node.fullname,
                 ID: node.ID,
                 api: node.api,
+                arc: node.architecture,
                 variants: node.variants,
                 width: nodeW,
                 height: nodeH,
@@ -263,9 +264,7 @@ export default class Evolution extends React.Component<Props, State>{
                 ),
                     doi = api_diff + r_dist * distance
                 dag.setNode(v, {
-                    label: v,
-                    fullname: node.fullname,
-                    ID: v,
+                    ...node,
                     api: api,
                     doi: doi,
                     variants: node.variants,
