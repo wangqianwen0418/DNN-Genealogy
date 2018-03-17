@@ -45,7 +45,7 @@ const appData = [
 ]
 
 let CNN = ["streamlined", "skip connections", "multi-branch", "seperatable conv"]
-let RNN = ["stacked", "bidirectional", "gated", "attention"]
+let RNN = ["stacked", "bidirectional", "multiple time scale", "gated", "recursive"]
 
 let legend = (Names: string[]) => {
     let items = {}
@@ -85,7 +85,7 @@ export interface State {
     legend: LegendProps['items']
 }
 
-const nodeH = 40, nodeW = 200, margin = 30, labelL = 20, tabH = 32,
+const nodeH = 40, nodeW = 220, margin = 30, labelL = 20, tabH = 32,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -206,8 +206,10 @@ export default class Evolution extends React.Component<Props, State>{
 
             dag.setNode(node.ID, {
                 label: node.ID,
+                fullname: node.fullname,
                 ID: node.ID,
                 api: node.api,
+                arc: node.architecture,
                 variants: node.variants,
                 width: nodeW,
                 height: nodeH,
@@ -223,7 +225,7 @@ export default class Evolution extends React.Component<Props, State>{
                             label_l: parent.link_info_l,
                             from: parent.ID,
                             to: node.ID,
-                            cate: parent.link_category.split('=>')[1],
+                            cate: parent.link_category.split('=>')[0],
                         }
                     )
                 })
@@ -262,8 +264,7 @@ export default class Evolution extends React.Component<Props, State>{
                 ),
                     doi = api_diff + r_dist * distance
                 dag.setNode(v, {
-                    label: v,
-                    ID: v,
+                    ...node,
                     api: api,
                     doi: doi,
                     variants: node.variants,
@@ -286,25 +287,17 @@ export default class Evolution extends React.Component<Props, State>{
             if (parents && parents.length != 0) {
                 topParent = parents.map(v => dag.node(v)).sort((a, b) => b.doi - a.doi)[0]
                 dag.setNode(topParent.label, {
-                    label: topParent.ID,
+                    ...topParent,
                     width: expandW,
-                    height: expandH,
-                    ID: topParent.ID,
-                    api: topParent.api,
-                    doi: topParent.doi,
-                    variants: topParent.variants
+                    height: expandH
                 })
             }
             if (children && children.length != 0) {
                 topChild = children.map(v => dag.node(v)).sort((a, b) => b.doi - a.doi)[0]
                 dag.setNode(topChild.label, {
-                    label: topChild.ID,
+                    ...topChild,
                     width: expandW,
-                    height: expandH,
-                    ID: topChild.ID,
-                    api: topChild.api,
-                    doi: topChild.doi,
-                    variants: topChild.variants
+                    height: expandH
                 })
             }
 
@@ -490,9 +483,9 @@ export default class Evolution extends React.Component<Props, State>{
                 className="Edge"
                 id={`${from}->${to}`}
                 d={pathData}
-                stroke={hovered ? "#111" : (clickLegend ? getColor(edge.cate) : "gray")}
+                stroke={clickLegend ? getColor(edge.cate) : "gray"}
                 fill='none'
-                strokeWidth={hoverLegend ? 4 : 2}
+                strokeWidth={hoverLegend||hovered ? 4 : 2}
                 opacity={hoverLegend? 1: 0.8}
             >
             </path>

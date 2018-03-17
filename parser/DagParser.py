@@ -58,31 +58,32 @@ class DagParser:
                 models.add(datum[0])
                 result.append({
                     'ID': datum[0],
-                    'url': datum[1],
-                    'date': datum[2],
-                    'citation': datum[3],
-                    'application': self.get_split_data(datum[4]),
-                    'training': self.get_split_data(datum[5]),
-                    'architecture': self.get_split_data(datum[6]),
+                    "fullname":datum[1],
+                    'url': datum[2],
+                    'date': datum[3],
+                    'citation': datum[4],
+                    'application': self.get_split_data(datum[5]),
+                    'training': self.get_split_data(datum[6]),
+                    'architecture': self.get_split_data(datum[7]),
                     'names': list(),
                     'parents': list(),
                     'variants': list()
                 })
 
             # add a parent to current model
-            if datum[7]:
-                if datum[7] not in models:
-                    print('Error in line %d: Parent "%s" not exists.' % (label, datum[7]))
+            if datum[8]:
+                if datum[8] not in models:
+                    print('Error in line %d: Parent "%s" not exists.' % (label, datum[8]))
                 result[-1]['parents'].append({
-                    'ID': datum[7],
-                    'link_info_l': datum[8],
-                    'link_info_s': datum[9],
-                    'link_category': datum[10]
+                    'ID': datum[8],
+                    'link_info_l': datum[9],
+                    'link_info_s': datum[10],
+                    'link_category': datum[11]
                 })
             # add variants' ID to current model
-            if datum[11]:
+            if datum[12]:
                 result[-1]['variants'].append({
-                    'ID': datum[11]
+                    'ID': datum[12]
                 })
 
             # add datasets to current model
