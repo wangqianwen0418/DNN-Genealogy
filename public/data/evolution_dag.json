@@ -1030,14 +1030,14 @@
     "variants": []
   },
   {
-    "ID": "vanilla RNN",
+    "ID": "SRN",
     "application": [
       "1.2.NLP"
     ],
     "architecture": [],
-    "citation": "13951",
-    "date": "1986.12.01",
-    "fullname": "vanilla RNN",
+    "citation": "9047",
+    "date": "1990.03.01",
+    "fullname": "simple RNN",
     "names": [
       {
         "name": "recurrent neural network",
@@ -1046,7 +1046,7 @@
     ],
     "parents": [],
     "training": [],
-    "url": "https://www.nature.com/articles/323533a0",
+    "url": "http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/full",
     "variants": []
   },
   {
@@ -1088,7 +1088,7 @@
     ],
     "parents": [
       {
-        "ID": "vanilla RNN",
+        "ID": "SRN",
         "link_category": "",
         "link_info_l": "introduce a RNN architecture to map squence to sequence",
         "link_info_s": "sequence to sequence"
@@ -1137,7 +1137,7 @@
     ],
     "parents": [
       {
-        "ID": "vanilla RNN",
+        "ID": "SRN",
         "link_category": "",
         "link_info_l": "ESN use reservior computing to set the recurrent weights such that the recurrent hidden units do a good job of capturing the history of past inputs.  Only the output weights need to be learnt.",
         "link_info_s": "reservoir computing"
@@ -1191,7 +1191,7 @@
     "names": [],
     "parents": [
       {
-        "ID": "vanilla RNN",
+        "ID": "SRN",
         "link_category": "c",
         "link_info_l": " To address long-term dependency, it adds direct connections from variables in the distant past to variables in the present.",
         "link_info_s": "add long time scale"
@@ -1202,16 +1202,16 @@
     "variants": []
   },
   {
-    "ID": "removing connections",
+    "ID": "CW-RNN",
     "application": [
       "1.2.NLP"
     ],
     "architecture": [
       "c"
     ],
-    "citation": "",
-    "date": "2013",
-    "fullname": "",
+    "citation": "135",
+    "date": "2014.02.14",
+    "fullname": "replace some short-time connections with long-time connections",
     "names": [],
     "parents": [
       {
@@ -1222,7 +1222,7 @@
       }
     ],
     "training": [],
-    "url": "",
+    "url": "https://arxiv.org/pdf/1402.3511.pdf",
     "variants": []
   },
   {
@@ -1239,7 +1239,7 @@
     "names": [],
     "parents": [
       {
-        "ID": "vanilla RNN",
+        "ID": "SRN",
         "link_category": "c",
         "link_info_l": " To address long-term dependency, it adds linear self connections with a weight near one.",
         "link_info_s": "linear self connections"
@@ -1269,7 +1269,7 @@
     "names": [],
     "parents": [
       {
-        "ID": "vanilla RNN",
+        "ID": "SRN",
         "link_category": "d",
         "link_info_l": "LSTM uses a gated self-loop to learn long-term dependencies more easily",
         "link_info_s": "gated units"
@@ -1406,7 +1406,7 @@
     ],
     "parents": [
       {
-        "ID": "vanilla RNN",
+        "ID": "SRN",
         "link_category": "e",
         "link_info_l": "Generalize RNN from chain-like structure to tree-like structure",
         "link_info_s": "chain to tree"
@@ -1497,7 +1497,7 @@
     ],
     "parents": [
       {
-        "ID": "vanilla RNN",
+        "ID": "SRN",
         "link_category": "b=>b",
         "link_info_l": "Bidirectional inputs enable the current state to get information from both past and future input.",
         "link_info_s": "bidirectional inputs"
@@ -1521,7 +1521,7 @@
     "names": [],
     "parents": [
       {
-        "ID": "vanilla RNN",
+        "ID": "SRN",
         "link_category": "a",
         "link_info_l": "Increase deepth to improve  the representational capacity",
         "link_info_s": "deeper"
