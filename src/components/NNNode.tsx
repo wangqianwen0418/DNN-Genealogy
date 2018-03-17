@@ -62,13 +62,15 @@ export default class NNNode extends React.Component<Props, {}>{
                 fill="white"
                 stroke={hovered ? "#111" : "gray"}
                 strokeWidth={1.5}
-            /> : []
+            /> : [],
+            arc:string[]=node.arc,
+            arc_num = arc.length
         let capFirstLetter = (name: string) => {
             return name.charAt(0).toUpperCase() + name.slice(1)
         }
         //a trick. calculate position
         //if assign transX, transY, scale to another group, the transition animiation will be wired
-
+        
         return <g key={node.label} className="Node"
             transform={`translate (${(node.x - node.width / 2) * scale + transX}, ${(node.y - node.height / 2) * scale + transY})`}
             onMouseDown={this.mouseDown}
@@ -91,17 +93,23 @@ export default class NNNode extends React.Component<Props, {}>{
                         strokeWidth={1.5}
                         cursor="pointer"
                     ></rect>
-                    <rect
-                        className="arcIcon Node"
-                        width={node.width * scale * 0.2} height={node.height * scale}
-                        fill={zoomed ? "none" : getColor('a')}
-                    />
+                    {<g>
+                        {arc.map((key, i)=>{
+                            return <rect
+                            className="arcIcon Node"
+                            y={node.height * scale * i /arc_num}
+                            width={node.width * scale * 0.2} height={node.height * scale /arc_num}
+                            fill={zoomed ? "none" : getColor(key)}
+                        />
+                        })}
+                    </g>}
+                    
                     <rect
                         className="perIcon"
                         x={node.width * scale * 0.2}
                         y={node.height * scale * 0.8}
                         width={node.width * scale * 0.8} height={node.height * scale * 0.2}
-                        fill={zoomed ? "none" : getColor('b')}
+                        fill={zoomed ? "none" : getColor('unkonw')}
                     />
                 </g>
             </g>
