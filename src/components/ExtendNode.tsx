@@ -106,7 +106,8 @@ export default class ExtendNode extends React.Component<Props, State>{
                 height: node.height * scale,
                 width: node.width * scale,
                 visibility: zoomed ? "visible" : "hidden",
-                opacity: zoomed ? 1 : 0
+                opacity: zoomed ? 1 : 0,
+                border: `1px solid ${selected ? "red" : "gray"}`,
                 // ...defaultStyle,
                 // ...transitionStyles[status]
 
