@@ -347,7 +347,7 @@
         "parents": [
           {
             "ID": "resNet",
-            "link_category": "",
+            "link_category": "b=>b",
             "link_info_l": "to increase the parameter efficiency, increase the number of channels and decrease the number of layers",
             "link_info_s": "wider and shallower"
           }
@@ -411,8 +411,8 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "b",
-      "c"
+      "c",
+      "b"
     ],
     "citation": "480",
     "date": "2016.02.23",
@@ -489,6 +489,12 @@
         "link_category": "c=>c",
         "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
         "link_info_s": "split-transfer-merge"
+      },
+      {
+        "ID": "resNet",
+        "link_category": "b=>c",
+        "link_info_l": "train very deep networks with residual connections",
+        "link_info_s": "deep without residual"
       }
     ],
     "training": [
@@ -540,7 +546,7 @@
       {
         "ID": "inception_resNet",
         "link_category": "b+c=>b+c",
-        "link_info_l": "highly modulized",
+        "link_info_l": "similar architeccture, yet ResNeXt has fewer hyperparameter and is highly modulized",
         "link_info_s": "highly modulized"
       }
     ],
@@ -643,7 +649,7 @@
         "ID": "resNet",
         "link_category": "b=>b",
         "link_info_l": "dense residual connection; use concate instead of adding to combine mult-braches",
-        "link_info_s": "residual connections"
+        "link_info_s": "dense residual connections"
       }
     ],
     "training": [
@@ -772,8 +778,8 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "b",
       "c",
+      "b",
       "d"
     ],
     "citation": "35",
@@ -985,8 +991,8 @@
       "1.1.1.general recognition"
     ],
     "architecture": [
-      "a",
-      "d"
+      "d",
+      "a"
     ],
     "citation": "149",
     "date": "2017.04.17",
@@ -1422,8 +1428,8 @@
       "1.2.NLP"
     ],
     "architecture": [
-      "e",
-      "d"
+      "d",
+      "e"
     ],
     "citation": "549",
     "date": "2015.02.28",
@@ -1453,8 +1459,8 @@
       "1.2.NLP"
     ],
     "architecture": [
-      "a",
-      "d"
+      "d",
+      "a"
     ],
     "citation": "15",
     "date": "2015.08.01",
@@ -1537,9 +1543,9 @@
       "1.2.NLP"
     ],
     "architecture": [
-      "a",
+      "d",
       "b",
-      "d"
+      "a"
     ],
     "citation": "1897",
     "date": "2013.03.22",
