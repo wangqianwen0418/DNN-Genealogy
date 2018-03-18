@@ -8,8 +8,8 @@
 .ant-card-body{
     padding-top:4px!important;
 }
-.ant-tabs-content{
-    max-height: 200px;
+.train .ant-tabs-content{
+    max-height:200px;
 }
 /* .ant-tabs-content { 
     width: 100%;

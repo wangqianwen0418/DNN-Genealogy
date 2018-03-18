@@ -8,6 +8,11 @@ export interface Dot {
     [key: string]: any
 }
 
+export interface Network {
+    dot: Dot[],
+    network: string
+}
+
 export interface Props {
     database: string,
     nn: NN,
@@ -16,7 +21,8 @@ export interface Props {
 
 export interface State {
     selected: string[],
-    nns: Dot[],
+    // nns: Dot[],
+    nns: Network[],
     attr_names: string[],
 }
 
@@ -82,10 +88,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         } else {
             radius = Math.sqrt(d.r)
         }
-        console.log(edges)
         while (i < edges) {
            points += Math.cos(angle * i) * radius + ',' + Math.sin(angle * i) * radius + ' '
-           console.log(i)
            i += 1
         }
         return points
@@ -105,7 +109,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     componentWillReceiveProps(nextProps: Props) {
         if (nextProps.op !== 1 || this.props === nextProps)
             return
-        //this.draw()
         this.updateData(nextProps.nn)
     }
 
@@ -121,19 +124,25 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         } else {
             attr_names = sequenceDatasets
         }
-        let newnns: Dot[] = []
+        for (let existedNN of nns) {
+            if (existedNN.network === nn.ID) return
+        }
+        let newdots: Dot[] = []
         for (let name of nn.names) {
             let tmpAttr: number[] = []
             for (let index in attr_names) {
                 tmpAttr[index] = name[attr_names[index]] ? name[attr_names[index]] : 0
             }
-            newnns.push({
+            newdots.push({
                 r: name.params,
                 name: name.name,
                 attr: tmpAttr
             })
         }
-        nns = nns.concat(newnns)
+        nns = nns.concat({
+            network: nn.ID,
+            dot: newdots
+        })
 
         this.setState({ attr_names, nns })
         
@@ -187,7 +196,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         this.width = (this.ref?this.ref.clientWidth:50)
         this.height = (this.ref?this.ref.clientHeight:30)
         this.r = this.height / 2 - 4 * margin
-        let selected_nns = selected.map((name: string) =>nns.filter((nn) => nn.name == name)[0])
+        let selected_nns = selected.map((name: string) =>nns.filter((nn) => nn.network == name)[0])
 
         let bars: JSX.Element[][] = selected_nns
             .map((data: Dot, idx: number) => {
@@ -268,7 +277,11 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         this.width = (this.ref?this.ref.clientWidth:50)
         this.height = (this.ref?this.ref.clientHeight:30)
         this.r = this.height / 2 - 4 * margin 
-        let selected_nns = selected.map((name: string) =>nns.filter((nn) => nn.name == name)[0])
+        let selected_nns = selected.map((name: string) => nns.filter((nn) => {
+            for (let d of nn.dot)
+                if (d.name == name) return true
+            return false
+        })[0].dot.filter((d) => d.name == name)[0])
 
         let svg = d3.select('.RadialBoxplot').insert('svg')
             .attr('width', '100%')
@@ -354,14 +367,17 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         }
 
         // Nodes
-        console.log(nns)
+        let NNnodes :Dot[] = []
+        for (let nn of nns) {
+            NNnodes = NNnodes.concat(nn.dot)
+        }
         let that = this
         this.nodes = d3.select('.compareView')
             .append('g')
             .attr('id', 'nodes')
             .selectAll('.dot')
             .attr('class', 'dot')
-            .data(nns)
+            .data(NNnodes)
             .enter().append('g')
             .attr('transform', (d, i) => 'translate(' + (this.getForceX(d.attr) || 0) + ',' + (this.getForceY(d.attr) || 0) + ')')
             .append('polygon')
@@ -391,24 +407,15 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr("font-size", 10)
             .attr("text-anchor", "end")
             .selectAll("g")
-            .data(this.state.selected)
+            .data(this.state.nns)
             .enter().append("g")
-            .attr("transform", (d: any, i: number) => "translate(-20," + (i * 15 + 20) + ")")
+            .attr("transform", (d: Network, i: number) => "translate(-20," + (i * 15 + 20) + ")")
         legend.append("rect")
-            .attr("class", (d: any) => "label")
+            .attr("class", (d: Network) => "label")
             .attr("x", this.width - 9)
             .attr("width", 9)
             .attr("height", 9)
-            .attr("fill", (d: any) => String(getColor(d)))
-            .on("mousemove", (d: any) => {
-                // d3.selectAll(".bar")
-                //     .attr("opacity", (model: any) => {
-                //         if (model.key === d)
-                //             return 1
-                //         else
-                //             return 0.4
-                //     })
-            })
+            .attr("fill", (d: Network, idx: number) => String(getColor(d.network, idx)))
             .on("mouseout", () => {
                 d3.selectAll(".bar").attr("opacity", 1)
             })
@@ -416,7 +423,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr("x", this.width - 14)
             .attr("y", 6.5)
             .attr("dy", "0.15em")
-            .text((d: any) => d)
+            .text((d: Network) => d.network)
 
     }
 

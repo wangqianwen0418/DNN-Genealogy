@@ -14,18 +14,18 @@ resNet	Residual Networks	https://arxiv.org/abs/1512.03385	2015.12.10	5464	1.1.1.
 													resNet_v2	na	na	na	na	35.29	na	
 													resNet_v2_56_cifar	1.6	6.99	na	na	na	na	
 													resNet_v2_110_cifar	3.3	6.38	24.64	na	na	na	
-inception_resNet	inception_resNet	https://arxiv.org/abs/1602.07261	2016.02.23	480	1.1.1.general recognition	3.2.3.RMSprop;scaling of the residuals;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	b;c	inception	combine resnet with inception	combine	c=>c		inception_resNet	55.8	na	na	na	17.8	3.7	x
+inception_resNet	inception_resNet	https://arxiv.org/abs/1602.07261	2016.02.23	480	1.1.1.general recognition	3.2.3.RMSprop;scaling of the residuals;3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	c;b	inception	combine resnet with inception	combine	c=>c		inception_resNet	55.8	na	na	na	17.8	3.7	x
 								resNet	combine resnet with inception	combine	b=>b				na	na	na	na	na	
-WRN	Wide ReseNet	https://arxiv.org/abs/1605.07146	2016.05.23	285	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	b	resNet	to increase the parameter efficiency, increase the number of channels and decrease the number of layers	wider and shallower			wideResNet_16_4	2.9	5.24	23.91	1.64	na	na	x
+WRN	Wide ReseNet	https://arxiv.org/abs/1605.07146	2016.05.23	285	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	b	resNet	to increase the parameter efficiency, increase the number of channels and decrease the number of layers	wider and shallower	b=>b		wideResNet_16_4	2.9	5.24	23.91	1.64	na	na	x
 													wideResNet_28_10	36	3.89	18.85	1.64	na	na	x
 													wideResNet-50-2	na	na	na	na	21.9	5.79	
 RIR	ResNet in ResNet	https://arxiv.org/abs/1603.08029	2016.05.25	37	1.1.1.general recognition	3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	b	resNet	generalizes ResNets and standard CNNs	generalizes	b=>b		resNet-in-resent	na	5.01	22.9	na	na	na	
 fractalNet	fractalNet	https://arxiv.org/abs/1605.07648	2016.05.24	71	1.1.1.general recognition	3.4.3.drop path;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	c	inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge	c=>c		fractalNet-40	22.9	5.24	22.49	na	na	na	x
-													fractalNet-20	38.6	5.22	23.3	na	na	na	
+								resNet	train very deep networks with residual connections	deep without residual	b=>c		fractalNet-20	38.6	5.22	23.3	na	na	na	
 resNeXt	resNeXt	https://arxiv.org/abs/1611.05431	2016.11.16	134	1.1.1.general recognition	3.4.7.pre-activation;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay	b;c	inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge	c=>c		ResNeXt	25	3.58	17.31	na	20.4	5.3	
 								resNet	add a new dimension called "cardinality"	residual connections	b=>b				na	na	na	na	na	
-								inception_resNet	highly modulized	highly modulized	b+c=>b+c									
-denseNet	Densely Connected Networks	https://arxiv.org/abs/1608.06993	2016.08.25	378	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with nesterov momentum;3.4.2.weight decay;3.1.7.he_normal	b	resNet	dense residual connection; use concate instead of adding to combine mult-braches	residual connections	b=>b		denseNet_40_12	1	5.24	24.42	1.79	na	na	x
+								inception_resNet	similar architeccture, yet ResNeXt has fewer hyperparameter and is highly modulized	highly modulized	b+c=>b+c									
+denseNet	Densely Connected Networks	https://arxiv.org/abs/1608.06993	2016.08.25	378	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with nesterov momentum;3.4.2.weight decay;3.1.7.he_normal	b	resNet	dense residual connection; use concate instead of adding to combine mult-braches	dense residual connections	b=>b		denseNet_40_12	1	5.24	24.42	1.79	na	na	x
 													denseNet_100_12	7.2	4.1	20.2	1.67	na	na	x
 													denseNet_100_24	27.2	3.74	19.25	1.59	na	na	x
 													denseNet-BC(l=100, k=12)	0.8	4.51	22.27	1.76	na	na	
@@ -39,7 +39,7 @@ diracNet	diracNet	https://arxiv.org/abs/1706.00388	2017.06.07	4	1.1.1.general re
 													diracNet-28-10	36.5	4.75	21.54	na	na	na	
 													diracNet-18	11.7	na	na	na	30.37	10.88	
 													diracNet-34	21.8	na	na	na	27.79	9.34	
-nasNet	nasNet	https://arxiv.org/abs/1707.07012	2017.12.01	35	1.1.1.general recognition	neural architecture search by reinforcement learning	b;c;d	inception	borrow the multi-brach, 1x7 then 7x1 convolution, 1x3 then 3x1 convolution from Inception and let neural architecture search (NAS) select from it	borrow operations	c=>c		nasNet_cifar	3.3	2.65	na	na	na	na	x
+nasNet	nasNet	https://arxiv.org/abs/1707.07012	2017.12.01	35	1.1.1.general recognition	neural architecture search by reinforcement learning	c;b;d	inception	borrow the multi-brach, 1x7 then 7x1 convolution, 1x3 then 3x1 convolution from Inception and let neural architecture search (NAS) select from it	borrow operations	c=>c		nasNet_cifar	3.3	2.65	na	na	na	na	x
 								resNet	borrow the skip connections from ResNet and let neural architecture search (NAS) select from them	borrow operations	b=>b		nasNet_small	11.1	na	na	na	17.3	3.8	x
 								mobileNet	borrow the depthwise separable conv from mobileNet and let neural architecture search (NAS) select from them	borrow operations	d=>d		nasNet_large	5.3	na	na	na	26	8.4	x
 SENet	Squeeze-and-Excitation Networks	https://arxiv.org/abs/1709.01507	2017.09.05	48	1.1.1.general recognition		b	mobileNet	insipired by the manipulation on channels=>significant performance improvements with slight computional cost	manipulate channels	a=>b		seNet_inception_resnetv2	65.6	na	na	na	19.8	4.79	
@@ -49,37 +49,37 @@ mixNet		https://arxiv.org/abs/1802.01808	2018.02.06	0	1.1.1.general recognition	
 DPN	Dual Path Networks	https://arxiv.org/pdf/1707.01629.pdf	2017.06.06	31	1.1.1.general recognition		b	denseNet	combine the connections in DenseNet and ResNet	combine	b=>b		DPN-92	145	na	na	na	20.8	5.4	
 								resNet	combine the connections in DenseNet and ResNet	combine	b=>b									
 xception		https://arxiv.org/abs/1610.02357	2016.10.07	114	1.1.1.general recognition		c;d	inception	the inception modules are replaced with depthwise separable convolutions=>improve parameter efficiency	depthwise seperable conv	c=>c+d						21	5.5		
-mobileNet		https://arxiv.org/abs/1704.04861	2017.04.17	149	1.1.1.general recognition		a;d	xception	borrow the depthwise seperable convolutions used	depthwise seperable conv	d=>d		mobileNet-224	4.2				29.4		
+mobileNet		https://arxiv.org/abs/1704.04861	2017.04.17	149	1.1.1.general recognition		d;a	xception	borrow the depthwise seperable convolutions used	depthwise seperable conv	d=>d		mobileNet-224	4.2				29.4		
 								VGG	apply the same streamlined architecture; add batch normalization; replace normal conv blocks with depthwise seperable conv blocks	same streamlined architecture	a=>a									
 													mobileNet-160	1.32				39.8		
 															na	na	na	na	na	
 ID		url	date	citation	application	training	architecture	parent	link_info_l	link_info_s	link_category		name							
-vanilla RNN	vanilla RNN	https://www.nature.com/articles/323533a0	1986.12.01	13951	1.2.NLP								recurrent neural network							
+SRN	simple RNN	http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/full	1990.03.01	9047	1.2.NLP								recurrent neural network							
 attention	RNN with attention mechanism	https://arxiv.org/abs/1409.0473	2014.09.01	2081	1.2.NLP			seq2seq	Attention mechanism allows  to search relevant parts in the context at each step of the output generation.	add attention	 									
-seq2seq	sequence to sequence	https://arxiv.org/abs/1409.3215	2014.09.10	2829	1.2.NLP			vanilla RNN	introduce a RNN architecture to map squence to sequence	sequence to sequence			squence to sequence							
+seq2seq	sequence to sequence	https://arxiv.org/abs/1409.3215	2014.09.10	2829	1.2.NLP			SRN	introduce a RNN architecture to map squence to sequence	sequence to sequence			squence to sequence							
 conv seq2seq	conv seq2seq	https://arxiv.org/abs/1705.03122	2017.05.08	73	1.2.NLP			seq2seq	Introduce a CNN structure to map sequence to sequence.  Compared previous RNN architecture, it has a faster speed with a high accuracy.	CNN for high speed										
-ESN	echo state networks	http://science.sciencemag.org/content/304/5667/78	2004.04.02	1517	1.2.NLP			vanilla RNN	ESN use reservior computing to set the recurrent weights such that the recurrent hidden units do a good job of capturing the history of past inputs.  Only the output weights need to be learnt.	reservoir computing			echo state network							
+ESN	echo state networks	http://science.sciencemag.org/content/304/5667/78	2004.04.02	1517	1.2.NLP			SRN	ESN use reservior computing to set the recurrent weights such that the recurrent hidden units do a good job of capturing the history of past inputs.  Only the output weights need to be learnt.	reservoir computing			echo state network							
 ESN with leaky units	echo state networks with leaky integration units	https://www.sciencedirect.com/science/article/pii/S089360800700041x	2007.04.01	414	1.2.NLP		c	ESN	An extension to echo state networks by leaky integration units	leaky units	c									
 								leaky units	An extension to echo state networks by leaky integration units	use it	c=>c									
-time skip connections	recurrent neural units with time skip connections	https://drum.lib.umd.edu/handle/1903/745	1998.10.15	15	1.2.NLP		c	vanilla RNN	 To address long-term dependency, it adds direct connections from variables in the distant past to variables in the present.	add long time scale	c									
-removing connections			2013		1.2.NLP		c	time skip connections	Time skip connections add edges, so the units can choose to operate on a long time scale or focus on a short one; Removing connections force units to operate the long time scale.  	force on long time scale	c=>c									
-leaky units	recurrent neural units  leaky units		2013.02.13	900	1.2.NLP		c	vanilla RNN	 To address long-term dependency, it adds linear self connections with a weight near one.	linear self connections	c									
+time skip connections	recurrent neural units with time skip connections	https://drum.lib.umd.edu/handle/1903/745	1998.10.15	15	1.2.NLP		c	SRN	 To address long-term dependency, it adds direct connections from variables in the distant past to variables in the present.	add long time scale	c									
+CW-RNN	replace some short-time connections with long-time connections	https://arxiv.org/pdf/1402.3511.pdf	2014.02.14	135	1.2.NLP		c	time skip connections	Time skip connections add edges, so the units can choose to operate on a long time scale or focus on a short one; Removing connections force units to operate the long time scale.  	force on long time scale	c=>c									
+leaky units	recurrent neural units  leaky units		2013.02.13	900	1.2.NLP		c	SRN	 To address long-term dependency, it adds linear self connections with a weight near one.	linear self connections	c									
 								time skip connections	Leaky units are units  with linear self-connections and a weight near one on these connections. Leaky units are more smooth and flexible than skip time connections since it adjust the real-valed weight rather than the integer-valued time skip.	smooth and flexible	c=>c									
-LSTM	long short term memory	https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735	1997.12.15	8136	1.2.NLP		d	vanilla RNN	LSTM uses a gated self-loop to learn long-term dependencies more easily	gated units	d	add forget gate								
+LSTM	long short term memory	https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735	1997.12.15	8136	1.2.NLP		d	SRN	LSTM uses a gated self-loop to learn long-term dependencies more easily	gated units	d	add forget gate								
 								leaky units	LSTM and leaky units adopt different methods to accumulate information through time. 		c=>d	add peephole								
 												with BPTT								
 add forget gate	LSTM with forget gate	http://digital-library.theiet.org/content/conferences/10.1049/cp_19991218	1999.09.07	848	1.2.NLP		d	initial LSTM	Add forget gate to LSTM cells.  These cells learn to reset themselves at appropriate times, thus releasing internal resources.	forget gate	d=>d									
 add peephole	LSTM with peephole connetions	http://ieeexplore.ieee.org/abstract/document/861302/	2000.07.01	157	1.2.NLP		d	LSTM with forget	 Make the weights on the self-loop conditioned on the context, rather than ﬁxed	peephole connections	d=>d									
 with BPTT	the modern long short-term memory	https://www.sciencedirect.com/science/article/pii/S0893608005001206	2005.07.01	777	1.2.NLP		d	LSTM with peephole	use full backpropogation through time for training 	BPTT	d=>d									
 GRU	gated recurrent unit	https://arxiv.org/abs/1406.1078	2014.06.03	2069	1.2.NLP		d	LSTM	To improve computation effiency, the gates of a recureent uit is redesigned in GRU, input gate and forget gate are combined into one single gate. input, forget, output gates=>reset, update gates	redesign gates	d=>d		gated recurrent unit							
-recursive	recursive neural network	https://www.sciencedirect.com/science/article/pii/000437029090005K	1990.11.01	1050	1.2.NLP		e	vanilla RNN	Generalize RNN from chain-like structure to tree-like structure	chain to tree	e		recursive neural network							
-tree-LSTM	tree structured long short term memory	https://arxiv.org/abs/1503.00075	2015.02.28	549	1.2.NLP		e;d	LSTM	a generalization of LSTMs from chain-structured to tree-structured network topologies	chain to tree	d=>d									
+recursive	recursive neural network	https://www.sciencedirect.com/science/article/pii/000437029090005K	1990.11.01	1050	1.2.NLP		e	SRN	Generalize RNN from chain-like structure to tree-like structure	chain to tree	e		recursive neural network							
+tree-LSTM	tree structured long short term memory	https://arxiv.org/abs/1503.00075	2015.02.28	549	1.2.NLP		d;e	LSTM	a generalization of LSTMs from chain-structured to tree-structured network topologies	chain to tree	d=>d									
 								recursive	build a recursive neural networks with LSTM cells	use LSTM	e=>e									
-DGLSTM	depth-gated long short-term memory	https://pdfs.semanticscholar.org/d3e9/9f2f98ac361aded0b9b9d90b6f9fe8bbbc70.pdf	2015.08.01	15	1.2.NLP		a;d	LSTM	an extension of LSTM to use a depth gate to connect memory cells of adjacent layers	add depth gate	d=>d									
+DGLSTM	depth-gated long short-term memory	https://pdfs.semanticscholar.org/d3e9/9f2f98ac361aded0b9b9d90b6f9fe8bbbc70.pdf	2015.08.01	15	1.2.NLP		d;a	LSTM	an extension of LSTM to use a depth gate to connect memory cells of adjacent layers	add depth gate	d=>d									
 								stacked RNN	add gated skip connection	gated skip connection	a=>d									
-BRNN	bidirectional RNN	http://ieeexplore.ieee.org/abstract/document/650093/	1997.12.01	984	1.2.NLP		b	vanilla RNN	Bidirectional inputs enable the current state to get information from both past and future input.	bidirectional inputs	b=>b		bidirectional recurrent neural network							
-stacked RNN	stacked RNN	http://ieeexplore.ieee.org/document/6795261/	1992.03.01	263	1.2.NLP		a	vanilla RNN	Increase deepth to improve  the representational capacity	deeper	a									
-DB-LSTM	deep bidirectional LSTM	https://arxiv.org/abs/1303.5778	2013.03.22	1897	1.2.NLP		a;b;d	LSTM	combine it with other methods and successfully use RNN in speech recognition	combine with other methods	d=>d		deep bidirectional LSTM							
+BRNN	bidirectional RNN	http://ieeexplore.ieee.org/abstract/document/650093/	1997.12.01	984	1.2.NLP		b	SRN	Bidirectional inputs enable the current state to get information from both past and future input.	bidirectional inputs	b=>b		bidirectional recurrent neural network							
+stacked RNN	stacked RNN	http://ieeexplore.ieee.org/document/6795261/	1992.03.01	263	1.2.NLP		a	SRN	Increase deepth to improve  the representational capacity	deeper	a									
+DB-LSTM	deep bidirectional LSTM	https://arxiv.org/abs/1303.5778	2013.03.22	1897	1.2.NLP		d;b;a	LSTM	combine it with other methods and successfully use RNN in speech recognition	combine with other methods	d=>d		deep bidirectional LSTM							
 								BRNN	combine it with other methods and successfully use RNN in speech recognition	combine with other methods	b=>b									
 								stacked RNN	combine it with other methods and successfully use RNN in speech recognition	combine with other methods	a=>a									
 DT-RNN	deep transition RNN	https://arxiv.org/abs/1312.6026	2013.12.20	269	1.2.NLP		a	stacked RNN	use MLP to increase the network depth	add MLP	a=>a									

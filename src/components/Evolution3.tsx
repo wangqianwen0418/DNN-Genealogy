@@ -54,7 +54,7 @@ let legend = (Names: string[]) => {
         let item = {
             name,
             key,
-            click: true,
+            click: false,
             hover: false
         }
         items[key] = item
@@ -85,7 +85,7 @@ export interface State {
     legend: LegendProps['items']
 }
 
-const nodeH = 40, nodeW = 220, margin = 30, labelL = 20, tabH = 32,
+const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 32,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -181,25 +181,26 @@ export default class Evolution extends React.Component<Props, State>{
         let { pinNodes } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: nodeW / 2,
+            ranksep: nodeW * .8,
             marginx: margin * 2,
             marginy: margin,
             rankdir: 'LR',
             edgesep: nodeH * 0.4,
             nodesep: nodeH * .5,
             // ranker: "tight-tree"
-            // ranker: "longest-path"
+            ranker: "longest-path"
         });
         dag.setDefaultEdgeLabel(() => { return {}; });
 
         //control the min value after resizing the nodes, 
         const resizeNode = (w: number, ratio: number) => {
-            let newW = w * ratio
-            if (newW > w * 0.3) {
-                return newW
-            } else {
-                return w * 0.3
-            }
+            // let newW = w * ratio
+            // if (newW > w * 0.3) {
+            //     return newW
+            // } else {
+            //     return w * 0.3
+            // }
+            return w * (.4*ratio + .6)
         }
         datum.forEach((node: NN) => {
             // let label = `${layer.name}:${layer.class_name}`
@@ -225,7 +226,7 @@ export default class Evolution extends React.Component<Props, State>{
                             label_l: parent.link_info_l,
                             from: parent.ID,
                             to: node.ID,
-                            cate: parent.link_category.split('=>')[0],
+                            cate: parent.link_category.split('=>')[0].split("+"),
                         }
                     )
                 })
@@ -408,11 +409,26 @@ export default class Evolution extends React.Component<Props, State>{
     }
     oneEdge(edge: GraphEdge, i: number) {
         let { points, from, to, label_s, label_l, cate } = edge,
-            { selectedNode, hoverEdge, transX, transY, scale, showLabel } = this.state,
+            { selectedNode, hoverEdge, transX, transY, scale, showLabel, legend } = this.state,
             selectedID = selectedNode ? selectedNode.label : undefined,
-            clickLegend = this.state.legend[cate] ? this.state.legend[cate].click : false,
-            hoverLegend = this.state.legend[cate] ? this.state.legend[cate].hover : false
-        // console.info(cate, this.state.legend)
+            // clickLegend = this.state.legend[cate] ? this.state.legend[cate].click : false,
+            // hoverLegend = this.state.legend[cate] ? this.state.legend[cate].hover : false
+            clickLegend:boolean=false, hoverLegend:boolean=false,
+            everHover=false, everClick=false
+            cate.forEach((k:string)=>{
+                let item = legend[k]
+                if(item&&item.click){
+                    clickLegend=true
+                }
+                if(item&&item.hover){
+                    hoverLegend=true
+                }
+            })
+            // Object.keys(legend).forEach(k=>{
+            //     let item = legend[k]
+            //     if(item.click){everClick=true}
+            //     if(item.hover){everHover=true}
+            // })
 
         //a trick. if assign transX, transY, scale to a group, the transition animiation will be wired
         const movePoint = (p: Point, x: number, y: number, s: number) => {
@@ -479,16 +495,19 @@ export default class Evolution extends React.Component<Props, State>{
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
 
         return <g className='Edge EdgeGroup' key={`${i}_${from}->${to}`}>
-            <path
+            {cate.map((key:string, i:number)=>{
+                return <path
                 className="Edge"
                 id={`${from}->${to}`}
                 d={pathData}
-                stroke={clickLegend ? getColor(edge.cate) : "gray"}
+                stroke={clickLegend?"gray":getColor(key)}
                 fill='none'
-                strokeWidth={hoverLegend||hovered ? 4 : 2}
-                opacity={hoverLegend? 1: 0.8}
-            >
-            </path>
+                transform={`translate(${i*4}, ${i*4})`}
+                strokeWidth={(hoverLegend||hovered)&&!clickLegend ? 4 : 2.5}
+                opacity={hoverLegend? 1:(clickLegend?0.4: 0.7)}
+            />
+            })}
+            
 
             <path
                 id={`label_${from}->${to}`}
