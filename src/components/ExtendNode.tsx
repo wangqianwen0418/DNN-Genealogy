@@ -103,7 +103,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 left: transX + node.x * scale - node.width * scale / 2,
                 top: transY + node.y * scale - node.height * scale / 2,
                 backgroundColor: "white",
-                height: node.height * scale - margin,
+                height: node.height * scale,
                 width: node.width * scale,
                 visibility: zoomed ? "visible" : "hidden",
                 opacity: zoomed ? 1 : 0
@@ -118,9 +118,9 @@ export default class ExtendNode extends React.Component<Props, State>{
                     <img
                         className="abstract Node"
                         src={`../../images/${node.label}.png`}
-                        style={{
-                            border: `1px solid ${selected ? "red" : "gray"}`,
-                        }}
+                        // style={{
+                        //     border: `1px solid ${selected ? "red" : "gray"}`,
+                        // }}
                         height={node.height * scale - margin}
                         width={node.width * scale}
                         onMouseDown={this.mouseDown}
@@ -141,22 +141,34 @@ export default class ExtendNode extends React.Component<Props, State>{
                     </TabPane>
                 })}
             </Tabs>
-            <Icon className="pin" type="pushpin"
+            <div className="floatIcon"
                 style={{
+                    position: "relative",
+                    float: "right",
+                    top: "-10px",
                     opacity: pin || showpin ? 1 : 0,
                     color: pin ? "red" : "gray"
-                }}
-                onClick={(e: React.MouseEvent<any>) => {
-                    let { pin } = this.state
-                    e.stopPropagation()
-                    e.preventDefault()
-                    this.setState({ pin: !pin })
-                    pinNode(node)
+                }
+                }>
+                <Dropdown overlay={menu} className="infoButton">
+                    <a className="infoTrigger"> ...</a>
+                </Dropdown>
+                <Icon className="pin" type="pushpin"
+                    style={{
+                        opacity: pin || showpin ? 1 : 0,
+                        color: pin ? "red" : "gray"
+                    }}
+                    onClick={(e: React.MouseEvent<any>) => {
+                        let { pin } = this.state
+                        e.stopPropagation()
+                        e.preventDefault()
+                        this.setState({ pin: !pin })
+                        pinNode(node)
 
-                }} />
-            <Dropdown overlay={menu} className="infoButton">
-                <a className="infoTrigger"> ...</a>
-            </Dropdown>
+                    }} />
+                <Icon type="arrows-alt" />
+            </div>
+
         </div>
         // }}
         {/* </Transition> */ }

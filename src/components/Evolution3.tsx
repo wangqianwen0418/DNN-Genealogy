@@ -416,7 +416,6 @@ export default class Evolution extends React.Component<Props, State>{
             clickLegend:boolean=false, hoverLegend:boolean=false,
             everHover=false, everClick=false
             cate.forEach((k:string)=>{
-                console.info(legend, k)
                 let item = legend[k]
                 if(item&&item.click){
                     clickLegend=true
