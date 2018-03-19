@@ -6,7 +6,7 @@ import * as d3 from "d3";
 import { getColor } from "../helper";
 const TabPane = Tabs.TabPane
 
-const margin = 40, nodeH = 20, nodeW = 100, labelL = 10,
+const margin = 40, nodeH = 20, nodeW = 100, labelL = 6,
     expandH = 150, expandW = 200,
     boxH = 10,
     labelFont = 12
@@ -102,15 +102,15 @@ export default class NNNode extends React.Component<Props, {}>{
                             fill={zoomed ? "none" : getColor(key)}
                         />
                         })}
-                    </g>}
-                    
-                    <rect
+                        <rect
                         className="perIcon"
                         x={node.width * scale * 0.2}
                         y={node.height * scale * 0.8}
                         width={node.width * scale * 0.8} height={node.height * scale * 0.2}
                         fill={zoomed ? "none" : getColor('unkonw')}
                     />
+                    </g>}
+                                   
                 </g>
             </g>
             {zoomed ?

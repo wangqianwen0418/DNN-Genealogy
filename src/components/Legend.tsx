@@ -17,6 +17,11 @@ export interface Item{
 export default class Legend extends React.Component<LegendProps, {}>{
     render(){
         let {items, selectItem} = this.props
+        // everClick:boolean = false
+        // Object.keys(items).forEach((key:string)=>{
+        //     let item = items[key]
+        //     if(item.click){everClick=true}
+        // })
         return <ul>
             {Object.keys(items).map((key:string)=>{
                 let item = items[key]
@@ -28,7 +33,7 @@ export default class Legend extends React.Component<LegendProps, {}>{
                     position:"relative",
                     top:"4px",
                     marginRight:"3px",
-                    backgroundColor:item.click?getColor(item.key):"gray"
+                    backgroundColor:item.click?"gray":getColor(item.key)
                 }}
                 onClick={()=>{
                     selectItem(item.key, "click")

@@ -20,18 +20,10 @@
     stroke-width:1px;
 }
 
-.infoTrigger{
-    position: relative!important;
-    top: -20px;
-    padding: 2px!important;
+.floatIcon a , .floatIcon i{
+    padding: 1px 2px!important;
 }
-.pin{
-    position: relative;
-    float: right;
-    top:-20px;
-    padding: 2px!important;
-    /* z-index: 10; */
-}
+
 /* dropdown button */
 .ant-btn > span{
     font-size: 1.2em;

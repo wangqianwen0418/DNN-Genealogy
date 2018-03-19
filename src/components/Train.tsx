@@ -69,7 +69,7 @@ export default class Train extends React.Component<Props, State>{
                 title={<span style={{ fontSize: "1.2em" }}>Training</span>}
                 className="View ViewBottom"
             >
-                <Tabs onChange={this.changeTab}>
+                <Tabs onChange={this.changeTab} className="train">
                     {panes}
                 </Tabs>
             </Card>
