@@ -24,4 +24,9 @@ export type SELECT_NNMOTION = typeof SELECT_NNMOTION
 
 // style config
 export const BG_COLOR="#333";
-export const FG_COLOR=["#49a9ee", "#F29C30", "#75C277", "#DA5246"] 
+export const FG_COLOR=["#49a9ee", "#F29C30", "#75C277", "#DA5246"]
+
+export const sequenceDatasets = [],
+             nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top5']
+export let sequenceBenchmarks: any[] = [],
+           nonsequenceBenchmarks: any[] = []

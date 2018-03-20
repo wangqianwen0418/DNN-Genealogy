@@ -14,6 +14,7 @@ import NNNode from "./NNNode";
 import Legend, { LegendProps } from "./Legend";
 import ExtendNode from "./ExtendNode";
 import { showDetailedStructure } from './ImageModel'
+import { nonsequenceDatasets, nonsequenceBenchmarks } from "../constants";
 
 // const {TreeNode} = TreeSelect
 
@@ -173,6 +174,27 @@ export default class Evolution extends React.Component<Props, State>{
 
         // label(appData)
 
+        // Get benchmarks of datasets
+        if (appValue === '1.1.' && nonsequenceBenchmarks.length === 0) {
+            let stat : any[] = [] 
+            for (let d of datum)
+                for (let name of d.names)
+                    stat.push(name)
+            console.log(stat)
+            for (let dataset of nonsequenceDatasets) {
+                let benchmarkData = stat.map((d: any) => d[dataset])
+                let sortedData = benchmarkData.sort((x, y) => x - y).filter((x) => x)
+                let length: number = sortedData.length
+                nonsequenceBenchmarks.push({
+                    dataset: dataset,
+                    minimum: sortedData[0],
+                    lowerQuartile: sortedData[Math.round(length / 4)],
+                    median: sortedData[Math.round(length / 2)],
+                    higherQuartile: sortedData[Math.round(length * 3 / 4)],
+                    maximum: sortedData[length - 1],
+                })
+            }
+        }
 
         this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
     }
