@@ -27,7 +27,7 @@ export interface State {
 }
 
 let simulation = d3.forceSimulation()
-    .force("charge", d3.forceManyBody().strength(-30))
+    // .force("charge", d3.forceManyBody().strength(2))
 
 const sequenceDatasets = ['abc'],
       nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top 5']
@@ -70,12 +70,12 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     getForceX(attr: number[]) {
         let len = attr.length
-        let x: number = attr.map((d: number, idx: number) => d * Math.cos(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
+        let x: number = attr.map((d: number, idx: number) => (100-d) * Math.cos(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
         return x
     }
     getForceY(attr: number[]) {
         let len = attr.length
-        let y: number = attr.map((d: number, idx: number) => d * Math.sin(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
+        let y: number = attr.map((d: number, idx: number) => (100-d) * Math.sin(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
         return y
     }
 
@@ -268,25 +268,31 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('class', 'dot')
             .data(NNnodes)
             .enter().append('g')
-            .attr('transform', (d, i) => 'translate(' + (this.getForceX(d.attr) || 0) + ',' + (this.getForceY(d.attr) || 0) + ')')
             .append('polygon')
+            .attr("transform", d=>`translate(${d.x}, ${d.y})`)
             .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
             .attr('stroke-width', 1)
             .attr('points', (d :Dot) => this.polygon(Math.sqrt(d.r), networks.indexOf(d.parent) + 3))
             .on('click', function(d) {
                 that.selectNode(d)
             })
-        // simulation
-        //     .nodes(nns)
-        //     .force('collide', d3.forceCollide().strength(.5).radius(this.node_dist).iterations(3))
-        //     .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
-        //     .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
-        //     .on('tick', ticked)
-        // let nodes = this.nodes
-        // function ticked() {
-        //     nodes.attr('cx', (d: any) => d.x || 0)
-        //         .attr('cy', (d: any) => d.y || 0)
-        // }
+
+        simulation = simulation
+            .nodes(NNnodes)
+            .force('collide',d3.forceCollide().strength(.5).radius((d:Dot)=>d.r).iterations(3))
+            // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
+            // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
+            .on('tick', ticked)
+            
+        let nodes = this.nodes
+        function ticked() {
+            nodes.attr("transform", (d:Dot)=>`translate(${d.x}, ${d.y})`)
+        }
+        simulation.alpha(1).restart()
+        // for (let i = 0; i < 300; ++i) {
+        //     console.info("tick")
+        //     simulation.tick()
+        // };
 
         // Legend
         var legend_nn = svg.append("g")
