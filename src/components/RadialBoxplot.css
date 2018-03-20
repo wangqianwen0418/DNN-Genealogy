@@ -5,9 +5,10 @@
     position: relative !important;
     z-index: 100;
 }
-/* .dot{
-    position:relative;
-} */
+.remove {
+    fill: red;
+    cursor: pointer;
+}
 .RadialBoxplot {
     overflow: hidden;
 }
