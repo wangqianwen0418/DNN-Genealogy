@@ -1,8 +1,9 @@
-import * as React from "react";
-import {Card} from "antd";
-import "./App.css";
-import { NN, NodeTextInfo } from "../types"
-import axios from "axios"
+import * as React from 'react'
+import {Card} from 'antd'
+import { NN, NodeTextInfo } from '../types'
+import axios from 'axios'
+import './App.css'
+import './TextInfo.css'
 
 export interface Props{
     database: string,
@@ -41,8 +42,7 @@ export default class TextInfo extends React.Component<Props, State>{
 
     render(){
         let nn = this.props.nn
-        console.log(this.state)
-
+        
         let p: number = -1
         for (let i in this.state.textinfo) {
             if (this.state.textinfo[i].ID === nn.ID) {
@@ -54,7 +54,7 @@ export default class TextInfo extends React.Component<Props, State>{
         if (p !== -1) {
             let cur: NodeTextInfo = this.state.textinfo[p]
             let links = this.state.textinfo[p].links.map(
-                (d, i) => <div key={i}><a href={d}>{d}</a></div>
+                (d, i) => <div key={i}><a href={d[1]}>{d[0]}</a></div>
             )
             return (
                 <Card
@@ -62,20 +62,12 @@ export default class TextInfo extends React.Component<Props, State>{
                     title={<span style={{fontSize:'1.2em'}}>{nn.ID}</span>}
                     className="TextInfo View ViewBottom"
                 >
-                <div>
-                    Information:
-                </div>
-                <div>
-                    <span>
+                    <div className="TextInfo-Description">
                         {cur.info}
-                    </span>
-                </div>
-                <div>
-                    Links:
-                </div>
-                <div>
-                    {links}
-                </div>
+                    </div>
+                    <div className="TextInfo-Links">
+                        {links}
+                    </div>
                 </Card>)
         } else {
             return (

@@ -68,13 +68,22 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     getForceX(attr: number[]) {
         let len = attr.length
-        let x: number = attr.map((d: number, idx: number) => (100-d) * Math.cos(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
-        return x
+        let x: number = attr.map((d: number, idx: number) => (1-d/100) * Math.cos(Math.PI / len * (idx + .5)))
+                            .reduce((a, b) => a + b, 0)
+        return x/len*this.r
+        // let x:number = attr.map((d:number, idx:number)=> this.polarToCartesian(0,0, this.r*0.8, 360/len*(idx+.5)).x)
+        // .reduce((a, b) => a + b, 0)
+        // return x/len
     }
     getForceY(attr: number[]) {
         let len = attr.length
-        let y: number = attr.map((d: number, idx: number) => (100-d) * Math.sin(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
-        return y
+        let y: number = attr.map((d: number, idx: number) => (1-d/100) * Math.sin(Math.PI / len * (idx + .5)))
+                            .reduce((a, b) => a + b, 0)
+        return y/len*this.r
+        // let len = attr.length
+        // let y:number = attr.map((d:number, idx:number)=> this.polarToCartesian(0,0, this.r*0.8, 360/len*(idx+.5)).y)
+        // .reduce((a, b) => a + b, 0)
+        // return y/len
     }
 
     polygon(r: number, edges: number) {
@@ -312,14 +321,22 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
         simulation = simulation
             .nodes(NNnodes)
-            .force('collide',d3.forceCollide().strength(.5).radius((d:Dot)=>Math.sqrt(d.r)).iterations(10))
-            // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
-            // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
+            .force('collide',d3.forceCollide().strength(.7).radius((d:Dot)=>d.r*2).iterations(5))
+            .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
+            .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)
             
         let nodes = this.nodes
         function ticked() {
-            nodes.attr("transform", (d:Dot)=>`translate(${d.x}, ${d.y})`)
+            nodes.attr("transform", (d:Dot)=>{
+                if(d.x*d.x+d.y*d.y<that.r*that.r){
+                    return `translate(${d.x}, ${d.y})`
+                }else{
+                    let k = d.y/d.x, theta = Math.atan(k)
+                    return `translate(${that.r *0.8* Math.cos(theta)}, ${that.r *0.8* Math.sin(theta)})`
+                }
+                // return `translate(${d.x}, ${d.y})`
+            })
         }
         simulation.alpha(1).restart()
         // for (let i = 0; i < 300; ++i) {

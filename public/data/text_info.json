@@ -1,127 +1,182 @@
 [
     {
-        "ID": "vanilla RNN",
-        "info": "A recurrent neural network is used for processing sequences of variable length, in which a state contains information about the whole past sequence. It shares same parameters across different time steps of the sequence.",
+        "ID": "SRN",
+        "info": "A simple recurrent neural network is used for processing sequences of variable length, in which a state contains information about the whole past sequence. It shares same parameters across different time steps of the sequence.",
         "links": [
-            "http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/full",
-            "http://ieeexplore.ieee.org/abstract/document/6638947/",
-            "https://arxiv.org/abs/1506.00019",
-            "http://www.isca-speech.org/archive/interspeech_2010/i10_1045.html"
+            ["Finding Structure in Time", "http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/full"],
+            ["Recurrent Neural Network Based Language Model", "http://www.isca-speech.org/archive/interspeech_2010/i10_1045.html"],
+            ["DRAW: A Recurrent Neural Network For Image Generation", "https://arxiv.org/abs/1502.04623"],
+            ["A Critical Review of Recurrent Neural Networks for Sequence Learning", "https://arxiv.org/abs/1506.00019"]
         ]
     },
     {
-        "ID": "stacked RNN",
-        "info": "A stacked RNN is built up by stacking multiple recurrent hidden layers on top of the original RNN to make it deeper. It is also known as deep RNN.",
+        "ID": "attention",
+        "info": "The attention mechanism is based on the seq2seq model, in which multiple vector Cs are generated from the hidden units of the input sentence.",
         "links": [
-            "http://ieeexplore.ieee.org/document/6795261/",
-            "http://ieeexplore.ieee.org/abstract/document/6638947/",
-            "http://ieeexplore.ieee.org/abstract/document/7404790/",
-            "http://cal.cs.illinois.edu/papers/huang-ismir2014.pdf"
+            ["End-to-end attention-based large vocabulary speech recognition", "http://ieeexplore.ieee.org/abstract/document/7472618/"],
+            ["Effective Approaches to Attention-based Neural Machine Translation", "https://arxiv.org/abs/1508.04025"],
+            ["Neural Machine Translation by Jointly Learning to Align and Translate", "https://arxiv.org/abs/1409.0473"],
+            ["Show, Attend and Tell: Neural Image Caption Generation with Visual Attention", "http://proceedings.mlr.press/v37/xuc15.pdf"]
         ]
     },
     {
-        "ID": "MLP_RNN",
-        "info": "An MLP_RNN is built up by applying an MLP with one or more layers to hidden-to-hidden transition in the original RNN.",
+        "ID": "seq2seq",
+        "info": "A sequence to sequence model is mainly used for translation. The model reads the input sentence into a vector C and decomposes C into translation. It is also known as encoder-decoder model.",
         "links": [
-            "https://arxiv.org/abs/1312.6026"
+            ["Multi-task Sequence to Sequence Learning", "https://arxiv.org/abs/1511.06114"],
+            ["Sequence to Sequence Learning with Neural Networks", "https://arxiv.org/abs/1409.3215"],
+            ["Massive Exploration of Neural Machine Translation Architectures", "https://arxiv.org/abs/1703.03906"],
+            ["On the Properties of Neural Machine Translation: Encoder-Decoder Approaches", "https://arxiv.org/abs/1409.1259"],
+            ["Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation", "https://arxiv.org/abs/1406.1078"]
         ]
     },
     {
-        "ID": "BRNN",
-        "info": "A bidirectional RNN is used for making predictions that depend on the whole input sequence. It combines an RNN that moves forward with another RNN that moves backward.",
+        "ID": "conv seq2seq",
+        "info": "A convolution sequence to sequence model applys CNN structure to map sequence to sequence. It has a faster speed and a high accuracy.",
         "links": [
-            "http://ieeexplore.ieee.org/abstract/document/650093/",
-            "http://ieeexplore.ieee.org/abstract/document/4531750/",
-            "https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Du_Hierarchical_Recurrent_Neural_2015_CVPR_paper.pdf",
-            "https://arxiv.org/abs/1409.0473",
-            "https://academic.oup.com/bioinformatics/article/15/11/937/249908"
-        ]
-    },
-    {
-        "ID": "recursive",
-        "info": "A recursive neural network is a generalization of recurrent network with a tree-like computational graph. The depth is reduced from n to log(n), which may help deal with long-term dependencies.",
-        "links": [
-            "https://www.sciencedirect.com/science/article/pii/000437029090005K",
-            "http://ieeexplore.ieee.org/abstract/document/712151/",
-            "https://dl.acm.org/citation.cfm?id=2145450",
-            "http://www.aclweb.org/anthology/D13-1170",
-            "https://nlp.stanford.edu/pubs/SocherLinNgManning_ICML2011.pdf"
+            ["Attention is All you Need", "http://papers.nips.cc/paper/7181-attention-is-all-you-need"],
+            ["Convolutional Sequence to Sequence Learning", "https://arxiv.org/abs/1705.03122"],
+            ["A Convolutional Encoder Model for Neural Machine Translation", "https://arxiv.org/abs/1611.02344"]
         ]
     },
     {
         "ID": "ESN",
         "info": "An echo state network is used for solving vanishing/exploding problems, in which recurrent hidden units are set and only output weight are learnt.",
         "links": [
-            "http://science.sciencemag.org/content/304/5667/78",
-            "https://opus.jacobs-university.de/frontdoor/index/index/docId/638",
-            "http://ieeexplore.ieee.org/abstract/document/5629375/"
+            ["Minimum Complexity Echo State Network", "http://ieeexplore.ieee.org/abstract/document/5629375/"],
+            ["Adaptive Nonlinear System Identification with Echo State Networks", "http://papers.nips.cc/paper/2318-adaptive-nonlinear-system-identification-with-echo-state-networks.pdf"],
+            ["Long Short-Term Memory in Echo State Networks: Details of a Simulation Study", "https://opus.jacobs-university.de/frontdoor/index/index/docId/638"],
+            ["Harnessing Nonlinearity: Predicting Chaotic Systems and Saving Energy in Wireless Communication", "http://science.sciencemag.org/content/304/5667/78"]
         ]
     },
     {
-        "ID": "MTRNN",
-        "info": "A multiple timescale RNN adds direct connections from variables in the distant past to variables in the present, in order to transfer information more efficiently.",
+        "ID": "ESN with leaky units",
+        "info": "An ESN with leaky units appends an ESN by leaky integration units.",
         "links": [
-            "http://papers.nips.cc/paper/522-induction-of-multiscale-temporal-structure.pdf",
-            "http://ieeexplore.ieee.org/abstract/document/6722152/",
-            "https://link.springer.com/chapter/10.1007/978-3-319-11179-7_25",
-            "https://link.springer.com/chapter/10.1007/978-3-319-09903-3_8"
+            ["A Novel Model of Leaky Integrator Echo State Network for Time-Series Prediction", "https://www.sciencedirect.com/science/article/pii/S0925231215001782"],
+            ["Optimization and Applications of Echo State Networks with Leaky-Integrator Neurons", "https://www.sciencedirect.com/science/article/pii/S089360800700041X"]
+        ]
+    },
+    {
+        "ID": "time skip connections",
+        "info": "An RNN with time skip connections adds direct connections from variables in the distant past to variables in the present, in order to transfer information more efficiently.",
+        "links": [
+            ["Interactive Language Understanding with Multiple Timescale Recurrent Neural Networks", "https://link.springer.com/chapter/10.1007/978-3-319-11179-7_25"],
+            ["Developmental Human-Robot Imitation Learning of Drawing with a Neuro Dynamical System", "http://ieeexplore.ieee.org/abstract/document/6722152/"],
+            ["Learning Long-Term Dependencies is Not as Difficult With NARX Recurrent Neural Networks", "https://drum.lib.umd.edu/handle/1903/745"],
+            ["Analysing the Multiple Timescale Recurrent Neural Network for Embodied Language Understanding", "https://link.springer.com/chapter/10.1007/978-3-319-09903-3_8"]
+        ]
+    },
+    {
+        "ID": "CW-RNN",
+        "info": "A Clockwork RNN partitions the hidden layers in an RNN into separate modules, each of which processes inputs at its own temporal granularity and computes only at its clock rate.",
+        "links": [
+            ["A Clockwork RNN", "https://arxiv.org/pdf/1402.3511.pdf"],
+            ["Spatial Clockwork Recurrent Neural Network for Muscle Perimysium Segmentation", "https://link.springer.com/chapter/10.1007/978-3-319-46723-8_22"]
+        ]
+    },
+    {
+        "ID": "leaky units",
+        "info": "A leaky unit appends a self-connection to a hidden unit. A parameter alpha is used for calculating the moving average which memorizes both the past and the present.",
+        "links": [
+            ["Advances in Optimizing Recurrent Networks", "http://ieeexplore.ieee.org/abstract/document/6639349/"],
+            ["Induction of Multiscale Temporal Structure", "http://papers.nips.cc/paper/522-induction-of-multiscale-temporal-structure.pdf"],
+            ["Hierarchical Recurrent Neural Networks for Long-Term Dependencies", "http://papers.nips.cc/paper/1102-hierarchical-recurrent-neural-networks-for-long-term-dependencies.pdf"]
         ]
     },
     {
         "ID": "LSTM",
         "info": "A long short-team memory is one of the gated RNNs which allow the network to forget the old state besides accumulation infomation. The self-loop RNN in an LSTM is conditioned on the context by a group of layers.",
         "links": [
-            "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735",
-            "http://papers.nips.cc/paper/3449-offline-handwriting-recognition-with-multidimensional-recurrent-neural-networks",
-            "http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural",
-            "http://ieeexplore.ieee.org/abstract/document/6638947/",
-            "https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/2A_101.pdf"
-        ]
-    },
-    {
-        "ID": "A deep bidirectional LSTM is built up by combine a deep bidirectional RNN and a LSTM.",
-        "info": "",
-        "links": [
-            "https://arxiv.org/abs/1303.5778",
-            "http://ieeexplore.ieee.org/abstract/document/6707742/",
-            "http://www.isca-speech.org/archive/interspeech_2014/i14_0338.html",
-            "http://proceedings.mlr.press/v32/graves14.pdf"
+            ["Long Short-Term Memory", "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735"],
+            ["LSTM: A Search Space Odyssey", "http://ieeexplore.ieee.org/abstract/document/7508408/"],
+            ["Show and Tell: A Neural Image Caption Generator", "https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/2A_101.pdf"],
+            ["Speech recognition with deep recurrent neural networks", "http://ieeexplore.ieee.org/abstract/document/6638947/"],
+            ["Offline Handwriting Recognition with Multidimensional Recurrent Neural Networks", "http://papers.nips.cc/paper/3449-offline-handwriting-recognition-with-multidimensional-recurrent-neural-networks"]
         ]
     },
     {
         "ID": "GRU",
         "info": "A gated recurrent unit is one of the gated RNNs, including an update gate and a reset gate.",
         "links": [
-            "https://arxiv.org/abs/1412.3555",
-            "http://proceedings.mlr.press/v37/jozefowicz15.pdf?utm_campaign=Revue%20newsletter&utm_medium=Newsletter&utm_source=revue",
-            "http://www.aclweb.org/anthology/D15-1167",
-            "https://www.cv-foundation.org/openaccess/content_cvpr_2016/app/S19-04.pdf"
+            ["An Empirical Exploration of Recurrent Network Architectures", "http://proceedings.mlr.press/v37/jozefowicz15.pdf"],
+            ["Gate-Variants of Gated Recurrent Unit (GRU) Neural Networks", "http://ieeexplore.ieee.org/iel7/8039346/8052834/08053243.pdf"],
+            ["Video Paragraph Captioning Using Hierarchical Recurrent Neural Networks", "https://www.cv-foundation.org/openaccess/content_cvpr_2016/app/S19-04.pdf"],
+            ["Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling", "https://arxiv.org/abs/1412.3555"],
+            ["Document Modeling with Gated Recurrent Neural Network for Sentiment Classification", "http://www.aclweb.org/anthology/D15-1167"]
         ]
     },
     {
-        "ID": "seq2seq",
-        "info": "A sequence to sequence model is mainly used for translation. The model reads the input sentence into a vector C and decompose C into translation. It is also known as encoder-decoder model.",
+        "ID": "recursive",
+        "info": "A recursive neural network is a generalization of recurrent network with a tree-structured computational graph. The depth is reduced from n to log(n), which may help deal with long-term dependencies.",
         "links": [
-            "https://arxiv.org/abs/1409.3215",
-            "https://arxiv.org/abs/1511.06114",
-            "https://arxiv.org/abs/1406.1078",
-            "https://arxiv.org/abs/1409.1259"
+            ["Recursive Distributed Representations", "http://129.64.46.116/papers/raam.pdf"],
+            ["A General Framework for Adaptive Processing of Data Structures", "http://ieeexplore.ieee.org/abstract/document/712151/"],
+            ["Parsing Natural Scenes and Natural Language with Recursive Neural Networks", "https://nlp.stanford.edu/pubs/SocherLinNgManning_ICML2011.pdf"],
+            ["Semi-supervised Recursive Autoencoders for Predicting Sentiment Distributions", "https://dl.acm.org/citation.cfm?id=2145450"],
+            ["Recursive Deep Models for Semantic Compositionality Over a Sentiment Treebank", "http://www.aclweb.org/anthology/D13-1170"]
         ]
     },
     {
-        "ID": "attention RNN",
-        "info": "An attention model is based on the seq2seq model, in which multiple vector Cs are used.",
+        "ID": "tree-LSTM",
+        "info": "A tree LSTM is a generalization of LSTM with a tree-structured network topology.",
         "links": [
-            "https://arxiv.org/abs/1409.0473",
-            "https://arxiv.org/abs/1508.04025",
-            "http://ieeexplore.ieee.org/abstract/document/7472618/"
+            ["Enhanced LSTM for Natural Language Inference", "https://arxiv.org/abs/1609.06038"],
+            ["Improved Semantic Representations From Tree-Structured Long Short-Term Memory Networks", "https://arxiv.org/abs/1503.00075"]
         ]
     },
     {
-        "ID": "conv seq2seq",
-        "info": "",
+        "ID": "DGLSTM",
+        "info": "A depth-gated LSTM appends depth gates to adjacent layers in LSTM. It performs better in machine translation and language modeling.",
         "links": [
-            "https://arxiv.org/abs/1705.03122"
+            ["Depth-Gated Recurrent Neural Networks", "https://pdfs.semanticscholar.org/d3e9/9f2f98ac361aded0b9b9d90b6f9fe8bbbc70.pdf"],
+            ["Long Short-Term Memory-Networks for Machine Reading", "https://arxiv.org/abs/1601.06733"],
+            ["Highway Long Short-Term Memory RNNS for Distant Speech Recognition", "http://ieeexplore.ieee.org/abstract/document/7472780/"]
+        ]
+    },
+    {
+        "ID": "BRNN",
+        "info": "A bidirectional RNN combines an RNN that moves forward with another RNN that moves backward.  It is used for making predictions that depend on the whole input sequence.",
+        "links": [
+            ["Bidirectional recurrent neural networks", "http://ieeexplore.ieee.org/abstract/document/650093/"],
+            ["Neural Machine Translation by Jointly Learning to Align and Translate", "https://arxiv.org/abs/1409.0473"],
+            ["A Novel Connectionist System for Unconstrained Handwriting Recognition", "http://ieeexplore.ieee.org/abstract/document/4531750/"],
+            ["Hierarchical Recurrent Neural Network for Skeleton Based Action Recognition", "https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Du_Hierarchical_Recurrent_Neural_2015_CVPR_paper.pdf"],
+            ["Exploiting the Past and the Future in Protein Secondary Structure Prediction", "https://academic.oup.com/bioinformatics/article/15/11/937/249908"]
+        ]
+    },
+    {
+        "ID": "stacked RNN",
+        "info": "A stacked RNN stacks more recurrent hidden layers in an RNN to make it deeper. It is also known as deep RNN.",
+        "links": [
+            ["Speech Recognition with Deep Recurrent Neural Networks", "http://ieeexplore.ieee.org/abstract/document/6638947/"],
+            ["Learning Complex, Extended Sequences Using the Principle of History Compression", "http://ieeexplore.ieee.org/document/6795261/"],
+            ["EESEN: End-to-end Speech Recognition Using Deep RNN Models and WFST-based Decoding", "http://ieeexplore.ieee.org/abstract/document/7404790/"],
+            ["Singing-voice Separation from Monaural Recordings Using Deep Recurrent Neural Networks", "http://cal.cs.illinois.edu/papers/huang-ismir2014.pdf"]
+        ]
+    },
+    {
+        "ID": "DB-LSTM",
+        "info": "A deep bidirectional LSTM combines a deep bidirectional RNN and a LSTM.",
+        "links": [
+            ["Speech Recognition with Deep Recurrent Neural Networks", "https://arxiv.org/abs/1303.5778"],
+            ["Hybrid Speech Recognition with Deep Bidirectional LSTM", "http://ieeexplore.ieee.org/abstract/document/6707742/"],
+            ["Towards End-to-End Speech Recognition with Recurrent Neural Networks", "http://proceedings.mlr.press/v32/graves14.pdf"],
+            ["Long Short-Term Memory Recurrent Neural Network Architectures for Large Scale Acoustic Modeling", "http://www.isca-speech.org/archive/interspeech_2014/i14_0338.html"]
+        ]
+    },
+    {
+        "ID": "DT-RNN",
+        "info": "A deep transition RNN appends an MLP with one or more layers in hidden-to-hidden transition to an RNN.",
+        "links": [
+            ["How to Construct Deep Recurrent Neural Networks", "https://arxiv.org/abs/1312.6026"]
+        ]
+    },
+    {
+        "ID": "DT(S)-RNN",
+        "info": "A deep transition RNN with shortcut appends input-to-hidden shortcut connections to a DT-RNN.",
+        "links": [
+            ["How to Construct Deep Recurrent Neural Networks", "https://arxiv.org/abs/1312.6026"]
         ]
     }
 ]
