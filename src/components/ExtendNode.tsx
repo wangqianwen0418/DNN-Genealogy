@@ -95,8 +95,8 @@ export default class ExtendNode extends React.Component<Props, State>{
         // return <Transition in={zoomed} timeout={duration}>
         //     {(status: any) => {
         return <div className="ExtendNode Node"
-            onMouseEnter={() => this.setState({ showpin: true })}
-            onMouseLeave={() => this.setState({ showpin: false })}
+            onMouseOver={() => this.setState({ showpin: true })}
+            onMouseOut={() => this.setState({ showpin: false })}
             // onMouseOut={()=>this.setState({showpin:false})}
             style={{
                 position: "absolute",
@@ -113,7 +113,9 @@ export default class ExtendNode extends React.Component<Props, State>{
 
             }}
         >
-            <Tabs defaultActiveKey={`${node.variants.length}`}
+            <Tabs 
+            defaultActiveKey={`0`}
+            // defaultActiveKey={`${node.variants.length}`}
             >
                 <TabPane tab={node.label} key="0">
                     <img
@@ -146,14 +148,11 @@ export default class ExtendNode extends React.Component<Props, State>{
                 style={{
                     position: "relative",
                     float: "right",
-                    top: "-15px",
+                    top: "-20px",
                     opacity: pin || showpin ? 1 : 0,
                     color: "gray"
                 }
                 }>
-                <Dropdown overlay={menu} className="infoButton">
-                    <a className="infoTrigger"> ...</a>
-                </Dropdown>
                 <Icon className="pin" type="pushpin"
                     style={{
                         opacity: pin || showpin ? 1 : 0,
@@ -168,6 +167,9 @@ export default class ExtendNode extends React.Component<Props, State>{
 
                     }} />
                 <Icon type="arrows-alt" />
+                <Dropdown overlay={menu} className="infoButton">
+                    <a className="infoTrigger"> ...</a>
+                </Dropdown>
             </div>
 
         </div>

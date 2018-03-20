@@ -85,7 +85,7 @@ export interface State {
     legend: LegendProps['items']
 }
 
-const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 32,
+const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -590,7 +590,7 @@ export default class Evolution extends React.Component<Props, State>{
         let { scale, transX, transY } = this.state
         console.info("wheel", evt)
         this.updateEdge = !this.updateEdge
-        if (evt.deltaY > 0) {
+        if (evt.deltaY > 0) { 
             scale = scale * 1.1 
             transX =  transX * 1.1
             transY = transY*1.1
