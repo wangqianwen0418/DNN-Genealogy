@@ -483,7 +483,7 @@ export default class Evolution extends React.Component<Props, State>{
 
             }
             return vias
-        }
+        }   
         vias = getCurve(points)
 
         let pathData = `${start}  ${vias.join(' ')}`,
@@ -503,7 +503,7 @@ export default class Evolution extends React.Component<Props, State>{
                 stroke={clickLegend?"gray":getColor(key)}
                 fill='none'
                 transform={`translate(${i*4}, ${i*4})`}
-                strokeWidth={(hoverLegend||hovered)&&!clickLegend ? 4 : 2.5}
+                strokeWidth={(hoverLegend||hovered)&&!clickLegend ? 6 : 3}
                 opacity={hoverLegend? 1:(clickLegend?0.4: 0.7)}
             />
             })}

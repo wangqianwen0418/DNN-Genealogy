@@ -146,7 +146,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 style={{
                     position: "relative",
                     float: "right",
-                    top: "-10px",
+                    top: "-15px",
                     opacity: pin || showpin ? 1 : 0,
                     color: pin ? "red" : "gray"
                 }
