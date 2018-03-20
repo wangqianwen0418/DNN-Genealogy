@@ -3,6 +3,7 @@ import "./RadialBoxplot.css"
 import { getColor } from "../helper"
 import * as d3 from "d3"
 import { NN } from "../types"
+import { nonsequenceBenchmarks, sequenceBenchmarks } from "../constants"
 
 export interface Dot {
     [key: string]: any
@@ -23,14 +24,11 @@ export interface State {
     selected: string[],
     // nns: Dot[],
     nns: Network[],
-    attr_names: string[],
+    attr_names: any[],
 }
 
 let simulation = d3.forceSimulation()
     // .force("charge", d3.forceManyBody().strength(2))
-
-const sequenceDatasets = ['abc'],
-      nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top 5']
 
 export default class RadialBoxplot extends React.Component<Props, State> {
     public nodes: any; r : number; node_dist = 10
@@ -41,7 +39,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         this.state = {
             selected: [],
             nns: [],
-            attr_names: nonsequenceDatasets
+            attr_names: nonsequenceBenchmarks
         }
         this.selectNode = this.selectNode.bind(this)
         this.deleteNN = this.deleteNN.bind(this)
@@ -130,9 +128,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     updateData(nn: NN) {
         let database = this.props.database, { nns, attr_names } = this.state
         if (database === 'nonsequence') {
-            attr_names = nonsequenceDatasets
+            attr_names = nonsequenceBenchmarks
         } else {
-            attr_names = sequenceDatasets
+            attr_names = sequenceBenchmarks
         }
         for (let existedNN of nns) {
             if (existedNN.network === nn.ID) return
@@ -141,7 +139,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         for (let name of nn.names) {
             let tmpAttr: number[] = []
             for (let index in attr_names) {
-                tmpAttr[index] = name[attr_names[index]] ? name[attr_names[index]] : 0
+                tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 0
             }
             newdots.push({
                 r: name.params,
@@ -169,7 +167,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             bar_w: number = 10
         this.width = (this.ref?this.ref.clientWidth:50)
         this.height = (this.ref?this.ref.clientHeight:30)
-        this.r = this.height / 2 - 4 * margin 
+        this.r = this.height / 2 - 6 * margin 
         let selected_nns = selected.map((name: string) => nns.filter((nn) => {
             for (let d of nn.dot)
                 if (d.name == name) return true
@@ -183,9 +181,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         
         let g = svg.append('g')
             .attr('class', 'compareView')
-            .attr('transform', 'translate(' + String(this.r + 6 * margin) + ',' + String(this.r + 4 * margin) +')')
+            .attr('transform', 'translate(' + String(this.r + 6 * margin) + ',' + String(this.r + 6 * margin) +')')
         
-        // Axis and Circle
+        // Axis(include quartiles) and Circle
         g.append('circle')
             .attr('r', this.r)
             .attr('fill', 'none')
@@ -196,34 +194,69 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .data(attr_names)
             .enter().append('g')
         axis.append('path')
-            .attr('key', (attr: string) => 'axis_' + attr)
-            .attr('id', (attr: string) => 'axis_' + attr)
-            .attr('d', (attr: string, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin))
+            .attr('key', (attr: any) => 'axis_' + attr.dataset)
+            .attr('id', (attr: any) => 'axis_' + attr.dataset)
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin))
             .attr('fill', 'none')
             .attr('stroke-width', 1)
             .attr('stroke', 'grey')
             .attr('stroke-dasharray', '5, 5')
         axis.append('path')
-            .attr('key', (attr: string) => 'axis_' + attr + '_start')
-            .attr('d', (attr: string, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * i + 0.5))
+            .attr('key', (attr: any) => 'axis_' + attr.dataset + '_start')
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * i + 0.5))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
             .attr('stroke', 'grey')
         axis.append('path')
-            .attr('key', (attr: string) => 'axis_' + attr + '_end')
-            .attr('d', (attr: string, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin - 1.5, bar_a * (i + 1) - margin))
+            .attr('key', (attr: any) => 'axis_' + attr.dataset + '_end')
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin - 1.5, bar_a * (i + 1) - margin))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
             .attr('stroke', 'grey')
+        axis.append('path')
+            .attr('key', (attr: any) => 'axis_' + attr.dataset + '_lowerQuartile')
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
+                 bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin) + 0.5))
+            .attr('fill', 'none')
+            .attr('stroke-width', bar_w)
+            .attr('stroke', 'grey')
+        axis.append('path')
+            .attr('key', (attr: any) => 'axis_' + attr.dataset + '_median')
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
+                 bar_a * i + (attr.median- attr.minimum) / attr.range * (bar_a - margin) - 0.25, bar_a * i + (attr.median- attr.minimum) / attr.range * (bar_a - margin) + 0.25))
+            .attr('fill', 'none')
+            .attr('stroke-width', bar_w)
+            .attr('stroke', 'grey')
+        axis.append('path')
+            .attr('key', (attr: any) => 'axis_' + attr.dataset + '_higherQuartile')
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
+                 bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin) - 0.5, bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
+            .attr('fill', 'none')
+            .attr('stroke-width', bar_w)
+            .attr('stroke', 'grey')
+        axis.append('path')
+            .attr('key', (attr: any) => 'axis_' + attr.dataset + '_upperbox')
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w,
+                 bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
+            .attr('fill', 'none')
+            .attr('stroke-width', 1)
+            .attr('stroke', 'grey')
+        axis.append('path')
+            .attr('key', (attr: any) => 'axis_' + attr.dataset + '_lowerbox')
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin,
+                 bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
+            .attr('fill', 'none')
+            .attr('stroke-width', 1)
+            .attr('stroke', 'grey')
         axis.append('text')
             .attr('text-anchor', 'middle')
-            .attr('dy', -3)
+            .attr('dy', 12)
             .attr('font-size', '7px')
             .attr('opacity', 0.5)
             .insert('textPath')
-            .attr('xlink:href', (attr: string) => '#axis_' + attr)
+            .attr('xlink:href', (attr: any) => '#axis_' + attr.dataset)
             .attr('startOffset', '50%')
-            .text((attr: string) => attr)
+            .text((attr: any) => attr.dataset)
 
         // Performances
         if (selected_nns.length > 0) {
@@ -232,7 +265,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     if (attr)
                         return {
                             name: d.name,
-                            angle: bar_a * attr_i + (bar_a - margin) * attr / 100
+                            angle: bar_a * attr_i + (bar_a - margin) * (attr - nonsequenceBenchmarks[attr_i].minimum) / nonsequenceBenchmarks[attr_i].range
                         }
                     else
                         return null
@@ -279,7 +312,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
         simulation = simulation
             .nodes(NNnodes)
-            .force('collide',d3.forceCollide().strength(.5).radius((d:Dot)=>d.r).iterations(3))
+            .force('collide',d3.forceCollide().strength(.5).radius((d:Dot)=>Math.sqrt(d.r)).iterations(10))
             // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
             // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)
