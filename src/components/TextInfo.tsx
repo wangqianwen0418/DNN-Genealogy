@@ -54,7 +54,7 @@ export default class TextInfo extends React.Component<Props, State>{
         if (p !== -1) {
             let cur: NodeTextInfo = this.state.textinfo[p]
             let links = this.state.textinfo[p].links.map(
-                (d, i) => <div key={i}><a href={d}>{d}</a></div>
+                (d, i) => <div key={i}><a href={d[1]}>{d[0]}</a></div>
             )
             return (
                 <Card
