@@ -27,7 +27,7 @@ export interface State {
 }
 
 let simulation = d3.forceSimulation()
-    .force("charge", d3.forceManyBody().strength(-30))
+    // .force("charge", d3.forceManyBody().strength(2))
 
 const sequenceDatasets = ['abc'],
       nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top 5']
@@ -44,6 +44,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             attr_names: nonsequenceDatasets
         }
         this.selectNode = this.selectNode.bind(this)
+        this.deleteNN = this.deleteNN.bind(this)
     }
 
     arc(x: number = 0, y: number = 0, r: number, startAngle: number, endAngle: number) {
@@ -69,27 +70,25 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     getForceX(attr: number[]) {
         let len = attr.length
-        let x: number = attr.map((d: number, idx: number) => d * Math.cos(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
+        let x: number = attr.map((d: number, idx: number) => (100-d) * Math.cos(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
         return x
     }
     getForceY(attr: number[]) {
         let len = attr.length
-        let y: number = attr.map((d: number, idx: number) => d * Math.sin(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
+        let y: number = attr.map((d: number, idx: number) => (100-d) * Math.sin(Math.PI / len * idx)).reduce((a, b) => a + b, 0)
         return y
     }
 
-    polygon(d: Dot, num: number) {
-        var i = 0, edges = num + 2, radius: number, angle = (360 / edges) * Math.PI / 180
+    polygon(r: number, edges: number) {
+        var i = 0, angle = (360 / edges) * Math.PI / 180
         var points = ''
-        if (Math.sqrt(d.r) < 4) {
-            radius = 4
-        } else if (Math.sqrt(d.r) > 10) {
-            radius = 10
-        } else {
-            radius = Math.sqrt(d.r)
+        if (r < 4) {
+            r = 4
+        } else if (r > 10) {
+            r = 10
         }
         while (i < edges) {
-           points += Math.cos(angle * i) * radius + ',' + Math.sin(angle * i) * radius + ' '
+           points += Math.cos(angle * i) * r + ',' + Math.sin(angle * i) * r + ' '
            i += 1
         }
         return points
@@ -104,6 +103,17 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             selected.splice(name_idx, 1)
         }
         this.setState({ selected })
+    }
+
+    deleteNN(nn: Network) {
+        let { selected, nns } = this.state
+        let nn_idx = nns.indexOf(nn)
+        for (let d of nn.dot) {
+            var name_idx = selected.indexOf(d.name)
+            selected.splice(name_idx, 1)
+        }
+        nns.splice(nn_idx, 1)
+        this.setState({ selected, nns })
     }
 
     componentWillReceiveProps(nextProps: Props) {
@@ -136,7 +146,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             newdots.push({
                 r: name.params,
                 name: name.name,
-                attr: tmpAttr
+                attr: tmpAttr,
+                parent: nn.ID
             })
         }
         nns = nns.concat({
@@ -146,124 +157,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
         this.setState({ attr_names, nns })
         
-    }
-
-    drawNodes() {
-        console.log('legend')
-        d3.select(".CompareView").select("#legend").remove()
-        var g = d3.select(".CompareView")
-        console.log(g)
-        var labels = g.append("g")
-            .attr("id", "legend")
-            .attr("font-family", "sans-serif")
-            .attr("font-size", 10)
-            .attr("text-anchor", "end")
-            .selectAll("g")
-            .data(this.state.selected)
-            .enter().append("g")
-            .attr("transform", (d: any, i: number) => "translate(50," + i * 10 + ")")
-        labels.append("rect")
-            .attr("class", (d: any) => "label")
-            .attr("x", this.width - 9)
-            .attr("width", 9)
-            .attr("height", 9)
-            .attr("fill", (d: any) => String(getColor(d)))
-            .on("mousemove", (d: any) => {
-                d3.selectAll(".bar")
-                    .attr("opacity", (model: any) => {
-                        if (model.key === d)
-                            return 1
-                        else
-                            return 0.4
-                    })
-            })
-            .on("mouseout", () => {
-                d3.selectAll(".bar").attr("opacity", 1)
-            })
-        labels.append("text")
-            .attr("x", this.width - 14)
-            .attr("y", 6.5)
-            .attr("dy", "0.15em")
-            .text((d: any) => d)
-    }
-
-    drawPlot() {
-        let { nns, attr_names, selected } = this.state
-        if (nns.length === 0) return
-        let margin: number = 5,
-            bar_a: number = 360 / attr_names.length,
-            bar_w: number = 10
-        this.width = (this.ref?this.ref.clientWidth:50)
-        this.height = (this.ref?this.ref.clientHeight:30)
-        this.r = this.height / 2 - 4 * margin
-        let selected_nns = selected.map((name: string) =>nns.filter((nn) => nn.network == name)[0])
-
-        let bars: JSX.Element[][] = selected_nns
-            .map((data: Dot, idx: number) => {
-                return data.attr.map((attr: number, attr_i: number) => 
-                    attr ? <g>
-                            <path key={`point_${idx}_attr_${attr_i}`}
-                                d={
-                                    this.arc(0, 0,
-                                    this.r + margin + bar_w / 2,
-                                    bar_a * attr_i + (bar_a - margin) * attr / 100 - 0.5,
-                                    bar_a * attr_i + (bar_a - margin) * attr / 100 + 0.5)
-                                }
-                                fill='none'
-                                strokeWidth={bar_w}
-                                stroke={getColor(data.name)}></path>
-                            </g> : ""
-                )
-            })
-        let axis: JSX.Element[] = attr_names.map((attr: string, i: number) => {
-            return <g>
-                <path key={`axis_${attr}`} id={`axis_${attr}`}
-                    d={this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin)}
-                    fill='none'
-                    strokeWidth={1}
-                    stroke='grey'
-                    stroke-dasharray='5, 5'></path>
-                <path key={`axis_${attr}_start`}
-                    d={this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * i + 0.5)}
-                    fill='none'
-                    strokeWidth={bar_w}
-                    stroke='grey'></path>
-                <path key={`axis_${attr}_end`}
-                    d={this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin - 1.5, bar_a * (i + 1) - margin)}
-                    fill='none'
-                    strokeWidth={bar_w}
-                    stroke='grey'></path>
-                {/* <path key={`aixs_${i}_bg`}
-                    d={
-                        this.arc(0, 0,
-                        this.r + margin + bar_w / 2,
-                        bar_a * i,
-                        bar_a * (i + 1) - margin)
-                    }
-                    fill='none'
-                    strokeWidth={bar_w}
-                    opacity='0.2'
-                    stroke='grey'></path> */}
-                <text textAnchor="middle" dy='-3' fontSize='7px' opacity='0.5'>
-                    <textPath
-                        xlinkHref={`#axis_${attr}`}
-                        startOffset='50%'>
-                    {attr}
-                    </textPath>
-                </text>
-                
-            </g>
-        })
-
-        return <svg width='100%' height='100%'>
-            <g className='compareView'
-            transform={`translate(${this.r + 6 * margin}, ${this.r + 4 * margin})`}>
-            <circle r={this.r} fill='none' stroke='grey'></circle>
-            {axis}               
-            {bars}
-            </g>
-        </svg>
-
     }
 
     draw() {
@@ -282,6 +175,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 if (d.name == name) return true
             return false
         })[0].dot.filter((d) => d.name == name)[0])
+        let networks = nns.map((nn: Network) => nn.network)
 
         let svg = d3.select('.RadialBoxplot').insert('svg')
             .attr('width', '100%')
@@ -354,11 +248,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 .selectAll('g')
                 .data(perf)
                 .enter().append('g')
-                // .attr('transform', (d: any) => 'translate('  + (this.r + bar_w) * Math.cos(d.angle) + ',' + (this.r + bar_w) * Math.sin(d.angle) + ')')
-            // tags.append('circle')
-            //     .attr('r', 3)
-            //     .attr('fill', 'none')
-            //     .attr('stroke', (d: any) => getColor(d.name))
             tags.append('path')
                 .attr('d', (d: any) => this.arc(0, 0, this.r + margin + bar_w / 2, d.angle - 0.5, d.angle + 0.5))
                 .attr('fill', 'none')
@@ -379,30 +268,35 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('class', 'dot')
             .data(NNnodes)
             .enter().append('g')
-            .attr('transform', (d, i) => 'translate(' + (this.getForceX(d.attr) || 0) + ',' + (this.getForceY(d.attr) || 0) + ')')
             .append('polygon')
+            .attr("transform", d=>`translate(${d.x}, ${d.y})`)
             .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
             .attr('stroke-width', 1)
-            .attr('points', (d :Dot, idx: number) => this.polygon(d, idx))
+            .attr('points', (d :Dot) => this.polygon(Math.sqrt(d.r), networks.indexOf(d.parent) + 3))
             .on('click', function(d) {
                 that.selectNode(d)
             })
 
-        // simulation
-        //     .nodes(nns)
-        //     .force('collide', d3.forceCollide().strength(.5).radius(this.node_dist).iterations(3))
-        //     .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
-        //     .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
-        //     .on('tick', ticked)
-        // let nodes = this.nodes
-        // function ticked() {
-        //     nodes.attr('cx', (d: any) => d.x || 0)
-        //         .attr('cy', (d: any) => d.y || 0)
-        // }
+        simulation = simulation
+            .nodes(NNnodes)
+            .force('collide',d3.forceCollide().strength(.5).radius((d:Dot)=>d.r).iterations(3))
+            // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
+            // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
+            .on('tick', ticked)
+            
+        let nodes = this.nodes
+        function ticked() {
+            nodes.attr("transform", (d:Dot)=>`translate(${d.x}, ${d.y})`)
+        }
+        simulation.alpha(1).restart()
+        // for (let i = 0; i < 300; ++i) {
+        //     console.info("tick")
+        //     simulation.tick()
+        // };
 
         // Legend
-        var legend = svg.append("g")
-            .attr("id", "legend")
+        var legend_nn = svg.append("g")
+            .attr("id", "legend_nn")
             .attr("font-family", "sans-serif")
             .attr("font-size", 10)
             .attr("text-anchor", "end")
@@ -410,20 +304,45 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .data(this.state.nns)
             .enter().append("g")
             .attr("transform", (d: Network, i: number) => "translate(-20," + (i * 15 + 20) + ")")
-        legend.append("rect")
-            .attr("class", (d: Network) => "label")
-            .attr("x", this.width - 9)
-            .attr("width", 9)
-            .attr("height", 9)
-            .attr("fill", (d: Network, idx: number) => String(getColor(d.network, idx)))
-            .on("mouseout", () => {
-                d3.selectAll(".bar").attr("opacity", 1)
-            })
-        legend.append("text")
+        legend_nn.append('g')
+            .attr("transform", (d: Network, i: number) => "translate(" + (this.width - 5) + ", 5)")
+            .append('polygon')
+            .attr('fill', '#666')
+            .attr('stroke-width', 1)
+            .attr('points', (d :Network, idx: number) => this.polygon(5, idx + 3))
+        legend_nn.append("text")
             .attr("x", this.width - 14)
             .attr("y", 6.5)
             .attr("dy", "0.15em")
             .text((d: Network) => d.network)
+        legend_nn.append("text")
+            .attr("x", this.width + 12)
+            .attr("y", 6.5)
+            .attr("dy", "0.15em")
+            .attr('class', 'remove')
+            .text("×")
+            .on('click', (d: Network) => this.deleteNN(d))
+        
+        var legend_name = svg.append("g")
+            .attr("id", "legend_name")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 10)
+            .attr("text-anchor", "end")
+            .selectAll("g")
+            .data(selected_nns)
+            .enter().append("g")
+            .attr("transform", (d: Dot, i: number) => "translate(-20," + (this.height - i * 15 - 20) + ")")
+        legend_name.append("rect")
+             .attr("x", this.width - 9)
+             .attr("width", 9)
+             .attr("height", 9)
+             .attr("fill", (d: Dot, idx: number) => String(getColor(d.name)))
+        legend_name.append("text")
+             .attr("x", this.width - 14)
+             .attr("y", 6.5)
+             .attr("dy", "0.15em")
+             .text((d: Dot) => d.name)
+
 
     }
 

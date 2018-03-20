@@ -685,16 +685,16 @@
     ],
     "parents": [
       {
-        "ID": "alexNet",
-        "link_category": "a=>c",
-        "link_info_l": "same performance with 50x less parameters",
-        "link_info_s": "50x less parameters"
-      },
-      {
         "ID": "inception",
         "link_category": "c=>c",
         "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
         "link_info_s": "split-transfer-merge"
+      },
+      {
+        "ID": "alexNet",
+        "link_category": "a=>c",
+        "link_info_l": "same performance with 50x less parameters",
+        "link_info_s": "50x less parameters"
       }
     ],
     "training": [

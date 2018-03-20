@@ -102,13 +102,13 @@ export default class NNNode extends React.Component<Props, {}>{
                             fill={zoomed ? "none" : getColor(key)}
                         />
                         })}
-                        <rect
+                        {/* <rect
                         className="perIcon"
                         x={node.width * scale * 0.2}
                         y={node.height * scale * 0.8}
                         width={node.width * scale * 0.8} height={node.height * scale * 0.2}
                         fill={zoomed ? "none" : getColor('unkonw')}
-                    />
+                    /> */}
                     </g>}
                                    
                 </g>

@@ -113,7 +113,7 @@ export default class ExtendNode extends React.Component<Props, State>{
 
             }}
         >
-            <Tabs defaultActiveKey="0"
+            <Tabs defaultActiveKey={`${node.variants.length}`}
             >
                 <TabPane tab={node.label} key="0">
                     <img
@@ -135,7 +135,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         <img
                             className="abstract Node"
                             src={`../../images/${d.ID}.png`}
-                            style={{ border: `1px solid ${selected ? "red" : "none"}`, }}
+                            // style={{ border: `1px solid ${selected ? "red" : "none"}`, }}
                             //   height={node.height}
                             width={node.width * scale}
                         />
@@ -146,9 +146,9 @@ export default class ExtendNode extends React.Component<Props, State>{
                 style={{
                     position: "relative",
                     float: "right",
-                    top: "-10px",
+                    top: "-15px",
                     opacity: pin || showpin ? 1 : 0,
-                    color: pin ? "red" : "gray"
+                    color: "gray"
                 }
                 }>
                 <Dropdown overlay={menu} className="infoButton">

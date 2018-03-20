@@ -89,7 +89,7 @@ const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 32,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
-    labelFont = 10,
+    labelFont = 13,
     textMargin = 20,
     r_api = 1, r_dist = -0.1, r_diff = 0 //factors for DOI calculation
 
@@ -483,7 +483,7 @@ export default class Evolution extends React.Component<Props, State>{
 
             }
             return vias
-        }
+        }   
         vias = getCurve(points)
 
         let pathData = `${start}  ${vias.join(' ')}`,
@@ -503,7 +503,7 @@ export default class Evolution extends React.Component<Props, State>{
                 stroke={clickLegend?"gray":getColor(key)}
                 fill='none'
                 transform={`translate(${i*4}, ${i*4})`}
-                strokeWidth={(hoverLegend||hovered)&&!clickLegend ? 4 : 2.5}
+                strokeWidth={(hoverLegend||hovered)&&!clickLegend ? 6 : 3}
                 opacity={hoverLegend? 1:(clickLegend?0.4: 0.7)}
             />
             })}
@@ -587,15 +587,20 @@ export default class Evolution extends React.Component<Props, State>{
         </g>)
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
-        let { scale } = this.state
+        let { scale, transX, transY } = this.state
+        console.info("wheel", evt)
         this.updateEdge = !this.updateEdge
         if (evt.deltaY > 0) {
-            this.setState({ scale: scale * 1.1 });
+            scale = scale * 1.1 
+            transX =  transX * 1.1
+            transY = transY*1.1
+            
         } else if (evt.deltaY < 0) {
-            this.setState({
-                scale: (scale * 0.9)
-            });
+            scale = scale * .9 
+            transX =  transX * .9
+            transY = transY* .9
         }
+        this.setState({ scale, transX, transY });
     }
     componentDidMount() {
         this.getData()
@@ -639,7 +644,7 @@ export default class Evolution extends React.Component<Props, State>{
     selectNode(selectedNode: Node | undefined) {
         let { datum } = this.state
         let { onSelectNN } = this.props
-        this.updateEdge = !this.updateEdge
+        // this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
         //     if (nodeID == d.ID) {
         //         if (!d._width) {
@@ -683,6 +688,7 @@ export default class Evolution extends React.Component<Props, State>{
         document.addEventListener("mousemove", this.pan)
         this.x0 = e.clientX
         this.y0 = e.clientY
+        this.updateEdge = !this.updateEdge
     }
     pan(e: any) {
         let { transX, transY } = this.state
@@ -696,10 +702,10 @@ export default class Evolution extends React.Component<Props, State>{
     mouseUp(e: React.MouseEvent<any>) {
         e.stopPropagation()
         e.preventDefault()
-        if (this.dragFlag) {
-            this.updateEdge = !this.updateEdge
-            this.dragFlag = false
-        }
+        // if (this.dragFlag) {
+            
+        //     this.dragFlag = false
+        // }
 
         document.removeEventListener("mousemove", this.pan)
     }
