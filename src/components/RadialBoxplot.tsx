@@ -1,4 +1,4 @@
-    import * as React from "react"
+import * as React from "react"
 import "./RadialBoxplot.css"
 import { getColor } from "../helper"
 import * as d3 from "d3"
@@ -124,8 +124,24 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     }
 
     componentWillReceiveProps(nextProps: Props) {
+        /*
         if (nextProps.op !== 1 || this.props === nextProps)
             return
+        */
+
+        if (this.props === nextProps || nextProps.nn.ID === '') {
+            return
+        }
+        
+        // do not update if rnn (hardcode)
+        let ID = nextProps.nn.ID
+        console.log('ID =', ID)
+        if (['SRN', 'attention', 'seq2seq', 'conv seq2seq', 'ESN', 'ESN with leaky units',
+             'time skip connections','CW-RNN', 'leaky units', 'LSTM', 'GRU', 'recursive',
+             'tree-LSTM', 'DGLSTM', 'BRNN', 'stacked RNN', 'DB-LSTM', 'DT-RNN', 'DT(S)-RNN'].indexOf(ID) >= 0) {
+            return
+        }
+        console.log(nextProps.nn)
         this.updateData(nextProps.nn)
     }
 

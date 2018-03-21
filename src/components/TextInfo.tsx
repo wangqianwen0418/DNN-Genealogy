@@ -29,11 +29,14 @@ export default class TextInfo extends React.Component<Props, State>{
     }
 
     shouldComponentUpdate(nextProps: Props, nextState: State) {
-        if (nextProps.op === 2) {
+        /*if (nextProps.op === 2) {
             return true
         } else {
             return false
-        }
+        }*/
+
+        // always update
+        return true;
     }
 
     componentWillMount() {
