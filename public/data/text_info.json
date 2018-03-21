@@ -178,5 +178,134 @@
         "links": [
             ["How to Construct Deep Recurrent Neural Networks", "https://arxiv.org/abs/1312.6026"]
         ]
+    },
+    {
+        "ID": "leNet",
+        "info": "LeNet-5 is a pioneering 7-level convolutional network proposed by LeCun et al in 1998. It recognises hand-written numbers in 32x32 pixel images. ",
+        "links": [
+            ["Gradient-based learning applied to document recognition", "http://ieeexplore.ieee.org/abstract/document/726791/"]
+        ]
+    },
+    {
+        "ID":"alexNet",
+        "info": "In 2012, AlexNet significantly outperformed all the prior competitors and won the ImageNet LSVRC challenge.  It has a similar structure as LeNet, but it changes the activation function from Sigmoid to Relu and uses dropout to deal with overfitting. Traning on two GPUs enables AlexNet to learn from a large amount of data.",
+        "links":[
+            ["ImageNet Classification with Deep Convolutional Neural Networks", "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks"]
+        ]
+    },
+    {
+        "ID":"VGG",
+        "info": "VGGNet consists of 16/19 convolutional layers and has a highly modularized architecture. It stacks small size convolutional layers to increase the depth. ",
+        "links":[
+            ["ImageNet Classification with Deep Convolutional Neural Networks", "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks"]
+        ]
+    },
+    {
+        "ID":"inception",
+        "info":"Inception is a multi-branch module proposed in GoogleNet. This architecture consists of 22 layers and significantly reduces the number of parameters from 60M (AlexNet) to 4M",
+        "links":[
+            ["Going deeper with convolutions", "https://arxiv.org/abs/1409.4842"],
+            ["Rethinking the Inception Architecture for Computer Vision", "https://arxiv.org/abs/1512.00567"],
+            ["Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning", "https://arxiv.org/abs/1602.07261"]
+        ]
+    },
+    {
+        "ID":"highwayNets",
+        "info": "HighwahNets is a new architecture designed to ease gradient-based training of very deep networks. The architecture allows information flow over layers and uses gating units to regulate the flow.",
+        "links":[
+            ["Highway Networks", "https://arxiv.org/pdf/1505.00387.pdf"],
+            ["Highway and Residual Networks learn Unrolled Iterative Estimation", "http://arxiv.org/abs/1612.07771"]
+        ]
+    },
+    {
+        "ID": "resNet",
+        "info": "ResNet proposes an architecture that adds skip connections over layers. ResNets are easier to optimize, and can gain accuracy from considerably increased depth.",
+        "links": [
+            ["Deep Residual Learning for Image Recognition", "https://arxiv.org/abs/1512.03385"],
+            ["Identity Mappings in Deep Residual Networks", "http://arxiv.org/abs/1603.05027"],
+            ["Identity Matters in Deep Learning", "http://arxiv.org/abs/1611.04231"],
+            ["Wider or Deeper: Revisiting the ResNet Model for Visual Recognition", "http://arxiv.org/abs/1611.10080"],
+            ["Residual Networks Behave Like Ensembles of Relatively Shallow Networks", "http://arxiv.org/abs/1605.06431"]
+        ]
+    },
+    {
+        "ID": "denseNet",
+        "info": "Based on the observation that CNNs are more accurate and efficient to train if they contain shorter connections between layers, DenseNet connects each layer to every other layer in a feed-forward fashion. DenseNets alleviate the vanishing-gradient problem, strengthen feature propagation, encourage feature reuse, and substantially reduce the number of parameters.",
+        "links": [
+            ["Densely Connected Convolutional Networks", "https://arxiv.org/abs/1608.06993"],
+            ["DenseNet for Dense Flow", "https://arxiv.org/abs/1707.06316"]
+        ]
+    },
+    {
+        "ID": "resNeXt",
+        "info":"ResNeXt is a simple, highly modularized network architecture that has only a few hyper-parameters. exposes a new dimension, calleda as cardinality (the size of the set of transformations). ",
+        "links":[
+            ["Aggregated Residual Transformations for Deep Neural Networks", "https://arxiv.org/abs/1611.05431"]
+        ]
+    },
+    {
+        "ID": "squeezeNet",
+        "info": "SqueezeNet is a smaller architecture that achieves AlexNet-level accuracy on ImageNet with 50x fewer parameters.",
+        "links":[
+            ["SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size", "https://arxiv.org/abs/1602.07360"]
+        ]
+    },
+    {
+        "ID": "diracNet",
+        "info": "DiracNets propose a simple weight parameterization, which allows to train very deep plain networks without explicit skip-connections. ",
+        "links": [
+            ["DiracNets: Training Very Deep Neural Networks Without Skip-Connections", "https://arxiv.org/abs/1706.00388"]
+        ]
+    },
+    {
+        "ID": "nasNet",
+        "info": "NasNet automatically learns the architcture design by searching an architecture design space",
+        "links": [
+            ["Learning Transferable Architectures for Scalable Image Recognition", "https://arxiv.org/abs/1707.07012"],
+            ["Neural Architecture Search with Reinforcement Learning", "https://arxiv.org/abs/1611.01578"]
+        ]
+    },
+    {
+        "ID": "SENet",
+        "info": "To boost the representational power of a network, SENet proposes a novel architectural unit, squeeze-and-excitation, to recalibrates channel-wise feature responses. It won ILSVRC 2017 classification.",
+        "links":[
+            ["Squeeze-and-Excitation Networks", "https://arxiv.org/abs/1709.01507"]
+        ]
+    },
+    {
+        "ID": "mixNet",
+        "info": "",
+        "links":[
+            ["Mixed Link Networks", "https://arxiv.org/abs/1802.01808"]
+        ]
+    },
+    {
+        "ID": "DPN",
+        "info":"DPN proposes a new topology of connection paths internally by evealing the equivalence of the ResNet and DenseNet.",
+        "links":[
+            ["Dual Path Networks", "https://arxiv.org/pdf/1707.01629.pdf"]
+        ]
+    },
+    {
+        "ID": "mobileNet",
+        "info": "MoblieNets are based on a streamlined architecture that uses depth-wise separable convolutions to build light weight deep neural networks. It has only two global hyper-parameters that are easy to set.",
+        "links": [
+            ["MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications", "https://arxiv.org/abs/1704.04861"]
+        ]
+    },
+    {
+        "ID": "xception",
+        "info": "The authors present an interpretation of Inception modules as a depthwise convolution followed by a pointwise convolution. This observation leads to a novel CNN architecture inspired by Inception, where Inception modules have been replaced with depthwise separable convolutions.",
+        "links": [
+            ["Xception: Deep Learning with Depthwise Separable Convolutions", "https://arxiv.org/abs/1610.02357"]
+        ]
+    },
+    {
+        "ID": "fractalNet",
+        "info": "fractalNet introduce an architecture design strategy that repeatedly applies an expansion rule to generate a DNN. It proves that ultra-deep NNs with residual connections are possible",
+        "links":[
+            ["Fractalnet: ultra-deep neural networks without residuals", "https://arxiv.org/abs/1605.07648"],
+            ["3D FractalNet: Dense Volumetric Segmentation for Cardiovascular MRI Volumes", "https://link.springer.com/chapter/10.1007/978-3-319-52280-7_10"]
+        ]
     }
 ]
