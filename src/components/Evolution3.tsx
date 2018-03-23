@@ -175,6 +175,7 @@ export default class Evolution extends React.Component<Props, State>{
         // label(appData)
 
         // Get benchmarks of datasets
+        console.log(datum)
         if (appValue === '1.1.' && nonsequenceBenchmarks.length === 0) {
             let stat : any[] = [] 
             for (let d of datum)

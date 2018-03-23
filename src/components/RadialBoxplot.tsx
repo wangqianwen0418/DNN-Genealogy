@@ -1,4 +1,4 @@
-    import * as React from "react"
+import * as React from "react"
 import "./RadialBoxplot.css"
 import { getColor } from "../helper"
 import * as d3 from "d3"
@@ -151,7 +151,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 0
             }
             newdots.push({
-                r: name.params,
+                r: Math.min(Math.max(Math.sqrt(name.params), 4), 10),
                 name: name.name,
                 attr: tmpAttr,
                 parent: nn.ID
@@ -218,7 +218,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('stroke', 'grey')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_end')
-            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin - 1.5, bar_a * (i + 1) - margin))
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin, bar_a * (i + 1) - margin + 1))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
             .attr('stroke', 'grey')
@@ -310,18 +310,23 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('class', 'dot')
             .data(NNnodes)
             .enter().append('g')
-            .append('polygon')
-            .attr("transform", d=>`translate(${d.x}, ${d.y})`)
+            .attr("transform", d=>`translate(${d.x}, ${d.y})`)            
+            //.append('polygon')
+            //.attr('points', (d :Dot) => this.polygon(d.r, networks.indexOf(d.parent) + 3))            
+            //.attr('stroke-width', 1)            
+            .append('circle')
+            .attr('r', (d: Dot) => d.r)
             .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
-            .attr('stroke-width', 1)
-            .attr('points', (d :Dot) => this.polygon(Math.sqrt(d.r), networks.indexOf(d.parent) + 3))
             .on('click', function(d) {
                 that.selectNode(d)
+            })
+            .on('hover', function(d) {
+                console.log('hov')
             })
 
         simulation = simulation
             .nodes(NNnodes)
-            .force('collide',d3.forceCollide().strength(.7).radius((d:Dot)=>d.r*2).iterations(5))
+            .force('collide',d3.forceCollide().strength(.7).radius((d:Dot)=>d.r*2).iterations(3))
             .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
             .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)
@@ -356,10 +361,12 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr("transform", (d: Network, i: number) => "translate(-20," + (i * 15 + 20) + ")")
         legend_nn.append('g')
             .attr("transform", (d: Network, i: number) => "translate(" + (this.width - 5) + ", 5)")
-            .append('polygon')
-            .attr('fill', '#666')
-            .attr('stroke-width', 1)
-            .attr('points', (d :Network, idx: number) => this.polygon(5, idx + 3))
+            //.append('polygon')
+            //.attr('points', (d :Network, idx: number) => this.polygon(5, idx + 3))
+            //.attr('stroke-width', 1)
+            .append('circle')
+            .attr('r', 5)
+            .attr('fill', '#666')            
         legend_nn.append("text")
             .attr("x", this.width - 14)
             .attr("y", 6.5)
