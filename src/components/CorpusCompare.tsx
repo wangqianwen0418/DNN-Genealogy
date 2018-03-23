@@ -56,10 +56,12 @@ export default class CorpusCompare extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
-        if (this.props.op !== 1) {
+        /*if (this.props.op !== 1) {
             return
-        }
-        console.log('corpus update')
+        }*/
+
+        // always update
+        console.log('corpus update!')
         this.updateData()
         this.draw()
     }

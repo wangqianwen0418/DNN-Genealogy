@@ -67,19 +67,21 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     }
 
     getForceX(attr: number[]) {
+        // return 0
         let len = attr.length
-        let x: number = attr.map((d: number, idx: number) => (1-d/100) * Math.cos(Math.PI / len * (idx + .5)))
+        let x: number = attr.map((d: number, idx: number) => (1-d/100) * Math.cos(2*Math.PI / (len+1) * (idx + .5) - Math.PI/2))
                             .reduce((a, b) => a + b, 0)
-        return x/len*this.r
+        return x*this.r/(len+1)
         // let x:number = attr.map((d:number, idx:number)=> this.polarToCartesian(0,0, this.r*0.8, 360/len*(idx+.5)).x)
         // .reduce((a, b) => a + b, 0)
         // return x/len
     }
     getForceY(attr: number[]) {
+        // return 0
         let len = attr.length
-        let y: number = attr.map((d: number, idx: number) => (1-d/100) * Math.sin(Math.PI / len * (idx + .5)))
+        let y: number = attr.map((d: number, idx: number) => (1-d/100) * Math.sin( 2*Math.PI / (len+1) * (idx + .5) - Math.PI/2))
                             .reduce((a, b) => a + b, 0)
-        return y/len*this.r
+        return y*this.r/(len+1)
         // let len = attr.length
         // let y:number = attr.map((d:number, idx:number)=> this.polarToCartesian(0,0, this.r*0.8, 360/len*(idx+.5)).y)
         // .reduce((a, b) => a + b, 0)
@@ -124,8 +126,24 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     }
 
     componentWillReceiveProps(nextProps: Props) {
+        /*
         if (nextProps.op !== 1 || this.props === nextProps)
             return
+        */
+
+        if (this.props === nextProps || nextProps.nn.ID === '') {
+            return
+        }
+        
+        // do not update if rnn (hardcode)
+        let ID = nextProps.nn.ID
+        // console.log('ID =', ID)
+        if (['SRN', 'attention', 'seq2seq', 'conv seq2seq', 'ESN', 'ESN with leaky units',
+             'time skip connections','CW-RNN', 'leaky units', 'LSTM', 'GRU', 'recursive',
+             'tree-LSTM', 'DGLSTM', 'BRNN', 'stacked RNN', 'DB-LSTM', 'DT-RNN', 'DT(S)-RNN'].indexOf(ID) >= 0) {
+            return
+        }
+        // console.log(nextProps.nn)
         this.updateData(nextProps.nn)
     }
 
@@ -148,7 +166,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         for (let name of nn.names) {
             let tmpAttr: number[] = []
             for (let index in attr_names) {
-                tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 0
+                tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 100
             }
             newdots.push({
                 r: Math.min(Math.max(Math.sqrt(name.params), 4), 10),
@@ -302,7 +320,15 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         for (let nn of nns) {
             NNnodes = NNnodes.concat(nn.dot)
         }
+        NNnodes = NNnodes.map((node:Dot)=>{
+            return {
+                ...node,
+                x: this.getForceX(node.attr),
+                y: this.getForceY(node.attr)
+            }
+        })
         let that = this
+        
         this.nodes = d3.select('.compareView')
             .append('g')
             .attr('id', 'nodes')
@@ -326,9 +352,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
         simulation = simulation
             .nodes(NNnodes)
-            .force('collide',d3.forceCollide().strength(.7).radius((d:Dot)=>d.r*2).iterations(3))
-            .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
-            .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
+            .force('collide',d3.forceCollide().strength(.7).radius((d:Dot)=>d.r).iterations(5))
+            // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
+            // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)
             
         let nodes = this.nodes
@@ -337,7 +363,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 if(d.x*d.x+d.y*d.y<that.r*that.r){
                     return `translate(${d.x}, ${d.y})`
                 }else{
-                    let k = d.y/d.x, theta = Math.atan(k)
+                    let k = d.y/d.x, theta = Math.atan(k) + (d.x>0?0:Math.PI)
                     return `translate(${that.r *0.8* Math.cos(theta)}, ${that.r *0.8* Math.sin(theta)})`
                 }
                 // return `translate(${d.x}, ${d.y})`

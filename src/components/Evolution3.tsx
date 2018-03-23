@@ -694,6 +694,14 @@ export default class Evolution extends React.Component<Props, State>{
             transX, transY
         })
 
+        if (selectedNode) {
+            for (let nn of datum) {
+                if (nn.ID === selectedNode.label) {
+                    onSelectNN(nn)
+                }
+            }
+        }
+        
         /*if (selectedNode) {
             for (let nn of datum) {
                 if (nn.ID === selectedNode.label) {
