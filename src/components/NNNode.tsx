@@ -71,13 +71,13 @@ export default class NNNode extends React.Component<Props, {}>{
         //a trick. calculate position
         //if assign transX, transY, scale to another group, the transition animiation will be wired
         
-        return <g key={node.label} className="Node"
+        return <g id={`nnnode_${node.ID}`} key={node.label} className="Node"
             transform={`translate (${(node.x - node.width / 2) * scale + transX}, ${(node.y - node.height / 2) * scale + transY})`}
             onMouseDown={this.mouseDown}
             onMouseUp={(e) => { this.mouseUp(e, node) }}
 
         >
-            <g className={`Node ${hovered ? "pop" : 'no'}`}>
+            <g className={`${hovered ? "pop" : 'no'}`}>
                 {bg}
                 <g>
                     <rect
@@ -96,7 +96,7 @@ export default class NNNode extends React.Component<Props, {}>{
                     {<g>
                         {arc.map((key, i)=>{
                             return <rect
-                            className="arcIcon Node"
+                            className="arcIcon"
                             y={node.height * scale * i /arc_num}
                             width={node.width * scale * 0.2} height={node.height * scale /arc_num}
                             fill={zoomed ? "none" : getColor(key)}
@@ -122,7 +122,7 @@ export default class NNNode extends React.Component<Props, {}>{
                 ><g>
 
                         <text
-                            className="Node"
+                            className="NodeText"
                             textAnchor="middle"
                             fontSize={0.7 * node.height * scale}
                             cursor="pointer"

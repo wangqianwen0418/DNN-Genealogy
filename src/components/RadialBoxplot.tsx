@@ -214,7 +214,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         g.append('circle')
             .attr('r', this.r)
             .attr('fill', 'none')
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         var axis = g.append('g')
             .attr('id', 'axis')
             .selectAll('g')
@@ -226,55 +226,55 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin))
             .attr('fill', 'none')
             .attr('stroke-width', 1)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
             .attr('stroke-dasharray', '5, 5')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_start')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * i + 0.5))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_end')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin, bar_a * (i + 1) - margin + 1))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_lowerQuartile')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
                  bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin) + 0.5))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_median')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
                  bar_a * i + (attr.median- attr.minimum) / attr.range * (bar_a - margin) - 0.25, bar_a * i + (attr.median- attr.minimum) / attr.range * (bar_a - margin) + 0.25))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_higherQuartile')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
                  bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin) - 0.5, bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_upperbox')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w,
                  bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
             .attr('fill', 'none')
             .attr('stroke-width', 1)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_lowerbox')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin,
                  bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
             .attr('fill', 'none')
             .attr('stroke-width', 1)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('text')
             .attr('text-anchor', 'middle')
             .attr('dy', 12)
@@ -289,7 +289,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         if (selected_nns.length > 0) {
             let marks = selected_nns.map((d: Dot, idx: number) => {
                 return d.attr.map((attr: number, attr_i: number) => {
-                    if (attr)
+                    if (attr !== 100)
                         return {
                             name: d.name,
                             angle: bar_a * attr_i + (bar_a - margin) * (attr - nonsequenceBenchmarks[attr_i].minimum) / nonsequenceBenchmarks[attr_i].range
@@ -298,6 +298,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                         return null
                 })
             })
+            console.log(selected_nns)
             marks = marks.reduce((prev, item) => prev.concat(item))
             let perf = []
             for (let mark of marks) {
@@ -346,8 +347,17 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .on('click', function(d) {
                 that.selectNode(d)
             })
-            .on('hover', function(d) {
-                console.log('hov')
+            .on('mousemove', function(d) {
+                console.log('hover')
+                let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .Node')
+                if (hoveredNode)
+                    hoveredNode.setAttribute('stroke', 'yellow')
+                console.log(hoveredNode)
+            })
+            .on('mouseout', function(d) {
+                let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .Node')
+                if (hoveredNode)
+                    hoveredNode.setAttribute('stroke', 'gray')
             })
 
         simulation = simulation
