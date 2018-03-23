@@ -92,7 +92,7 @@ const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
     boxH = 10,
     labelFont = 13,
     textMargin = 20,
-    r_api = 1, r_dist = -0.1, r_diff = 0 //factors for DOI calculation
+    r_api = 1, r_dist = -1, r_diff = 0 //factors for DOI calculation
 
 // for the lablel fade in/out animiation 
 const duration = 1000;
@@ -226,6 +226,8 @@ export default class Evolution extends React.Component<Props, State>{
             // }
             return w * (.4*ratio + .6)
         }
+
+        //initialize the dag
         datum.forEach((node: NN) => {
             // let label = `${layer.name}:${layer.class_name}`
 
@@ -234,10 +236,11 @@ export default class Evolution extends React.Component<Props, State>{
                 fullname: node.fullname,
                 ID: node.ID,
                 api: node.api,
+                doi: node.api,
                 arc: node.architecture,
                 variants: node.variants,
-                width: nodeW,
-                height: nodeH,
+                // width: nodeW,
+                // height: nodeH,
             })
             //IR model or keras model
             if (node.parents.length > 0) {
@@ -261,7 +264,6 @@ export default class Evolution extends React.Component<Props, State>{
 
 
         // const getEdgeWeight = (e: dagre.Edge) => dag.node(e.v).api + dag.node(e.w).api
-        // const getEdgeWeight = (e:dagre.Edge)=>1
         const getEI = (v: dagre.Edge) => 1
         let distanceDict: any
         if (selectedNode) {
@@ -272,61 +274,83 @@ export default class Evolution extends React.Component<Props, State>{
         // console.info(tree.edges)
 
 
-        //calculate doi and size for each node
+        //calculate doi for each node
+        let minDoi= Infinity, maxDoi = -Infinity
         dag.nodes().forEach((v) => {
             if (dag.node(v)) {
-                let node: Node = dag.node(v),
+                let node = dag.node(v),
                     api = node.api || 1,
-                    distance = selectedNode ? distanceDict[v].distance : 0,
-                    selected: boolean = (v == selectedID),
-                    pinned: boolean = (pinNodes.indexOf(v) != -1)
+                    distance = selectedNode ? distanceDict[v].distance : 0
 
-                let api_diff = Math.max(
-                    api,
-                    Math.max(...(dag.neighbors(v) || []).map((neighbor: Node) => {
-                        return r_diff * (neighbor.api || 0) / getEI({ v, w: neighbor.label })
-                    }))
-                ),
-                    doi = api_diff + r_dist * distance
+                // let api_diff = Math.max(
+                //     api,
+                //     Math.max(...(dag.neighbors(v) || []).map((neighbor: Node) => {
+                //         return r_diff * (neighbor.api || 0) / getEI({ v, w: neighbor.label })
+                //     }))
+                // ),
+                // doi = api_diff + r_dist * distance
+                let doi = api +r_dist * distance
+
                 dag.setNode(v, {
                     ...node,
                     api: api,
                     doi: doi,
-                    variants: node.variants,
-                    width: (selected || pinned) ? expandW : resizeNode(nodeW, doi),
-                    height: (selected || pinned) ? expandH : resizeNode(nodeH, doi),
                 })
+
+                if(minDoi>doi){
+                    minDoi = doi
+                }
+                if(maxDoi<doi){
+                    maxDoi = doi
+                }
             }
         })
-        dag.edges().forEach((e, i) => {
-            let edge: GraphEdge = dag.edge(e)
-            // edge.weight = getEdgeWeight(e)
-        });
+        //set edge weight
+        // dag.edges().forEach((e, i) => {
+        //     let edge: GraphEdge = dag.edge(e)
+        //     // edge.weight = getEdgeWeight(e)
+        // });
 
-        //calculate the top N doi nodes, and update their size
-        let topParent: Node | undefined = undefined
-        let topChild: Node | undefined = undefined
-        if (selectedNode) {
-            let parents = dag.predecessors(selectedNode.label),
-                children = dag.successors(selectedNode.label)
-            if (parents && parents.length != 0) {
-                topParent = parents.map(v => dag.node(v)).sort((a, b) => b.doi - a.doi)[0]
-                dag.setNode(topParent.label, {
-                    ...topParent,
-                    width: expandW,
-                    height: expandH
+        // //calculate the top N doi nodes, and update their size
+        // let topParent: Node | undefined = undefined
+        // let topChild: Node | undefined = undefined
+        // if (selectedNode) {
+        //     let parents = dag.predecessors(selectedNode.label),
+        //         children = dag.successors(selectedNode.label)
+        //     if (parents && parents.length != 0) {
+        //         topParent = parents.map(v => dag.node(v)).sort((a, b) => b.doi - a.doi)[0]
+        //         dag.setNode(topParent.label, {
+        //             ...topParent,
+        //             width: expandW,
+        //             height: expandH
+        //         })
+        //     }
+        //     if (children && children.length != 0) {
+        //         topChild = children.map(v => dag.node(v)).sort((a, b) => b.doi - a.doi)[0]
+        //         dag.setNode(topChild.label, {
+        //             ...topChild,
+        //             width: expandW,
+        //             height: expandH
+        //         })
+        //     }
+
+        // }
+
+        //normalize doi to 0-1, resize the node
+        dag.nodes().forEach((v)=>{
+            let node= dag.node(v),
+            selected: boolean = (v == selectedID),
+            pinned: boolean = (pinNodes.indexOf(v) != -1)
+            if(node){
+                node.doi = (node.doi-minDoi)/(maxDoi-minDoi)
+                dag.setNode(v,{
+                    ...node,
+                    width: (pinned)?expandW:resizeNode(nodeW, node.doi),
+                    height: (pinned)?expandH:resizeNode(nodeH, node.doi),
                 })
             }
-            if (children && children.length != 0) {
-                topChild = children.map(v => dag.node(v)).sort((a, b) => b.doi - a.doi)[0]
-                dag.setNode(topChild.label, {
-                    ...topChild,
-                    width: expandW,
-                    height: expandH
-                })
-            }
+        })       
 
-        }
 
         const topN = (nodes: string[], n: number = 4) => {
             let topDoi: Node[] = []
@@ -334,13 +358,13 @@ export default class Evolution extends React.Component<Props, State>{
                 let v = nodes[i]
                 let node = dag.node(v)
                 //exclude topParent and topChild from topN
-                if ((topChild && v == topChild.label)
-                    || (topParent && v == topParent.label)
-                    || (selectedNode && v == selectedNode.label)) {
-                } else {
-                    topDoi.push(node)
-                }
-
+                // if ((topChild && v == topChild.label)
+                //     || (topParent && v == topParent.label)
+                //     || (selectedNode && v == selectedNode.label)) {
+                // } else {
+                //     topDoi.push(node)
+                // }
+                topDoi.push(node)
                 if (topDoi.length > n) {
                     topDoi.sort((a, b) => (b.doi || 0) - (a.doi || 0))
                     topDoi.pop()
@@ -350,23 +374,37 @@ export default class Evolution extends React.Component<Props, State>{
         }
         let topDoi: Node[] = topN(dag.nodes())
 
+        topDoi.forEach((node:Node)=>{
+            dag.setNode(node.label, {
+                            ...node,
+                            width: expandW,
+                            height: expandH,
+                        })
+        })
+
 
         //calculate layout
         dagre.layout(dag)
 
+        //calculate the output
         let nodes: Node[] = [], edges: GraphEdge[] = [],
             height = (dag.graph().height || 0),
             width = dag.graph().width || 0
         dag.nodes().forEach(v => {
-            if (dag.node(v)) {
-                nodes.push(dag.node(v))
+            let node = dag.node(v)
+            if (node) {
+                nodes.push(node)
             }
-        }),
-            dag.edges().forEach(e => {
-                if (dag.node(e.v) && dag.node(e.w)) {
-                    edges.push(dag.edge(e))
-                }
-            })
+        })
+        //normalize doi to 0~1
+        nodes.forEach((node:any)=>{
+            node.doi = (node.doi-minDoi)/(maxDoi-minDoi)
+        })
+        dag.edges().forEach(e => {
+            if (dag.node(e.v) && dag.node(e.w)) {
+                edges.push(dag.edge(e))
+            }
+        })
 
         let scaleX = this.ref.clientWidth / (width),
             scaleY = this.ref.clientHeight / (height),
@@ -376,8 +414,7 @@ export default class Evolution extends React.Component<Props, State>{
             ),
             transX = scaleX > scaleY ? (this.ref.clientWidth - width * scale) / 2 : 0,
             transY = scaleY > scaleX ? (this.ref.clientHeight - height * scale) / 2 : 0
-
-        return { nodes, edges, height, width, topDoi, topParent, topChild, scale, transX, transY }
+        return { nodes, edges, height, width, topDoi, scale, transX, transY }
     }
     drawNodes(nodes: Node[]) {
         let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
@@ -612,7 +649,6 @@ export default class Evolution extends React.Component<Props, State>{
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
         let { scale, transX, transY } = this.state
-        console.info("wheel", evt)
         this.updateEdge = !this.updateEdge
         if (evt.deltaY > 0) { 
             scale = scale * 1.1 
@@ -686,10 +722,10 @@ export default class Evolution extends React.Component<Props, State>{
         //         }
         //     }
         // })
-        let { nodes, edges, width: w, height: h, topChild, topParent, topDoi, scale, transX, transY } = this.getDag(datum, selectedNode)
+        let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum, selectedNode)
         this.setState({
             nodes, edges, w, h, datum, selectedNode,
-            topChild, topParent, topDoi, scale,
+            topDoi, scale,
             transX, transY
         })
 
