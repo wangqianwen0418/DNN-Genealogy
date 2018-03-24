@@ -131,7 +131,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             return
         */
 
-        if (this.props === nextProps || nextProps.nn.ID === '') {
+        if (nextProps.op !== 1 || this.props === nextProps || nextProps.nn.ID === '') {
             return
         }
         
@@ -149,7 +149,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     componentDidUpdate() {
         this.draw()
-        
     }
 
     updateData(nn: NN) {
@@ -181,7 +180,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         })
 
         this.setState({ attr_names, nns })
-        
     }
 
     draw() {
