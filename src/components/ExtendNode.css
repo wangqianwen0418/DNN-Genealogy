@@ -5,3 +5,15 @@
 .ant-tabs-tab-active{
     color:black!important;
 }
+
+.zoomed {
+    opacity: 1;
+}
+
+.collapsed {
+    opacity: 0;
+}
+
+.faded {
+    opacity: 0.2;
+}

@@ -168,7 +168,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 100
             }
             newdots.push({
-                r: name.params,
+                r: Math.min(Math.max(Math.sqrt(name.params), 4), 10),
                 name: name.name,
                 attr: tmpAttr,
                 parent: nn.ID
@@ -212,7 +212,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         g.append('circle')
             .attr('r', this.r)
             .attr('fill', 'none')
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         var axis = g.append('g')
             .attr('id', 'axis')
             .selectAll('g')
@@ -224,55 +224,55 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin))
             .attr('fill', 'none')
             .attr('stroke-width', 1)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
             .attr('stroke-dasharray', '5, 5')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_start')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * i + 0.5))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_end')
-            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin - 1.5, bar_a * (i + 1) - margin))
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * (i + 1) - margin, bar_a * (i + 1) - margin + 1))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_lowerQuartile')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
                  bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin) + 0.5))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_median')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
                  bar_a * i + (attr.median- attr.minimum) / attr.range * (bar_a - margin) - 0.25, bar_a * i + (attr.median- attr.minimum) / attr.range * (bar_a - margin) + 0.25))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_higherQuartile')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2,
                  bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin) - 0.5, bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
             .attr('fill', 'none')
             .attr('stroke-width', bar_w)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_upperbox')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w,
                  bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
             .attr('fill', 'none')
             .attr('stroke-width', 1)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_lowerbox')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin,
                  bar_a * i + (attr.lowerQuartile - attr.minimum) / attr.range * (bar_a - margin), bar_a * i + (attr.higherQuartile - attr.minimum) / attr.range * (bar_a - margin)))
             .attr('fill', 'none')
             .attr('stroke-width', 1)
-            .attr('stroke', 'grey')
+            .attr('stroke', 'black')
         axis.append('text')
             .attr('text-anchor', 'middle')
             .attr('dy', 12)
@@ -287,7 +287,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         if (selected_nns.length > 0) {
             let marks = selected_nns.map((d: Dot, idx: number) => {
                 return d.attr.map((attr: number, attr_i: number) => {
-                    if (attr)
+                    if (attr !== 100)
                         return {
                             name: d.name,
                             angle: bar_a * attr_i + (bar_a - margin) * (attr - nonsequenceBenchmarks[attr_i].minimum) / nonsequenceBenchmarks[attr_i].range
@@ -296,6 +296,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                         return null
                 })
             })
+            console.log(selected_nns)
             marks = marks.reduce((prev, item) => prev.concat(item))
             let perf = []
             for (let mark of marks) {
@@ -334,18 +335,72 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('class', 'dot')
             .data(NNnodes)
             .enter().append('g')
-            .append('polygon')
-            .attr("transform", d=>`translate(${d.x}, ${d.y})`)
+            .attr("transform", d=>`translate(${d.x}, ${d.y})`)            
+            //.append('polygon')
+            //.attr('points', (d :Dot) => this.polygon(d.r, networks.indexOf(d.parent) + 3))            
+            //.attr('stroke-width', 1)            
+            .append('circle')
+            .attr('r', (d: Dot) => d.r)
             .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
-            .attr('stroke-width', 1)
-            .attr('points', (d :Dot) => this.polygon(Math.sqrt(d.r), networks.indexOf(d.parent) + 3))
             .on('click', function(d) {
                 that.selectNode(d)
+            })
+            .on('mousemove', function(d) {
+                let idx: number
+                // let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .bounder')
+                // if (hoveredNode)
+                //     hoveredNode.setAttribute('stroke', 'yellow')
+                document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 0.2;')
+                let nnnodes = document.getElementsByClassName('NNNode')
+                idx = 0
+                while (idx < nnnodes.length) {
+                    console.log(idx, nnnodes[idx])
+                    if (nnnodes[idx].id !== 'nnnode_' + d.parent)
+                        nnnodes[idx].setAttribute('opacity', '0.2')
+                    idx += 1
+                }
+                let exnodes = document.getElementsByClassName('ExtendNode')
+                idx = 0
+                while (idx < exnodes.length) {
+                    console.log(idx, exnodes[idx])
+                    if (exnodes[idx].id !== 'exnode_' + d.parent) {
+                        if (exnodes[idx].classList.contains('zoomed'))
+                            exnodes[idx].classList.add('faded')
+                    }
+                    idx += 1
+                }
+            })
+            .on('mouseout', function(d) {
+                let idx: number
+                // let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .bounder')
+                // if (hoveredNode)
+                //     hoveredNode.setAttribute('stroke', 'gray')
+                // let dag = document.querySelector(".Evolution .container")
+                //     if (dag)
+                //         dag.setAttribute('style', 'opacity: 1;')
+                document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 1;')
+                let nnnodes = document.getElementsByClassName('NNNode')
+                idx = 0
+                while (idx < nnnodes.length) {
+                    console.log(idx, nnnodes[idx])                    
+                    nnnodes[idx].setAttribute('opacity', '1')
+                    idx += 1
+                }
+                let exnodes = document.getElementsByClassName('ExtendNode')
+                idx = 0
+                while (idx < exnodes.length) {
+                    console.log(idx, exnodes[idx])
+                    if (exnodes[idx].id !== 'exnode_' + d.parent) {
+                        if (exnodes[idx].classList.contains('faded'))
+                            exnodes[idx].classList.remove('faded')
+                    }
+                    idx += 1
+                }
             })
 
         simulation = simulation
             .nodes(NNnodes)
-            .force('collide',d3.forceCollide().strength(.7).radius((d:Dot)=>Math.sqrt(d.r)).iterations(5))
+            .force('collide',d3.forceCollide().strength(.7).radius((d:Dot)=>d.r).iterations(5))
             // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
             // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)
@@ -380,10 +435,12 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr("transform", (d: Network, i: number) => "translate(-20," + (i * 15 + 20) + ")")
         legend_nn.append('g')
             .attr("transform", (d: Network, i: number) => "translate(" + (this.width - 5) + ", 5)")
-            .append('polygon')
-            .attr('fill', '#666')
-            .attr('stroke-width', 1)
-            .attr('points', (d :Network, idx: number) => this.polygon(5, idx + 3))
+            //.append('polygon')
+            //.attr('points', (d :Network, idx: number) => this.polygon(5, idx + 3))
+            //.attr('stroke-width', 1)
+            .append('circle')
+            .attr('r', 5)
+            .attr('fill', '#666')            
         legend_nn.append("text")
             .attr("x", this.width - 14)
             .attr("y", 6.5)
