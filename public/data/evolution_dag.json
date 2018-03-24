@@ -91,8 +91,8 @@
         "SVHN": null,
         "cifar10": null,
         "cifar100": null,
-        "imageNet val top1": null,
-        "imagenet val top5": null,
+        "imageNet val top1": 21.2,
+        "imagenet val top5": 5.6,
         "name": "inception_v2",
         "params": 0.0
       }
