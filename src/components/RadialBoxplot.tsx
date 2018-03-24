@@ -348,16 +348,56 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 that.selectNode(d)
             })
             .on('mousemove', function(d) {
-                console.log('hover')
-                let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .Node')
-                if (hoveredNode)
-                    hoveredNode.setAttribute('stroke', 'yellow')
-                console.log(hoveredNode)
+                let idx: number
+                // let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .bounder')
+                // if (hoveredNode)
+                //     hoveredNode.setAttribute('stroke', 'yellow')
+                document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 0.2;')
+                let nnnodes = document.getElementsByClassName('NNNode')
+                idx = 0
+                while (idx < nnnodes.length) {
+                    console.log(idx, nnnodes[idx])
+                    if (nnnodes[idx].id !== 'nnnode_' + d.parent)
+                        nnnodes[idx].setAttribute('opacity', '0.2')
+                    idx += 1
+                }
+                let exnodes = document.getElementsByClassName('ExtendNode')
+                idx = 0
+                while (idx < exnodes.length) {
+                    console.log(idx, exnodes[idx])
+                    if (exnodes[idx].id !== 'exnode_' + d.parent) {
+                        if (exnodes[idx].classList.contains('zoomed'))
+                            exnodes[idx].classList.add('faded')
+                    }
+                    idx += 1
+                }
             })
             .on('mouseout', function(d) {
-                let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .Node')
-                if (hoveredNode)
-                    hoveredNode.setAttribute('stroke', 'gray')
+                let idx: number
+                // let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .bounder')
+                // if (hoveredNode)
+                //     hoveredNode.setAttribute('stroke', 'gray')
+                // let dag = document.querySelector(".Evolution .container")
+                //     if (dag)
+                //         dag.setAttribute('style', 'opacity: 1;')
+                document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 1;')
+                let nnnodes = document.getElementsByClassName('NNNode')
+                idx = 0
+                while (idx < nnnodes.length) {
+                    console.log(idx, nnnodes[idx])                    
+                    nnnodes[idx].setAttribute('opacity', '1')
+                    idx += 1
+                }
+                let exnodes = document.getElementsByClassName('ExtendNode')
+                idx = 0
+                while (idx < exnodes.length) {
+                    console.log(idx, exnodes[idx])
+                    if (exnodes[idx].id !== 'exnode_' + d.parent) {
+                        if (exnodes[idx].classList.contains('faded'))
+                            exnodes[idx].classList.remove('faded')
+                    }
+                    idx += 1
+                }
             })
 
         simulation = simulation
@@ -435,8 +475,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
              .attr("y", 6.5)
              .attr("dy", "0.15em")
              .text((d: Dot) => d.name)
-
-
     }
 
     render() {
