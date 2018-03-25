@@ -43,6 +43,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         }
         this.selectNode = this.selectNode.bind(this)
         this.deleteNN = this.deleteNN.bind(this)
+        this.draw = this.draw.bind(this)        
     }
 
     arc(x: number = 0, y: number = 0, r: number, startAngle: number, endAngle: number) {
@@ -112,6 +113,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             selected.splice(name_idx, 1)
         }
         this.setState({ selected })
+        return name_idx
     }
 
     deleteNN(nn: Network) {
@@ -149,6 +151,14 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     componentDidUpdate() {
         this.draw()
+    }
+
+    componentDidMount() {
+        window.addEventListener("resize", this.draw)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.draw)
     }
 
     updateData(nn: NN) {
@@ -199,7 +209,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             return false
         })[0].dot.filter((d) => d.name == name)[0])
         let networks = nns.map((nn: Network) => nn.network)
-
+        let perf :any[] = []
+        let noticing :Boolean = false
+        
         let svg = d3.select('.RadialBoxplot').insert('svg')
             .attr('width', '100%')
             .attr('height', '100%')
@@ -296,9 +308,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                         return null
                 })
             })
-            console.log(selected_nns)
             marks = marks.reduce((prev, item) => prev.concat(item))
-            let perf = []
+            perf = []
             for (let mark of marks) {
                 if (mark) perf.push(mark)
             }
@@ -308,6 +319,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 .data(perf)
                 .enter().append('g')
             tags.append('path')
+                .attr('class', (d: any) => 'mark_' + d.name)
                 .attr('d', (d: any) => this.arc(0, 0, this.r + margin + bar_w / 2, d.angle - 0.5, d.angle + 0.5))
                 .attr('fill', 'none')
                 .attr('stroke-width', bar_w)
@@ -327,7 +339,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             }
         })
         let that = this
-        
+
         this.nodes = d3.select('.compareView')
             .append('g')
             .attr('id', 'nodes')
@@ -340,6 +352,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             //.attr('points', (d :Dot) => this.polygon(d.r, networks.indexOf(d.parent) + 3))            
             //.attr('stroke-width', 1)            
             .append('circle')
+            .style('z-index', 10)
+            .attr('id', (d: any) => 'bpnode_' + d.name)            
             .attr('r', (d: Dot) => d.r)
             .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
             .on('click', function(d) {
@@ -354,7 +368,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 let nnnodes = document.getElementsByClassName('NNNode')
                 idx = 0
                 while (idx < nnnodes.length) {
-                    console.log(idx, nnnodes[idx])
                     if (nnnodes[idx].id !== 'nnnode_' + d.parent)
                         nnnodes[idx].setAttribute('opacity', '0.2')
                     idx += 1
@@ -362,41 +375,53 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 let exnodes = document.getElementsByClassName('ExtendNode')
                 idx = 0
                 while (idx < exnodes.length) {
-                    console.log(idx, exnodes[idx])
                     if (exnodes[idx].id !== 'exnode_' + d.parent) {
                         if (exnodes[idx].classList.contains('zoomed'))
                             exnodes[idx].classList.add('faded')
                     }
                     idx += 1
                 }
+                noticeLines(d.name)
             })
             .on('mouseout', function(d) {
                 let idx: number
-                // let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .bounder')
-                // if (hoveredNode)
-                //     hoveredNode.setAttribute('stroke', 'gray')
-                // let dag = document.querySelector(".Evolution .container")
-                //     if (dag)
-                //         dag.setAttribute('style', 'opacity: 1;')
                 document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 1;')
                 let nnnodes = document.getElementsByClassName('NNNode')
                 idx = 0
                 while (idx < nnnodes.length) {
-                    console.log(idx, nnnodes[idx])                    
                     nnnodes[idx].setAttribute('opacity', '1')
                     idx += 1
                 }
                 let exnodes = document.getElementsByClassName('ExtendNode')
                 idx = 0
                 while (idx < exnodes.length) {
-                    console.log(idx, exnodes[idx])
                     if (exnodes[idx].id !== 'exnode_' + d.parent) {
                         if (exnodes[idx].classList.contains('faded'))
                             exnodes[idx].classList.remove('faded')
                     }
                     idx += 1
                 }
+                noticing = false                
+                d3.selectAll('.noticelines').remove()
             })
+
+        function noticeLines(name: string) {
+            if (that.state.selected.indexOf(name) !== -1 && !noticing) {
+                noticing = true                    
+                let attention = perf.filter((pf) => pf.name == name)
+                d3.select('.RadialBoxplot').select('svg').append('g').attr('class', 'noticelines')
+                    .selectAll('line')
+                    .data(attention)
+                    .enter().append('line')
+                    .style('z-index', 1)
+                    .attr('x1', d3.event.offsetX)
+                    .attr('y1', d3.event.offsetY)
+                    .attr('x2', (pf: any) => (that.r + margin)*(Math.cos((pf.angle - 90) * Math.PI / 180.0)) + that.r + 6 * margin)
+                    .attr('y2', (pf: any) => (that.r + margin)*(Math.sin((pf.angle - 90) * Math.PI / 180.0)) + that.r + 6 * margin)
+                    .attr('stroke', getColor(name))
+                    .attr('stroke-dasharray', '2, 2')
+            }
+        }
 
         simulation = simulation
             .nodes(NNnodes)
