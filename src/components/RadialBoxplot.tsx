@@ -39,7 +39,13 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         this.state = {
             selected: [],
             nns: [],
-            attr_names: nonsequenceBenchmarks
+            attr_names: [
+                {dataset: 'SVHN'},
+                {dataset: 'cifar10'}, 
+                {dataset: 'cifar100'},
+                {dataset: 'imageNet val top1'},
+                {dataset: 'imagenet val top5'}
+            ]
         }
         this.selectNode = this.selectNode.bind(this)
         this.deleteNN = this.deleteNN.bind(this)
@@ -155,6 +161,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     componentDidMount() {
         window.addEventListener("resize", this.draw)
+        this.draw()
     }
 
     componentWillUnmount() {
@@ -199,10 +206,12 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         let { nns, attr_names, selected } = this.state
         let margin: number = 5,
             bar_a: number = 360 / attr_names.length,
-            bar_w: number = 10
+            bar_w: number = 15
         this.width = (this.ref?this.ref.clientWidth:50)
         this.height = (this.ref?this.ref.clientHeight:30)
-        this.r = this.height / 2 - 6 * margin 
+        this.r = this.height / 2 - bar_w - 2 - margin * 3
+        let offsetX = this.r + 5 * margin + bar_w + 2,
+            offsetY = this.r + 3 * margin + bar_w + 2
         let selected_nns = selected.map((name: string) => nns.filter((nn) => {
             for (let d of nn.dot)
                 if (d.name == name) return true
@@ -218,7 +227,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         
         let g = svg.append('g')
             .attr('class', 'compareView')
-            .attr('transform', 'translate(' + String(this.r + 6 * margin) + ',' + String(this.r + 6 * margin) +')')
+            .attr('transform', 'translate(' + String(offsetX) + ',' + String(offsetY) +')')
         
         // Axis(include quartiles) and Circle
         g.append('circle')
@@ -287,7 +296,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('stroke', 'black')
         axis.append('text')
             .attr('text-anchor', 'middle')
-            .attr('dy', 12)
+            .attr('dy', bar_w + 2)
             .attr('font-size', '7px')
             .attr('opacity', 0.5)
             .insert('textPath')
@@ -416,8 +425,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     .style('z-index', 1)
                     .attr('x1', d3.event.offsetX)
                     .attr('y1', d3.event.offsetY)
-                    .attr('x2', (pf: any) => (that.r + margin)*(Math.cos((pf.angle - 90) * Math.PI / 180.0)) + that.r + 6 * margin)
-                    .attr('y2', (pf: any) => (that.r + margin)*(Math.sin((pf.angle - 90) * Math.PI / 180.0)) + that.r + 6 * margin)
+                    .attr('x2', (pf: any) => (that.r + margin)*(Math.cos((pf.angle - 90) * Math.PI / 180.0)) + offsetX)
+                    .attr('y2', (pf: any) => (that.r + margin)*(Math.sin((pf.angle - 90) * Math.PI / 180.0)) + offsetY)
                     .attr('stroke', getColor(name))
                     .attr('stroke-dasharray', '2, 2')
             }
