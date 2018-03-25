@@ -7,7 +7,7 @@
 @keyframes move {
 
 }
-.Node, .Edge, .NodeBg {
+.Node, .Edge, .NodeBg, .edges {
     /* transition-property: opacity transform width height; */
     transition-duration: 1.0s;
     transition-timing-function: ease-in-out;
