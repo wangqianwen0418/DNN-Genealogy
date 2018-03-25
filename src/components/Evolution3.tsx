@@ -269,7 +269,11 @@ export default class Evolution extends React.Component<Props, State>{
         let distanceDict: any
         if (selectedNode) {
             distanceDict = dagre.graphlib.alg
-                .dijkstra(dag, selectedNode.label, (e) => 1, v => dag.nodeEdges(v))
+                .dijkstra(
+                    dag, selectedNode.label, 
+                    (e) =>(e.v==selectedNode.label?0.8:1), 
+                    v => dag.nodeEdges(v)
+                )
         }
         // let tree = dagre.graphlib.alg.prim(dag, getEdgeWeight)
         // console.info(tree.edges)
