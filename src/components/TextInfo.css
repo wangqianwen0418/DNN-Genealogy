@@ -1,3 +1,7 @@
+.TextInfo-Content {
+    height: 95%;
+}
+
 .TextInfo-Description {
     margin-top: 5px;
     margin-bottom: 10px;
@@ -6,9 +10,15 @@
 .TextInfo-Description::before {
     content: "Description:\0A";
     display: block;
+    margin-bottom: 3px;
+}
+
+.TextInfo-Link::before {
+    content: "-\a0";
 }
 
 .TextInfo-Links::before {
     content: "Links:\0A";
     display: block;
+    margin-bottom: 3px;
 }
