@@ -1,9 +1,11 @@
 import * as React from 'react'
-import {Card} from 'antd'
+import { Card, Layout } from 'antd'
 import { NN, NodeTextInfo } from '../types'
 import axios from 'axios'
 import './App.css'
 import './TextInfo.css'
+
+const { Content } = Layout;
 
 export interface Props{
     database: string,
@@ -57,19 +59,24 @@ export default class TextInfo extends React.Component<Props, State>{
         if (p !== -1) {
             let cur: NodeTextInfo = this.state.textinfo[p]
             let links = this.state.textinfo[p].links.map(
-                (d, i) => <div key={i}><a href={d[1]}>{d[0]}</a></div>
+                (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
             )
             return (
                 <Card
                     bordered={false}
                     title={<span style={{fontSize:'1.2em'}}>{nn.ID}</span>}
                     className="TextInfo View ViewBottom"
+                    bodyStyle={{height: 'calc(100% - 48px)', overflow: 'auto'}}
                 >
-                    <div className="TextInfo-Description">
-                        {cur.info}
-                    </div>
-                    <div className="TextInfo-Links">
-                        {links}
+                    <div
+                        className="TextInfo-Content"
+                    >
+                        <div className="TextInfo-Description">
+                            {cur.info}
+                        </div>
+                        <div className="TextInfo-Links">
+                            {links}
+                        </div>
                     </div>
                 </Card>)
         } else {
