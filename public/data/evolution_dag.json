@@ -887,13 +887,58 @@
     "fullname": "",
     "names": [
       {
+        "SVHN": 1.57,
+        "cifar10": 4.19,
+        "cifar100": 21.12,
+        "imageNet val top1": null,
+        "imagenet val top5": null,
+        "name": "mixNet-100",
+        "params": 1.5
+      },
+      {
+        "SVHN": 1.51,
+        "cifar10": 3.32,
+        "cifar100": 17.06,
+        "imageNet val top1": null,
+        "imagenet val top5": null,
+        "name": "mixNet-250",
+        "params": 29.0
+      },
+      {
+        "SVHN": null,
+        "cifar10": 3.13,
+        "cifar100": 16.92,
+        "imageNet val top1": null,
+        "imagenet val top5": null,
+        "name": "mixNet-190",
+        "params": 48.5
+      },
+      {
         "SVHN": null,
         "cifar10": null,
         "cifar100": null,
-        "imageNet val top1": null,
-        "imagenet val top5": null,
-        "name": "mixNet",
-        "params": 0.0
+        "imageNet val top1": 23.3,
+        "imagenet val top5": 6.7,
+        "name": "mixNet-105",
+        "params": 11.16
+      },
+      {
+        "SVHN": null,
+        "cifar10": null,
+        "cifar100": null,
+        "imageNet val top1": 21.9,
+        "imagenet val top5": 5.9,
+        "name": "mixNet-121",
+        "params": 21.86
+      },
+      {
+        "SVHN": null,
+        "cifar10": null,
+        "cifar100": null,
+        "imageNet val top1": 20.4,
+        "imagenet val top5": 5.3,
+        "name": "mixNet-141",
+        "params": 41.07
       }
     ],
     "parents": [
