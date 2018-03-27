@@ -311,6 +311,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     if (attr !== 100)
                         return {
                             name: d.name,
+                            parent: d.parent,
                             angle: bar_a * attr_i + (bar_a - margin) * (attr - nonsequenceBenchmarks[attr_i].minimum) / nonsequenceBenchmarks[attr_i].range
                         }
                     else
@@ -332,7 +333,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 .attr('d', (d: any) => this.arc(0, 0, this.r + margin + bar_w / 2, d.angle - 0.5, d.angle + 0.5))
                 .attr('fill', 'none')
                 .attr('stroke-width', bar_w)
-                .attr('stroke', (d: any) => getColor(d.name))
+                .attr("stroke", (d: Dot) => {console.info(d); return getColor(d.parent)})
+                // .attr('stroke', (d: any) => getColor(d.name))
         }
 
         // Nodes
@@ -364,7 +366,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .style('z-index', 10)
             .attr('id', (d: any) => 'bpnode_' + d.name)            
             .attr('r', (d: Dot) => d.r)
-            .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
+            .attr('fill', (d:Dot)=>getColor(d.parent))
+            // .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
             .on('click', function(d) {
                 that.selectNode(d)
             })
@@ -427,7 +430,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     .attr('y1', d3.event.offsetY)
                     .attr('x2', (pf: any) => (that.r + margin)*(Math.cos((pf.angle - 90) * Math.PI / 180.0)) + offsetX)
                     .attr('y2', (pf: any) => (that.r + margin)*(Math.sin((pf.angle - 90) * Math.PI / 180.0)) + offsetY)
-                    .attr('stroke', getColor(name))
+                    // .attr('stroke', getColor(name))
+                    .attr("stroke", (d: Dot) => {console.info(d); return getColor(d.parent)})
                     .attr('stroke-dasharray', '2, 2')
             }
         }
@@ -501,7 +505,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
              .attr("x", this.width - 9)
              .attr("width", 9)
              .attr("height", 9)
-             .attr("fill", (d: Dot, idx: number) => String(getColor(d.name)))
+             .attr("fill", (d: Dot) => getColor(d.parent))
+            //  .attr("fill", (d: Dot, idx: number) => String(getColor(d.name)))
         legend_name.append("text")
              .attr("x", this.width - 14)
              .attr("y", 6.5)

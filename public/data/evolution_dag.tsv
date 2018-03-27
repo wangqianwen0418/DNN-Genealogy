@@ -3,7 +3,7 @@ leNet	leNet	http://ieeexplore.ieee.org/abstract/document/726791/	1998.11.01	1083
 alexNet	alexNet	https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks	2012.12.03	18438	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	a	leNet	add regularization: dropout, data augmentation; change activication: relu; 	regularizer & activation	a=>a		alexNet	60	na	na	na	36.7	15.4	
 inception	inception	https://arxiv.org/abs/1409.4842	2014.09.17	5591	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	c	VGG	introduce multi-brach inception module=>less computation cost	inception module	a=>c	inception_v2	inception	6.8	na	na	na	na	6.67	
 												inception_v3	inception_v3	23.8	na	na	na	18.77	4.2	x
-												inception_v4	inception_v2		na	na	na	na	na	
+												inception_v4	inception_v2		na	na	na	21.2	5.6	
 VGG	VGG	https://arxiv.org/abs/1409.1556	2014.09.04	8205	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay;2.2.2.2.1.1.standard relu	a	alexNet	increasing depth using an architecture with very small (3x3) convolution filters	small filter size & deeper	a=>a		vgg19	144	na	na	na	25.5	7.3	x
 													vgg16	138	na	na	na	25.6	8.1	
 highwayNets	highwayNets	https://arxiv.org/pdf/1505.00387.pdf	2015.11.03	320	1.1.1.general recognition		b	VGG	introduce gated skip connections to train extremely deep models directly from scratch	gated skip connections	a=>b		highwayNets	2.3	7.76	na	na	na	na	
@@ -33,8 +33,8 @@ denseNet	Densely Connected Networks	https://arxiv.org/abs/1608.06993	2016.08.25	
 													denseNet-BC(l=190, k=40)	25.6	3.46	17.18	na	na	na	
 													denseNet_121	8.1	na	na	na	25.02	7.71	x
 													denseNet_201	20.2	na	na	na	22.58	6.34	x
-squeezeNet	squeezeNet	https://arxiv.org/abs/1602.07360	2016.02.24	264	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	c	alexNet	same performance with 50x less parameters	50x less parameters	a=>c		squeezeNet	1.24	na	na	na	39.6	17.5	x
-								inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge	c=>c				na	na	na	na	na	
+squeezeNet	squeezeNet	https://arxiv.org/abs/1602.07360	2016.02.24	264	1.1.1.general recognition	3.4.1.dropout;3.2.1.SGD with momentum;3.4.2.weight decay	c	inception	exploiting the split-transform-merge strategy in an easy, extensible way	split-transfer-merge	c=>c		squeezeNet	1.24	na	na	na	39.6	17.5	x
+								alexNet	same performance with 50x less parameters	50x less parameters	a=>c				na	na	na	na	na	
 diracNet	diracNet	https://arxiv.org/abs/1706.00388	2017.06.07	4	1.1.1.general recognition	3.1.11.dirac;3.4.4.batch normalization;3.2.1.SGD with momentum;3.4.2.weight decay;3.4.1.dropout	a	resNet	parameterize weights as a residual of Dirac function	implicit residual	b=>a		diracNet-28-5	9.1	3.16	23.44	na	na	na	
 													diracNet-28-10	36.5	4.75	21.54	na	na	na	
 													diracNet-18	11.7	na	na	na	30.37	10.88	
@@ -43,9 +43,12 @@ nasNet	nasNet	https://arxiv.org/abs/1707.07012	2017.12.01	35	1.1.1.general recog
 								resNet	borrow the skip connections from ResNet and let neural architecture search (NAS) select from them	borrow operations	b=>b		nasNet_small	11.1	na	na	na	17.3	3.8	x
 								mobileNet	borrow the depthwise separable conv from mobileNet and let neural architecture search (NAS) select from them	borrow operations	d=>d		nasNet_large	5.3	na	na	na	26	8.4	x
 SENet	Squeeze-and-Excitation Networks	https://arxiv.org/abs/1709.01507	2017.09.05	48	1.1.1.general recognition		b	mobileNet	insipired by the manipulation on channels=>significant performance improvements with slight computional cost	manipulate channels	a=>b		seNet_inception_resnetv2	65.6	na	na	na	19.8	4.79	
-mixNet		https://arxiv.org/abs/1802.01808	2018.02.06	0	1.1.1.general recognition		b	resNet	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b		mixNet							
-								denseNet	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b									
-								DPN	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b									
+mixNet		https://arxiv.org/abs/1802.01808	2018.02.06	0	1.1.1.general recognition		b	resNet	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b		mixNet-100	1.5	4.19	21.12	1.57	na	na	
+								denseNet	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b		mixNet-250	29	3.32	17.06	1.51	na	na	
+								DPN	generalize the connections in ResNet, DenseNet and DPN	generalize	b=>b		mixNet-190	48.5	3.13	16.92	na	na	na	
+													mixNet-105	11.16	na	na	na	23.3	6.7	
+													mixNet-121	21.86	na	na	na	21.9	5.9	
+													mixNet-141	41.07	na	na	na	20.4	5.3	
 DPN	Dual Path Networks	https://arxiv.org/pdf/1707.01629.pdf	2017.06.06	31	1.1.1.general recognition		b	denseNet	combine the connections in DenseNet and ResNet	combine	b=>b		DPN-92	145	na	na	na	20.8	5.4	
 								resNet	combine the connections in DenseNet and ResNet	combine	b=>b									
 xception		https://arxiv.org/abs/1610.02357	2016.10.07	114	1.1.1.general recognition		c;d	inception	the inception modules are replaced with depthwise separable convolutions=>improve parameter efficiency	depthwise seperable conv	c=>c+d						21	5.5		
