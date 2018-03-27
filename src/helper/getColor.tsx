@@ -9,7 +9,8 @@ const COLORS: string[] = [
     ' #66c2a5',
     ' #3288bd',
     ' #5e4fa2',
-    ' #fee08b',
+    ' #d53e4f',
+    // ' #fee08b',
     ]
 
 const GREEN: string[] = [
