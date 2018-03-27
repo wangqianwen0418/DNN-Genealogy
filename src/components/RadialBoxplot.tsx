@@ -305,24 +305,23 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .text((attr: any) => attr.dataset)
 
         // Performances
-        if (selected_nns.length > 0) {
-            let marks = selected_nns.map((d: Dot, idx: number) => {
-                return d.attr.map((attr: number, attr_i: number) => {
-                    if (attr !== 100)
-                        return {
-                            name: d.name,
-                            parent: d.parent,
-                            angle: bar_a * attr_i + (bar_a - margin) * (attr - nonsequenceBenchmarks[attr_i].minimum) / nonsequenceBenchmarks[attr_i].range
+        if (nns.length > 0) {
+            perf = nns.reduce((prev: any, nn: Network) => prev.concat(
+                nn.dot.reduce((prev: any, d: Dot) => prev.concat(
+                    d.attr.reduce((prev: any, attr: number, attr_i: number) => {
+                        if (attr !== 100) {
+                            return prev.concat({
+                                name: d.name,
+                                parent: d.parent,
+                                angle: bar_a * attr_i + (bar_a - margin) * (attr - nonsequenceBenchmarks[attr_i].minimum) / nonsequenceBenchmarks[attr_i].range
+                            })
+                        } else {
+                            return prev
                         }
-                    else
-                        return null
-                })
-            })
-            marks = marks.reduce((prev, item) => prev.concat(item))
-            perf = []
-            for (let mark of marks) {
-                if (mark) perf.push(mark)
-            }
+                    }, [])
+                ), [])
+            ), [])
+
             let tags = g.append('g')
                 .attr('id', 'marks')
                 .selectAll('g')
@@ -333,8 +332,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 .attr('d', (d: any) => this.arc(0, 0, this.r + margin + bar_w / 2, d.angle - 0.5, d.angle + 0.5))
                 .attr('fill', 'none')
                 .attr('stroke-width', bar_w)
-                .attr("stroke", (d: Dot) => {console.info(d); return getColor(d.parent)})
-                // .attr('stroke', (d: any) => getColor(d.name))
+                .attr("stroke", (d: Dot) => getColor(d.parent))
         }
 
         // Nodes
@@ -368,14 +366,11 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('r', (d: Dot) => d.r)
             .attr('fill', (d:Dot)=>getColor(d.parent))
             // .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
-            .on('click', function(d) {
-                that.selectNode(d)
-            })
+            // .on('click', function(d) {
+            //     that.selectNode(d)
+            // })
             .on('mousemove', function(d) {
                 let idx: number
-                // let hoveredNode = document.querySelector('#nnnode_' + d.parent + ' .bounder')
-                // if (hoveredNode)
-                //     hoveredNode.setAttribute('stroke', 'yellow')
                 document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 0.2;')
                 let nnnodes = document.getElementsByClassName('NNNode')
                 idx = 0
@@ -418,7 +413,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             })
 
         function noticeLines(name: string) {
-            if (that.state.selected.indexOf(name) !== -1 && !noticing) {
+            if (!noticing) {
                 noticing = true                    
                 let attention = perf.filter((pf) => pf.name == name)
                 d3.select('.RadialBoxplot').select('svg').append('g').attr('class', 'noticelines')
@@ -431,7 +426,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     .attr('x2', (pf: any) => (that.r + margin)*(Math.cos((pf.angle - 90) * Math.PI / 180.0)) + offsetX)
                     .attr('y2', (pf: any) => (that.r + margin)*(Math.sin((pf.angle - 90) * Math.PI / 180.0)) + offsetY)
                     // .attr('stroke', getColor(name))
-                    .attr("stroke", (d: Dot) => {console.info(d); return getColor(d.parent)})
+                    .attr("stroke", (d: Dot) => getColor(d.parent))
                     .attr('stroke-dasharray', '2, 2')
             }
         }
@@ -478,7 +473,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             //.attr('stroke-width', 1)
             .append('circle')
             .attr('r', 5)
-            .attr('fill', '#666')            
+            .attr('fill', (d: Network) => getColor(d.network))            
         legend_nn.append("text")
             .attr("x", this.width - 14)
             .attr("y", 6.5)
@@ -492,26 +487,26 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .text("×")
             .on('click', (d: Network) => this.deleteNN(d))
         
-        var legend_name = svg.append("g")
-            .attr("id", "legend_name")
-            .attr("font-family", "sans-serif")
-            .attr("font-size", 10)
-            .attr("text-anchor", "end")
-            .selectAll("g")
-            .data(selected_nns)
-            .enter().append("g")
-            .attr("transform", (d: Dot, i: number) => "translate(-20," + (this.height - i * 15 - 20) + ")")
-        legend_name.append("rect")
-             .attr("x", this.width - 9)
-             .attr("width", 9)
-             .attr("height", 9)
-             .attr("fill", (d: Dot) => getColor(d.parent))
-            //  .attr("fill", (d: Dot, idx: number) => String(getColor(d.name)))
-        legend_name.append("text")
-             .attr("x", this.width - 14)
-             .attr("y", 6.5)
-             .attr("dy", "0.15em")
-             .text((d: Dot) => d.name)
+        // var legend_name = svg.append("g")
+        //     .attr("id", "legend_name")
+        //     .attr("font-family", "sans-serif")
+        //     .attr("font-size", 10)
+        //     .attr("text-anchor", "end")
+        //     .selectAll("g")
+        //     .data(selected_nns)
+        //     .enter().append("g")
+        //     .attr("transform", (d: Dot, i: number) => "translate(-20," + (this.height - i * 15 - 20) + ")")
+        // legend_name.append("rect")
+        //      .attr("x", this.width - 9)
+        //      .attr("width", 9)
+        //      .attr("height", 9)
+        //      .attr("fill", (d: Dot) => getColor(d.parent))
+        //     //  .attr("fill", (d: Dot, idx: number) => String(getColor(d.name)))
+        // legend_name.append("text")
+        //      .attr("x", this.width - 14)
+        //      .attr("y", 6.5)
+        //      .attr("dy", "0.15em")
+        //      .text((d: Dot) => d.name)
     }
 
     render() {
