@@ -38,8 +38,6 @@ export default class Network extends React.Component<Props, State> {
         this.shiftDown = false
     }
     getDag(layers: EvoNode[]) {
-        console.log(layers)
-        console.log(layers.length)
         const nodeH = 10, nodeW = 200
         let g = new dagre.graphlib.Graph();
         g.setGraph({ 
@@ -156,6 +154,12 @@ export default class Network extends React.Component<Props, State> {
         let { nodes, edges } = this.getDag(EvoNodes)
         this.setState({ nodes, edges })
     }
+    componentWillReceiveProps(nextProps: Props) {
+         console.log('did receive')
+         let { nodes: EvoNodes } = nextProps
+         let { nodes, edges } = this.getDag(EvoNodes)
+         this.setState({ nodes, edges })
+    }
     // componentWillUpdate() {
     //     if(this.first && this.props.nodes.length > 0){
     //         this.first = false
@@ -170,8 +174,6 @@ export default class Network extends React.Component<Props, State> {
     //     }
     // }
     render() {
-        console.log('will render')
-        console.log(this.state.nodes)
         let { nodes, edges, x, y, scale } = this.state
         if (nodes.length > 0) {
             // let { nodes, edges} = this.getDag(EvoNodes)
