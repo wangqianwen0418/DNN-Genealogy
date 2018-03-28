@@ -67,3 +67,8 @@
     animation: bumb 800ms;
 }
 
+/* modal  */
+.ant-modal-content{
+    height:80vh;
+}
+

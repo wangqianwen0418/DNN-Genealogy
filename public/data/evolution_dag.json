@@ -946,19 +946,19 @@
         "ID": "resNet",
         "link_category": "b=>b",
         "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
-        "link_info_s": "generalize"
+        "link_info_s": "generalize connections"
       },
       {
         "ID": "denseNet",
         "link_category": "b=>b",
         "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
-        "link_info_s": "generalize"
+        "link_info_s": "generalize connections"
       },
       {
         "ID": "DPN",
         "link_category": "b=>b",
-        "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
-        "link_info_s": "generalize"
+        "link_info_l": "like DPN, MixNet combines the connections in ResNet and DenseNet, but in a more flexible way",
+        "link_info_s": "generalize connections"
       }
     ],
     "training": [],

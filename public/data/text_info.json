@@ -274,7 +274,7 @@
     },
     {
         "ID": "mixNet",
-        "info": "",
+        "info": "Two forms of connections, additon and concatenation, have the superiority and insufficiency. To combine their advantages and avoid certain limitations on representation learning, we present a highly efficient and modularized Mixed Link Network (MixNet) which is equipped with flexible inner link (addition) and outer link (concatenation) modules. ",
         "links":[
             ["Mixed Link Networks", "https://arxiv.org/abs/1802.01808"]
         ]
