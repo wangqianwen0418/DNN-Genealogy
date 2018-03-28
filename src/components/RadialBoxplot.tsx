@@ -161,11 +161,13 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     componentDidMount() {
         window.addEventListener("resize", this.draw)
+        d3.select(".RadialBoxplot").append("div").attr("class", "toolTip")
         this.draw()
     }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.draw)
+        d3.select(".toolTip").remove()
     }
 
     updateData(nn: NN) {
@@ -224,6 +226,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         let svg = d3.select('.RadialBoxplot').insert('svg')
             .attr('width', '100%')
             .attr('height', '100%')
+        let tooltip = d3.select(".RadialBoxplot").select(".toolTip")
         
         let g = svg.append('g')
             .attr('class', 'compareView')
@@ -242,11 +245,13 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset)
             .attr('id', (attr: any) => 'axis_' + attr.dataset)
+            .attr('class', 'link')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin))
             .attr('fill', 'none')
             .attr('stroke-width', 1)
             .attr('stroke', 'black')
             .attr('stroke-dasharray', '5, 5')
+            .style('marker-end', 'url(#arrow)')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_start')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * i + 0.5))
@@ -388,6 +393,17 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     }
                     idx += 1
                 }
+                tooltip
+                    .style("right", "20px")
+                    .style("bottom", "20px")
+                    .style("display", "inline-block")
+                    .html("<span>" + (d.name) + "</span><br>" + d.attr.map((attr: number, attr_i: number) => {
+                        if (attr !== 100) {
+                            return nonsequenceBenchmarks[attr_i].dataset + ": " + attr + "%<br>"
+                        } else {
+                            return ""
+                        }
+                    }).join(""))
                 noticeLines(d.name)
             })
             .on('mouseout', function(d) {
@@ -408,7 +424,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     }
                     idx += 1
                 }
-                noticing = false                
+                noticing = false
+                tooltip.style("display", "none")
                 d3.selectAll('.noticelines').remove()
             })
 
