@@ -8,7 +8,7 @@ import axios from "axios"
 import * as d3 from "d3"
 import { NN, NNLink, Node, GraphEdge, Point } from "../types"
 import { getColor } from "../helper/index";
-import { TreeSelect, Button, Dropdown, Menu, Tooltip, Switch } from "antd"
+import { TreeSelect, Button, Dropdown, Menu, Tooltip, Switch, Modal } from "antd"
 import moment from 'moment';
 import NNNode from "./NNNode";
 import Legend, { LegendProps } from "./Legend";
@@ -83,7 +83,8 @@ export interface State {
     transY: number,
     hoverEdge: string,
     showLabel: boolean,
-    legend: LegendProps['items']
+    legend: LegendProps['items'],
+    modalVisible: boolean
 }
 
 const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
@@ -121,6 +122,7 @@ export default class Evolution extends React.Component<Props, State>{
         this.mouseDown = this.mouseDown.bind(this)
         this.mouseUp = this.mouseUp.bind(this)
         this.selectItem = this.selectItem.bind(this)
+        this.showModal = this.showModal.bind(this)
         this.state = {
             datum: [],
             nodes: [],
@@ -139,7 +141,8 @@ export default class Evolution extends React.Component<Props, State>{
             transY: 0,
             hoverEdge: '',
             showLabel: false,
-            legend: legendCNN
+            legend: legendCNN,
+            modalVisible: false
         }
     }
     async getData() {
@@ -804,7 +807,8 @@ export default class Evolution extends React.Component<Props, State>{
                 break
             case 'detailed':
                 console.log('detailed')
-                showDetailedStructure(selectedNode.label)
+                // showDetailedStructure(selectedNode.label)
+                this.showModal(selectedNode.label)
                 break
             default:
                 break
@@ -815,8 +819,15 @@ export default class Evolution extends React.Component<Props, State>{
         legend[key][op] = !legend[key][op]
         this.setState({ legend })
     }
+
+    showModal(label: string) {
+        this.setState({
+            modalVisible: true
+        })
+    }
+
     render() {
-        let { nodes, edges, w, h, appValue, legend } = this.state
+        let { nodes, edges, w, h, appValue, legend, modalVisible } = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
@@ -910,6 +921,16 @@ export default class Evolution extends React.Component<Props, State>{
 
 
             </div>
+            <Modal
+                wrapClassName="imageModal"
+                style={{ top: "10vh"}}
+                title="test"
+                visible={modalVisible}
+                maskClosable={true}
+                footer={false}
+                
+                >
+            </Modal>
         </div>
     }
 }

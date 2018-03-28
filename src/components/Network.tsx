@@ -175,6 +175,8 @@ export default class Network extends React.Component<Props, State> {
     // }
     render() {
         let { nodes, edges, x, y, scale } = this.state
+        let svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 20
+        console.log(document.getElementsByClassName('ant-modal-content')[0].clientHeight)
         if (nodes.length > 0) {
             // let { nodes, edges} = this.getDag(EvoNodes)
             // let svg_h = Math.max(h, this.graphWindow.clientHeight)
@@ -182,10 +184,10 @@ export default class Network extends React.Component<Props, State> {
             // let svg_h = this.graphWindow.clientHeight
             // let svg_w = this.graphWindow.clientWidth
             return (
-            <div className="wrapped-graph">
+            <div className="wrapped-graph" style={{ height: "200px"}}>
                 <svg
                     width="100%"
-                    height="auto"
+                    height={`${svgHeight}px`}
                 >
                     <g
                         className="graph"
