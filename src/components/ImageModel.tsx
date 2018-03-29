@@ -10,7 +10,13 @@ const info = Modal.info
 export async function showDetailedStructure(label: string) {
     return info({
         title: (
-            <div style={{textAlign:'center'}}>Detailed Structure of {label}</div>
+            <div style={{
+                textAlign:'center',
+                height:"100%",
+            }} 
+            className="arcModal">
+            Detailed Structure of {label}
+            </div>
         ),
         content: (
             //<Network nodes={datum} />

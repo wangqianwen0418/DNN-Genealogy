@@ -53,8 +53,8 @@ DPN	Dual Path Networks	https://arxiv.org/pdf/1707.01629.pdf	2017.06.06	31	1.1.1.
 								resNet	combine the connections in DenseNet and ResNet	combine	b=>b									
 xception		https://arxiv.org/abs/1610.02357	2016.10.07	114	1.1.1.general recognition		c;d	inception	the inception modules are replaced with depthwise separable convolutions=>improve parameter efficiency	depthwise seperable conv	c=>c+d						21	5.5		
 mobileNet		https://arxiv.org/abs/1704.04861	2017.04.17	149	1.1.1.general recognition		d;a	xception	borrow the depthwise seperable convolutions used	depthwise seperable conv	d=>d		mobileNet-224	4.2				29.4		
-								VGG	apply the same streamlined architecture; add batch normalization; replace normal conv blocks with depthwise seperable conv blocks	same streamlined architecture	a=>a									
-													mobileNet-160	1.32				39.8		
+								VGG	apply the same streamlined architecture; add batch normalization; replace normal conv blocks with depthwise seperable conv blocks	same streamlined architecture	a=>a		mobileNet-160	1.32				39.8		
+								squeezeNet	mobileNet and squeezeNet both aim to build small networks. MobileNet has better performance and less computation cost compared with SqueezeNet with the same size.	same small size with better performance	d=>a									
 															na	na	na	na	na	
 ID		url	date	citation	application	training	architecture	parent	link_info_l	link_info_s	link_category		name							
 SRN	simple RNN	http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/full	1990.03.01	9047	1.2.NLP								recurrent neural network							

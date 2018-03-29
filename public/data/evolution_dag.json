@@ -946,19 +946,19 @@
         "ID": "resNet",
         "link_category": "b=>b",
         "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
-        "link_info_s": "generalize connections"
+        "link_info_s": "generalize"
       },
       {
         "ID": "denseNet",
         "link_category": "b=>b",
         "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
-        "link_info_s": "generalize connections"
+        "link_info_s": "generalize"
       },
       {
         "ID": "DPN",
         "link_category": "b=>b",
-        "link_info_l": "like DPN, MixNet combines the connections in ResNet and DenseNet, but in a more flexible way",
-        "link_info_s": "generalize connections"
+        "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
+        "link_info_s": "generalize"
       }
     ],
     "training": [],
@@ -1074,6 +1074,12 @@
         "link_category": "a=>a",
         "link_info_l": "apply the same streamlined architecture; add batch normalization; replace normal conv blocks with depthwise seperable conv blocks",
         "link_info_s": "same streamlined architecture"
+      },
+      {
+        "ID": "squeezeNet",
+        "link_category": "c=>a",
+        "link_info_l": "mobileNet and squeezeNet both aim to build small networks. MobileNet has better performance and less computation cost compared with SqueezeNet with the same size.",
+        "link_info_s": "same small size with better performance"
       }
     ],
     "training": [],
