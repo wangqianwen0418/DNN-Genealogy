@@ -13,7 +13,8 @@ import moment from 'moment';
 import NNNode from "./NNNode";
 import Legend, { LegendProps } from "./Legend";
 import ExtendNode from "./ExtendNode";
-import { showDetailedStructure } from './ImageModel'
+// import { showDetailedStructure } from './ImageModel'
+import ArchitectureCompare from "./ArchitectureCompare"
 import { nonsequenceDatasets, nonsequenceBenchmarks } from "../constants";
 
 // const {TreeNode} = TreeSelect
@@ -84,7 +85,8 @@ export interface State {
     hoverEdge: string,
     showLabel: boolean,
     legend: LegendProps['items'],
-    modalVisible: boolean
+    modalVisible: boolean,
+    detailed: string
 }
 
 const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
@@ -142,7 +144,8 @@ export default class Evolution extends React.Component<Props, State>{
             hoverEdge: '',
             showLabel: false,
             legend: legendCNN,
-            modalVisible: false
+            modalVisible: false,
+            detailed: ""
         }
     }
     async getData() {
@@ -822,12 +825,13 @@ export default class Evolution extends React.Component<Props, State>{
 
     showModal(label: string) {
         this.setState({
+            detailed: label,
             modalVisible: true
         })
     }
 
     render() {
-        let { nodes, edges, w, h, appValue, legend, modalVisible } = this.state
+        let { nodes, edges, w, h, appValue, legend, modalVisible, detailed } = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
@@ -924,12 +928,14 @@ export default class Evolution extends React.Component<Props, State>{
             <Modal
                 wrapClassName="imageModal"
                 style={{ top: "10vh"}}
-                title="test"
+                title={`Detailed Structure of ${detailed}`}
+                width="80vw"
                 visible={modalVisible}
-                maskClosable={true}
                 footer={false}
-                
+                onCancel={() => this.setState({modalVisible: false})}
+                maskClosable={true}                
                 >
+                <ArchitectureCompare network={detailed} />
             </Modal>
         </div>
     }
