@@ -271,7 +271,7 @@ export default class Evolution extends React.Component<Props, State>{
             distanceDict = dagre.graphlib.alg
                 .dijkstra(
                     dag, selectedNode.label, 
-                    (e) =>(e.v==selectedNode.label?0.8:1), 
+                    (e) =>(e.v==selectedNode.label?1:0.8), 
                     v => dag.nodeEdges(v)
                 )
         }
@@ -569,8 +569,8 @@ export default class Evolution extends React.Component<Props, State>{
                 stroke={clickLegend?"gray":getColor(key)}
                 fill='none'
                 transform={`translate(${i*4}, ${i*4})`}
-                strokeWidth={(hoverLegend||hovered)&&!clickLegend ? 6 : 3}
-                opacity={hoverLegend? 1:(clickLegend?0.4: 0.7)}
+                strokeWidth={(hoverLegend||hovered)&&!clickLegend ? 6 : 4}
+                opacity={hoverLegend? 1:(clickLegend?0.4: .7)}
             />
             })}
             
