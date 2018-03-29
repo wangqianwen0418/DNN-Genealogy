@@ -24,7 +24,6 @@ export interface State {
 export default class Network extends React.Component<Props, State> {
     public graphWindow: any; shiftDown: boolean
     constructor(props: Props) {
-        console.log('construct')
         super(props)
         this.state = {
             x: 1,
@@ -141,7 +140,6 @@ export default class Network extends React.Component<Props, State> {
     //     this.setState({ scale })
     // }
     componentWillMount() {
-        console.log('will mount')
         /*if (this.props.nodes.length !== nextProps.nodes.length) {
             let { nodes: EvoNodes } = nextProps
             let { nodes, edges } = this.getDag(EvoNodes)
@@ -155,7 +153,6 @@ export default class Network extends React.Component<Props, State> {
         this.setState({ nodes, edges })
     }
     componentWillReceiveProps(nextProps: Props) {
-         console.log('did receive')
          let { nodes: EvoNodes } = nextProps
          let { nodes, edges } = this.getDag(EvoNodes)
          this.setState({ nodes, edges })
@@ -175,6 +172,8 @@ export default class Network extends React.Component<Props, State> {
     // }
     render() {
         let { nodes, edges, x, y, scale } = this.state
+        let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 70,
+            svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 20
         if (nodes.length > 0) {
             // let { nodes, edges} = this.getDag(EvoNodes)
             // let svg_h = Math.max(h, this.graphWindow.clientHeight)
@@ -182,10 +181,10 @@ export default class Network extends React.Component<Props, State> {
             // let svg_h = this.graphWindow.clientHeight
             // let svg_w = this.graphWindow.clientWidth
             return (
-            <div className="wrapped-graph">
+            <div className="wrapped-graph" style={{ height: "200px", width: "100%"}}>
                 <svg
-                    width="100%"
-                    height="auto"
+                    width={`${svgWidth}px`}
+                    height={`${svgHeight}px`}
                 >
                     <g
                         className="graph"

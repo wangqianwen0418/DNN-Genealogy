@@ -24,7 +24,7 @@ export async function showDetailedStructure(label: string) {
         ),
         okText: 'OK',
         iconType: '',
-        width: '80%',
+        width: '60%',
         onOk() {
             // do nothing
         },
