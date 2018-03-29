@@ -112,6 +112,16 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         this.getData = this.getData.bind(this)
     }
 
+    componentWillMount() {
+        console.log('mount')
+        let arcs: any = mapNetworkToArcs.filter((d: any) => this.props.network == d.label)[0], model: string = ""
+        if (arcs.hasOwnProperty('children'))
+            model = arcs.children[0].value
+        else
+            model = arcs.value
+        this.getData(model, 1)
+    }
+
     componentWillReceiveProps(nextProps: Props) {
         console.log('yuanjun', nextProps)
         let arcs: any = mapNetworkToArcs.filter((d: any) => nextProps.network == d.label)[0], model: string = ""
@@ -136,7 +146,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         let network = this.props.network
         let that = this
         return <div className="ArchitectureCompare">
-            <div style={{float: "left", width: "50%"}}>
+            <div style={{float: "left", width: "50%", height: "65vh"}}>
             <Cascader
                 options={mapNetworkToArcs.filter((d: any) => network == d.label)}
                 placeholder={`Choose Model in ${network}`}
@@ -146,7 +156,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
             </Cascader>
             <Network nodes={this.state.nodes1} />
             </div>
-            <div style={{float: "left", width: "50%"}}>
+            <div style={{float: "left", width: "50%", height: "65vh"}}>
             <Cascader
                 options={mapNetworkToArcs}
                 placeholder="Choose Model"
