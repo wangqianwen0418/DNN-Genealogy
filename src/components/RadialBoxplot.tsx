@@ -469,7 +469,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
         simulation = simulation
             .nodes(NNnodes)
-            .force('collide',d3.forceCollide().strength(.5).radius((d:Dot)=>d.r).iterations(5))
+            .force('collide',d3.forceCollide().strength(.1).radius((d:Dot)=>d.r).iterations(5))
             // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
             // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)

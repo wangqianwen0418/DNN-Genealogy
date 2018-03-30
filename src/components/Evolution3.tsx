@@ -89,7 +89,7 @@ export interface State {
     detailed: string
 }
 
-const nodeH = 25, nodeW = 120, margin = 30, labelL = 20, tabH = 24,
+const nodeH = 45, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -383,7 +383,7 @@ export default class Evolution extends React.Component<Props, State>{
         }
         let topDoi: Node[] = topN(dag.nodes())
         
-        let ratio = 1
+        let ratio = 1.5
         topDoi.forEach((node:Node)=>{
             ratio *= 0.9
             dag.setNode(node.label, {

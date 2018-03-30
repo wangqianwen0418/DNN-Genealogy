@@ -240,9 +240,11 @@ def build_network(deepest=False):
 if __name__ == "__main__":
     NB_CLASSES = 10
     model = build_network()
-    model.summary()
+    # model.summary()
     json_string = model.to_json()
-    with open("fractal.json", "w") as jsonf:
-        jsonf.write(json_string)
-    jsonf.close()
+    for layer in model.layers:
+        print(layer.name, layer)
+    # with open("fractal.json", "w") as jsonf:
+    #     jsonf.write(json_string)
+    # jsonf.close()
 
