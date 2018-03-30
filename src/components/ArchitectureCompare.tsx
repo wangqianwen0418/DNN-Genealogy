@@ -14,6 +14,13 @@ const mapNetworkToArcs = [{
         label: 'fractalNet-40'
     }]
 }, {
+    value: 'inception',
+    label: 'inception',
+    children: [{
+        value: 'inception_v3',
+        label: 'inception_v3'
+    }]
+}, {
     value: 'inception_resNet',
     label: 'inception_resNet'
 }, {
