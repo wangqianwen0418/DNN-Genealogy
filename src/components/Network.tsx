@@ -230,13 +230,6 @@ export default class Network extends React.Component<Props, State> {
         }
     }
 
-    shouldComponentUpdate(nextProps: Props, nextState: State) {
-        if (nextProps.name === this.props.name) {
-            return false
-        }
-        return true
-    }
-
     // componentWillUpdate() {
     //     if(this.first && this.props.nodes.length > 0){
     //         this.first = false

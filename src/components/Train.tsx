@@ -40,36 +40,35 @@ export default class Train extends React.Component<Props, State>{
     //     }
     //   }
     changeTab(key: string) {
-
+        
     }
+
     componentWillMount() {
         this.getData()
     }
     render() {
-        let panes = this.state.tabsData.map((tab: any, i: number) => {
-            return <TabPane tab={tab.name} key={i} 
-            className="Train"
-            style={{
-                overflowY:"auto",
-                height:"inherit"
-                }}
-                >
-                <Collapse bordered={false} >
-                {tab.children.map((pane:any)=>{
-                    return <Panel header={pane.name} key={pane.name}>
-                    <p>{pane.url}</p>
-                </Panel>
-                })}
+        let panes = this.state.tabsData.map((tab: any, i: number) => {return (
+            <TabPane
+                tab={tab.name}
+                key={i} 
+                className="Train"
+                style={{height:'calc(100% - 25px)', overflow:'auto'}}
+            >
+                <Collapse bordered={false}>
+                    {tab.children.map((pane:any)=>{
+                        return <Panel header={pane.name} key={pane.name}><p>{pane.url}</p></Panel>
+                    })}
                 </Collapse>
             </TabPane>
-        })
+        )})
         return (
             <Card
                 bordered={false}
-                title={<span style={{ fontSize: "1.2em" }}>Training</span>}
+                title={<span style={{ fontSize: '1.2em' }}>Training</span>}
                 className="View ViewBottom"
+                bodyStyle={{height: 'calc(100% - 48px)'}}
             >
-                <Tabs onChange={this.changeTab} className="train">
+                <Tabs onChange={this.changeTab} className="train" style={{height: '100%'}}>
                     {panes}
                 </Tabs>
             </Card>
