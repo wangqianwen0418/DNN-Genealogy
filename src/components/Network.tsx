@@ -229,6 +229,14 @@ export default class Network extends React.Component<Props, State> {
             this.setState({ nodes, edges })
         }
     }
+
+    shouldComponentUpdate(nextProps: Props, nextState: State) {
+        if (nextProps.name === this.props.name) {
+            return false
+        }
+        return true
+    }
+
     // componentWillUpdate() {
     //     if(this.first && this.props.nodes.length > 0){
     //         this.first = false
@@ -243,6 +251,7 @@ export default class Network extends React.Component<Props, State> {
     //     }
     // }
     render() {
+        console.log('render = ', this.props.name)
         let { nodes, edges, x, y, scale } = this.state
         let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 70,
             svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 20

@@ -151,7 +151,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
     ifCompare(comparing: boolean) {
         if (comparing === true) {
             d3.select('.CompareModal').style('width', '80%')
-            this.setState({model2: "", nodes2: [], comparing})
+            this.setState({model2: '', nodes2: [], comparing})
         } else {
             d3.select('.CompareModal').style('width', '40%')
             this.setState({comparing})
@@ -163,12 +163,13 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         if (!this.state.comparing) {
             return (
                 <div className="ArchitectureCompare" >
-                    <Col span={24} style={{height: '100%'}}>
+                    <Col span={24} className="ArchitectureColumn">
                         <Cascader
                             options={mapNetworkToArcs.filter((d: any) => network === d.label)}
                             placeholder={`Choose Model in ${network}`}
                             onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
                             expandTrigger="hover"
+                            allowClear={false}
                             style={{width: '35%'}}
                         />
                         <Button
@@ -185,12 +186,13 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         } else {
             return (
                 <div className="ArchitectureCompare" >
-                    <Col span={12} style={{height: '100%'}}>
+                    <Col span={12} className="ArchitectureColumn">
                         <Cascader
                             options={mapNetworkToArcs.filter((d: any) => network === d.label)}
                             placeholder={`Choose Model in ${network}`}
                             onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
                             expandTrigger="hover"
+                            allowClear={false}
                             style={{width: '35%'}}
                         />
                         <Button
@@ -203,12 +205,13 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         </Button>
                         <Network nodes={this.state.nodes1} name={this.state.model1} />
                     </Col>
-                    <Col span={12} style={{height: '100%'}}>
+                    <Col span={12} className="ArchitectureColumn ArchRight">
                         <Cascader
                             options={mapNetworkToArcs}
                             placeholder="Choose Model"
                             onChange={(value: any) => {this.getData(value[value.length - 1], 2)}}
                             expandTrigger="hover"
+                            allowClear={false}
                             style={{width: '35%'}}
                         />
                         <Network nodes={this.state.nodes2} name={this.state.model2} />
