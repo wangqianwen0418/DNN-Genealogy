@@ -89,7 +89,7 @@ export interface State {
     detailed: string
 }
 
-const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
+const nodeH = 25, nodeW = 120, margin = 30, labelL = 20, tabH = 24,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -216,7 +216,7 @@ export default class Evolution extends React.Component<Props, State>{
             marginx: margin * 2,
             marginy: margin,
             rankdir: 'LR',
-            edgesep: nodeH * 0.4,
+            edgesep: nodeH * 0.6,
             nodesep: nodeH * .5,
             // ranker: "tight-tree"
             ranker: "longest-path"
@@ -384,12 +384,14 @@ export default class Evolution extends React.Component<Props, State>{
             return topDoi
         }
         let topDoi: Node[] = topN(dag.nodes())
-
+        
+        let ratio = 1
         topDoi.forEach((node:Node)=>{
+            ratio *= 0.9
             dag.setNode(node.label, {
                             ...node,
-                            width: expandW,
-                            height: expandH,
+                            width: expandW * ratio,
+                            height: expandH * ratio,
                         })
         })
 
@@ -436,7 +438,7 @@ export default class Evolution extends React.Component<Props, State>{
             {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
-                    zoomed: boolean = node.width == expandW,
+                    zoomed: boolean = node.width > nodeW,
                     hoverNodes = hoverEdge.split("->"),
                     hovered = hoverNodes.indexOf(node.label) != -1
                 return <NNNode
@@ -460,7 +462,7 @@ export default class Evolution extends React.Component<Props, State>{
 
         return nodes.map((node: Node) => {
             let selected: boolean = (node.ID === selectedID),
-                zoomed: boolean = node.width == expandW,
+                zoomed: boolean = node.width > nodeW,
                 hoverNodes = hoverEdge.split("->"),
                 hovered = hoverNodes.indexOf(node.label) != -1
             return <ExtendNode
@@ -598,7 +600,7 @@ export default class Evolution extends React.Component<Props, State>{
                             {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                                 // console.info(status)
                                 return <text className="link_info fadeIn"
-                                    dy={-0.2 * labelFont}
+                                    dy={-0.3 * labelFont}
                                     scale={1 / scale}
                                     textAnchor="middle"
                                     style={{
@@ -619,7 +621,7 @@ export default class Evolution extends React.Component<Props, State>{
                         <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
                             {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                                 return <text className="link_info fadeIn"
-                                    dy={-0.2 * labelFont}
+                                    dy={-0.3 * labelFont}
                                     scale={1 / scale}
                                     textAnchor="middle"
                                     style={{

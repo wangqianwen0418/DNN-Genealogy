@@ -259,7 +259,7 @@
     },
     {
         "ID": "nasNet",
-        "info": "NasNet automatically learns the architcture design by searching an architecture design space",
+        "info": "NasNet automatically learns the DNN architcture design by searching through an architecture design space. This architecture design space consists of a set of operations collected based on their prevalence in the CNN literature. The architecture learnt on a small dataset can be transfered to a large dataset.",
         "links": [
             ["Learning Transferable Architectures for Scalable Image Recognition", "https://arxiv.org/abs/1707.07012"],
             ["Neural Architecture Search with Reinforcement Learning", "https://arxiv.org/abs/1611.01578"]

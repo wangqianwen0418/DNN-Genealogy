@@ -187,7 +187,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 100
             }
             newdots.push({
-                r: Math.min(Math.max(Math.sqrt(name.params), 4), 10),
+                // r: Math.min(Math.max(Math.sqrt(name.params), 4), 10),
+                r: 4 +  (name.params>15?15+name.params/8:name.params),
                 name: name.name,
                 attr: tmpAttr,
                 parent: nn.ID
@@ -208,12 +209,12 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         let { nns, attr_names, selected } = this.state
         let margin: number = 5,
             bar_a: number = 360 / attr_names.length,
-            bar_w: number = 15
+            bar_w: number = 30
         this.width = (this.ref?this.ref.clientWidth:50)
         this.height = (this.ref?this.ref.clientHeight:30)
         this.r = this.height / 2 - bar_w - 2 - margin * 3
-        let offsetX = this.r + 5 * margin + bar_w + 2,
-            offsetY = this.r + 3 * margin + bar_w + 2
+        let offsetX = this.r + 5 * margin + bar_w + 30,
+            offsetY = this.r + 3 * margin + bar_w + 10
         let selected_nns = selected.map((name: string) => nns.filter((nn) => {
             for (let d of nn.dot)
                 if (d.name == name) return true
@@ -478,7 +479,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
         simulation = simulation
             .nodes(NNnodes)
-            .force('collide',d3.forceCollide().strength(.7).radius((d:Dot)=>d.r).iterations(5))
+            .force('collide',d3.forceCollide().strength(.1).radius((d:Dot)=>d.r).iterations(5))
             // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
             // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)

@@ -107,7 +107,8 @@ export default class ExtendNode extends React.Component<Props, State>{
                 height: node.height * scale,
                 width: node.width * scale,
                 visibility: zoomed ? "visible" : "hidden",
-                border: `0.5px solid ${selected ? "red" : "gray"}`,
+                border: `${selected ? 4 : 0.5}px ${selected ?"dashed":"solid" } gray`,
+                // borderRadius: "5px"
                 // ...defaultStyle,
                 // ...transitionStyles[status]
 
@@ -124,7 +125,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         // style={{
                         //     border: `1px solid ${selected ? "red" : "gray"}`,
                         // }}
-                        height={node.height * scale - margin}
+                        height={node.height * scale - margin - 6}
                         width={node.width * scale}
                         onMouseDown={this.mouseDown}
                         onMouseUp={(e) => { this.mouseUp(e, node) }}
@@ -139,6 +140,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                             src={`../../images/${d.ID}.png`}
                             // style={{ border: `1px solid ${selected ? "red" : "none"}`, }}
                             //   height={node.height}
+                            height={node.height * scale - margin - 6}
                             width={node.width * scale}
                         />
                     </TabPane>
