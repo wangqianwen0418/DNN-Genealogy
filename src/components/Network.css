@@ -4,3 +4,8 @@
     margin-top: 5%;
     text-align: center;
 }
+.wrapped-graph .nodes, .wrapped-graph .edges {
+    /* transition-property: opacity transform width height; */
+    transition-duration: 1.0s;
+    transition-timing-function: ease-in-out;
+}
