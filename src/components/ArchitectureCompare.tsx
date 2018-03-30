@@ -170,6 +170,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
                             expandTrigger="hover"
                             allowClear={false}
+                            popupClassName="MyCascade"
                             style={{width: '35%'}}
                         />
                         <Button
@@ -193,6 +194,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
                             expandTrigger="hover"
                             allowClear={false}
+                            popupClassName="MyCascade"
                             style={{width: '35%'}}
                         />
                         <Button
@@ -212,6 +214,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             onChange={(value: any) => {this.getData(value[value.length - 1], 2)}}
                             expandTrigger="hover"
                             allowClear={false}
+                            popupClassName="MyCascade"
                             style={{width: '35%'}}
                         />
                         <Network nodes={this.state.nodes2} name={this.state.model2} />
