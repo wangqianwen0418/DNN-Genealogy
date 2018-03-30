@@ -200,9 +200,7 @@ export default class Evolution extends React.Component<Props, State>{
                     maximum: sortedData[length - 1],
                     range: sortedData[length - 1] - sortedData[0]
                 })
-                console.log(sortedData)
             }
-            console.log(nonsequenceBenchmarks)
         }
 
         this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
@@ -941,5 +939,3 @@ export default class Evolution extends React.Component<Props, State>{
         </div>
     }
 }
-
-

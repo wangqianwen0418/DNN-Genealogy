@@ -113,6 +113,16 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         this.getData = this.getData.bind(this)
     }
 
+    componentWillMount() {
+        console.log('mount')
+        let arcs: any = mapNetworkToArcs.filter((d: any) => this.props.network == d.label)[0], model: string = ""
+        if (arcs.hasOwnProperty('children'))
+            model = arcs.children[0].value
+        else
+            model = arcs.value
+        this.getData(model, 1)
+    }
+
     componentWillReceiveProps(nextProps: Props) {
         let arcs: any = mapNetworkToArcs.filter((d: any) => nextProps.network === d.label)[0], model: string = ''
         // console.log(arcs)
