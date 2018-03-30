@@ -149,7 +149,7 @@
         "ID": "stacked RNN",
         "info": "A stacked RNN stacks more recurrent hidden layers in an RNN to make it deeper. It is also known as deep RNN.",
         "links": [
-            ["Speech Recognition with Deep Recurrent Neural Networks", "http://ieeexplore.ieee.org/abstract/document/6638947/"],
+            ["Speech Recognition with Deep Recurrent Neural Networks", "https://arxiv.org/abs/1303.5778"],
             ["Learning Complex, Extended Sequences Using the Principle of History Compression", "http://ieeexplore.ieee.org/document/6795261/"],
             ["EESEN: End-to-end Speech Recognition Using Deep RNN Models and WFST-based Decoding", "http://ieeexplore.ieee.org/abstract/document/7404790/"],
             ["Singing-voice Separation from Monaural Recordings Using Deep Recurrent Neural Networks", "http://cal.cs.illinois.edu/papers/huang-ismir2014.pdf"]

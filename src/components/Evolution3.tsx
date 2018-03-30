@@ -200,9 +200,7 @@ export default class Evolution extends React.Component<Props, State>{
                     maximum: sortedData[length - 1],
                     range: sortedData[length - 1] - sortedData[0]
                 })
-                console.log(sortedData)
             }
-            console.log(nonsequenceBenchmarks)
         }
 
         this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
@@ -929,18 +927,17 @@ export default class Evolution extends React.Component<Props, State>{
             </div>
             <Modal
                 wrapClassName="imageModal"
-                style={{ top: "10vh"}}
+                style={{ top: "10%"}}
+                bodyStyle={{ height: "calc(100% - 48px)"}}
                 title={`Detailed Structure of ${detailed}`}
-                width="80vw"
+                width="80%"
                 visible={modalVisible}
                 footer={false}
                 onCancel={() => this.setState({modalVisible: false})}
-                maskClosable={true}                
+                maskClosable={true}
                 >
                 <ArchitectureCompare network={detailed} />
             </Modal>
         </div>
     }
 }
-
-
