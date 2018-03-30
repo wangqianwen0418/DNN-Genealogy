@@ -76,9 +76,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     getForceX(attr: number[]) {
         // return 0
         let len = attr.length
-        let x: number = attr.map((d: number, idx: number) => ((nonsequenceBenchmarks[idx].maximum-d)/nonsequenceBenchmarks[idx].range) * Math.cos(2*Math.PI / (len+1) * (idx + .5) - Math.PI/2))
+        let x: number = attr.map((d: number, idx: number) => d ? ((nonsequenceBenchmarks[idx].maximum-d)/nonsequenceBenchmarks[idx].range) * Math.cos(2*Math.PI / (len+1) * (idx + .5) - Math.PI/2) : 0)
                             .reduce((a, b) => a + b, 0)
-        return x*this.r/(len+1)/200
+        return x*this.r/(len+1)
         // let x:number = attr.map((d:number, idx:number)=> this.polarToCartesian(0,0, this.r*0.8, 360/len*(idx+.5)).x)
         // .reduce((a, b) => a + b, 0)
         // return x/len
@@ -86,9 +86,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     getForceY(attr: number[]) {
         // return 0
         let len = attr.length
-        let y: number = attr.map((d: number, idx: number) => ((nonsequenceBenchmarks[idx].maximum-d)/nonsequenceBenchmarks[idx].range) * Math.sin( 2*Math.PI / (len+1) * (idx + .5) - Math.PI/2))
+        let y: number = attr.map((d: number, idx: number) => d ? ((nonsequenceBenchmarks[idx].maximum-d)/nonsequenceBenchmarks[idx].range) * Math.sin( 2*Math.PI / (len+1) * (idx + .5) - Math.PI/2) : 0)
                             .reduce((a, b) => a + b, 0)
-        return y*this.r/(len+1)/200
+        return y*this.r/(len+1)
         // let len = attr.length
         // let y:number = attr.map((d:number, idx:number)=> this.polarToCartesian(0,0, this.r*0.8, 360/len*(idx+.5)).y)
         // .reduce((a, b) => a + b, 0)
@@ -184,7 +184,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         for (let name of nn.names) {
             let tmpAttr: number[] = []
             for (let index in attr_names) {
-                tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 100
+                // tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 100
+                tmpAttr[index] = name[attr_names[index].dataset]
             }
             newdots.push({
                 // r: Math.min(Math.max(Math.sqrt(name.params), 4), 10),
@@ -331,7 +332,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             perf = nns.reduce((prev: any, nn: Network) => prev.concat(
                 nn.dot.reduce((prev: any, d: Dot) => prev.concat(
                     d.attr.reduce((prev: any, attr: number, attr_i: number) => {
-                        if (attr !== 100) {
+                        // if (attr !== 100) {
+                        if (attr) {
                             return prev.concat({
                                 name: d.name,
                                 parent: d.parent,
@@ -377,7 +379,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('class', 'dot')
             .data(NNnodes)
             .enter().append('g')
-            //.attr("transform", d=>`translate(${d.x}, ${d.y})`)            
+            .attr("transform", d=>`translate(${d.x}, ${d.y})`)            
             //.append('polygon')
             //.attr('points', (d :Dot) => this.polygon(d.r, networks.indexOf(d.parent) + 3))            
             //.attr('stroke-width', 1)            
