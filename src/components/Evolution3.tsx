@@ -924,15 +924,15 @@ export default class Evolution extends React.Component<Props, State>{
 
             </div>
             <Modal
-                wrapClassName="imageModal"
-                style={{ top: "10%"}}
-                bodyStyle={{ height: "calc(100% - 48px)"}}
+                className="CompareModal"
+                style={{top: "10%", width: "40%", transitionDuration: "0.3s", transitionTimingFunction: "ease"}}
+                bodyStyle={{height: "calc(100% - 48px)"}}
                 title={`Detailed Structure of ${detailed}`}
-                width="80%"
                 visible={modalVisible}
                 footer={false}
                 onCancel={() => this.setState({modalVisible: false})}
                 maskClosable={true}
+                key={Math.random()}
                 >
                 <ArchitectureCompare network={detailed} />
             </Modal>
