@@ -3,7 +3,8 @@ import "./Network.css";
 import { EvoNode } from "../types";
 import * as dagre from 'dagre';
 import { Node, GraphEdge } from 'dagre';
-import { getColor } from "../helper";
+import { getLayerColor } from "../helper";
+import { color } from "d3";
 
 // export interface Node {
 //     class?:string
@@ -96,6 +97,7 @@ export default class Network extends React.Component<Props, State> {
         });
         let height = g.graph().height,
             width = g.graph().width
+            console.log(nodes)        
         return { nodes, edges, height, width }
     }
     drawNodes(nodes: Node[]) {
@@ -107,7 +109,7 @@ export default class Network extends React.Component<Props, State> {
                           onClick={() => this.selectLayer(node)}
                           style={{ cursor: "pointer"}}>
                     <rect width={node.width} height={node.height}
-                        style={{ fill: getColor(node.op), strokeWidth: 3 }} />
+                        style={{ fill: getLayerColor(node.className), strokeWidth: 3 }} />
                     {node.expand ?
                         (<g><text textAnchor="middle"
                             fill="white"
@@ -123,7 +125,7 @@ export default class Network extends React.Component<Props, State> {
                             y={22}>
                             -----------------------------
                         </text>
-                        {JSON.stringify(node.config, null, 2).split('\n').map((str:string, idx: number) => {
+                        {node.details.map((str:string, idx: number) => {
                             return (<text key={`${node.label}_config_line_${idx}`}
                                 textAnchor="left"
                                 fill="white"
@@ -141,6 +143,17 @@ export default class Network extends React.Component<Props, State> {
                         y={node.height * 0.6}>
                         {node.label}
                     </text>}
+                    {/* <foreignObject><div style={{width: node.width / this.state.scale, color: "white", fontSize: "10px"}}>
+                    <p style={{align:"center"}}>
+                        {node.label}
+                    </p>
+                    {node.expand ? <p>--------------------</p> : ""}
+                    {node.expand ?
+                        node.details.map((str: string) => {
+                            return str
+                        })
+                        : ""}
+                    </div></foreignObject> */}
                 </g>
             })}
         </g>)
@@ -245,7 +258,7 @@ export default class Network extends React.Component<Props, State> {
     render() {
         console.log('render = ', this.props.name)
         let { nodes, edges, x, y, scale } = this.state
-        let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 70,
+        let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 120,
             svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 20
         if (nodes.length > 0) {
             // let { nodes, edges} = this.getDag(EvoNodes)
