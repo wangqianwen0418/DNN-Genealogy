@@ -1,4 +1,5 @@
 .wrapped-graph { 
-    overflow-y: scroll;
-    overflow-x: scroll;
+    overflow: auto;
+    height: 90%;
+    margin-top: 5%;
 }

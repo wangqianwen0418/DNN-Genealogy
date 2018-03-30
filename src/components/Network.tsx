@@ -181,7 +181,7 @@ export default class Network extends React.Component<Props, State> {
             // let svg_h = this.graphWindow.clientHeight
             // let svg_w = this.graphWindow.clientWidth
             return (
-            <div className="wrapped-graph" style={{ height: "100%", width: "100%"}}>
+            <div className="wrapped-graph">
                 <svg
                     width={`${svgWidth}px`}
                     height={`${svgHeight}px`}
