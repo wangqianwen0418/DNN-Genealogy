@@ -164,7 +164,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         if (!this.state.comparing) {
             return (
                 <div className="ArchitectureCompare" >
-                    <Col span={24} style={{height: '100%'}} key={1}>
+                    <Col span={24} style={{height: '100%'}}>
                         <Cascader
                             options={mapNetworkToArcs.filter((d: any) => network === d.label)}
                             placeholder={`Choose Model in ${network}`}
@@ -186,7 +186,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         } else {
             return (
                 <div className="ArchitectureCompare" >
-                    <Col span={12} style={{height: '100%'}} key={1}>
+                    <Col span={12} style={{height: '100%'}}>
                         <Cascader
                             options={mapNetworkToArcs.filter((d: any) => network === d.label)}
                             placeholder={`Choose Model in ${network}`}
@@ -204,7 +204,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         </Button>
                         <Network nodes={this.state.nodes1} />
                     </Col>
-                    <Col span={12} style={{height: '100%'}} key={2}>
+                    <Col span={12} style={{height: '100%'}}>
                         <Cascader
                             options={mapNetworkToArcs}
                             placeholder="Choose Model"
