@@ -10,7 +10,8 @@ import { getColor } from "../helper";
 // }
 const node_w: number = 110, node_h: number = 20, margin: number = 10;
 export interface Props {
-    nodes: EvoNode[]
+    nodes: EvoNode[],
+    name: string
 }
 export interface State {
     x: number,
@@ -153,9 +154,12 @@ export default class Network extends React.Component<Props, State> {
         this.setState({ nodes, edges })
     }
     componentWillReceiveProps(nextProps: Props) {
-         let { nodes: EvoNodes } = nextProps
-         let { nodes, edges } = this.getDag(EvoNodes)
-         this.setState({ nodes, edges })
+        if (nextProps.name !== this.props.name) {
+            let { nodes: EvoNodes } = nextProps
+            console.log(EvoNodes)
+            let { nodes, edges } = this.getDag(EvoNodes)
+            this.setState({ nodes, edges })
+        }
     }
     // componentWillUpdate() {
     //     if(this.first && this.props.nodes.length > 0){

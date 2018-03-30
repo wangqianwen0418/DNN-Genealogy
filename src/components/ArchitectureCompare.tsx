@@ -142,17 +142,16 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
     async getData(model: string, idx: number) {
         let res = await axios.get('../../data/recognition/' + model + '.json'), nodes: EvoNode[]
         if (idx === 1) {
-            this.setState({nodes1: res.data.config.layers})
+            this.setState({model1: model, nodes1: res.data.config.layers})
         } else if (idx === 2) {
-            this.setState({nodes2: res.data.config.layers})
+            this.setState({model2: model, nodes2: res.data.config.layers})
         }
     }
 
     ifCompare(comparing: boolean) {
-        console.log(document.getElementsByClassName('CompareModal'))
         if (comparing === true) {
             d3.select('.CompareModal').style('width', '80%')
-            this.setState({nodes2: [], comparing})
+            this.setState({model2: "", nodes2: [], comparing})
         } else {
             d3.select('.CompareModal').style('width', '40%')
             this.setState({comparing})
@@ -180,7 +179,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         >
                             Compare
                         </Button>
-                        <Network nodes={this.state.nodes1} />
+                        <Network nodes={this.state.nodes1} name={this.state.model1}/>
                     </Col>
                 </div>)
         } else {
@@ -202,7 +201,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         >
                             Detail
                         </Button>
-                        <Network nodes={this.state.nodes1} />
+                        <Network nodes={this.state.nodes1} name={this.state.model1} />
                     </Col>
                     <Col span={12} style={{height: '100%'}}>
                         <Cascader
@@ -212,7 +211,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             expandTrigger="hover"
                             style={{width: '35%'}}
                         />
-                        <Network nodes={this.state.nodes2} />
+                        <Network nodes={this.state.nodes2} name={this.state.model2} />
                     </Col>
                 </div>)
         }
