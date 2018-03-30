@@ -378,7 +378,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('class', 'dot')
             .data(NNnodes)
             .enter().append('g')
-            .attr("transform", d=>`translate(${d.x}, ${d.y})`)            
+            //.attr("transform", d=>`translate(${d.x}, ${d.y})`)            
             //.append('polygon')
             //.attr('points', (d :Dot) => this.polygon(d.r, networks.indexOf(d.parent) + 3))            
             //.attr('stroke-width', 1)            
@@ -415,7 +415,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     .style("bottom", "20px")
                     .style("display", "inline-block")
                     .html("<span>" + (d.name) + "</span><br>" + d.attr.map((attr: number, attr_i: number) => {
-                        if (attr !== 100) {
+                        if (attr) {
                             return nonsequenceBenchmarks[attr_i].dataset + ": " + attr + "%<br>"
                         } else {
                             return ""
