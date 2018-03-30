@@ -42,7 +42,7 @@ export default class Network extends React.Component<Props, State> {
         this.selectLayer = this.selectLayer.bind(this)
     }
     getDag(layers: EvoNode[], selectedLayers: string[]) {
-        const nodeH = 20, nodeW = 150, expandW = 150, expandH = 200
+        const nodeH = 20, nodeW = 200, expandW = 200, expandH = 200
         let g = new dagre.graphlib.Graph();
         g.setGraph({ 
             ranksep: node_h * 1.5,
@@ -74,7 +74,7 @@ export default class Network extends React.Component<Props, State> {
         // Selected Layers
         selectedLayers.forEach(layer => {
             let node = g.node(layer)
-            let details = JSON.stringify(node.config, null, 2).split('\n')
+            let details = JSON.stringify(node.config, null, 2).replace(/"/g, '').split('\n')
             g.setNode(layer, {
                 ...node,
                 width: expandW,
@@ -124,7 +124,8 @@ export default class Network extends React.Component<Props, State> {
                             -----------------------------
                         </text>
                         {JSON.stringify(node.config, null, 2).split('\n').map((str:string, idx: number) => {
-                            return (<text textAnchor="left"
+                            return (<text key={`${node.label}_config_line_${idx}`}
+                                textAnchor="left"
                                 fill="white"
                                 xmlSpace="preserve"
                                 fontSize={10}
@@ -195,7 +196,6 @@ export default class Network extends React.Component<Props, State> {
     // }
 
     selectLayer(layer: Node) {
-        console.log(layer)
         let { selectedLayers } = this.state,
             idx = selectedLayers.indexOf(layer.label)
         if (idx === -1) {
@@ -203,7 +203,6 @@ export default class Network extends React.Component<Props, State> {
         } else {
             selectedLayers.splice(idx, 1)
         }
-        console.log(selectedLayers)
         let { nodes: EvoNodes } = this.props
         let { nodes, edges } = this.getDag(EvoNodes, selectedLayers)
         this.setState({ nodes, edges, selectedLayers })
