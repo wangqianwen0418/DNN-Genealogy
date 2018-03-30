@@ -76,9 +76,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     getForceX(attr: number[]) {
         // return 0
         let len = attr.length
-        let x: number = attr.map((d: number, idx: number) => (1-d/100) * Math.cos(2*Math.PI / (len+1) * (idx + .5) - Math.PI/2))
+        let x: number = attr.map((d: number, idx: number) => ((nonsequenceBenchmarks[idx].maximum-d)/nonsequenceBenchmarks[idx].range) * Math.cos(2*Math.PI / (len+1) * (idx + .5) - Math.PI/2))
                             .reduce((a, b) => a + b, 0)
-        return x*this.r/(len+1)
+        return x*this.r/(len+1)/200
         // let x:number = attr.map((d:number, idx:number)=> this.polarToCartesian(0,0, this.r*0.8, 360/len*(idx+.5)).x)
         // .reduce((a, b) => a + b, 0)
         // return x/len
@@ -86,9 +86,9 @@ export default class RadialBoxplot extends React.Component<Props, State> {
     getForceY(attr: number[]) {
         // return 0
         let len = attr.length
-        let y: number = attr.map((d: number, idx: number) => (1-d/100) * Math.sin( 2*Math.PI / (len+1) * (idx + .5) - Math.PI/2))
+        let y: number = attr.map((d: number, idx: number) => ((nonsequenceBenchmarks[idx].maximum-d)/nonsequenceBenchmarks[idx].range) * Math.sin( 2*Math.PI / (len+1) * (idx + .5) - Math.PI/2))
                             .reduce((a, b) => a + b, 0)
-        return y*this.r/(len+1)
+        return y*this.r/(len+1)/200
         // let len = attr.length
         // let y:number = attr.map((d:number, idx:number)=> this.polarToCartesian(0,0, this.r*0.8, 360/len*(idx+.5)).y)
         // .reduce((a, b) => a + b, 0)
@@ -240,7 +240,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('refY', '6')
             .attr('orient', 'auto')
             .append('path')
-            .attr('d', 'M10,2 L2,6 L10,10 L6,6 L10,2')
+            .attr('d', 'M2,2 L10,6 L2,10 L6,6 L2,2')
             .style('fill', 'black')
 
         let tooltip = d3.select(".RadialBoxplot").select(".toolTip")
@@ -263,24 +263,12 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('key', (attr: any) => 'axis_' + attr.dataset)
             .attr('id', (attr: any) => 'axis_' + attr.dataset)
             .attr('class', 'link')
-            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin - 2))
+            .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i + 2, bar_a * (i + 1) - margin))
             .attr('fill', 'none')
-            .attr('stroke-width', 1)
+            .attr('stroke-width', 2)
             .attr('stroke', 'black')
             .attr('stroke-dasharray', '5, 5')
-            .style('marker-start', 'url(#arrow)')
-
-            // axis.append('path')
-            // .attr('key', (attr: any) => 'axis_' + attr.dataset)
-            // .attr('id', (attr: any) => 'axis_' + attr.dataset)
-            // .attr('class', 'link')
-            // .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * (i + 1) - margin))
-            // .attr('fill', 'none')
-            // .attr('stroke-width', 1)
-            // .attr('stroke', 'black')
-            // .attr('stroke-dasharray', '5, 5')
-            // .style('marker-end', 'url(#arrow)')
-
+            .style('marker-end', 'url(#arrow)')
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset + '_start')
             .attr('d', (attr: any, i: number) => this.arc(0, 0, this.r + margin + bar_w / 2, bar_a * i, bar_a * i + 0.5))
@@ -382,7 +370,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             }
         })
         let that = this
-
         this.nodes = d3.select('.compareView')
             .append('g')
             .attr('id', 'nodes')
@@ -390,7 +377,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('class', 'dot')
             .data(NNnodes)
             .enter().append('g')
-            .attr("transform", d=>`translate(${d.x}, ${d.y})`)            
+            //.attr("transform", d=>`translate(${d.x}, ${d.y})`)            
             //.append('polygon')
             //.attr('points', (d :Dot) => this.polygon(d.r, networks.indexOf(d.parent) + 3))            
             //.attr('stroke-width', 1)            
@@ -474,20 +461,22 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     // .attr('stroke', getColor(name))
                     .attr("stroke", (d: Dot) => getColor(d.parent))
                     .attr('stroke-dasharray', '2, 2')
+                    .attr('stroke-width', 3)
             }
         }
 
         simulation = simulation
             .nodes(NNnodes)
-            .force('collide',d3.forceCollide().strength(.1).radius((d:Dot)=>d.r).iterations(5))
+            .force('collide',d3.forceCollide().strength(.5).radius((d:Dot)=>d.r).iterations(5))
             // .force('forceX', d3.forceX().strength(.1).x((d: Dot) => this.getForceX(d.attr)))
             // .force("forceY", d3.forceY().strength(.1).y((d: Dot) => this.getForceY(d.attr)))
             .on('tick', ticked)
             
         let nodes = this.nodes
+        console.log(nodes)
         function ticked() {
             nodes.attr("transform", (d:Dot)=>{
-                if(d.x*d.x+d.y*d.y<that.r*that.r){
+                if(d.x*d.x+d.y*d.y<(that.r-d.r)*(that.r-d.r)){
                     return `translate(${d.x}, ${d.y})`
                 }else{
                     let k = d.y/d.x, theta = Math.atan(k) + (d.x>0?0:Math.PI)
@@ -506,7 +495,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         var legend_nn = svg.append("g")
             .attr("id", "legend_nn")
             .attr("font-family", "sans-serif")
-            .attr("font-size", 10)
+            .attr("font-size", 16)
             .attr("text-anchor", "end")
             .selectAll("g")
             .data(this.state.nns)

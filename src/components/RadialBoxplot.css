@@ -6,7 +6,7 @@
     z-index: 100;
 }
 .remove {
-    fill: red;
+    fill: gray;
     cursor: pointer;
 }
 .RadialBoxplot {

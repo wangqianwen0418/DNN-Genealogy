@@ -3,6 +3,7 @@ import Network from './Network'
 import { EvoNode } from '../types'
 import axios from 'axios'
 import { TreeSelect, Cascader, Dropdown, Menu, Button, Col } from 'antd';
+import * as d3 from 'd3'
 import './ArchitectureCompare.css'
 
 const mapNetworkToArcs = [{
@@ -98,28 +99,32 @@ export interface State {
     model1: string,
     model2: string,
     nodes1: EvoNode[],
-    nodes2: EvoNode[]
+    nodes2: EvoNode[],
+    comparing: boolean
 }
 
 export default class ArchitectureCompare extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
         this.state = {
-            model1: 'vgg19',
+            model1: '',
             model2: '',
             nodes1: [],
-            nodes2: []
+            nodes2: [],
+            comparing: false
         }
         this.getData = this.getData.bind(this)
     }
 
     componentWillMount() {
-        console.log('mount')
-        let arcs: any = mapNetworkToArcs.filter((d: any) => this.props.network == d.label)[0], model: string = ""
-        if (arcs.hasOwnProperty('children'))
+        // console.log('mount')
+        let arcs: any = mapNetworkToArcs.filter((d: any) => this.props.network === d.label)[0], model: string = ''
+        if (arcs.hasOwnProperty('children')) {
             model = arcs.children[0].value
-        else
+        } else {
             model = arcs.value
+        
+        }
         this.getData(model, 1)
     }
 
@@ -143,31 +148,73 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         }
     }
 
+    ifCompare(comparing: boolean) {
+        console.log(document.getElementsByClassName('CompareModal'))
+        if (comparing === true) {
+            d3.select('.CompareModal').style('width', '80%')
+            this.setState({nodes2: [], comparing})
+        } else {
+            d3.select('.CompareModal').style('width', '40%')
+            this.setState({comparing})
+        }
+    }
+
     render() {
         let network = this.props.network
-        let that = this
-        return (
-        <div className="ArchitectureCompare" >
-            <Col span={12} style={{height: '100%'}}>
-                <Cascader
-                    options={mapNetworkToArcs.filter((d: any) => network === d.label)}
-                    placeholder={`Choose Model in ${network}`}
-                    onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
-                    expandTrigger="hover"
-                    style={{width: '35%'}}
-                />
-                <Network nodes={this.state.nodes1} />
-            </Col>
-            <Col span={12} style={{height: '100%'}}>
-                <Cascader
-                    options={mapNetworkToArcs}
-                    placeholder="Choose Model"
-                    onChange={(value: any) => {console.log(value); this.getData(value[value.length - 1], 2)}}
-                    expandTrigger="hover"
-                    style={{width: '35%'}}
-                />
-                <Network nodes={this.state.nodes2} />
-            </Col>
-        </div>)
+        if (!this.state.comparing) {
+            return (
+                <div className="ArchitectureCompare" >
+                    <Col span={24} style={{height: '100%'}}>
+                        <Cascader
+                            options={mapNetworkToArcs.filter((d: any) => network === d.label)}
+                            placeholder={`Choose Model in ${network}`}
+                            onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
+                            expandTrigger="hover"
+                            style={{width: '35%'}}
+                        />
+                        <Button
+                            type="primary"
+                            icon="right-circle"
+                            onClick={() => {this.ifCompare(true)}}
+                            style={{float: 'right', marginRight: '10px'}}
+                        >
+                            Compare
+                        </Button>
+                        <Network nodes={this.state.nodes1} />
+                    </Col>
+                </div>)
+        } else {
+            return (
+                <div className="ArchitectureCompare" >
+                    <Col span={12} style={{height: '100%'}}>
+                        <Cascader
+                            options={mapNetworkToArcs.filter((d: any) => network === d.label)}
+                            placeholder={`Choose Model in ${network}`}
+                            onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
+                            expandTrigger="hover"
+                            style={{width: '35%'}}
+                        />
+                        <Button
+                            type="primary"
+                            icon="left-circle"
+                            onClick={() => {this.ifCompare(false)}}
+                            style={{float: 'right', marginRight: '10px'}}
+                        >
+                            Detail
+                        </Button>
+                        <Network nodes={this.state.nodes1} />
+                    </Col>
+                    <Col span={12} style={{height: '100%'}}>
+                        <Cascader
+                            options={mapNetworkToArcs}
+                            placeholder="Choose Model"
+                            onChange={(value: any) => {this.getData(value[value.length - 1], 2)}}
+                            expandTrigger="hover"
+                            style={{width: '35%'}}
+                        />
+                        <Network nodes={this.state.nodes2} />
+                    </Col>
+                </div>)
+        }
     }
 }

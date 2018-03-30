@@ -801,7 +801,7 @@
         "cifar100": null,
         "imageNet val top1": 17.3,
         "imagenet val top5": 3.8,
-        "name": "nasNet_small",
+        "name": "nasNet_large",
         "params": 11.1
       },
       {
@@ -810,7 +810,7 @@
         "cifar100": null,
         "imageNet val top1": 26.0,
         "imagenet val top5": 8.4,
-        "name": "nasNet_large",
+        "name": "nasNet_small",
         "params": 5.3
       }
     ],
