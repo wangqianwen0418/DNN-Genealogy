@@ -204,7 +204,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         </Button>
                         <Network nodes={this.state.nodes1} />
                     </Col>
-                    <Col span={12} style={{height: '100%'}} key={1}>
+                    <Col span={12} style={{height: '100%'}} key={2}>
                         <Cascader
                             options={mapNetworkToArcs}
                             placeholder="Choose Model"
