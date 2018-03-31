@@ -14,6 +14,13 @@ const mapNetworkToArcs = [{
         label: 'fractalNet-40'
     }]
 }, {
+    value: 'inception',
+    label: 'inception',
+    children: [{
+        value: 'inception_v3',
+        label: 'inception_v3'
+    }]
+}, {
     value: 'inception_resNet',
     label: 'inception_resNet'
 }, {
@@ -170,6 +177,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
                             expandTrigger="hover"
                             allowClear={false}
+                            popupClassName="MyCascade"
                             style={{width: '35%'}}
                         />
                         <Button
@@ -193,6 +201,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             onChange={(value: any) => {this.getData(value[value.length - 1], 1)}}
                             expandTrigger="hover"
                             allowClear={false}
+                            popupClassName="MyCascade"
                             style={{width: '35%'}}
                         />
                         <Button
@@ -212,6 +221,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             onChange={(value: any) => {this.getData(value[value.length - 1], 2)}}
                             expandTrigger="hover"
                             allowClear={false}
+                            popupClassName="MyCascade"
                             style={{width: '35%'}}
                         />
                         <Network nodes={this.state.nodes2} name={this.state.model2} />

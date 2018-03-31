@@ -11,6 +11,10 @@
 .ArchRight {
     animation: blink .3s;
 }
+.MyCascade .ant-cascader-menu {
+        height: auto;
+        max-height: 160px;
+}
 
 @keyframes blink {
     0% {

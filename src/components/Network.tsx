@@ -3,12 +3,14 @@ import "./Network.css";
 import { EvoNode } from "../types";
 import * as dagre from 'dagre';
 import { Node, GraphEdge } from 'dagre';
-import { getColor } from "../helper";
+import { getLayerColor } from "../helper";
+import { color } from "d3";
 
 // export interface Node {
 //     class?:string
 // }
 const node_w: number = 110, node_h: number = 20, margin: number = 10;
+const nodeH = 20, nodeW = 200, expandMaxH = 200
 
 export interface Props {
     nodes: EvoNode[],
@@ -22,7 +24,7 @@ export interface State {
     edges: GraphEdge[],
     h: number,
     w: number,
-    selectedLayers: string[]
+    selectedLayers: any[]
 }
 export default class Network extends React.Component<Props, State> {
     public graphWindow: any; shiftDown: boolean
@@ -40,108 +42,112 @@ export default class Network extends React.Component<Props, State> {
         }
         this.shiftDown = false
         this.selectLayer = this.selectLayer.bind(this)
+        this.handleMouseWheel = this.handleMouseWheel.bind(this)
     }
     getDag(layers: EvoNode[], selectedLayers: string[]) {
-        const nodeH = 20, nodeW = 150, expandW = 150, expandH = 200
-        let g = new dagre.graphlib.Graph();
-        g.setGraph({ 
+        let dag = new dagre.graphlib.Graph();
+        dag.setGraph({ 
             ranksep: node_h * 1.5,
             marginx: margin,
             marginy: margin,
             rankdir: 'TB',
             edgesep: node_w * 0.02 
         });
-        g.setDefaultEdgeLabel(() => { return {}; });
+        dag.setDefaultEdgeLabel(() => { return {}; });
         layers.forEach(layer => {
-            // let label = `${layer.name}:${layer.class_name}`
-            g.setNode(layer.name, { 
+            let details = JSON.stringify(layer.config, null, 2).replace(/"/g, '').split('\n'), textLength = details.length * 12 + 30
+            dag.setNode(layer.name, { 
                 label: layer.name,
                 width: nodeW,
                 height: nodeH,
                 className: layer.class_name,
                 config: layer.config,
-                expand: false
+                expand: false,
+                location: 0,
+                textLength: textLength,
+                details: details,
             })
             //IR model or keras model
             if (layer.inbound_nodes.length > 0) {
                 let inputs = layer.inbound_nodes[0]
                 inputs.forEach((input:string[]|any[]) => {
-                    g.setEdge(input[0], layer.name)
+                    dag.setEdge(input[0], layer.name)
                 })
             }
         })
         
         // Selected Layers
         selectedLayers.forEach(layer => {
-            let node = g.node(layer)
-            let details = JSON.stringify(node.config, null, 2).split('\n')
-            g.setNode(layer, {
+            let node = dag.node(layer)
+            dag.setNode(layer, {
                 ...node,
-                width: expandW,
-                height: details.length * 12 + 30,
-                details: details,
+                height: node.textLength > expandMaxH ? expandMaxH : node.textLength,
                 expand: true
             })
         })
 
-        dagre.layout(g)
+        dagre.layout(dag)
         let nodes:Node[] = [], edges:GraphEdge[] = []
-        g.nodes().forEach((v) => {
-            if (g.node(v)) {
-                nodes.push(g.node(v))
+        dag.nodes().forEach((v) => {
+            if (dag.node(v)) {
+                nodes.push(dag.node(v))
             }
         })
-        g.edges().forEach((e) => {    
-            edges.push(g.edge(e))
+        dag.edges().forEach((e) => {    
+            edges.push(dag.edge(e))
         });
-        let height = g.graph().height,
-            width = g.graph().width
+        let height = dag.graph().height,
+            width = dag.graph().width
+            console.log(nodes)        
         return { nodes, edges, height, width }
     }
     drawNodes(nodes: Node[]) {
         return (<g className="nodes" >
             {nodes.map((node: Node) => {
                 
-                return <g key={node.label}
-                          className="node"
+                return <g className="layers node"
+                          id={`layer_${node.label}`}
+                          key={`layer_${node.label}`}
                           transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
                           onClick={() => this.selectLayer(node)}
+                          onWheel={this.handleMouseWheel}
                           style={{ cursor: "pointer"}}>
                     <rect width={node.width} height={node.height}
-                        style={{ fill: getColor(node.op), strokeWidth: 3 }} 
-                        className="node"/>
+                        style={{ fill: getLayerColor(node.className), strokeWidth: 3 }} />
                     {node.expand ?
-                        (<g><text textAnchor="middle"
+                        (<svg width={node.width} height={node.height}><g><text textAnchor="middle"
                             fill="white"
                             fontSize={10}
                             x={node.width / 2}
                             y={12}>
                             {node.label}
-                        </text>
-                        <text textAnchor="middle"
+                            </text>
+                            <text textAnchor="middle"
+                                fill="white"
+                                fontSize={10}
+                                x={node.width / 2}
+                                y={22}>
+                                -----------------------------
+                            </text>
+                            {node.details.map((str:string, idx: number) => {
+                                return <text key={`${node.label}_config_line_${idx}`}
+                                    textAnchor="left"
+                                    fill="white"
+                                    xmlSpace="preserve"
+                                    fontSize={10}
+                                    x={5}
+                                    y={12 * idx + 35}>
+                                    {str}
+                                </text>
+                            })}
+                            </g></svg>)
+                        : <text textAnchor="middle"
                             fill="white"
                             fontSize={10}
                             x={node.width / 2}
-                            y={22}>
-                            -----------------------------
-                        </text>
-                        {JSON.stringify(node.config, null, 2).split('\n').map((str:string, idx: number) => {
-                            return (<text textAnchor="left"
-                                fill="white"
-                                xmlSpace="preserve"
-                                fontSize={10}
-                                x={5}
-                                y={12 * idx + 35}>
-                                {str}
-                            </text>)})}
-                        </g>)
-                    : <text textAnchor="middle"
-                        fill="white"
-                        fontSize={10}
-                        x={node.width / 2}
-                        y={node.height * 0.6}>
-                        {node.label}
-                    </text>}
+                            y={node.height * 0.6}>
+                            {node.label}
+                        </text>}
                 </g>
             })}
         </g>)
@@ -197,20 +203,41 @@ export default class Network extends React.Component<Props, State> {
     // }
 
     selectLayer(layer: Node) {
-        console.log(layer)
         let { selectedLayers } = this.state,
-            idx = selectedLayers.indexOf(layer.label)
+            idx = selectedLayers.map((l: any) => l.label).indexOf(layer.label)
         if (idx === -1) {
-            selectedLayers.push(layer.label)
+            selectedLayers.push({
+                ...layer,
+                height: layer.textLength > expandMaxH ? expandMaxH : layer.textLength
+            })
         } else {
             selectedLayers.splice(idx, 1)
         }
-        console.log(selectedLayers)
         let { nodes: EvoNodes } = this.props
-        let { nodes, edges } = this.getDag(EvoNodes, selectedLayers)
+        let { nodes, edges } = this.getDag(EvoNodes, selectedLayers.map((l: any) => l.label))
         this.setState({ nodes, edges, selectedLayers })
     }
+    handleMouseWheel(evt: React.WheelEvent<any>) {
+        let g: any = evt.target
+        while (g.getAttribute('class') !== 'layers') {
+            g = g.parentElement
+        }
+        let { selectedLayers }= this.state, idx = this.state.selectedLayers.map((l : any) => l.label).indexOf(g.id.substring(6))
+        if (idx !== -1) {
+            evt.preventDefault()
+            g = g.children[1].firstChild
+            var node = selectedLayers[idx]
+            var location = node.location + evt.deltaY, offset: number
+            if (location < 0)
+                location = 0
+            else if (node.height + location > node.textLength)
+                location = node.textLength - node.height
+            g.setAttribute('transform', `translate (0, ${-location})`)
+            selectedLayers[idx].location = location
+            this.setState({ selectedLayers })
+        }
 
+    }
     componentWillMount() {
         /*if (this.props.nodes.length !== nextProps.nodes.length) {
             let { nodes: EvoNodes } = nextProps
@@ -246,9 +273,8 @@ export default class Network extends React.Component<Props, State> {
     //     }
     // }
     render() {
-        console.log('render = ', this.props.name)
         let { nodes, edges, x, y, scale } = this.state
-        let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 70,
+        let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 120,
             svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 20
         if (nodes.length > 0) {
             // let { nodes, edges} = this.getDag(EvoNodes)
