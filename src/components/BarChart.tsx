@@ -3,7 +3,7 @@ import "./BarChart.css"
 import axios from "axios"
 import * as d3 from "d3"
 import { NN } from "../types"
-import { Tabs } from "antd"
+import { Tabs, Tooltip } from "antd"
 // import { Dropdown, Icon, Menu } from "antd"
 
 const TabPane = Tabs.TabPane
@@ -127,15 +127,16 @@ export default class BarChart extends React.Component<Props, State> {
             let svg = d3.select(`.CorpusCompare .tab${cp.idx}`).insert("svg")
                 .attr("width", "100%")
                 .attr("height", "100%")
+                .style("margin-top", "20px")
                 .append("g")
 
             let x = d3.scaleLinear().range([0, width]),
                 y = d3.scaleBand().range([height, 0]),
                 y_group = d3.scaleBand().padding(0.05)
 
-            let g = svg.append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
+            let g = svg.append("g").attr("transform", "translate(" + margin.left + "," + 0 + ")")
+            //    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        
             let data = cp.performance,
                 keys = cp.nns
             
@@ -223,9 +224,21 @@ export default class BarChart extends React.Component<Props, State> {
             <Tabs
             defaultActiveKey="1"
             tabPosition="top"
-            style={{ width: "100%"}}>
+            style={{ height: "100%", width: "100%"}}
+            className="barchart"
+            >
                 {this.state.compare.map((cp: any) => {
-                    return <TabPane tab={`Compare${cp.idx}`} key={cp.idx} className={`tab${cp.idx}`}></TabPane>
+                    return (
+                        //<Tooltip title="123">
+                        <TabPane
+                            tab={<Tooltip title={cp.norm}>{cp.field}</Tooltip>}
+                            key={cp.idx}
+                            className={`tab${cp.idx}`}
+                            style={{height:'calc(100% - 25px)'}}
+                        >
+                        </TabPane>
+                        //</Tooltip>
+                    )
                 })}
                 {/* <TabPane tab="Compare1" key="0" className="tab0"></TabPane>
                 <TabPane tab="Compare2" key="1" className="tab1"></TabPane>
