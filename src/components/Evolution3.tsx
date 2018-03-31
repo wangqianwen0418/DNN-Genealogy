@@ -688,7 +688,10 @@ export default class Evolution extends React.Component<Props, State>{
 
     // }
     onChange = (appValue: "1.1." | "1.2.") => {
-        let legend = appValue == "1.1." ? legendCNN : legendRNN
+        if (appValue === undefined) {
+            return
+        }
+        let legend = appValue === "1.1." ? legendCNN : legendRNN
         this.setState({ appValue, legend });
         this.getData()
         let { onSelectDatabase } = this.props
@@ -699,6 +702,7 @@ export default class Evolution extends React.Component<Props, State>{
         else
             onSelectDatabase('all')
     }
+
     pinNode(pinNode: Node) {
         let { pinNodes } = this.state,
             index = pinNodes.indexOf(pinNode.label)
@@ -866,7 +870,7 @@ export default class Evolution extends React.Component<Props, State>{
                     treeData={appData}
                     placeholder="select your data type"
                     //multiple
-                    treeDefaultExpandAll
+                    treeDefaultExpandAll={false}
                     onChange={this.onChange}
                 />
                 <div>
