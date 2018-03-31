@@ -1,16 +1,16 @@
 let layers: string[] = []
 
 const LAYERCOLORS: string[] = [
-    ' #ef6140',
-    ' #cb9c6b',
-    ' #be9062',
-    ' #907b50',
-    ' #9eab7f',
-    ' #3e2f31',
-    ' #5d7263',
-    ' #93c88c',
-    ' #d8cd20',
-    ' #f5c775',
+    ' #2b637b',
+    ' #5fa49f',
+    ' #d6767a',
+    ' #acda9e',
+    ' #ffb054',
+    ' #8ecb78',
+    ' #ee632a',
+    ' #236d56',
+    ' #b28582',
+    ' #c29880',
 ]
 
 const getLayerColor = (layer: string): string => {

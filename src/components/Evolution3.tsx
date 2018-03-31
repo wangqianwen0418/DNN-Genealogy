@@ -186,11 +186,12 @@ export default class Evolution extends React.Component<Props, State>{
             let stat : any[] = [] 
             for (let d of datum)
                 for (let name of d.names)
-                    stat.push(name)
+                    stat.push({ ...name, parent: d.ID})
             for (let dataset of nonsequenceDatasets) {
                 let benchmarkData = stat.map((d: any) => d[dataset])
                 let sortedData = benchmarkData.sort((x, y) => x - y).filter((x) => x)
                 let length: number = sortedData.length
+                let bpm = stat.filter((st: any) => st[dataset] === sortedData[0])[0]
                 nonsequenceBenchmarks.push({
                     dataset: dataset,
                     minimum: sortedData[0],
@@ -198,9 +199,14 @@ export default class Evolution extends React.Component<Props, State>{
                     median: sortedData[Math.floor(length / 2)],
                     higherQuartile: sortedData[Math.floor(length * 3 / 4)],
                     maximum: sortedData[length - 1],
-                    range: sortedData[length - 1] - sortedData[0]
+                    range: sortedData[length - 1] - sortedData[0],
+                    bestPerformanceModel: {
+                        name: bpm.name,
+                        parent: bpm.parent
+                    }
                 })
             }
+            console.log(nonsequenceBenchmarks)
         }
 
         this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
