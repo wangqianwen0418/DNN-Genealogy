@@ -219,7 +219,7 @@ export default class Network extends React.Component<Props, State> {
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
         let g: any = evt.target
-        while (g.getAttribute('class') !== 'layers') {
+        while (!g.getAttribute('class') || g.getAttribute('class').indexOf('layers') === -1) {
             g = g.parentElement
         }
         let { selectedLayers }= this.state, idx = this.state.selectedLayers.map((l : any) => l.label).indexOf(g.id.substring(6))
