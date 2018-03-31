@@ -5,7 +5,7 @@
             {
                 "norm": "negative log-probability",
                 "field": "polyphonic music prediction",
-                "dataset": ["Nottingham", "JSB CHorales", "MuseData"],
+                "dataset": ["Nottingham", "JSB Chorales", "MuseData"],
                 "model": ["RNN", "DT(S)-RNN", "DOT(S)-RNN", "sRNN", "DOT(S)-RNN*"],
                 "acc": [
                     [3.225, 3.206, 3.215, 3.258, 2.95],
@@ -96,7 +96,8 @@
                 "dataset": ["Stanford Sentiment Treebank fine-grained", "Stanford Sentiment Treebank binary"],
                 "model": ["sRNN", "LSTM", "Bid-LSTM", "2-layer LSTM", "2-layer Bid-LSTM", "Constituency Tree-LSTM", "Dependency Tree-LSTM"],
                 "acc": [
-
+                    [49.8, 46.4, 49.1, 46, 48.5, 48.4, 51],
+                    [86.6, 84.9, 87.5, 86.3, 87.2, 85.7, 88]
                 ]
             },
             {
@@ -132,7 +133,94 @@
         "table": [
             {
                 "norm": "accuracy rate",
-                "dataset": ["Yelp2013 sentiment classification", "Yelp2014 sentiment classification", "Yelp2015 sentiment classificaiton", "IMDB sentiment classificaiton"]
+                "field": "sentiment classification",
+                "dataset": ["Yelp2013", "Yelp2014", "Yelp2015", "IMDB"],
+                "model": ["RNN", "BRNN", "GRU", "Bid-GRU"],
+                "acc": [
+                    [58.2, 58.7, 63.5, 63.7],
+                    [59.1, 59.7, 65.9, 65.5],
+                    [59.7, 57.7, 65.7, 66],
+                    [34.4, 37.2, 41.6, 42.5]
+                ]
+            }
+        ]
+    },
+    {
+        "ID": ["leaky units"],
+        "table": [
+            {
+                "norm": "negative log-probability",
+                "field": "polyphonic music prediction",
+                "dataset": ["Piano-midi.de", "Nottingham", "MuseData", "JSB Chorales"],
+                "model": ["RNN", "RNN+leaky units"],
+                "acc": [
+                    [7.86, 7.57],
+                    [3.75, 3.57],
+                    [7.2, 6.99],
+                    [8.65, 8.63]
+                ]
+            },
+            {
+                "norm": "perplexity per character",
+                "field": "language model construction",
+                "dataset": ["Penn Treebank Corpus"],
+                "model": ["RNN", "RNN+leaky units"],
+                "acc": [
+                    [1.76, 1.56]
+                ]
+            },
+            {
+                "norm": "perplexity per word",
+                "field": "language model construction",
+                "dataset": ["Penn Treebank Corpus"],
+                "model": ["RNN", "RNN+leaky units"],
+                "acc": [
+                    [145.16, 129.83]
+                ]
+            }
+        ]
+    },
+    {
+        "ID": ["CW-RNN"],
+        "table": [
+            {
+                "norm": "phoneme error",
+                "field": "acoustics recognition",
+                "dataset": ["TIMIT"],
+                "model": ["RNN", "LSTM", "CW-RNN"],
+                "acc": [
+                    [66.8, 34.2, 16.8]
+                ]
+            }
+        ]
+    },
+    {
+        "ID": ["conv seq2seq"],
+        "table": [
+            {
+                "norm": "BLEU",
+                "field": "machine translation",
+                "dataset": ["WMT'16 English-Romanian", "WMT'14 English-German", "WMT'14 English-French"],
+                "model": ["conv", "RNN best"],
+                "acc": [
+                    [30.02, 28.1],
+                    [25.16, 24.61],
+                    [40.51, 39.92]
+                ]
+            }
+        ]
+    },
+    {
+        "ID": ["seq2seq", "attention"],
+        "table": [
+            {
+                "norm": "BLEU",
+                "field": "machine translation",
+                "dataset": ["WMT'14 English-French"],
+                "model": ["RNNencdec-30", "RNNsearch-30", "RNNencdec-50", "RNNsearch-50", "RNNsearch-50 best"],
+                "acc": [
+                    [24.19, 31.44, 26.71, 34.16, 36.15]
+                ]
             }
         ]
     }
