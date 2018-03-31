@@ -89,7 +89,7 @@ export interface State {
     detailed: string
 }
 
-const nodeH = 45, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
+const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -207,17 +207,17 @@ export default class Evolution extends React.Component<Props, State>{
     }
     getDag(datum: NN[], selectedNode: Node | undefined = undefined) {
         let selectedID = selectedNode ? selectedNode.ID : undefined
-        let { pinNodes } = this.state
+        let { pinNodes, appValue } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: nodeW * .8,
+            ranksep: appValue=="1.1."?nodeW * .8:nodeW * 1.6,
             marginx: margin * 2,
             marginy: margin,
             rankdir: 'LR',
             edgesep: nodeH * 0.6,
             nodesep: nodeH * .5,
             // ranker: "tight-tree"
-            ranker: "longest-path"
+            ranker: appValue=="1.1."?"longest-path":"tight-tree"
         });
         dag.setDefaultEdgeLabel(() => { return {}; });
 
