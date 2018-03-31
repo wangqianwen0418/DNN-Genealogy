@@ -275,7 +275,7 @@ export default class Network extends React.Component<Props, State> {
     render() {
         let { nodes, edges, x, y, scale } = this.state
         let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 120,
-            svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 20
+            svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 120
         if (nodes.length > 0) {
             // let { nodes, edges} = this.getDag(EvoNodes)
             // let svg_h = Math.max(h, this.graphWindow.clientHeight)
