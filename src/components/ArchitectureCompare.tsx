@@ -6,7 +6,7 @@ import { TreeSelect, Cascader, Dropdown, Menu, Button, Col } from 'antd';
 import * as d3 from 'd3'
 import './ArchitectureCompare.css'
 
-const mapNetworkToArcs = [{
+export const mapNetworkToArcs = [{
     value: 'fractalNet',
     label: 'fractalNet',
     children: [{
