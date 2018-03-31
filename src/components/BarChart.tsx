@@ -13,20 +13,18 @@ export interface Props {
 
 export interface State {
     datum: any,
-    database: string,
+    selected: string,
     nns: string[],
     performance: any[],
 }
 
-const sequenceDatasets = [],
-      nonsequenceDatasets= ['SVHN', 'cifar10', 'cifar100', 'imageNet val top1', 'imagenet val top 5']
-
 export default class BarChart extends React.Component<Props, State> {
     private ref:HTMLDivElement|null
+    private sequenceDatasets: any[] = []
     constructor(props: Props) {
         super(props)
         this.state = {
-            database: "nonsequence",
+            selected: "",
             nns: [],
             performance: [],
             datum: {}
@@ -36,13 +34,14 @@ export default class BarChart extends React.Component<Props, State> {
     }
 
     async getData() {
-        let res = await axios.get("../../data/survey.json")
+        let res = await axios.get("../../data/rnn_data.json")
         let datum = res.data
+        console.log('Barchart', datum)
         this.setState({ datum })
     }
 
     componentWillMount() {
-        // this.getData()
+        this.getData()
     }
 
     componentDidMount() {
@@ -55,36 +54,38 @@ export default class BarChart extends React.Component<Props, State> {
         d3.select(".toolTip").remove()
     }
 
-    componentDidUpdate(prevProps: Props, prevState: State) {
-        /*if (this.props.op !== 1) {
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps.op !== 1)
             return
-        }*/
-
-        // always update
-        console.log('corpus update!')
-        this.updateData()
-        this.draw()
+        if (nextProps.nn.ID === this.state.selected)
+            return
+        this.updateData(nextProps.nn.ID)
     }
 
-    updateData() {
-        let database = this.props.database, nns = this.state.nns, performance = this.state.performance
-        if (database === 'nonsequence') {
-            if (performance.length === 0) {
-                for (let dataset of nonsequenceDatasets)
-                    performance.push({'dataset': dataset})
+    componentDidUpdate(prevProps: Props, prevState: State) {
+        console.log('corpus update!', this.state)
+        if (this.state.nns.length > 0)
+            this.draw()
+    }
+
+    updateData(network: string) {
+        let { nns, datum } = this.state
+        if (nns.indexOf(network) !== -1)
+            return
+        let wanted = datum.filter((d: any) => d.ID.indexOf(network) !== -1)[0], table = wanted.table[0]
+        console.log('updateData', wanted)
+        nns = table.model
+        let performance: any[] = []
+        for (let i in table.dataset) {
+            performance.push({
+                dataset: table.dataset[i]
+            })
+            for (let j in table.model) {
+                performance[i][nns[j]] = table.acc[i][j]
             }
         }
-        for (let name of this.props.nn.names) {
-            if (nns.indexOf(name.name) === -1) {
-                nns.push(name.name)
-                for (let index in nonsequenceDatasets) {
-                    performance[index][name.name] = name[nonsequenceDatasets[index]] ? name[nonsequenceDatasets[index]] : 0
-                }
-            }
-        }
-        if (performance !== this.state.performance) {
-            this.setState({database, nns, performance})
-        }
+        console.log(nns, performance)
+        this.setState({nns, performance})
     }
 
     draw() {
@@ -106,7 +107,8 @@ export default class BarChart extends React.Component<Props, State> {
         let x = d3.scaleLinear().range([0, width]),
             y = d3.scaleBand().range([height, 0]),
             y_group = d3.scaleBand().padding(0.05),
-            color = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"])
+            color = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56",
+                                             "#d0743c", "#ff8c00", "#e46084", "#7f1874", "#801818"])
         
         let g = svg.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -114,8 +116,17 @@ export default class BarChart extends React.Component<Props, State> {
         let data = this.state.performance,
             keys = this.state.nns
         //    keys = ["A", "B"]
-
-        x.domain([0, 100])
+        console.log(data, keys)
+        let min: number, max: number;
+        min = Math.floor(Math.min.apply(null, data.reduce((prev: any, cur: any) => {
+            console.log(keys.map((k: string) => cur[k]))
+            return prev.concat(keys.map((k: string) => cur[k]))
+        }, [])) * 0.9)
+        max = Math.ceil(Math.max.apply(null, data.reduce((prev: any, cur: any) => {
+            console.log(keys.map((k: string) => cur[k]))
+            return prev.concat(keys.map((k: string) => cur[k]))
+        }, [])) * 1.1)
+        x.domain([min, max])
         y.domain(data.map(((d: any) => d.dataset))).padding(0.1)
         y_group.domain(keys).rangeRound([0, y.bandwidth()])
         

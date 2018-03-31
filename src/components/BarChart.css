@@ -1,5 +1,5 @@
 .bar:hover, .label:hover {
-    fill: #CC0058;
+    fill: #00FF80;
     transition: fill 0.15s;
 }
 text {
