@@ -260,6 +260,24 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .selectAll('g')
             .data(attr_names)
             .enter().append('g')
+            .on('mousemove', function(attr: any, i: number) {
+                let nnnode = d3.select(`#nnnode_${nonsequenceBenchmarks[i].bestPerformanceModel.parent} .bounder`),
+                    exnode = d3.select(`#exnode_${nonsequenceBenchmarks[i].bestPerformanceModel.parent}`)
+                nnnode.attr("stroke", "red")
+                exnode.style("border", exnode.style("border").replace('gray', 'red'))
+                tooltip
+                    .style("right", "20px")
+                    .style("bottom", "20px")
+                    .style("display", "inline-block")
+                    .html("<span>Best Error Rate of "+  attr.dataset + "</span><br>" + nonsequenceBenchmarks[i].bestPerformanceModel.name + ": " + nonsequenceBenchmarks[i].minimum + "%")
+            })
+            .on('mouseout', function(attr: any, i: number) {
+                let nnnode = d3.select(`#nnnode_${nonsequenceBenchmarks[i].bestPerformanceModel.parent} .bounder`),
+                exnode = d3.select(`#exnode_${nonsequenceBenchmarks[i].bestPerformanceModel.parent}`)
+                nnnode.attr("stroke", "gray")
+                exnode.style("border", exnode.style("border").replace('red', 'gray'))
+                tooltip.style('display', 'none')
+            })
         axis.append('path')
             .attr('key', (attr: any) => 'axis_' + attr.dataset)
             .attr('id', (attr: any) => 'axis_' + attr.dataset)
