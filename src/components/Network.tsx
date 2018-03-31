@@ -103,11 +103,13 @@ export default class Network extends React.Component<Props, State> {
             {nodes.map((node: Node) => {
                 
                 return <g key={node.label}
+                          className="node"
                           transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
                           onClick={() => this.selectLayer(node)}
                           style={{ cursor: "pointer"}}>
                     <rect width={node.width} height={node.height}
-                        style={{ fill: getColor(node.op), strokeWidth: 3 }} />
+                        style={{ fill: getColor(node.op), strokeWidth: 3 }} 
+                        className="node"/>
                     {node.expand ?
                         (<g><text textAnchor="middle"
                             fill="white"

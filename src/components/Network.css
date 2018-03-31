@@ -9,3 +9,8 @@
     transition-duration: 1.0s;
     transition-timing-function: ease-in-out;
 }
+
+.node{
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+}
