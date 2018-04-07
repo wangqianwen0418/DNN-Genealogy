@@ -98,7 +98,7 @@ export default class Network extends React.Component<Props, State> {
         });
         let height = dag.graph().height,
             width = dag.graph().width
-            console.log(nodes)        
+            // console.log(nodes)        
         return { nodes, edges, height, width }
     }
     drawNodes(nodes: Node[]) {

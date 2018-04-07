@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Button, Dropdown, Menu, Tooltip, Tabs, Icon } from "antd";
+import { Button, Dropdown, Menu, Tooltip, Tabs, Icon, Modal } from "antd";
 import { Transition } from "react-transition-group";
 import { Node } from "../types";
-import "./ExtendNode.css"
-import { mapNetworkToArcs } from "./ArchitectureCompare"
+import "./ExtendNode.css";
+import {capFirstLetter, cutLabel} from "../helper";
+import { mapNetworkToArcs } from "./ArchitectureCompare";
 // import ImageModel from './ImageModel'
 
 const TabPane = Tabs.TabPane
@@ -33,7 +34,8 @@ export interface Props {
     // apiArr: number[],
     selectNode: (node: Node) => void,
     onclickMenu: (node: Node, menu: string) => void,
-    pinNode: (node: Node) => void
+    pinNode: (node: Node) => void,
+    changeGlyphZoom: (label: string)=>void
 }
 
 export interface State {
@@ -69,7 +71,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         }
     }
     render() {
-        let { node, margin, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY } = this.props
+        let { node, margin, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom } = this.props
         {/* <div style={{ height: node.height }}>
             <img
                 className="abstract Node"
@@ -113,7 +115,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 height: node.height * scale,
                 width: node.width * scale,
                 visibility: zoomed ? "visible" : "hidden",
-                border: `${selected ? 4 : 0.5}px ${selected ?"dashed":"solid" } gray`,
+                outline: `${selected ? 3 : 0.5}px ${selected ?"dashed":"solid" } #aaa`,
                 // borderRadius: "5px"
                 // ...defaultStyle,
                 // ...transitionStyles[status]
@@ -124,14 +126,14 @@ export default class ExtendNode extends React.Component<Props, State>{
             defaultActiveKey={`0`}
             // defaultActiveKey={`${node.variants.length}`}
             >
-                <TabPane tab={node.label} key="0">
+                <TabPane tab={capFirstLetter(cutLabel(node.label, 5))} key="0">
                     <img
                         className="abstract Node"
                         src={`../../images/${node.label}.png`}
                         // style={{
                         //     border: `1px solid ${selected ? "red" : "gray"}`,
                         // }}
-                        height={node.height * scale - margin - 6}
+                        height={node.height * scale - margin }
                         width={node.width * scale}
                         onMouseDown={this.mouseDown}
                         onMouseUp={(e) => { this.mouseUp(e, node) }}
@@ -139,7 +141,7 @@ export default class ExtendNode extends React.Component<Props, State>{
 
                     />
                 </TabPane>
-                {node.variants.map((d: any, i: number) => {
+                {/* {node.variants.map((d: any, i: number) => {
                     return <TabPane tab={d.ID} key={`${i + 1}`}>
                         <img
                             className="abstract Node"
@@ -150,7 +152,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                             width={node.width * scale}
                         />
                     </TabPane>
-                })}
+                })} */}
             </Tabs>
             <div className="floatIcon"
                 style={{
@@ -160,12 +162,15 @@ export default class ExtendNode extends React.Component<Props, State>{
                     opacity: pin || showpin ? 1 : 0,
                     color: "gray"
                 }
+                
                 }>
                 <Icon className="pin" type="pushpin"
                     style={{
                         opacity: pin || showpin ? 1 : 0,
-                        color: pin ? "red" : "gray"
+                        color: pin ? "red" : "gray",
+                        cursor: "pointer"
                     }}
+                    
                     onClick={(e: React.MouseEvent<any>) => {
                         let { pin } = this.state
                         e.stopPropagation()
@@ -174,7 +179,10 @@ export default class ExtendNode extends React.Component<Props, State>{
                         pinNode(node)
 
                     }} />
-                <Icon type="arrows-alt" />
+                <Icon type="arrows-alt" 
+                style={{cursor: "pointer"}}
+                onClick={()=>this.props.changeGlyphZoom(node.label)}
+                />
                 <Dropdown overlay={menu} className="infoButton">
                     <a className="infoTrigger"> ...</a>
                 </Dropdown>

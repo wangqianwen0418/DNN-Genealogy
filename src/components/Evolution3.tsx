@@ -86,7 +86,9 @@ export interface State {
     showLabel: boolean,
     legend: LegendProps['items'],
     modalVisible: boolean,
-    detailed: string
+    detailed: string,
+    glyphZoom: boolean,
+    glyphZoomLabel: string
 }
 
 const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
@@ -125,6 +127,7 @@ export default class Evolution extends React.Component<Props, State>{
         this.mouseUp = this.mouseUp.bind(this)
         this.selectItem = this.selectItem.bind(this)
         this.showModal = this.showModal.bind(this)
+        this.changeGlyphZoom = this.changeGlyphZoom.bind(this)
         this.state = {
             datum: [],
             nodes: [],
@@ -145,7 +148,9 @@ export default class Evolution extends React.Component<Props, State>{
             showLabel: false,
             legend: legendCNN,
             modalVisible: false,
-            detailed: ""
+            detailed: "",
+            glyphZoom: false,
+            glyphZoomLabel: ''
         }
     }
     async getData() {
@@ -183,10 +188,10 @@ export default class Evolution extends React.Component<Props, State>{
         // Get benchmarks of datasets
         console.log(datum)
         if (appValue === '1.1.' && nonsequenceBenchmarks.length === 0) {
-            let stat : any[] = [] 
+            let stat: any[] = []
             for (let d of datum)
                 for (let name of d.names)
-                    stat.push({ ...name, parent: d.ID})
+                    stat.push({ ...name, parent: d.ID })
             for (let dataset of nonsequenceDatasets) {
                 let benchmarkData = stat.map((d: any) => d[dataset])
                 let sortedData = benchmarkData.sort((x, y) => x - y).filter((x) => x)
@@ -216,14 +221,14 @@ export default class Evolution extends React.Component<Props, State>{
         let { pinNodes, appValue } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: appValue=="1.1."?nodeW * .8:nodeW * 1.6,
+            ranksep: appValue == "1.1." ? nodeW * .8 : nodeW * 1.6,
             marginx: margin * 2,
             marginy: margin,
             rankdir: 'LR',
             edgesep: nodeH * 0.6,
             nodesep: nodeH * .5,
             // ranker: "tight-tree"
-            ranker: appValue=="1.1."?"longest-path":"tight-tree"
+            ranker: appValue == "1.1." ? "longest-path" : "tight-tree"
         });
         dag.setDefaultEdgeLabel(() => { return {}; });
 
@@ -235,7 +240,7 @@ export default class Evolution extends React.Component<Props, State>{
             // } else {
             //     return w * 0.3
             // }
-            return w * (.4*ratio + .6)
+            return w * (.4 * ratio + .6)
         }
 
         //initialize the dag
@@ -280,8 +285,8 @@ export default class Evolution extends React.Component<Props, State>{
         if (selectedNode) {
             distanceDict = dagre.graphlib.alg
                 .dijkstra(
-                    dag, selectedNode.label, 
-                    (e) =>(e.v==selectedNode.label?1:0.8), 
+                    dag, selectedNode.label,
+                    (e) => (e.v == selectedNode.label ? 1 : 0.8),
                     v => dag.nodeEdges(v)
                 )
         }
@@ -290,7 +295,7 @@ export default class Evolution extends React.Component<Props, State>{
 
 
         //calculate doi for each node
-        let minDoi= Infinity, maxDoi = -Infinity
+        let minDoi = Infinity, maxDoi = -Infinity
         dag.nodes().forEach((v) => {
             if (dag.node(v)) {
                 let node = dag.node(v),
@@ -304,7 +309,7 @@ export default class Evolution extends React.Component<Props, State>{
                 //     }))
                 // ),
                 // doi = api_diff + r_dist * distance
-                let doi = api +r_dist * distance
+                let doi = api + r_dist * distance
 
                 dag.setNode(v, {
                     ...node,
@@ -312,10 +317,10 @@ export default class Evolution extends React.Component<Props, State>{
                     doi: doi,
                 })
 
-                if(minDoi>doi){
+                if (minDoi > doi) {
                     minDoi = doi
                 }
-                if(maxDoi<doi){
+                if (maxDoi < doi) {
                     maxDoi = doi
                 }
             }
@@ -352,19 +357,19 @@ export default class Evolution extends React.Component<Props, State>{
         // }
 
         //normalize doi to 0-1, resize the node
-        dag.nodes().forEach((v)=>{
-            let node= dag.node(v),
-            selected: boolean = (v == selectedID),
-            pinned: boolean = (pinNodes.indexOf(v) != -1)
-            if(node){
-                node.doi = (node.doi-minDoi)/(maxDoi-minDoi)
-                dag.setNode(v,{
+        dag.nodes().forEach((v) => {
+            let node = dag.node(v),
+                selected: boolean = (v == selectedID),
+                pinned: boolean = (pinNodes.indexOf(v) != -1)
+            if (node) {
+                node.doi = (node.doi - minDoi) / (maxDoi - minDoi)
+                dag.setNode(v, {
                     ...node,
-                    width: (pinned)?expandW:resizeNode(nodeW, node.doi),
-                    height: (pinned)?expandH:resizeNode(nodeH, node.doi),
+                    width: (pinned) ? expandW : resizeNode(nodeW, node.doi),
+                    height: (pinned) ? expandH : resizeNode(nodeH, node.doi),
                 })
             }
-        })       
+        })
 
 
         const topN = (nodes: string[], n: number = 4) => {
@@ -388,15 +393,15 @@ export default class Evolution extends React.Component<Props, State>{
             return topDoi
         }
         let topDoi: Node[] = topN(dag.nodes())
-        
+
         let ratio = 1.5
-        topDoi.forEach((node:Node)=>{
+        topDoi.forEach((node: Node) => {
             ratio *= 0.9
             dag.setNode(node.label, {
-                            ...node,
-                            width: expandW * ratio,
-                            height: expandH * ratio,
-                        })
+                ...node,
+                width: expandW * ratio,
+                height: expandH * ratio,
+            })
         })
 
 
@@ -414,8 +419,8 @@ export default class Evolution extends React.Component<Props, State>{
             }
         })
         //normalize doi to 0~1
-        nodes.forEach((node:any)=>{
-            node.doi = (node.doi-minDoi)/(maxDoi-minDoi)
+        nodes.forEach((node: any) => {
+            node.doi = (node.doi - minDoi) / (maxDoi - minDoi)
         })
         dag.edges().forEach(e => {
             if (dag.node(e.v) && dag.node(e.w)) {
@@ -455,7 +460,7 @@ export default class Evolution extends React.Component<Props, State>{
                     transX={transX}
                     transY={transY}
                     scale={scale}
-                    selectNode={this.selectNode} />
+                    selectNode={this.selectNode}/>
             })}
         </g>)
     }
@@ -482,6 +487,7 @@ export default class Evolution extends React.Component<Props, State>{
                 onclickMenu={this.onclickMenu}
                 pinNode={this.pinNode}
                 duration={duration}
+                changeGlyphZoom={this.changeGlyphZoom} 
             />
         })
     }
@@ -491,22 +497,22 @@ export default class Evolution extends React.Component<Props, State>{
             selectedID = selectedNode ? selectedNode.label : undefined,
             // clickLegend = this.state.legend[cate] ? this.state.legend[cate].click : false,
             // hoverLegend = this.state.legend[cate] ? this.state.legend[cate].hover : false
-            clickLegend:boolean=false, hoverLegend:boolean=false,
-            everHover=false, everClick=false
-            cate.forEach((k:string)=>{
-                let item = legend[k]
-                if(item&&item.click){
-                    clickLegend=true
-                }
-                if(item&&item.hover){
-                    hoverLegend=true
-                }
-            })
-            // Object.keys(legend).forEach(k=>{
-            //     let item = legend[k]
-            //     if(item.click){everClick=true}
-            //     if(item.hover){everHover=true}
-            // })
+            clickLegend: boolean = false, hoverLegend: boolean = false,
+            everHover = false, everClick = false
+        cate.forEach((k: string) => {
+            let item = legend[k]
+            if (item && item.click) {
+                clickLegend = true
+            }
+            if (item && item.hover) {
+                hoverLegend = true
+            }
+        })
+        // Object.keys(legend).forEach(k=>{
+        //     let item = legend[k]
+        //     if(item.click){everClick=true}
+        //     if(item.hover){everHover=true}
+        // })
 
         //a trick. if assign transX, transY, scale to a group, the transition animiation will be wired
         const movePoint = (p: Point, x: number, y: number, s: number) => {
@@ -561,7 +567,7 @@ export default class Evolution extends React.Component<Props, State>{
 
             }
             return vias
-        }   
+        }
         vias = getCurve(points)
 
         let pathData = `${start}  ${vias.join(' ')}`,
@@ -573,19 +579,19 @@ export default class Evolution extends React.Component<Props, State>{
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
 
         return <g className='Edge EdgeGroup' key={`${i}_${from}->${to}`}>
-            {cate.map((key:string, i:number)=>{
+            {cate.map((key: string, i: number) => {
                 return <path
-                className="Edge"
-                id={`${from}->${to}`}
-                d={pathData}
-                stroke={clickLegend?"gray":getColor(key)}
-                fill='none'
-                transform={`translate(${i*4}, ${i*4})`}
-                strokeWidth={(hoverLegend||hovered)&&!clickLegend ? 6 : 4}
-                opacity={hoverLegend? 1:(clickLegend?0.4: .7)}
-            />
+                    className="Edge"
+                    id={`${from}->${to}`}
+                    d={pathData}
+                    stroke={clickLegend ? "gray" : getColor(key)}
+                    fill='none'
+                    transform={`translate(${i * 4}, ${i * 4})`}
+                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 6 : 4}
+                    opacity={hoverLegend ? 1 : (clickLegend ? 0.4 : .7)}
+                />
             })}
-            
+
 
             <path
                 id={`label_${from}->${to}`}
@@ -596,7 +602,7 @@ export default class Evolution extends React.Component<Props, State>{
             {showLabel ?
                 <Tooltip title={label_l} mouseEnterDelay={.3}>
                     <g className="edgeLable" cursor="pointer"
-                        opacity={hoverLegend?1:0.8}
+                        opacity={hoverLegend ? 1 : 0.8}
                         onMouseOver={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `${from}->${to}` })}
                         onMouseLeave={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `` })}
                     >
@@ -641,7 +647,7 @@ export default class Evolution extends React.Component<Props, State>{
                             }}
                         </Transition>
                     </g>
-                </Tooltip> : <g/>
+                </Tooltip> : <g />
                 // <path
                 //     className="EdgeMarker"
                 //     strokeWidth={10}
@@ -667,17 +673,23 @@ export default class Evolution extends React.Component<Props, State>{
     handleMouseWheel(evt: React.WheelEvent<any>) {
         let { scale, transX, transY } = this.state
         this.updateEdge = !this.updateEdge
-        if (evt.deltaY > 0) { 
-            scale = scale * 1.1 
-            transX =  transX * 1.1
-            transY = transY*1.1
-            
+        if (evt.deltaY > 0) {
+            scale = scale * 1.1
+            transX = transX * 1.1
+            transY = transY * 1.1
+
         } else if (evt.deltaY < 0) {
-            scale = scale * .9 
-            transX =  transX * .9
-            transY = transY* .9
+            scale = scale * .9
+            transX = transX * .9
+            transY = transY * .9
         }
         this.setState({ scale, transX, transY });
+    }
+    changeGlyphZoom(name:string){
+        this.setState({
+            glyphZoom: !this.state.glyphZoom,
+            glyphZoomLabel: name
+        })
     }
     componentDidMount() {
         this.getData()
@@ -757,7 +769,7 @@ export default class Evolution extends React.Component<Props, State>{
                 }
             }
         }
-        
+
         /*if (selectedNode) {
             for (let nn of datum) {
                 if (nn.ID === selectedNode.label) {
@@ -792,7 +804,7 @@ export default class Evolution extends React.Component<Props, State>{
         e.stopPropagation()
         e.preventDefault()
         // if (this.dragFlag) {
-            
+
         //     this.dragFlag = false
         // }
 
@@ -827,7 +839,7 @@ export default class Evolution extends React.Component<Props, State>{
                 break
         }
     }
-    selectItem(key: string, op:"click"|"hover") {
+    selectItem(key: string, op: "click" | "hover") {
         let { legend } = this.state
         legend[key][op] = !legend[key][op]
         this.setState({ legend })
@@ -841,12 +853,13 @@ export default class Evolution extends React.Component<Props, State>{
     }
 
     render() {
-        let { nodes, edges, w, h, appValue, legend, modalVisible, detailed } = this.state
+        let { nodes, edges, w, h, appValue, legend, modalVisible, detailed, glyphZoom, glyphZoomLabel} = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         let { train, arc } = this.props
+
 
         return <div
             className="Evolution View"
@@ -937,16 +950,35 @@ export default class Evolution extends React.Component<Props, State>{
             </div>
             <Modal
                 className="CompareModal"
-                style={{top: "10%", width: "40%", transitionDuration: "0.3s", transitionTimingFunction: "ease"}}
-                bodyStyle={{height: "calc(100% - 48px)"}}
+                style={{ top: "10%", width: "40%", transitionDuration: "0.3s", transitionTimingFunction: "ease" }}
+                bodyStyle={{ height: "calc(100% - 48px)" }}
                 title={`Detailed Structure of ${detailed}`}
                 visible={modalVisible}
                 footer={false}
-                onCancel={() => this.setState({modalVisible: false})}
+                onCancel={() => this.setState({ modalVisible: false })}
                 maskClosable={true}
                 key={Math.random()}
-                >
+            >
                 <ArchitectureCompare network={detailed} />
+            </Modal>
+            <Modal
+                title={glyphZoomLabel}
+                visible={glyphZoom}
+                onCancel={()=>{this.setState({glyphZoom: false})}}
+                footer={null}
+                // onOk={this.handleOk}
+                // onCancel={this.handleCancel}
+            >
+            <img 
+            src={`../../images/${glyphZoomLabel}.png`}
+            style={{
+                height:"100%",
+                width:"100%"
+            }}
+            />
+            <div>
+
+                </div>
             </Modal>
         </div>
     }

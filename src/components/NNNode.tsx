@@ -3,7 +3,7 @@ import { Node } from "../types";
 import BoxPlot from "./BoxPlot";
 import { Button, Dropdown, Menu, Tooltip, Tabs } from "antd";
 import * as d3 from "d3";
-import { getColor } from "../helper";
+import { getColor, capFirstLetter,cutLabel } from "../helper";
 const TabPane = Tabs.TabPane
 
 const margin = 40, nodeH = 20, nodeW = 100, labelL = 6,
@@ -23,7 +23,8 @@ export interface Props {
     transX: number,
     transY: number,
     scale: number,
-    selectNode: (node: Node) => void
+    selectNode: (node: Node) => void,
+    
 }
 
 
@@ -53,7 +54,6 @@ export default class NNNode extends React.Component<Props, {}>{
     }
     render() {
         let { node, zoomed, selected, isTop, hovered, selectNode, apiArr, transX, transY, scale } = this.props,
-            tooLong: boolean = node.label.length > labelL,
             bg: JSX.Element | any = (node.variants.length > 0 && !zoomed) ? <rect width={node.width * scale} height={node.height * scale}
                 className="NodeBg"
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
@@ -65,9 +65,7 @@ export default class NNNode extends React.Component<Props, {}>{
             /> : [],
             arc:string[]=node.arc,
             arc_num = arc.length
-        let capFirstLetter = (name: string) => {
-            return name.charAt(0).toUpperCase() + name.slice(1)
-        }
+        
         //a trick. calculate position
         //if assign transX, transY, scale to another group, the transition animiation will be wired
         
@@ -130,8 +128,7 @@ export default class NNNode extends React.Component<Props, {}>{
                             x={node.width * scale * 0.6}
                             y={.8 * node.height * scale}
                         >
-                            {
-                                capFirstLetter(tooLong ? (node.label.slice(0, labelL) + '...') : node.label)
+                            {capFirstLetter(cutLabel(node.label, labelL))
                             }
                         </text>
                         {/* <BoxPlot

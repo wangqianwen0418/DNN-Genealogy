@@ -188,8 +188,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 tmpAttr[index] = name[attr_names[index].dataset]
             }
             newdots.push({
-                // r: Math.min(Math.max(Math.sqrt(name.params), 4), 10),
-                r: 4 +  (name.params>15?15+name.params/8:name.params),
+                r: Math.min(Math.max(Math.sqrt(name.params), 4), 10),
+                // r: 4 +  (name.params>15?15+name.params/20:name.params),
                 name: name.name,
                 attr: tmpAttr,
                 parent: nn.ID
@@ -210,7 +210,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         let { nns, attr_names, selected } = this.state
         let margin: number = 5,
             bar_a: number = 360 / attr_names.length,
-            bar_w: number = 30
+            bar_w: number = this.height/15 
         this.width = (this.ref?this.ref.clientWidth:50)
         this.height = (this.ref?this.ref.clientHeight:30)
         this.r = this.height / 2 - bar_w - 2 - margin * 5
@@ -496,7 +496,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         console.log(nodes)
         function ticked() {
             nodes.attr("transform", (d:Dot)=>{
-                if(d.x*d.x+d.y*d.y<(that.r-d.r)*(that.r-d.r)){
+                if(d.x*d.x+d.y*d.y<(that.r-d.r)*(that.r-d.r)*0.8){
                     return `translate(${d.x}, ${d.y})`
                 }else{
                     let k = d.y/d.x, theta = Math.atan(k) + (d.x>0?0:Math.PI)
