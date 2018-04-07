@@ -213,7 +213,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             bar_w: number = 30
         this.width = (this.ref?this.ref.clientWidth:50)
         this.height = (this.ref?this.ref.clientHeight:30)
-        this.r = this.height / 2 - bar_w - 2 - margin * 3
+        this.r = this.height / 2 - bar_w - 2 - margin * 5
         let offsetX = this.r + 5 * margin + bar_w + 30,
             offsetY = this.r + 3 * margin + bar_w + 10
         let selected_nns = selected.map((name: string) => nns.filter((nn) => {
