@@ -3,6 +3,7 @@ import { Button, Dropdown, Menu, Tooltip, Tabs, Icon } from "antd";
 import { Transition } from "react-transition-group";
 import { Node } from "../types";
 import "./ExtendNode.css"
+import { mapNetworkToArcs } from "./ArchitectureCompare"
 // import ImageModel from './ImageModel'
 
 const TabPane = Tabs.TabPane
@@ -87,7 +88,12 @@ export default class ExtendNode extends React.Component<Props, State>{
             <Menu onClick={onclick}>
                 <Menu.Item key="text">text intro</Menu.Item>
                 <Menu.Item key="compare">compare performance</Menu.Item>
-                <Menu.Item key="detailed">detailed structure</Menu.Item>
+                <Menu.Item
+                    key="detailed"
+                    disabled={mapNetworkToArcs.filter((d: any)=>(d.label===node.ID)).length === 0}
+                >
+                    detailed structure
+                </Menu.Item>
             </Menu>
         )
 

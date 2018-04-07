@@ -56,7 +56,12 @@ export default class Train extends React.Component<Props, State>{
             >
                 <Collapse bordered={false}>
                     {tab.children.map((pane:any)=>{
-                        return <Panel header={pane.name} key={pane.name}><p>{pane.url}</p></Panel>
+                        return <Panel header={pane.name} key={pane.name}>
+                            <a href={pane.url}>{pane.url}</a>
+                            <div style={{marginTop: '15px'}}>
+                                <img src={'http://latex.codecogs.com/gif.latex?'+pane.latex} />
+                            </div>
+                        </Panel>
                     })}
                 </Collapse>
             </TabPane>

@@ -6,49 +6,56 @@
               "id": "3.1.1.",
               "name": "Orthogonal",
               "size": 0,
-              "url": "http://arxiv.org/abs/1312.6120"
+              "url": "http://arxiv.org/abs/1312.6120",
+              "latex": "W=A,AA^T=E"
             },
             {
               "depth": 3,
               "id": "3.1.2.",
               "name": "Xavier Normal",
               "size": 0,
-              "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf"
+              "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf",
+              "latex":"W\\sim N\\left(0, \\frac{2}{n_l+n_{l+1}}\\right)"
             },
             {
               "depth": 3,
               "id": "3.1.3.",
               "name": "Xavier Uniform",
               "size": 0,
-              "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf"
+              "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf",
+              "latex":"W\\sim U\\left(-\\sqrt{\\frac{6}{n_l+n_{l+1}}}, \\sqrt{\\frac{6}{n_l+n_{l+1}}}\\right)"
             },
             {
               "depth": 3,
               "id": "3.1.4.",
               "name": "He Normal",
               "size": 0,
-              "url":"http://arxiv.org/abs/1502.01852"
+              "url":"http://arxiv.org/abs/1502.01852",
+              "latex":"W\\sim N\\left(0, \\frac{2}{n_l}\\right)"
             },
             {
               "depth": 3,
               "id": "3.1.5.",
               "name": "He Uniform",
               "size": 0,
-              "url":"http://arxiv.org/abs/1502.01852"
+              "url":"http://arxiv.org/abs/1502.01852",
+              "latex":"W\\sim U\\left(-\\sqrt{\\frac{6}{n_l}}, \\sqrt{\\frac{6}{n_l}}\\right)"
             },
             {
               "depth": 3,
               "id": "3.1.6.",
               "name": "Lecun Normal",
               "size": 0,
-              "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf"
+              "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf",
+              "latex":"W\\sim N\\left(0, \\frac{1}{n_l}\\right)"
             },
             {
               "depth": 3,
               "id": "3.1.7.",
               "name": "Lecun Uniform",
               "size": 0,
-              "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf"
+              "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf",
+              "latex":"W\\sim U\\left(-\\sqrt{\\frac{3}{n_l}}, \\sqrt{\\frac{3}{n_l}}\\right)"
             }
           ],
           "depth": 2,

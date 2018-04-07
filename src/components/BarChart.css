@@ -53,3 +53,6 @@ text {
 .CorpusCompare{
     overflow: hidden;
 }
+.barchart .ant-tabs-content{
+    height: 100%;
+}
