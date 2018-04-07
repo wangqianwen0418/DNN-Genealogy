@@ -47,11 +47,11 @@ subtract_pixel_mean = True
 # ResNet164 |27(18)| -----     | 94.07     | -----     | 94.54     | ---(---)
 # ResNet1001| (111)| -----     | 92.39     | -----     | 95.08+-.14| ---(---)
 # ---------------------------------------------------------------------------
-n = 6
+n = 5
 
 # Model version
 # Orig paper: version = 1 (ResNet v1), Improved ResNet: version = 2 (ResNet v2)
-version = 2
+version = 1
 
 # Computed depth from supplied model parameter n
 if version == 1:
@@ -312,6 +312,6 @@ model.summary()
 
 json_string = model.to_json()
 
-with open("resnetv2_56_cifar.json", "w") as jsonf:
+with open("resnetv1_32_cifar.json", "w") as jsonf:
     jsonf.write(json_string)
 jsonf.close()

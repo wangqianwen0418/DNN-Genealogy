@@ -81,6 +81,9 @@ const mapNetworkToArcs = [{
         value: 'resNet_v1_50',
         label: 'resNet_v1_50'
     }, {
+        value: 'resNet_v1_32_cifar',
+        label: 'resNet_v1_32_cifar'
+    }, {
         value: 'resNet_v1_56_cifar',
         label: 'resNet_v1_56_cifar'
     }, {

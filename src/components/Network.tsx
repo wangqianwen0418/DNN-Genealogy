@@ -9,8 +9,8 @@ import { color } from "d3";
 // export interface Node {
 //     class?:string
 // }
-const node_w: number = 110, node_h: number = 20, margin: number = 10;
-const nodeH = 20, nodeW = 200, expandMaxH = 200
+const node_w: number = 110, margin: number = 10;
+const nodeH = 40, nodeW = 200, expandMaxH = 200
 
 export interface Props {
     nodes: EvoNode[],
@@ -47,7 +47,7 @@ export default class Network extends React.Component<Props, State> {
     getDag(layers: EvoNode[], selectedLayers: string[]) {
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({ 
-            ranksep: node_h * 1.5,
+            ranksep: nodeH * .6,
             marginx: margin,
             marginy: margin,
             rankdir: 'TB',
@@ -58,7 +58,7 @@ export default class Network extends React.Component<Props, State> {
             let details = JSON.stringify(layer.config, null, 2).replace(/"/g, '').split('\n'), textLength = details.length * 12 + 30
             dag.setNode(layer.name, { 
                 label: layer.name,
-                width: nodeW,
+                width: layer.name.length*nodeH/4 + nodeH,
                 height: nodeH,
                 className: layer.class_name,
                 config: layer.config,
@@ -117,16 +117,16 @@ export default class Network extends React.Component<Props, State> {
                     {node.expand ?
                         (<svg width={node.width} height={node.height}><g><text textAnchor="middle"
                             fill="white"
-                            fontSize={10}
+                            fontSize={nodeH/2}
                             x={node.width / 2}
-                            y={12}>
+                            y={nodeH/2}>
                             {node.label}
                             </text>
                             <text textAnchor="middle"
                                 fill="white"
-                                fontSize={10}
+                                fontSize={nodeH/2}
                                 x={node.width / 2}
-                                y={22}>
+                                y={nodeH}>
                                 -----------------------------
                             </text>
                             {node.details.map((str:string, idx: number) => {
@@ -134,16 +134,16 @@ export default class Network extends React.Component<Props, State> {
                                     textAnchor="left"
                                     fill="white"
                                     xmlSpace="preserve"
-                                    fontSize={10}
+                                    fontSize={nodeH * .4}
                                     x={5}
-                                    y={12 * idx + 35}>
+                                    y={nodeH * .4 * idx + nodeH*1.2}>
                                     {str}
                                 </text>
                             })}
                             </g></svg>)
                         : <text textAnchor="middle"
                             fill="white"
-                            fontSize={10}
+                            fontSize={nodeH/2}
                             x={node.width / 2}
                             y={node.height * 0.6}>
                             {node.label}
