@@ -2,6 +2,7 @@
   "name": "vis_edit",
   "version": "0.1.0",
   "private": true,
+  "_homepage" : "https://wangqianwen0418.github.io/projects/DNNGenealogy/",
   "dependencies": {
     "@types/react-transition-group": "^2.0.7",
     "antd": "^2.13.10",

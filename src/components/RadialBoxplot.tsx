@@ -397,20 +397,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .attr('class', 'dot')
             .data(NNnodes)
             .enter().append('g')
-            //.attr("transform", d=>`translate(${d.x}, ${d.y})`)            
-            //.append('polygon')
-            //.attr('points', (d :Dot) => this.polygon(d.r, networks.indexOf(d.parent) + 3))            
-            //.attr('stroke-width', 1)            
-            .append('circle')
-            .style('z-index', 10)
-            .attr('id', (d: any) => 'bpnode_' + d.name)            
-            .attr('r', (d: Dot) => d.r)
-            .attr('fill', (d:Dot)=>getColor(d.parent))
-            // .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
-            // .on('click', function(d) {
-            //     that.selectNode(d)
-            // })
-            .on('mouseover', function(d) {
+            .on('mouseenter', function(d) {
                 let idx: number
                 document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 0.2;')
                 let nnnodes = document.getElementsByClassName('NNNode')
@@ -442,7 +429,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     }).join(""))
                 noticeLines(d.name)
             })
-            .on('mouseout', function(d) {
+            .on('mouseleave', function(d) {
                 let idx: number
                 document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 1;')
                 let nnnodes = document.getElementsByClassName('NNNode')
@@ -464,6 +451,20 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                 tooltip.style("display", "none")
                 d3.selectAll('.noticelines').remove()
             })
+            //.attr("transform", d=>`translate(${d.x}, ${d.y})`)            
+            //.append('polygon')
+            //.attr('points', (d :Dot) => this.polygon(d.r, networks.indexOf(d.parent) + 3))            
+            //.attr('stroke-width', 1)            
+            .append('circle')
+            .style('z-index', 10)
+            .attr('id', (d: any) => 'bpnode_' + d.name)            
+            .attr('r', (d: Dot) => d.r)
+            .attr('fill', (d:Dot)=>getColor(d.parent))
+            // .attr('fill', (d: Dot) => that.state.selected.indexOf(d.name) !== -1 ? getColor(d.name) : '#666')
+            // .on('click', function(d) {
+            //     that.selectNode(d)
+            // })
+            
 
         function noticeLines(name: string) {
             if (!noticing) {
