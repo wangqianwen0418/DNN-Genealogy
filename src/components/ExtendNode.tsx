@@ -104,7 +104,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         // return <Transition in={zoomed} timeout={duration}>
         //     {(status: any) => {
         return <div id={`exnode_${node.ID}`}
-            className={`ExtendNode Node ${zoomed?"zoomed":"collapsed"}`}
+            className={`ExtendNode Node ${zoomed?"zoomed":"collapsed"} ${show?'':'faded'}`}
             onMouseOver={() => this.setState({ showpin: true })}
             onMouseOut={() => this.setState({ showpin: false })}
             // onMouseOut={()=>this.setState({showpin:false})}
@@ -117,7 +117,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 width: node.width * scale,
                 visibility: zoomed ? "visible" : "hidden",
                 outline: `${selected ? 3 : 0.5}px ${selected ?"dashed":"solid" } #aaa`,
-                opacity: show?1:.2
+                // opacity: show?1:.2
                 // borderRadius: "5px"
                 // ...defaultStyle,
                 // ...transitionStyles[status]
