@@ -91,7 +91,7 @@ export interface State {
     glyphZoomLabel: string
 }
 
-const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 24,
+const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 20,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -221,7 +221,7 @@ export default class Evolution extends React.Component<Props, State>{
         let { pinNodes, appValue } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: appValue == "1.1." ? nodeW * .8 : nodeW * 1.6,
+            ranksep: appValue == "1.1." ? nodeW * 1 : nodeW * 1.6,
             marginx: margin * 2,
             marginy: margin,
             rankdir: 'LR',
@@ -460,7 +460,7 @@ export default class Evolution extends React.Component<Props, State>{
                     transX={transX}
                     transY={transY}
                     scale={scale}
-                    selectNode={this.selectNode}/>
+                    selectNode={this.selectNode} />
             })}
         </g>)
     }
@@ -480,14 +480,14 @@ export default class Evolution extends React.Component<Props, State>{
                 scale={scale}
                 transX={transX}
                 transY={transY}
-                margin={tabH}
+                tabH={tabH}
                 node={node}
                 selected={selected}
                 selectNode={this.selectNode}
                 onclickMenu={this.onclickMenu}
                 pinNode={this.pinNode}
                 duration={duration}
-                changeGlyphZoom={this.changeGlyphZoom} 
+                changeGlyphZoom={this.changeGlyphZoom}
             />
         })
     }
@@ -579,18 +579,31 @@ export default class Evolution extends React.Component<Props, State>{
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
 
         return <g className='Edge EdgeGroup' key={`${i}_${from}->${to}`}>
-            {cate.map((key: string, i: number) => {
+            {/* {cate.map((key: string, i: number) => {
                 return <path
                     className="Edge"
                     id={`${from}->${to}`}
                     d={pathData}
-                    stroke={clickLegend ? "gray" : getColor(key)}
+                    stroke="#aaa"
+                    // stroke={clickLegend ? "gray" : getColor(key)}
                     fill='none'
                     transform={`translate(${i * 4}, ${i * 4})`}
-                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 6 : 4}
+                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 3 : 1}
                     opacity={hoverLegend ? 1 : (clickLegend ? 0.4 : .7)}
                 />
-            })}
+            })} */}
+            {
+                <path
+                    className="Edge"
+                    id={`${from}->${to}`}
+                    d={pathData}
+                    stroke={(hoverLegend || hovered) && !clickLegend ? "#555" : "#aaa"}
+                    // stroke={clickLegend ? "gray" : getColor(key)}
+                    fill='none'
+                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 1}
+                    opacity={hoverLegend ? 1 : (clickLegend ? 0.4 : .7)}
+                />
+            }
 
 
             <path
@@ -685,7 +698,7 @@ export default class Evolution extends React.Component<Props, State>{
         }
         this.setState({ scale, transX, transY });
     }
-    changeGlyphZoom(name:string){
+    changeGlyphZoom(name: string) {
         this.setState({
             glyphZoom: !this.state.glyphZoom,
             glyphZoomLabel: name
@@ -853,7 +866,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
 
     render() {
-        let { nodes, edges, w, h, appValue, legend, modalVisible, detailed, glyphZoom, glyphZoomLabel} = this.state
+        let { nodes, edges, w, h, appValue, legend, modalVisible, detailed, glyphZoom, glyphZoomLabel } = this.state
         // let screen_w = (window.innerWidth - 2 * margin) / 2
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
@@ -964,19 +977,19 @@ export default class Evolution extends React.Component<Props, State>{
             <Modal
                 title={glyphZoomLabel}
                 visible={glyphZoom}
-                onCancel={()=>{this.setState({glyphZoom: false})}}
+                onCancel={() => { this.setState({ glyphZoom: false }) }}
                 footer={null}
-                // onOk={this.handleOk}
-                // onCancel={this.handleCancel}
+            // onOk={this.handleOk}
+            // onCancel={this.handleCancel}
             >
-            <img 
-            src={`../../images/${glyphZoomLabel}.png`}
-            style={{
-                height:"100%",
-                width:"100%"
-            }}
-            />
-            <div>
+                <img
+                    src={`../../images/${glyphZoomLabel}.png`}
+                    style={{
+                        height: "100%",
+                        width: "100%"
+                    }}
+                />
+                <div>
 
                 </div>
             </Modal>
