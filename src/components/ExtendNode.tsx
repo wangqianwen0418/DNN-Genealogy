@@ -31,6 +31,7 @@ export interface Props {
     zoomed: boolean,
     transX: number,
     transY: number,
+    show: boolean,
     // apiArr: number[],
     selectNode: (node: Node) => void,
     onclickMenu: (node: Node, menu: string) => void,
@@ -71,7 +72,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         }
     }
     render() {
-        let { node, tabH, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom } = this.props
+        let { node, tabH, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom, show } = this.props
         {/* <div style={{ height: node.height }}>
             <img
                 className="abstract Node"
@@ -99,7 +100,6 @@ export default class ExtendNode extends React.Component<Props, State>{
             </Menu>
         )
 
-
         // return <Transition in={zoomed} timeout={duration}>
         //     {(status: any) => {
         return <div id={`exnode_${node.ID}`}
@@ -116,6 +116,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 width: node.width * scale,
                 visibility: zoomed ? "visible" : "hidden",
                 outline: `${selected ? 3 : 0.5}px ${selected ? "dashed" : "solid"} #aaa`,
+                opacity: show?1:0.2,
                 // borderRadius: "5px"
                 // ...defaultStyle,
                 // ...transitionStyles[status]

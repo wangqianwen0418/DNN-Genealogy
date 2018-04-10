@@ -37,6 +37,7 @@ export default class Legend extends React.Component<LegendProps, {}>{
                 }}
                 onClick={()=>{
                     selectItem(item.key, "click")
+                    
                 }}
                 onMouseEnter={()=>{
                     selectItem(item.key, "hover")

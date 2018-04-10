@@ -223,7 +223,7 @@ export default class Evolution extends React.Component<Props, State>{
         dag.setGraph({
             ranksep: appValue == "1.1." ? nodeW * 1 : nodeW * 1.6,
             marginx: margin * 2,
-            marginy: margin,
+            marginy: margin * 2,
             rankdir: 'LR',
             edgesep: nodeH * 0.6,
             nodesep: nodeH * .5,
@@ -439,7 +439,7 @@ export default class Evolution extends React.Component<Props, State>{
         return { nodes, edges, height, width, topDoi, scale, transX, transY }
     }
     drawNodes(nodes: Node[]) {
-        let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
+        let { selectedNode, topDoi, scale, transX, transY, hoverEdge, legend } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
@@ -449,7 +449,20 @@ export default class Evolution extends React.Component<Props, State>{
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
                     zoomed: boolean = node.width > nodeW,
                     hoverNodes = hoverEdge.split("->"),
-                    hovered = hoverNodes.indexOf(node.label) != -1
+                    hovered = hoverNodes.indexOf(node.label) != -1,
+                    hoverLegend = false, clickLegend = false, everHover = false, everClick = false
+                node.arc.forEach((key: string) => {
+                    let item = legend[key]
+                    if (item && item.hover) {
+                        hoverLegend = true
+                    }
+                })
+                Object.keys(legend).forEach(k => {
+                    let item = legend[k]
+                    if (item.click) { everClick = true }
+                    if (item.hover) { everHover = true }
+                })
+
                 return <NNNode
                     node={node}
                     selected={selected}
@@ -460,12 +473,14 @@ export default class Evolution extends React.Component<Props, State>{
                     transX={transX}
                     transY={transY}
                     scale={scale}
-                    selectNode={this.selectNode} />
+                    show={(hoverLegend || !everHover)}
+                    selectNode={this.selectNode}
+                />
             })}
         </g>)
     }
     drawExtendNodes(nodes: Node[]) {
-        let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
+        let { selectedNode, topDoi, scale, transX, transY, hoverEdge,legend } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
@@ -473,7 +488,19 @@ export default class Evolution extends React.Component<Props, State>{
             let selected: boolean = (node.ID === selectedID),
                 zoomed: boolean = node.width > nodeW,
                 hoverNodes = hoverEdge.split("->"),
-                hovered = hoverNodes.indexOf(node.label) != -1
+                hovered = hoverNodes.indexOf(node.label) != -1,
+                hoverLegend = false, clickLegend = false, everHover = false, everClick = false
+                node.arc.forEach((key: string) => {
+                    let item = legend[key]
+                    if (item && item.hover) {
+                        hoverLegend = true
+                    }
+                })
+                Object.keys(legend).forEach(k => {
+                    let item = legend[k]
+                    if (item.click) { everClick = true }
+                    if (item.hover) { everHover = true }
+                })
             return <ExtendNode
                 zoomed={zoomed}
                 hovered={hovered}
@@ -483,6 +510,7 @@ export default class Evolution extends React.Component<Props, State>{
                 tabH={tabH}
                 node={node}
                 selected={selected}
+                show={hoverLegend||!everHover}
                 selectNode={this.selectNode}
                 onclickMenu={this.onclickMenu}
                 pinNode={this.pinNode}
