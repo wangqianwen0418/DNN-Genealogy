@@ -260,7 +260,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .selectAll('g')
             .data(attr_names)
             .enter().append('g')
-            .on('mousemove', function(attr: any, i: number) {
+            .on('mouseover', function(attr: any, i: number) {
                 let nnnode = d3.select(`#nnnode_${nonsequenceBenchmarks[i].bestPerformanceModel.parent} .bounder`),
                     exnode = d3.select(`#exnode_${nonsequenceBenchmarks[i].bestPerformanceModel.parent}`)
                 nnnode.attr("stroke", "red")
@@ -410,7 +410,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             // .on('click', function(d) {
             //     that.selectNode(d)
             // })
-            .on('mousemove', function(d) {
+            .on('mouseover', function(d) {
                 let idx: number
                 document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 0.2;')
                 let nnnodes = document.getElementsByClassName('NNNode')
