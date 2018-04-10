@@ -1,6 +1,6 @@
 import * as React from "react"
 // import * as dagre from "dagre"
-import { Node, GraphEdge } from "dagre"
+import { Node, GraphEdge } from "../lib/@types/dagre"
 import "./Evolution.css"
 import "./App.css"
 import axios from "axios"

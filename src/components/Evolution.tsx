@@ -1,6 +1,6 @@
 import * as React from "react"
-import * as dagre from "dagre"
-import { Node, GraphEdge } from "dagre"
+import * as dagre from "../lib/dagre"
+import { Node, GraphEdge } from "../lib/@types/dagre"
 import "./Evolution.css"
 import "./App.css"
 import axios from "axios"
@@ -102,12 +102,12 @@ export default class Evolution extends React.Component<Props, State>{
         })
         dagre.layout(g)
         let nodes: Node[] = [], edges: any[] = []
-        g.nodes().forEach((v) => {
+        g.nodes().forEach((v:string) => {
             if (g.node(v)) {
                 nodes.push(g.node(v))
             }
         })
-        g.edges().forEach((e, i) => {
+        g.edges().forEach((e:any, i:number) => {
             edges.push(g.edge(e))
         });
         let height = g.graph().height,

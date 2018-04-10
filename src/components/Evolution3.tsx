@@ -1,5 +1,6 @@
 import * as React from "react"
-import * as dagre from "dagre"
+import * as dagre from "../lib/dagre"
+import {Edge} from "../lib/@types/dagre"
 import { Transition } from "react-transition-group"
 // import * as graphlib from "graphlib"
 import "./Evolution.css"
@@ -280,14 +281,14 @@ export default class Evolution extends React.Component<Props, State>{
 
 
         // const getEdgeWeight = (e: dagre.Edge) => dag.node(e.v).api + dag.node(e.w).api
-        const getEI = (v: dagre.Edge) => 1
+        const getEI = (v: Edge) => 1
         let distanceDict: any
         if (selectedNode) {
             distanceDict = dagre.graphlib.alg
                 .dijkstra(
                     dag, selectedNode.label,
-                    (e) => (e.v == selectedNode.label ? 1 : 0.8),
-                    v => dag.nodeEdges(v)
+                    (e:Edge) => (e.v == selectedNode.label ? 1 : 0.8),
+                    (v:string) => dag.nodeEdges(v)
                 )
         }
         // let tree = dagre.graphlib.alg.prim(dag, getEdgeWeight)
@@ -296,7 +297,7 @@ export default class Evolution extends React.Component<Props, State>{
 
         //calculate doi for each node
         let minDoi = Infinity, maxDoi = -Infinity
-        dag.nodes().forEach((v) => {
+        dag.nodes().forEach((v:string) => {
             if (dag.node(v)) {
                 let node = dag.node(v),
                     api = node.api || 1,
@@ -357,7 +358,7 @@ export default class Evolution extends React.Component<Props, State>{
         // }
 
         //normalize doi to 0-1, resize the node
-        dag.nodes().forEach((v) => {
+        dag.nodes().forEach((v:string) => {
             let node = dag.node(v),
                 selected: boolean = (v == selectedID),
                 pinned: boolean = (pinNodes.indexOf(v) != -1)
@@ -412,7 +413,7 @@ export default class Evolution extends React.Component<Props, State>{
         let nodes: Node[] = [], edges: GraphEdge[] = [],
             height = (dag.graph().height || 0),
             width = dag.graph().width || 0
-        dag.nodes().forEach(v => {
+        dag.nodes().forEach((v:string) => {
             let node = dag.node(v)
             if (node) {
                 nodes.push(node)
@@ -422,7 +423,7 @@ export default class Evolution extends React.Component<Props, State>{
         nodes.forEach((node: any) => {
             node.doi = (node.doi - minDoi) / (maxDoi - minDoi)
         })
-        dag.edges().forEach(e => {
+        dag.edges().forEach((e:Edge) => {
             if (dag.node(e.v) && dag.node(e.w)) {
                 edges.push(dag.edge(e))
             }

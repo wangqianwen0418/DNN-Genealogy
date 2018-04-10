@@ -1,0 +1,92 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "@types/dagre@^0.7.38",
+        "scope": "@types",
+        "escapedName": "@types%2fdagre",
+        "name": "@types/dagre",
+        "rawSpec": "^0.7.38",
+        "spec": ">=0.7.38 <0.8.0",
+        "type": "range"
+      },
+      "/Users/wangqianwen/Desktop/coding-train/model-picker"
+    ]
+  ],
+  "_from": "@types/dagre@>=0.7.38 <0.8.0",
+  "_id": "@types/dagre@0.7.39",
+  "_inCache": true,
+  "_location": "/@types/dagre",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/dagre-0.7.39.tgz_1511370597009_0.5261387794744223"
+  },
+  "_npmUser": {
+    "name": "types",
+    "email": "ts-npm-types@microsoft.com"
+  },
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "@types/dagre@^0.7.38",
+    "scope": "@types",
+    "escapedName": "@types%2fdagre",
+    "name": "@types/dagre",
+    "rawSpec": "^0.7.38",
+    "spec": ">=0.7.38 <0.8.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/dagre/-/dagre-0.7.39.tgz",
+  "_shasum": "2bffeb091937d95183a505b81b8b5c098949a338",
+  "_shrinkwrap": null,
+  "_spec": "@types/dagre@^0.7.38",
+  "_where": "/Users/wangqianwen/Desktop/coding-train/model-picker",
+  "contributors": [
+    {
+      "name": "Qinfeng Chen",
+      "url": "https://github.com/qinfchen"
+    },
+    {
+      "name": "Lisa Vallfors",
+      "url": "https://github.com/Frankrike"
+    },
+    {
+      "name": "Pete Vilter",
+      "url": "https://github.com/vilterp"
+    },
+    {
+      "name": "David Newell",
+      "url": "https://github.com/rustedgrail"
+    }
+  ],
+  "dependencies": {},
+  "description": "TypeScript definitions for dagre",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-pHEEzkxQZp1ta4a3n+/Llf1jdyeMpS5ournBmLctv+CQRmU8NOXLh1cKlYQfXLUrFqo5AGRvW1psd5QOgRSRrw==",
+    "shasum": "2bffeb091937d95183a505b81b8b5c098949a338",
+    "tarball": "https://registry.npmjs.org/@types/dagre/-/dagre-0.7.39.tgz"
+  },
+  "license": "MIT",
+  "main": "",
+  "maintainers": [
+    {
+      "name": "types",
+      "email": "ts-npm-types@microsoft.com"
+    }
+  ],
+  "name": "@types/dagre",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+  },
+  "scripts": {},
+  "typeScriptVersion": "2.2",
+  "typesPublisherContentHash": "2b5c6b81f1586b23bbe4210811612925bb9ae5d9128541052bbaad1a54385da1",
+  "version": "0.7.39"
+}

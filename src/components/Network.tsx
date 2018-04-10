@@ -1,8 +1,8 @@
 import * as React from "react";
 import "./Network.css";
 import { EvoNode } from "../types";
-import * as dagre from 'dagre';
-import { Node, GraphEdge } from 'dagre';
+import * as dagre from '../lib/dagre';
+import { Node, GraphEdge } from '../lib/@types/dagre';
 import { getLayerColor } from "../helper";
 import { color } from "d3";
 
@@ -88,12 +88,12 @@ export default class Network extends React.Component<Props, State> {
 
         dagre.layout(dag)
         let nodes:Node[] = [], edges:GraphEdge[] = []
-        dag.nodes().forEach((v) => {
+        dag.nodes().forEach((v:string) => {
             if (dag.node(v)) {
                 nodes.push(dag.node(v))
             }
         })
-        dag.edges().forEach((e) => {    
+        dag.edges().forEach((e:string) => {    
             edges.push(dag.edge(e))
         });
         let height = dag.graph().height,
