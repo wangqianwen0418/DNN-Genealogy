@@ -3,7 +3,7 @@ import { Button, Dropdown, Menu, Tooltip, Tabs, Icon, Modal } from "antd";
 import { Transition } from "react-transition-group";
 import { Node } from "../types";
 import "./ExtendNode.css";
-import {capFirstLetter, cutLabel} from "../helper";
+import { capFirstLetter, cutLabel, getColor } from "../helper";
 import { mapNetworkToArcs } from "./ArchitectureCompare";
 // import ImageModel from './ImageModel'
 
@@ -24,7 +24,7 @@ export interface Props {
     node: Node,
     selected: boolean,
     hovered: boolean,
-    margin: number,
+    tabH: number,
     scale: number,
     duration: number,
     // isTop: boolean,
@@ -35,7 +35,7 @@ export interface Props {
     selectNode: (node: Node) => void,
     onclickMenu: (node: Node, menu: string) => void,
     pinNode: (node: Node) => void,
-    changeGlyphZoom: (label: string)=>void
+    changeGlyphZoom: (label: string) => void
 }
 
 export interface State {
@@ -71,7 +71,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         }
     }
     render() {
-        let { node, margin, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom } = this.props
+        let { node, tabH, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom } = this.props
         {/* <div style={{ height: node.height }}>
             <img
                 className="abstract Node"
@@ -92,7 +92,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 <Menu.Item key="compare">compare performance</Menu.Item>
                 <Menu.Item
                     key="detailed"
-                    disabled={mapNetworkToArcs.filter((d: any)=>(d.label===node.ID)).length === 0}
+                    disabled={mapNetworkToArcs.filter((d: any) => (d.label === node.ID)).length === 0}
                 >
                     detailed structure
                 </Menu.Item>
@@ -103,7 +103,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         // return <Transition in={zoomed} timeout={duration}>
         //     {(status: any) => {
         return <div id={`exnode_${node.ID}`}
-            className={`ExtendNode Node ${zoomed?"zoomed":"collapsed"}`}
+            className={`ExtendNode Node ${zoomed ? "zoomed" : "collapsed"}`}
             onMouseOver={() => this.setState({ showpin: true })}
             onMouseOut={() => this.setState({ showpin: false })}
             // onMouseOut={()=>this.setState({showpin:false})}
@@ -115,45 +115,90 @@ export default class ExtendNode extends React.Component<Props, State>{
                 height: node.height * scale,
                 width: node.width * scale,
                 visibility: zoomed ? "visible" : "hidden",
-                outline: `${selected ? 3 : 0.5}px ${selected ?"dashed":"solid" } #aaa`,
+                outline: `${selected ? 3 : 0.5}px ${selected ? "dashed" : "solid"} #aaa`,
                 // borderRadius: "5px"
                 // ...defaultStyle,
                 // ...transitionStyles[status]
 
             }}
         >
-            <Tabs 
-            defaultActiveKey={`0`}
-            // defaultActiveKey={`${node.variants.length}`}
-            >
-                <TabPane tab={capFirstLetter(cutLabel(node.label, 5))} key="0">
+            {/* <Tabs defaultActiveKey={`0`}>
+                <TabPane
+                    tab={
+                        <div style={{ height: "100%", display: "inline-block" }}>
+                            <div style={{
+
+                                width: "32px",
+                                height: "100%",
+                                display: "inline-block"
+                            }}>
+                                {node.arc.map((d: string) => (
+                                    <div style={{
+                                        backgroundColor: getColor(d),
+                                        width: "100%",
+                                        height: `${100 / (node.arc.length + 1)}%`
+                                    }} />
+                                ))}
+                            </div>
+                            {capFirstLetter(cutLabel(node.label, node.width * scale / 9))}
+                        </div>
+                    }
+                    key="0">
                     <img
                         className="abstract Node"
                         src={`../../images/${node.label}.png`}
                         // style={{
                         //     border: `1px solid ${selected ? "red" : "gray"}`,
                         // }}
-                        height={node.height * scale - margin }
-                        width={node.width * scale}
-                        onMouseDown={this.mouseDown}
-                        onMouseUp={(e) => { this.mouseUp(e, node) }}
-
-
-                    />
-                </TabPane>
-                {/* {node.variants.map((d: any, i: number) => {
-                    return <TabPane tab={d.ID} key={`${i + 1}`}>
-                        <img
-                            className="abstract Node"
-                            src={`../../images/${d.ID}.png`}
-                            // style={{ border: `1px solid ${selected ? "red" : "none"}`, }}
-                            //   height={node.height}
-                            height={node.height * scale - margin - 6}
+                        height={node.height * scale - tabH - 6}
                             width={node.width * scale}
                         />
                     </TabPane>
-                })} */}
-            </Tabs>
+                })} 
+            </Tabs> */}
+            <div
+                className="Node tab"
+                style={{
+                    height: tabH + 'px',
+                    width: node.width * scale,
+                    borderBottom: "0.5px solid #aaa"
+                }}
+            >
+                <div style={{
+                    // width: node.width * scale * .2 + 'px',
+                    width: "20px",
+                    height: "100%",
+                    display: "inline-block"
+                }}>
+                    {node.arc.map((d: string) => (
+                        <div style={{
+                            backgroundColor: getColor(d),
+                            width: "100%",
+                            height: `${100 / node.arc.length}%`
+                        }} />
+                    ))}
+                </div>
+                <span style={{
+                        padding: '2px', 
+                        fontSize: tabH*.7+'px',
+                        webkitTextFillColor: "black",
+                        transform: `translate(0, -10)`,
+                        verticalAlign: 'top'
+                        }}
+                >
+                   {capFirstLetter(cutLabel(node.label, node.width * scale / 9))}
+                </span>
+            </div>
+            <img
+                className="abstract Node"
+                src={`../../images/${node.label}.png`}
+                // style={{
+                //     border: `1px solid ${selected ? "red" : "gray"}`,
+                // }}
+                height={node.height * scale - tabH}
+                width={node.width * scale}
+                onMouseDown={this.mouseDown}
+                onMouseUp={(e) => { this.mouseUp(e, node) }} />
             <div className="floatIcon"
                 style={{
                     position: "relative",
@@ -162,7 +207,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                     opacity: pin || showpin ? 1 : 0,
                     color: "gray"
                 }
-                
+
                 }>
                 <Icon className="pin" type="pushpin"
                     style={{
@@ -170,7 +215,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         color: pin ? "red" : "gray",
                         cursor: "pointer"
                     }}
-                    
+
                     onClick={(e: React.MouseEvent<any>) => {
                         let { pin } = this.state
                         e.stopPropagation()
@@ -179,9 +224,9 @@ export default class ExtendNode extends React.Component<Props, State>{
                         pinNode(node)
 
                     }} />
-                <Icon type="arrows-alt" 
-                style={{cursor: "pointer"}}
-                onClick={()=>this.props.changeGlyphZoom(node.label)}
+                <Icon type="arrows-alt"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => this.props.changeGlyphZoom(node.label)}
                 />
                 <Dropdown overlay={menu} className="infoButton">
                     <a className="infoTrigger"> ...</a>
