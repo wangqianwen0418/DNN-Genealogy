@@ -22,6 +22,11 @@ export default class Legend extends React.Component<LegendProps, {}>{
         //     let item = items[key]
         //     if(item.click){everClick=true}
         // })
+        let everClick = false
+        Object.keys(items).forEach(k=>{
+            let item = items[k]
+            if(item.click)everClick=true
+        })
         return <ul>
             {Object.keys(items).map((key:string)=>{
                 let item = items[key]
@@ -33,7 +38,7 @@ export default class Legend extends React.Component<LegendProps, {}>{
                     position:"relative",
                     top:"4px",
                     marginRight:"3px",
-                    backgroundColor:item.click?"gray":getColor(item.key)
+                    backgroundColor:(item.click||!everClick)?getColor(item.key):"gray"
                 }}
                 onClick={()=>{
                     selectItem(item.key, "click")

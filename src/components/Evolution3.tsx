@@ -439,7 +439,7 @@ export default class Evolution extends React.Component<Props, State>{
         return { nodes, edges, height, width, topDoi, scale, transX, transY }
     }
     drawNodes(nodes: Node[]) {
-        let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
+        let { selectedNode, topDoi, scale, transX, transY, hoverEdge, legend } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
@@ -449,7 +449,24 @@ export default class Evolution extends React.Component<Props, State>{
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
                     zoomed: boolean = node.width > nodeW,
                     hoverNodes = hoverEdge.split("->"),
-                    hovered = hoverNodes.indexOf(node.label) != -1
+                    hovered = hoverNodes.indexOf(node.label) != -1,
+                    hoverLegend = false, clickLegend = false, everHover = false, everClick = false
+                node.arc.forEach((key: string) => {
+                    let item = legend[key]
+                    if (item && item.hover) {
+                        hoverLegend = true
+                    }
+                    if (item && item.click) {
+                        clickLegend = true
+                    }
+                })
+                Object.keys(legend).forEach(k => {
+                    let item = legend[k]
+                    if (item.click) { everClick = true }
+                    if (item.hover) { everHover = true }
+                })
+                hoverLegend = hoverLegend||!everHover
+                clickLegend = clickLegend||!everClick
                 return <NNNode
                     node={node}
                     selected={selected}
@@ -460,12 +477,13 @@ export default class Evolution extends React.Component<Props, State>{
                     transX={transX}
                     transY={transY}
                     scale={scale}
+                    show={(hoverLegend)}
                     selectNode={this.selectNode}/>
             })}
         </g>)
     }
     drawExtendNodes(nodes: Node[]) {
-        let { selectedNode, topDoi, scale, transX, transY, hoverEdge } = this.state,
+        let { selectedNode, topDoi, scale, transX, transY, hoverEdge,legend } = this.state,
             selectedID = selectedNode ? selectedNode.ID : undefined,
             apiArr = this.state.nodes.map(d => d.api || 0).sort(d3.ascending)
 
@@ -473,7 +491,24 @@ export default class Evolution extends React.Component<Props, State>{
             let selected: boolean = (node.ID === selectedID),
                 zoomed: boolean = node.width > nodeW,
                 hoverNodes = hoverEdge.split("->"),
-                hovered = hoverNodes.indexOf(node.label) != -1
+                hovered = hoverNodes.indexOf(node.label) != -1,
+                hoverLegend = false, clickLegend = false, everHover = false, everClick = false
+                node.arc.forEach((key: string) => {
+                    let item = legend[key]
+                    if (item && item.hover) {
+                        hoverLegend = true
+                    }
+                    if (item && item.click) {
+                        clickLegend = true
+                    }
+                })
+                Object.keys(legend).forEach(k => {
+                    let item = legend[k]
+                    if (item.click) { everClick = true }
+                    if (item.hover) { everHover = true }
+                })
+                hoverLegend = hoverLegend||!everHover
+                clickLegend = clickLegend||!everClick
             return <ExtendNode
                 zoomed={zoomed}
                 hovered={hovered}
@@ -483,6 +518,7 @@ export default class Evolution extends React.Component<Props, State>{
                 margin={tabH}
                 node={node}
                 selected={selected}
+                show={hoverLegend}
                 selectNode={this.selectNode}
                 onclickMenu={this.onclickMenu}
                 pinNode={this.pinNode}
@@ -508,11 +544,13 @@ export default class Evolution extends React.Component<Props, State>{
                 hoverLegend = true
             }
         })
-        // Object.keys(legend).forEach(k=>{
-        //     let item = legend[k]
-        //     if(item.click){everClick=true}
-        //     if(item.hover){everHover=true}
-        // })
+        Object.keys(legend).forEach(k=>{
+            let item = legend[k]
+            if(item.click){everClick=true}
+            if(item.hover){everHover=true}
+        })
+        hoverLegend = hoverLegend||!everHover
+        clickLegend = clickLegend||!everClick
 
         //a trick. if assign transX, transY, scale to a group, the transition animiation will be wired
         const movePoint = (p: Point, x: number, y: number, s: number) => {
@@ -584,11 +622,12 @@ export default class Evolution extends React.Component<Props, State>{
                     className="Edge"
                     id={`${from}->${to}`}
                     d={pathData}
-                    stroke={clickLegend ? "gray" : getColor(key)}
+                    stroke={clickLegend ? getColor(key):'gray'}
                     fill='none'
                     transform={`translate(${i * 4}, ${i * 4})`}
-                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 6 : 4}
-                    opacity={hoverLegend ? 1 : (clickLegend ? 0.4 : .7)}
+                    strokeWidth={(hoverLegend || hovered) ? 4 : 2}
+                    // opacity={hoverLegend ? 1 : (clickLegend ? 0.4 : .7)}
+                    opacity={(hoverLegend)?1:.2}
                 />
             })}
 
@@ -841,7 +880,9 @@ export default class Evolution extends React.Component<Props, State>{
     }
     selectItem(key: string, op: "click" | "hover") {
         let { legend } = this.state
+        console.info(legend, key, op, legend[key][op])
         legend[key][op] = !legend[key][op]
+        console.info(legend, key, op, legend[key][op])
         this.setState({ legend })
     }
 

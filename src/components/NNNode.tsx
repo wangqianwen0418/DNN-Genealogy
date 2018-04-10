@@ -23,6 +23,7 @@ export interface Props {
     transX: number,
     transY: number,
     scale: number,
+    show: boolean,
     selectNode: (node: Node) => void,
     
 }
@@ -53,7 +54,7 @@ export default class NNNode extends React.Component<Props, {}>{
         }
     }
     render() {
-        let { node, zoomed, selected, isTop, hovered, selectNode, apiArr, transX, transY, scale } = this.props,
+        let { node, zoomed, selected, isTop, hovered, selectNode, apiArr, transX, transY, scale, show } = this.props,
             bg: JSX.Element | any = (node.variants.length > 0 && !zoomed) ? <rect width={node.width * scale} height={node.height * scale}
                 className="NodeBg"
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
@@ -71,7 +72,7 @@ export default class NNNode extends React.Component<Props, {}>{
         
         return <g id={`nnnode_${node.ID}`} key={node.label} className="NNNode Node"
             transform={`translate (${(node.x - node.width / 2) * scale + transX}, ${(node.y - node.height / 2) * scale + transY})`}
-            opacity="1"
+            opacity= {show?1:.2}
             onMouseDown={this.mouseDown}
             onMouseUp={(e) => { this.mouseUp(e, node) }}
 
