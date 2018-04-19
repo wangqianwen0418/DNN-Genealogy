@@ -629,7 +629,7 @@ export default class Evolution extends React.Component<Props, State>{
                     stroke={(hoverLegend || hovered) && !clickLegend ? "#555" : "#aaa"}
                     // stroke={clickLegend ? "gray" : getColor(key)}
                     fill='none'
-                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 1}
+                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 4 : 2}
                     opacity={hoverLegend ? 1 : (clickLegend ? 0.4 : .7)}
                 />
             }

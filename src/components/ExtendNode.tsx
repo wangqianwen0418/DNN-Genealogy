@@ -157,14 +157,12 @@ export default class ExtendNode extends React.Component<Props, State>{
                     </TabPane>
                 })} 
             </Tabs> */}
-            <div
-                className="Node tab"
+            <div className="Node tab"
                 style={{
                     height: tabH + 'px',
                     width: node.width * scale,
                     borderBottom: "0.5px solid #aaa"
-                }}
-            >
+                }}>
                 <div style={{
                     // width: node.width * scale * .2 + 'px',
                     width: "20px",
