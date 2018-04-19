@@ -24,7 +24,7 @@ export interface Props {
     node: Node,
     selected: boolean,
     hovered: boolean,
-    margin: number,
+    tabH: number,
     scale: number,
     duration: number,
     // isTop: boolean,
@@ -72,7 +72,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         }
     }
     render() {
-        let { node, margin, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom, show } = this.props
+        let { node, tabH, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom, show } = this.props
         {/* <div style={{ height: node.height }}>
             <img
                 className="abstract Node"

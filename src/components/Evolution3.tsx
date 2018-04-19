@@ -515,7 +515,7 @@ export default class Evolution extends React.Component<Props, State>{
                 scale={scale}
                 transX={transX}
                 transY={transY}
-                margin={tabH}
+                tabH={tabH}
                 node={node}
                 selected={selected}
                 show={hoverLegend}
