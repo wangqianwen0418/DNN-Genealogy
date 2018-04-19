@@ -59,7 +59,7 @@ export default class Train extends React.Component<Props, State>{
                         return <Panel header={pane.name} key={pane.name}>
                             <a href={pane.url}>{pane.url}</a>
                             <div style={{marginTop: '15px'}}>
-                                <img src={'http://latex.codecogs.com/gif.latex?'+pane.latex} />
+                                <img src={'http://latex.codecogs.com/gif.latex?\\begin{align*}'+pane.latex+'\\end{align*}'} />
                             </div>
                         </Panel>
                     })}

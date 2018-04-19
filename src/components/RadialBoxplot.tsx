@@ -32,6 +32,7 @@ let simulation = d3.forceSimulation()
 
 export default class RadialBoxplot extends React.Component<Props, State> {
     public nodes: any; r : number; node_dist = 10
+    private offsetX: number; offsetY: number
     private ref: HTMLDivElement|null; width: number; height: number
     constructor(props: Props) {
         super(props)
@@ -214,8 +215,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         this.width = (this.ref?this.ref.clientWidth:50)
         this.height = (this.ref?this.ref.clientHeight:30)
         this.r = this.height / 2 - bar_w - 2 - margin * 5
-        let offsetX = this.r + 5 * margin + bar_w + 30,
-            offsetY = this.r + 3 * margin + bar_w + 10
+        this.offsetX = this.r + 5 * margin + bar_w + 30
+        this.offsetY = this.r + 3 * margin + bar_w + 10
         let selected_nns = selected.map((name: string) => nns.filter((nn) => {
             for (let d of nn.dot)
                 if (d.name == name) return true
@@ -223,7 +224,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         })[0].dot.filter((d) => d.name == name)[0])
         let networks = nns.map((nn: Network) => nn.network)
         let perf :any[] = []
-        let noticing :Boolean = false
+        let noticing :string = ""
         
         let svg = d3.select('.RadialBoxplot').insert('svg')
             .attr('width', '100%')
@@ -248,7 +249,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         
         let g = svg.append('g')
             .attr('class', 'compareView')
-            .attr('transform', 'translate(' + String(offsetX) + ',' + String(offsetY) +')')
+            .attr('transform', 'translate(' + this.offsetX + ',' + this.offsetY +')')
         
         // Axis(include quartiles) and Circle
         g.append('circle')
@@ -411,6 +412,8 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             //     that.selectNode(d)
             // })
             .on('mouseover', function(d) {
+                if (noticing == d.name) return
+                noticing = d.name
                 let idx: number
                 document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 0.2;')
                 let nnnodes = document.getElementsByClassName('NNNode')
@@ -440,9 +443,12 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                             return ""
                         }
                     }).join(""))
-                noticeLines(d.name)
+                noticeLines(d)
             })
             .on('mouseout', function(d) {
+                if ((d3.event.offsetX-d.x-that.offsetX)*(d3.event.offsetX-d.x-that.offsetX)+(d3.event.offsetY-d.y-that.offsetY)*(d3.event.offsetY-d.y-that.offsetY)<d.r*d.r)
+                    return
+                console.log(d, d3.event.offsetX, d3.event.offsetY)
                 let idx: number
                 document.getElementsByClassName('edges')[0].setAttribute('style', 'opacity: 1;')
                 let nnnodes = document.getElementsByClassName('NNNode')
@@ -460,29 +466,27 @@ export default class RadialBoxplot extends React.Component<Props, State> {
                     }
                     idx += 1
                 }
-                noticing = false
                 tooltip.style("display", "none")
                 d3.selectAll('.noticelines').remove()
+                noticing = ""
             })
 
-        function noticeLines(name: string) {
-            if (!noticing) {
-                noticing = true                    
-                let attention = perf.filter((pf) => pf.name == name)
-                d3.select('.RadialBoxplot').select('svg').append('g').attr('class', 'noticelines')
-                    .selectAll('line')
-                    .data(attention)
-                    .enter().append('line')
-                    .style('z-index', 1)
-                    .attr('x1', d3.event.offsetX)
-                    .attr('y1', d3.event.offsetY)
-                    .attr('x2', (pf: any) => (that.r + margin)*(Math.cos((pf.angle - 90) * Math.PI / 180.0)) + offsetX)
-                    .attr('y2', (pf: any) => (that.r + margin)*(Math.sin((pf.angle - 90) * Math.PI / 180.0)) + offsetY)
-                    // .attr('stroke', getColor(name))
-                    .attr("stroke", (d: Dot) => getColor(d.parent))
-                    .attr('stroke-dasharray', '2, 2')
-                    .attr('stroke-width', 3)
-            }
+        function noticeLines(dot: Dot) {
+            let attention = perf.filter((pf) => pf.name == dot.name)
+            let posX = that.offsetX + dot.x, posY = that.offsetY + dot.y
+            d3.select('.RadialBoxplot').select('svg').append('g').attr('class', 'noticelines')
+                .selectAll('line')
+                .data(attention)
+                .enter().append('line')
+                .style('z-index', 1)
+                .attr('x1', posX)
+                .attr('y1', posY)
+                .attr('x2', (pf: any) => (that.r + margin)*(Math.cos((pf.angle - 90) * Math.PI / 180.0)) + that.offsetX)
+                .attr('y2', (pf: any) => (that.r + margin)*(Math.sin((pf.angle - 90) * Math.PI / 180.0)) + that.offsetY)
+                // .attr('stroke', getColor(name))
+                .attr("stroke", (d: Dot) => getColor(d.parent))
+                .attr('stroke-dasharray', '2, 2')
+                .attr('stroke-width', 3)
         }
 
         simulation = simulation
@@ -493,7 +497,6 @@ export default class RadialBoxplot extends React.Component<Props, State> {
             .on('tick', ticked)
             
         let nodes = this.nodes
-        console.log(nodes)
         function ticked() {
             nodes.attr("transform", (d:Dot)=>{
                 if(d.x*d.x+d.y*d.y<(that.r-d.r)*(that.r-d.r)*0.8){
@@ -553,7 +556,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         //     .attr("transform", (d: Dot, i: number) => "translate(-20," + (this.height - i * 15 - 20) + ")")
         // legend_name.append("rect")
         //      .attr("x", this.width - 9)
-        //      .attr("width", 9)
+        //      .attar("width", 9)
         //      .attr("height", 9)
         //      .attr("fill", (d: Dot) => getColor(d.parent))
         //     //  .attr("fill", (d: Dot, idx: number) => String(getColor(d.name)))
