@@ -626,7 +626,7 @@ export default class Evolution extends React.Component<Props, State>{
                     className="Edge"
                     id={`${from}->${to}`}
                     d={pathData}
-                    stroke={(hoverLegend || hovered) && !clickLegend ? "#555" : "#aaa"}
+                    stroke={(hoverLegend || hovered) && !clickLegend ? "#555" : "#999"}
                     // stroke={clickLegend ? "gray" : getColor(key)}
                     fill='none'
                     strokeWidth={(hoverLegend || hovered) && !clickLegend ? 4 : 2}
