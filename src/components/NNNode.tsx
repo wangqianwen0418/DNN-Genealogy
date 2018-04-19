@@ -6,7 +6,7 @@ import * as d3 from "d3";
 import { getColor, capFirstLetter,cutLabel } from "../helper";
 const TabPane = Tabs.TabPane
 
-const margin = 40, nodeH = 20, nodeW = 100, labelL = 6,
+const margin = 40, nodeH = 20, nodeW = 100, labelL = 4,
     expandH = 150, expandW = 200,
     boxH = 10,
     labelFont = 12

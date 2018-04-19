@@ -17,6 +17,7 @@ import ExtendNode from "./ExtendNode";
 // import { showDetailedStructure } from './ImageModel'
 import ArchitectureCompare from "./ArchitectureCompare"
 import { nonsequenceDatasets, nonsequenceBenchmarks } from "../constants";
+let imgSize = require("../assets/ratio.json")
 
 // const {TreeNode} = TreeSelect
 
@@ -92,7 +93,7 @@ export interface State {
     glyphZoomLabel: string
 }
 
-const nodeH = 55, nodeW = 220, margin = 30, labelL = 20, tabH = 20,
+const nodeH = 65, nodeW = 220, margin = 30, labelL = 20, tabH = 20,
     expandH = 180 + tabH, expandW = 240,
     r = nodeH / 3,
     boxH = 10,
@@ -187,7 +188,6 @@ export default class Evolution extends React.Component<Props, State>{
         // label(appData)
 
         // Get benchmarks of datasets
-        console.log(datum)
         if (appValue === '1.1.' && nonsequenceBenchmarks.length === 0) {
             let stat: any[] = []
             for (let d of datum)
@@ -212,7 +212,7 @@ export default class Evolution extends React.Component<Props, State>{
                     }
                 })
             }
-            console.log(nonsequenceBenchmarks)
+            // console.log(nonsequenceBenchmarks)
         }
 
         this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
@@ -227,7 +227,7 @@ export default class Evolution extends React.Component<Props, State>{
             marginy: margin * 2,
             rankdir: 'LR',
             edgesep: nodeH * 0.6,
-            nodesep: nodeH * .5,
+            nodesep: nodeH * .3,
             // ranker: "tight-tree"
             ranker: appValue == "1.1." ? "longest-path" : "tight-tree"
         });
@@ -366,8 +366,8 @@ export default class Evolution extends React.Component<Props, State>{
                 node.doi = (node.doi - minDoi) / (maxDoi - minDoi)
                 dag.setNode(v, {
                     ...node,
-                    width: (pinned) ? expandW : resizeNode(nodeW, node.doi),
-                    height: (pinned) ? expandH : resizeNode(nodeH, node.doi),
+                    width: (pinned) ? expandH : resizeNode(nodeW, node.doi),
+                    height: (pinned) ? expandH*imgSize[v].w/imgSize[v].h : resizeNode(nodeH, node.doi),
                 })
             }
         })
@@ -400,8 +400,8 @@ export default class Evolution extends React.Component<Props, State>{
             ratio *= 0.9
             dag.setNode(node.label, {
                 ...node,
-                width: expandW * ratio,
-                height: expandH * ratio,
+                width: expandH*imgSize[node.label].w/imgSize[node.label].h * ratio,
+                height: expandH  * ratio,
             })
         })
 
@@ -448,7 +448,7 @@ export default class Evolution extends React.Component<Props, State>{
             {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
-                    zoomed: boolean = node.width > nodeW,
+                    zoomed: boolean = node.height > nodeH,
                     hoverNodes = hoverEdge.split("->"),
                     hovered = hoverNodes.indexOf(node.label) != -1,
                     hoverLegend = false, clickLegend = false, everHover = false, everClick = false
@@ -487,7 +487,7 @@ export default class Evolution extends React.Component<Props, State>{
 
         return nodes.map((node: Node) => {
             let selected: boolean = (node.ID === selectedID),
-                zoomed: boolean = node.width > nodeW,
+                zoomed: boolean = node.height > nodeH,
                 hoverNodes = hoverEdge.split("->"),
                 hovered = hoverNodes.indexOf(node.label) != -1,
                 hoverLegend = false, clickLegend = false, everHover = false, everClick = false
@@ -901,8 +901,6 @@ export default class Evolution extends React.Component<Props, State>{
 
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         let { train, arc } = this.props
-
-
         return <div
             className="Evolution View"
             onWheel={this.handleMouseWheel}

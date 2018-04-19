@@ -157,12 +157,14 @@ export default class ExtendNode extends React.Component<Props, State>{
                     </TabPane>
                 })} 
             </Tabs> */}
+            <Tooltip title={node.label} mouseEnterDelay={0.2}>
             <div className="Node tab"
                 style={{
                     height: tabH + 'px',
                     width: node.width * scale,
                     borderBottom: "0.5px solid #aaa"
                 }}>
+                
                 <div style={{
                     // width: node.width * scale * .2 + 'px',
                     width: "20px",
@@ -177,32 +179,35 @@ export default class ExtendNode extends React.Component<Props, State>{
                         }} />
                     ))}
                 </div>
+                
                 <span style={{
                         padding: '2px', 
                         fontSize: tabH*.7+'px',
                         webkitTextFillColor: "black",
                         transform: `translate(0, -10)`,
-                        verticalAlign: 'top'
+                        verticalAlign: 'top',
+                        cursor: "pointer"
                         }}
                 >
-                   {capFirstLetter(cutLabel(node.label, node.width * scale / 9))}
+                   {capFirstLetter(cutLabel(node.label, (node.width * scale -20) / 11))}
                 </span>
             </div>
+            </Tooltip>
             <img
                 className="abstract Node"
-                src={`../../images/${node.label}.png`}
-                // style={{
-                //     border: `1px solid ${selected ? "red" : "gray"}`,
-                // }}
-                height={node.height * scale - tabH}
-                width={node.width * scale}
+                src={`../../images/${node.label}_.png`}
+                style={{
+                    margin:`${(node.width * scale) * .1}px  ${(node.height * scale - tabH) * .1}px`,
+                }}
+                height={(node.height * scale - tabH) * .8}
+                width={(node.width * scale) * .8}
                 onMouseDown={this.mouseDown}
                 onMouseUp={(e) => { this.mouseUp(e, node) }} />
             <div className="floatIcon"
                 style={{
-                    position: "relative",
-                    float: "right",
-                    top: "-20px",
+                    position: "absolute",
+                    right: "0px",
+                    bottom: "0px",
                     opacity: pin || showpin ? 1 : 0,
                     color: "gray"
                 }
