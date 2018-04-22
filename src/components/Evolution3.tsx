@@ -94,7 +94,8 @@ export interface State {
 }
 
 const nodeH = 65, nodeW = 220, margin = 30, labelL = 20, tabH = 20,
-    expandH = 180 + tabH, expandW = 240,
+    // expandH = 180 + tabH, 
+    expandW = 180,
     r = nodeH / 3,
     boxH = 10,
     labelFont = 13,
@@ -366,14 +367,14 @@ export default class Evolution extends React.Component<Props, State>{
                 node.doi = (node.doi - minDoi) / (maxDoi - minDoi)
                 dag.setNode(v, {
                     ...node,
-                    width: (pinned) ? expandH : resizeNode(nodeW, node.doi),
-                    height: (pinned) ? expandH*imgSize[v].w/imgSize[v].h : resizeNode(nodeH, node.doi),
+                    width: (pinned) ? expandW : resizeNode(nodeW, node.doi),
+                    height: (pinned) ? expandW*imgSize[v].h/imgSize[v].w+tabH : resizeNode(nodeH, node.doi),
                 })
             }
         })
 
-
-        const topN = (nodes: string[], n: number = 4) => {
+        let topNum = window.innerWidth/350
+        const topN = (nodes: string[], n: number = topNum) => {
             let topDoi: Node[] = []
             for (let i = 0; i < nodes.length; i++) {
                 let v = nodes[i]
@@ -395,14 +396,14 @@ export default class Evolution extends React.Component<Props, State>{
         }
         let topDoi: Node[] = topN(dag.nodes())
 
-        let ratio = 1.5
+        let ratio = 1 + 0.1*topNum
         topDoi.forEach((node: Node) => {
-            ratio *= 0.9
             dag.setNode(node.label, {
                 ...node,
-                width: expandH*imgSize[node.label].w/imgSize[node.label].h * ratio,
-                height: expandH  * ratio,
+                width: expandW * ratio,
+                height: (expandW*imgSize[node.label].h/imgSize[node.label].w+tabH)  * ratio,
             })
+            ratio -= 0.1
         })
 
 
@@ -448,7 +449,7 @@ export default class Evolution extends React.Component<Props, State>{
             {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
-                    zoomed: boolean = node.height > nodeH,
+                    zoomed: boolean = node.width > expandW,
                     hoverNodes = hoverEdge.split("->"),
                     hovered = hoverNodes.indexOf(node.label) != -1,
                     hoverLegend = false, clickLegend = false, everHover = false, everClick = false
@@ -487,7 +488,7 @@ export default class Evolution extends React.Component<Props, State>{
 
         return nodes.map((node: Node) => {
             let selected: boolean = (node.ID === selectedID),
-                zoomed: boolean = node.height > nodeH,
+                zoomed: boolean = node.width > expandW,
                 hoverNodes = hoverEdge.split("->"),
                 hovered = hoverNodes.indexOf(node.label) != -1,
                 hoverLegend = false, clickLegend = false, everHover = false, everClick = false
