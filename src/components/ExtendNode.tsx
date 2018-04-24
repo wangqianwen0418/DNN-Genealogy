@@ -235,7 +235,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         style={{ cursor: "pointer" }}
                         onClick={() => this.props.changeGlyphZoom(node.label)}
                     />
-                    <Dropdown overlay={menu} className="infoButton" trigger={['click']}>
+                    <Dropdown overlay={menu} className="infoButton" >
                         <a className="infoTrigger"> ...</a>
                     </Dropdown>
                 </span>}
