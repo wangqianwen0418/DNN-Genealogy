@@ -11,7 +11,7 @@ for model in data:
         w, h = im.size
         ratio[name]= {'w':w, 'h':h}
     except Exception:
-        pass
+        print("no "+name)
 # print(ratio)
-with open('ratio.json', 'w') as save_file:
+with open('../../src/assets/ratio.json', 'w') as save_file:
     json.dump(ratio, save_file)
