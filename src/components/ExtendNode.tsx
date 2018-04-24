@@ -105,8 +105,8 @@ export default class ExtendNode extends React.Component<Props, State>{
         //     {(status: any) => {
         return <div id={`exnode_${node.ID}`}
             className={`ExtendNode Node ${zoomed ? "zoomed" : "collapsed"} ${show ? '' : 'faded'}`}
-            onMouseOver={() => this.setState({ showpin: true })}
-            onMouseOut={() => this.setState({ showpin: false })}
+            onMouseEnter={() => this.setState({ showpin: true })}
+            onMouseLeave={() => this.setState({ showpin: false })}
             // onMouseOut={()=>this.setState({showpin:false})}
             style={{
                 position: "absolute",
@@ -210,11 +210,10 @@ export default class ExtendNode extends React.Component<Props, State>{
                     position: "absolute",
                     right: "0px",
                     bottom: "0px",
-                    // opacity: showpin ? 1 : 0,
+                    opacity: showpin ? 1 : 0,
                     color: "gray"
-                }
-
-                }>
+                }}
+            >
                 <Icon className="pin" type="pushpin"
                     style={{
                         opacity: pin || showpin ? 1 : 0,
@@ -231,15 +230,15 @@ export default class ExtendNode extends React.Component<Props, State>{
                         pinNode(node)
 
                     }} />
-                {showpin ? <span>
+                {!showpin&&pin ?<span/>: <span >
                     <Icon type="arrows-alt"
                         style={{ cursor: "pointer" }}
                         onClick={() => this.props.changeGlyphZoom(node.label)}
                     />
-                    <Dropdown overlay={menu} className="infoButton">
+                    <Dropdown overlay={menu} className="infoButton" trigger={['click']}>
                         <a className="infoTrigger"> ...</a>
                     </Dropdown>
-                </span> : <span />}
+                </span>}
 
             </div>
 
