@@ -113,8 +113,8 @@ export default class ExtendNode extends React.Component<Props, State>{
                 left: transX + node.x * scale - node.width * scale / 2,
                 top: transY + node.y * scale - node.height * scale / 2,
                 backgroundColor: "white",
-                height: node.height * scale,
-                width: node.width * scale,
+                height: node.height * scale+ 'px',
+                width: node.width * scale + 'px',
                 visibility: zoomed ? "visible" : "hidden",
                 outline: `${selected ? 3 : 0.5}px ${selected ? "dashed" : "solid"} #aaa`,
                 // opacity: show?1:0.2,
@@ -162,8 +162,11 @@ export default class ExtendNode extends React.Component<Props, State>{
                 <div className="Node tab"
                     style={{
                         height: tabH + 'px',
-                        width: node.width * scale,
-                        borderBottom: "0.5px solid #aaa"
+                        width: node.width * scale +'px',
+                        borderBottom: "0.5px solid #aaa",
+                        overflow: "hidden",
+                        whiteSpace:"nowrap",
+                        textOverflow: "ellipsis"
                     }}>
 
                     <div style={{
@@ -187,10 +190,12 @@ export default class ExtendNode extends React.Component<Props, State>{
                         webkitTextFillColor: "black",
                         transform: `translate(0, -10)`,
                         verticalAlign: 'top',
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        
                     }}
                     >
-                        {capFirstLetter(cutLabel(node.label, (node.width * scale - 20) / 11))}
+                    {capFirstLetter(node.label)}
+                        {/* {capFirstLetter(cutLabel(node.label, (node.width * scale - 20 ) / (tabH * .7)))} */}
                     </span>
                 </div>
             </Tooltip>
@@ -210,7 +215,6 @@ export default class ExtendNode extends React.Component<Props, State>{
                     position: "absolute",
                     right: "0px",
                     bottom: "0px",
-                    opacity: showpin ? 1 : 0,
                     color: "gray"
                 }}
             >
@@ -230,7 +234,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         pinNode(node)
 
                     }} />
-                {!showpin&&pin ?<span/>: <span >
+                {!showpin&&pin ?<span/>: <span style={{opacity: showpin ? 1 : 0}}>
                     <Icon type="arrows-alt"
                         style={{ cursor: "pointer" }}
                         onClick={() => this.props.changeGlyphZoom(node.label)}
