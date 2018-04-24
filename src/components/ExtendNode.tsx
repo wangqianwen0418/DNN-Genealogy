@@ -32,6 +32,7 @@ export interface Props {
     transX: number,
     transY: number,
     show: boolean,
+    glyphXmargin: number,
     // apiArr: number[],
     selectNode: (node: Node) => void,
     onclickMenu: (node: Node, menu: string) => void,
@@ -72,7 +73,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         }
     }
     render() {
-        let { node, tabH, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom, show } = this.props
+        let { node, tabH, glyphXmargin, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom, show } = this.props
         {/* <div style={{ height: node.height }}>
             <img
                 className="abstract Node"
@@ -103,7 +104,7 @@ export default class ExtendNode extends React.Component<Props, State>{
         // return <Transition in={zoomed} timeout={duration}>
         //     {(status: any) => {
         return <div id={`exnode_${node.ID}`}
-            className={`ExtendNode Node ${zoomed ? "zoomed" : "collapsed"} ${show?'':'faded'}`}
+            className={`ExtendNode Node ${zoomed ? "zoomed" : "collapsed"} ${show ? '' : 'faded'}`}
             onMouseOver={() => this.setState({ showpin: true })}
             onMouseOut={() => this.setState({ showpin: false })}
             // onMouseOut={()=>this.setState({showpin:false})}
@@ -158,49 +159,50 @@ export default class ExtendNode extends React.Component<Props, State>{
                 })} 
             </Tabs> */}
             <Tooltip title={node.label} mouseEnterDelay={0.2}>
-            <div className="Node tab"
-                style={{
-                    height: tabH + 'px',
-                    width: node.width * scale,
-                    borderBottom: "0.5px solid #aaa"
-                }}>
-                
-                <div style={{
-                    // width: node.width * scale * .2 + 'px',
-                    width: "20px",
-                    height: "100%",
-                    display: "inline-block"
-                }}>
-                    {node.arc.map((d: string) => (
-                        <div style={{
-                            backgroundColor: getColor(d),
-                            width: "100%",
-                            height: `${100 / node.arc.length}%`
-                        }} />
-                    ))}
-                </div>
-                
-                <span style={{
-                        padding: '2px', 
-                        fontSize: tabH*.7+'px',
+                <div className="Node tab"
+                    style={{
+                        height: tabH + 'px',
+                        width: node.width * scale,
+                        borderBottom: "0.5px solid #aaa"
+                    }}>
+
+                    <div style={{
+                        // width: node.width * scale * .2 + 'px',
+                        width: "20px",
+                        height: "100%",
+                        display: "inline-block"
+                    }}>
+                        {node.arc.map((d: string) => (
+                            <div style={{
+                                backgroundColor: getColor(d),
+                                width: "100%",
+                                height: `${100 / node.arc.length}%`
+                            }} />
+                        ))}
+                    </div>
+
+                    <span style={{
+                        padding: '2px',
+                        fontSize: tabH * .7 + 'px',
                         webkitTextFillColor: "black",
                         transform: `translate(0, -10)`,
                         verticalAlign: 'top',
                         cursor: "pointer"
-                        }}
-                >
-                   {capFirstLetter(cutLabel(node.label, (node.width * scale -20) / 11))}
-                </span>
-            </div>
+                    }}
+                    >
+                        {capFirstLetter(cutLabel(node.label, (node.width * scale - 20) / 11))}
+                    </span>
+                </div>
             </Tooltip>
             <img
                 className="abstract Node"
                 src={`../../images/${node.label}_.png`}
-                style={{
-                    margin:`${(node.width * scale) * .1}px  ${(node.height * scale - tabH) * .1}px`,
-                }}
-                height={(node.height * scale - tabH) * .8}
-                width={(node.width * scale) * .8}
+                // style={{
+                //     margin:`${(node.width * scale) * .1}px  ${(node.height * scale - tabH) * .1}px`,
+                // }}
+                style={{ margin: `0px ${glyphXmargin}px` }}
+                height={(node.height * scale - tabH) * 1}
+                width={(node.width * scale - 2 * glyphXmargin)}
                 onMouseDown={this.mouseDown}
                 onMouseUp={(e) => { this.mouseUp(e, node) }} />
             <div className="floatIcon"
@@ -208,7 +210,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                     position: "absolute",
                     right: "0px",
                     bottom: "0px",
-                    opacity: pin || showpin ? 1 : 0,
+                    // opacity: showpin ? 1 : 0,
                     color: "gray"
                 }
 
@@ -217,7 +219,8 @@ export default class ExtendNode extends React.Component<Props, State>{
                     style={{
                         opacity: pin || showpin ? 1 : 0,
                         color: pin ? "red" : "gray",
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        transform: `rotate(${pin ? 45 : 0}deg)`
                     }}
 
                     onClick={(e: React.MouseEvent<any>) => {
@@ -228,13 +231,16 @@ export default class ExtendNode extends React.Component<Props, State>{
                         pinNode(node)
 
                     }} />
-                <Icon type="arrows-alt"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => this.props.changeGlyphZoom(node.label)}
-                />
-                <Dropdown overlay={menu} className="infoButton">
-                    <a className="infoTrigger"> ...</a>
-                </Dropdown>
+                {showpin ? <span>
+                    <Icon type="arrows-alt"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => this.props.changeGlyphZoom(node.label)}
+                    />
+                    <Dropdown overlay={menu} className="infoButton">
+                        <a className="infoTrigger"> ...</a>
+                    </Dropdown>
+                </span> : <span />}
+
             </div>
 
         </div>

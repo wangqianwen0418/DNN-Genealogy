@@ -96,6 +96,7 @@ export interface State {
 const nodeH = 65, nodeW = 220, margin = 30, labelL = 20, tabH = 20,
     // expandH = 180 + tabH, 
     expandW = 180,
+    glyphXmargin = 5,
     r = nodeH / 3,
     boxH = 10,
     labelFont = 13,
@@ -317,6 +318,7 @@ export default class Evolution extends React.Component<Props, State>{
                     ...node,
                     api: api,
                     doi: doi,
+                    isZoomed: false
                 })
 
                 if (minDoi > doi) {
@@ -367,7 +369,8 @@ export default class Evolution extends React.Component<Props, State>{
                 node.doi = (node.doi - minDoi) / (maxDoi - minDoi)
                 dag.setNode(v, {
                     ...node,
-                    width: (pinned) ? expandW : resizeNode(nodeW, node.doi),
+                    isZoomed: pinned,
+                    width: (pinned ? expandW : resizeNode(nodeW, node.doi)) + 2*glyphXmargin,
                     height: (pinned) ? expandW*imgSize[v].h/imgSize[v].w+tabH : resizeNode(nodeH, node.doi),
                 })
             }
@@ -400,7 +403,8 @@ export default class Evolution extends React.Component<Props, State>{
         topDoi.forEach((node: Node) => {
             dag.setNode(node.label, {
                 ...node,
-                width: expandW * ratio,
+                isZoomed: true,
+                width: expandW * ratio + 2*glyphXmargin,
                 height: (expandW*imgSize[node.label].h/imgSize[node.label].w+tabH)  * ratio,
             })
             ratio -= 0.1
@@ -449,7 +453,7 @@ export default class Evolution extends React.Component<Props, State>{
             {nodes.map((node: Node) => {
                 let selected: boolean = (node.ID === selectedID),
                     isTop: boolean = topDoi.map(d => d.ID).indexOf(node.ID) != -1,
-                    zoomed: boolean = node.width > expandW,
+                    zoomed: boolean = node.isZoomed,
                     hoverNodes = hoverEdge.split("->"),
                     hovered = hoverNodes.indexOf(node.label) != -1,
                     hoverLegend = false, clickLegend = false, everHover = false, everClick = false
@@ -488,7 +492,7 @@ export default class Evolution extends React.Component<Props, State>{
 
         return nodes.map((node: Node) => {
             let selected: boolean = (node.ID === selectedID),
-                zoomed: boolean = node.width > expandW,
+                zoomed: boolean = node.isZoomed,
                 hoverNodes = hoverEdge.split("->"),
                 hovered = hoverNodes.indexOf(node.label) != -1,
                 hoverLegend = false, clickLegend = false, everHover = false, everClick = false
@@ -510,6 +514,7 @@ export default class Evolution extends React.Component<Props, State>{
                 transX={transX}
                 transY={transY}
                 tabH={tabH}
+                glyphXmargin={glyphXmargin}
                 node={node}
                 selected={selected}
                 show={hoverLegend||!everHover}
