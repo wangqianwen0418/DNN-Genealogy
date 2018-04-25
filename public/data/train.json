@@ -6,16 +6,14 @@
               "id": "3.1.1.",
               "name": "Orthogonal",
               "size": 0,
-              "info": "Initializer that generates a random orthogonal matrix",
               "url": "http://arxiv.org/abs/1312.6120",
-              "latex": "&W=A \\\\ &AA^T=E"
+              "latex": "W=A,AA^T=E"
             },
             {
               "depth": 3,
               "id": "3.1.2.",
               "name": "Xavier Normal",
               "size": 0,
-              "info": "Xavier normal is also called as Glorot normal. It draws samples from a truncated normal distribution centered on 0 with  stddev = sqrt(2 / (fan_in + fan_out)) where fan_in is the number of input units in the weight tensor and fan_out is the number of output units in the weight tensor.",
               "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf",
               "latex":"W\\sim N\\left(0, \\frac{2}{n_l+n_{l+1}}\\right)"
             },
@@ -23,7 +21,6 @@
               "depth": 3,
               "id": "3.1.3.",
               "name": "Xavier Uniform",
-              "info": "Xavier uniform is also called as glorot uniform. It draws samples from a uniform distribution within [-limit, limit] where limit is  sqrt(6 / (fan_in + fan_out)) where fan_in is the number of input units in the weight tensor and  fan_out is the number of output units in the weight tensor.",
               "size": 0,
               "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf",
               "latex":"W\\sim U\\left(-\\sqrt{\\frac{6}{n_l+n_{l+1}}}, \\sqrt{\\frac{6}{n_l+n_{l+1}}}\\right)"
@@ -33,7 +30,6 @@
               "id": "3.1.4.",
               "name": "He Normal",
               "size": 0,
-              "info": "He normal draws samples from a truncated normal distribution centered on 0 with stddev = sqrt(2 / fan_in) where  fan_in is the number of input units in the weight tensor.",
               "url":"http://arxiv.org/abs/1502.01852",
               "latex":"W\\sim N\\left(0, \\frac{2}{n_l}\\right)"
             },
@@ -42,7 +38,6 @@
               "id": "3.1.5.",
               "name": "He Uniform",
               "size": 0,
-              "info": "He uniform draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(6 / fan_in) where  fan_in is the number of input units in the weight tensor.",
               "url":"http://arxiv.org/abs/1502.01852",
               "latex":"W\\sim U\\left(-\\sqrt{\\frac{6}{n_l}}, \\sqrt{\\frac{6}{n_l}}\\right)"
             },
@@ -51,7 +46,6 @@
               "id": "3.1.6.",
               "name": "Lecun Normal",
               "size": 0,
-              "info": "Lecun normal draws samples from a truncated normal distribution centered on 0 with stddev = sqrt(1 / fan_in) where  fan_in is the number of input units in the weight tensor.",
               "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf",
               "latex":"W\\sim N\\left(0, \\frac{1}{n_l}\\right)"
             },
@@ -60,7 +54,6 @@
               "id": "3.1.7.",
               "name": "Lecun Uniform",
               "size": 0,
-              "info": "Lecun uniform draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(3 / fan_in) where  fan_in is the number of input units in the weight tensor.",
               "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf",
               "latex":"W\\sim U\\left(-\\sqrt{\\frac{3}{n_l}}, \\sqrt{\\frac{3}{n_l}}\\right)"
             }
@@ -77,36 +70,28 @@
               "id": "3.2.1.",
               "name": "SGD",
               "size": 0,
-              "info": "Stochastic gradient descent (SGD) is a stochastic approximation of the gradient descent optimization and iterative method for minimizing an objective function that is written as a sum of differentiable functions.",
-              "url":"http://ufldl.stanford.edu/tutorial/supervised/OptimizationStochasticGradientDescent/",
-              "latex":"\\theta=\\theta-\\alpha\\nabla_{\\theta}J(\\theta;x^{(i)}, y^{(i)})"
+              "url":"http://ufldl.stanford.edu/tutorial/supervised/OptimizationStochasticGradientDescent/"
             },
             {
               "depth": 3,
               "id": "3.2.4.",
               "name": "Momentum",
               "size": 0,
-              "info": "Momentum accelerates SGD in the relevant direction and dampens oscillations",
-              "url":"http://proceedings.mlr.press/v28/sutskever13.html",
-              "latex":"&\\nu_{t+1}=\\mu\\nu_t-\\epsilon\\nabla f(\\theta_t) \\\\ &\\theta_{t+1}=\\theta_t+\\nu_{t+1}"
+              "url":"http://proceedings.mlr.press/v28/sutskever13.html"
             },
             {
               "depth": 3,
               "id": "3.2.2.",
               "name": "Adam",
               "size": 0,
-              "info": "Adaptive Moment Estimation (Adam) is an optimization algorithm based on adaptive estimates of lower-order moments. It combines the ability of AdaGrad to deal with sparse gradients, and the ability of RMSProp to deal with non-stationary objectives",
-              "url":"http://arxiv.org/abs/1412.6980v8",
-              "latex":"&g_t=\\nabla_{\\theta}f_t(\\theta_{t-1}) \\\\ &m_t=\\beta_1\\cdot m_{t-1}+(1-\\beta_1)\\cdot g_t \\\\ &v_t=\\beta_2\\cdot v_{t-1}+(1-\\beta_2)\\cdot g_t^2 \\\\ &\\hat m_t=\\frac{m_t}{1-\\beta_1^t} \\\\ &\\hat v_t=\\frac{v_t}{1-\\beta_2^t} \\\\ &\\theta_t=\\theta_{t-1}-\\frac{\\alpha\\cdot\\hat m_t}{\\sqrt{\\hat v_t}+\\epsilon}"
+              "url":"http://arxiv.org/abs/1412.6980v8"
             },
             {
               "depth": 3,
               "id": "3.2.3.",
               "name": "RMSprop",
               "size": 0,
-              "info": "RMSprop a running average of the magnitudes of recent gradients for that weight.",
-              "url":"http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf",
-              "latex": "s(w, t)=\\rho\\cdot s(w, t-1)+(1-\\rho)(\\frac{\\partial E}{\\partial w}(t))^2"
+              "url":"http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf"
             }
           ],
           "depth": 2,
@@ -126,31 +111,25 @@
               "depth": 3,
               "id": "3.3.3.",
               "name": "Hinge",
-              "size": 0,
-              "info": "The hinge loss is used for maximum-margin classification."
+              "size": 0
             },
             {
               "depth": 3,
               "id": "3.3.4.",
               "name": "Cosine",
-              "size": 0,
-              "info": "Cosine loss measures the similarity between two non-zero vectors of an inner product space by the cosine of the angle between them. "
+              "size": 0
             },
             {
               "depth": 3,
               "id": "3.3.5.",
               "name": "Cross Entropy",
-              "size": 0,
-              "info": "Cross entropy describes the relationship between two probability distributions over the same underlying set of events.",
-              "latex": "H(p,q)=-\\sum p(x) log q(x)"
+              "size": 0
             },
             {
               "depth": 3,
               "id": "3.3.6.",
               "name": "CTC",
-              "size": 0,
-              "info": "Connectionist temporal classification (CTC) loss function is used for end-to-end speech recognition.",
-              "url":"https://dl.acm.org/citation.cfm?id=1143891"
+              "size": 0
             }
           ],
           "depth": 2,
@@ -165,45 +144,56 @@
               "id": "3.4.1.",
               "name": "Dropout",
               "size": 0,
-              "info": "Dropout is a technique for addressing the overfitting problem. The key idea is to randomly drop units along with their connections from the neural network during training.",
-              "url": "https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf"
+              "url": "http://www.jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf?utm_content=buffer79b43&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer"
             },
             {
               "depth": 3,
               "id": "3.4.2.",
               "name": "Weight Decay",
-              "size": 0,
-              "info": "When training a neural network, the weights are multiplied by a factor slightly less than 1 after each update."
+              "size": 0
             },
             {
               "depth": 3,
               "id": "3.4.3.",
               "name": "Drop Path",
-              "size": 0,
-              "info": "Drop path is a training procedure that enables the seemingly contradictory setup to train short networks and use deep networks at test time. It reduces training time and improves the test error",
-              "url":"https://arxiv.org/abs/1603.09382"
+              "size": 0
             },
             {
               "depth": 3,
               "id": "3.4.4.",
               "name": "Data Augmentation",
-              "size": 0,
-              "info": "Data augmentation increases the amount of training data to reduce overfitting."
+              "size": 0
             },
             {
               "depth": 3,
               "id": "3.4.5.",
               "name": "Batch Normalization",
               "size": 0,
-              "info": "Batch normalization performs the normalization for each training mini-batch.",
               "url":"http://www.jmlr.org/proceedings/papers/v37/ioffe15.html"
             },
             {
               "depth": 3,
               "id": "3.4.6.",
               "name": "Shake-Shake",
-              "size": 0,
-              "info": "In a multi-branch network, the Shake-shake regularization replaces the standard summation of parallel branches with a stochastic affine combination"
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.7.",
+              "name": "LSR",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.8.",
+              "name": "DSD",
+              "size": 0
+            },
+            {
+              "depth": 3,
+              "id": "3.4.9.",
+              "name": "Swapout",
+              "size": 0
             }
           ],
           "depth": 2,
