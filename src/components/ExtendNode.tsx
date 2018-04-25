@@ -164,16 +164,17 @@ export default class ExtendNode extends React.Component<Props, State>{
                         height: tabH + 'px',
                         width: node.width * scale +'px',
                         borderBottom: "0.5px solid #aaa",
-                        overflow: "hidden",
-                        whiteSpace:"nowrap",
-                        textOverflow: "ellipsis"
+                        display: "flex"
+                        // overflow: "hidden",
+                        // whiteSpace:"nowrap",
+                        // textOverflow: "ellipsis",
                     }}>
 
                     <div style={{
                         // width: node.width * scale * .2 + 'px',
                         width: "20px",
                         height: "100%",
-                        display: "inline-block"
+                        // display: "inline-block"
                     }}>
                         {node.arc.map((d: string) => (
                             <div style={{
@@ -184,19 +185,23 @@ export default class ExtendNode extends React.Component<Props, State>{
                         ))}
                     </div>
 
-                    <span style={{
+                    <div style={{
                         padding: '2px',
                         fontSize: tabH * .7 + 'px',
                         webkitTextFillColor: "black",
                         transform: `translate(0, -10)`,
-                        verticalAlign: 'top',
+                        lineHeight: "100%",
                         cursor: "pointer",
+                        width: "100%",
+                        overflow: "hidden",
+                        whiteSpace:"nowrap",
+                        textOverflow: "ellipsis",
                         
                     }}
                     >
                     {capFirstLetter(node.label)}
                         {/* {capFirstLetter(cutLabel(node.label, (node.width * scale - 20 ) / (tabH * .7)))} */}
-                    </span>
+                    </div>
                 </div>
             </Tooltip>
             <img

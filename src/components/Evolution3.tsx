@@ -224,12 +224,12 @@ export default class Evolution extends React.Component<Props, State>{
         let { pinNodes, appValue } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: appValue == "1.1." ? nodeW * 1 : nodeW * 1.6,
+            ranksep: appValue == "1.1." ? nodeW * 1.3 : nodeW * 1.6,
             marginx: margin * 2,
             marginy: margin * 2,
             rankdir: 'LR',
-            edgesep: nodeH * 0.6,
-            nodesep: nodeH * .3,
+            edgesep: nodeH * .5,
+            nodesep: nodeH * 1,
             // ranker: "tight-tree"
             ranker: appValue == "1.1." ? "longest-path" : "tight-tree"
         });
