@@ -1,8 +1,8 @@
 import * as React from "react";
 import { getColor } from "../helper/index";
-import {Popover} from "antd";
+import { Popover } from "antd";
 
-const info={
+const info = {
     "streamlined": "layers are stacked on top of one another",
     "multi-branch": "the output of one layer goes through multiple branches and then converges",
     "skip connections": "a connection skips one or more layers",
@@ -11,7 +11,7 @@ const info={
     "bidirectional": "",
     "multiple time scale": "",
     "tree-structured": "",
-    "gated": "" 
+    "gated": ""
 }
 
 export interface LegendProps {
@@ -39,44 +39,45 @@ export default class Legend extends React.Component<LegendProps, {}>{
             {Object.keys(items).map((key: string) => {
                 let item = items[key]
                 return <Popover
-                placement="left"
-                title={item.name}
-                content={
-                    <div style={{width: '150px'}}>
-                        <img 
-                        src={`../../images/types/${item.name}.png`}
-                        width='100%'
-                        />
-                        <div>{info[item.name]}</div>
-                    </div>
-                }
-                arrowPointAtCenter
+                    placement="left"
+                    title={item.name}
+                    content={
+                        <div style={{ width: '150px' }}>
+                            <img
+                                src={`../../images/types/${item.name}.png`}
+                                width='100%'
+                            />
+                            <div>{info[item.name]}</div>
+                        </div>
+                    }
                 >
-                <li>
-                    <div style={{
-                        width: item.hover ? "13px" : "10px",
-                        height: item.hover ? "13px" : "10px",
-                        float: "left",
-                        position: "relative",
-                        top: "4px",
-                        marginRight: "3px",
-                        backgroundColor: item.click ? "gray" : getColor(item.key)
-                        }}
-                        onClick={() => {
+                    <li style={{float:"left", clear:"left"}}>
+                        <div onClick={() => {
                             selectItem(item.key, "click")
 
-                        }}
-                        onMouseEnter={() => {
-                            selectItem(item.key, "hover")
-                        }}
-                        onMouseLeave={() => {
-                            selectItem(item.key, "hover")
-                        }}
-                    />
-                    <span style={{fontSize: item.hover?"12px":"9px"}}>
-                    {item.name}
-                    </span>
-                </li>
+                            }}
+                            onMouseEnter={() => {
+                                selectItem(item.key, "hover")
+                            }}
+                            onMouseLeave={() => {
+                                selectItem(item.key, "hover")
+                            }}
+                            style={{cursor: "pointer"}}>
+                            <div style={{
+                                width: item.hover ? "13px" : "10px",
+                                height: item.hover ? "13px" : "10px",
+                                float: "left",
+                                position: "relative",
+                                top: "4px",
+                                marginRight: "3px",
+                                backgroundColor: item.click ? "gray" : getColor(item.key)
+                            }}
+                            />
+                            <span style={{ fontSize: item.hover ? "12px" : "9px" }}>
+                                {item.name}
+                            </span>
+                        </div>
+                    </li>
                 </Popover>
             })}
         </ul>
