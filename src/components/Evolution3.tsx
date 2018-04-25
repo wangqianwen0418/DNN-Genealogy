@@ -46,8 +46,8 @@ const appData = [
     }
 ]
 
-let CNN = ["streamlined", "skip connections", "multi-branch", "seperatable conv"]
-let RNN = ["stacked", "bidirectional", "multiple time scale", "gated", "recursive"]
+let CNN = ["streamlined", "skip connections", "multi-branch", "depthwise separable conv"]
+let RNN = ["stacked", "bidirectional", "multiple time scale", "gated", "tree-structured"]
 
 let legend = (Names: string[]) => {
     let items = {}
