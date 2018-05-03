@@ -3,15 +3,15 @@ import { getColor } from "../helper/index";
 import { Popover } from "antd";
 
 const info = {
-    "streamlined": "layers are stacked on top of one another",
-    "multi-branch": "the output of one layer goes through multiple branches and then converges",
-    "skip connections": "a connection skips one or more layers",
-    "depthwise separable conv": "a depthwise convolution and a 1x1 convolution called a pointwise convolution",
-    "stacked": "",
-    "bidirectional": "",
-    "multiple time scale": "",
-    "tree-structured": "",
-    "gated": ""
+    "streamlined": "Layers are stacked on top of one another",
+    "multi-branch": "The output of one layer goes through multiple branches and then converges",
+    "skip connections": "A connection skips one or more layers",
+    "depthwise separable conv": "A depthwise convolution and a 1x1 convolution called a pointwise convolution",
+    "stacked": "Layers are stacked to increase the depth of a RNN",
+    "bidirectional": "A standard RNN is split into two parts to process the input sequence in two directions",
+    "multiple time scale": "RNNs operates at multiple time scales",
+    "tree-structured": "The connection graph is structured as a tree",
+    "gated": "Add the gate mechanism to the hidden layer"
 }
 
 export interface LegendProps {
