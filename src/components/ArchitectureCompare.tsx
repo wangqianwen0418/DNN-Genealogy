@@ -2,7 +2,7 @@ import * as React from 'react'
 import Network from './Network'
 import { EvoNode } from '../types'
 import axios from 'axios'
-import { TreeSelect, Cascader, Dropdown, Menu, Button, Col } from 'antd';
+import { TreeSelect, Cascader, Dropdown, Menu, Button, Col, Icon } from 'antd';
 import * as d3 from 'd3'
 import './ArchitectureCompare.css'
 
@@ -115,7 +115,8 @@ export interface State {
     model2: string,
     nodes1: EvoNode[],
     nodes2: EvoNode[],
-    comparing: boolean
+    comparing: boolean,
+    mounted: boolean,
 }
 
 export default class ArchitectureCompare extends React.Component<Props, State> {
@@ -126,7 +127,8 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
             model2: '',
             nodes1: [],
             nodes2: [],
-            comparing: false
+            comparing: false,
+            mounted: false
         }
         this.getData = this.getData.bind(this)
     }
@@ -173,6 +175,10 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         }
     }
 
+    networkIsReady(mounted:boolean){
+        this.setState({mounted: true})
+    }
+
     render() {
         let network = this.props.network
         if (!this.state.comparing) {
@@ -196,7 +202,12 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         >
                             Compare
                         </Button>
-                        <Network nodes={this.state.nodes1} name={this.state.model1}/>
+                        {/* {this.state.mounted?
+                        <span/>:
+                        <Icon type="loading" style={{fontSize: "100px",position: "absolute", top: "200px"}}/>
+                        } */}
+                        <Network nodes={this.state.nodes1} name={this.state.model1} isReady={this.networkIsReady}/>
+                        
                     </Col>
                 </div>)
         } else {
@@ -220,7 +231,9 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         >
                             Detail
                         </Button>
-                        <Network nodes={this.state.nodes1} name={this.state.model1} />
+                        <Network nodes={this.state.nodes1} name={this.state.model1} isReady={this.networkIsReady}/>
+                    
+                        
                     </Col>
                     <Col span={12} className="ArchitectureColumn ArchRight">
                         <Cascader
@@ -232,7 +245,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             popupClassName="MyCascade"
                             style={{width: '35%'}}
                         />
-                        <Network nodes={this.state.nodes2} name={this.state.model2} />
+                        <Network nodes={this.state.nodes2} name={this.state.model2} isReady={this.networkIsReady}/>
                     </Col>
                 </div>)
         }

@@ -224,7 +224,7 @@ export default class Evolution extends React.Component<Props, State>{
         let { pinNodes, appValue } = this.state
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
-            ranksep: appValue == "1.1." ? nodeW * 1.3 : nodeW * 1.6,
+            ranksep: appValue == "1.1." ? nodeW * 1.5 : nodeW * 1.8,
             marginx: margin * 2,
             marginy: margin * 2,
             rankdir: 'LR',

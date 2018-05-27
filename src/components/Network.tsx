@@ -5,6 +5,8 @@ import * as dagre from '../lib/dagre';
 import { Node, GraphEdge } from '../lib/@types/dagre';
 import { getLayerColor } from "../helper";
 import { color } from "d3";
+import worker_script from '../worker';
+var myWorker = new Worker(worker_script);
 
 // export interface Node {
 //     class?:string
@@ -14,7 +16,8 @@ const nodeH = 40, nodeW = 200, expandMaxH = 200
 
 export interface Props {
     nodes: EvoNode[],
-    name: string
+    name: string,
+    isReady:(mounted:boolean)=>void
 }
 export interface State {
     x: number,
@@ -44,62 +47,64 @@ export default class Network extends React.Component<Props, State> {
         this.selectLayer = this.selectLayer.bind(this)
         this.handleMouseWheel = this.handleMouseWheel.bind(this)
     }
-    getDag(layers: EvoNode[], selectedLayers: string[]) {
-        let dag = new dagre.graphlib.Graph();
-        dag.setGraph({ 
-            ranksep: nodeH * .6,
-            marginx: margin,
-            marginy: margin,
-            rankdir: 'TB',
-            edgesep: node_w * 0.02 
-        });
-        dag.setDefaultEdgeLabel(() => { return {}; });
-        layers.forEach(layer => {
-            let details = JSON.stringify(layer.config, null, 2).replace(/"/g, '').split('\n'), textLength = details.length * 12 + 30
-            dag.setNode(layer.name, { 
-                label: layer.name,
-                width: layer.name.length*nodeH/4 + nodeH,
-                height: nodeH,
-                className: layer.class_name,
-                config: layer.config,
-                expand: false,
-                location: 0,
-                textLength: textLength,
-                details: details,
-            })
-            //IR model or keras model
-            if (layer.inbound_nodes.length > 0) {
-                let inputs = layer.inbound_nodes[0]
-                inputs.forEach((input:string[]|any[]) => {
-                    dag.setEdge(input[0], layer.name)
+    async getDag(layers: EvoNode[], selectedLayers: string[]) {
+        return new Promise<{nodes:Node[]; edges:GraphEdge[];height:number;width:number;}>((resolve, reject)=>{
+            let dag = new dagre.graphlib.Graph();
+            dag.setGraph({ 
+                ranksep: nodeH * .6,
+                marginx: margin,
+                marginy: margin,
+                rankdir: 'TB',
+                edgesep: node_w * 0.02 
+            });
+            dag.setDefaultEdgeLabel(() => { return {}; });
+            layers.forEach(layer => {
+                let details = JSON.stringify(layer.config, null, 2).replace(/"/g, '').split('\n'), textLength = details.length * 12 + 30
+                dag.setNode(layer.name, { 
+                    label: layer.name,
+                    width: layer.name.length*nodeH/4 + nodeH,
+                    height: nodeH,
+                    className: layer.class_name,
+                    config: layer.config,
+                    expand: false,
+                    location: 0,
+                    textLength: textLength,
+                    details: details,
                 })
-            }
-        })
-        
-        // Selected Layers
-        selectedLayers.forEach(layer => {
-            let node = dag.node(layer)
-            dag.setNode(layer, {
-                ...node,
-                height: node.textLength > expandMaxH ? expandMaxH : node.textLength,
-                expand: true
+                //IR model or keras model
+                if (layer.inbound_nodes.length > 0) {
+                    let inputs = layer.inbound_nodes[0]
+                    inputs.forEach((input:string[]|any[]) => {
+                        dag.setEdge(input[0], layer.name)
+                    })
+                }
             })
-        })
-
-        dagre.layout(dag)
-        let nodes:Node[] = [], edges:GraphEdge[] = []
-        dag.nodes().forEach((v:string) => {
-            if (dag.node(v)) {
-                nodes.push(dag.node(v))
-            }
-        })
-        dag.edges().forEach((e:string) => {    
-            edges.push(dag.edge(e))
+            
+            // Selected Layers
+            selectedLayers.forEach(layer => {
+                let node = dag.node(layer)
+                dag.setNode(layer, {
+                    ...node,
+                    height: node.textLength > expandMaxH ? expandMaxH : node.textLength,
+                    expand: true
+                })
+            })
+    
+            dagre.layout(dag)
+            let nodes:Node[] = [], edges:GraphEdge[] = []
+            dag.nodes().forEach((v:string) => {
+                if (dag.node(v)) {
+                    nodes.push(dag.node(v))
+                }
+            })
+            dag.edges().forEach((e:string) => {    
+                edges.push(dag.edge(e))
+            });
+            let height = dag.graph().height,
+                width = dag.graph().width
+                // console.log(nodes)        
+            resolve({ nodes, edges, height, width });
         });
-        let height = dag.graph().height,
-            width = dag.graph().width
-            // console.log(nodes)        
-        return { nodes, edges, height, width }
     }
     drawNodes(nodes: Node[]) {
         return (<g className="nodes" >
@@ -202,7 +207,7 @@ export default class Network extends React.Component<Props, State> {
     //     this.setState({ scale })
     // }
 
-    selectLayer(layer: Node) {
+    async selectLayer(layer: Node) {
         let { selectedLayers } = this.state,
             idx = selectedLayers.map((l: any) => l.label).indexOf(layer.label)
         if (idx === -1) {
@@ -214,7 +219,7 @@ export default class Network extends React.Component<Props, State> {
             selectedLayers.splice(idx, 1)
         }
         let { nodes: EvoNodes } = this.props
-        let { nodes, edges } = this.getDag(EvoNodes, selectedLayers.map((l: any) => l.label))
+        let { nodes, edges } = await this.getDag(EvoNodes, selectedLayers.map((l: any) => l.label))
         this.setState({ nodes, edges, selectedLayers })
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
@@ -238,7 +243,7 @@ export default class Network extends React.Component<Props, State> {
         }
 
     }
-    componentWillMount() {
+    async componentDidMount() {
         /*if (this.props.nodes.length !== nextProps.nodes.length) {
             let { nodes: EvoNodes } = nextProps
             let { nodes, edges } = this.getDag(EvoNodes)
@@ -248,13 +253,16 @@ export default class Network extends React.Component<Props, State> {
             this.setState({ nodes, edges })
         }*/
         let { nodes: EvoNodes } = this.props
-        let { nodes, edges } = this.getDag(EvoNodes, [])
+        let { nodes, edges } = await this.getDag(EvoNodes, []);
         this.setState({ nodes, edges })
+        if(nodes.length>0){
+            this.props.isReady(true)
+        }
     }
-    componentWillReceiveProps(nextProps: Props) {
+    async componentWillReceiveProps(nextProps: Props) {
         if (nextProps.name !== this.props.name) {
             let { nodes: EvoNodes } = nextProps
-            let { nodes, edges } = this.getDag(EvoNodes, [])
+            let { nodes, edges } = await this.getDag(EvoNodes, [])
             this.setState({ nodes, edges })
         }
     }
