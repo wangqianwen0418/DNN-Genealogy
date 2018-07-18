@@ -143,7 +143,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         if (nextProps.op !== 1 || this.props === nextProps)
             return
         */
-
+        console.info(nextProps)
         if (nextProps.op !== 1 || this.props === nextProps || nextProps.nn.ID === '') {
             return
         }
@@ -168,6 +168,7 @@ export default class RadialBoxplot extends React.Component<Props, State> {
         window.addEventListener('resize', this.draw)
         d3.select('.RadialBoxplot').append('div').attr('class', 'toolTip')
         this.draw()
+        console.info(this.state.attr_names)
     }
 
     componentWillUnmount() {
@@ -177,18 +178,19 @@ export default class RadialBoxplot extends React.Component<Props, State> {
 
     updateData(nn: NN) {
         let database = this.props.database, { nns, attr_names } = this.state
-        if (database === 'nonsequence') {
-            attr_names = nonsequenceBenchmarks
-        } else {
-            attr_names = sequenceBenchmarks
-        }
+        console.info('attr names', attr_names, nonsequenceBenchmarks, sequenceBenchmarks)
+        // if (database === 'nonsequence') {
+        //     attr_names = nonsequenceBenchmarks
+        // } else {
+        //     attr_names = sequenceBenchmarks
+        // }
         for (let existedNN of nns) {
             if (existedNN.network === nn.ID) {return}
         }
         let newdots: Dot[] = []
         for (let name of nn.names) {
             let tmpAttr: number[] = []
-            attr_names.forEach((index)=> {
+            attr_names.forEach((attr, index)=> {
                 // tmpAttr[index] = name[attr_names[index].dataset] ? name[attr_names[index].dataset] : 100
                 tmpAttr[index] = name[attr_names[index].dataset]
             })

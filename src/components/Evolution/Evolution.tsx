@@ -6,7 +6,7 @@ import { Transition } from 'react-transition-group'
 import './Evolution.css'
 import axios from 'axios'
 import * as d3 from 'd3'
-import { NN, NNLink, Node, GraphEdge, Point } from 'types'
+import { NN, NodeTextInfo, Node, GraphEdge, Point } from 'types'
 import { getColor } from 'helper/';
 import { TreeSelect, Button, Dropdown, Menu, Tooltip, Switch, Modal } from 'antd'
 import moment from 'moment';
@@ -117,7 +117,7 @@ const transitionStyles = {
 };
 
 export default class Evolution extends React.Component<Props, State>{
-    public updateEdge: boolean = true; 
+    public updateEdge: boolean = true; textInfo:{[key:string]:NodeTextInfo}={};
             ref: any; x0: number; y0: number; dragFlag = false
     constructor(props: Props) {
         super(props)
@@ -158,10 +158,14 @@ export default class Evolution extends React.Component<Props, State>{
         }
     }
     async getData() {
+        // textinfo data
+        let resText = await axios.get('../../data/textInfo.json')
+        this.textInfo = resText.data
+        // evolution data
         let res = await axios.get('../../data/evolution_dag.json'),
             datum: NN[] = res.data,
-            { appValue } = this.state
-
+            { appValue } = this.state;
+        
         datum = datum.filter((d: NN) => d.application[0].startsWith(appValue))
         datum.forEach((d: NN) => {
 
@@ -920,6 +924,15 @@ export default class Evolution extends React.Component<Props, State>{
 
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         let { train, arc } = this.props
+        let NNInfo = this.textInfo[glyphZoomLabel]
+        let info = '', links:JSX.Element[] = []
+        if (NNInfo){
+            info = NNInfo.info
+            links = NNInfo.links.map(
+                (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
+            )
+        }
+
         return (
         <div
             className="Evolution View"
@@ -1058,6 +1071,11 @@ export default class Evolution extends React.Component<Props, State>{
                         width: '100%'
                     }}
                 />
+                <div>
+                    {info}
+                    {links}
+                </div>
+                
             </Modal>
         </div>)
     }

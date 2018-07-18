@@ -24,7 +24,7 @@ export default class TextInfo extends React.Component<Props, State>{
     }
 
     async getData() {
-        let res = await axios.get('../../data/text_info.json'),
+        let res = await axios.get('../../data/textInfo.json'),
             textinfo = res.data
         this.setState({ textinfo })
     }
@@ -45,19 +45,11 @@ export default class TextInfo extends React.Component<Props, State>{
     }
 
     render(){
-        let nn = this.props.nn
+        let {nn} = this.props
         
-        let p: number = -1
-        for (let i in this.state.textinfo) {
-            if (this.state.textinfo[i].ID === nn.ID) {
-                p = +i
-                break
-            }
-        }
-
-        if (p !== -1) {
-            let cur: NodeTextInfo = this.state.textinfo[p]
-            let links = this.state.textinfo[p].links.map(
+        if (nn.ID) {
+            let currentNN: NodeTextInfo = this.state.textinfo[nn.ID]
+            let links = currentNN.links.map(
                 (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
             )
             return (
@@ -71,7 +63,7 @@ export default class TextInfo extends React.Component<Props, State>{
                         className="TextInfo-Content"
                     >
                         <div className="TextInfo-Description">
-                            {cur.info}
+                            {currentNN.info}
                         </div>
                         <div className="TextInfo-Links">
                             {links}
