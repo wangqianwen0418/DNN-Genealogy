@@ -619,19 +619,6 @@ export default class Evolution extends React.Component<Props, State>{
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
 
         return (<g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
-            {/* {cate.map((key: string, i: number) => {
-                return <path
-                    className="Edge"
-                    id={`${from}->${to}`}
-                    d={pathData}
-                    stroke="#aaa"
-                    // stroke={clickLegend ? "gray" : getColor(key)}
-                    fill='none'
-                    transform={`translate(${i * 4}, ${i * 4})`}
-                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 3 : 1}
-                    opacity={hoverLegend ? 1 : (clickLegend ? 0.4 : .7)}
-                />
-            })} */}
             {
                 <path
                     className="Edge"
@@ -650,8 +637,7 @@ export default class Evolution extends React.Component<Props, State>{
                 opacity={0}
                 d={pathData}
             />
-            {/* a trick for the edge label, two transition: one for fade in, one for fade out */}
-            {showLabel ?
+            
                 <Tooltip title={label_l} mouseEnterDelay={.3}>
                     <g 
                         className="edgeLable" 
@@ -659,8 +645,14 @@ export default class Evolution extends React.Component<Props, State>{
                         opacity={hoverLegend ? 1 : 0.8}
                         onMouseOver={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `${from}->${to}` })}
                         onMouseLeave={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `` })}
-                    >
-                        <Transition in={this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
+                    >   
+                        
+                        {showLabel? (
+                        <g>
+                            <Transition 
+                                in={this.updateEdge} 
+                                timeout={{ enter: duration, exit: 10 }}
+                            >
                             {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
                                 // console.info(status)
                                 return <text
@@ -682,7 +674,7 @@ export default class Evolution extends React.Component<Props, State>{
                                     </textPath>
                                 </text>
                             }}
-                        </Transition>
+                            </Transition>
 
                         <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
                             {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
@@ -706,18 +698,32 @@ export default class Evolution extends React.Component<Props, State>{
                                 </text>
                             }}
                         </Transition>
+                        </g>
+                        ):
+                            (
+                            <text
+                                className="link_info fadeIn"
+                                dy={-0.3 * labelFont}
+                                scale={1 / scale}
+                                textAnchor="middle"
+                                style={{
+                                    opacity: 0
+                                }}
+                            >
+                            <textPath
+                                xlinkHref={`#label_${from}->${to}`}
+                                startOffset="50%"
+                            >
+                                {label_s}
+                            </textPath>
+                            </text>
+                            )
+                    }
+                    
+                    }
                     </g>
-                </Tooltip> : <g />
-                // <path
-                //     className="EdgeMarker"
-                //     strokeWidth={10}
-                //     stroke="transparent"
-                //     fill="none"
-                //     d={pathData}
-                //     cursor="pointer"
-                // >
-                // </path>
-            }
+                </Tooltip> 
+            
         </g>
         )
 
