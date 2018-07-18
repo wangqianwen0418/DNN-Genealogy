@@ -1,12 +1,12 @@
-import * as React from "react";
-import "./Network.css";
-import { EvoNode } from "../types";
+import * as React from 'react';
+import './Network.css';
+import { EvoNode } from '../types';
 import * as dagre from '../lib/dagre';
 import { Node, GraphEdge } from '../lib/@types/dagre';
-import { getLayerColor } from "../helper";
-import { color } from "d3";
-import worker_script from '../worker';
-var myWorker = new Worker(worker_script);
+import { getLayerColor } from '../helper';
+import { color } from 'd3';
+// import worker_script from '../worker';
+// var myWorker = new Worker(worker_script);
 
 // export interface Node {
 //     class?:string
@@ -59,7 +59,9 @@ export default class Network extends React.Component<Props, State> {
             });
             dag.setDefaultEdgeLabel(() => { return {}; });
             layers.forEach(layer => {
-                let details = JSON.stringify(layer.config, null, 2).replace(/"/g, '').split('\n'), textLength = details.length * 12 + 30
+                let details = JSON.stringify(layer.config, null, 2)
+                            .replace(/"/g, '').split('\n'), 
+                    textLength = details.length * 12 + 30
                 dag.setNode(layer.name, { 
                     label: layer.name,
                     width: layer.name.length*nodeH/4 + nodeH,
@@ -71,7 +73,7 @@ export default class Network extends React.Component<Props, State> {
                     textLength: textLength,
                     details: details,
                 })
-                //IR model or keras model
+                // IR model or keras model
                 if (layer.inbound_nodes.length > 0) {
                     let inputs = layer.inbound_nodes[0]
                     inputs.forEach((input:string[]|any[]) => {
@@ -110,52 +112,68 @@ export default class Network extends React.Component<Props, State> {
         return (<g className="nodes" >
             {nodes.map((node: Node) => {
                 
-                return <g className="layers node"
-                          id={`layer_${node.label}`}
-                          key={`layer_${node.label}`}
-                          transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
-                          onClick={() => this.selectLayer(node)}
-                          onWheel={this.handleMouseWheel}
-                          style={{ cursor: "pointer"}}>
-                    <rect width={node.width} height={node.height}
-                        style={{ fill: getLayerColor(node.className), strokeWidth: 3 }} />
+                return <g 
+                        className="layers node"
+                        id={`layer_${node.label}`}
+                        key={`layer_${node.label}`}
+                        transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
+                        onClick={() => this.selectLayer(node)}
+                        onWheel={this.handleMouseWheel}
+                        style={{ cursor: 'pointer'}}
+                >
+                    <rect 
+                        width={node.width} 
+                        height={node.height}
+                        style={{ fill: getLayerColor(node.className), strokeWidth: 3 }} 
+                    />
                     {node.expand ?
-                        (<svg width={node.width} height={node.height}><g><text textAnchor="middle"
-                            fill="white"
-                            fontSize={nodeH/2}
-                            x={node.width / 2}
-                            y={nodeH/2}>
-                            {node.label}
-                            </text>
-                            <text textAnchor="middle"
+                        (<svg width={node.width} height={node.height}>
+                        <g>
+                            <text 
+                                textAnchor="middle"
                                 fill="white"
                                 fontSize={nodeH/2}
                                 x={node.width / 2}
-                                y={nodeH}>
+                                y={nodeH/2}
+                            >
+                            {node.label}
+                            </text>
+                            <text 
+                                textAnchor="middle"
+                                fill="white"
+                                fontSize={nodeH/2}
+                                x={node.width / 2}
+                                y={nodeH}
+                            >
                                 -----------------------------
                             </text>
                             {node.details.map((str:string, idx: number) => {
-                                return <text key={`${node.label}_config_line_${idx}`}
+                                return <text 
+                                    key={`${node.label}_config_line_${idx}`}
                                     textAnchor="left"
                                     fill="white"
                                     xmlSpace="preserve"
                                     fontSize={nodeH * .4}
                                     x={5}
-                                    y={nodeH * .4 * idx + nodeH*1.2}>
+                                    y={nodeH * .4 * idx + nodeH*1.2}
+                                >
                                     {str}
                                 </text>
                             })}
                             </g></svg>)
-                        : <text textAnchor="middle"
+                        : <text 
+                            textAnchor="middle"
                             fill="white"
                             fontSize={nodeH/2}
                             x={node.width / 2}
-                            y={node.height * 0.6}>
+                            y={node.height * 0.6}
+                        >
                             {node.label}
                         </text>}
                 </g>
             })}
-        </g>)
+        </g>
+        )
     }
     oneEdge(edge: GraphEdge, i: number) {
         let { points, from, to } = edge
@@ -169,11 +187,15 @@ export default class Network extends React.Component<Props, State> {
 
         }
         let pathData = `${start}  ${vias.join(' ')}`
-        return <g className='link' key={`${i}_${from}->${to}`}>
+        return (
+        <g 
+            className="link" 
+            key={`${i}_${from}->${to}`}
+        >
             <path
                 d={pathData}
                 stroke="gray"
-                fill='none'
+                fill="none"
                 strokeWidth="2"
             // markerEnd="url(#arrow)" 
             />
@@ -184,10 +206,12 @@ export default class Network extends React.Component<Props, State> {
                 fill='transparent'
                 strokeWidth="6" /> */}
         </g>
+        )
 
     }
     drawEdges(edges: GraphEdge[]) {
-        return (<g className="edges">
+        return (
+        <g className="edges">
             {edges.map((edge: GraphEdge, i: number) => {
                 return this.oneEdge(edge, i)
             })}
@@ -227,16 +251,19 @@ export default class Network extends React.Component<Props, State> {
         while (!g.getAttribute('class') || g.getAttribute('class').indexOf('layers') === -1) {
             g = g.parentElement
         }
-        let { selectedLayers }= this.state, idx = this.state.selectedLayers.map((l : any) => l.label).indexOf(g.id.substring(6))
+        let { selectedLayers }= this.state, 
+            idx = this.state.selectedLayers
+                    .map((l: any) => l.label).indexOf(g.id.substring(6))
         if (idx !== -1) {
             evt.preventDefault()
             g = g.children[1].firstChild
             var node = selectedLayers[idx]
             var location = node.location + evt.deltaY, offset: number
-            if (location < 0)
+            if (location < 0) {
                 location = 0
-            else if (node.height + location > node.textLength)
+            }else if (node.height + location > node.textLength) {
                 location = node.textLength - node.height
+                 }
             g.setAttribute('transform', `translate (0, ${-location})`)
             selectedLayers[idx].location = location
             this.setState({ selectedLayers })
@@ -247,7 +274,10 @@ export default class Network extends React.Component<Props, State> {
         /*if (this.props.nodes.length !== nextProps.nodes.length) {
             let { nodes: EvoNodes } = nextProps
             let { nodes, edges } = this.getDag(EvoNodes)
-            // let scale: number = Math.min((this.graphWindow.clientHeight - 2 * margin) / h, (this.graphWindow.clientWidth - 2 * margin) / w)
+            // let scale: number = Math.min(
+                (this.graphWindow.clientHeight - 2 * margin) / h, 
+                (this.graphWindow.clientWidth - 2 * margin) / w
+            )
             // let x: number = margin + 0.5 * this.graphWindow.clientWidth - 0.5 * w
             // let y: number = margin
             this.setState({ nodes, edges })
@@ -273,7 +303,10 @@ export default class Network extends React.Component<Props, State> {
     //         let { h, w } = this.getDag(this.props.nodes)
     //         let svg_h = Math.max(h, this.graphWindow.clientHeight)
     //         let svg_w = Math.max(w, this.graphWindow.clientWidth)
-    //         let scale: number = Math.min((this.graphWindow.clientHeight - 2 * margin) / svg_h, (this.graphWindow.clientWidth - 2 * margin) / svg_w)
+    //         let scale: number = Math.min(
+            //     (this.graphWindow.clientHeight - 2 * margin) / svg_h, 
+            //     (this.graphWindow.clientWidth - 2 * margin) / svg_w
+            // )
     //         let x:number = margin + 0.5 * this.graphWindow.clientWidth - 0.5 * w
     //         let y:number = margin
     //         console.info(h, w)

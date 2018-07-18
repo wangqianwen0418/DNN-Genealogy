@@ -1,22 +1,23 @@
-import { EvoNode } from "./types";
+import { EvoNode } from './types';
 import * as dagre from './lib/dagre';
 import { Node, GraphEdge } from './lib/@types/dagre';
 
-
 const workercode = ()=>{
-    self.onmessage = function(e: MessageEvent){
+    onmessage = function(e: MessageEvent){
         let dag = new dagre.graphlib.Graph();
         let {layers, selectedLayers, nodeH, margin, node_w, expandMaxH} = e.data
-            dag.setGraph({ 
+        dag.setGraph({ 
                 ranksep: nodeH * .6,
                 marginx: margin,
                 marginy: margin,
                 rankdir: 'TB',
                 edgesep: node_w * 0.02 
             });
-            dag.setDefaultEdgeLabel(() => { return {}; });
-            layers.forEach((layer:any) => {
-                let details = JSON.stringify(layer.config, null, 2).replace(/"/g, '').split('\n'), textLength = details.length * 12 + 30
+        dag.setDefaultEdgeLabel(() => { return {}; });
+        layers.forEach((layer:any) => {
+                let details = JSON.stringify(layer.config, null, 2)
+                                .replace(/"/g, '').split('\n'), 
+                textLength = details.length * 12 + 30
                 dag.setNode(layer.name, { 
                     label: layer.name,
                     width: layer.name.length*nodeH/4 + nodeH,
@@ -28,7 +29,7 @@ const workercode = ()=>{
                     textLength: textLength,
                     details: details,
                 })
-                //IR model or keras model
+                // IR model or keras model
                 if (layer.inbound_nodes.length > 0) {
                     let inputs = layer.inbound_nodes[0]
                     inputs.forEach((input:string[]|any[]) => {
@@ -38,7 +39,7 @@ const workercode = ()=>{
             })
             
             // Selected Layers
-            selectedLayers.forEach((layer:any) => {
+        selectedLayers.forEach((layer:any) => {
                 let node = dag.node(layer)
                 dag.setNode(layer, {
                     ...node,
@@ -47,27 +48,27 @@ const workercode = ()=>{
                 })
             })
     
-            dagre.layout(dag)
-            let nodes:Node[] = [], edges:GraphEdge[] = []
-            dag.nodes().forEach((v:string) => {
+        dagre.layout(dag)
+        let nodes:Node[] = [], edges:GraphEdge[] = []
+        dag.nodes().forEach((v:string) => {
                 if (dag.node(v)) {
                     nodes.push(dag.node(v))
                 }
             })
-            dag.edges().forEach((e:string) => {    
+        dag.edges().forEach((e:string) => {    
                 edges.push(dag.edge(e))
             });
-            let height = dag.graph().height,
+        let height = dag.graph().height,
                 width = dag.graph().width
                 // console.log(nodes)        
-            self.postMessage({ nodes, edges, height, width },)
+        postMessage({ nodes, edges, height, width },)
     }
 }
 
 let code = workercode.toString();
-code = code.substring(code.indexOf("{")+1, code.lastIndexOf("}"));
+code = code.substring(code.indexOf('{')+1, code.lastIndexOf('}'));
 
-const blob = new Blob([code], {type: "application/javascript"});
-const worker_script = URL.createObjectURL(blob);
+const blob = new Blob([code], {type: 'application/javascript'});
+const workerScript = URL.createObjectURL(blob);
 
-export default worker_script;
+export default workerScript;
