@@ -1,6 +1,6 @@
-import TextInfo from '../components/TextInfo'
-import * as actions from '../actions/';
-import { StoreState } from '../types/index';
+import TextInfo from 'components/TextInfo/TextInfo'
+import * as actions from 'actions/';
+import { StoreState } from 'types/index';
 import { connect, Dispatch } from 'react-redux';
 
 export function mapStateToProps(state:StoreState) {

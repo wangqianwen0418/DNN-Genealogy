@@ -1,9 +1,9 @@
 import * as React from 'react'
 import './RadialBoxplot.css'
-import { getColor } from '../helper'
+import { getColor } from 'helper'
 import * as d3 from 'd3'
-import { NN } from '../types'
-import { nonsequenceBenchmarks, sequenceBenchmarks } from '../constants'
+import { NN } from 'types'
+import { nonsequenceBenchmarks, sequenceBenchmarks } from 'constants/'
 
 export interface Dot {
     [key: string]: any

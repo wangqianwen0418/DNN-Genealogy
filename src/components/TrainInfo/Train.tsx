@@ -1,11 +1,10 @@
 import { Tabs, Collapse, Icon, Card } from 'antd';
-import "./Train.css"
-import * as React from "react";
+import './Train.css'
+import * as React from 'react';
 import axios from 'axios';
 
 const TabPane = Tabs.TabPane
 const Panel = Collapse.Panel;
-
 
 export interface Props {
     treeType: string;
@@ -39,9 +38,9 @@ export default class Train extends React.Component<Props, State>{
     //       });
     //     }
     //   }
-    changeTab(key: string) {
+    // changeTab(key: string) {
         
-    }
+    // }
 
     componentWillMount() {
         this.getData()
@@ -60,8 +59,11 @@ export default class Train extends React.Component<Props, State>{
                             <div>{pane.info}</div>
                             <a href={pane.url}>{pane.url}</a>
                             {pane.latex?<div style={{marginTop: '15px'}}>
-                                <img src={'http://latex.codecogs.com/gif.latex?\\begin{align*}'+pane.latex+'\\end{align*}'} />
-                            </div>:<div></div>}
+                                <img 
+                                    src={'http://latex.codecogs.com/gif.latex?\\begin{align*}'
+                                    +pane.latex+'\\end{align*}'} 
+                                />
+                            </div>:<div/>}
                         </Panel>
                     })}
                 </Collapse>
@@ -74,7 +76,11 @@ export default class Train extends React.Component<Props, State>{
                 className="View ViewBottom"
                 bodyStyle={{height: 'calc(100% - 48px)'}}
             >
-                <Tabs onChange={this.changeTab} className="train" style={{height: '100%'}}>
+                <Tabs 
+                // onChange={this.changeTab} 
+                    className="train" 
+                    style={{height: '100%'}}
+                >
                     {panes}
                 </Tabs>
             </Card>

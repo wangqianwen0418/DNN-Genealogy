@@ -1,0 +1,19 @@
+.ant-tabs-tab .ant-tabs-tab-active .ant-tabs-tab-active:hover .ant-tabs-tab:hover{
+    color:gray!important;
+}
+
+.ant-tabs-tab-active{
+    color:black!important;
+}
+
+.zoomed {
+    opacity: 1;
+}
+
+.collapsed {
+    opacity: 0;
+}
+
+.faded {
+    opacity: 0.2;
+}

@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Card, Layout } from 'antd'
-import { NN, NodeTextInfo } from '../types'
+import { NN, NodeTextInfo } from 'types'
 import axios from 'axios'
-import './App.css'
 import './TextInfo.css'
 
 const { Content } = Layout;

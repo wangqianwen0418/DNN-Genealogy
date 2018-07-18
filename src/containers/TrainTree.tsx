@@ -1,18 +1,18 @@
-import Train from '../components/Train';
+import Train from '../components/TrainInfo/';
 import * as actions from '../actions/';
 import { StoreState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
 
 export function mapStateToProps(state:StoreState) {
     return {
-        treeType:"Train"
+        treeType:'Train'
 
     };
 }
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.SelectTrain>) {
     return {
-        onSelect:(arc_node:string)=>{dispatch(actions.selectTrain(arc_node))}
+        onSelect:(arcNode:string)=>{dispatch(actions.selectTrain(arcNode))}
     }
 }
 

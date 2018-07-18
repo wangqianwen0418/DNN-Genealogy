@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Network from './Network'
-import { EvoNode } from '../types'
+import { EvoNode } from 'types'
 import axios from 'axios'
 import { TreeSelect, Cascader, Dropdown, Menu, Button, Col, Icon } from 'antd';
 import * as d3 from 'd3'
@@ -236,7 +236,6 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         </Button>
                         <Network nodes={this.state.nodes1} name={this.state.model1} isReady={this.networkIsReady}/>
                     
-                        
                     </Col>
                     <Col span={12} className="ArchitectureColumn ArchRight">
                         <Cascader

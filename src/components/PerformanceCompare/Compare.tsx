@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { NN } from '../types'
-import { nonsequenceBenchmarks, sequenceBenchmarks } from '../constants'
-import RadialBoxplot from '../components/RadialBoxplot'
-import BarChart from '../components/BarChart'
+import { NN } from 'types'
+import { nonsequenceBenchmarks, sequenceBenchmarks } from 'constants/'
+import RadialBoxplot from './RadialBoxplot'
+import BarChart from './BarChart'
 
 export interface Props {
     database: string,

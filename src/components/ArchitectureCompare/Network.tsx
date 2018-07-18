@@ -1,9 +1,9 @@
 import * as React from 'react';
 import './Network.css';
-import { EvoNode } from '../types';
-import * as dagre from '../lib/dagre';
-import { Node, GraphEdge } from '../lib/@types/dagre';
-import { getLayerColor } from '../helper';
+import { EvoNode } from 'types';
+import * as dagre from 'lib/dagre';
+import { Node, GraphEdge } from 'lib/@types/dagre';
+import { getLayerColor } from 'helper';
 import { color } from 'd3';
 // import worker_script from '../worker';
 // var myWorker = new Worker(worker_script);

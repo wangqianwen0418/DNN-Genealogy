@@ -1,15 +1,15 @@
 
 import * as React from 'react';
-import "./App.css";
+import './App.css';
 // import SiderBar from "../containers/SideBar";
 // import MultiSunBurst from "./MultiSunBurst";
-import TextInfo from "../containers/TextInfo";
-import Evolution from "../containers/Evolution";
+import TextInfo from 'containers/TextInfo';
+import Evolution from 'containers/Evolution';
 // import SimpleTree from "./SimpleTree";
-import Compare2 from "./Compare2"
-import ArcTree from "../containers/ArcTree";
-import TrainTree from "../containers/TrainTree";
-import CorpusCompare from "../containers/CorpusCompare";
+// import Compare2 from './Compare2'
+// import ArcTree from '../containers/ArcTree';
+import TrainTree from 'containers/TrainTree';
+import CorpusCompare from 'containers/CorpusCompare';
 // import Navi from "./Navi";
 import { Col, Layout } from 'antd';
 const { Header, Content } = Layout;

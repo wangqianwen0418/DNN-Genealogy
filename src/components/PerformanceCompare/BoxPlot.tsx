@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as d3 from "d3";
+import * as React from 'react';
+import * as d3 from 'd3';
 
 export interface Props {
     key: string,
@@ -24,8 +24,8 @@ export default class BoxPlot extends React.Component<Props, {}> {
               iqr = (q3 - q1) * k,
               i = -1,
               j = d.length;
-          while (d[++i] < q1 - iqr);
-          while (d[--j] > q3 + iqr);
+          while (d[++i] < q1 - iqr) {; }
+          while (d[--j] > q3 + iqr) {; }
           return [i, j];
       }
     render() {

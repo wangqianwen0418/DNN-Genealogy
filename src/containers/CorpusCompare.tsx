@@ -1,8 +1,8 @@
 // import CorpusCompare from '../components/CorpusCompare';
 // import RadialBoxplot from '../components/RadialBoxplot';
-import Compare9 from '../components/Compare9';
-import * as actions from '../actions/';
-import { StoreState } from '../types/index';
+import PerformanceCompare from 'components/PerformanceCompare/';
+import * as actions from 'actions/';
+import { StoreState } from 'types/index';
 import { connect, Dispatch } from 'react-redux';
 
 export function mapStateToProps(state:StoreState) {
@@ -18,4 +18,4 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.AllActions>) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Compare9);
+export default connect(mapStateToProps, mapDispatchToProps)(PerformanceCompare);
