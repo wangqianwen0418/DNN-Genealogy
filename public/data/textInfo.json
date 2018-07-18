@@ -1,0 +1,590 @@
+{
+    "leaky units": {
+        "info": "A leaky unit appends a self-connection to a hidden unit. A parameter alpha is used for calculating the moving average which memorizes both the past and the present.",
+        "ID": "leaky units",
+        "links": [
+            [
+                "Advances in Optimizing Recurrent Networks",
+                "http://ieeexplore.ieee.org/abstract/document/6639349/"
+            ],
+            [
+                "Induction of Multiscale Temporal Structure",
+                "http://papers.nips.cc/paper/522-induction-of-multiscale-temporal-structure.pdf"
+            ],
+            [
+                "Hierarchical Recurrent Neural Networks for Long-Term Dependencies",
+                "http://papers.nips.cc/paper/1102-hierarchical-recurrent-neural-networks-for-long-term-dependencies.pdf"
+            ]
+        ]
+    },
+    "diracNet": {
+        "info": "DiracNets propose a simple weight parameterization, which allows to train very deep plain networks without explicit skip-connections. ",
+        "ID": "diracNet",
+        "links": [
+            [
+                "DiracNets: Training Very Deep Neural Networks Without Skip-Connections",
+                "https://arxiv.org/abs/1706.00388"
+            ]
+        ]
+    },
+    "highwayNets": {
+        "info": "HighwahNets is a new architecture designed to ease gradient-based training of very deep networks. The architecture allows information flow over layers and uses gating units to regulate the flow.",
+        "ID": "highwayNets",
+        "links": [
+            [
+                "Highway Networks",
+                "https://arxiv.org/pdf/1505.00387.pdf"
+            ],
+            [
+                "Highway and Residual Networks learn Unrolled Iterative Estimation",
+                "http://arxiv.org/abs/1612.07771"
+            ]
+        ]
+    },
+    "CW-RNN": {
+        "info": "A Clockwork RNN partitions the hidden layers in an RNN into separate modules, each of which processes inputs at its own temporal granularity and computes only at its clock rate.",
+        "ID": "CW-RNN",
+        "links": [
+            [
+                "A Clockwork RNN",
+                "https://arxiv.org/pdf/1402.3511.pdf"
+            ],
+            [
+                "Spatial Clockwork Recurrent Neural Network for Muscle Perimysium Segmentation",
+                "https://link.springer.com/chapter/10.1007/978-3-319-46723-8_22"
+            ]
+        ]
+    },
+    "fractalNet": {
+        "info": "fractalNet introduce an architecture design strategy that repeatedly applies an expansion rule to generate a DNN. It proves that ultra-deep NNs with residual connections are possible",
+        "ID": "fractalNet",
+        "links": [
+            [
+                "Fractalnet: ultra-deep neural networks without residuals",
+                "https://arxiv.org/abs/1605.07648"
+            ],
+            [
+                "3D FractalNet: Dense Volumetric Segmentation for Cardiovascular MRI Volumes",
+                "https://link.springer.com/chapter/10.1007/978-3-319-52280-7_10"
+            ]
+        ]
+    },
+    "DPN": {
+        "info": "DPN proposes a new topology of connection paths internally by evealing the equivalence of the ResNet and DenseNet.",
+        "ID": "DPN",
+        "links": [
+            [
+                "Dual Path Networks",
+                "https://arxiv.org/pdf/1707.01629.pdf"
+            ]
+        ]
+    },
+    "LSTM": {
+        "info": "A long short-team memory is one of the gated RNNs which allow the network to forget the old state besides accumulation infomation. The self-loop RNN in an LSTM is conditioned on the context by a group of layers.",
+        "ID": "LSTM",
+        "links": [
+            [
+                "Long Short-Term Memory",
+                "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735"
+            ],
+            [
+                "LSTM: A Search Space Odyssey",
+                "http://ieeexplore.ieee.org/abstract/document/7508408/"
+            ],
+            [
+                "Show and Tell: A Neural Image Caption Generator",
+                "https://www.cv-foundation.org/openaccess/content_cvpr_2015/app/2A_101.pdf"
+            ],
+            [
+                "Speech recognition with deep recurrent neural networks",
+                "http://ieeexplore.ieee.org/abstract/document/6638947/"
+            ],
+            [
+                "Offline Handwriting Recognition with Multidimensional Recurrent Neural Networks",
+                "http://papers.nips.cc/paper/3449-offline-handwriting-recognition-with-multidimensional-recurrent-neural-networks"
+            ]
+        ]
+    },
+    "BRNN": {
+        "info": "A bidirectional RNN combines an RNN that moves forward with another RNN that moves backward.  It is used for making predictions that depend on the whole input sequence.",
+        "ID": "BRNN",
+        "links": [
+            [
+                "Bidirectional recurrent neural networks",
+                "http://ieeexplore.ieee.org/abstract/document/650093/"
+            ],
+            [
+                "Neural Machine Translation by Jointly Learning to Align and Translate",
+                "https://arxiv.org/abs/1409.0473"
+            ],
+            [
+                "A Novel Connectionist System for Unconstrained Handwriting Recognition",
+                "http://ieeexplore.ieee.org/abstract/document/4531750/"
+            ],
+            [
+                "Hierarchical Recurrent Neural Network for Skeleton Based Action Recognition",
+                "https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Du_Hierarchical_Recurrent_Neural_2015_CVPR_paper.pdf"
+            ],
+            [
+                "Exploiting the Past and the Future in Protein Secondary Structure Prediction",
+                "https://academic.oup.com/bioinformatics/article/15/11/937/249908"
+            ]
+        ]
+    },
+    "tree-LSTM": {
+        "info": "A tree LSTM is a generalization of LSTM with a tree-structured network topology.",
+        "ID": "tree-LSTM",
+        "links": [
+            [
+                "Enhanced LSTM for Natural Language Inference",
+                "https://arxiv.org/abs/1609.06038"
+            ],
+            [
+                "Improved Semantic Representations From Tree-Structured Long Short-Term Memory Networks",
+                "https://arxiv.org/abs/1503.00075"
+            ]
+        ]
+    },
+    "DT-RNN": {
+        "info": "A deep transition RNN appends an MLP with one or more layers in hidden-to-hidden transition to an RNN.",
+        "ID": "DT-RNN",
+        "links": [
+            [
+                "How to Construct Deep Recurrent Neural Networks",
+                "https://arxiv.org/abs/1312.6026"
+            ]
+        ]
+    },
+    "DT(S)-RNN": {
+        "info": "A deep transition RNN with shortcut appends input-to-hidden shortcut connections to a DT-RNN.",
+        "ID": "DT(S)-RNN",
+        "links": [
+            [
+                "How to Construct Deep Recurrent Neural Networks",
+                "https://arxiv.org/abs/1312.6026"
+            ]
+        ]
+    },
+    "recursive": {
+        "info": "A recursive neural network is a generalization of recurrent network with a tree-structured computational graph. The depth is reduced from n to log(n), which may help deal with long-term dependencies.",
+        "ID": "recursive",
+        "links": [
+            [
+                "Recursive Distributed Representations",
+                "http://129.64.46.116/papers/raam.pdf"
+            ],
+            [
+                "A General Framework for Adaptive Processing of Data Structures",
+                "http://ieeexplore.ieee.org/abstract/document/712151/"
+            ],
+            [
+                "Parsing Natural Scenes and Natural Language with Recursive Neural Networks",
+                "https://nlp.stanford.edu/pubs/SocherLinNgManning_ICML2011.pdf"
+            ],
+            [
+                "Semi-supervised Recursive Autoencoders for Predicting Sentiment Distributions",
+                "https://dl.acm.org/citation.cfm?id=2145450"
+            ],
+            [
+                "Recursive Deep Models for Semantic Compositionality Over a Sentiment Treebank",
+                "http://www.aclweb.org/anthology/D13-1170"
+            ]
+        ]
+    },
+    "VGG": {
+        "info": "VGGNet consists of 16/19 convolutional layers and has a highly modularized architecture. It stacks small size convolutional layers to increase the depth. ",
+        "ID": "VGG",
+        "links": [
+            [
+                "ImageNet Classification with Deep Convolutional Neural Networks",
+                "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks"
+            ]
+        ]
+    },
+    "alexNet": {
+        "info": "In 2012, AlexNet significantly outperformed all the prior competitors and won the ImageNet LSVRC challenge.  It has a similar structure as LeNet, but it changes the activation function from Sigmoid to Relu and uses dropout to deal with overfitting. Traning on two GPUs enables AlexNet to learn from a large amount of data.",
+        "ID": "alexNet",
+        "links": [
+            [
+                "ImageNet Classification with Deep Convolutional Neural Networks",
+                "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks"
+            ]
+        ]
+    },
+    "mixNet": {
+        "info": "Two forms of connections, additon and concatenation, have the superiority and insufficiency. To combine their advantages and avoid certain limitations on representation learning, we present a highly efficient and modularized Mixed Link Network (MixNet) which is equipped with flexible inner link (addition) and outer link (concatenation) modules. ",
+        "ID": "mixNet",
+        "links": [
+            [
+                "Mixed Link Networks",
+                "https://arxiv.org/abs/1802.01808"
+            ]
+        ]
+    },
+    "GRU": {
+        "info": "A gated recurrent unit is one of the gated RNNs, including an update gate and a reset gate.",
+        "ID": "GRU",
+        "links": [
+            [
+                "An Empirical Exploration of Recurrent Network Architectures",
+                "http://proceedings.mlr.press/v37/jozefowicz15.pdf"
+            ],
+            [
+                "Gate-Variants of Gated Recurrent Unit (GRU) Neural Networks",
+                "http://ieeexplore.ieee.org/iel7/8039346/8052834/08053243.pdf"
+            ],
+            [
+                "Video Paragraph Captioning Using Hierarchical Recurrent Neural Networks",
+                "https://www.cv-foundation.org/openaccess/content_cvpr_2016/app/S19-04.pdf"
+            ],
+            [
+                "Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling",
+                "https://arxiv.org/abs/1412.3555"
+            ],
+            [
+                "Document Modeling with Gated Recurrent Neural Network for Sentiment Classification",
+                "http://www.aclweb.org/anthology/D15-1167"
+            ]
+        ]
+    },
+    "attention": {
+        "info": "The attention mechanism is based on the seq2seq model, in which multiple vector Cs are generated from the hidden units of the input sentence.",
+        "ID": "attention",
+        "links": [
+            [
+                "End-to-end attention-based large vocabulary speech recognition",
+                "http://ieeexplore.ieee.org/abstract/document/7472618/"
+            ],
+            [
+                "Effective Approaches to Attention-based Neural Machine Translation",
+                "https://arxiv.org/abs/1508.04025"
+            ],
+            [
+                "Neural Machine Translation by Jointly Learning to Align and Translate",
+                "https://arxiv.org/abs/1409.0473"
+            ],
+            [
+                "Show, Attend and Tell: Neural Image Caption Generation with Visual Attention",
+                "http://proceedings.mlr.press/v37/xuc15.pdf"
+            ]
+        ]
+    },
+    "SRN": {
+        "info": "A simple recurrent neural network is used for processing sequences of variable length, in which a state contains information about the whole past sequence. It shares same parameters across different time steps of the sequence.",
+        "ID": "SRN",
+        "links": [
+            [
+                "Finding Structure in Time",
+                "http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/full"
+            ],
+            [
+                "Recurrent Neural Network Based Language Model",
+                "http://www.isca-speech.org/archive/interspeech_2010/i10_1045.html"
+            ],
+            [
+                "DRAW: A Recurrent Neural Network For Image Generation",
+                "https://arxiv.org/abs/1502.04623"
+            ],
+            [
+                "A Critical Review of Recurrent Neural Networks for Sequence Learning",
+                "https://arxiv.org/abs/1506.00019"
+            ]
+        ]
+    },
+    "ESN with leaky units": {
+        "info": "An ESN with leaky units appends an ESN by leaky integration units.",
+        "ID": "ESN with leaky units",
+        "links": [
+            [
+                "A Novel Model of Leaky Integrator Echo State Network for Time-Series Prediction",
+                "https://www.sciencedirect.com/science/article/pii/S0925231215001782"
+            ],
+            [
+                "Optimization and Applications of Echo State Networks with Leaky-Integrator Neurons",
+                "https://www.sciencedirect.com/science/article/pii/S089360800700041X"
+            ]
+        ]
+    },
+    "seq2seq": {
+        "info": "A sequence to sequence model is mainly used for translation. The model reads the input sentence into a vector C and decomposes C into translation. It is also known as encoder-decoder model.",
+        "ID": "seq2seq",
+        "links": [
+            [
+                "Multi-task Sequence to Sequence Learning",
+                "https://arxiv.org/abs/1511.06114"
+            ],
+            [
+                "Sequence to Sequence Learning with Neural Networks",
+                "https://arxiv.org/abs/1409.3215"
+            ],
+            [
+                "Massive Exploration of Neural Machine Translation Architectures",
+                "https://arxiv.org/abs/1703.03906"
+            ],
+            [
+                "On the Properties of Neural Machine Translation: Encoder-Decoder Approaches",
+                "https://arxiv.org/abs/1409.1259"
+            ],
+            [
+                "Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation",
+                "https://arxiv.org/abs/1406.1078"
+            ]
+        ]
+    },
+    "SENet": {
+        "info": "To boost the representational power of a network, SENet proposes a novel architectural unit, squeeze-and-excitation, to recalibrates channel-wise feature responses. It won ILSVRC 2017 classification.",
+        "ID": "SENet",
+        "links": [
+            [
+                "Squeeze-and-Excitation Networks",
+                "https://arxiv.org/abs/1709.01507"
+            ]
+        ]
+    },
+    "mobileNet": {
+        "info": "MoblieNets are based on a streamlined architecture that uses depth-wise separable convolutions to build light weight deep neural networks. It has only two global hyper-parameters that are easy to set.",
+        "ID": "mobileNet",
+        "links": [
+            [
+                "MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications",
+                "https://arxiv.org/abs/1704.04861"
+            ]
+        ]
+    },
+    "conv seq2seq": {
+        "info": "A convolution sequence to sequence model applys CNN structure to map sequence to sequence. It has a faster speed and a high accuracy.",
+        "ID": "conv seq2seq",
+        "links": [
+            [
+                "Attention is All you Need",
+                "http://papers.nips.cc/paper/7181-attention-is-all-you-need"
+            ],
+            [
+                "Convolutional Sequence to Sequence Learning",
+                "https://arxiv.org/abs/1705.03122"
+            ],
+            [
+                "A Convolutional Encoder Model for Neural Machine Translation",
+                "https://arxiv.org/abs/1611.02344"
+            ]
+        ]
+    },
+    "leNet": {
+        "info": "LeNet-5 is a pioneering 7-level convolutional network proposed by LeCun et al in 1998. It recognises hand-written numbers in 32x32 pixel images. ",
+        "ID": "leNet",
+        "links": [
+            [
+                "Gradient-based learning applied to document recognition",
+                "http://ieeexplore.ieee.org/abstract/document/726791/"
+            ]
+        ]
+    },
+    "inception": {
+        "info": "Inception is a multi-branch module proposed in GoogleNet. This architecture consists of 22 layers and significantly reduces the number of parameters from 60M (AlexNet) to 4M",
+        "ID": "inception",
+        "links": [
+            [
+                "Going deeper with convolutions",
+                "https://arxiv.org/abs/1409.4842"
+            ],
+            [
+                "Rethinking the Inception Architecture for Computer Vision",
+                "https://arxiv.org/abs/1512.00567"
+            ],
+            [
+                "Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning",
+                "https://arxiv.org/abs/1602.07261"
+            ]
+        ]
+    },
+    "ESN": {
+        "info": "An echo state network is used for solving vanishing/exploding problems, in which recurrent hidden units are set and only output weight are learnt.",
+        "ID": "ESN",
+        "links": [
+            [
+                "Minimum Complexity Echo State Network",
+                "http://ieeexplore.ieee.org/abstract/document/5629375/"
+            ],
+            [
+                "Adaptive Nonlinear System Identification with Echo State Networks",
+                "http://papers.nips.cc/paper/2318-adaptive-nonlinear-system-identification-with-echo-state-networks.pdf"
+            ],
+            [
+                "Long Short-Term Memory in Echo State Networks: Details of a Simulation Study",
+                "https://opus.jacobs-university.de/frontdoor/index/index/docId/638"
+            ],
+            [
+                "Harnessing Nonlinearity: Predicting Chaotic Systems and Saving Energy in Wireless Communication",
+                "http://science.sciencemag.org/content/304/5667/78"
+            ]
+        ]
+    },
+    "denseNet": {
+        "info": "Based on the observation that CNNs are more accurate and efficient to train if they contain shorter connections between layers, DenseNet connects each layer to every other layer in a feed-forward fashion. DenseNets alleviate the vanishing-gradient problem, strengthen feature propagation, encourage feature reuse, and substantially reduce the number of parameters.",
+        "ID": "denseNet",
+        "links": [
+            [
+                "Densely Connected Convolutional Networks",
+                "https://arxiv.org/abs/1608.06993"
+            ],
+            [
+                "DenseNet for Dense Flow",
+                "https://arxiv.org/abs/1707.06316"
+            ]
+        ]
+    },
+    "DB-LSTM": {
+        "info": "A deep bidirectional LSTM combines a deep bidirectional RNN and a LSTM.",
+        "ID": "DB-LSTM",
+        "links": [
+            [
+                "Speech Recognition with Deep Recurrent Neural Networks",
+                "https://arxiv.org/abs/1303.5778"
+            ],
+            [
+                "Hybrid Speech Recognition with Deep Bidirectional LSTM",
+                "http://ieeexplore.ieee.org/abstract/document/6707742/"
+            ],
+            [
+                "Towards End-to-End Speech Recognition with Recurrent Neural Networks",
+                "http://proceedings.mlr.press/v32/graves14.pdf"
+            ],
+            [
+                "Long Short-Term Memory Recurrent Neural Network Architectures for Large Scale Acoustic Modeling",
+                "http://www.isca-speech.org/archive/interspeech_2014/i14_0338.html"
+            ]
+        ]
+    },
+    "xception": {
+        "info": "The authors present an interpretation of Inception modules as a depthwise convolution followed by a pointwise convolution. This observation leads to a novel CNN architecture inspired by Inception, where Inception modules have been replaced with depthwise separable convolutions.",
+        "ID": "xception",
+        "links": [
+            [
+                "Xception: Deep Learning with Depthwise Separable Convolutions",
+                "https://arxiv.org/abs/1610.02357"
+            ]
+        ]
+    },
+    "resNeXt": {
+        "info": "ResNeXt is a simple, highly modularized network architecture that has only a few hyper-parameters. exposes a new dimension, calleda as cardinality (the size of the set of transformations). ",
+        "ID": "resNeXt",
+        "links": [
+            [
+                "Aggregated Residual Transformations for Deep Neural Networks",
+                "https://arxiv.org/abs/1611.05431"
+            ]
+        ]
+    },
+    "resNet": {
+        "info": "ResNet proposes an architecture that adds skip connections over layers. ResNets are easier to optimize, and can gain accuracy from considerably increased depth.",
+        "ID": "resNet",
+        "links": [
+            [
+                "Deep Residual Learning for Image Recognition",
+                "https://arxiv.org/abs/1512.03385"
+            ],
+            [
+                "Identity Mappings in Deep Residual Networks",
+                "http://arxiv.org/abs/1603.05027"
+            ],
+            [
+                "Identity Matters in Deep Learning",
+                "http://arxiv.org/abs/1611.04231"
+            ],
+            [
+                "Wider or Deeper: Revisiting the ResNet Model for Visual Recognition",
+                "http://arxiv.org/abs/1611.10080"
+            ],
+            [
+                "Residual Networks Behave Like Ensembles of Relatively Shallow Networks",
+                "http://arxiv.org/abs/1605.06431"
+            ]
+        ]
+    },
+    "DGLSTM": {
+        "info": "A depth-gated LSTM appends depth gates to adjacent layers in LSTM. It performs better in machine translation and language modeling.",
+        "ID": "DGLSTM",
+        "links": [
+            [
+                "Depth-Gated Recurrent Neural Networks",
+                "https://pdfs.semanticscholar.org/d3e9/9f2f98ac361aded0b9b9d90b6f9fe8bbbc70.pdf"
+            ],
+            [
+                "Long Short-Term Memory-Networks for Machine Reading",
+                "https://arxiv.org/abs/1601.06733"
+            ],
+            [
+                "Highway Long Short-Term Memory RNNS for Distant Speech Recognition",
+                "http://ieeexplore.ieee.org/abstract/document/7472780/"
+            ]
+        ]
+    },
+    "nasNet": {
+        "info": "NasNet automatically learns the DNN architcture design by searching through an architecture design space. This architecture design space consists of a set of operations collected based on their prevalence in the CNN literature. The architecture learnt on a small dataset can be transfered to a large dataset.",
+        "ID": "nasNet",
+        "links": [
+            [
+                "Learning Transferable Architectures for Scalable Image Recognition",
+                "https://arxiv.org/abs/1707.07012"
+            ],
+            [
+                "Neural Architecture Search with Reinforcement Learning",
+                "https://arxiv.org/abs/1611.01578"
+            ]
+        ]
+    },
+    "stacked RNN": {
+        "info": "A stacked RNN stacks more recurrent hidden layers in an RNN to make it deeper. It is also known as deep RNN.",
+        "ID": "stacked RNN",
+        "links": [
+            [
+                "Speech Recognition with Deep Recurrent Neural Networks",
+                "https://arxiv.org/abs/1303.5778"
+            ],
+            [
+                "Learning Complex, Extended Sequences Using the Principle of History Compression",
+                "http://ieeexplore.ieee.org/document/6795261/"
+            ],
+            [
+                "EESEN: End-to-end Speech Recognition Using Deep RNN Models and WFST-based Decoding",
+                "http://ieeexplore.ieee.org/abstract/document/7404790/"
+            ],
+            [
+                "Singing-voice Separation from Monaural Recordings Using Deep Recurrent Neural Networks",
+                "http://cal.cs.illinois.edu/papers/huang-ismir2014.pdf"
+            ]
+        ]
+    },
+    "time skip connections": {
+        "info": "An RNN with time skip connections adds direct connections from variables in the distant past to variables in the present, in order to transfer information more efficiently.",
+        "ID": "time skip connections",
+        "links": [
+            [
+                "Interactive Language Understanding with Multiple Timescale Recurrent Neural Networks",
+                "https://link.springer.com/chapter/10.1007/978-3-319-11179-7_25"
+            ],
+            [
+                "Developmental Human-Robot Imitation Learning of Drawing with a Neuro Dynamical System",
+                "http://ieeexplore.ieee.org/abstract/document/6722152/"
+            ],
+            [
+                "Learning Long-Term Dependencies is Not as Difficult With NARX Recurrent Neural Networks",
+                "https://drum.lib.umd.edu/handle/1903/745"
+            ],
+            [
+                "Analysing the Multiple Timescale Recurrent Neural Network for Embodied Language Understanding",
+                "https://link.springer.com/chapter/10.1007/978-3-319-09903-3_8"
+            ]
+        ]
+    },
+    "squeezeNet": {
+        "info": "SqueezeNet is a smaller architecture that achieves AlexNet-level accuracy on ImageNet with 50x fewer parameters.",
+        "ID": "squeezeNet",
+        "links": [
+            [
+                "SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size",
+                "https://arxiv.org/abs/1602.07360"
+            ]
+        ]
+    }
+}
