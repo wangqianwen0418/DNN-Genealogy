@@ -1,17 +1,15 @@
-import * as React from "react";
-import { Node } from "../types";
-import BoxPlot from "./BoxPlot";
-import { Button, Dropdown, Menu, Tooltip, Tabs } from "antd";
-import * as d3 from "d3";
-import { getColor, capFirstLetter,cutLabel } from "../helper";
+import * as React from 'react';
+import { Node } from '../types';
+import BoxPlot from './BoxPlot';
+import { Button, Dropdown, Menu, Tooltip, Tabs } from 'antd';
+import * as d3 from 'd3';
+import { getColor, capFirstLetter,cutLabel } from '../helper';
 const TabPane = Tabs.TabPane
 
 const margin = 40, nodeH = 20, nodeW = 100, labelL = 4,
     expandH = 150, expandW = 200,
     boxH = 10,
     labelFont = 12
-
-
 
 export interface Props {
     node: Node,
@@ -28,7 +26,6 @@ export interface Props {
     
 }
 
-
 export default class NNNode extends React.Component<Props, {}>{
     private dragFlag: boolean = false
     constructor(props: Props) {
@@ -37,16 +34,16 @@ export default class NNNode extends React.Component<Props, {}>{
         this.mouseMove = this.mouseMove.bind(this)
         this.mouseUp = this.mouseUp.bind(this)
     }
-    //prevent drag trigger the onclick event
+    // prevent drag trigger the onclick event
     mouseDown(e: React.MouseEvent<any>) {
         this.dragFlag = false
-        document.addEventListener("mousemove", this.mouseMove)
+        document.addEventListener('mousemove', this.mouseMove)
     }
     mouseMove(e: MouseEvent) {
         this.dragFlag = true
     }
     mouseUp(e: React.MouseEvent<any>, node: Node) {
-        document.removeEventListener("mousemove", this.mouseMove)
+        document.removeEventListener('mousemove', this.mouseMove)
         if (!this.dragFlag) {
             this.props.selectNode(node)
         } else {
@@ -55,52 +52,68 @@ export default class NNNode extends React.Component<Props, {}>{
     }
     render() {
         let { node, zoomed, selected, isTop, hovered, selectNode, apiArr, transX, transY, scale, show} = this.props,
-            bg: JSX.Element | any = (node.variants.length > 0 && !zoomed) ? <rect width={node.width * scale} height={node.height * scale}
+            bg: JSX.Element | any = 
+            (node.variants.length > 0 && !zoomed) ? 
+            (
+            <rect 
+                width={node.width * scale} 
+                height={node.height * scale}
                 className="NodeBg"
                 transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
                 rx={1}
                 ry={1}
                 fill="white"
-                stroke={hovered ? "#111" : "gray"}
+                stroke={hovered ? '#111' : 'gray'}
                 strokeWidth={1.5}
-            /> : [],
+            />
+            ) : [],
             arc:string[]=node.arc,
-            arc_num = arc.length
+            arcNum = arc.length
         
-        //a trick. calculate position
-        //if assign transX, transY, scale to another group, the transition animiation will be wired
+        // a trick. calculate position
+        // if assign transX, transY, scale to another group, the transition animiation will be wired
         
-        return <g id={`nnnode_${node.ID}`} key={node.label} className="NNNode Node"
-            transform={`translate (${(node.x - node.width / 2) * scale + transX}, ${(node.y - node.height / 2) * scale + transY})`}
+        return (
+        <g 
+            id={`nnnode_${node.ID}`} 
+            key={node.label} 
+            className="NNNode Node"
+            transform={`translate (
+                ${(node.x - node.width / 2) * scale + transX}, 
+                ${(node.y - node.height / 2) * scale + transY}
+            )`}
             onMouseDown={this.mouseDown}
             onMouseUp={(e) => { this.mouseUp(e, node) }}
             opacity={show?1:.2}
 
         >
-            <g className={`Node ${hovered ? "pop" : 'no'}`}>
+            <g className={`Node ${hovered ? 'pop' : 'no'}`}>
                 {bg}
                 <g>
                     <rect
                         className="Node bounder"
-                        width={node.width * scale} height={node.height * scale}
+                        width={node.width * scale} 
+                        height={node.height * scale}
                         // rx={1}
                         // ry={1}
-                        fill={"white"}
-                        stroke={hovered ? "#111" : "gray"}
+                        fill={'white'}
+                        stroke={hovered ? '#111' : 'gray'}
                         // opacity={zoomed?0:1}
                         // stroke={zoomed ? "none" : (isTop ? "#7dc1f2" : "gray")}
                         // strokeWidth={hovered ? 2 : 1.5}
                         strokeWidth={1.5}
                         cursor="pointer"
-                    ></rect>
+                    />
                     {<g>
                         {arc.map((key, i)=>{
                             return <rect
-                            className="arcIcon Node"
-                            y={node.height * scale * i /arc_num}
-                            width={node.width * scale * 0.2} height={node.height * scale /arc_num}
-                            fill={zoomed ? "none" : getColor(key)}
-                        />
+                                key={key}
+                                className="arcIcon Node"
+                                y={node.height * scale * i /arcNum}
+                                width={node.width * scale * 0.2} 
+                                height={node.height * scale /arcNum}
+                                fill={zoomed ? 'none' : getColor(key)}
+                            />
                         })}
                         {/* <rect
                         className="perIcon"
@@ -143,6 +156,7 @@ export default class NNNode extends React.Component<Props, {}>{
                 </Tooltip>
             }
         </g>
+        )
 
     }
 }
