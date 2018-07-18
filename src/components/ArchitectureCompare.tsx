@@ -26,6 +26,9 @@ export const mapNetworkToArcs = [
         label: 'inception_v3'
     }]
 }, {
+    value: 'xception',
+    label: 'xception'
+},  {
     value: 'inception_resNet',
     label: 'inception_resNet'
 }, {

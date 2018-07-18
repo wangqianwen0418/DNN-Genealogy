@@ -1,23 +1,23 @@
-import * as React from "react";
-import { Button, Dropdown, Menu, Tooltip, Tabs, Icon, Modal } from "antd";
-import { Transition } from "react-transition-group";
-import { Node } from "../types";
-import "./ExtendNode.css";
-import { capFirstLetter, cutLabel, getColor } from "../helper";
-import { mapNetworkToArcs } from "./ArchitectureCompare";
+import * as React from 'react';
+import { Button, Dropdown, Menu, Tooltip, Tabs, Icon, Modal } from 'antd';
+import { Transition } from 'react-transition-group';
+import { Node } from '../types';
+import './ExtendNode.css';
+import { capFirstLetter, cutLabel, getColor } from '../helper';
+import { mapNetworkToArcs } from './ArchitectureCompare';
 // import ImageModel from './ImageModel'
 
 const TabPane = Tabs.TabPane
 const defaultStyle = {
     transition: `opacity 500ms ease-in-out`,
     opacity: 0,
-    visibility: "hidden"
+    visibility: 'hidden'
 }
 
 const transitionStyles = {
-    entering: { opacity: 0, visibility: "hidden" },
-    entered: { opacity: 1, visibility: "visible" },
-    exited: { opacity: 0, visibility: "hidden" }
+    entering: { opacity: 0, visibility: 'hidden' },
+    entered: { opacity: 1, visibility: 'visible' },
+    exited: { opacity: 0, visibility: 'hidden' }
 }
 
 export interface Props {
@@ -59,13 +59,13 @@ export default class ExtendNode extends React.Component<Props, State>{
     }
     mouseDown(e: React.MouseEvent<any>) {
         this.dragFlag = false
-        document.addEventListener("mousemove", this.mouseMove)
+        document.addEventListener('mousemove', this.mouseMove)
     }
     mouseMove(e: MouseEvent) {
         this.dragFlag = true
     }
     mouseUp(e: React.MouseEvent<any>, node: Node) {
-        document.removeEventListener("mousemove", this.mouseMove)
+        document.removeEventListener('mousemove', this.mouseMove)
         if (!this.dragFlag) {
             this.props.selectNode(node)
         } else {
@@ -73,7 +73,9 @@ export default class ExtendNode extends React.Component<Props, State>{
         }
     }
     render() {
-        let { node, tabH, glyphXmargin, selected, scale, duration, zoomed, selectNode, onclickMenu, pinNode, transX, transY, changeGlyphZoom, show } = this.props
+        let { node, tabH, glyphXmargin, selected, scale, 
+            duration, zoomed, selectNode, onclickMenu, 
+            pinNode, transX, transY, changeGlyphZoom, show } = this.props
         {/* <div style={{ height: node.height }}>
             <img
                 className="abstract Node"
@@ -103,20 +105,22 @@ export default class ExtendNode extends React.Component<Props, State>{
 
         // return <Transition in={zoomed} timeout={duration}>
         //     {(status: any) => {
-        return <div id={`exnode_${node.ID}`}
-            className={`ExtendNode Node ${zoomed ? "zoomed" : "collapsed"} ${show ? '' : 'faded'}`}
+        return (
+        <div 
+            id={`exnode_${node.ID}`}
+            className={`ExtendNode Node ${zoomed ? 'zoomed' : 'collapsed'} ${show ? '' : 'faded'}`}
             onMouseEnter={() => this.setState({ showpin: true })}
             onMouseLeave={() => this.setState({ showpin: false })}
             // onMouseOut={()=>this.setState({showpin:false})}
             style={{
-                position: "absolute",
+                position: 'absolute',
                 left: transX + node.x * scale - node.width * scale / 2,
                 top: transY + node.y * scale - node.height * scale / 2,
-                backgroundColor: "white",
+                backgroundColor: 'white',
                 height: node.height * scale+ 'px',
                 width: node.width * scale + 'px',
-                visibility: zoomed ? "visible" : "hidden",
-                outline: `${selected ? 3 : 0.5}px ${selected ? "dashed" : "solid"} #aaa`,
+                visibility: zoomed ? 'visible' : 'hidden',
+                outline: `${selected ? 3 : 0.5}px ${selected ? 'dashed' : 'solid'} #aaa`,
                 // opacity: show?1:0.2,
                 // borderRadius: "5px"
                 // ...defaultStyle,
@@ -158,44 +162,54 @@ export default class ExtendNode extends React.Component<Props, State>{
                     </TabPane>
                 })} 
             </Tabs> */}
-            <Tooltip title={node.label} mouseEnterDelay={0.2}>
-                <div className="Node tab"
+            <Tooltip 
+                title={node.label} 
+                mouseEnterDelay={0.2}
+            >
+                <div 
+                    className="Node tab"
                     style={{
                         height: tabH + 'px',
                         width: node.width * scale +'px',
-                        borderBottom: "0.5px solid #aaa",
-                        display: "flex"
+                        borderBottom: '0.5px solid #aaa',
+                        display: 'flex'
                         // overflow: "hidden",
                         // whiteSpace:"nowrap",
                         // textOverflow: "ellipsis",
-                    }}>
+                    }}
+                >
 
-                    <div style={{
+                    <div 
+                        style={{
                         // width: node.width * scale * .2 + 'px',
-                        width: "20px",
-                        height: "100%",
+                        width: '20px',
+                        height: '100%',
                         // display: "inline-block"
-                    }}>
+                        }}
+                    >
                         {node.arc.map((d: string) => (
-                            <div style={{
+                            <div 
+                                style={{
                                 backgroundColor: getColor(d),
-                                width: "100%",
+                                width: '100%',
                                 height: `${100 / node.arc.length}%`
-                            }} />
+                                }} 
+                            />
                         ))}
                     </div>
 
-                    <div style={{
+                    <div 
+                        style={{
                         padding: '2px',
                         fontSize: tabH * .7 + 'px',
-                        webkitTextFillColor: "black",
+                        webkitTextFillColor: 'black',
                         transform: `translate(0, -10)`,
-                        lineHeight: "100%",
-                        cursor: "pointer",
-                        width: "100%",
-                        overflow: "hidden",
-                        whiteSpace:"nowrap",
-                        textOverflow: "ellipsis",
+                        lineHeight: '100%',
+                        cursor: 'pointer',
+                        width: '100%',
+                        overflow: 'hidden',
+                        whiteSpace:'nowrap',
+                        textOverflow: 'ellipsis',
                         
                     }}
                     >
@@ -215,19 +229,22 @@ export default class ExtendNode extends React.Component<Props, State>{
                 width={(node.width * scale - 2 * glyphXmargin)}
                 onMouseDown={this.mouseDown}
                 onMouseUp={(e) => { this.mouseUp(e, node) }} />
-            <div className="floatIcon"
+            <div 
+                className="floatIcon"
                 style={{
-                    position: "absolute",
-                    right: "0px",
-                    bottom: "0px",
-                    color: "gray"
+                    position: 'absolute',
+                    right: '0px',
+                    bottom: '0px',
+                    color: 'gray'
                 }}
             >
-                <Icon className="pin" type="pushpin"
+                <Icon 
+                    className="pin" 
+                    type="pushpin"
                     style={{
                         opacity: pin || showpin ? 1 : 0,
-                        color: pin ? "red" : "gray",
-                        cursor: "pointer",
+                        color: pin ? 'red' : 'gray',
+                        cursor: 'pointer',
                         transform: `rotate(${pin ? 45 : 0}deg)`
                     }}
 
@@ -238,10 +255,12 @@ export default class ExtendNode extends React.Component<Props, State>{
                         this.setState({ pin: !pin })
                         pinNode(node)
 
-                    }} />
+                    }} 
+                />
                 {!showpin&&pin ?<span/>: <span style={{opacity: showpin ? 1 : 0}}>
-                    <Icon type="arrows-alt"
-                        style={{ cursor: "pointer" }}
+                    <Icon 
+                        type="arrows-alt"
+                        style={{ cursor: 'pointer' }}
                         onClick={() => this.props.changeGlyphZoom(node.label)}
                     />
                     <Dropdown overlay={menu} className="infoButton" >
@@ -252,6 +271,7 @@ export default class ExtendNode extends React.Component<Props, State>{
             </div>
 
         </div>
+        )
         // }}
         {/* </Transition> */ }
     }
