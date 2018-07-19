@@ -15,9 +15,9 @@
 
 
 .link_info{
-    fill:#333;
+    fill:#666;
     stroke:none;
-    stroke-width:1px;
+    stroke-width:0.5px;
 }
 
 .floatIcon a , .floatIcon i{

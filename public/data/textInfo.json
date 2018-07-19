@@ -397,6 +397,25 @@
             ]
         ]
     },
+    "inception_resNet": {
+        "info": "Inception is a multi-branch module proposed in GoogleNet. This architecture consists of 22 layers and significantly reduces the number of parameters from 60M (AlexNet) to 4M",
+        "ID": "inception_resNet",
+        "links": [
+            [
+                "Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning",
+                "https://arxiv.org/abs/1602.07261"
+            ],
+            [
+                "Going deeper with convolutions",
+                "https://arxiv.org/abs/1409.4842"
+            ],
+            [
+                "Rethinking the Inception Architecture for Computer Vision",
+                "https://arxiv.org/abs/1512.00567"
+            ]
+            
+        ]
+    },
     "ESN": {
         "info": "An echo state network is used for solving vanishing/exploding problems, in which recurrent hidden units are set and only output weight are learnt.",
         "ID": "ESN",

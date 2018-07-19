@@ -1,4 +1,4 @@
-task|name|date|params(M)|cifar10|cifar100|SVHN|imageNet val top1|imagenet val top5|citation|paper|model path|||||||||
+task|name|date|params(M)|cifar10|cifar100|SVHN|imageNet top1|imagenet top5|citation|paper|model path|||||||||
 recognition|alexNet|2012.12.03|60|na|na|na|36.7|15.4|18438|https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks||||||||||
 recognition|vgg19|2014.09.04|144|na|na|na|25.5|7.3|8205|https://arxiv.org/abs/1409.1556|x|||||||||
 recognition|inception|2014.09.17|6.8|na|na|na|na|6.67|5591|https://arxiv.org/abs/1409.4842||||||||||
@@ -21,9 +21,9 @@ recognition|fractalNet-20|2016.05.24|38.6|5.22|23.3|na|na|na|71|https://arxiv.or
 recognition|denseNet_40_12|2016.08.25|1|5.24|24.42|1.79|na|na|378|https://arxiv.org/abs/1608.06993|x|||||||||
 recognition|denseNet_100_12|2016.08.25|7.2|4.1|20.2|1.67|na|na|378|https://arxiv.org/abs/1608.06993|x|||||||||
 recognition|denseNet_100_24|2016.08.25|27.2|3.74|19.25|1.59|na|na|378|https://arxiv.org/abs/1608.06993|x|||||||||
-recognition|denseNet-BC(l=100, k=12)|2016.08.25|0.8|4.51|22.27|1.76|na|na|378|https://arxiv.org/abs/1608.06993||||||||||
-recognition|denseNet-BC(l=250, k=24)|2016.08.25|15.3|3.62|17.6|1.74|na|na|378|https://arxiv.org/abs/1608.06993||||||||||
-recognition|denseNet-BC(l=190, k=40)|2016.08.25|25.6|3.46|17.18|na|na|na|378|https://arxiv.org/abs/1608.06993||||||||||
+recognition|denseNet_BC(l=100, k=12)|2016.08.25|0.8|4.51|22.27|1.76|na|na|378|https://arxiv.org/abs/1608.06993||||||||||
+recognition|denseNet_BC(l=250, k=24)|2016.08.25|15.3|3.62|17.6|1.74|na|na|378|https://arxiv.org/abs/1608.06993||||||||||
+recognition|denseNet_BC(l=190, k=40)|2016.08.25|25.6|3.46|17.18|na|na|na|378|https://arxiv.org/abs/1608.06993||||||||||
 recognition|denseNet_121|2016.08.25|8.1|na|na|na|25.02|7.71|378|https://arxiv.org/abs/1608.06993|x|||||||||
 recognition|denseNet_201|2016.08.25|20.2|na|na|na|22.58|6.34|378|https://arxiv.org/abs/1608.06993|x|||||||||
 recognition|shake-shake|2017.05.21|2.9|2.86|15.85|na|na|na|16|https://arxiv.org/abs/1705.07485||||||||||

@@ -35,10 +35,12 @@ export default class Legend extends React.Component<LegendProps, {}>{
         //     let item = items[key]
         //     if(item.click){everClick=true}
         // })
-        return <ul>
+        return ( 
+        <ul>
             {Object.keys(items).map((key: string) => {
                 let item = items[key]
                 return <Popover
+                    key={key}
                     placement="left"
                     title={item.name}
                     content={
@@ -51,7 +53,8 @@ export default class Legend extends React.Component<LegendProps, {}>{
                         </div>}
                 >
                     <li style={{float:'left', clear:'left'}}>
-                        <div onClick={() => {
+                        <div 
+                            onClick={() => {
                             selectItem(item.key, 'click')
 
                             }}
@@ -61,8 +64,10 @@ export default class Legend extends React.Component<LegendProps, {}>{
                             onMouseLeave={() => {
                                 selectItem(item.key, 'hover')
                             }}
-                            style={{cursor: 'pointer'}}>
-                            <div style={{
+                            style={{cursor: 'pointer'}}
+                        >
+                            <div 
+                                style={{
                                 width: item.hover ? '13px' : '10px',
                                 height: item.hover ? '13px' : '10px',
                                 float: 'left',
@@ -80,5 +85,6 @@ export default class Legend extends React.Component<LegendProps, {}>{
                 </Popover>
             })}
         </ul>
+        )
     }
 }

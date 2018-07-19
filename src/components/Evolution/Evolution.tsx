@@ -638,7 +638,7 @@ export default class Evolution extends React.Component<Props, State>{
                 d={pathData}
             />
             
-                <Tooltip title={label_l} mouseEnterDelay={.3}>
+                <Tooltip title={label_l} mouseEnterDelay={.3} placement="bottom">
                     <g 
                         className="edgeLable" 
                         cursor="pointer"
@@ -932,7 +932,9 @@ export default class Evolution extends React.Component<Props, State>{
         let { train, arc } = this.props
         let NNInfo = this.textInfo[glyphZoomLabel]
         let info = '', links:JSX.Element[] = []
+        let paperTitle = ''
         if (NNInfo){
+            paperTitle = NNInfo.links[0][0]
             info = NNInfo.info
             links = NNInfo.links.map(
                 (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
@@ -1078,6 +1080,7 @@ export default class Evolution extends React.Component<Props, State>{
                     }}
                 />
                 <div>
+                    <h3>{paperTitle}</h3>
                     {info}
                     {links}
                 </div>

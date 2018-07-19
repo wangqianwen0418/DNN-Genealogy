@@ -1,13 +1,12 @@
-task|model|date|size|memory|voc2012 mIOU|coco AP@[0.5:0.95]|coco AP@0.5|coco AP s|coco AP m|coco AP l|citation|paper
-segmentation|fcn|2015.06.01|||67.2||||||3141|https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Long_Fully_Convolutional_Networks_2015_CVPR_paper.pdf
-segmentation|mask r-cnn|2017.04.05|||||||||88|https://arxiv.org/abs/1703.06870
-segmentation|deepLab_v1|2014.12.22|||71.6||||||1183|https://arxiv.org/abs/1412.7062
-segmentation|deepLab_v2|2016.06.02|||79.7||||||1183|https://arxiv.org/abs/1606.00915
-segmentation|uNet|2015.05.18|||||||||994|https://arxiv.org/abs/1505.04597
-segmentation|segNet|2015.11.02|||59.9||||||464|https://arxiv.org/abs/1511.00561
-segmentation|CRF (postprocessing)|||||||||||https://arxiv.org/abs/1210.5644
-segmentation|dilated conv|2015.11.23|||75.3||||||508|https://arxiv.org/abs/1511.07122
-segmentation|refineNet|2016.11.20|||84.2||||||60|https://arxiv.org/abs/1611.06612
-segmentation|PSPNet|2016.12.04|||85.4||||||129|https://arxiv.org/abs/1612.01105
-segmentation|GCN|2017.03.08|||83.6||||||15|https://arxiv.org/abs/1703.02719
-segmentation|deepLab_v3|2017.06.17|||85.7||||||17|https://arxiv.org/abs/1706.05587
+task,model,date,size,memory,voc2012 mIOU,coco AP@[0.5:0.95],coco AP@0.5,coco AP s,coco AP m,coco AP l,citation,paper
+segmentation,fcn,2015.06.01,,,67.2,,,,,,3141,https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Long_Fully_Convolutional_Networks_2015_CVPR_paper.pdf
+segmentation,mask r-cnn,2017.04.05,,,,,,,,,88,https://arxiv.org/abs/1703.06870
+segmentation,deepLab_v1,2014.12.22,,,71.6,,,,,,1183,https://arxiv.org/abs/1412.7062
+segmentation,deepLab_v2,2016.06.02,,,79.7,,,,,,1183,https://arxiv.org/abs/1606.00915
+segmentation,uNet,2015.05.18,,,,,,,,,994,https://arxiv.org/abs/1505.04597
+segmentation,segNet,2015.11.02,,,59.9,,,,,,464,https://arxiv.org/abs/1511.00561
+segmentation,dilated conv,2015.11.23,,,75.3,,,,,,508,https://arxiv.org/abs/1511.07122
+segmentation,refineNet,2016.11.20,,,84.2,,,,,,60,https://arxiv.org/abs/1611.06612
+segmentation,PSPNet,2016.12.04,,,85.4,,,,,,129,https://arxiv.org/abs/1612.01105
+segmentation,GCN,2017.03.08,,,83.6,,,,,,15,https://arxiv.org/abs/1703.02719
+segmentation,deepLab_v3,2017.06.17,,,85.7,,,,,,17,https://arxiv.org/abs/1706.05587
