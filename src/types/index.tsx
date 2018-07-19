@@ -71,7 +71,6 @@ export interface Node {
     [key: string]: any;
 }
 
-
 export interface Parent{
     ID:string,
     link_info:string,
@@ -82,4 +81,9 @@ interface Name{
     name:string,
     [datasets:string]:number|any,
     params:number
+}
+
+export interface Performances {
+    datasets: string[],
+    models: { [modelName: string]: number [] }
 }

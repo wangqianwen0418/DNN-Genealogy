@@ -910,9 +910,9 @@ export default class Evolution extends React.Component<Props, State>{
     }
     selectItem(key: string, op: 'click' | 'hover') {
         let { legend } = this.state
-        console.info(legend, key, op, legend[key][op])
+        // console.info(legend, key, op, legend[key][op])
         legend[key][op] = !legend[key][op]
-        console.info(legend, key, op, legend[key][op])
+        // console.info(legend, key, op, legend[key][op])
         this.setState({ legend })
     }
 
