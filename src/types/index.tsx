@@ -84,6 +84,8 @@ interface Name{
 }
 
 export interface Performances {
+    name:string,
     datasets: string[],
+    modelIDs: string[],
     models: { [modelName: string]: number [] }
 }

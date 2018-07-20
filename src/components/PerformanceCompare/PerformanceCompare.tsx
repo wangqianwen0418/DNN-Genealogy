@@ -11,31 +11,37 @@ export interface Props {
     op: number
 }
 
+export interface State {
+    cnnTables: Performances[],
+    rnnTables: Performances[]
+}
+
 const TabPane = Tabs.TabPane;
 
-export default class PerformanceCompare extends React.Component<Props, { tables: Performances[] }>{
+export default class PerformanceCompare extends React.Component<Props, State>{
     constructor(props: Props) {
         super(props)
         this.state = {
-            tables: []
+            cnnTables: [],
+            rnnTables: []
         }
     }
     async getData() {
-        console.info('getdata')
-        if (this.props.database === 'nonsequence'){
             let res = await axios.get('../../data/recognition.csv')
             let csvData = res.data
-            let performances: Performances = {
+            let cnnTable: Performances = {
+                name: 'image classification',
+                modelIDs: [],
                 datasets: [],
                 models: {}
             }
             let lines = csvData.split('\n').slice(0, -2)
             let header = lines[0]
-            performances.datasets = header.split('|').slice(3, 9)
+            cnnTable.datasets = header.split('|').slice(3, 9)
             lines.slice(1).forEach((line: string) => {
                 let cells = line.split('|')
                 let modelName = cells[1]
-                performances.models[modelName] = cells.slice(3, 9).map((d: string, i: number) => {
+                cnnTable.models[modelName] = cells.slice(3, 9).map((d: string, i: number) => {
                     if (d === 'na') {
                         return 0
                     } else if (i > 0) {
@@ -45,31 +51,34 @@ export default class PerformanceCompare extends React.Component<Props, { tables:
                     return parseFloat(d) // model number of parameters
                 }
                 )
+                cnnTable.modelIDs.push(modelName.split('-')[0].split('_')[0])
 
             })
-            this.setState({ tables: [performances] })
-        }else{
-            let res = await axios.get('../../data/rnn_scores.json')
-            let tables = res.data.filter(
+        
+            let rnnres = await axios.get('../../data/rnn_scores.json')
+            let rnnTables = rnnres.data
+            this.setState({cnnTables: [cnnTable], rnnTables})
+        
+    }
+    getTables(){
+        if (this.props.database === 'nonsequence'){
+            return this.state.cnnTables
+        }else{ 
+            return  this.state.rnnTables.filter(
                 (table:Performances)=>
-                Object.keys(table.models)
+                table.modelIDs
                 .indexOf(this.props.nn.ID)>-1
             )
-            console.info(res, tables, this.props.nn.ID)
-            this.setState({tables})
         }
-        
+
     }
 
     componentDidMount() {
         this.getData()
     }
-    componentWillReceiveProps(nextProps: Props){
-        this.getData()
-    }
-
+    
     render() {
-        let {tables} = this.state
+        let tables = this.getTables()
         console.info(tables)
         if(tables.length>0){
             // if (this.props.database === 'nonsequence') {
@@ -82,10 +91,10 @@ export default class PerformanceCompare extends React.Component<Props, { tables:
                 {tables.map((table:Performances, tabIdx:number)=>{
                     return (
                     <TabPane 
-                        tab="Tab 1" 
+                        tab={table.name} 
                         key={tabIdx.toString()} 
                         style={{height:'100%', width:'100%'}}
-                        forceRender={true}
+                        // forceRender={true}
                     >
                        <Box performances={table}/>
                     </TabPane>
