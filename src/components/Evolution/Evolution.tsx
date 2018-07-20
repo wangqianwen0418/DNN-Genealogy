@@ -551,7 +551,7 @@ export default class Evolution extends React.Component<Props, State>{
             if (item.click) { everClick = true }
             if (item.hover) { everHover = true }
         })
-        hoverLegend = hoverLegend || !everHover
+        hoverLegend = hoverLegend && everHover
         clickLegend = clickLegend || !everClick
 
         // a trick. if assign transX, transY, scale to a group, the transition animiation will be wired
@@ -615,10 +615,11 @@ export default class Evolution extends React.Component<Props, State>{
             // let pathData = `M ${points[0].x} ${points[0].y} 
             //                 L ${points[points.length - 1].x} ${points[points.length - 1].y}`,
             highlight: boolean = ((from === selectedID) || (to === selectedID)),
-            hovered: boolean = hoverEdge === `${from}->${to}`,
+            hovered: boolean = (hoverEdge === `${from}->${to}`),
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
-
-        return (<g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
+        
+        return (
+        <g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
             {
                 <path
                     className="Edge"
@@ -628,17 +629,29 @@ export default class Evolution extends React.Component<Props, State>{
                     // stroke={clickLegend ? "gray" : getColor(key)}
                     fill="none"
                     strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 2}
-                    opacity={hoverLegend ? 1 : (clickLegend ? 0.4 : .7)}
+                    // opacity={(hoverLegend|| hovered) ? 1 : (clickLegend ? 0.4 : .4)}
+                    opacity={(hoverLegend|| hovered) ? 1 : 0.3}
                 />
             }
-
-            <path
-                id={`label_${from}->${to}`}
-                opacity={0}
-                d={pathData}
-            />
             
-                <Tooltip title={label_l} mouseEnterDelay={.3} placement="bottom">
+                <path
+                    id={`mark_${from}->${to}`}
+                    opacity={0}
+                    d={pathData}
+                    stroke="red"
+                    strokeWidth={7}
+                    fill="none"
+                    cursor="pointer"
+                    onMouseOver={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `${from}->${to}` })}
+                    onMouseLeave={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `` })}
+                />
+            
+                <Tooltip 
+                    title={label_l} 
+                    mouseEnterDelay={.3} 
+                    placement="bottom" 
+                    visible={hovered}
+                >
                     <g 
                         className="edgeLable" 
                         cursor="pointer"
@@ -648,7 +661,7 @@ export default class Evolution extends React.Component<Props, State>{
                     >   
                         
                         {showLabel? (
-                        <g>
+                        <g className="labels">
                             <Transition 
                                 in={this.updateEdge} 
                                 timeout={{ enter: duration, exit: 10 }}
@@ -667,7 +680,7 @@ export default class Evolution extends React.Component<Props, State>{
                                     }}
                                 >
                                     <textPath
-                                        xlinkHref={`#label_${from}->${to}`}
+                                        xlinkHref={`#mark_${from}->${to}`}
                                         startOffset="50%"
                                     >
                                         {label_s}
@@ -690,7 +703,7 @@ export default class Evolution extends React.Component<Props, State>{
                                     }}
                                 >
                                     <textPath
-                                        xlinkHref={`#label_${from}->${to}`}
+                                        xlinkHref={`#mark_${from}->${to}`}
                                         startOffset="50%"
                                     >
                                         {label_s}
@@ -699,8 +712,7 @@ export default class Evolution extends React.Component<Props, State>{
                             }}
                         </Transition>
                         </g>
-                        ):
-                            (
+                        ):(<g className="no labels">
                             <text
                                 className="link_info fadeIn"
                                 dy={-0.3 * labelFont}
@@ -711,13 +723,14 @@ export default class Evolution extends React.Component<Props, State>{
                                 }}
                             >
                             <textPath
-                                xlinkHref={`#label_${from}->${to}`}
+                                xlinkHref={`#mark_${from}->${to}`}
                                 startOffset="50%"
                             >
-                                {label_s}
+                                {'fake label for tool tip'}
                             </textPath>
                             </text>
-                            )
+                            </g>
+                        )
                     }
                     
                     }

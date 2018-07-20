@@ -171,6 +171,7 @@ export default class Box extends React.Component<{ performances: Performances },
                         borderWidth: 1.5,
                         color: 'white',
                         borderColor: 'black',
+                        opacity: 0.5,
                     },
                     data: boxData[idx].boxData
                 }
@@ -200,14 +201,14 @@ export default class Box extends React.Component<{ performances: Performances },
             option = {
                 legend:{
                     type:'scroll',
-                    data: Object.keys(models),
+                    data: Array.from(new Set(Object.keys(models).map(d=>d.split('_')[0]))),
                     top: `${top/2}%`,
                     orient: 'vertical',
                     left:'left',
                     selected,
-                    formatter: function (name:string) {
-                        return name.split('_')[0]
-                    },
+                    // formatter: function (name:string) {
+                    //     return name.split('_')[0]
+                    // },
                     tooltip: {
                         show: true,
                         formatter: (params:{[key:string]:any})=>{
