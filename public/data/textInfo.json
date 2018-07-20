@@ -269,9 +269,9 @@
             ]
         ]
     },
-    "SRN": {
-        "info": "A simple recurrent neural network is used for processing sequences of variable length, in which a state contains information about the whole past sequence. It shares same parameters across different time steps of the sequence.",
-        "ID": "SRN",
+    "RNN": {
+        "info": "Vanilla RNN is a simple recurrent neural network is used for processing sequences of variable length, in which a state contains information about the whole past sequence. It shares same parameters across different time steps of the sequence.",
+        "ID": "RNN",
         "links": [
             [
                 "Finding Structure in Time",

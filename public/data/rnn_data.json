@@ -201,7 +201,7 @@
                 "norm": "BLEU",
                 "field": "machine translation",
                 "dataset": ["WMT'16 English-Romanian", "WMT'14 English-German", "WMT'14 English-French"],
-                "model": ["conv", "RNN best"],
+                "model": ["conv seq2seq", "RNN best"],
                 "acc": [
                     [30.02, 28.1],
                     [25.16, 24.61],

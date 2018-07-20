@@ -1,1 +1,534 @@
-[{"models": {"DOT(S)-RNN": [3.215, 8.437, 6.973], "DOT(S)-RNN*": [2.95, 7.92, 6.59], "DT(S)-RNN": [3.206, 8.278, 6.988], "RNN": [3.225, 8.338, 6.99], "sRNN": [3.258, 8.367, 6.954]}, "datasets": ["Nottingham", "JSB Chorales", "MuseData"]}, {"models": {"DT(S)-RNN": [1.409], "RNN": [1.414], "sRNN": [1.412], "LSTM best": [1.24], "RNN best": [1.41], "DOT(S)-RNN": [1.386]}, "datasets": ["Penn Treebank Corpus"]}, {"models": {"DT(S)-RNN": [112], "RNN": [117.7], "sRNN": [110], "LSTM best": [117], "RNN best": [123], "DOT(S)-RNN": [107.5]}, "datasets": ["Penn Treebank Corpus"]}, {"models": {"CTC-5L-250H": [18.4], "CTC-1L-250H": [23.9], "CTC-2L-250H": [21], "CTC-3L-421H-UNI": [19.6], "CTC-3L-250H": [18.6], "CTC-1L-622H": [23], "CTC-3L-500H-TANH": [37.6], "TRANS-3L-250H": [18.3], "PRETRANS-3L-250H": [17.7]}, "datasets": ["TIMIT"]}, {"models": {"both mod. BRNN, log.": [77.75, 82.38], "back-RNN": [61.91, 70.94], "for mod. BRNN": [72.7, 79.08], "for-RNN(1-delay)": [65.83, 73], "merge(for+back)": [65.28, 73.73], "both mod. BRNN, lin.": [77.53, 82.11], "back mod. BRNN": [72.74, 77.44], "BRNN": [68.53, 75.48], "for-RNN(2-delay)": [63.27, 70.77], "for-RNN": [63.2, 72.51]}, "datasets": ["TIMIT 61-class", "TIMIT 39-class"]}, {"models": {"LSTM": [32.43, 33.52, 31.99], "GRU": [33.95, 32.73, 30.72], "DGLSTM": [34.48, 33.81, 32.19]}, "datasets": ["BTEC depth-3", "BTEC depth-5", "BTEC depth-10"]}, {"models": {"DOT(S)-RNN": [108], "LSTM": [117], "DGLSTM": [96], "RNN": [123], "sRNN": [110]}, "datasets": ["Penn Treebank Corpus"]}, {"models": {"Dependency Tree-LSTM": [51, 88], "sRNN": [49.8, 86.6], "2-layer Bid-LSTM": [48.5, 87.2], "2-layer LSTM": [46, 86.3], "Bid-LSTM": [49.1, 87.5], "LSTM": [46.4, 84.9], "Constituency Tree-LSTM": [48.4, 85.7]}, "datasets": ["Stanford Sentiment Treebank fine-grained", "Stanford Sentiment Treebank binary"]}, {"models": {"Dependency Tree-LSTM": [0.8676, 0.8083, 0.2532], "DT-RNN": [0.7923, 0.7319, 0.3822], "2-layer Bid-LSTM": [0.8558, 0.7965, 0.2762], "2-layer LSTM": [0.8515, 0.7896, 0.2838], "SDT-RNN": [0.79, 0.7304, 0.3848], "Bid-LSTM": [0.8567, 0.7966, 0.2736], "LSTM": [0.8528, 0.7911, 0.2831], "Constituency Tree-LSTM": [0.8582, 0.7966, 0.2734]}, "datasets": ["Pearson's r on SICK", "Spearman's p on SICK", "MSE on SICK"]}, {"models": {"MV-RNN": [44.4, 82.9], "RNN": [43.2, 82.4], "RNTN": [45.7, 85.4]}, "datasets": ["Stanford Sentiment Treebank fine-grained", "Stanford Sentiment Treebank binary"]}, {"models": {"GRU": [63.5, 65.9, 65.7, 41.6], "BRNN": [58.7, 59.7, 57.7, 37.2], "RNN": [58.2, 59.1, 59.7, 34.4], "Bid-GRU": [63.7, 65.5, 66, 42.5]}, "datasets": ["Yelp2013", "Yelp2014", "Yelp2015", "IMDB"]}, {"models": {"RNN": [7.86, 3.75, 7.2, 8.65], "RNN+leaky units": [7.57, 3.57, 6.99, 8.63]}, "datasets": ["Piano-midi.de", "Nottingham", "MuseData", "JSB Chorales"]}, {"models": {"RNN": [1.76], "RNN+leaky units": [1.56]}, "datasets": ["Penn Treebank Corpus"]}, {"models": {"RNN": [145.16], "RNN+leaky units": [129.83]}, "datasets": ["Penn Treebank Corpus"]}, {"models": {"CW-RNN": [16.8], "LSTM": [34.2], "RNN": [66.8]}, "datasets": ["TIMIT"]}, {"models": {"RNN best": [28.1, 24.61, 39.92], "conv": [30.02, 25.16, 40.51]}, "datasets": ["WMT'16 English-Romanian", "WMT'14 English-German", "WMT'14 English-French"]}, {"models": {"RNNencdec-50": [26.71], "RNNencdec-30": [24.19], "RNNsearch-50 best": [36.15], "RNNsearch-50": [34.16], "RNNsearch-30": [31.44]}, "datasets": ["WMT'14 English-French"]}]
+[
+    {
+        "models": {
+            "DOT(S)-RNN": [
+                3.215,
+                8.437,
+                6.973
+            ],
+            "DOT(S)-RNN*": [
+                2.95,
+                7.92,
+                6.59
+            ],
+            "DT(S)-RNN": [
+                3.206,
+                8.278,
+                6.988
+            ],
+            "RNN": [
+                3.225,
+                8.338,
+                6.99
+            ],
+            "sRNN": [
+                3.258,
+                8.367,
+                6.954
+            ]
+        },
+        "datasets": [
+            "Nottingham",
+            "JSB Chorales",
+            "MuseData"
+        ],
+        "modelIDs": [
+            "DT(S)-RNN",
+            "DT-RNN",
+            "stacked RNN"
+        ],
+        "name": "polyphonic music prediction"
+    },
+    {
+        "models": {
+            "DT(S)-RNN": [
+                1.409
+            ],
+            "RNN": [
+                1.414
+            ],
+            "sRNN": [
+                1.412
+            ],
+            "LSTM best": [
+                1.24
+            ],
+            "RNN best": [
+                1.41
+            ],
+            "DOT(S)-RNN": [
+                1.386
+            ]
+        },
+        "datasets": [
+            "Penn Treebank Corpus"
+        ],
+        "modelIDs": [
+            "DT(S)-RNN",
+            "DT-RNN",
+            "stacked RNN"
+        ],
+        "name": "language model construction"
+    },
+    {
+        "models": {
+            "DT(S)-RNN": [
+                112
+            ],
+            "RNN": [
+                117.7
+            ],
+            "sRNN": [
+                110
+            ],
+            "LSTM best": [
+                117
+            ],
+            "RNN best": [
+                123
+            ],
+            "DOT(S)-RNN": [
+                107.5
+            ]
+        },
+        "datasets": [
+            "Penn Treebank Corpus"
+        ],
+        "modelIDs": [
+            "DT(S)-RNN",
+            "DT-RNN",
+            "stacked RNN"
+        ],
+        "name": "language model construction"
+    },
+    {
+        "models": {
+            "CTC-5L-250H": [
+                18.4
+            ],
+            "CTC-1L-250H": [
+                23.9
+            ],
+            "CTC-2L-250H": [
+                21
+            ],
+            "CTC-3L-421H-UNI": [
+                19.6
+            ],
+            "CTC-3L-250H": [
+                18.6
+            ],
+            "CTC-1L-622H": [
+                23
+            ],
+            "CTC-3L-500H-TANH": [
+                37.6
+            ],
+            "TRANS-3L-250H": [
+                18.3
+            ],
+            "PRETRANS-3L-250H": [
+                17.7
+            ]
+        },
+        "datasets": [
+            "TIMIT"
+        ],
+        "modelIDs": [
+            "DB-LSTM",
+            "LSTM"
+        ],
+        "name": "acoustics recognition"
+    },
+    {
+        "models": {
+            "both mod. BRNN, log.": [
+                77.75,
+                82.38
+            ],
+            "back-RNN": [
+                61.91,
+                70.94
+            ],
+            "for mod. BRNN": [
+                72.7,
+                79.08
+            ],
+            "for-RNN(1-delay)": [
+                65.83,
+                73
+            ],
+            "merge(for+back)": [
+                65.28,
+                73.73
+            ],
+            "both mod. BRNN, lin.": [
+                77.53,
+                82.11
+            ],
+            "back mod. BRNN": [
+                72.74,
+                77.44
+            ],
+            "BRNN": [
+                68.53,
+                75.48
+            ],
+            "for-RNN(2-delay)": [
+                63.27,
+                70.77
+            ],
+            "for-RNN": [
+                63.2,
+                72.51
+            ]
+        },
+        "datasets": [
+            "TIMIT 61-class",
+            "TIMIT 39-class"
+        ],
+        "modelIDs": [
+            "BRNN"
+        ],
+        "name": "acoustics classification"
+    },
+    {
+        "models": {
+            "LSTM": [
+                32.43,
+                33.52,
+                31.99
+            ],
+            "GRU": [
+                33.95,
+                32.73,
+                30.72
+            ],
+            "DGLSTM": [
+                34.48,
+                33.81,
+                32.19
+            ]
+        },
+        "datasets": [
+            "BTEC depth-3",
+            "BTEC depth-5",
+            "BTEC depth-10"
+        ],
+        "modelIDs": [
+            "DGLSTM"
+        ],
+        "name": "Chinese-English machine translation"
+    },
+    {
+        "models": {
+            "DOT(S)-RNN": [
+                108
+            ],
+            "LSTM": [
+                117
+            ],
+            "DGLSTM": [
+                96
+            ],
+            "RNN": [
+                123
+            ],
+            "sRNN": [
+                110
+            ]
+        },
+        "datasets": [
+            "Penn Treebank Corpus"
+        ],
+        "modelIDs": [
+            "DGLSTM"
+        ],
+        "name": "language model construction"
+    },
+    {
+        "models": {
+            "Dependency Tree-LSTM": [
+                51,
+                88
+            ],
+            "sRNN": [
+                49.8,
+                86.6
+            ],
+            "2-layer Bid-LSTM": [
+                48.5,
+                87.2
+            ],
+            "2-layer LSTM": [
+                46,
+                86.3
+            ],
+            "Bid-LSTM": [
+                49.1,
+                87.5
+            ],
+            "LSTM": [
+                46.4,
+                84.9
+            ],
+            "Constituency Tree-LSTM": [
+                48.4,
+                85.7
+            ]
+        },
+        "datasets": [
+            "Stanford Sentiment Treebank fine-grained",
+            "Stanford Sentiment Treebank binary"
+        ],
+        "modelIDs": [
+            "tree-LSTM", "LSTM"
+        ],
+        "name": "sentiment classification"
+    },
+    {
+        "models": {
+            "Dependency Tree-LSTM": [
+                0.8676,
+                0.8083,
+                0.2532
+            ],
+            "DT-RNN": [
+                0.7923,
+                0.7319,
+                0.3822
+            ],
+            "2-layer Bid-LSTM": [
+                0.8558,
+                0.7965,
+                0.2762
+            ],
+            "2-layer LSTM": [
+                0.8515,
+                0.7896,
+                0.2838
+            ],
+            "SDT-RNN": [
+                0.79,
+                0.7304,
+                0.3848
+            ],
+            "Bid-LSTM": [
+                0.8567,
+                0.7966,
+                0.2736
+            ],
+            "LSTM": [
+                0.8528,
+                0.7911,
+                0.2831
+            ],
+            "Constituency Tree-LSTM": [
+                0.8582,
+                0.7966,
+                0.2734
+            ]
+        },
+        "datasets": [
+            "Pearson's r on SICK",
+            "Spearman's p on SICK",
+            "MSE on SICK"
+        ],
+        "modelIDs": [
+            "tree-LSTM"
+        ],
+        "name": "sentiment relatedness"
+    },
+    {
+        "models": {
+            "MV-RNN": [
+                44.4,
+                82.9
+            ],
+            "RNN": [
+                43.2,
+                82.4
+            ],
+            "RNTN": [
+                45.7,
+                85.4
+            ]
+        },
+        "datasets": [
+            "Stanford Sentiment Treebank fine-grained",
+            "Stanford Sentiment Treebank binary"
+        ],
+        "modelIDs": [
+            "recursive"
+        ],
+        "name": "sentiment classification"
+    },
+    {
+        "models": {
+            "GRU": [
+                63.5,
+                65.9,
+                65.7,
+                41.6
+            ],
+            "BRNN": [
+                58.7,
+                59.7,
+                57.7,
+                37.2
+            ],
+            "RNN": [
+                58.2,
+                59.1,
+                59.7,
+                34.4
+            ],
+            "Bid-GRU": [
+                63.7,
+                65.5,
+                66,
+                42.5
+            ]
+        },
+        "datasets": [
+            "Yelp2013",
+            "Yelp2014",
+            "Yelp2015",
+            "IMDB"
+        ],
+        "modelIDs": [
+            "GRU"
+        ],
+        "name": "sentiment classification"
+    },
+    {
+        "models": {
+            "RNN": [
+                7.86,
+                3.75,
+                7.2,
+                8.65
+            ],
+            "RNN+leaky units": [
+                7.57,
+                3.57,
+                6.99,
+                8.63
+            ]
+        },
+        "datasets": [
+            "Piano-midi.de",
+            "Nottingham",
+            "MuseData",
+            "JSB Chorales"
+        ],
+        "modelIDs": [
+            "leaky units"
+        ],
+        "name": "polyphonic music prediction"
+    },
+    {
+        "models": {
+            "RNN": [
+                1.76
+            ],
+            "RNN+leaky units": [
+                1.56
+            ]
+        },
+        "datasets": [
+            "Penn Treebank Corpus"
+        ],
+        "modelIDs": [
+            "leaky units"
+        ],
+        "name": "language model construction"
+    },
+    {
+        "models": {
+            "RNN": [
+                145.16
+            ],
+            "RNN+leaky units": [
+                129.83
+            ]
+        },
+        "datasets": [
+            "Penn Treebank Corpus"
+        ],
+        "modelIDs": [
+            "leaky units"
+        ],
+        "name": "language model construction"
+    },
+    {
+        "models": {
+            "CW-RNN": [
+                16.8
+            ],
+            "LSTM": [
+                34.2
+            ],
+            "RNN": [
+                66.8
+            ]
+        },
+        "datasets": [
+            "TIMIT"
+        ],
+        "modelIDs": [
+            "CW-RNN"
+        ],
+        "name": "acoustics recognition"
+    },
+    {
+        "models": {
+            "RNN best": [
+                28.1,
+                24.61,
+                39.92
+            ],
+            "conv seq2seq": [
+                30.02,
+                25.16,
+                40.51
+            ]
+        },
+        "datasets": [
+            "WMT'16 English-Romanian",
+            "WMT'14 English-German",
+            "WMT'14 English-French"
+        ],
+        "modelIDs": [
+            "conv seq2seq"
+        ],
+        "name": "machine translation"
+    },
+    {
+        "models": {
+            "RNNencdec-50": [
+                26.71
+            ],
+            "RNNencdec-30": [
+                24.19
+            ],
+            "RNNsearch-50 best": [
+                36.15
+            ],
+            "RNNsearch-50": [
+                34.16
+            ],
+            "RNNsearch-30": [
+                31.44
+            ]
+        },
+        "datasets": [
+            "WMT'14 English-French"
+        ],
+        "modelIDs": [
+            "seq2seq",
+            "attention"
+        ],
+        "name": "machine translation"
+    }
+]

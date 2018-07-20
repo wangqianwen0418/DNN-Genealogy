@@ -1087,7 +1087,7 @@
     "variants": []
   },
   {
-    "ID": "SRN",
+    "ID": "RNN",
     "application": [
       "1.2.NLP"
     ],
@@ -1145,7 +1145,7 @@
     ],
     "parents": [
       {
-        "ID": "SRN",
+        "ID": "RNN",
         "link_category": "",
         "link_info_l": "introduce a RNN architecture to map squence to sequence",
         "link_info_s": "sequence to sequence"
@@ -1194,7 +1194,7 @@
     ],
     "parents": [
       {
-        "ID": "SRN",
+        "ID": "RNN",
         "link_category": "",
         "link_info_l": "ESN use reservior computing to set the recurrent weights such that the recurrent hidden units do a good job of capturing the history of past inputs.  Only the output weights need to be learnt.",
         "link_info_s": "reservoir computing"
@@ -1248,7 +1248,7 @@
     "names": [],
     "parents": [
       {
-        "ID": "SRN",
+        "ID": "RNN",
         "link_category": "c",
         "link_info_l": " To address long-term dependency, it adds direct connections from variables in the distant past to variables in the present.",
         "link_info_s": "add long time scale"
@@ -1296,7 +1296,7 @@
     "names": [],
     "parents": [
       {
-        "ID": "SRN",
+        "ID": "RNN",
         "link_category": "c",
         "link_info_l": " To address long-term dependency, it adds linear self connections with a weight near one.",
         "link_info_s": "linear self connections"
@@ -1326,7 +1326,7 @@
     "names": [],
     "parents": [
       {
-        "ID": "SRN",
+        "ID": "RNN",
         "link_category": "d",
         "link_info_l": "LSTM uses a gated self-loop to learn long-term dependencies more easily",
         "link_info_s": "gated units"
@@ -1463,7 +1463,7 @@
     ],
     "parents": [
       {
-        "ID": "SRN",
+        "ID": "RNN",
         "link_category": "e",
         "link_info_l": "Generalize RNN from chain-like structure to tree-like structure",
         "link_info_s": "chain to tree"
@@ -1554,7 +1554,7 @@
     ],
     "parents": [
       {
-        "ID": "SRN",
+        "ID": "RNN",
         "link_category": "b=>b",
         "link_info_l": "Bidirectional inputs enable the current state to get information from both past and future input.",
         "link_info_s": "bidirectional inputs"
@@ -1578,7 +1578,7 @@
     "names": [],
     "parents": [
       {
-        "ID": "SRN",
+        "ID": "RNN",
         "link_category": "a",
         "link_info_l": "Increase deepth to improve the representational capacity",
         "link_info_s": "deeper"
