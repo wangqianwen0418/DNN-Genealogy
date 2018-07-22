@@ -617,7 +617,14 @@ export default class Evolution extends React.Component<Props, State>{
             highlight: boolean = ((from === selectedID) || (to === selectedID)),
             hovered: boolean = (hoverEdge === `${from}->${to}`),
             k = (points[points.length - 1].y - points[0].y) / (points[points.length - 1].x - points[0].x)
-        
+        let tooltipTxt = (
+            <div>
+                <p><b>{from}->{to}:</b></p>
+                {label_l.split(';').map((line:string, lineIdx:number)=>{
+                    return <p key={lineIdx}>{lineIdx+1}: {line}</p>
+                })}
+                </div>
+            )
         return (
         <g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
             {
@@ -647,7 +654,7 @@ export default class Evolution extends React.Component<Props, State>{
                 />
             
                 <Tooltip 
-                    title={label_l} 
+                    title={tooltipTxt} 
                     mouseEnterDelay={.3} 
                     placement="bottom" 
                     visible={hovered}
@@ -726,7 +733,7 @@ export default class Evolution extends React.Component<Props, State>{
                                 xlinkHref={`#mark_${from}->${to}`}
                                 startOffset="50%"
                             >
-                                {'fake label for tool tip'}
+                                {'fake'}
                             </textPath>
                             </text>
                             </g>

@@ -17,7 +17,7 @@
     "react-scripts-ts": "2.8.0",
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
-    "graphlib": "^1.0.7"
+    "graphlib": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts-ts start",
