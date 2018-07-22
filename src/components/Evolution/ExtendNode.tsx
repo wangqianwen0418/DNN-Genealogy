@@ -202,7 +202,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         style={{
                         padding: '2px',
                         fontSize: tabH * .7 + 'px',
-                        webkitTextFillColor: 'black',
+                        // webkitTextFillColor: 'black',
                         transform: `translate(0, -10)`,
                         lineHeight: '100%',
                         cursor: 'pointer',

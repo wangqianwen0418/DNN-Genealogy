@@ -1073,8 +1073,9 @@ export default class Evolution extends React.Component<Props, State>{
             </div>
             <Modal
                 className="CompareModal"
-                style={{ top: '10%', width: '40%', transitionDuration: '0.3s', transitionTimingFunction: 'ease' }}
-                bodyStyle={{ height: 'calc(100% - 48px)' }}
+                style={{ top: '10%', transitionDuration: '0.3s', transitionTimingFunction: 'ease' }}
+                width="40%"
+                // bodyStyle={{ height: 'calc(100% - 48px)' }}
                 title={`Detailed Structure of ${detailed}`}
                 visible={modalVisible}
                 footer={false}

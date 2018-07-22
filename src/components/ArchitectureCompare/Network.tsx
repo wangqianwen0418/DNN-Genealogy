@@ -4,6 +4,7 @@ import { EvoNode } from 'types';
 import * as dagre from 'lib/dagre';
 import { Node, GraphEdge } from 'lib/@types/dagre';
 import { getLayerColor } from 'helper';
+import * as d3 from 'd3';
 import { color } from 'd3';
 // import worker_script from '../worker';
 // var myWorker = new Worker(worker_script);
@@ -27,10 +28,10 @@ export interface State {
     edges: GraphEdge[],
     h: number,
     w: number,
-    selectedLayers: any[]
+    selectedLayers: any[],
 }
 export default class Network extends React.Component<Props, State> {
-    public graphWindow: any; shiftDown: boolean
+    public graphWindow: any; shiftDown: boolean; isMountedZoom: boolean = false; rand: string;
     constructor(props: Props) {
         super(props)
         this.state = {
@@ -41,11 +42,12 @@ export default class Network extends React.Component<Props, State> {
             edges: [],
             h: 0,
             w: 0,
-            selectedLayers: []
+            selectedLayers: [],
         }
         this.shiftDown = false
         this.selectLayer = this.selectLayer.bind(this)
         this.handleMouseWheel = this.handleMouseWheel.bind(this)
+        this.handleZoom = this.handleZoom.bind(this)
     }
     async getDag(layers: EvoNode[], selectedLayers: string[]) {
         return new Promise<{nodes:Node[]; edges:GraphEdge[];height:number;width:number;}>((resolve, reject)=>{
@@ -248,6 +250,7 @@ export default class Network extends React.Component<Props, State> {
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
         let g: any = evt.target
+        console.log('mouse', g)
         while (!g.getAttribute('class') || g.getAttribute('class').indexOf('layers') === -1) {
             g = g.parentElement
         }
@@ -270,6 +273,35 @@ export default class Network extends React.Component<Props, State> {
         }
 
     }
+    handleZoom() {
+        if (this.isMountedZoom)
+            return
+        var svg = d3.select('#' + this.rand + ' svg'),
+            g = svg.select('.graph')
+        if (svg.empty())
+            return
+        var trans = svg.select('#layer_input_1').attr('transform'),
+            rectWidth = svg.select('#layer_input_1').select('rect').attr('width'),
+            offset = Number(trans.substring(11, trans.indexOf(','))) + Number(rectWidth) / 2
+        svg.select('.graph-offset')
+            .attr('transform', 'translate(' + (window.innerWidth * 0.35 / 2 - offset) + ', 0)')
+        svg.select('.zoom-rect')
+            .remove()
+        var zoom = d3.zoom()
+            .scaleExtent([1/2, 4])
+            .on("zoom", zoomed)
+        function zoomed() {
+            g.attr('transform', d3.event.transform)
+        }
+        svg.insert("rect", "g")
+            .attr("width", window.innerWidth * 0.35)
+            .attr("height", window.innerHeight * 0.65)
+            .attr('class', 'zoom-rect')
+            .style("fill", "none")
+            .style("pointer-events", "all")
+            .call(zoom)
+        this.isMountedZoom = true
+    }
     async componentDidMount() {
         /*if (this.props.nodes.length !== nextProps.nodes.length) {
             let { nodes: EvoNodes } = nextProps
@@ -282,21 +314,35 @@ export default class Network extends React.Component<Props, State> {
             // let y: number = margin
             this.setState({ nodes, edges })
         }*/
+
         let { nodes: EvoNodes } = this.props
         let { nodes, edges } = await this.getDag(EvoNodes, []);
         this.setState({ nodes, edges })
         if(nodes.length>0){
             this.props.isReady(true)
         }
+        // let { nodes: EvoNodes } = this.props
+        // let that = this
+        // this.getDag(EvoNodes, []).then(function(response) {
+        //     that.setState({
+        //         nodes: response.nodes,
+        //         edges: response.edges
+        //     })
+        //     if (response.nodes.length > 0)
+        //         that.props.isReady(true)
+        // })
+    }
+    componentDidUpdate() {
+        this.handleZoom()
     }
     async componentWillReceiveProps(nextProps: Props) {
         if (nextProps.name !== this.props.name) {
+            this.isMountedZoom = false
             let { nodes: EvoNodes } = nextProps
             let { nodes, edges } = await this.getDag(EvoNodes, [])
             this.setState({ nodes, edges })
         }
     }
-
     // componentWillUpdate() {
     //     if(this.first && this.props.nodes.length > 0){
     //         this.first = false
@@ -315,8 +361,18 @@ export default class Network extends React.Component<Props, State> {
     // }
     render() {
         let { nodes, edges, x, y, scale } = this.state
-        let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 120,
-            svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 120
+        // let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 120,
+            // svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 120
+        let svgWidth = window.innerWidth * 0.35,
+            svgHeight = window.innerHeight * 0.65
+
+        function randomString(length: number, chars: string) {
+            var result = '';
+            for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+            return result;
+        }
+        this.rand = randomString(8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+
         if (nodes.length > 0) {
             // let { nodes, edges} = this.getDag(EvoNodes)
             // let svg_h = Math.max(h, this.graphWindow.clientHeight)
@@ -324,22 +380,27 @@ export default class Network extends React.Component<Props, State> {
             // let svg_h = this.graphWindow.clientHeight
             // let svg_w = this.graphWindow.clientWidth
             return (
-            <div className="wrapped-graph">
+            <div className="wrapped-graph" id={this.rand}>
                 <svg
                     width={`${svgWidth}px`}
                     height={`${svgHeight}px`}
                 >
+                <g className="graph-offset">
                     <g
                         className="graph"
                         // transform={`translate(${x+40}, ${y}) scale(${scale})`}
+                        // transform={`translate(${svgWidth / 2 - Math.max.apply(null, nodes.map((node: Node) => node.x)) / 2 - 60}, 0)`}
                     >
                         {this.drawEdges(edges)}
                         {this.drawNodes(nodes)}
                     </g>
+                </g>
                 </svg>
             </div>)
         } else {
-            return <div className="graphWindow" ref={(ref) => { this.graphWindow = ref }} />
+            return (<div className="graphWindow" ref={(ref) => { this.graphWindow = ref }}>
+                <div className="loader" />
+            </div>)
         }
 
     }
