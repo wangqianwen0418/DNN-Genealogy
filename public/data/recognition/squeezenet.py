@@ -6,6 +6,7 @@ from keras.models import Model
 from keras.engine.topology import get_source_inputs
 from keras.utils import get_file
 from keras.utils import layer_utils
+import json
 
 
 '''
@@ -152,8 +153,14 @@ def SqueezeNet(include_top=True, weights='imagenet',
 
 if __name__ == "__main__":
     model = SqueezeNet(weights=None)
-    model.summary()
     json_string = model.to_json()
-    with open("squeezeNet.json", "w")as jsonf:
-        jsonf.write(json_string)
+    summary = json.loads(json_string)
+
+    params = {}
+    for layer in model.layers:
+        params[layer.name] = layer.count_params()
+    summary['params'] = params
+
+    with open("squeezeNet.json", "w") as jsonf:
+        jsonf.write(json.dumps(summary))
     jsonf.close()

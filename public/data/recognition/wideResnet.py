@@ -30,6 +30,7 @@ from keras.callbacks import LearningRateScheduler, ModelCheckpoint
 from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import np_utils
 from keras import backend as K
+import json
 
 
 # ================================================
@@ -207,10 +208,16 @@ def create_model():
 
 if __name__ == '__main__':
     model = create_model()
-    model.summary()
     json_string = model.to_json()
-    with open("wideresnet_16_4.json", "w")as jsonf:
-        jsonf.write(json_string)
+    summary = json.loads(json_string)
+
+    params = {}
+    for layer in model.layers:
+        params[layer.name] = layer.count_params()
+    summary['params'] = params
+
+    with open("wideresnet_16_4.json", "w") as jsonf:
+        jsonf.write(json.dumps(summary))
     jsonf.close()
 
     # model.compile(optimizer=sgd, loss="categorical_crossentropy", metrics=['accuracy'])

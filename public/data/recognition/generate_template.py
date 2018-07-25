@@ -1,7 +1,6 @@
-import keras
 import json
 
-model = keras.applications.xception.Xception(include_top=True, weights=None, input_tensor=None, input_shape=None, pooling=None, classes=1000)
+# model is a Keras model object
 json_string = model.to_json()
 summary = json.loads(json_string)
 
@@ -10,6 +9,6 @@ for layer in model.layers:
     params[layer.name] = layer.count_params()
 summary['params'] = params
 
-with open("xception.json", "w") as jsonf:
+with open("filename.json", "w") as jsonf:
     jsonf.write(json.dumps(summary))
 jsonf.close()

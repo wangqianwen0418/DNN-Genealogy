@@ -122,7 +122,6 @@ export default class Network extends React.Component<Props, State> {
                         y: ((i % 2) + 0.5) * dotBox
                     })
                 }
-                console.log(dotsPosition)
                 return <g 
                         className="layers node"
                         id={`layer_${node.label}`}
