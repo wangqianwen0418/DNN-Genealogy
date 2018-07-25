@@ -13,10 +13,11 @@ import { color } from 'd3';
 //     class?:string
 // }
 const node_w: number = 110, margin: number = 10;
-const nodeH = 40, nodeW = 200, expandMaxH = 200
+const nodeH = 40, nodeW = 200, expandMaxH = 200, dotBox = 20, dotRadius = 7.5
 
 export interface Props {
     nodes: EvoNode[],
+    params: {},
     name: string,
     isReady:(mounted:boolean)=>void
 }
@@ -49,7 +50,7 @@ export default class Network extends React.Component<Props, State> {
         this.handleMouseWheel = this.handleMouseWheel.bind(this)
         this.handleZoom = this.handleZoom.bind(this)
     }
-    async getDag(layers: EvoNode[], selectedLayers: string[]) {
+    async getDag(layers: EvoNode[], params: object, selectedLayers: string[]) {
         return new Promise<{nodes:Node[]; edges:GraphEdge[];height:number;width:number;}>((resolve, reject)=>{
             let dag = new dagre.graphlib.Graph();
             dag.setGraph({ 
@@ -74,6 +75,7 @@ export default class Network extends React.Component<Props, State> {
                     location: 0,
                     textLength: textLength,
                     details: details,
+                    params: params[layer.name]
                 })
                 // IR model or keras model
                 if (layer.inbound_nodes.length > 0) {
@@ -113,7 +115,14 @@ export default class Network extends React.Component<Props, State> {
     drawNodes(nodes: Node[]) {
         return (<g className="nodes" >
             {nodes.map((node: Node) => {
-                
+                var dots: number = node.params ? Math.log(node.params) / Math.log(10) + 1: 0, dotsPosition = []
+                for (var i = 0; i < dots; ++i) {
+                    dotsPosition.push({
+                        x: node.width + (Math.trunc(i / 2) + 0.5) * dotBox,
+                        y: ((i % 2) + 0.5) * dotBox
+                    })
+                }
+                console.log(dotsPosition)
                 return <g 
                         className="layers node"
                         id={`layer_${node.label}`}
@@ -123,11 +132,13 @@ export default class Network extends React.Component<Props, State> {
                         onWheel={this.handleMouseWheel}
                         style={{ cursor: 'pointer'}}
                 >
+                {dotsPosition.map(pos => <circle r={dotRadius} cx={pos.x} cy={pos.y} fill="grey"></circle>)}
                     <rect 
                         width={node.width} 
                         height={node.height}
                         style={{ fill: getLayerColor(node.className), strokeWidth: 3 }} 
                     />
+
                     {node.expand ?
                         (<svg width={node.width} height={node.height}>
                         <g>
@@ -244,13 +255,12 @@ export default class Network extends React.Component<Props, State> {
         } else {
             selectedLayers.splice(idx, 1)
         }
-        let { nodes: EvoNodes } = this.props
-        let { nodes, edges } = await this.getDag(EvoNodes, selectedLayers.map((l: any) => l.label))
+        let { nodes: EvoNodes, params } = this.props
+        let { nodes, edges } = await this.getDag(EvoNodes, params, selectedLayers.map((l: any) => l.label))
         this.setState({ nodes, edges, selectedLayers })
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
         let g: any = evt.target
-        console.log('mouse', g)
         while (!g.getAttribute('class') || g.getAttribute('class').indexOf('layers') === -1) {
             g = g.parentElement
         }
@@ -315,8 +325,8 @@ export default class Network extends React.Component<Props, State> {
             this.setState({ nodes, edges })
         }*/
 
-        let { nodes: EvoNodes } = this.props
-        let { nodes, edges } = await this.getDag(EvoNodes, []);
+        let { nodes: EvoNodes, params } = this.props
+        let { nodes, edges } = await this.getDag(EvoNodes, params, []);
         this.setState({ nodes, edges })
         if(nodes.length>0){
             this.props.isReady(true)
@@ -338,8 +348,8 @@ export default class Network extends React.Component<Props, State> {
     async componentWillReceiveProps(nextProps: Props) {
         if (nextProps.name !== this.props.name) {
             this.isMountedZoom = false
-            let { nodes: EvoNodes } = nextProps
-            let { nodes, edges } = await this.getDag(EvoNodes, [])
+            let { nodes: EvoNodes, params } = nextProps
+            let { nodes, edges } = await this.getDag(EvoNodes, params, [])
             this.setState({ nodes, edges })
         }
     }

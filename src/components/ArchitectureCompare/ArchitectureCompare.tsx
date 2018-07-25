@@ -118,6 +118,8 @@ export interface State {
     model2: string,
     nodes1: EvoNode[],
     nodes2: EvoNode[],
+    params1: {},
+    params2: {},
     comparing: boolean,
     mounted: boolean,
 }
@@ -130,6 +132,8 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
             model2: '',
             nodes1: [],
             nodes2: [],
+            params1: {},
+            params2: {},
             comparing: false,
             mounted: false
         }
@@ -162,16 +166,16 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
     async getData(model: string, idx: number) {
         let res = await axios.get('../../data/recognition/' + model + '.json'), nodes: EvoNode[]
         if (idx === 1) {
-            this.setState({model1: model, nodes1: res.data.config.layers})
+            this.setState({model1: model, nodes1: res.data.config.layers, params1: res.data.params})
         } else if (idx === 2) {
-            this.setState({model2: model, nodes2: res.data.config.layers})
+            this.setState({model2: model, nodes2: res.data.config.layers, params2: res.data.params})
         }
     }
 
     ifCompare(comparing: boolean) {
         if (comparing === true) {
             d3.select('.CompareModal').style('width', '80%')
-            this.setState({model2: '', nodes2: [], comparing})
+            this.setState({model2: '', nodes2: [], params2: {}, comparing})
         } else {
             d3.select('.CompareModal').style('width', '40%')
             this.setState({comparing})
@@ -209,7 +213,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         <span/>:
                         <Icon type="loading" style={{fontSize: "100px",position: "absolute", top: "200px"}}/>
                         } */}
-                        <Network nodes={this.state.nodes1} name={this.state.model1} isReady={this.networkIsReady}/>
+                        <Network nodes={this.state.nodes1} params={this.state.params1} name={this.state.model1} isReady={this.networkIsReady}/>
                         
                     </Col>
                 </div>)
@@ -234,7 +238,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                         >
                             Detail
                         </Button>
-                        <Network nodes={this.state.nodes1} name={this.state.model1} isReady={this.networkIsReady}/>
+                        <Network nodes={this.state.nodes1} params={this.state.params1} name={this.state.model1} isReady={this.networkIsReady}/>
                     
                     </Col>
                     <Col span={12} className="ArchitectureColumn ArchRight">
@@ -247,7 +251,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                             popupClassName="MyCascade"
                             style={{width: '35%'}}
                         />
-                        <Network nodes={this.state.nodes2} name={this.state.model2} isReady={this.networkIsReady}/>
+                        <Network nodes={this.state.nodes2} params={this.state.params2} name={this.state.model2} isReady={this.networkIsReady}/>
                     </Col>
                 </div>)
         }
