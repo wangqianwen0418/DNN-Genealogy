@@ -5,7 +5,6 @@ import * as dagre from 'lib/dagre';
 import { Node, GraphEdge } from 'lib/@types/dagre';
 import { getLayerColor } from 'helper';
 import * as d3 from 'd3';
-import { color } from 'd3';
 // import worker_script from '../worker';
 // var myWorker = new Worker(worker_script);
 
@@ -65,9 +64,11 @@ export default class Network extends React.Component<Props, State> {
                 let details = JSON.stringify(layer.config, null, 2)
                             .replace(/"/g, '').split('\n'), 
                     textLength = details.length * 12 + 30
+                var dotsWidth: number = (params[layer.name] ?  Math.trunc(Math.trunc(Math.log(params[layer.name]) / Math.log(10) + 1) / 2 + 1): 0) * dotBox
                 dag.setNode(layer.name, { 
                     label: layer.name,
-                    width: layer.name.length*nodeH/4 + nodeH,
+                    width: layer.name.length*nodeH/4 + nodeH + dotsWidth,
+                    dotsWidth: dotsWidth,
                     height: nodeH,
                     className: layer.class_name,
                     config: layer.config,
@@ -113,12 +114,14 @@ export default class Network extends React.Component<Props, State> {
         });
     }
     drawNodes(nodes: Node[]) {
+        let that = this
         return (<g className="nodes" >
             {nodes.map((node: Node) => {
-                var dots: number = node.params ? Math.log(node.params) / Math.log(10) + 1: 0, dotsPosition = []
+                var dots: number = node.params ? Math.log(node.params) / Math.log(10) + 1: 0, dotsPosition = [],
+                    labelWidth = node.width - node.dotsWidth
                 for (var i = 0; i < dots; ++i) {
                     dotsPosition.push({
-                        x: node.width + (Math.trunc(i / 2) + 0.5) * dotBox,
+                        x: labelWidth + (Math.trunc(i / 2) + 0.5) * dotBox,
                         y: ((i % 2) + 0.5) * dotBox
                     })
                 }
@@ -130,10 +133,38 @@ export default class Network extends React.Component<Props, State> {
                         onClick={() => this.selectLayer(node)}
                         onWheel={this.handleMouseWheel}
                         style={{ cursor: 'pointer'}}
-                >
-                {dotsPosition.map(pos => <circle r={dotRadius} cx={pos.x} cy={pos.y} fill="grey"></circle>)}
+                    >
+
+                    {dotsPosition.map(pos => <circle className="param-dot" r={dotRadius} cx={pos.x} cy={pos.y} fill="grey"></circle>)}
+                    {node.params ?
+                        <text className="param-number"
+                              textAnchor="middle"
+                              x={node.dotsWidth / 2 + labelWidth}
+                              y={nodeH * 0.6}
+                              fontSize={nodeH / 2}
+                              fill="grey"
+                              style={{display: 'none'}}>
+                            {node.params}
+                        </text>
+                        : null}
+                    <rect
+                        x={labelWidth}
+                        width={node.dotsWidth} 
+                        height={node.height}
+                        opacity="0"
+                        style={{ fill: 'white' }}
+                        onMouseEnter={function() {
+                            d3.selectAll('.param-dot').style('display', 'none')
+                            d3.selectAll('.param-number').style('display', 'block')
+                        }}
+                        onMouseOut={function() {
+                            d3.selectAll('.param-dot').style('display', 'block')
+                            d3.selectAll('.param-number').style('display', 'none')
+                        }}
+                    />
+
                     <rect 
-                        width={node.width} 
+                        width={labelWidth} 
                         height={node.height}
                         style={{ fill: getLayerColor(node.className), strokeWidth: 3 }} 
                     />
@@ -145,7 +176,7 @@ export default class Network extends React.Component<Props, State> {
                                 textAnchor="middle"
                                 fill="white"
                                 fontSize={nodeH/2}
-                                x={node.width / 2}
+                                x={labelWidth / 2}
                                 y={nodeH/2}
                             >
                             {node.label}
@@ -154,10 +185,10 @@ export default class Network extends React.Component<Props, State> {
                                 textAnchor="middle"
                                 fill="white"
                                 fontSize={nodeH/2}
-                                x={node.width / 2}
+                                x={labelWidth / 2}
                                 y={nodeH}
                             >
-                                -----------------------------
+                                --------------
                             </text>
                             {node.details.map((str:string, idx: number) => {
                                 return <text 
@@ -177,7 +208,7 @@ export default class Network extends React.Component<Props, State> {
                             textAnchor="middle"
                             fill="white"
                             fontSize={nodeH/2}
-                            x={node.width / 2}
+                            x={labelWidth / 2}
                             y={node.height * 0.6}
                         >
                             {node.label}
