@@ -2,6 +2,7 @@ import keras
 from keras.layers import Input, Conv2D, MaxPooling2D, ZeroPadding2D, Flatten, Dense, Activation, Dropout, merge, Lambda
 from keras.models import Model
 import keras.backend as K
+import json
 
 def crosschannelnormalization(alpha=1e-4, k=2, beta=0.75, n=5, **kwargs):
     """
@@ -104,7 +105,13 @@ if __name__=="__main__":
     model = keras.applications.inception_v3.InceptionV3(include_top=True, weights=None, input_tensor=None, input_shape=None, pooling=None, classes=1000)
     model.summary()
     json_string = model.to_json()
+    summary = json.loads(json_string)
 
-    with open(".json", "w") as jsonf:
-        jsonf.write(json_string)
+    params = {}
+    for layer in model.layers:
+        params[layer.name] = layer.count_params()
+    summary['params'] = params
+
+    with open("inception_v3.json", "w") as jsonf:
+        jsonf.write(json.dumps(summary))
     jsonf.close()

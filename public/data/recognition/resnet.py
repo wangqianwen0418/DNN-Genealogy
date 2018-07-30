@@ -30,7 +30,7 @@ from keras.utils.data_utils import get_file
 from keras.applications.imagenet_utils import decode_predictions
 from keras.applications.imagenet_utils import preprocess_input
 from keras.applications.imagenet_utils import _obtain_input_shape
-
+import json
 
 WEIGHTS_PATH = 'https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels.h5'
 WEIGHTS_PATH_NO_TOP = 'https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
@@ -344,11 +344,18 @@ def resnet152(include_top=True, weights='imagenet',
     return model
 
 if __name__ == "__main__":
-    model = resnet152(weights=None)
+    model = ResNet50(weights=None)
     model.summary()
     json_string = model.to_json()
-    with open("resnet152.json", "w") as jsonf:
-        jsonf.write(json_string)
+    summary = json.loads(json_string)
+
+    params = {}
+    for layer in model.layers:
+        params[layer.name] = layer.count_params()
+    summary['params'] = params
+
+    with open("resNet_v1_50.json", "w") as jsonf:
+        jsonf.write(json.dumps(summary))
     jsonf.close()
 
     

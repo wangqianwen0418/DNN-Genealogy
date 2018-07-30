@@ -22,7 +22,7 @@ from keras import backend as K
 from keras.models import Model
 from keras.datasets import cifar10
 import numpy as np
-import os
+import os, json
 
 # Training parameters
 batch_size = 32  # orig paper trained all networks with batch_size=128
@@ -311,7 +311,13 @@ else:
 model.summary()
 
 json_string = model.to_json()
+summary = json.loads(json_string)
 
-with open("resnetv1_32_cifar.json", "w") as jsonf:
-    jsonf.write(json_string)
+params = {}
+for layer in model.layers:
+    params[layer.name] = layer.count_params()
+summary['params'] = params
+
+with open("resnet_v1_32_cifar.json", "w") as jsonf:
+    jsonf.write(json.dumps(summary))
 jsonf.close()

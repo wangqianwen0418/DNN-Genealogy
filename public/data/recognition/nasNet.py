@@ -57,6 +57,7 @@ from keras.applications.imagenet_utils import _obtain_input_shape
 from keras.applications.inception_v3 import preprocess_input
 from keras.applications.imagenet_utils import decode_predictions
 from keras import backend as K
+import json
 
 _BN_DECAY = 0.9997
 _BN_EPSILON = 1e-3
@@ -787,9 +788,16 @@ if __name__ == "__main__":
     #     jsonf.write(json_string)
     # jsonf.close()
 
-    model = NASNetCIFAR()
+    model = NASNetLarge()
     model.summary()
     json_string = model.to_json()
-    with open("nasnet-cifar.json", "w") as jsonf:
-        jsonf.write(json_string)
+    summary = json.loads(json_string)
+
+    params = {}
+    for layer in model.layers:
+        params[layer.name] = layer.count_params()
+    summary['params'] = params
+
+    with open("nasNet_large.json", "w") as jsonf:
+        jsonf.write(json.dumps(summary))
     jsonf.close()
