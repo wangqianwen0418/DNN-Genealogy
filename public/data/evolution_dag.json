@@ -1436,7 +1436,7 @@
       {
         "ID": "LSTM",
         "link_category": "d=>d",
-        "link_info_l": "To improve computation effiency, the gates of a recureent uit is redesigned in GRU, input gate and forget gate are combined into one single gate. input, forget, output gates=>reset, update gates",
+        "link_info_l": "To improve computation effiency, the gates of a recureent uit is redesigned in GRU, input gate and forget gate are combined into one update gate.",
         "link_info_s": "redesign gates"
       }
     ],
