@@ -16,11 +16,10 @@
     "react-redux": "^5.0.6",
     "react-scripts-ts": "2.8.0",
     "react-transition-group": "^2.2.1",
-    "redux": "^3.7.2",
-    "graphlib": "1.0.5"
+    "redux": "^3.7.2"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
+    "start": "NODE_PATH=src/ PORT=7778 react-scripts-ts start",
     "build": "react-scripts-ts build ",
     "test": "react-scripts-ts test --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill",
     "eject": "react-scripts-ts eject"
