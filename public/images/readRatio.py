@@ -1,6 +1,6 @@
 from PIL import Image
 import json
-jsonFile = '../data/evolution_dag.json'
+jsonFile = '../data/evolution.json'
 with open(jsonFile, 'r') as json_file:
     data = json.load(json_file)
 ratio = dict() 

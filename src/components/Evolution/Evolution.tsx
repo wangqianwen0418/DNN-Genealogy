@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as dagre from 'lib/dagre/'
+import * as dagre from 'lib/dagre.js'
 import { Edge } from 'lib/@types/dagre/'
 import { Transition } from 'react-transition-group'
 // import * as graphlib from "graphlib"
@@ -53,14 +53,13 @@ let RNN = ['stacked', 'bidirectional', 'multiple time scale', 'gated', 'tree-str
 let legend = (Names: string[]) => {
     let items = {}
     Names.forEach((name: string, i: number) => {
-        let key = String.fromCharCode(i + 97)
+        // let key = String.fromCharCode(i + 97)
         let item = {
             name,
-            key,
             click: false,
             hover: false
         }
-        items[key] = item
+        items[name] = item
     })
     return items
 }
@@ -162,11 +161,14 @@ export default class Evolution extends React.Component<Props, State>{
         let resText = await axios.get('../../data/textInfo.json')
         this.textInfo = resText.data
         // evolution data
-        let res = await axios.get('../../data/evolution_dag.json'),
+        let res = await axios.get('../../data/evolution.json'),
             datum: NN[] = res.data,
             { appValue } = this.state;
         
-        datum = datum.filter((d: NN) => d.application[0].startsWith(appValue))
+        datum = datum.filter((d: NN) => {
+            return d.application[0].startsWith(appValue)
+        })
+        console.info(datum.map(d=>d.ID))
         datum.forEach((d: NN) => {
 
             let pubDate = moment(d.date, 'YYYY-MM-DD'),
@@ -632,10 +634,12 @@ export default class Evolution extends React.Component<Props, State>{
                     className="Edge"
                     id={`${from}->${to}`}
                     d={pathData}
-                    stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
+                    stroke={'#999'}
+                    strokeWidth={2}
+                    // stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
                     // stroke={clickLegend ? "gray" : getColor(key)}
                     fill="none"
-                    strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 2}
+                    // strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 2}
                     // opacity={(hoverLegend|| hovered) ? 1 : (clickLegend ? 0.4 : .4)}
                     opacity={(hoverLegend|| hovered) ? 1 : 0.3}
                 />
@@ -928,10 +932,10 @@ export default class Evolution extends React.Component<Props, State>{
                 break
         }
     }
-    selectItem(key: string, op: 'click' | 'hover') {
+    selectItem(name: string, op: 'click' | 'hover') {
         let { legend } = this.state
         // console.info(legend, key, op, legend[key][op])
-        legend[key][op] = !legend[key][op]
+        legend[name][op] = !legend[name][op]
         // console.info(legend, key, op, legend[key][op])
         this.setState({ legend })
     }
@@ -951,7 +955,7 @@ export default class Evolution extends React.Component<Props, State>{
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         let { train, arc } = this.props
         let NNInfo = this.textInfo[glyphZoomLabel]
-        let info = '', links:JSX.Element[] = []
+        let info = '', links:JSX.Element[] = [], code:JSX.Element[] = []
         let paperTitle = ''
         if (NNInfo){
             paperTitle = NNInfo.links[0][0]
@@ -959,6 +963,11 @@ export default class Evolution extends React.Component<Props, State>{
             links = NNInfo.links.map(
                 (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
             )
+            if(NNInfo.code){
+                code = NNInfo.code.map(
+                    (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
+                )
+            }
         }
 
         return (
@@ -1090,22 +1099,26 @@ export default class Evolution extends React.Component<Props, State>{
                 visible={glyphZoom}
                 onCancel={() => { this.setState({ glyphZoom: false }) }}
                 footer={null}
+                
             // onOk={this.handleOk}
             // onCancel={this.handleCancel}
             >
+            <div className="content" style={{overflowY:'scroll'}}>
                 <img
-                    src={`../../images/${glyphZoomLabel}.png`}
+                    src={`../../images/${glyphZoomLabel}_.png`}
                     style={{
-                        height: '100%',
-                        width: '100%'
+                        height: '80%',
+                        width: '80%',
+                        padding: '10%'
                     }}
                 />
                 <div>
                     <h3>{paperTitle}</h3>
                     {info}
+                    <h4>related papers: </h4>
                     {links}
                 </div>
-                
+            </div> 
             </Modal>
         </div>)
     }

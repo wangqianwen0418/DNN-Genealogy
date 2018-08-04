@@ -23,7 +23,6 @@ export interface Items {
 }
 export interface Item {
     name: string,
-    key: string,
     click: boolean,
     hover: boolean
 }
@@ -37,10 +36,10 @@ export default class Legend extends React.Component<LegendProps, {}>{
         // })
         return ( 
         <ul>
-            {Object.keys(items).map((key: string) => {
-                let item = items[key]
+            {Object.keys(items).map((name: string) => {
+                let item = items[name]
                 return <Popover
-                    key={key}
+                    key={name}
                     placement="left"
                     title={item.name}
                     content={
@@ -55,14 +54,14 @@ export default class Legend extends React.Component<LegendProps, {}>{
                     <li style={{float:'left', clear:'left'}}>
                         <div 
                             onClick={() => {
-                            selectItem(item.key, 'click')
+                            selectItem(name, 'click')
 
                             }}
                             onMouseEnter={() => {
-                                selectItem(item.key, 'hover')
+                                selectItem(name, 'hover')
                             }}
                             onMouseLeave={() => {
-                                selectItem(item.key, 'hover')
+                                selectItem(name, 'hover')
                             }}
                             style={{cursor: 'pointer'}}
                         >
@@ -74,7 +73,7 @@ export default class Legend extends React.Component<LegendProps, {}>{
                                 position: 'relative',
                                 top: '4px',
                                 marginRight: '3px',
-                                backgroundColor: item.click ? 'gray' : getColor(item.key)
+                                backgroundColor: item.click ? 'gray' : getColor(item.name)
                             }}
                             />
                             <span style={{ fontSize: item.hover ? '12px' : '9px' }}>

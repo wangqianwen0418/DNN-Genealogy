@@ -77,6 +77,9 @@
                 "Dual Path Networks",
                 "https://arxiv.org/pdf/1707.01629.pdf"
             ]
+        ],
+        "code":[
+            ["MxNet", "https://github.com/cypw/DPNs"]
         ]
     },
     "LSTM": {
@@ -550,6 +553,9 @@
                 "Neural Architecture Search with Reinforcement Learning",
                 "https://arxiv.org/abs/1611.01578"
             ]
+        ],
+        "code":[
+            ["tensorflow", "https://github.com/tensorflow/models/blob/master/research/slim/nets/nasnet/nasnet.py"]  
         ]
     },
     "stacked RNN": {
@@ -604,6 +610,40 @@
                 "SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size",
                 "https://arxiv.org/abs/1602.07360"
             ]
+        ]
+    },
+    "polyInception":{
+        "info": "PolyInception is a new family of modules that extend inception residual units. PolyInception generalizes the additive combination in Inception residual units via various forms of polynomial compositions to encourage the structural diversity and enhance the expressive power",
+        "ID":"polyInception",
+        "links":[
+            [
+                "PolyNet: A Pursuit of Structural Diversity in Very Deep Networks",
+                "https://arxiv.org/pdf/1611.05725"
+            ]
+        ],
+        "code":[
+            ["caffe", "https://github.com/CUHK-MMLAB/polynet"]
+        ]
+    },
+    "WRN": {
+        "info":"Wide Residual Networks (WRN) is a novel architecture which decrease depth and increase width of ResNet blocks. A simple 16-layer WRN outperforms in accuracy and efficiency all previous deep residual networks, achieving new state-of-the-art results on CIFAR, SVHN, and COCO",
+        "ID":"Wide ResNet",
+        "links": [
+            "Wide Residual Networks", "http://arxiv.org/abs/1605.07146"
+        ],
+        "code":[
+         ["Torch", "https://github.com/szagoruyko/wide-residual-networks"],
+         ["Keras", "https://github.com/titu1994/Wide-Residual-Networks"]   
+        ]
+    },
+    "RIR":{
+        "info":"Resnet in Resnet (RiR) is a deep dual-stream architecture that generalizes ResNets and standard CNNs. RiR is easily implemented with no computational overhead. RiR consistently improves performance over ResNets, outperforms architectures with similar amounts of augmentation on CIFAR-10, and establishes a new state-of-the-art on CIFAR-100.",
+        "ID": "ResNet in ResNet",
+        "links":[
+            "Resnet in Resnet: Generalizing Residual Architectures", "https://arxiv.org/abs/1603.08029"
+        ],
+        "code": [
+
         ]
     }
 }

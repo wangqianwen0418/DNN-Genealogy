@@ -5,22 +5,22 @@ import { createStore } from 'redux';
 import { reducer } from './reducers/index';
 import { StoreState, NN } from './types/index';
 import { Provider } from 'react-redux';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 import 'antd/dist/antd.css';
 
 let initNN: NN = {
-  ID:"",
-  url:"",
-  date:"",
+  ID:'',
+  url:'',
+  date:'',
   application:[],
   training:[],
   architecture:[],
   names:[],
   parents:[]
 }
-let initState:StoreState = {database:"nonsequence", arc:"", app:"", train:"", nn: initNN, op: 0}
+let initState:StoreState = {database:'nonsequence', arc:'', app:'', train:'', nn: initNN, op: 0}
 const store = createStore<StoreState>(reducer, initState );
 
 ReactDOM.render(
@@ -29,4 +29,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
-registerServiceWorker();
+// registerServiceWorker();

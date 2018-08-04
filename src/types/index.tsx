@@ -23,7 +23,8 @@ export interface EvoLink {
 export interface NodeTextInfo{
     ID:string,
     info:string,
-    links:Array<string>
+    links:Array<string>,
+    code?:Array<string>,
 }
 
 export interface NN{

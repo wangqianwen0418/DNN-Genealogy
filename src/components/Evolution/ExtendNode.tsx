@@ -98,7 +98,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                     key="detailed"
                     disabled={mapNetworkToArcs.filter((d: any) => (d.label === node.ID)).length === 0}
                 >
-                    detailed structure
+                    detailed architecture
                 </Menu.Item>
             </Menu>
         )
