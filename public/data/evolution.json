@@ -422,7 +422,7 @@
                 "link_category": "multi-branch=>multi-branch"
             },
             {
-                "link_info_l": "train very deep networks with residual connections",
+                "link_info_l": "train very deep networks without residual connections",
                 "ID": "resNet",
                 "link_info_s": "deep without residual",
                 "link_category": "skip connections=>multi-branch"
