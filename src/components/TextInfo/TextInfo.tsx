@@ -8,7 +8,7 @@ const { Content } = Layout;
 
 export interface Props{
     database: string,
-    nn: NN,
+    selectedNN: NN,
     op: number
 }
 
@@ -45,17 +45,17 @@ export default class TextInfo extends React.Component<Props, State>{
     }
 
     render(){
-        let {nn} = this.props
+        let {selectedNN} = this.props
         
-        if (nn.ID) {
-            let currentNN: NodeTextInfo = this.state.textinfo[nn.ID]
+        if (selectedNN.ID) {
+            let currentNN: NodeTextInfo = this.state.textinfo[selectedNN.ID]
             let links = currentNN.links.map(
                 (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
             )
             return (
                 <Card
                     bordered={false}
-                    title={<span style={{fontSize:'1.2em'}}>{nn.ID}</span>}
+                    title={<span style={{fontSize:'1.2em'}}>{selectedNN.ID}</span>}
                     className="TextInfo View ViewBottom"
                     bodyStyle={{height: 'calc(100% - 48px)', overflow: 'auto'}}
                 >

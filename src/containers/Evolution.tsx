@@ -14,7 +14,7 @@ export function mapStateToProps(state:StoreState) {
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.SelectNN|actions.SelectNNMotion|actions.SelectDatabase>) {
     return {
-        onSelectNN:(nn:NN)=>{dispatch(actions.selectNN(nn))},
+        onSelectNN:(currentNNs:NN[], selectedNN: NN)=>{dispatch(actions.selectNN(currentNNs, selectedNN))},
         onSelectNNMotion:(op:number)=>{dispatch(actions.selectNNMotion(op))},
         onSelectDatabase:(db:string)=>{dispatch(actions.selectDatabase(db))}
     }

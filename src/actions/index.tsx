@@ -47,12 +47,14 @@ export function selectApp(node:string):SelectApp{
 
 export interface SelectNN{
     type:constants.SELECT_NN,
-    nn:NN
+    currenNNs:NN[],
+    selectedNN: NN
 }
-export function selectNN(nn:NN):SelectNN{
+export function selectNN(currenNNs:NN[], selectedNN: NN):SelectNN{
     return {
         type:constants.SELECT_NN,
-        nn
+        currenNNs,
+        selectedNN
     }
 }
 

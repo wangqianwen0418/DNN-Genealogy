@@ -20,7 +20,7 @@ export function reducer(state: StoreState, action: AllActions): StoreState {
     case SELECT_TRAIN:  
       return { ...state, train:action.node}
     case SELECT_NN:
-      return { ...state, nn:action.nn, op:0}
+      return { ...state, currentNNs:action.currenNNs, selectedNN:action.selectedNN, op:0}
     case SELECT_NNMOTION:
       return { ...state, op:action.op}
     default:

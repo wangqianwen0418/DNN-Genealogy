@@ -2,15 +2,22 @@ import {Performances} from 'types';
 import * as React from 'react';
 import {prepareBoxplotData} from 'helper/';
 import ReactEcharts from 'echarts-for-react';
+import {NN} from 'types';
 
-export default class Box extends React.Component<{ performances: Performances }, {}>{
-    constructor(props: { performances: Performances }) {
+interface Props{
+    performances: Performances, 
+    currentNNs: NN[],
+    selectedNN: NN
+}
+export default class Box extends React.Component<Props, {}>{
+    public ref: ReactEcharts|null
+    constructor(props: Props) {
         super(props)
         
     }
 
     getOption() {
-        let { models, datasets } = this.props.performances
+        let { models, datasets, modelIDs } = this.props.performances
         let option = {}
 
         let left = 25, right = 15, top=25, bottom=20, 
@@ -61,7 +68,6 @@ export default class Box extends React.Component<{ performances: Performances },
             return option
 
         }else{
-            console.info('draw parallel box')
             let parallelAxis = datasets.map((name:string, idx:number) => {
                 return {
                     dim: idx,
@@ -74,25 +80,36 @@ export default class Box extends React.Component<{ performances: Performances },
                             opacity: 0.4
                         }
                     },
+                    axisLabel:{
+                        show: false
+                    },
                     nameRotate: 45
                 }
             })
-            console.info(models)
-            let parallelSeries = Object.keys(models).map((modelName)=>{
+            let currentIDs = this.props.currentNNs.map(d=>d.ID)
+            // console.info(currentIDs, modelIDs)
+            
+            let parallelSeries = currentIDs.map((modelName)=>{
+                let parallelData:Array<number[]> = []
+                modelIDs.forEach(d=>{
+                    if(modelName === d[0]){
+                        let variants = d[1]
+                        variants.forEach(v=>(parallelData.push(models[v])))
+                    }
+                })
                 return  {
                     name: modelName,
                     type: 'parallel',
-                    data: [models[modelName]],
-                    smooth: true,
+                    data: parallelData,
+                    smooth: false,
                     lineStyle:{
                         width: 2,
                         opacity: 1
                     },
-                    inactiveOpacity: 0.45,
+                    inactiveOpacity: 0.15,
                     activeOpacity: 1,
                 }
             })
-    
             // layout
            
             let grid = []
@@ -189,19 +206,38 @@ export default class Box extends React.Component<{ performances: Performances },
                         borderColor: 'black',
                         borderWidth: 1.5
                     },
-                    data: boxData[idx].outliers.map(d=>d[0])
+                    data: boxData[idx].outliers.map(d=>d[0]),
+                    tooltip: {
+                        show: true,
+                        formatter: (params:{[key:string]:any})=>{
+                            return `${params.name}: ${params.data}`
+                        }
+                    }
                 }
             })
     
             let selected = {}
-            Object.keys(models).forEach((modelName, i)=>{
-                selected[modelName] = (i<6)
+            currentIDs.forEach(id=>{
+                selected[id] = (id===this.props.selectedNN.ID)
             })
+            // Object.keys(models).forEach((modelName, i)=>{
+            //     selected[modelName] = false
+            // })
+            // let currentIDs = this.props.currentNNs.map(d=>d.ID)
+            // console.info(currentIDs, modelIDs)
+            // modelIDs.forEach(d=>{
+            //     if(currentIDs.indexOf(d[0])!==-1){
+            //         let variants = d[1]
+            //         variants.forEach(v=>(selected[v]=true))
+            //     }
+                
+            // })
             
             option = {
                 legend:{
                     type:'scroll',
-                    data: Array.from(new Set(Object.keys(models).map(d=>d.split('_')[0]))),
+                    // data: Array.from(new Set(Object.keys(models).map(d=>d.split('_')[0]))),
+                    data: currentIDs,
                     top: `${top/2}%`,
                     orient: 'vertical',
                     left:'left',
@@ -212,9 +248,11 @@ export default class Box extends React.Component<{ performances: Performances },
                     tooltip: {
                         show: true,
                         formatter: (params:{[key:string]:any})=>{
-                            return models[params.name]
-                                    .map((score, i)=>{return `${datasets[i]}: ${score}`})
-                                    .join('<br/>')
+                            // console.info(params)
+                            // return models[params.name]
+                            //         .map((score, i)=>{return `${datasets[i]}: ${score}`})
+                            //         .join('<br/>')
+                            return modelIDs.filter(d=>d[0]===params.name)[0][1].join('<br/>')
                         }
                     }
                 },
@@ -229,6 +267,7 @@ export default class Box extends React.Component<{ performances: Performances },
                         type: 'value',
                         name: 'params(M)',
                         nameLocation: 'end',
+                        axisLabel:{show: false}
                     }
                 },
                 series: [...boxSeries, ...outlierSeries, ...parallelSeries],
@@ -239,10 +278,39 @@ export default class Box extends React.Component<{ performances: Performances },
         ////////// parallel coordinates
         
     }
+    componentDidUpdate(){
+        // if(this.ref){
+        //     let myChart = this.ref.getEchartsInstance();
+            
+        //     myChart.on('legendselected', (params:any)=>{
+        //         console.info(params)
+        //     })
+        //     myChart.on('legendselectchanged', (params:any)=>{
+        //         console.info('legend select change', params)
+
+        //         myChart.dispatchAction({
+        //             type: 'highlight',
+        //             seriesIndex: 13,
+        //             dataIndex: 0
+        //         });
+
+        //         myChart.dispatchAction({
+        //             type: 'legendUnSelect',
+        //             // 图例名称
+        //             name: 'resNet'
+        //         })
+        //     })
+        //     myChart.on('click', (params:any)=>{
+        //         console.info('click', params)
+        //     })
+            
+        // }
+    }
     
     render() {
         return (
             <ReactEcharts
+                ref={(e) => { this.ref = e; }}
                 notMerge={true}
                 lazyUpdate={true}
                 option={this.getOption()}

@@ -3,7 +3,8 @@ export interface StoreState {
     arc:string,
     train:string,
     app:string,
-    nn:NN,
+    currentNNs:NN[],
+    selectedNN: NN,
     op:number // op=0:nothing 1:update corpus 2:update textinfo
 }
 
@@ -87,6 +88,6 @@ interface Name{
 export interface Performances {
     name:string,
     datasets: string[],
-    modelIDs: string[],
+    modelIDs: Array<[string, string[]]>,
     models: { [modelName: string]: number [] }
 }

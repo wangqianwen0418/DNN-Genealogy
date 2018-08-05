@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './Network.css';
 import { EvoNode } from 'types';
-import * as dagre from 'lib/dagre';
+import * as dagre from 'lib/dagre.js';
 import { Node, GraphEdge } from 'lib/@types/dagre';
 import { getLayerColor } from 'helper';
 import * as d3 from 'd3';
@@ -314,12 +314,14 @@ export default class Network extends React.Component<Props, State> {
 
     }
     handleZoom() {
-        if (this.isMountedZoom)
+        if (this.isMountedZoom) {
             return
+        }
         var svg = d3.select('#' + this.rand + ' svg'),
             g = svg.select('.graph')
-        if (svg.empty())
+        if (svg.empty()) {
             return
+        }
         var trans = svg.select('#layer_input_1').attr('transform'),
             rectWidth = svg.select('#layer_input_1').select('rect').attr('width'),
             offset = Number(trans.substring(11, trans.indexOf(','))) + Number(rectWidth) / 2
@@ -329,16 +331,16 @@ export default class Network extends React.Component<Props, State> {
             .remove()
         var zoom = d3.zoom()
             .scaleExtent([1/2, 4])
-            .on("zoom", zoomed)
+            .on('zoom', zoomed)
         function zoomed() {
             g.attr('transform', d3.event.transform)
         }
-        svg.insert("rect", "g")
-            .attr("width", window.innerWidth * 0.35)
-            .attr("height", window.innerHeight * 0.65)
+        svg.insert('rect', 'g')
+            .attr('width', window.innerWidth * 0.35)
+            .attr('height', window.innerHeight * 0.65)
             .attr('class', 'zoom-rect')
-            .style("fill", "none")
-            .style("pointer-events", "all")
+            .style('fill', 'none')
+            .style('pointer-events', 'all')
             .call(zoom)
         this.isMountedZoom = true
     }
@@ -408,7 +410,7 @@ export default class Network extends React.Component<Props, State> {
 
         function randomString(length: number, chars: string) {
             var result = '';
-            for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+            for (var i = length; i > 0; --i) { result += chars[Math.floor(Math.random() * chars.length)]; }
             return result;
         }
         this.rand = randomString(8, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')

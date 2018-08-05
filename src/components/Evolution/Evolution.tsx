@@ -24,7 +24,7 @@ export interface Props {
     arc: string,
     app: string,
     train: string,
-    onSelectNN: (nn: NN) => void,
+    onSelectNN: (currentNetworks: NN[], selectedNN: NN) => void,
     onSelectNNMotion: (op: number) => void,
     onSelectDatabase: (db: string) => void
 }
@@ -168,7 +168,6 @@ export default class Evolution extends React.Component<Props, State>{
         datum = datum.filter((d: NN) => {
             return d.application[0].startsWith(appValue)
         })
-        console.info(datum.map(d=>d.ID))
         datum.forEach((d: NN) => {
 
             let pubDate = moment(d.date, 'YYYY-MM-DD'),
@@ -858,7 +857,8 @@ export default class Evolution extends React.Component<Props, State>{
         if (selectedNode) {
             for (let nn of datum) {
                 if (nn.ID === selectedNode.label) {
-                    onSelectNN(nn)
+                    let currentNNs = nodes.filter(n=>n.isZoomed).map(n=>n.ID)
+                    onSelectNN( this.state.datum.filter( n=>currentNNs.indexOf(n.ID)!==-1 ), nn )
                 }
             }
         }
@@ -910,7 +910,8 @@ export default class Evolution extends React.Component<Props, State>{
 
         for (let nn of datum) {
             if (nn.ID === selectedNode.label) {
-                onSelectNN(nn)
+                let currentNNs = this.state.nodes.filter(n=>n.isZoomed).map(n=>n.ID)
+                onSelectNN( this.state.datum.filter( n=>currentNNs.indexOf(n.ID)!==-1 ), nn )
             }
         }
 

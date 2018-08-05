@@ -8,7 +8,8 @@ import { connect, Dispatch } from 'react-redux';
 export function mapStateToProps(state:StoreState) {
     return {
         database:state.database,
-        nn:state.nn,
+        currentNNs:state.currentNNs,
+        selectedNN: state.selectedNN,
         op:state.op
     };
 }

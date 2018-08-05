@@ -1,5 +1,5 @@
 import { EvoNode } from './types';
-import * as dagre from './lib/dagre';
+import * as dagre from './lib/dagre.js';
 import { Node, GraphEdge } from './lib/@types/dagre';
 
 const workercode = ()=>{
