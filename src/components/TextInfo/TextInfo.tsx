@@ -55,7 +55,7 @@ export default class TextInfo extends React.Component<Props, State>{
             return (
                 <Card
                     bordered={false}
-                    title={<span style={{fontSize:'1.2em'}}>{selectedNN.ID}</span>}
+                    title={<span style={{fontSize:'1.2em'}}>{currentNN.fullname}</span>}
                     className="TextInfo View ViewBottom"
                     bodyStyle={{height: 'calc(100% - 48px)', overflow: 'auto'}}
                 >
@@ -68,7 +68,7 @@ export default class TextInfo extends React.Component<Props, State>{
                         <div className="TextInfo-Links">
                             {links}
                         </div>
-                        Code:<br/>
+                        {currentNN.code?'Code:':''}<br/>
                         {currentNN.code?currentNN.code.map((d,i)=>(
                             <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
                         )):<div/>}

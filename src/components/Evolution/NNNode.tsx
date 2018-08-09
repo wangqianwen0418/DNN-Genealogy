@@ -50,21 +50,21 @@ export default class NNNode extends React.Component<Props, {}>{
     }
     render() {
         let { node, zoomed, selected, isTop, hovered, selectNode, apiArr, transX, transY, scale, show} = this.props,
-            bg: JSX.Element | any = 
-            (node.variants.length > 0 && !zoomed) ? 
-            (
-            <rect 
-                width={node.width * scale} 
-                height={node.height * scale}
-                className="NodeBg"
-                transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
-                rx={1}
-                ry={1}
-                fill="white"
-                stroke={hovered ? '#111' : 'gray'}
-                strokeWidth={1.5}
-            />
-            ) : [],
+            // bg: JSX.Element | any = 
+            // (node.variants.length > 0 && !zoomed) ? 
+            // (
+            // <rect 
+            //     width={node.width * scale} 
+            //     height={node.height * scale}
+            //     className="NodeBg"
+            //     transform={`translate(${zoomed ? 8 : 4}, ${zoomed ? -8 : -4})`}
+            //     rx={1}
+            //     ry={1}
+            //     fill="white"
+            //     stroke={hovered ? '#111' : 'gray'}
+            //     strokeWidth={1.5}
+            // />
+            // ) : [],
             arc:string[]=node.arc,
             arcNum = arc.length
         
@@ -86,7 +86,7 @@ export default class NNNode extends React.Component<Props, {}>{
 
         >
             <g className={`Node ${hovered ? 'pop' : 'no'}`}>
-                {bg}
+                {/* {bg} */}
                 <g>
                     <rect
                         className="Node bounder"

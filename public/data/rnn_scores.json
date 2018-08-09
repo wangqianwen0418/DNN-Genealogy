@@ -69,6 +69,21 @@
         "name": "language model construction"
     },
     {
+        "modelIDs":[
+           [ "LRU", ["LRU"]],
+            ["GRU",["GRU"]],
+            ["gridLSTM",["gridLSTM"]]   
+        ],
+        "models":{
+            "LSTM":[0.972, 1.158, 1.075, 1.013],
+            "LRU":[0.965, 1.141, 1.057, 1.010],
+            "GRU":[0.972, 1.163, 1.101, 1.047],
+            "gridLSTM":[0.970, 1.148, 1.077, 1.009]
+        },
+        "datasets":["Penn Treebank", "War and Peace","enwik8","text8"],
+        "name": "language modeling"
+    },
+    {
         "models": {
             "DT(S)-RNN": [
                 112
@@ -219,9 +234,9 @@
         ],
         "modelIDs": [
             ["DGLSTM",["DGLSTM"]],
-            ["GRU", ["GRU"]],
             ["LSTM", ["LSTM"]],
-            ["RNN", ["RNN"]]
+            ["RNN", ["RNN"]],
+            ["LRU", ["LRU"]]
         ],
         "name": "language model construction"
     },
@@ -496,5 +511,19 @@
             ["attention",[""]]
         ],
         "name": "machine translation"
+    },{
+        "models": {
+            "LSTM": [82.7, 92.4, 79.1, 93.2, 88.8, 85.3],
+            "CNN": [82.7, 92.9, 79.1, 93.2, 88.8, 85.3],
+            "SRU": [84.8, 93.4, 82.2, 93.9, 89.7, 89.1]
+        },
+        "datasets": ["Customer Reviews", "Subjectivity", "Moview Review", "TREC Question Type", "MPQA opinion polarity", "Stanford sentiment treebank"],
+        "modelIDs":[
+            ["SRU",["SRU"]],
+            ["CNN", ["CNN"]],
+            ["LSTM", ["LSTM"]]
+
+        ],
+        "name":"text classification"
     }
 ]

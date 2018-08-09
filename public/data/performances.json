@@ -1,1 +1,561 @@
-[{"modelIDs": [["leNet", []], ["alexNet", ["alexNet"]], ["inception", ["inception", "inception_v3", "inception_v2"]], ["squeezeNet", ["squeezeNet"]], ["VGG", ["vgg19", "vgg16"]], ["highwayNets", ["highwayNets"]], ["resNet", ["resNet_v1_56_cifar", "resNet_v1_110_cifar", "resNet_v1_50", "resNet_v1_152", "resNet_v2", "resNet_v2_56_cifar", "resNet_v2_110_cifar"]], ["inception_resNet", ["inception_resNet"]], ["fractalNet", ["fractalNet-40", "fractalNet-20"]], ["resNeXt", ["ResNeXt"]], ["denseNet", ["denseNet_40_12", "denseNet_100_12", "denseNet_100_24", "denseNet-BC(l=100, k=12)", "denseNet-BC(l=250, k=24)", "denseNet-BC(l=190, k=40)", "denseNet_121", "denseNet_201"]], ["WRN", ["wideResNet_16_4", "wideResNet_28_10", "wideResNet-50-2"]], ["RIR", ["resNet-in-resent"]], ["diracNet", ["diracNet-28-5", "diracNet-28-10", "diracNet-18", "diracNet-34"]], ["nasNet", ["nasNet_cifar", "nasNet_large", "nasNet_small"]], ["SENet", ["seNet_inception_resnetv2"]], ["mixNet", ["mixNet-100", "mixNet-250", "mixNet-190", "mixNet-105", "mixNet-121", "mixNet-141"]], ["DPN", ["DPN-92"]], ["xception", []], ["mobileNet", ["mobileNet-224", "mobileNet-160"]], ["polyInception", ["PolyNet"]]], "name": "image classification", "datasets": ["params", "imagenet val top5", "imageNet val top1", "SVHN", "cifar10", "cifar100"], "models": {"diracNet-28-5": [9.1, 0, 0, 0, 96.84, 76.56], "ResNeXt": [25.0, 94.7, 79.6, 0, 96.42, 82.69], "vgg16": [138.0, 91.9, 74.4, 0, 0, 0], "mixNet-100": [1.5, 0, 0, 98.43, 95.81, 78.88], "denseNet-BC(l=100, k=12)": [0.8, 0, 0, 98.24, 95.49, 77.73], "vgg19": [144.0, 92.7, 74.5, 0, 0, 0], "diracNet-28-10": [36.5, 0, 0, 0, 95.25, 78.46000000000001], "denseNet_100_12": [7.2, 0, 0, 98.33, 95.9, 79.8], "DPN-92": [145.0, 94.6, 79.2, 0, 0, 0], "inception_resNet": [55.8, 96.3, 82.2, 0, 0, 0], "mixNet-141": [41.07, 94.7, 79.6, 0, 0, 0], "resNet_v1_152": [60.4, 94.29, 78.57, 0, 0, 0], "mixNet-250": [29.0, 0, 0, 98.49, 96.68, 82.94], "squeezeNet": [1.24, 82.5, 60.4, 0, 0, 0], "seNet_inception_resnetv2": [65.6, 95.21, 80.2, 0, 0, 0], "nasNet_small": [5.3, 91.6, 74.0, 0, 0, 0], "diracNet-18": [11.7, 89.12, 69.63, 0, 0, 0], "mixNet-190": [48.5, 0, 0, 0, 96.87, 83.08], "fractalNet-20": [38.6, 0, 0, 0, 94.78, 76.7], "mixNet-105": [11.16, 93.3, 76.7, 0, 0, 0], "inception_v2": [23.8, 94.4, 78.8, 0, 0, 0], "inception_v3": [23.8, 95.8, 81.23, 0, 0, 0], "resNet_v1_50": [25.6, 92.9, 75.9, 0, 0, 0], "denseNet_40_12": [1.0, 0, 0, 98.21, 94.76, 75.58], "resNet_v1_56_cifar": [0.86, 0, 0, 0, 93.03, 74.84], "highwayNets": [2.3, 0, 0, 0, 92.24, 0], "alexNet": [60.0, 84.6, 63.3, 0, 0, 0], "inception": [6.8, 93.33, 0, 0, 0, 0], "denseNet_201": [20.2, 93.66, 77.42, 0, 0, 0], "diracNet-34": [21.8, 90.66, 72.21000000000001, 0, 0, 0], "denseNet-BC(l=250, k=24)": [15.3, 0, 0, 98.26, 96.38, 82.4], "mobileNet-224": [4.2, 0, 70.6, 0, 0, 0], "nasNet_cifar": [3.3, 0, 0, 0, 97.35, 0], "resNet_v2": [0.0, 0, 64.71000000000001, 0, 0, 0], "mixNet-121": [21.86, 94.1, 78.1, 0, 0, 0], "wideResNet_16_4": [2.9, 0, 0, 98.36, 94.76, 76.09], "mobileNet-160": [1.32, 0, 60.2, 0, 0, 0], "fractalNet-40": [22.9, 0, 0, 0, 94.76, 77.51], "nasNet_large": [11.1, 96.2, 82.7, 0, 0, 0], "denseNet-BC(l=190, k=40)": [25.6, 0, 0, 0, 96.54, 82.82], "denseNet_100_24": [27.2, 0, 0, 98.41, 96.26, 80.75], "wideResNet_28_10": [36.0, 0, 0, 98.36, 96.11, 81.15], "denseNet_121": [8.1, 92.29, 74.98, 0, 0, 0], "resNet-in-resent": [0.0, 0, 0, 0, 94.99, 77.1], "resNet_v1_110_cifar": [1.7, 0, 0, 0, 93.57, 74.84], "PolyNet": [92, 95.75, 81.28999999999999, 0, 0, 0], "resNet_v2_56_cifar": [1.6, 0, 0, 0, 93.01, 0], "resNet_v2_110_cifar": [3.3, 0, 0, 0, 93.62, 75.36], "wideResNet-50-2": [0.0, 94.21, 78.1, 0, 0, 0]}}]
+[
+    {
+        "modelIDs": [
+            [
+                "leNet",
+                []
+            ],
+            [
+                "alexNet",
+                [
+                    "alexNet"
+                ]
+            ],
+            [
+                "inception",
+                [
+                    "inception",
+                    "inception_v3",
+                    "inception_v2"
+                ]
+            ],
+            [
+                "squeezeNet",
+                [
+                    "squeezeNet"
+                ]
+            ],
+            [
+                "VGG",
+                [
+                    "vgg19",
+                    "vgg16"
+                ]
+            ],
+            [
+                "highwayNets",
+                [
+                    "highwayNets"
+                ]
+            ],
+            [
+                "resNet",
+                [
+                    "resNet_v1_56_cifar",
+                    "resNet_v1_110_cifar",
+                    "resNet_v1_50",
+                    "resNet_v1_152",
+                    "resNet_v2",
+                    "resNet_v2_56_cifar",
+                    "resNet_v2_110_cifar"
+                ]
+            ],
+            [
+                "inception_resNet",
+                [
+                    "inception_resNet"
+                ]
+            ],
+            [
+                "fractalNet",
+                [
+                    "fractalNet-40",
+                    "fractalNet-20"
+                ]
+            ],
+            [
+                "resNeXt",
+                [
+                    "ResNeXt"
+                ]
+            ],
+            [
+                "denseNet",
+                [
+                    "denseNet_40_12",
+                    "denseNet_100_12",
+                    "denseNet_100_24",
+                    "denseNet-BC(l=100, k=12)",
+                    "denseNet-BC(l=250, k=24)",
+                    "denseNet-BC(l=190, k=40)",
+                    "denseNet_121",
+                    "denseNet_201"
+                ]
+            ],
+            [
+                "WRN",
+                [
+                    "wideResNet_16_4",
+                    "wideResNet_28_10",
+                    "wideResNet-50-2"
+                ]
+            ],
+            [
+                "RIR",
+                [
+                    "resNet-in-resent"
+                ]
+            ],
+            [
+                "diracNet",
+                [
+                    "diracNet-28-5",
+                    "diracNet-28-10",
+                    "diracNet-18",
+                    "diracNet-34"
+                ]
+            ],
+            [
+                "nasNet",
+                [
+                    "nasNet_cifar",
+                    "nasNet_large",
+                    "nasNet_small"
+                ]
+            ],
+            [
+                "SENet",
+                [
+                    "seNet_inception_resnetv2"
+                ]
+            ],
+            [
+                "mixNet",
+                [
+                    "mixNet-100",
+                    "mixNet-250",
+                    "mixNet-190",
+                    "mixNet-105",
+                    "mixNet-121",
+                    "mixNet-141"
+                ]
+            ],
+            [
+                "DPN",
+                [
+                    "DPN-92"
+                ]
+            ],
+            [
+                "xception",
+                []
+            ],
+            [
+                "mobileNet",
+                [
+                    "mobileNet-224",
+                    "mobileNet-160"
+                ]
+            ],
+            [
+                "polyInception",
+                [
+                    "PolyNet"
+                ]
+            ]
+        ],
+        "name": "image classification",
+        "datasets": [
+            "params",
+            "imagenet val top5",
+            "imageNet val top1",
+            "SVHN",
+            "cifar10",
+            "cifar100"
+        ],
+        "models": {
+            "diracNet-28-5": [
+                9.1,
+                0,
+                0,
+                0,
+                96.84,
+                76.56
+            ],
+            "ResNeXt": [
+                25.0,
+                94.7,
+                79.6,
+                0,
+                96.42,
+                82.69
+            ],
+            "vgg16": [
+                138.0,
+                91.9,
+                74.4,
+                0,
+                0,
+                0
+            ],
+            "mixNet-100": [
+                1.5,
+                0,
+                0,
+                98.43,
+                95.81,
+                78.88
+            ],
+            "denseNet-BC(l=100, k=12)": [
+                0.8,
+                0,
+                0,
+                98.24,
+                95.49,
+                77.73
+            ],
+            "vgg19": [
+                144.0,
+                92.7,
+                74.5,
+                0,
+                0,
+                0
+            ],
+            "diracNet-28-10": [
+                36.5,
+                0,
+                0,
+                0,
+                95.25,
+                78.46000000000001
+            ],
+            "denseNet_100_12": [
+                7.2,
+                0,
+                0,
+                98.33,
+                95.9,
+                79.8
+            ],
+            "DPN-92": [
+                145.0,
+                94.6,
+                79.2,
+                0,
+                0,
+                0
+            ],
+            "inception_resNet": [
+                55.8,
+                96.3,
+                82.2,
+                0,
+                0,
+                0
+            ],
+            "mixNet-141": [
+                41.07,
+                94.7,
+                79.6,
+                0,
+                0,
+                0
+            ],
+            "resNet_v1_152": [
+                60.4,
+                94.29,
+                78.57,
+                0,
+                0,
+                0
+            ],
+            "mixNet-250": [
+                29.0,
+                0,
+                0,
+                98.49,
+                96.68,
+                82.94
+            ],
+            "squeezeNet": [
+                1.24,
+                82.5,
+                60.4,
+                0,
+                0,
+                0
+            ],
+            "seNet_inception_resnetv2": [
+                65.6,
+                95.21,
+                80.2,
+                0,
+                0,
+                0
+            ],
+            "nasNet_small": [
+                5.3,
+                91.6,
+                74.0,
+                0,
+                0,
+                0
+            ],
+            "diracNet-18": [
+                11.7,
+                89.12,
+                69.63,
+                0,
+                0,
+                0
+            ],
+            "mixNet-190": [
+                48.5,
+                0,
+                0,
+                0,
+                96.87,
+                83.08
+            ],
+            "fractalNet-20": [
+                38.6,
+                0,
+                0,
+                0,
+                94.78,
+                76.7
+            ],
+            "mixNet-105": [
+                11.16,
+                93.3,
+                76.7,
+                0,
+                0,
+                0
+            ],
+            "inception_v2": [
+                23.8,
+                94.4,
+                78.8,
+                0,
+                0,
+                0
+            ],
+            "inception_v3": [
+                23.8,
+                95.8,
+                81.23,
+                0,
+                0,
+                0
+            ],
+            "resNet_v1_50": [
+                25.6,
+                92.9,
+                75.9,
+                0,
+                0,
+                0
+            ],
+            "denseNet_40_12": [
+                1.0,
+                0,
+                0,
+                98.21,
+                94.76,
+                75.58
+            ],
+            "resNet_v1_56_cifar": [
+                0.86,
+                0,
+                0,
+                0,
+                93.03,
+                74.84
+            ],
+            "highwayNets": [
+                2.3,
+                0,
+                0,
+                0,
+                92.24,
+                0
+            ],
+            "alexNet": [
+                60.0,
+                84.6,
+                63.3,
+                0,
+                0,
+                0
+            ],
+            "inception": [
+                6.8,
+                93.33,
+                0,
+                0,
+                0,
+                0
+            ],
+            "denseNet_201": [
+                20.2,
+                93.66,
+                77.42,
+                0,
+                0,
+                0
+            ],
+            "diracNet-34": [
+                21.8,
+                90.66,
+                72.21000000000001,
+                0,
+                0,
+                0
+            ],
+            "denseNet-BC(l=250, k=24)": [
+                15.3,
+                0,
+                0,
+                98.26,
+                96.38,
+                82.4
+            ],
+            "mobileNet-224": [
+                4.2,
+                0,
+                70.6,
+                0,
+                0,
+                0
+            ],
+            "nasNet_cifar": [
+                3.3,
+                0,
+                0,
+                0,
+                97.35,
+                0
+            ],
+            "resNet_v2": [
+                0.0,
+                0,
+                64.71000000000001,
+                0,
+                0,
+                0
+            ],
+            "mixNet-121": [
+                21.86,
+                94.1,
+                78.1,
+                0,
+                0,
+                0
+            ],
+            "wideResNet_16_4": [
+                2.9,
+                0,
+                0,
+                98.36,
+                94.76,
+                76.09
+            ],
+            "mobileNet-160": [
+                1.32,
+                0,
+                60.2,
+                0,
+                0,
+                0
+            ],
+            "fractalNet-40": [
+                22.9,
+                0,
+                0,
+                0,
+                94.76,
+                77.51
+            ],
+            "nasNet_large": [
+                11.1,
+                96.2,
+                82.7,
+                0,
+                0,
+                0
+            ],
+            "denseNet-BC(l=190, k=40)": [
+                25.6,
+                0,
+                0,
+                0,
+                96.54,
+                82.82
+            ],
+            "denseNet_100_24": [
+                27.2,
+                0,
+                0,
+                98.41,
+                96.26,
+                80.75
+            ],
+            "wideResNet_28_10": [
+                36.0,
+                0,
+                0,
+                98.36,
+                96.11,
+                81.15
+            ],
+            "denseNet_121": [
+                8.1,
+                92.29,
+                74.98,
+                0,
+                0,
+                0
+            ],
+            "resNet-in-resent": [
+                0.0,
+                0,
+                0,
+                0,
+                94.99,
+                77.1
+            ],
+            "resNet_v1_110_cifar": [
+                1.7,
+                0,
+                0,
+                0,
+                93.57,
+                74.84
+            ],
+            "PolyNet": [
+                92,
+                95.75,
+                81.28999999999999,
+                0,
+                0,
+                0
+            ],
+            "resNet_v2_56_cifar": [
+                1.6,
+                0,
+                0,
+                0,
+                93.01,
+                0
+            ],
+            "resNet_v2_110_cifar": [
+                3.3,
+                0,
+                0,
+                0,
+                93.62,
+                75.36
+            ],
+            "wideResNet-50-2": [
+                0.0,
+                94.21,
+                78.1,
+                0,
+                0,
+                0
+            ]
+        }
+    }
+]

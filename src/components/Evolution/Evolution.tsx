@@ -236,7 +236,7 @@ export default class Evolution extends React.Component<Props, State>{
             marginy: margin * 2,
             rankdir: 'LR',
             edgesep: nodeH * .5,
-            nodesep: nodeH * 1,
+            nodesep: nodeH * 0.5,
             // ranker: "tight-tree"
             ranker: appValue === '1.1.' ? 'longest-path' : 'tight-tree'
         });
@@ -633,7 +633,7 @@ export default class Evolution extends React.Component<Props, State>{
                     className="Edge"
                     id={`${from}->${to}`}
                     d={pathData}
-                    stroke={'#999'}
+                    stroke={hoverLegend?getColor(cate[0]):'#999'}
                     strokeWidth={2}
                     // stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
                     // stroke={clickLegend ? "gray" : getColor(key)}
@@ -659,7 +659,7 @@ export default class Evolution extends React.Component<Props, State>{
                 <Tooltip 
                     title={tooltipTxt} 
                     mouseEnterDelay={.3} 
-                    placement="bottom" 
+                    // placement="bottom" 
                     visible={hovered}
                 >
                     <g 

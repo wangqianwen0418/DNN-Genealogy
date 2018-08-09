@@ -22,7 +22,7 @@ export interface EvoLink {
 // models=Array<model>
 
 export interface NodeTextInfo{
-    ID:string,
+    fullname:string,
     info:string,
     links:Array<string>,
     code?:Array<string>,

@@ -29,7 +29,7 @@ export default class Box extends React.Component<Props, {}>{
             top: `${top}%`,
         }
 
-        if (datasets.length===1 || Object.keys(models).length<3){
+        if (datasets.length<3 || Object.keys(models).length * datasets.length<15){
         ///////// if only one dataset, just use bar charts
             let series = Object.keys(models).map((modelName:string)=>{
                 let records = models[modelName]
@@ -101,7 +101,7 @@ export default class Box extends React.Component<Props, {}>{
                     name: modelName,
                     type: 'parallel',
                     data: parallelData,
-                    smooth: false,
+                    smooth: true,
                     lineStyle:{
                         width: 2,
                         opacity: 1
