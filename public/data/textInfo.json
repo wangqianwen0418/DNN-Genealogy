@@ -1,7 +1,7 @@
 {
     "leaky units": {
         "info": "A leaky unit appends a self-connection to a hidden unit. A parameter alpha is used for calculating the moving average which memorizes both the past and the present.",
-        "ID": "leaky units",
+        "fullname": "leaky units",
         "links": [
             [
                 "Advances in Optimizing Recurrent Networks",
@@ -19,7 +19,7 @@
     },
     "diracNet": {
         "info": "DiracNets propose a simple weight parameterization, which allows to train very deep plain networks without explicit skip-connections. ",
-        "ID": "diracNet",
+        "fullname": "diracNet",
         "links": [
             [
                 "DiracNets: Training Very Deep Neural Networks Without Skip-Connections",
@@ -29,7 +29,7 @@
     },
     "highwayNets": {
         "info": "HighwahNets is a new architecture designed to ease gradient-based training of very deep networks. The architecture allows information flow over layers and uses gating units to regulate the flow.",
-        "ID": "highwayNets",
+        "fullname": "highwayNets",
         "links": [
             [
                 "Highway Networks",
@@ -43,7 +43,7 @@
     },
     "CW-RNN": {
         "info": "A Clockwork RNN partitions the hidden layers in an RNN into separate modules, each of which processes inputs at its own temporal granularity and computes only at its clock rate.",
-        "ID": "CW-RNN",
+        "fullname": "CW-RNN",
         "links": [
             [
                 "A Clockwork RNN",
@@ -57,7 +57,7 @@
     },
     "fractalNet": {
         "info": "fractalNet introduce an architecture design strategy that repeatedly applies an expansion rule to generate a DNN. It proves that ultra-deep NNs with residual connections are possible",
-        "ID": "fractalNet",
+        "fullname": "fractalNet",
         "links": [
             [
                 "Fractalnet: ultra-deep neural networks without residuals",
@@ -71,7 +71,7 @@
     },
     "DPN": {
         "info": "DPN proposes a new topology of connection paths internally by evealing the equivalence of the ResNet and DenseNet.",
-        "ID": "DPN",
+        "fullname": "DPN",
         "links": [
             [
                 "Dual Path Networks",
@@ -84,7 +84,7 @@
     },
     "LSTM": {
         "info": "A long short-team memory is one of the gated RNNs which allow the network to forget the old state besides accumulation infomation. The self-loop RNN in an LSTM is conditioned on the context by a group of layers.",
-        "ID": "LSTM",
+        "fullname": "LSTM",
         "links": [
             [
                 "Long Short-Term Memory",
@@ -110,7 +110,7 @@
     },
     "BRNN": {
         "info": "A bidirectional RNN combines an RNN that moves forward with another RNN that moves backward.  It is used for making predictions that depend on the whole input sequence.",
-        "ID": "BRNN",
+        "fullname": "BRNN",
         "links": [
             [
                 "Bidirectional recurrent neural networks",
@@ -136,7 +136,7 @@
     },
     "tree-LSTM": {
         "info": "A tree LSTM is a generalization of LSTM with a tree-structured network topology.",
-        "ID": "tree-LSTM",
+        "fullname": "tree-LSTM",
         "links": [
             [
                 "Enhanced LSTM for Natural Language Inference",
@@ -150,7 +150,7 @@
     },
     "DT-RNN": {
         "info": "A deep transition RNN appends an MLP with one or more layers in hidden-to-hidden transition to an RNN.",
-        "ID": "DT-RNN",
+        "fullname": "DT-RNN",
         "links": [
             [
                 "How to Construct Deep Recurrent Neural Networks",
@@ -160,7 +160,7 @@
     },
     "DT(S)-RNN": {
         "info": "A deep transition RNN with shortcut appends input-to-hidden shortcut connections to a DT-RNN.",
-        "ID": "DT(S)-RNN",
+        "fullname": "DT(S)-RNN",
         "links": [
             [
                 "How to Construct Deep Recurrent Neural Networks",
@@ -170,7 +170,7 @@
     },
     "recursive": {
         "info": "A recursive neural network is a generalization of recurrent network with a tree-structured computational graph. The depth is reduced from n to log(n), which may help deal with long-term dependencies.",
-        "ID": "recursive",
+        "fullname": "recursive",
         "links": [
             [
                 "Recursive Distributed Representations",
@@ -196,7 +196,7 @@
     },
     "VGG": {
         "info": "VGGNet consists of 16/19 convolutional layers and has a highly modularized architecture. It stacks small size convolutional layers to increase the depth. ",
-        "ID": "VGG",
+        "fullname": "VGG",
         "links": [
             [
                 "ImageNet Classification with Deep Convolutional Neural Networks",
@@ -206,7 +206,7 @@
     },
     "alexNet": {
         "info": "In 2012, AlexNet significantly outperformed all the prior competitors and won the ImageNet LSVRC challenge.  It has a similar structure as LeNet, but it changes the activation function from Sigmoid to Relu and uses dropout to deal with overfitting. Traning on two GPUs enables AlexNet to learn from a large amount of data.",
-        "ID": "alexNet",
+        "fullname": "alexNet",
         "links": [
             [
                 "ImageNet Classification with Deep Convolutional Neural Networks",
@@ -216,7 +216,7 @@
     },
     "mixNet": {
         "info": "Two forms of connections, additon and concatenation, have the superiority and insufficiency. To combine their advantages and avoid certain limitations on representation learning, we present a highly efficient and modularized Mixed Link Network (MixNet) which is equipped with flexible inner link (addition) and outer link (concatenation) modules. ",
-        "ID": "mixNet",
+        "fullname": "mixNet",
         "links": [
             [
                 "Mixed Link Networks",
@@ -226,7 +226,7 @@
     },
     "GRU": {
         "info": "A gated recurrent unit is one of the gated RNNs, including an update gate and a reset gate.",
-        "ID": "GRU",
+        "fullname": "GRU",
         "links": [
             [
                 "An Empirical Exploration of Recurrent Network Architectures",
@@ -252,7 +252,7 @@
     },
     "attention": {
         "info": "The attention mechanism is based on the seq2seq model, in which multiple vector Cs are generated from the hidden units of the input sentence.",
-        "ID": "attention",
+        "fullname": "attention",
         "links": [
             [
                 "End-to-end attention-based large vocabulary speech recognition",
@@ -274,7 +274,7 @@
     },
     "RNN": {
         "info": "Vanilla RNN is a simple recurrent neural network is used for processing sequences of variable length, in which a state contains information about the whole past sequence. It shares same parameters across different time steps of the sequence.",
-        "ID": "RNN",
+        "fullname": "RNN",
         "links": [
             [
                 "Finding Structure in Time",
@@ -296,7 +296,7 @@
     },
     "ESN with leaky units": {
         "info": "An ESN with leaky units appends an ESN by leaky integration units.",
-        "ID": "ESN with leaky units",
+        "fullname": "ESN with leaky units",
         "links": [
             [
                 "A Novel Model of Leaky Integrator Echo State Network for Time-Series Prediction",
@@ -310,7 +310,7 @@
     },
     "seq2seq": {
         "info": "A sequence to sequence model is mainly used for translation. The model reads the input sentence into a vector C and decomposes C into translation. It is also known as encoder-decoder model.",
-        "ID": "seq2seq",
+        "fullname": "seq2seq",
         "links": [
             [
                 "Multi-task Sequence to Sequence Learning",
@@ -336,7 +336,7 @@
     },
     "SENet": {
         "info": "To boost the representational power of a network, SENet proposes a novel architectural unit, squeeze-and-excitation, to recalibrates channel-wise feature responses. It won ILSVRC 2017 classification.",
-        "ID": "SENet",
+        "fullname": "SENet",
         "links": [
             [
                 "Squeeze-and-Excitation Networks",
@@ -346,7 +346,7 @@
     },
     "mobileNet": {
         "info": "MoblieNets are based on a streamlined architecture that uses depth-wise separable convolutions to build light weight deep neural networks. It has only two global hyper-parameters that are easy to set.",
-        "ID": "mobileNet",
+        "fullname": "mobileNet",
         "links": [
             [
                 "MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications",
@@ -356,7 +356,7 @@
     },
     "conv seq2seq": {
         "info": "A convolution sequence to sequence model applys CNN structure to map sequence to sequence. It has a faster speed and a high accuracy.",
-        "ID": "conv seq2seq",
+        "fullname": "conv seq2seq",
         "links": [
             [
                 "Attention is All you Need",
@@ -374,7 +374,7 @@
     },
     "leNet": {
         "info": "LeNet-5 is a pioneering 7-level convolutional network proposed by LeCun et al in 1998. It recognises hand-written numbers in 32x32 pixel images. ",
-        "ID": "leNet",
+        "fullname": "leNet",
         "links": [
             [
                 "Gradient-based learning applied to document recognition",
@@ -384,7 +384,7 @@
     },
     "inception": {
         "info": "Inception is a multi-branch module proposed in GoogleNet. This architecture consists of 22 layers and significantly reduces the number of parameters from 60M (AlexNet) to 4M",
-        "ID": "inception",
+        "fullname": "inception",
         "links": [
             [
                 "Going deeper with convolutions",
@@ -402,7 +402,7 @@
     },
     "inception_resNet": {
         "info": "Inception is a multi-branch module proposed in GoogleNet. This architecture consists of 22 layers and significantly reduces the number of parameters from 60M (AlexNet) to 4M",
-        "ID": "inception_resNet",
+        "fullname": "inception_resNet",
         "links": [
             [
                 "Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning",
@@ -421,7 +421,7 @@
     },
     "ESN": {
         "info": "An echo state network is used for solving vanishing/exploding problems, in which recurrent hidden units are set and only output weight are learnt.",
-        "ID": "ESN",
+        "fullname": "ESN",
         "links": [
             [
                 "Minimum Complexity Echo State Network",
@@ -443,7 +443,7 @@
     },
     "denseNet": {
         "info": "Based on the observation that CNNs are more accurate and efficient to train if they contain shorter connections between layers, DenseNet connects each layer to every other layer in a feed-forward fashion. DenseNets alleviate the vanishing-gradient problem, strengthen feature propagation, encourage feature reuse, and substantially reduce the number of parameters.",
-        "ID": "denseNet",
+        "fullname": "denseNet",
         "links": [
             [
                 "Densely Connected Convolutional Networks",
@@ -457,7 +457,7 @@
     },
     "DB-LSTM": {
         "info": "A deep bidirectional LSTM combines a deep bidirectional RNN and a LSTM.",
-        "ID": "DB-LSTM",
+        "fullname": "DB-LSTM",
         "links": [
             [
                 "Speech Recognition with Deep Recurrent Neural Networks",
@@ -479,7 +479,7 @@
     },
     "xception": {
         "info": "The authors present an interpretation of Inception modules as a depthwise convolution followed by a pointwise convolution. This observation leads to a novel CNN architecture inspired by Inception, where Inception modules have been replaced with depthwise separable convolutions.",
-        "ID": "xception",
+        "fullname": "xception",
         "links": [
             [
                 "Xception: Deep Learning with Depthwise Separable Convolutions",
@@ -489,7 +489,7 @@
     },
     "resNeXt": {
         "info": "ResNeXt is a simple, highly modularized network architecture that has only a few hyper-parameters. exposes a new dimension, calleda as cardinality (the size of the set of transformations). ",
-        "ID": "resNeXt",
+        "fullname": "resNeXt",
         "links": [
             [
                 "Aggregated Residual Transformations for Deep Neural Networks",
@@ -499,7 +499,7 @@
     },
     "resNet": {
         "info": "ResNet proposes an architecture that adds skip connections over layers. ResNets are easier to optimize, and can gain accuracy from considerably increased depth.",
-        "ID": "resNet",
+        "fullname": "resNet",
         "links": [
             [
                 "Deep Residual Learning for Image Recognition",
@@ -525,7 +525,7 @@
     },
     "DGLSTM": {
         "info": "A depth-gated LSTM appends depth gates to adjacent layers in LSTM. It performs better in machine translation and language modeling.",
-        "ID": "DGLSTM",
+        "fullname": "DGLSTM",
         "links": [
             [
                 "Depth-Gated Recurrent Neural Networks",
@@ -543,7 +543,7 @@
     },
     "nasNet": {
         "info": "NasNet automatically learns the DNN architcture design by searching through an architecture design space. This architecture design space consists of a set of operations collected based on their prevalence in the CNN literature. The architecture learnt on a small dataset can be transfered to a large dataset.",
-        "ID": "nasNet",
+        "fullname": "nasNet",
         "links": [
             [
                 "Learning Transferable Architectures for Scalable Image Recognition",
@@ -560,7 +560,7 @@
     },
     "stacked RNN": {
         "info": "A stacked RNN stacks more recurrent hidden layers in an RNN to make it deeper. It is also known as deep RNN.",
-        "ID": "stacked RNN",
+        "fullname": "stacked RNN",
         "links": [
             [
                 "Speech Recognition with Deep Recurrent Neural Networks",
@@ -582,7 +582,7 @@
     },
     "time skip connections": {
         "info": "An RNN with time skip connections adds direct connections from variables in the distant past to variables in the present, in order to transfer information more efficiently.",
-        "ID": "time skip connections",
+        "fullname": "time skip connections",
         "links": [
             [
                 "Interactive Language Understanding with Multiple Timescale Recurrent Neural Networks",
@@ -604,7 +604,7 @@
     },
     "squeezeNet": {
         "info": "SqueezeNet is a smaller architecture that achieves AlexNet-level accuracy on ImageNet with 50x fewer parameters.",
-        "ID": "squeezeNet",
+        "fullname": "squeezeNet",
         "links": [
             [
                 "SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size",
@@ -614,7 +614,7 @@
     },
     "polyInception":{
         "info": "PolyInception is a new family of modules that extend inception residual units. PolyInception generalizes the additive combination in Inception residual units via various forms of polynomial compositions to encourage the structural diversity and enhance the expressive power",
-        "ID":"polyInception",
+        "fullname":"polyInception",
         "links":[
             [
                 "PolyNet: A Pursuit of Structural Diversity in Very Deep Networks",
@@ -627,9 +627,9 @@
     },
     "WRN": {
         "info":"Wide Residual Networks (WRN) is a novel architecture which decrease depth and increase width of ResNet blocks. A simple 16-layer WRN outperforms in accuracy and efficiency all previous deep residual networks, achieving new state-of-the-art results on CIFAR, SVHN, and COCO",
-        "ID":"Wide ResNet",
+        "fullname":"Wide ResNet",
         "links": [
-            "Wide Residual Networks", "http://arxiv.org/abs/1605.07146"
+            ["Wide Residual Networks", "http://arxiv.org/abs/1605.07146"]
         ],
         "code":[
          ["Torch", "https://github.com/szagoruyko/wide-residual-networks"],
@@ -638,12 +638,41 @@
     },
     "RIR":{
         "info":"Resnet in Resnet (RiR) is a deep dual-stream architecture that generalizes ResNets and standard CNNs. RiR is easily implemented with no computational overhead. RiR consistently improves performance over ResNets, outperforms architectures with similar amounts of augmentation on CIFAR-10, and establishes a new state-of-the-art on CIFAR-100.",
-        "ID": "ResNet in ResNet",
+        "fullname": "ResNet in ResNet",
         "links":[
-            "Resnet in Resnet: Generalizing Residual Architectures", "https://arxiv.org/abs/1603.08029"
+            ["Resnet in Resnet: Generalizing Residual Architectures", "https://arxiv.org/abs/1603.08029"]
         ],
         "code": [
 
+        ]
+    },
+    "SRU":{
+        "info": "Simple Recurrent Unit (SRU) architecture is a recurrent unit that simplifies the computation by exposing more parallelism. In SRU, the majority of computation for each step is independent of the recurrence and can be easily parallelized. SRU is as fast as a convolutional layer and 5-10x faster than an optimized LSTM. SRUs can be used in a wide range of applications.",
+        "fullname": "Simple Reccurent Unit",
+        "links":[
+            ["TRAINING RNNS AS FAST AS CNNS", "https://arxiv.org/pdf/1709.02755"]
+        ],
+        "code":[
+            ["PyTorch", "https://github.com/taolei87/sru"],
+            ["CNTK", "https://github.com/taolei87/sru"]
+        ]
+    },
+    "LRU":{
+        "info": "Lattice Recurrent Unit(LRU) is an adaptation of GRUs to a lattice multi-dimensional architecture. LRU decouples the recurrent units to enable infomration flow for both time and depth dimensions. LRU enables better convergence and accuracy.",
+        "fullname": "Lattice Recurrent Unit",
+        "links": [
+            ["Lattice Recurrent Unit: Improving Convergence and Statistical Efficiency for Sequence Modeling", "https://arxiv.org/pdf/1710.02254"],
+            ["Lattice-Based Recurrent Neural Network Encoders for Neural Machine Translation","http://www.aaai.org/ocs/index.php/AAAI/AAAI17/paper/download/14320/14220"]
+        ],
+        "code":[
+         ["PyTorch", "https://github.com/chahuja/lru"]   
+        ]
+    },
+    "gridLSTM":{
+        "info": "Grid Long Short-Term Memory is a network where LSTM cells are arranged in a multidimensional grid. It can be applied to vectors, sequences or higher dimensional data. 2D LSTM achieved the state-of-the-art performance on Wikipedia character prediction benchmark. ",
+        "fullname": "Grid Long Short-term Memory",
+        "links": [
+            ["Grid Long Short-Term Memory", "https://arxiv.org/abs/1507.01526"]
         ]
     }
 }
