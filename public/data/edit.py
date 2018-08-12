@@ -20,63 +20,45 @@ def rnn(name):
 
 evofile = open('./evolution.json','r')
 evo = json.load(evofile)
+print(len(evo))
+
+# datasets=[
+#     "params",
+#     "imagenet val top5",        
+#     "imageNet val top1",
+#     "SVHN",
+#     "cifar10",        
+#     "cifar100"
+# ]
+
+# cnnTable = {
+#     "name": 'image classification',
+#     "modelIDs": [],
+#     "datasets": datasets,
+#     "models": {}
+# }
+
 # for nn in evo:
 #     if '1.1' in nn['application'][0]:
-#         for parent in nn['parents']:
-#             parent['link_category'] = ('=>').join(
-#                 [cnn(arc) for arc in parent['link_category'].split('=>')]
-#             )
+#         cnnTable['modelIDs'].append([nn['ID'], [name['name'] for name in nn['names']] ])
+#         for model in nn['names']:
+#             scores = []
+#             for dataset in datasets:
+#                 if model[dataset] and dataset!="params":
+#                     scores.append(100-model[dataset])
+#                 elif dataset=="params":
+#                     scores.append(model[dataset])
+#                 else:
+#                     scores.append(0)
+#             cnnTable['models'][model['name']] = scores
           
-#     else:
-#         for parent in nn['parents']:
-#             parent['link_category'] = ('=>').join(
-#                 [rnn(arc) for arc in parent['link_category'].split('=>')]
-#             )
+#     # else:
+#     #     for parent in nn['parents']:
+#     #         parent['link_category'] = ('=>').join(
+#     #             [rnn(arc) for arc in parent['link_category'].split('=>')]
+#     #         )
 
 
-polyInception =     {
-        "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "2.2.2.2.1.1.standard relu"
-        ],
-        "url": "https://arxiv.org/abs/1611.05725",
-        "citation": "32",
-        "ID": "polyInception",
-        "application": [
-            "1.1.1.general recognition"
-        ],
-        "parents": [
-            {
-                "link_info_l": "generalize the additive combination in Inception residual units via various forms of polynomial compositions; encourages the structural diversity and enhances the expressive power",
-                "ID": "inception_resNet",
-                "link_info_s": "generalize",
-                "link_category": "skip connections+multi-branch=>skip connections+multi-branch"
-            }
-        ],
-        "architecture": [
-            "multi-branch",
-            "skip connections"
-        ],
-        "date": "2016.12.17",
-        "variants": [
-        ],
-        "fullname": "polyNet",
-        "names": [
-            {
-                "imagenet val top5": 4.25,
-                "imageNet val top1": 18.71,
-                "SVHN": None,
-                "cifar10": None,
-                "params": 92,
-                "cifar100": None,
-                "name": "PolyNet"
-            }
-        ]
-    },
 
-evo.append(polyInception)
-
-savefile = open('evolution.json', 'w')
-json.dump(evo, savefile)
+# savefile = open('performances.json', 'w')
+# json.dump([cnnTable], savefile)

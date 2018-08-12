@@ -6,36 +6,38 @@ const COLORS: string[] = [
     // ' #e6f598',
     ' #f46d43',
     // ' #ffffbf',
-    ' #66c2a5',
-    ' #3288bd',
-    ' #5e4fa2',
-    ' #d53e4f',
-    // ' #fee08b',
+    '#66c2a5',
+    '#3288bd',
+    '#fe6e6b',
+    '#51569F',
+    '#B5CF74',
+    '#fee08b',
+    '#8FCCDD',
     ]
 
 const GREEN: string[] = [
-    "#498B77",
-    "#89C2AE",
-    "#C1D6D3"
+    '#498B77',
+    '#89C2AE',
+    '#C1D6D3'
 ]
 const BLUE: string[] = [
-    "#3E97C7",
-    "#72B3CF",
-    "#8FCCDD",
-    "#C8DADE"
+    '#3E97C7',
+    '#72B3CF',
+    '#8FCCDD',
+    '#C8DADE'
 
 ]
 const ORANGE: string[] = [
-    "#E96206",
-    "#F79143",
-    "#F6AD76",
-    "#F7CEA7"
+    '#E96206',
+    '#F79143',
+    '#F6AD76',
+    '#F7CEA7'
 ]
 const PINK: string[] = [
-    "#F6B1C3",
-    "#F07F93",
-    "#DE4863",
-    "#BC0F46"
+    '#F6B1C3',
+    '#F07F93',
+    '#DE4863',
+    '#BC0F46'
 
 ]
 

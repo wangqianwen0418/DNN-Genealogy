@@ -61,6 +61,50 @@
         "training": [
             "3.4.1.dropout",
             "3.2.1.SGD with momentum",
+            "3.4.2.weight decay"
+        ],
+        "url": "https://arxiv.org/abs/1602.07360",
+        "citation": "264",
+        "fullname": "squeezeNet",
+        "application": [
+            "1.1.1.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "same performance with 50x less parameters",
+                "ID": "alexNet",
+                "link_info_s": "50x less parameters",
+                "link_category": "streamlined=>multi-branch"
+            },
+            {
+                "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
+                "ID": "inception",
+                "link_info_s": "split-transfer-merge",
+                "link_category": "multi-branch=>multi-branch"
+            }
+        ],
+        "architecture": [
+            "multi-branch"
+        ],
+        "date": "2016.02.24",
+        "variants": [],
+        "ID": "squeezeNet",
+        "names": [
+            {
+                "imagenet val top5": 17.5,
+                "imageNet val top1": 39.6,
+                "SVHN": null,
+                "cifar10": null,
+                "params": 1.24,
+                "cifar100": null,
+                "name": "squeezeNet"
+            }
+        ]
+    },
+    {
+        "training": [
+            "3.4.1.dropout",
+            "3.2.1.SGD with momentum",
             "3.4.2.weight decay",
             "2.2.2.2.1.1.standard relu"
         ],
@@ -121,50 +165,6 @@
                 "params": 23.8,
                 "cifar100": null,
                 "name": "inception_v2"
-            }
-        ]
-    },
-    {
-        "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay"
-        ],
-        "url": "https://arxiv.org/abs/1602.07360",
-        "citation": "264",
-        "fullname": "squeezeNet",
-        "application": [
-            "1.1.1.general recognition"
-        ],
-        "parents": [
-            {
-                "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
-                "ID": "inception",
-                "link_info_s": "split-transfer-merge",
-                "link_category": "multi-branch=>multi-branch"
-            },
-            {
-                "link_info_l": "same performance with 50x less parameters",
-                "ID": "alexNet",
-                "link_info_s": "50x less parameters",
-                "link_category": "streamlined=>multi-branch"
-            }
-        ],
-        "architecture": [
-            "multi-branch"
-        ],
-        "date": "2016.02.24",
-        "variants": [],
-        "ID": "squeezeNet",
-        "names": [
-            {
-                "imagenet val top5": 17.5,
-                "imageNet val top1": 39.6,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 1.24,
-                "cifar100": null,
-                "name": "squeezeNet"
             }
         ]
     },
@@ -265,7 +265,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "introduce residual connections",
+                "link_info_l": "introduce residual connections to train very deep networks; use batch normalization instead of dropout; use average pooling for the last layer",
                 "ID": "VGG",
                 "link_info_s": "residual connection",
                 "link_category": "streamlined=>skip connections"
@@ -772,7 +772,40 @@
             }
         ]
     },
-
+    {
+        "training": [],
+        "url": "https://arxiv.org/abs/1709.01507",
+        "citation": "48",
+        "fullname": "Squeeze-and-Excitation Networks",
+        "application": [
+            "1.1.1.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "insipired by mobileNet's manipulation on channels which leads to significant performance improvements with slight computional cost",
+                "ID": "mobileNet",
+                "link_info_s": "manipulate channels",
+                "link_category": "streamlined=>skip connections"
+            }
+        ],
+        "architecture": [
+            "skip connections"
+        ],
+        "date": "2017.09.05",
+        "variants": [],
+        "ID": "SENet",
+        "names": [
+            {
+                "imagenet val top5": 4.79,
+                "imageNet val top1": 19.8,
+                "SVHN": null,
+                "cifar10": null,
+                "params": 65.6,
+                "cifar100": null,
+                "name": "seNet_inception_resnetv2"
+            }
+        ]
+    },
     {
         "training": [
             "neural architecture search by reinforcement learning"
@@ -785,6 +818,12 @@
         ],
         "parents": [
             {
+                "link_info_l": "borrow the depthwise separable conv from mobileNet and let neural architecture search (NAS) select from them",
+                "ID": "mobileNet",
+                "link_info_s": "borrow operations",
+                "link_category": "depthwise separable conv=>depthwise separable conv"
+            },
+            {
                 "link_info_l": "borrow the multi-brach, 1x7 then 7x1 convolution, 1x3 then 3x1 convolution from Inception and let neural architecture search (NAS) select from it",
                 "ID": "inception",
                 "link_info_s": "borrow operations",
@@ -795,12 +834,6 @@
                 "ID": "resNet",
                 "link_info_s": "borrow operations",
                 "link_category": "skip connections=>skip connections"
-            },
-            {
-                "link_info_l": "borrow the depthwise separable conv from mobileNet and let neural architecture search (NAS) select from them",
-                "ID": "mobileNet",
-                "link_info_s": "borrow operations",
-                "link_category": "depthwise separable conv=>depthwise separable conv"
             }
         ],
         "architecture": [
@@ -843,43 +876,9 @@
     },
     {
         "training": [],
-        "url": "https://arxiv.org/abs/1709.01507",
-        "citation": "48",
-        "fullname": "Squeeze-and-Excitation Networks",
-        "application": [
-            "1.1.1.general recognition"
-        ],
-        "parents": [
-            {
-                "link_info_l": "insipired by mobileNet's manipulation on channels which leads to significant performance improvements with slight computional cost",
-                "ID": "mobileNet",
-                "link_info_s": "manipulate channels",
-                "link_category": "streamlined=>skip connections"
-            }
-        ],
-        "architecture": [
-            "skip connections"
-        ],
-        "date": "2017.09.05",
-        "variants": [],
-        "ID": "SENet",
-        "names": [
-            {
-                "imagenet val top5": 4.79,
-                "imageNet val top1": 19.8,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 65.6,
-                "cifar100": null,
-                "name": "seNet_inception_resnetv2"
-            }
-        ]
-    },
-    {
-        "training": [],
         "url": "https://arxiv.org/abs/1802.01808",
         "citation": "0",
-        "fullname": "",
+        "fullname": "MixNet",
         "application": [
             "1.1.1.general recognition"
         ],
@@ -1042,12 +1041,6 @@
         ],
         "parents": [
             {
-                "link_info_l": "borrow the depthwise seperable convolutions used in xception",
-                "ID": "xception",
-                "link_info_s": "depthwise seperable conv",
-                "link_category": "depthwise separable conv=>depthwise separable conv"
-            },
-            {
                 "link_info_l": "apply the same streamlined architecture; add batch normalization; replace normal conv blocks with depthwise seperable conv blocks",
                 "ID": "VGG",
                 "link_info_s": "same streamlined architecture",
@@ -1056,8 +1049,14 @@
             {
                 "link_info_l": "mobileNet and squeezeNet both aim to build small networks; MobileNet has better performance and less computation cost compared with SqueezeNet with the same size.",
                 "ID": "squeezeNet",
-                "link_info_s": "same small size with better performance",
+                "link_info_s": "smaller",
                 "link_category": "multi-branch=>streamlined"
+            },
+            {
+                "link_info_l": "borrow the depthwise seperable convolutions used in xception",
+                "ID": "xception",
+                "link_info_s": "depthwise seperable conv",
+                "link_category": "depthwise separable conv=>depthwise separable conv"
             }
         ],
         "architecture": [
@@ -1481,7 +1480,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "LRU is an adaptation of GRUs to a lattice multi-dimensional architecture; LRU decouples the recurrent units to enable infomration flow for both time and depth dimensions; LRU enables better convergence and accuracy",
+                "link_info_l": "LRU decouples the GRU to two dimensions; LRU enables better convergence and accuracy",
                 "ID": "GRU",
                 "link_info_s": "flows of two dimensions",
                 "link_category": "gated=>gated"

@@ -163,7 +163,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 })} 
             </Tabs> */}
             <Tooltip 
-                title={node.label} 
+                title={node.fullname===''?node.label:node.fullname} 
                 mouseEnterDelay={0.2}
             >
                 <div 
@@ -213,7 +213,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         
                     }}
                     >
-                    {capFirstLetter(node.label)}
+                    {capFirstLetter(node.fullname===''?node.label:node.fullname)}
                         {/* {capFirstLetter(cutLabel(node.label, (node.width * scale - 20 ) / (tabH * .7)))} */}
                     </div>
                 </div>

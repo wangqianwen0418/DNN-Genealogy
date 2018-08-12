@@ -157,8 +157,8 @@
         "name": "image classification",
         "datasets": [
             "params",
-            "imagenet val top5",
-            "imageNet val top1",
+            "imagenet top5",
+            "imageNet top1",
             "SVHN",
             "cifar10",
             "cifar100"

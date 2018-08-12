@@ -538,6 +538,7 @@ export default class Evolution extends React.Component<Props, State>{
             // hoverLegend = this.state.legend[cate] ? this.state.legend[cate].hover : false
             clickLegend: boolean = false, hoverLegend: boolean = false,
             everHover = false, everClick = false
+        let keyArc = ''
         cate.forEach((k: string) => {
             let item = legend[k]
             if (item && item.click) {
@@ -545,6 +546,7 @@ export default class Evolution extends React.Component<Props, State>{
             }
             if (item && item.hover) {
                 hoverLegend = true
+                keyArc = k
             }
         })
         Object.keys(legend).forEach(k => {
@@ -633,7 +635,8 @@ export default class Evolution extends React.Component<Props, State>{
                     className="Edge"
                     id={`${from}->${to}`}
                     d={pathData}
-                    stroke={hoverLegend?getColor(cate[0]):'#999'}
+                    stroke={hoverLegend?getColor(keyArc):'#999'}
+                    // stroke="#999"
                     strokeWidth={2}
                     // stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
                     // stroke={clickLegend ? "gray" : getColor(key)}

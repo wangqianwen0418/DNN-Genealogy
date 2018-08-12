@@ -555,7 +555,8 @@
             ]
         ],
         "code":[
-            ["tensorflow", "https://github.com/tensorflow/models/blob/master/research/slim/nets/nasnet/nasnet.py"]  
+            ["tensorflow", "https://github.com/tensorflow/models/blob/master/research/slim/nets/nasnet/nasnet.py"],
+            ["keras", "https://github.com/titu1994/Keras-NASNet"]
         ]
     },
     "stacked RNN": {
