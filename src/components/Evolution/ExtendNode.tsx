@@ -213,7 +213,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                         
                     }}
                     >
-                    {capFirstLetter(node.fullname===''?node.label:node.fullname)}
+                    {capFirstLetter(node.label)}
                         {/* {capFirstLetter(cutLabel(node.label, (node.width * scale - 20 ) / (tabH * .7)))} */}
                     </div>
                 </div>

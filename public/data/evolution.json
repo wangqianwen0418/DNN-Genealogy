@@ -782,7 +782,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "insipired by mobileNet's manipulation on channels which leads to significant performance improvements with slight computional cost",
+                "link_info_l": "SENet is insipired by mobileNet's manipulation on channels; it has significant performance improvements with slight computional cost",
                 "ID": "mobileNet",
                 "link_info_s": "manipulate channels",
                 "link_category": "streamlined=>skip connections"
@@ -1263,7 +1263,7 @@
         "training": [],
         "url": "https://arxiv.org/pdf/1402.3511.pdf",
         "citation": "135",
-        "fullname": "replace some short-time connections with long-time connections",
+        "fullname": "Clockwork RNN",
         "application": [
             "1.2.NLP"
         ],
