@@ -38,11 +38,11 @@ export const mapNetworkToArcs = [
     value: 'nasNet',
     label: 'nasNet',
     children: [{
-        value: 'nasNet_cifar',
-        label: 'nasNet_cifar'
-    }, {
         value: 'nasNet_small',
         label: 'nasNet_small'
+    }, {
+        value: 'nasNet_cifar',
+        label: 'nasNet_cifar'
     }, {
         value: 'nasNet_large',
         label: 'nasNet_large'        
@@ -51,24 +51,25 @@ export const mapNetworkToArcs = [
     value: 'denseNet',
     label: 'denseNet',
     children: [{
-        value: 'denseNet_40_12',
-        label: 'denseNet_40_12'
-    }, {
-        value: 'denseNet_100_12',
-        label: 'denseNet_100_12'
-    }, {
-        value: 'denseNet_100_24',
-        label: 'denseNet_100_24'
-    }, {
         value: 'denseNet_121',
         label: 'denseNet_121'
     } ,{
         value: 'denseNet_201',
         label: 'denseNet_201'
     } ,{
-        value: 'denseNet_bc_100_12',
-        label: 'denseNet-BC(l=100, k=12)'
-    }]
+        value: 'denseNet_169',
+        label: 'denseNet_169'
+    } ]
+}, {
+    value: 'WRN',
+    label: 'WRN',
+    children: [{
+        value: 'wideresnet_16_4',
+        label: 'wideresnet_16_4',
+    } ,{
+        value: 'wideresnet_28_10',
+        label: 'wideresnet_28_10',
+    } ]
 }, {
     value: 'VGG',
     label: 'VGG',

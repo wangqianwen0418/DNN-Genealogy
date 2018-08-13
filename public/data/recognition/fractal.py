@@ -5,13 +5,14 @@ import numpy as np
 from keras.layers import (
     Input,
     BatchNormalization,
-    Activation, Dense, Dropout, Merge,
+    Activation, Dense, Dropout, 
     Convolution2D, MaxPooling2D, ZeroPadding2D,
     Flatten
 )
 from keras.models import Model
 from keras.engine import Layer
 from keras import backend as K
+import json
 
 if K._BACKEND == 'theano':
     from theano.sandbox.rng_mrg import MRG_RandomStreams as RandomStreams
@@ -238,13 +239,33 @@ def build_network(deepest=False):
     return model
 
 if __name__ == "__main__":
-    NB_CLASSES = 10
-    model = build_network()
-    # model.summary()
+    NB_CLASSES = 100
+    NB_EPOCHS = 400
+    LEARN_START = 0.02
+    BATCH_SIZE = 100
+    MOMENTUM = 0.9
+    dropout = [0., 0.1, 0.2, 0.3, 0.4]
+    conv = [(64, 3, 3), (128, 3, 3), (256, 3, 3), (512, 3, 3), (512, 2, 2)]
+    input= Input(shape=(3, 32, 32) if K._BACKEND == 'theano' else (32, 32,3))
+    output = fractal_net(
+        c=3, b=5, conv=conv,
+        drop_path=0.15, dropout=dropout,
+        deepest=False)(input)
+    output = Flatten()(output)
+    output = Dense(NB_CLASSES, init='he_normal')(output)
+    output = Activation('softmax')(output)
+    model = Model(input=input, output=output)
+
     json_string = model.to_json()
+    summary = json.loads(json_string)
+
+    params = {}
     for layer in model.layers:
-        print(layer.name, layer)
-    # with open("fractal.json", "w") as jsonf:
-    #     jsonf.write(json_string)
-    # jsonf.close()
+        params[layer.name] = int(layer.count_params())
+    summary['params'] = params
+
+    filename = "fractal_40"
+    with open("{}.json".format(filename), "w") as jsonf:
+        json.dump(summary, jsonf)
+    jsonf.close()
 

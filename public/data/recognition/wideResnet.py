@@ -19,6 +19,8 @@ sys.setrecursionlimit(2 ** 20)
 import numpy as np
 np.random.seed(2 ** 10)
 
+import keras
+
 from keras.datasets import cifar10
 from keras.models import Model
 from keras.layers import Input, Activation, merge, Dense, Flatten, Dropout
@@ -53,8 +55,8 @@ Y_test = np_utils.to_categorical(y_test, nb_classes)
 # NETWORK/TRAINING CONFIGURATION:
 logging.debug("Loading network/training configuration...")
 
-depth = 16             
-k = 4                  
+depth = 28             
+k = 10                  
 dropout_probability = 0.3 # 0.3 for cifar10 and 0.4 for svhn
 
 weight_decay = 0.0005   # page 10: "Used in all experiments"
@@ -154,7 +156,7 @@ def _wide_basic(n_input_plane, n_output_plane, stride):
         else:
             shortcut = net
 
-        return merge([convs, shortcut], mode="sum")
+        return keras.layers.add([convs, shortcut])
     
     return f
 
@@ -216,7 +218,7 @@ if __name__ == '__main__':
         params[layer.name] = layer.count_params()
     summary['params'] = params
 
-    with open("wideresnet_16_4.json", "w") as jsonf:
+    with open("wideresnet_28_10.json", "w") as jsonf:
         jsonf.write(json.dumps(summary))
     jsonf.close()
 

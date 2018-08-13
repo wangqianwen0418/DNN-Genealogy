@@ -16,6 +16,5 @@ def generate_json(model, filename):
     jsonf.close()
 
 
-model = keras.applications.vgg19.VGG19(include_top=True, weights=None, input_tensor=None, input_shape=None, pooling=None, classes=1000)
-
-generate_json(model, "vgg19")
+model = keras.applications.nasnet.NASNetMobile(input_shape=None, include_top=True, weights=None, input_tensor=None, pooling=None, classes=1000)
+generate_json(model, "nasNet_small")
