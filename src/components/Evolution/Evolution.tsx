@@ -232,7 +232,7 @@ export default class Evolution extends React.Component<Props, State>{
         let dag = new dagre.graphlib.Graph();
         dag.setGraph({
             ranksep: appValue === '1.1.' ? nodeW * 1.5 : nodeW * 1.8,
-            marginx: margin * 2,
+            marginx: margin * 6,
             marginy: margin * 2,
             rankdir: 'LR',
             edgesep: nodeH * .5,

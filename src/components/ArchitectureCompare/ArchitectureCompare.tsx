@@ -167,9 +167,9 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
     async getData(model: string, idx: number) {
         let res = await axios.get('../../data/recognition/' + model + '.json'), nodes: EvoNode[]
         if (idx === 1) {
-            this.setState({model1: model, nodes1: res.data.config.layers, params1: res.data.params})
+            this.setState({model1: model, nodes1: res.data.config.layers, params1: res.data.params?res.data.params:{}})
         } else if (idx === 2) {
-            this.setState({model2: model, nodes2: res.data.config.layers, params2: res.data.params})
+            this.setState({model2: model, nodes2: res.data.config.layers, params2: res.data.params?res.data.params:{}})
         }
     }
 
