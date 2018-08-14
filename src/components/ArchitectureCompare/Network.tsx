@@ -5,12 +5,7 @@ import * as dagre from 'lib/dagre.js';
 import { Node, GraphEdge } from 'lib/@types/dagre';
 import { getLayerColor } from 'helper';
 import * as d3 from 'd3';
-// import worker_script from '../worker';
-// var myWorker = new Worker(worker_script);
 
-// export interface Node {
-//     class?:string
-// }
 const node_w: number = 110, margin: number = 10;
 const nodeH = 40, nodeW = 200, expandMaxH = 200, dotBox = 20, dotRadius = 7.5
 
@@ -18,7 +13,7 @@ export interface Props {
     nodes: EvoNode[],
     params: {},
     name: string,
-    isReady:(mounted:boolean)=>void
+    isReady: (mounted: boolean) => void
 }
 export interface State {
     x: number,
@@ -50,66 +45,81 @@ export default class Network extends React.Component<Props, State> {
         this.handleZoom = this.handleZoom.bind(this)
     }
     async getDag(layers: EvoNode[], params: object, selectedLayers: string[]) {
-        return new Promise<{nodes:Node[]; edges:GraphEdge[];height:number;width:number;}>((resolve, reject)=>{
+        return new Promise<{ nodes: Node[]; edges: GraphEdge[]; height: number; width: number; }>((resolve, reject) => {
             let dag = new dagre.graphlib.Graph();
-            dag.setGraph({ 
+            dag.setGraph({
                 ranksep: nodeH * .6,
                 marginx: margin,
                 marginy: margin,
                 rankdir: 'TB',
-                edgesep: node_w * 0.02 
+                edgesep: node_w * 0.02
             });
             dag.setDefaultEdgeLabel(() => { return {}; });
             layers.forEach(layer => {
-                let details = JSON.stringify(layer.config, null, 2)
-                            .replace(/"/g, '').split('\n'), 
-                    textLength = details.length * 12 + 30
-                var dotsWidth: number = (params[layer.name] ?  Math.trunc(Math.trunc(Math.log(params[layer.name]) / Math.log(10) + 1) / 2 + 1): 0) * dotBox
-                dag.setNode(layer.name, { 
+                let lines = JSON.stringify(
+                    layer.config, (
+                        k, v) => Array.isArray(v) ? JSON.stringify(v) : v, // keep array in one line
+                    2
+                )
+                    .replace(/"/g, '').split('\n'),
+                    textLength = 120,
+                    textWidth = Math.max(...lines.map(d => d.length)) * 6,
+                    nodeExpand = false
+                let details = lines.slice(1, lines.length-1) // remove the start and end bracket
+                var dotsWidth: number = (
+                    params[layer.name] ?
+                        Math.trunc(Math.trunc(Math.log(params[layer.name]) / Math.log(10) + 1) / 2 + 1)
+                        : 0
+                ) * dotBox
+                let nodeWidth = layer.name.length * nodeH / 3 + nodeH + dotsWidth
+                dag.setNode(layer.name, {
                     label: layer.name,
-                    width: layer.name.length*nodeH/4 + nodeH + dotsWidth,
+                    // width: layer.name.length*nodeH/3 + nodeH + dotsWidth,
+                    width: nodeWidth,
                     dotsWidth: dotsWidth,
+                    textWidth: textWidth,
                     height: nodeH,
                     className: layer.class_name,
                     config: layer.config,
-                    expand: false,
+                    expand: nodeExpand,
                     location: 0,
                     textLength: textLength,
-                    details: details,
+                    details,
                     params: params[layer.name]
                 })
                 // IR model or keras model
                 if (layer.inbound_nodes.length > 0) {
                     let inputs = layer.inbound_nodes[0]
-                    inputs.forEach((input:string[]|any[]) => {
+                    inputs.forEach((input: string[] | any[]) => {
                         dag.setEdge(input[0], layer.name)
                     })
                 }
             })
-            
+
             // Selected Layers
             selectedLayers.forEach(layer => {
                 let node = dag.node(layer)
                 dag.setNode(layer, {
                     ...node,
                     height: node.textLength > expandMaxH ? expandMaxH : node.textLength,
+                    width: (node.textWidth + node.dotsWidth),
                     expand: true
                 })
             })
-    
+
             dagre.layout(dag)
-            let nodes:Node[] = [], edges:GraphEdge[] = []
-            dag.nodes().forEach((v:string) => {
+            let nodes: Node[] = [], edges: GraphEdge[] = []
+            dag.nodes().forEach((v: string) => {
                 if (dag.node(v)) {
                     nodes.push(dag.node(v))
                 }
             })
-            dag.edges().forEach((e:string) => {    
+            dag.edges().forEach((e: string) => {
                 edges.push(dag.edge(e))
             });
             let height = dag.graph().height,
                 width = dag.graph().width
-                // console.log(nodes)        
+            // console.log(nodes)        
             resolve({ nodes, edges, height, width });
         });
     }
@@ -117,7 +127,7 @@ export default class Network extends React.Component<Props, State> {
         let that = this
         return (<g className="nodes" >
             {nodes.map((node: Node) => {
-                var dots: number = node.params ? Math.log(node.params) / Math.log(10) + 1: 0, dotsPosition = [],
+                var dots: number = node.params ? Math.log(node.params) / Math.log(10) + 1 : 0, dotsPosition = [],
                     labelWidth = node.width - node.dotsWidth
                 for (var i = 0; i < dots; ++i) {
                     dotsPosition.push({
@@ -125,89 +135,127 @@ export default class Network extends React.Component<Props, State> {
                         y: ((i % 2) + 0.5) * dotBox
                     })
                 }
-                return <g 
-                        className="layers node"
-                        id={`layer_${node.label}`}
-                        key={`layer_${node.label}`}
-                        transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
-                        onClick={() => this.selectLayer(node)}
-                        onWheel={this.handleMouseWheel}
-                        style={{ cursor: 'pointer'}}
-                    >
+                return <g
+                    className="layers node"
+                    id={`layer_${node.label}`}
+                    key={`layer_${node.label}`}
+                    transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
+                    onClick={() => this.selectLayer(node)}
+                    onWheel={this.handleMouseWheel}
+                    style={{ cursor: 'pointer' }}
+                >
 
-                    {dotsPosition.map(pos => <circle className="param-dot" r={dotRadius} cx={pos.x} cy={pos.y} fill="grey"></circle>)}
+                    {dotsPosition.map(
+                        (pos, i) => <circle
+                            key={node.name + '_dot_' + i}
+                            className="param-dot"
+                            r={dotRadius}
+                            cx={pos.x}
+                            cy={pos.y}
+                            fill="grey"
+                        />
+                    )}
+                    {
+                        node.expand ? <text
+                            className="param-number2"
+                            textAnchor="middle"
+                            x={node.dotsWidth / 2 + labelWidth + 5}
+                            y={nodeH * 1.6}
+                            fontSize={nodeH / 2}
+                            fill="grey"
+                        >
+                            {node.params.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        </text> : null
+                    }
                     {node.params ?
-                        <text className="param-number"
-                              textAnchor="middle"
-                              x={node.dotsWidth / 2 + labelWidth}
-                              y={nodeH * 0.6}
-                              fontSize={nodeH / 2}
-                              fill="grey"
-                              style={{display: 'none'}}>
-                            {node.params}
+                        <text
+                            className="param-number"
+                            textAnchor="middle"
+                            x={node.dotsWidth / 2 + labelWidth+5}
+                            y={nodeH * 0.6}
+                            fontSize={nodeH / 2}
+                            fill="grey"
+                            style={{ display: 'none' }}
+                        >
+                            {node.params.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         </text>
                         : null}
                     <rect
                         x={labelWidth}
-                        width={node.dotsWidth} 
+                        width={node.dotsWidth}
                         height={node.height}
                         opacity="0"
                         style={{ fill: 'white' }}
-                        onMouseEnter={function() {
+                        onMouseEnter={function () {
                             d3.selectAll('.param-dot').style('display', 'none')
                             d3.selectAll('.param-number').style('display', 'block')
+                            d3.selectAll('.param-number2').style('display', 'none')
                         }}
-                        onMouseOut={function() {
+                        onMouseOut={function () {
                             d3.selectAll('.param-dot').style('display', 'block')
                             d3.selectAll('.param-number').style('display', 'none')
+                            d3.selectAll('.param-number2').style('display', 'block')
                         }}
                     />
 
-                    <rect 
-                        width={labelWidth} 
+                    <rect
+                        width={labelWidth}
                         height={node.height}
-                        style={{ fill: getLayerColor(node.className), strokeWidth: 3 }} 
+                        style={{ fill: getLayerColor(node.className), strokeWidth: 3 }}
                     />
 
                     {node.expand ?
-                        (<svg width={node.width} height={node.height}>
-                        <g>
-                            <text 
-                                textAnchor="middle"
-                                fill="white"
-                                fontSize={nodeH/2}
-                                x={labelWidth / 2}
-                                y={nodeH/2}
+                        (<foreignObject>
+                            <div
+                                style={{
+                                    width: node.textWidth,
+                                    height: node.height,
+                                    transform: `translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`
+                                }}
                             >
-                            {node.label}
-                            </text>
-                            <text 
-                                textAnchor="middle"
-                                fill="white"
-                                fontSize={nodeH/2}
-                                x={labelWidth / 2}
-                                y={nodeH}
-                            >
-                                --------------
-                            </text>
-                            {node.details.map((str:string, idx: number) => {
-                                return <text 
-                                    key={`${node.label}_config_line_${idx}`}
-                                    textAnchor="left"
-                                    fill="white"
-                                    xmlSpace="preserve"
-                                    fontSize={nodeH * .4}
-                                    x={5}
-                                    y={nodeH * .4 * idx + nodeH*1.2}
+                                <div
+                                    style={{
+                                        width: '100%',
+                                        textAlign: 'center',
+                                        color: 'white',
+                                        fontSize: nodeH / 2,
+                                    }}
+                                    className="nodeHeader"
                                 >
-                                    {str}
-                                </text>
-                            })}
-                            </g></svg>)
-                        : <text 
+                                    {node.label}
+                                </div>
+                                <div
+                                    className="nodeDetails"
+                                    style={{
+                                        width: node.textWidth, height: node.height - nodeH,
+                                        transform: `translate (${node.x - node.width / 2}, 
+                                            ${node.y - node.height / 2})`,
+                                        overflowY: 'scroll',
+                                        overflowX: 'hidden'
+                                    }}
+                                >
+                                    {node.details.map((info:string, lineIdx:number) => {
+                                        return (<p
+                                            key={'node_details_'+lineIdx}
+                                            style={{
+                                                position: 'relative',
+                                                left: 5,
+                                                color: 'white',
+                                                fontSize: nodeH * .4,
+                                                textAlign: 'left'
+                                            }}
+                                        >
+                                            {info}
+                                        </p>)
+
+                                    })}
+                                </div>
+                            </div>
+                        </foreignObject>)
+                        : <text
                             textAnchor="middle"
                             fill="white"
-                            fontSize={nodeH/2}
+                            fontSize={nodeH / 2}
                             x={labelWidth / 2}
                             y={node.height * 0.6}
                         >
@@ -215,8 +263,7 @@ export default class Network extends React.Component<Props, State> {
                         </text>}
                 </g>
             })}
-        </g>
-        )
+        </g>)
     }
     oneEdge(edge: GraphEdge, i: number) {
         let { points, from, to } = edge
@@ -231,34 +278,34 @@ export default class Network extends React.Component<Props, State> {
         }
         let pathData = `${start}  ${vias.join(' ')}`
         return (
-        <g 
-            className="link" 
-            key={`${i}_${from}->${to}`}
-        >
-            <path
-                d={pathData}
-                stroke="gray"
-                fill="none"
-                strokeWidth="2"
-            // markerEnd="url(#arrow)" 
-            />
-            {/* <path
+            <g
+                className="link"
+                key={`${i}_${from}->${to}`}
+            >
+                <path
+                    d={pathData}
+                    stroke="gray"
+                    fill="none"
+                    strokeWidth="2"
+                // markerEnd="url(#arrow)" 
+                />
+                {/* <path
                 key={`${edge.from}->${edge.to}_mask`}
                 d={pathData}
                 stroke="transparent"
                 fill='transparent'
                 strokeWidth="6" /> */}
-        </g>
+            </g>
         )
 
     }
     drawEdges(edges: GraphEdge[]) {
         return (
-        <g className="edges">
-            {edges.map((edge: GraphEdge, i: number) => {
-                return this.oneEdge(edge, i)
-            })}
-        </g>)
+            <g className="edges">
+                {edges.map((edge: GraphEdge, i: number) => {
+                    return this.oneEdge(edge, i)
+                })}
+            </g>)
     }
     // scroll(e: any) {
     //     if (this.shiftDown) {
@@ -294,9 +341,9 @@ export default class Network extends React.Component<Props, State> {
         while (!g.getAttribute('class') || g.getAttribute('class').indexOf('layers') === -1) {
             g = g.parentElement
         }
-        let { selectedLayers }= this.state, 
+        let { selectedLayers } = this.state,
             idx = this.state.selectedLayers
-                    .map((l: any) => l.label).indexOf(g.id.substring(6))
+                .map((l: any) => l.label).indexOf(g.id.substring(6))
         if (idx !== -1) {
             evt.preventDefault()
             g = g.children[1].firstChild
@@ -304,9 +351,9 @@ export default class Network extends React.Component<Props, State> {
             var location = node.location + evt.deltaY, offset: number
             if (location < 0) {
                 location = 0
-            }else if (node.height + location > node.textLength) {
+            } else if (node.height + location > node.textLength) {
                 location = node.textLength - node.height
-                 }
+            }
             g.setAttribute('transform', `translate (0, ${-location})`)
             selectedLayers[idx].location = location
             this.setState({ selectedLayers })
@@ -330,7 +377,7 @@ export default class Network extends React.Component<Props, State> {
         svg.select('.zoom-rect')
             .remove()
         var zoom = d3.zoom()
-            .scaleExtent([1/2, 4])
+            .scaleExtent([0.001, 4])
             .on('zoom', zoomed)
         function zoomed() {
             g.attr('transform', d3.event.transform)
@@ -360,7 +407,7 @@ export default class Network extends React.Component<Props, State> {
         let { nodes: EvoNodes, params } = this.props
         let { nodes, edges } = await this.getDag(EvoNodes, params, []);
         this.setState({ nodes, edges })
-        if(nodes.length>0){
+        if (nodes.length > 0) {
             this.props.isReady(true)
         }
         // let { nodes: EvoNodes } = this.props
@@ -392,9 +439,9 @@ export default class Network extends React.Component<Props, State> {
     //         let svg_h = Math.max(h, this.graphWindow.clientHeight)
     //         let svg_w = Math.max(w, this.graphWindow.clientWidth)
     //         let scale: number = Math.min(
-            //     (this.graphWindow.clientHeight - 2 * margin) / svg_h, 
-            //     (this.graphWindow.clientWidth - 2 * margin) / svg_w
-            // )
+    //     (this.graphWindow.clientHeight - 2 * margin) / svg_h, 
+    //     (this.graphWindow.clientWidth - 2 * margin) / svg_w
+    // )
     //         let x:number = margin + 0.5 * this.graphWindow.clientWidth - 0.5 * w
     //         let y:number = margin
     //         console.info(h, w)
@@ -404,7 +451,7 @@ export default class Network extends React.Component<Props, State> {
     render() {
         let { nodes, edges, x, y, scale } = this.state
         // let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 120,
-            // svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 120
+        // svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 120
         let svgWidth = window.innerWidth * 0.35,
             svgHeight = window.innerHeight * 0.65
 
@@ -422,23 +469,23 @@ export default class Network extends React.Component<Props, State> {
             // let svg_h = this.graphWindow.clientHeight
             // let svg_w = this.graphWindow.clientWidth
             return (
-            <div className="wrapped-graph" id={this.rand}>
-                <svg
-                    width={`${svgWidth}px`}
-                    height={`${svgHeight}px`}
-                >
-                <g className="graph-offset">
-                    <g
-                        className="graph"
-                        // transform={`translate(${x+40}, ${y}) scale(${scale})`}
-                        // transform={`translate(${svgWidth / 2 - Math.max.apply(null, nodes.map((node: Node) => node.x)) / 2 - 60}, 0)`}
+                <div className="wrapped-graph" id={this.rand}>
+                    <svg
+                        width={`${svgWidth}px`}
+                        height={`${svgHeight}px`}
                     >
-                        {this.drawEdges(edges)}
-                        {this.drawNodes(nodes)}
-                    </g>
-                </g>
-                </svg>
-            </div>)
+                        <g className="graph-offset">
+                            <g
+                                className="graph"
+                            // transform={`translate(${x+40}, ${y}) scale(${scale})`}
+                            // transform={`translate(${svgWidth / 2 - Math.max.apply(null, nodes.map((node: Node) => node.x)) / 2 - 60}, 0)`}
+                            >
+                                {this.drawEdges(edges)}
+                                {this.drawNodes(nodes)}
+                            </g>
+                        </g>
+                    </svg>
+                </div>)
         } else {
             return (<div className="graphWindow" ref={(ref) => { this.graphWindow = ref }}>
                 <div className="loader" />
