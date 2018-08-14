@@ -73,8 +73,8 @@ export default class ExtendNode extends React.Component<Props, State>{
         }
     }
     render() {
-        let { node, tabH, glyphXmargin, selected, scale, 
-            duration, zoomed, selectNode, onclickMenu, 
+        let { node, tabH, glyphXmargin, selected, scale,
+            duration, zoomed, selectNode, onclickMenu,
             pinNode, transX, transY, changeGlyphZoom, show } = this.props
         {/* <div style={{ height: node.height }}>
             <img
@@ -87,48 +87,48 @@ export default class ExtendNode extends React.Component<Props, State>{
         </div> */}
         let { showpin, pin } = this.state
 
-        let onclick = function (item: { key: string }) {
-            onclickMenu(node, item.key)
-        }
-        const menu = (
-            <Menu onClick={onclick}>
-                <Menu.Item key="text">text intro</Menu.Item>
-                <Menu.Item key="compare">compare performance</Menu.Item>
-                <Menu.Item
-                    key="detailed"
-                    disabled={mapNetworkToArcs.filter((d: any) => (d.label === node.ID)).length === 0}
-                >
-                    detailed architecture
-                </Menu.Item>
-            </Menu>
-        )
+        // let onclick = function (item: { key: string }) {
+        //     onclickMenu(node, item.key)
+        // }
+        // const menu = (
+        //     <Menu onClick={onclick}>
+        //         <Menu.Item key="text">text intro</Menu.Item>
+        //         <Menu.Item key="compare">compare performance</Menu.Item>
+        //         <Menu.Item
+        //             key="detailed"
+        //             disabled={mapNetworkToArcs.filter((d: any) => (d.label === node.ID)).length === 0}
+        //         >
+        //             detailed architecture
+        //         </Menu.Item>
+        //     </Menu>
+        // )
 
         // return <Transition in={zoomed} timeout={duration}>
         //     {(status: any) => {
         return (
-        <div 
-            id={`exnode_${node.ID}`}
-            className={`ExtendNode Node ${zoomed ? 'zoomed' : 'collapsed'} ${show ? '' : 'faded'}`}
-            onMouseEnter={() => this.setState({ showpin: true })}
-            onMouseLeave={() => this.setState({ showpin: false })}
-            // onMouseOut={()=>this.setState({showpin:false})}
-            style={{
-                position: 'absolute',
-                left: transX + node.x * scale - node.width * scale / 2,
-                top: transY + node.y * scale - node.height * scale / 2,
-                backgroundColor: 'white',
-                height: node.height * scale+ 'px',
-                width: node.width * scale + 'px',
-                visibility: zoomed ? 'visible' : 'hidden',
-                outline: `${selected ? 3 : 0.5}px ${selected ? 'dashed' : 'solid'} #aaa`,
-                // opacity: show?1:0.2,
-                // borderRadius: "5px"
-                // ...defaultStyle,
-                // ...transitionStyles[status]
+            <div
+                id={`exnode_${node.ID}`}
+                className={`ExtendNode Node ${zoomed ? 'zoomed' : 'collapsed'} ${show ? '' : 'faded'}`}
+                onMouseEnter={() => this.setState({ showpin: true })}
+                onMouseLeave={() => this.setState({ showpin: false })}
+                // onMouseOut={()=>this.setState({showpin:false})}
+                style={{
+                    position: 'absolute',
+                    left: transX + node.x * scale - node.width * scale / 2,
+                    top: transY + node.y * scale - node.height * scale / 2,
+                    backgroundColor: 'white',
+                    height: node.height * scale + 'px',
+                    width: node.width * scale + 'px',
+                    visibility: zoomed ? 'visible' : 'hidden',
+                    outline: `${selected ? 3 : 0.5}px ${selected ? 'dashed' : 'solid'} #aaa`,
+                    // opacity: show?1:0.2,
+                    // borderRadius: "5px"
+                    // ...defaultStyle,
+                    // ...transitionStyles[status]
 
-            }}
-        >
-            {/* <Tabs defaultActiveKey={`0`}>
+                }}
+            >
+                {/* <Tabs defaultActiveKey={`0`}>
                 <TabPane
                     tab={
                         <div style={{ height: "100%", display: "inline-block" }}>
@@ -162,115 +162,124 @@ export default class ExtendNode extends React.Component<Props, State>{
                     </TabPane>
                 })} 
             </Tabs> */}
-            <Tooltip 
-                title={node.fullname===''?node.label:node.fullname} 
-                mouseEnterDelay={0.2}
-            >
-                <div 
-                    className="Node tab"
-                    style={{
-                        height: tabH + 'px',
-                        width: node.width * scale +'px',
-                        borderBottom: '0.5px solid #aaa',
-                        display: 'flex'
-                        // overflow: "hidden",
-                        // whiteSpace:"nowrap",
-                        // textOverflow: "ellipsis",
-                    }}
+                <Tooltip
+                    title={node.fullname === '' ? node.label : node.fullname}
+                    mouseEnterDelay={0.2}
                 >
-
-                    <div 
+                    <div
+                        className="Node tab"
                         style={{
-                        // width: node.width * scale * .2 + 'px',
-                        width: '20px',
-                        height: '100%',
-                        // display: "inline-block"
+                            height: tabH + 'px',
+                            width: node.width * scale + 'px',
+                            borderBottom: '0.5px solid #aaa',
+                            display: 'flex'
+                            // overflow: "hidden",
+                            // whiteSpace:"nowrap",
+                            // textOverflow: "ellipsis",
                         }}
                     >
-                        {node.arc.map((d: string) => (
-                            <div 
-                                style={{
-                                backgroundColor: getColor(d),
+
+                        <div
+                            style={{
+                                // width: node.width * scale * .2 + 'px',
+                                width: '20px',
+                                height: '100%',
+                                // display: "inline-block"
+                            }}
+                        >
+                            {node.arc.map((d: string) => (
+                                <div
+                                    style={{
+                                        backgroundColor: getColor(d),
+                                        width: '100%',
+                                        height: `${100 / node.arc.length}%`
+                                    }}
+                                />
+                            ))}
+                        </div>
+
+                        <div
+                            style={{
+                                padding: '2px',
+                                fontSize: tabH * .7 + 'px',
+                                // webkitTextFillColor: 'black',
+                                transform: `translate(0, -10)`,
+                                lineHeight: '100%',
+                                cursor: 'pointer',
                                 width: '100%',
-                                height: `${100 / node.arc.length}%`
-                                }} 
-                            />
-                        ))}
-                    </div>
+                                overflow: 'hidden',
+                                whiteSpace: 'nowrap',
+                                textOverflow: 'ellipsis',
 
-                    <div 
-                        style={{
-                        padding: '2px',
-                        fontSize: tabH * .7 + 'px',
-                        // webkitTextFillColor: 'black',
-                        transform: `translate(0, -10)`,
-                        lineHeight: '100%',
-                        cursor: 'pointer',
-                        width: '100%',
-                        overflow: 'hidden',
-                        whiteSpace:'nowrap',
-                        textOverflow: 'ellipsis',
-                        
-                    }}
-                    >
-                    {capFirstLetter(node.label)}
-                        {/* {capFirstLetter(cutLabel(node.label, (node.width * scale - 20 ) / (tabH * .7)))} */}
+                            }}
+                        >
+                            {capFirstLetter(node.label)}
+                            {/* {capFirstLetter(cutLabel(node.label, (node.width * scale - 20 ) / (tabH * .7)))} */}
+                        </div>
                     </div>
-                </div>
-            </Tooltip>
-            <img
-                className="abstract Node"
-                src={`../../images/${node.label}_.png`}
-                // style={{
-                //     margin:`${(node.width * scale) * .1}px  ${(node.height * scale - tabH) * .1}px`,
-                // }}
-                style={{ margin: `0px ${glyphXmargin}px` }}
-                height={(node.height * scale - tabH) * 1}
-                width={(node.width * scale - 2 * glyphXmargin)}
-                onMouseDown={this.mouseDown}
-                onMouseUp={(e) => { this.mouseUp(e, node) }} />
-            <div 
-                className="floatIcon"
-                style={{
-                    position: 'absolute',
-                    right: '0px',
-                    bottom: '0px',
-                    color: 'gray'
-                }}
-            >
-                <Icon 
-                    className="pin" 
-                    type="pushpin"
+                </Tooltip>
+                <img
+                    className="abstract Node"
+                    src={`../../images/${node.label}_.png`}
+                    // style={{
+                    //     margin:`${(node.width * scale) * .1}px  ${(node.height * scale - tabH) * .1}px`,
+                    // }}
+                    style={{ margin: `0px ${glyphXmargin}px` }}
+                    height={(node.height * scale - tabH) * 1}
+                    width={(node.width * scale - 2 * glyphXmargin)}
+                    onMouseDown={this.mouseDown}
+                    onMouseUp={(e) => { this.mouseUp(e, node) }} />
+                <div
+                    className="floatIcon"
                     style={{
-                        opacity: pin || showpin ? 1 : 0,
-                        color: pin ? 'red' : 'gray',
-                        cursor: 'pointer',
-                        transform: `rotate(${pin ? 45 : 0}deg)`
+                        position: 'absolute',
+                        right: '0px',
+                        bottom: '0px',
+                        color: 'gray'
                     }}
+                >
+                    <Icon
+                        className="pin"
+                        type="pushpin"
+                        style={{
+                            opacity: pin || showpin ? 1 : 0,
+                            color: pin ? 'red' : 'gray',
+                            cursor: 'pointer',
+                            transform: `rotate(${pin ? 45 : 0}deg)`
+                        }}
 
-                    onClick={(e: React.MouseEvent<any>) => {
-                        let { pin } = this.state
-                        e.stopPropagation()
-                        e.preventDefault()
-                        this.setState({ pin: !pin })
-                        pinNode(node)
+                        onClick={(e: React.MouseEvent<any>) => {
+                            let { pin } = this.state
+                            e.stopPropagation()
+                            e.preventDefault()
+                            this.setState({ pin: !pin })
+                            pinNode(node)
 
-                    }} 
-                />
-                {!showpin&&pin ?<span/>: <span style={{opacity: showpin ? 1 : 0}}>
-                    <Icon 
-                        type="arrows-alt"
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => this.props.changeGlyphZoom(node.label)}
+                        }}
                     />
-                    <Dropdown overlay={menu} className="infoButton" >
+                    {!showpin && pin ? <span /> : <span style={{ opacity: showpin ? 1 : 0 }}>
+                        <Icon
+                            type="arrows-alt"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => this.props.changeGlyphZoom(node.label)}
+                        />
+                        <Icon
+                            type="ellipsis"
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => {
+                                if (mapNetworkToArcs.filter((d: any) => (d.label === node.ID)).length !== 0) {
+                                    this.props.onclickMenu(node, 'detailed')
+                                }
+                            }}
+                        />
+                        {/* <Dropdown overlay={menu} className="infoButton" >
                         <a className="infoTrigger"> ...</a>
-                    </Dropdown>
-                </span>}
+                    </Dropdown> */}
+                    </span>}
+
+                </div>
 
             </div>
-
-        </div>
         )
         // }}
         {/* </Transition> */ }

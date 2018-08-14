@@ -1193,7 +1193,7 @@
                 "link_info_l": "Introduce a CNN structure to map sequence to sequence;  Compared previous RNN architecture, it has a faster speed with a high accuracy.",
                 "ID": "seq2seq",
                 "link_info_s": "CNN for high speed",
-                "link_category": ""
+                "link_category": "gated"
             }
         ],
         "architecture": [],

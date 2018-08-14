@@ -511,7 +511,7 @@ export default class Evolution extends React.Component<Props, State>{
             })
             return (
                 <ExtendNode
-                    key={node.ID}
+                    key={'extended_'+node.ID}
                     zoomed={zoomed}
                     hovered={hovered}
                     scale={scale}
