@@ -4,4 +4,4 @@
 >> npm install
 >> npm start
 
-### contributions are wellcomed
+### contributions are wellcomed !
