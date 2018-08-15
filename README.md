@@ -1,3 +1,7 @@
-# model-picker #
+# DNN Genealogy
 
-help beginners quickly pick the deep learning models they need
+### how to run it
+>> npm install
+>> npm start
+
+### contributions are wellcomed
