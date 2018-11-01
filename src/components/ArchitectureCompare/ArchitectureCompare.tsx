@@ -38,11 +38,11 @@ export const mapNetworkToArcs = [
     value: 'nasNet',
     label: 'nasNet',
     children: [{
-        value: 'nasNet_small',
-        label: 'nasNet_small'
-    }, {
         value: 'nasNet_cifar',
         label: 'nasNet_cifar'
+    }, {
+        value: 'nasNet_small',
+        label: 'nasNet_small'
     }, {
         value: 'nasNet_large',
         label: 'nasNet_large'        
@@ -84,14 +84,14 @@ export const mapNetworkToArcs = [
     value: 'resNet',
     label: 'resNet',
     children: [{
+        value: 'resNet_v1_32_cifar',
+        label: 'resNet_v1_32_cifar'
+    }, {
         value: 'resNet_v1_152',
         label: 'resNet_v1_152'
     }, {
         value: 'resNet_v1_50',
         label: 'resNet_v1_50'
-    }, {
-        value: 'resNet_v1_32_cifar',
-        label: 'resNet_v1_32_cifar'
     }, {
         value: 'resNet_v1_56_cifar',
         label: 'resNet_v1_56_cifar'

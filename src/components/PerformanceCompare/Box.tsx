@@ -237,7 +237,7 @@ export default class Box extends React.Component<Props, {}>{
                 legend:{
                     type:'scroll',
                     // data: Array.from(new Set(Object.keys(models).map(d=>d.split('_')[0]))),
-                    data: currentIDs,
+                    data: this.props.selectedNN?currentIDs:['no DNN is selected'],
                     top: `${top/2}%`,
                     orient: 'vertical',
                     left:'left',
