@@ -699,16 +699,16 @@
         ],
         "parents": [
             {
-                "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
-                "ID": "inception",
-                "link_info_s": "split-transfer-merge",
-                "link_category": "multi-branch=>multi-branch"
-            },
-            {
                 "link_info_l": "train very deep networks without residual connections",
                 "ID": "resNet",
                 "link_info_s": "deep without residual",
                 "link_category": "skip connections=>multi-branch"
+            },
+            {
+                "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
+                "ID": "inception",
+                "link_info_s": "split-transfer-merge",
+                "link_category": "multi-branch=>multi-branch"
             }
         ],
         "architecture": [

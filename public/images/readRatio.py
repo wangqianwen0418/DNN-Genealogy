@@ -7,7 +7,7 @@ ratio = dict()
 for model in data:
     name = model['ID']
     try:
-        im = Image.open('./{}_.png'.format(name))
+        im = Image.open('./{}.png'.format(name))
         w, h = im.size
         ratio[name]= {'w':w, 'h':h}
     except Exception:
@@ -15,3 +15,6 @@ for model in data:
 # print(ratio)
 with open('../../src/assets/ratio.json', 'w') as save_file:
     json.dump(ratio, save_file)
+
+
+        

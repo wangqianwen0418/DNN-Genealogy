@@ -1095,6 +1095,7 @@ export default class Evolution extends React.Component<Props, State>{
                 onCancel={() => this.setState({ modalVisible: false })}
                 maskClosable={true}
                 key={Math.random()}
+                align=''
             >
                 <ArchitectureCompare network={detailed} />
             </Modal>
@@ -1103,6 +1104,7 @@ export default class Evolution extends React.Component<Props, State>{
                 visible={glyphZoom}
                 onCancel={() => { this.setState({ glyphZoom: false }) }}
                 footer={null}
+                align=''
                 
             // onOk={this.handleOk}
             // onCancel={this.handleCancel}

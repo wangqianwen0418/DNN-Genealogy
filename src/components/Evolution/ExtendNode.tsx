@@ -220,7 +220,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                 </Tooltip>
                 <img
                     className="abstract Node"
-                    src={`../../images/${node.label}_.png`}
+                    src={`../../images/${node.label}.png`}
                     // style={{
                     //     margin:`${(node.width * scale) * .1}px  ${(node.height * scale - tabH) * .1}px`,
                     // }}
