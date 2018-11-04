@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import './PerformanceCompare.css';
 import { NN, Performances } from 'types';
-import { Tabs, Tooltip } from 'antd';
+import { Tabs, Tooltip, Card } from 'antd';
 import Box from './Box';
 
 export interface Props {
@@ -84,14 +84,20 @@ export default class PerformanceCompare extends React.Component<Props, State>{
     render() {
         let {currentNNs, selectedNN} = this.props
         let tables = this.getTables()
-        if(tables.length>0){
+        if(tables.length>0 && selectedNN.ID){
             // if (this.props.database === 'nonsequence') {
             //     return <Box performances={tables[0]}/>
             // } else {
             //     return <BarChart database={this.props.database} nn={this.props.nn} op={this.props.op} />
             // }
             return (
-            <Tabs defaultActiveKey="0" className="View ViewBottom">
+                <Card
+                bordered={false}
+                title={<span style={{ fontSize: '1.2em' }}>Performances</span>}
+                className="View ViewBottom"
+                bodyStyle={{height: 'calc(100% - 48px)'}}
+            >
+            <Tabs defaultActiveKey="0" className="performance" style={{height: '100%'}}>
                 {tables.map((table:Performances, tabIdx:number)=>{
                     return (
                     <TabPane 
@@ -105,9 +111,18 @@ export default class PerformanceCompare extends React.Component<Props, State>{
                     )
                 })}
             </Tabs>
+            </Card>
             )
         }else{
-            return <div className="View ViewBottom"/>
+            return <Card
+            bordered={false}
+            title={<span style={{ fontSize: '1.2em' }}>Performances</span>}
+            className="View ViewBottom"
+            bodyStyle={{height: 'calc(100% - 48px)'}}
+        > <div>
+            Click DNNs to compare performance here.
+            </div>
+        </Card>
         }
         
     }

@@ -24,7 +24,7 @@ export default class Box extends React.Component<Props, {}>{
         console.info(models, datasets, modelIDs, this.props.currentNNs)
         let currentIDs = this.props.currentNNs.map(d=>d.ID)
 
-        let left = 25, right = 15, top = 20, bottom = 25,
+        let left = 25, right = 5, top = 10, bottom = 30,
             step = (100 - left - right) / (datasets.length - 1)
         let layout = {
             left: `${left}%`,
@@ -50,7 +50,13 @@ export default class Box extends React.Component<Props, {}>{
                     series.push({
                         name: d[0],
                         type:"bar",
-                        data: models[variant]
+                        data: models[variant],
+                        tooltip:{
+                            formatter:(params: Object|Array<any>, ticket: string) => {
+                                console.info(params)
+                                return `${params['seriesName']}</br>${variant}: ${params['value']}`
+                            }
+                        }
                     })
                 })
             }
@@ -63,11 +69,18 @@ export default class Box extends React.Component<Props, {}>{
         //         data: records
         //     }
         // })
+
+        let selected = {}
+            currentIDs.forEach(id=>{
+                selected[id] = (id===this.props.selectedNN.ID)
+            })
+
         option = {
             legend: {
                 top: `${top / 2}%`,
                 orient: 'vertical',
                 left: 'left',
+                selected
             },
             tooltip: {},
             grid: { ...layout },
