@@ -36,14 +36,30 @@ const appData = [
     //     value: "1."
     // }, 
     {
-        label: 'Non-Sequential Data',
-        key: 'Non-Sequential Data',
-        value: '1.1.'
+        label: 'classification',
+        key: 'classification',
+        value: '1',
+        selectable: false,
+        children:[{
+            label: 'Non-Sequential Data',
+            key: 'Non-Sequential Data',
+            value: '1.1.'
+        },
+        {
+            label: 'Sequential Data',
+            key: 'Sequential Data',
+            value: '1.2.'
+        }],
     },
     {
-        label: 'Sequential Data',
-        key: 'Sequential Data',
-        value: '1.2.'
+        label: 'Object Detection',
+        key: 'Object Detection',
+        value: '2'
+    },
+    {
+        label: 'Segmentation',
+        key: 'Segmentation',
+        value: '3'
     }
 ]
 
@@ -73,7 +89,7 @@ export interface State {
     selectedNode: Node | undefined,
     h: number | undefined,
     w: number | undefined,
-    appValue: '1.1.' | '1.2.',
+    appValue: string,
     // appData: any,
     topDoi: Node[],
     topParent: Node | undefined,
@@ -161,7 +177,7 @@ export default class Evolution extends React.Component<Props, State>{
         let resText = await axios.get('../../data/textInfo.json')
         this.textInfo = resText.data
         // evolution data
-        let res = await axios.get('../../data/evolution.json'),
+        let res = await axios.get('../../data/dnns.json'),
             datum: NN[] = res.data,
             { appValue } = this.state;
         
@@ -223,7 +239,6 @@ export default class Evolution extends React.Component<Props, State>{
             }
             // console.log(nonsequenceBenchmarks)
         }
-
         this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
     }
     getDag(datum: NN[], selectedNode: Node | undefined = undefined) {
@@ -285,7 +300,6 @@ export default class Evolution extends React.Component<Props, State>{
                 })
             }
         })
-
         // const getEdgeWeight = (e: dagre.Edge) => dag.node(e.v).api + dag.node(e.w).api
         const getEI = (v: Edge) => 1
         let distanceDict: any
@@ -316,6 +330,7 @@ export default class Evolution extends React.Component<Props, State>{
                 // ),
                 // doi = api_diff + r_dist * distance
                 let doi = api + r_dist * distance
+                console.info("api", api,"r_dist", r_dist, "distance", distance )
 
                 dag.setNode(v, {
                     ...node,
@@ -370,6 +385,10 @@ export default class Evolution extends React.Component<Props, State>{
                 pinned: boolean = (pinNodes.indexOf(v) !== -1)
             if (node) {
                 node.doi = (node.doi - minDoi) / (maxDoi - minDoi)
+                if (isNaN(node.doi)){
+                    node.doi = 1
+                }
+                console.info(node.doi)
                 dag.setNode(v, {
                     ...node,
                     isZoomed: pinned,
@@ -444,6 +463,8 @@ export default class Evolution extends React.Component<Props, State>{
             ),
             transX = scaleX > scaleY ? (this.ref.clientWidth - width * scale) / 2 : 0,
             transY = scaleY > scaleX ? (this.ref.clientHeight - height * scale) / 2 : 0
+        console.info(nodes, transX, scale)
+
         return { nodes, edges, height, width, topDoi, scale, transX, transY }
     }
     drawNodes(nodes: Node[]) {
@@ -801,7 +822,7 @@ export default class Evolution extends React.Component<Props, State>{
     //                 .on("touchstart.zoom", null)
 
     // }
-    onChange = (appValue: '1.1.' | '1.2.') => {
+    onChange = (appValue: string) => {
         if (appValue === undefined) {
             return
         }
@@ -1006,8 +1027,8 @@ export default class Evolution extends React.Component<Props, State>{
                     treeData={appData}
                     placeholder="select your data type"
                     // multiple
-                    treeDefaultExpandAll={false}
                     onChange={this.onChange}
+                    treeDefaultExpandAll={true}
                 />
                 <div>
                     <Button

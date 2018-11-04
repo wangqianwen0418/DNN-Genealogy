@@ -1,4 +1,134 @@
 {
+    "U-Net":{
+        "info": " ",
+        "fullname": "U-Net",
+        "links": [
+            [
+                "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+                "https://arxiv.org/abs/1505.04597"
+            ]
+        ]
+    },
+    "FCN":{
+        "info":"FCNs only have convolutional and pooling layers which give them the ability to make segmentations on arbitrary-sized inputs.",
+        "fullname":"FCN",
+        "links":[
+            [
+                "Fully Convolutional Networks for Semantic Segmentation",
+                "https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf"
+            ]
+        ]
+    },
+    "SegNet":{
+        "info": "SgeNet is a deep fully convolutional neural network architecture for semantic pixel-wise segmentation. The novelty of SegNet is that he decoder uses pooling indices computed in the max-pooling step of the corresponding encoder to perform non-linear upsampling. This eliminates the need for learning to upsample.",
+        "fullname": "SegNet",
+        "links":[
+            [
+                "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                "https://arxiv.org/abs/1511.00561"
+            ]
+        ]
+    },
+    "DeconvNet":{
+        "info": "DeconvNet is a novel semantic segmentation algorithm by learning a deconvolution network. The decoder is composed of deconvolution and unpooling layers.",
+        "fullname":"DeconvNet",
+        "links":[
+            [
+                "Learning deconvolution network for semantic segmentation",
+                "https://arxiv.org/abs/1505.04366"
+            ]
+        ]
+    },
+    "RedNet":{
+        "info": "In RedNet, the residual module is applied to both the encoder and decoder as the basic building block, and the skip-connection is used to bypass the spatial feature between the encoder and decoder. In order to incorporate the depth information of the scene, a fusion structure is constructed, which makes inference on RGB image and depth image separately, and fuses their features over several layers. In order to efficiently optimize the network's parameters, a `pyramid supervision' training scheme is proposed to apply supervised learning over different layers in the decoder.",
+        "fullname": "residual encoder decoder network",
+        "links":[
+            [
+                "RedNet: Residual Encoder-Decoder Network for indoor RGB-D Semantic Segmentation",
+                "https://arxiv.org/abs/1806.01054"
+            ]
+        ]
+    },
+    "RefineNet": {
+        "info": "RefineNet is a generic multi-path refinement network that explicitly exploits all the information available along the down-sampling process to enable high-resolution prediction using long-range residual connections.",
+        "fullname": "RefineNet",
+        "links":[
+            [
+                "RefineNet: Multi-Path Refinement Networks for High-Resolution Semantic Segmentation",
+                "https://arxiv.org/abs/1611.06612"
+            ]
+        ]
+    },
+    "PSPNet":{
+        "info": "In this paper, we exploit the capability of global context information by different-region-based context aggregation through our pyramid pooling module together with the proposed pyramid scene parsing network.",
+        "fullname": "PSPNet",
+        "links":[
+            [
+                "Pyramid Scene Parsing Network",
+                "https://arxiv.org/abs/1612.01105"
+            ]   
+        ]
+    },
+    "DilatedNet":{
+        "info": "",
+        "fullname": "DilatedNet",
+        "links":[
+         [
+             "Multi-Scale Context Aggregation by Dilated Convolutions",
+             "https://arxiv.org/abs/1511.07122"
+         ]   
+        ]
+    },
+    "DeepLab":{
+        "info": "To overcome the poor localization property of DCNNs in segmentation tasks, this work combines the responses at the final DCNN layer with a fully connected Conditional Random Field (CRF)",
+        "fullname": "DeepLab",
+        "links": [
+            [
+                "Semantic Image Segmentation with Deep Convolutional Nets and Fully Connected CRFs",
+                "https://arxiv.org/abs/1412.7062"
+            ]
+        ]
+    },
+    "DeepLab_v2":{
+        "info": "This work makes three contributions for the image semantic segmentation task: highlight the importance of using atrous/dilated convolutions; propose atrous spatial pyramid pooling (ASPP); use Fully connected CRF",
+        "fullname": "DeepLab_v3",
+        "links": [
+            [
+                "DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs",
+                "https://arxiv.org/abs/1606.00915"
+            ]
+        ]
+    },
+    "GCN":{
+        "info": "This work proves that large kernel is important for segmentation tasks. Since large kernel is computationally expensive, k x k convolution is approximated with sum of 1 x k + k x 1 and k x 1 and 1 x k convolutions, which is called global convolutional networks (GCN).",
+        "fullname": "global convolutional network",
+        "links":[
+            [
+                "Large Kernel Matters -- Improve Semantic Segmentation by Global Convolutional Network",
+                "https://arxiv.org/abs/1703.02719"
+            ]
+        ]
+    },
+    "DeepLab_v3":{
+        "info": "This works employs atrous convolution in cascade or in parallel to capture multi-scale context by adopting multiple atrous rates. Furthermore, it proposes to augment the previously proposed Atrous Spatial Pyramid Pooling module (in DeepLab_v2) with image-level features encoding global context and further boost performance. ",
+        "fullname": "DeepLab_v3",
+        "links": [
+            [
+                "Rethinking Atrous Convolution for Semantic Image Segmentation",
+                "https://arxiv.org/abs/1706.05587"
+            ]
+        ]
+    },
+
+    "R-CNN":{
+        "info": "",
+        "fullname": "region"
+    },
+
+
+
+
+
     "leaky units": {
         "info": "A leaky unit appends a self-connection to a hidden unit. A parameter alpha is used for calculating the moving average which memorizes both the past and the present.",
         "fullname": "leaky units",

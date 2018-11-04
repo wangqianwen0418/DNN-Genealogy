@@ -1,25 +1,22 @@
 [
     {
+        "ID": "alexNet",
+        "fullname": "alexNet",
+        "application": [
+            "1.1.1.general recognition"
+        ],
+        "parents": [],
+        "architecture": [
+            "streamlined"
+        ],
         "training": [
             "3.4.1.dropout",
             "3.2.1.SGD with momentum",
             "3.4.2.weight decay",
             "2.2.2.2.1.1.standard relu"
         ],
-        "url": "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks",
         "citation": "18438",
-        "fullname": "alexNet",
-        "application": [
-            "1.1.1.general recognition"
-        ],
-        "parents": [
-        ],
-        "architecture": [
-            "streamlined"
-        ],
         "date": "2012.12.03",
-        "variants": [],
-        "ID": "alexNet",
         "names": [
             {
                 "imagenet val top5": 15.4,
@@ -33,14 +30,7 @@
         ]
     },
     {
-        "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "2.2.2.2.1.1.standard relu"
-        ],
-        "url": "https://arxiv.org/abs/1409.1556",
-        "citation": "8205",
+        "ID": "VGG",
         "fullname": "VGG",
         "application": [
             "1.1.1.general recognition"
@@ -56,9 +46,14 @@
         "architecture": [
             "streamlined"
         ],
+        "training": [
+            "3.4.1.dropout",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay",
+            "2.2.2.2.1.1.standard relu"
+        ],
+        "citation": "8205",
         "date": "2014.09.04",
-        "variants": [],
-        "ID": "VGG",
         "names": [
             {
                 "imagenet val top5": 7.3,
@@ -81,9 +76,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/pdf/1505.00387.pdf",
-        "citation": "320",
+        "ID": "highwayNets",
         "fullname": "highwayNets",
         "application": [
             "1.1.1.general recognition"
@@ -99,9 +92,9 @@
         "architecture": [
             "skip connections"
         ],
+        "training": [],
+        "citation": "320",
         "date": "2015.11.03",
-        "variants": [],
-        "ID": "highwayNets",
         "names": [
             {
                 "imagenet val top5": null,
@@ -113,16 +106,9 @@
                 "name": "highwayNets"
             }
         ]
-    },  
+    },
     {
-        "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "2.2.2.2.1.1.standard relu"
-        ],
-        "url": "https://arxiv.org/abs/1409.4842",
-        "citation": "5591",
+        "ID": "inception",
         "fullname": "inception",
         "application": [
             "1.1.1.general recognition"
@@ -138,19 +124,14 @@
         "architecture": [
             "multi-branch"
         ],
-        "date": "2014.09.17",
-        "variants": [
-            {
-                "ID": "inception_v2"
-            },
-            {
-                "ID": "inception_v3"
-            },
-            {
-                "ID": "inception_v4"
-            }
+        "training": [
+            "3.4.1.dropout",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay",
+            "2.2.2.2.1.1.standard relu"
         ],
-        "ID": "inception",
+        "citation": "5591",
+        "date": "2014.09.17",
         "names": [
             {
                 "imagenet val top5": 6.67,
@@ -182,14 +163,7 @@
         ]
     },
     {
-        "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with nesterov momentum",
-            "3.4.2.weight decay",
-            "3.1.7.he_normal"
-        ],
-        "url": "https://arxiv.org/abs/1608.06993",
-        "citation": "378",
+        "ID": "denseNet",
         "fullname": "Densely Connected Networks",
         "application": [
             "1.1.1.general recognition"
@@ -205,9 +179,14 @@
         "architecture": [
             "skip connections"
         ],
+        "training": [
+            "3.4.1.dropout",
+            "3.2.1.SGD with nesterov momentum",
+            "3.4.2.weight decay",
+            "3.1.7.he_normal"
+        ],
+        "citation": "378",
         "date": "2016.08.25",
-        "variants": [],
-        "ID": "denseNet",
         "names": [
             {
                 "imagenet val top5": null,
@@ -284,9 +263,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1610.02357",
-        "citation": "114",
+        "ID": "xception",
         "fullname": "",
         "application": [
             "1.1.1.general recognition"
@@ -303,19 +280,13 @@
             "multi-branch",
             "depthwise separable conv"
         ],
+        "training": [],
+        "citation": "114",
         "date": "2016.10.07",
-        "variants": [],
-        "ID": "xception",
         "names": []
     },
     {
-        "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay"
-        ],
-        "url": "https://arxiv.org/abs/1602.07360",
-        "citation": "264",
+        "ID": "squeezeNet",
         "fullname": "squeezeNet",
         "application": [
             "1.1.1.general recognition"
@@ -337,9 +308,13 @@
         "architecture": [
             "multi-branch"
         ],
+        "training": [
+            "3.4.1.dropout",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay"
+        ],
+        "citation": "264",
         "date": "2016.02.24",
-        "variants": [],
-        "ID": "squeezeNet",
         "names": [
             {
                 "imagenet val top5": 17.5,
@@ -353,9 +328,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/pdf/1707.01629.pdf",
-        "citation": "31",
+        "ID": "DPN",
         "fullname": "Dual Path Networks",
         "application": [
             "1.1.1.general recognition"
@@ -377,9 +350,9 @@
         "architecture": [
             "skip connections"
         ],
+        "training": [],
+        "citation": "31",
         "date": "2017.06.06",
-        "variants": [],
-        "ID": "DPN",
         "names": [
             {
                 "imagenet val top5": 5.4,
@@ -393,21 +366,12 @@
         ]
     },
     {
-        "training": [
-            "3.2.3.RMSprop",
-            "scaling of the residuals",
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay"
-        ],
-        "url": "https://arxiv.org/abs/1602.07261",
-        "citation": "480",
+        "ID": "inception_resNet",
         "fullname": "inception_resNet",
         "application": [
             "1.1.1.general recognition"
         ],
         "parents": [
-            
             {
                 "link_info_l": "combine resnet with inception",
                 "ID": "resNet",
@@ -425,9 +389,15 @@
             "multi-branch",
             "skip connections"
         ],
+        "training": [
+            "3.2.3.RMSprop",
+            "scaling of the residuals",
+            "3.4.1.dropout",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay"
+        ],
+        "citation": "480",
         "date": "2016.02.23",
-        "variants": [],
-        "ID": "inception_resNet",
         "names": [
             {
                 "imagenet val top5": 3.7,
@@ -441,9 +411,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1704.04861",
-        "citation": "149",
+        "ID": "mobileNet",
         "fullname": "moblieNet",
         "application": [
             "1.1.1.general recognition"
@@ -472,9 +440,9 @@
             "depthwise separable conv",
             "streamlined"
         ],
+        "training": [],
+        "citation": "149",
         "date": "2017.04.17",
-        "variants": [],
-        "ID": "mobileNet",
         "names": [
             {
                 "imagenet val top5": null,
@@ -497,14 +465,7 @@
         ]
     },
     {
-        "training": [
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.4.1.dropout"
-        ],
-        "url": "https://arxiv.org/abs/1603.08029",
-        "citation": "62",
+        "ID": "RIR",
         "fullname": "ResNet in ResNet",
         "application": [
             "1.1.1.general recognition"
@@ -520,9 +481,14 @@
         "architecture": [
             "skip connections"
         ],
+        "training": [
+            "3.4.4.batch normalization",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay",
+            "3.4.1.dropout"
+        ],
+        "citation": "62",
         "date": "2016.05.25",
-        "variants": [],
-        "ID": "RIR",
         "names": [
             {
                 "imagenet val top5": null,
@@ -536,14 +502,7 @@
         ]
     },
     {
-        "training": [
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.4.1.dropout"
-        ],
-        "url": "https://arxiv.org/abs/1605.07146",
-        "citation": "285",
+        "ID": "WRN",
         "fullname": "Wide ReseNet",
         "application": [
             "1.1.1.general recognition"
@@ -559,9 +518,14 @@
         "architecture": [
             "skip connections"
         ],
+        "training": [
+            "3.4.4.batch normalization",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay",
+            "3.4.1.dropout"
+        ],
+        "citation": "285",
         "date": "2016.05.23",
-        "variants": [],
-        "ID": "WRN",
         "names": [
             {
                 "imagenet val top5": null,
@@ -593,9 +557,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1802.01808",
-        "citation": "0",
+        "ID": "mixNet",
         "fullname": "MixNet",
         "application": [
             "1.1.1.general recognition"
@@ -623,9 +585,9 @@
         "architecture": [
             "skip connections"
         ],
+        "training": [],
+        "citation": "0",
         "date": "2018.02.06",
-        "variants": [],
-        "ID": "mixNet",
         "names": [
             {
                 "imagenet val top5": null,
@@ -684,15 +646,7 @@
         ]
     },
     {
-        "training": [
-            "3.4.3.drop path",
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.4.1.dropout"
-        ],
-        "url": "https://arxiv.org/abs/1605.07648",
-        "citation": "71",
+        "ID": "fractalNet",
         "fullname": "fractalNet",
         "application": [
             "1.1.1.general recognition"
@@ -714,9 +668,15 @@
         "architecture": [
             "multi-branch"
         ],
+        "training": [
+            "3.4.3.drop path",
+            "3.4.4.batch normalization",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay",
+            "3.4.1.dropout"
+        ],
+        "citation": "71",
         "date": "2016.05.24",
-        "variants": [],
-        "ID": "fractalNet",
         "names": [
             {
                 "imagenet val top5": null,
@@ -739,28 +699,8 @@
         ]
     },
     {
-        "citation": "32",
-        "names": [
-            {
-                "imagenet val top5": 4.25,
-                "imageNet val top1": 18.71,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 92,
-                "cifar100": null,
-                "name": "PolyNet"
-            }
-        ],
-        "date": "2016.12.17",
-        "variants": [],
         "ID": "polyInception",
-        "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "2.2.2.2.1.1.standard relu"
-        ],
-        "url": "https://arxiv.org/abs/1611.05725",
+        "fullname": "polyNet",
         "application": [
             "1.1.1.general recognition"
         ],
@@ -776,19 +716,28 @@
             "multi-branch",
             "skip connections"
         ],
-        "fullname": "polyNet"
-    },
- 
-    {
         "training": [
-            "3.1.11.dirac",
-            "3.4.4.batch normalization",
+            "3.4.1.dropout",
             "3.2.1.SGD with momentum",
             "3.4.2.weight decay",
-            "3.4.1.dropout"
+            "2.2.2.2.1.1.standard relu"
         ],
-        "url": "https://arxiv.org/abs/1706.00388",
-        "citation": "4",
+        "citation": "32",
+        "date": "2016.12.17",
+        "names": [
+            {
+                "imagenet val top5": 4.25,
+                "imageNet val top1": 18.71,
+                "SVHN": null,
+                "cifar10": null,
+                "params": 92,
+                "cifar100": null,
+                "name": "PolyNet"
+            }
+        ]
+    },
+    {
+        "ID": "diracNet",
         "fullname": "diracNet",
         "application": [
             "1.1.1.general recognition"
@@ -804,9 +753,15 @@
         "architecture": [
             "streamlined"
         ],
+        "training": [
+            "3.1.11.dirac",
+            "3.4.4.batch normalization",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay",
+            "3.4.1.dropout"
+        ],
+        "citation": "4",
         "date": "2017.06.07",
-        "variants": [],
-        "ID": "diracNet",
         "names": [
             {
                 "imagenet val top5": null,
@@ -847,14 +802,7 @@
         ]
     },
     {
-        "training": [
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.1.7.he_normal"
-        ],
-        "url": "https://arxiv.org/abs/1512.03385",
-        "citation": "5464",
+        "ID": "resNet",
         "fullname": "Residual Networks",
         "application": [
             "1.1.1.general recognition"
@@ -876,13 +824,14 @@
         "architecture": [
             "skip connections"
         ],
-        "date": "2015.12.10",
-        "variants": [
-            {
-                "ID": "resNet_v2"
-            }
+        "training": [
+            "3.4.4.batch normalization",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay",
+            "3.1.7.he_normal"
         ],
-        "ID": "resNet",
+        "citation": "5464",
+        "date": "2015.12.10",
         "names": [
             {
                 "imagenet val top5": null,
@@ -949,17 +898,8 @@
             }
         ]
     },
-   
- 
     {
-        "training": [
-            "3.4.7.pre-activation",
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay"
-        ],
-        "url": "https://arxiv.org/abs/1611.05431",
-        "citation": "134",
+        "ID": "resNeXt",
         "fullname": "resNeXt",
         "application": [
             "1.1.1.general recognition"
@@ -970,7 +910,7 @@
                 "ID": "inception_resNet",
                 "link_info_s": "highly modulized",
                 "link_category": "skip connections+multi-branch=>skip connections+multi-branch"
-            },    
+            },
             {
                 "link_info_l": "add a new dimension called \"cardinality\"",
                 "ID": "resNet",
@@ -988,9 +928,14 @@
             "skip connections",
             "multi-branch"
         ],
+        "training": [
+            "3.4.7.pre-activation",
+            "3.4.4.batch normalization",
+            "3.2.1.SGD with momentum",
+            "3.4.2.weight decay"
+        ],
+        "citation": "134",
         "date": "2016.11.16",
-        "variants": [],
-        "ID": "resNeXt",
         "names": [
             {
                 "imagenet val top5": 5.3,
@@ -1003,11 +948,8 @@
             }
         ]
     },
-
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1709.01507",
-        "citation": "48",
+        "ID": "SENet",
         "fullname": "Squeeze-and-Excitation Networks",
         "application": [
             "1.1.1.general recognition"
@@ -1023,9 +965,9 @@
         "architecture": [
             "skip connections"
         ],
+        "training": [],
+        "citation": "48",
         "date": "2017.09.05",
-        "variants": [],
-        "ID": "SENet",
         "names": [
             {
                 "imagenet val top5": 4.79,
@@ -1039,11 +981,7 @@
         ]
     },
     {
-        "training": [
-            "neural architecture search by reinforcement learning"
-        ],
-        "url": "https://arxiv.org/abs/1707.07012",
-        "citation": "35",
+        "ID": "nasNet",
         "fullname": "nasNet",
         "application": [
             "1.1.1.general recognition"
@@ -1055,14 +993,12 @@
                 "link_info_s": "borrow operations",
                 "link_category": "skip connections=>skip connections"
             },
-            
             {
                 "link_info_l": "borrow the multi-brach, 1x7 then 7x1 convolution, 1x3 then 3x1 convolution from Inception and let neural architecture search (NAS) select from it",
                 "ID": "inception",
                 "link_info_s": "borrow operations",
                 "link_category": "multi-branch=>multi-branch"
             },
-            
             {
                 "link_info_l": "borrow the depthwise separable conv from mobileNet and let neural architecture search (NAS) select from them",
                 "ID": "mobileNet",
@@ -1075,9 +1011,11 @@
             "skip connections",
             "depthwise separable conv"
         ],
+        "training": [
+            "neural architecture search by reinforcement learning"
+        ],
+        "citation": "35",
         "date": "2017.12.01",
-        "variants": [],
-        "ID": "nasNet",
         "names": [
             {
                 "imagenet val top5": null,
@@ -1108,22 +1046,19 @@
             }
         ]
     },
- 
- 
-  
     {
-        "training": [],
-        "url": "http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/full",
-        "citation": "9047",
+        "ID": "RNN",
         "fullname": "simple RNN",
         "application": [
             "1.2.NLP"
         ],
         "parents": [],
-        "architecture": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "9047",
         "date": "1990.03.01",
-        "variants": [],
-        "ID": "RNN",
         "names": [
             {
                 "params": 0.0,
@@ -1132,9 +1067,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1409.0473",
-        "citation": "2081",
+        "ID": "attention",
         "fullname": "RNN with attention mechanism",
         "application": [
             "1.2.NLP"
@@ -1147,16 +1080,16 @@
                 "link_category": "tree-structured"
             }
         ],
-        "architecture": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "2081",
         "date": "2014.09.01",
-        "variants": [],
-        "ID": "attention",
         "names": []
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1409.3215",
-        "citation": "2829",
+        "ID": "seq2seq",
         "fullname": "sequence to sequence",
         "application": [
             "1.2.NLP"
@@ -1166,13 +1099,15 @@
                 "link_info_l": "introduce a RNN architecture to map squence to sequence",
                 "ID": "RNN",
                 "link_info_s": "sequence to sequence",
-                "link_category": ""
+                "link_category": "nan"
             }
         ],
-        "architecture": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "2829",
         "date": "2014.09.10",
-        "variants": [],
-        "ID": "seq2seq",
         "names": [
             {
                 "params": 0.0,
@@ -1181,9 +1116,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1705.03122",
-        "citation": "73",
+        "ID": "conv seq2seq",
         "fullname": "conv seq2seq",
         "application": [
             "1.2.NLP"
@@ -1196,16 +1129,16 @@
                 "link_category": "gated"
             }
         ],
-        "architecture": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "73",
         "date": "2017.05.08",
-        "variants": [],
-        "ID": "conv seq2seq",
         "names": []
     },
     {
-        "training": [],
-        "url": "http://science.sciencemag.org/content/304/5667/78",
-        "citation": "1517",
+        "ID": "ESN",
         "fullname": "echo state networks",
         "application": [
             "1.2.NLP"
@@ -1215,13 +1148,15 @@
                 "link_info_l": "ESN use reservior computing to set the recurrent weights; Only the output weights need to be learnt.",
                 "ID": "RNN",
                 "link_info_s": "reservoir computing",
-                "link_category": ""
+                "link_category": "nan"
             }
         ],
-        "architecture": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "1517",
         "date": "2004.04.02",
-        "variants": [],
-        "ID": "ESN",
         "names": [
             {
                 "params": 0.0,
@@ -1230,9 +1165,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://www.sciencedirect.com/science/article/pii/S089360800700041x",
-        "citation": "414",
+        "ID": "ESN with leaky units",
         "fullname": "echo state networks with leaky integration units",
         "application": [
             "1.2.NLP"
@@ -1254,15 +1187,13 @@
         "architecture": [
             "multiple time scale"
         ],
+        "training": [],
+        "citation": "414",
         "date": "2007.04.01",
-        "variants": [],
-        "ID": "ESN with leaky units",
         "names": []
     },
     {
-        "training": [],
-        "url": "https://drum.lib.umd.edu/handle/1903/745",
-        "citation": "15",
+        "ID": "time skip connections",
         "fullname": "recurrent neural units with time skip connections",
         "application": [
             "1.2.NLP"
@@ -1278,15 +1209,13 @@
         "architecture": [
             "multiple time scale"
         ],
+        "training": [],
+        "citation": "15",
         "date": "1998.10.15",
-        "variants": [],
-        "ID": "time skip connections",
         "names": []
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/pdf/1402.3511.pdf",
-        "citation": "135",
+        "ID": "CW-RNN",
         "fullname": "Clockwork RNN",
         "application": [
             "1.2.NLP"
@@ -1302,15 +1231,13 @@
         "architecture": [
             "multiple time scale"
         ],
+        "training": [],
+        "citation": "135",
         "date": "2014.02.14",
-        "variants": [],
-        "ID": "CW-RNN",
         "names": []
     },
     {
-        "training": [],
-        "url": "",
-        "citation": "900",
+        "ID": "leaky units",
         "fullname": "recurrent neural units leaky units",
         "application": [
             "1.2.NLP"
@@ -1332,15 +1259,13 @@
         "architecture": [
             "multiple time scale"
         ],
+        "training": [],
+        "citation": "900",
         "date": "2013.02.13",
-        "variants": [],
-        "ID": "leaky units",
         "names": []
     },
     {
-        "training": [],
-        "url": "https://www.mitpressjournals.org/doi/abs/10.1162/neco.1997.9.8.1735",
-        "citation": "8136",
+        "ID": "LSTM",
         "fullname": "long short term memory",
         "application": [
             "1.2.NLP"
@@ -1362,88 +1287,13 @@
         "architecture": [
             "gated"
         ],
+        "training": [],
+        "citation": "8136",
         "date": "1997.12.15",
-        "variants": [
-            {
-                "training": [],
-                "url": "http://digital-library.theiet.org/content/conferences/10.1049/cp_19991218",
-                "citation": "848",
-                "fullname": "LSTM with forget gate",
-                "application": [
-                    "1.2.NLP"
-                ],
-                "parents": [
-                    {
-                        "link_info_l": "Add forget gate to LSTM cells.  These cells learn to reset themselves at appropriate times, thus releasing internal resources.",
-                        "ID": "initial LSTM",
-                        "link_info_s": "forget gate",
-                        "link_category": "d=>d"
-                    }
-                ],
-                "architecture": [
-                    "d"
-                ],
-                "date": "1999.09.07",
-                "variants": [],
-                "ID": "add forget gate",
-                "names": []
-            },
-            {
-                "training": [],
-                "url": "http://ieeexplore.ieee.org/abstract/document/861302/",
-                "citation": "157",
-                "fullname": "LSTM with peephole connetions",
-                "application": [
-                    "1.2.NLP"
-                ],
-                "parents": [
-                    {
-                        "link_info_l": " Make the weights on the self-loop conditioned on the context, rather than fixed",
-                        "ID": "LSTM with forget",
-                        "link_info_s": "peephole connections",
-                        "link_category": "d=>d"
-                    }
-                ],
-                "architecture": [
-                    "d"
-                ],
-                "date": "2000.07.01",
-                "variants": [],
-                "ID": "add peephole",
-                "names": []
-            },
-            {
-                "training": [],
-                "url": "https://www.sciencedirect.com/science/article/pii/S0893608005001206",
-                "citation": "777",
-                "fullname": "the modern long short-term memory",
-                "application": [
-                    "1.2.NLP"
-                ],
-                "parents": [
-                    {
-                        "link_info_l": "use full backpropogation through time for training ",
-                        "ID": "LSTM with peephole",
-                        "link_info_s": "BPTT",
-                        "link_category": "d=>d"
-                    }
-                ],
-                "architecture": [
-                    "d"
-                ],
-                "date": "2005.07.01",
-                "variants": [],
-                "ID": "with BPTT",
-                "names": []
-            }
-        ],
-        "ID": "LSTM",
         "names": []
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1709.02755",
-        "citation": "25",
+        "ID": "SRU",
         "fullname": "Simple Recurrent Unit",
         "application": [
             "1.2.NLP"
@@ -1459,16 +1309,13 @@
         "architecture": [
             "gated"
         ],
+        "training": [],
+        "citation": "25",
         "date": "2017.09.08",
-        "variants": [],
-        "ID": "SRU",
-        "names": [
-        ]
+        "names": []
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1406.1078",
-        "citation": "2069",
+        "ID": "GRU",
         "fullname": "gated recurrent unit",
         "application": [
             "1.2.NLP"
@@ -1484,9 +1331,9 @@
         "architecture": [
             "gated"
         ],
+        "training": [],
+        "citation": "2069",
         "date": "2014.06.03",
-        "variants": [],
-        "ID": "GRU",
         "names": [
             {
                 "params": 0.0,
@@ -1495,9 +1342,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1406.1078",
-        "citation": "20",
+        "ID": "LRU",
         "fullname": "lattice recurrent unit",
         "application": [
             "1.2.NLP"
@@ -1513,16 +1358,13 @@
         "architecture": [
             "gated"
         ],
+        "training": [],
+        "citation": "20",
         "date": "2017.10.06",
-        "variants": [],
-        "ID": "LRU",
-        "names": [
-        ]
+        "names": []
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1507.01526",
-        "citation": "150",
+        "ID": "gridLSTM",
         "fullname": "Grid Long Short-term Memory",
         "application": [
             "1.2.NLP"
@@ -1538,16 +1380,13 @@
         "architecture": [
             "gated"
         ],
+        "training": [],
+        "citation": "150",
         "date": "2015.7.06",
-        "variants": [],
-        "ID": "gridLSTM",
-        "names": [
-        ]
+        "names": []
     },
     {
-        "training": [],
-        "url": "https://www.sciencedirect.com/science/article/pii/000437029090005K",
-        "citation": "1050",
+        "ID": "recursive",
         "fullname": "recursive neural network",
         "application": [
             "1.2.NLP"
@@ -1563,9 +1402,9 @@
         "architecture": [
             "tree-structured"
         ],
+        "training": [],
+        "citation": "1050",
         "date": "1990.11.01",
-        "variants": [],
-        "ID": "recursive",
         "names": [
             {
                 "params": 0.0,
@@ -1574,9 +1413,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1503.00075",
-        "citation": "549",
+        "ID": "tree-LSTM",
         "fullname": "tree structured long short term memory",
         "application": [
             "1.2.NLP"
@@ -1599,15 +1436,13 @@
             "gated",
             "tree-structured"
         ],
+        "training": [],
+        "citation": "549",
         "date": "2015.02.28",
-        "variants": [],
-        "ID": "tree-LSTM",
         "names": []
     },
     {
-        "training": [],
-        "url": "https://pdfs.semanticscholar.org/d3e9/9f2f98ac361aded0b9b9d90b6f9fe8bbbc70.pdf",
-        "citation": "15",
+        "ID": "DGLSTM",
         "fullname": "depth-gated long short-term memory",
         "application": [
             "1.2.NLP"
@@ -1630,15 +1465,13 @@
             "gated",
             "stacked"
         ],
+        "training": [],
+        "citation": "15",
         "date": "2015.08.01",
-        "variants": [],
-        "ID": "DGLSTM",
         "names": []
     },
     {
-        "training": [],
-        "url": "http://ieeexplore.ieee.org/abstract/document/650093/",
-        "citation": "984",
+        "ID": "BRNN",
         "fullname": "bidirectional RNN",
         "application": [
             "1.2.NLP"
@@ -1654,9 +1487,9 @@
         "architecture": [
             "bidirectional"
         ],
+        "training": [],
+        "citation": "984",
         "date": "1997.12.01",
-        "variants": [],
-        "ID": "BRNN",
         "names": [
             {
                 "params": 0.0,
@@ -1665,9 +1498,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "http://ieeexplore.ieee.org/document/6795261/",
-        "citation": "263",
+        "ID": "stacked RNN",
         "fullname": "stacked RNN",
         "application": [
             "1.2.NLP"
@@ -1683,15 +1514,13 @@
         "architecture": [
             "stacked"
         ],
+        "training": [],
+        "citation": "263",
         "date": "1992.03.01",
-        "variants": [],
-        "ID": "stacked RNN",
         "names": []
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1303.5778",
-        "citation": "1897",
+        "ID": "DB-LSTM",
         "fullname": "deep bidirectional LSTM",
         "application": [
             "1.2.NLP"
@@ -1721,9 +1550,9 @@
             "bidirectional",
             "stacked"
         ],
+        "training": [],
+        "citation": "1897",
         "date": "2013.03.22",
-        "variants": [],
-        "ID": "DB-LSTM",
         "names": [
             {
                 "params": 0.0,
@@ -1732,9 +1561,7 @@
         ]
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1312.6026",
-        "citation": "269",
+        "ID": "DT-RNN",
         "fullname": "deep transition RNN",
         "application": [
             "1.2.NLP"
@@ -1750,15 +1577,13 @@
         "architecture": [
             "stacked"
         ],
+        "training": [],
+        "citation": "269",
         "date": "2013.12.20",
-        "variants": [],
-        "ID": "DT-RNN",
         "names": []
     },
     {
-        "training": [],
-        "url": "https://arxiv.org/abs/1312.6026",
-        "citation": "269",
+        "ID": "DT(S)-RNN",
         "fullname": "add skip connections to deep transition RNN",
         "application": [
             "1.2.NLP"
@@ -1774,10 +1599,496 @@
         "architecture": [
             "stacked"
         ],
+        "training": [],
+        "citation": "269",
         "date": "2013.12.20",
-        "variants": [],
-        "ID": "DT(S)-RNN",
         "names": []
+    },
+    {
+        "ID": "R-CNN",
+        "fullname": "R-CNN",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "fast R-CNN",
+        "fullname": "fast R-CNN",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "nan",
+                "ID": "R-CNN",
+                "link_info_s": "",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "faster R-CNN",
+        "fullname": "faster R-CNN",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "nan",
+                "ID": "fast R-CNN",
+                "link_info_s": "",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "YOLO",
+        "fullname": "YOLO",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "SSD",
+        "fullname": "single shot detector",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "nan",
+                "ID": "faster R-CNN",
+                "link_info_s": "",
+                "link_category": "nan"
+            },
+            {
+                "link_info_l": "nan",
+                "ID": "YOLO",
+                "link_info_s": "",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "DSSD",
+        "fullname": "deconvolutional single shot detector",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "nan",
+                "ID": "SSD",
+                "link_info_s": "",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "DSOD",
+        "fullname": "DSOD",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "nan",
+                "ID": "SSD",
+                "link_info_s": "",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "R-FCN",
+        "fullname": "R-FCN",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "nan",
+                "ID": "faster R-CNN",
+                "link_info_s": "",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "FPN",
+        "fullname": "Feature Pyramid Network",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "nan",
+                "ID": "faster R-CNN",
+                "link_info_s": "",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+
+
+
+     
+    {
+        "ID": "FCN",
+        "fullname": "Fully Convolutional Network",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "U-Net",
+        "fullname": "U-Net",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+            {
+                "link_info_l": "use concatenation instead of addition to fusion the information of previous tensor and up-sampling tensor; drop the ",
+                "ID": "FCN",
+                "link_info_s": "add => concate",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "3139",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "SegNet",
+        "fullname": "SegNet",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+            {
+                "link_info_l": "the decoder uses pooling indices computed in the max-pooling step of the corresponding encoder to perform non-linear upsampling; significantly smaller in the number of trainable parameters",
+                "ID": "FCN",
+                "link_info_s": "upsampling with pooling indices",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "DeconvNet",
+        "fullname": "DeconvNet",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+            {
+                "link_info_l": "change the convolution layer to deconvolution layer during up-sampling; ",
+                "ID": "SegNet",
+                "link_info_s": "learnable deconv layers",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "RedNet",
+        "fullname": "residual encoder decoder network",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+            {
+                "link_info_l": "use convolution layers for down sample and upsample operation; use residual blocks;  propose a \u2018pyramid supervision\u2019 training scheme",
+                "ID": "SegNet",
+                "link_info_s": "no pooling;",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "2018.06.04",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "RefineNet",
+        "fullname": "RefineNet",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+            {
+                "link_info_l": "both use residual blocks; propose chained residual pooling; propose multi-path refinement;",
+                "ID": "FCN",
+                "link_info_s": "multi-path refine",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "20",
+        "date": "",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "DilatedNet",
+        "fullname": "DilatedNet",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+            {
+                "link_info_l": "use dilated convolutions; no downsampling or upsampling;",
+                "ID": "FCN",
+                "link_info_s": "dilated conv",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "1104",
+        "date": "2015.11.23",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "PSPNet",
+        "fullname": "PSPNet",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+            {
+                "link_info_l": "propose pyramid pooling module to aggregate the context; use auxiliary loss as intermediate supervision",
+                "ID": "DilatedNet",
+                "link_info_s": "pyramid pooling",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "576",
+        "date": "2016.12.04",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "DeepLab",
+        "fullname": "DeepLab",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "411",
+        "date": "2014.12.22",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "DeepLab_v2",
+        "fullname": "DeepLab_v2",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "1889",
+        "date": "2016.05.12",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "GCN",
+        "fullname": "global convolutional network",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+
+        ],
+        "architecture": [],
+        "training": [],
+        "citation": "99",
+        "date": "2017.03.08",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "DeepLab_v3",
+        "fullname": "DeepLab_v3",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+            {
+                "link_info_l": "improve atrous spatial pyramid pooling (ASPP); employ atrous convolutions in cascade; ",
+                "ID": "DeepLab_v2",
+                "link_info_s": "pyramid pooling",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [],
+        "training": [],
+        "citation": "198",
+        "date": "2017.06.17",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "Mask R-CNN",
+        "fullname": "Mask R-CNN",
+        "application": [
+            "3.segmentation"
+        ],
+        "parents": [
+
+        ],
+        "architecture": [],
+        "training": [],
+        "citation": "938",
+        "date": "2017.03.20",
+        "names": [
+            {}
+        ]
     }
-   
-    ]
+]

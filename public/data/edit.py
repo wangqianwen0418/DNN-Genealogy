@@ -1,4 +1,5 @@
 import json
+from collections import OrderedDict
 def cnn(name):
     if not name:
         return ''
@@ -18,9 +19,33 @@ def rnn(name):
         
         return ('+').join([RNN[ord(arc)%32-1] for arc in name.split('+')])
 
-evofile = open('./evolution.json','r')
+key_order = [
+    "ID",
+    "fullname",
+    "application",
+    "parents",
+    "architecture",
+    "training",
+    "citation",
+    "date",
+    "names"
+]
+
+evofile = open('./dnns.json','r')
 evo = json.load(evofile)
+
 print(len(evo))
+# new_nns = []
+# for nn in evo:
+#     new_nn = OrderedDict()
+#     for k in key_order:
+#         new_nn[k] = nn[k]
+#     new_nns.append(new_nn)
+# print(new_nns)
+
+# newfile = open('./dnns.json', 'w')
+# new_nns.sort(key=lambda x: x['application'][0].split('.')[0])
+# json.dump(new_nns, newfile)
 
 # datasets=[
 #     "params",
