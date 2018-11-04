@@ -60,6 +60,7 @@ export default class ExtendNode extends React.Component<Props, State>{
     mouseDown(e: React.MouseEvent<any>) {
         this.dragFlag = false
         document.addEventListener('mousemove', this.mouseMove)
+        console.info('click')
     }
     mouseMove(e: MouseEvent) {
         this.dragFlag = true
@@ -111,6 +112,8 @@ export default class ExtendNode extends React.Component<Props, State>{
                 className={`ExtendNode Node ${zoomed ? 'zoomed' : 'collapsed'} ${show ? '' : 'faded'}`}
                 onMouseEnter={() => this.setState({ showpin: true })}
                 onMouseLeave={() => this.setState({ showpin: false })}
+                onMouseDown={this.mouseDown}
+                onMouseUp={(e) => { this.mouseUp(e, node) }} 
                 // onMouseOut={()=>this.setState({showpin:false})}
                 style={{
                     position: 'absolute',
@@ -227,8 +230,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                     style={{ margin: `0px ${glyphXmargin}px` }}
                     height={(node.height * scale - tabH) * 1}
                     width={(node.width * scale - 2 * glyphXmargin)}
-                    onMouseDown={this.mouseDown}
-                    onMouseUp={(e) => { this.mouseUp(e, node) }} />
+                    />
                 <div
                     className="floatIcon"
                     style={{
