@@ -78,8 +78,10 @@ export default class TextInfo extends React.Component<Props, State>{
             return (
                 <Card
                     bordered={false}
+                    title={<span style={{fontSize:'1.2em'}}>More Info</span>}
                     className="TextInfo View ViewBottom"
-                />)
+                ><div>Click a DNN to see more details here. </div>
+                </Card>)
         }
     }
 }

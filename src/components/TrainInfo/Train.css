@@ -11,9 +11,17 @@
 .train .ant-tabs-content{
     height: 100%;
 }
+
 /* .ant-tabs-content { 
     width: 100%;
     
     overflow-y: auto;
     overflow-x: hidden; 
 } */
+
+.ant-tabs-tab{
+    font-size: 1.1em;
+}
+.ant-card-head{
+    font-size: 1.3em;
+}
