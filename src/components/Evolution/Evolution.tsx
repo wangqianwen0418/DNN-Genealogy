@@ -330,7 +330,6 @@ export default class Evolution extends React.Component<Props, State>{
                 // ),
                 // doi = api_diff + r_dist * distance
                 let doi = api + r_dist * distance
-                console.info("api", api,"r_dist", r_dist, "distance", distance )
 
                 dag.setNode(v, {
                     ...node,
@@ -388,7 +387,6 @@ export default class Evolution extends React.Component<Props, State>{
                 if (isNaN(node.doi)){
                     node.doi = 1
                 }
-                console.info(node.doi)
                 dag.setNode(v, {
                     ...node,
                     isZoomed: pinned,
@@ -463,7 +461,6 @@ export default class Evolution extends React.Component<Props, State>{
             ),
             transX = scaleX > scaleY ? (this.ref.clientWidth - width * scale) / 2 : 0,
             transY = scaleY > scaleX ? (this.ref.clientHeight - height * scale) / 2 : 0
-        console.info(nodes, transX, scale)
 
         return { nodes, edges, height, width, topDoi, scale, transX, transY }
     }
