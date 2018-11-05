@@ -1615,8 +1615,26 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "6532",
+        "date": "2013.11.11",
+        "names": [
+            {}
+        ]
+    },
+    {
+        "ID": "SPP-Net",
+        "fullname": "Spatial Pyramid Pooling Networks",
+        "application": [
+            "2.detection",
+            "1.1.1.general recognition"
+        ],
+        "parents": [],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "1337",
+        "date": "2014.06.18",
         "names": [
             {}
         ]
@@ -1639,8 +1657,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "3651",
+        "date": "2015.04.30",
         "names": [
             {}
         ]
@@ -1663,8 +1681,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "5061",
+        "date": "2015.06.04",
         "names": [
             {}
         ]
@@ -1680,8 +1698,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "2444",
+        "date": "2015.06.08",
         "names": [
             {}
         ]
@@ -1710,8 +1728,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "2116",
+        "date": "2015.12.08",
         "names": [
             {}
         ]
@@ -1734,8 +1752,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "132",
+        "date": "2017.01.23",
         "names": [
             {}
         ]
@@ -1758,8 +1776,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "48",
+        "date": "2017.08.03",
         "names": [
             {}
         ]
@@ -1782,8 +1800,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "757",
+        "date": "2016.05.20",
         "names": [
             {}
         ]
@@ -1806,8 +1824,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "531",
+        "date": "2016.12.09",
         "names": [
             {}
         ]

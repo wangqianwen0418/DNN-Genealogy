@@ -119,10 +119,7 @@
             ]
         ]
     },
-    "R-CNN": {
-        "info": "",
-        "fullname": "region"
-    },
+    
     "leaky units": {
         "info": "A leaky unit appends a self-connection to a hidden unit. A parameter alpha is used for calculating the moving average which memorizes both the past and the present.",
         "fullname": "leaky units",
@@ -843,48 +840,109 @@
         ]
     },
     "fast R-CNN": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "ast R-CNN builds on previous work to efficiently classify object proposals using deep convolutional networks. Compared to previous work, Fast R-CNN employs several innovations to improve training and testing speed while also increasing detection accuracy. ",
+        "fullname": "Fast R-CNN",
+        "links": [
+            [
+                "Fast R-CNN",
+                "https://arxiv.org/abs/1504.08083"
+            ]
+        ]
     },
     "faster R-CNN": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "Faster R-CNN proposes a Region Proposal Network (RPN). RPN shares full-image convolutional features with the detection network, thus enabling nearly cost-free region proposals. An RPN is a fully convolutional network that simultaneously predicts object bounds and objectness scores at each position.",
+        "fullname": "Faster R-CNN/Region Proposal Network",
+        "links": [
+            [
+                "Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks",
+                "https://arxiv.org/abs/1506.01497"
+            ]
+        ]
     },
     "YOLO": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "YOLO is a new approach to object detection. Prior work on object detection repurposes classifiers to perform detection. Instead, YOLO frames object detection as a regression problem to spatially separated bounding boxes and associated class probabilities. A single neural network predicts bounding boxes and class probabilities directly from full images in one evaluation. ",
+        "fullname": "You Only Look Once",
+        "links": [
+            [
+                "You Only Look Once: Unified, Real-Time Object Detection",
+                "https://arxiv.org/abs/1506.02640"
+            ]
+        ]
     },
     "SSD": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "SSD is a method for detecting objects in images using a single deep neural network. It discretizes the output space of bounding boxes into a set of default boxes over different aspect ratios and scales per feature map location. At prediction time, the network generates scores for the presence of each object category in each default box and produces adjustments to the box to better match the object shape. Additionally, the network combines predictions from multiple feature maps with different resolutions to naturally handle objects of various sizes. ",
+        "fullname": "Single Shot MultiBox Detector",
+        "links": [
+            [
+                "SSD: Single Shot MultiBox Detector",
+                "https://arxiv.org/abs/1512.02325"
+            ]
+        ]
     },
     "DSSD": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "DSSD is an approach for introducing additional context into state-of-the-art general object detection. A state-of-the-art classifier (Residual-101) is combined with a fast detection framework SSD. We then augment SSD+Residual-101 with deconvolution layers to introduce additional large-scale context in object detection and improve accuracy. ",
+        "fullname": "Deconvolutional Single Shot Detector",
+        "links": [
+            [
+                "DSSD : Deconvolutional Single Shot Detector",
+                "https://arxiv.org/abs/1701.06659"
+            ]
+        ]
     },
     "DSOD": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "DSOD is a framework that can learn object detectors from scratch. State-of-the-art object objectors rely heavily on networks pre-trained on large-scale classification datasets. ",
+        "fullname": "Deeply Supervised Object Detectors",
+        "links": [
+            [
+                "DSOD: Learning Deeply Supervised Object Detectors from Scratch",
+                "https://arxiv.org/abs/1708.01241"
+            ]
+        ]
     },
     "R-FCN": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "In contrast to previous region-based detectors such as Fast/Faster R-CNN that apply a costly per-region subnetwork hundreds of times, R-FCN is fully convolutional with almost all computation shared on the entire image. ",
+        "fullname": "Region-based Fully Convolutional Networks",
+        "links": [
+            "R-FCN: Object Detection via Region-based Fully Convolutional Networks",
+            "https://arxiv.org/abs/1605.06409"
+        ]
     },
     "FPN": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "Feature pyramids are a basic component in recognition systems for detecting objects at different scales. But recent deep learning object detectors have avoided pyramid representations, in part because they are compute and memory intensive. In this paper, we exploit the inherent multi-scale, pyramidal hierarchy of deep convolutional networks to construct feature pyramids with marginal extra cost. ",
+        "fullname": "Feature Pyramid Networks",
+        "links": [
+            "Feature Pyramid Networks for Object Detection",
+            "https://arxiv.org/abs/1612.03144"
+        ]
     },
     "Mask R-CNN": {
-        "info": "",
-        "fullname": "",
-        "links": []
+        "info": "Mask R-CNN detects objects in an image while simultaneously generating a high-quality segmentation mask for each instance.",
+        "fullname": "Mask R-CNN",
+        "links": [
+            [
+                "Mask R-CNN",
+                "https://arxiv.org/abs/1703.06870"
+            ]
+        ]
+    },
+    "R-CNN": {
+        "info": "R-CNN is the first work to use CNNs for object detection. It improves mean average precision (mAP) by more than 30% relative to the previous best result on VOC 2012. It combines two key insights: (1) one can apply high-capacity convolutional neural networks (CNNs) to bottom-up region proposals in order to localize and segment objects and (2) when labeled training data is scarce, supervised pre-training for an auxiliary task, followed by domain-specific fine-tuning, yields a significant performance boost. ",
+        "fullname": "Region-based convolutional neural network",
+        "links":[
+            [
+                "Rich feature hierarchies for accurate object detection and semantic segmentation",
+                "https://arxiv.org/abs/1311.2524"
+            ]
+        ]
+    },
+    "SPP-Net":{
+        "info":"Existing deep convolutional neural networks (CNNs) require a fixed-size (e.g., 224x224) input image. SPP-Net, with the spatial pyramid pooling, can eliminate the above requirement and generate a fixed-length representation regardless of image size/scale. Pyramid pooling is also robust to object deformations.",
+        "fullname":"Spatial Pyramid Pooling Networks",
+        "links":[
+            [
+                "Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition",
+                "https://arxiv.org/abs/1406.4729"
+            ]
+        ]
     }
 }
