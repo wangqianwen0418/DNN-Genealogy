@@ -823,7 +823,7 @@ export default class Evolution extends React.Component<Props, State>{
         if (appValue === undefined) {
             return
         }
-        let legend = appValue === '1.1.' ? legendCNN : legendRNN
+        let legend = appValue === '1.1.' ? legendCNN : (appValue ==='1.2.'?legendRNN: {})
         this.setState({ appValue, legend });
         this.getData()
         let { onSelectDatabase } = this.props
