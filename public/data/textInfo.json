@@ -1,5 +1,5 @@
 {
-    "U-Net":{
+    "U-Net": {
         "info": " ",
         "fullname": "U-Net",
         "links": [
@@ -9,40 +9,40 @@
             ]
         ]
     },
-    "FCN":{
-        "info":"FCNs only have convolutional and pooling layers which give them the ability to make segmentations on arbitrary-sized inputs.",
-        "fullname":"FCN",
-        "links":[
+    "FCN": {
+        "info": "FCNs only have convolutional and pooling layers which give them the ability to make segmentations on arbitrary-sized inputs.",
+        "fullname": "FCN",
+        "links": [
             [
                 "Fully Convolutional Networks for Semantic Segmentation",
                 "https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf"
             ]
         ]
     },
-    "SegNet":{
+    "SegNet": {
         "info": "SgeNet is a deep fully convolutional neural network architecture for semantic pixel-wise segmentation. The novelty of SegNet is that he decoder uses pooling indices computed in the max-pooling step of the corresponding encoder to perform non-linear upsampling. This eliminates the need for learning to upsample.",
         "fullname": "SegNet",
-        "links":[
+        "links": [
             [
                 "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
                 "https://arxiv.org/abs/1511.00561"
             ]
         ]
     },
-    "DeconvNet":{
+    "DeconvNet": {
         "info": "DeconvNet is a novel semantic segmentation algorithm by learning a deconvolution network. The decoder is composed of deconvolution and unpooling layers.",
-        "fullname":"DeconvNet",
-        "links":[
+        "fullname": "DeconvNet",
+        "links": [
             [
                 "Learning deconvolution network for semantic segmentation",
                 "https://arxiv.org/abs/1505.04366"
             ]
         ]
     },
-    "RedNet":{
+    "RedNet": {
         "info": "In RedNet, the residual module is applied to both the encoder and decoder as the basic building block, and the skip-connection is used to bypass the spatial feature between the encoder and decoder. In order to incorporate the depth information of the scene, a fusion structure is constructed, which makes inference on RGB image and depth image separately, and fuses their features over several layers. In order to efficiently optimize the network's parameters, a `pyramid supervision' training scheme is proposed to apply supervised learning over different layers in the decoder.",
         "fullname": "residual encoder decoder network",
-        "links":[
+        "links": [
             [
                 "RedNet: Residual Encoder-Decoder Network for indoor RGB-D Semantic Segmentation",
                 "https://arxiv.org/abs/1806.01054"
@@ -52,34 +52,34 @@
     "RefineNet": {
         "info": "RefineNet is a generic multi-path refinement network that explicitly exploits all the information available along the down-sampling process to enable high-resolution prediction using long-range residual connections.",
         "fullname": "RefineNet",
-        "links":[
+        "links": [
             [
                 "RefineNet: Multi-Path Refinement Networks for High-Resolution Semantic Segmentation",
                 "https://arxiv.org/abs/1611.06612"
             ]
         ]
     },
-    "PSPNet":{
+    "PSPNet": {
         "info": "In this paper, we exploit the capability of global context information by different-region-based context aggregation through our pyramid pooling module together with the proposed pyramid scene parsing network.",
         "fullname": "PSPNet",
-        "links":[
+        "links": [
             [
                 "Pyramid Scene Parsing Network",
                 "https://arxiv.org/abs/1612.01105"
-            ]   
+            ]
         ]
     },
-    "DilatedNet":{
+    "DilatedNet": {
         "info": "",
         "fullname": "DilatedNet",
-        "links":[
-         [
-             "Multi-Scale Context Aggregation by Dilated Convolutions",
-             "https://arxiv.org/abs/1511.07122"
-         ]   
+        "links": [
+            [
+                "Multi-Scale Context Aggregation by Dilated Convolutions",
+                "https://arxiv.org/abs/1511.07122"
+            ]
         ]
     },
-    "DeepLab":{
+    "DeepLab": {
         "info": "To overcome the poor localization property of DCNNs in segmentation tasks, this work combines the responses at the final DCNN layer with a fully connected Conditional Random Field (CRF)",
         "fullname": "DeepLab",
         "links": [
@@ -89,7 +89,7 @@
             ]
         ]
     },
-    "DeepLab_v2":{
+    "DeepLab_v2": {
         "info": "This work makes three contributions for the image semantic segmentation task: highlight the importance of using atrous/dilated convolutions; propose atrous spatial pyramid pooling (ASPP); use Fully connected CRF",
         "fullname": "DeepLab_v3",
         "links": [
@@ -99,17 +99,17 @@
             ]
         ]
     },
-    "GCN":{
+    "GCN": {
         "info": "This work proves that large kernel is important for segmentation tasks. Since large kernel is computationally expensive, k x k convolution is approximated with sum of 1 x k + k x 1 and k x 1 and 1 x k convolutions, which is called global convolutional networks (GCN).",
         "fullname": "global convolutional network",
-        "links":[
+        "links": [
             [
                 "Large Kernel Matters -- Improve Semantic Segmentation by Global Convolutional Network",
                 "https://arxiv.org/abs/1703.02719"
             ]
         ]
     },
-    "DeepLab_v3":{
+    "DeepLab_v3": {
         "info": "This works employs atrous convolution in cascade or in parallel to capture multi-scale context by adopting multiple atrous rates. Furthermore, it proposes to augment the previously proposed Atrous Spatial Pyramid Pooling module (in DeepLab_v2) with image-level features encoding global context and further boost performance. ",
         "fullname": "DeepLab_v3",
         "links": [
@@ -119,16 +119,10 @@
             ]
         ]
     },
-
-    "R-CNN":{
+    "R-CNN": {
         "info": "",
         "fullname": "region"
     },
-
-
-
-
-
     "leaky units": {
         "info": "A leaky unit appends a self-connection to a hidden unit. A parameter alpha is used for calculating the moving average which memorizes both the past and the present.",
         "fullname": "leaky units",
@@ -208,8 +202,11 @@
                 "https://arxiv.org/pdf/1707.01629.pdf"
             ]
         ],
-        "code":[
-            ["MxNet", "https://github.com/cypw/DPNs"]
+        "code": [
+            [
+                "MxNet",
+                "https://github.com/cypw/DPNs"
+            ]
         ]
     },
     "LSTM": {
@@ -546,7 +543,6 @@
                 "Rethinking the Inception Architecture for Computer Vision",
                 "https://arxiv.org/abs/1512.00567"
             ]
-            
         ]
     },
     "ESN": {
@@ -684,9 +680,15 @@
                 "https://arxiv.org/abs/1611.01578"
             ]
         ],
-        "code":[
-            ["tensorflow", "https://github.com/tensorflow/models/blob/master/research/slim/nets/nasnet/nasnet.py"],
-            ["keras", "https://github.com/titu1994/Keras-NASNet"]
+        "code": [
+            [
+                "tensorflow",
+                "https://github.com/tensorflow/models/blob/master/research/slim/nets/nasnet/nasnet.py"
+            ],
+            [
+                "keras",
+                "https://github.com/titu1994/Keras-NASNet"
+            ]
         ]
     },
     "stacked RNN": {
@@ -743,67 +745,146 @@
             ]
         ]
     },
-    "polyInception":{
+    "polyInception": {
         "info": "PolyInception is a new family of modules that extend inception residual units. PolyInception generalizes the additive combination in Inception residual units via various forms of polynomial compositions to encourage the structural diversity and enhance the expressive power",
-        "fullname":"polyInception",
-        "links":[
+        "fullname": "polyInception",
+        "links": [
             [
                 "PolyNet: A Pursuit of Structural Diversity in Very Deep Networks",
                 "https://arxiv.org/pdf/1611.05725"
             ]
         ],
-        "code":[
-            ["caffe", "https://github.com/CUHK-MMLAB/polynet"]
+        "code": [
+            [
+                "caffe",
+                "https://github.com/CUHK-MMLAB/polynet"
+            ]
         ]
     },
     "WRN": {
-        "info":"Wide Residual Networks (WRN) is a novel architecture which decrease depth and increase width of ResNet blocks. A simple 16-layer WRN outperforms in accuracy and efficiency all previous deep residual networks, achieving new state-of-the-art results on CIFAR, SVHN, and COCO",
-        "fullname":"Wide ResNet",
+        "info": "Wide Residual Networks (WRN) is a novel architecture which decrease depth and increase width of ResNet blocks. A simple 16-layer WRN outperforms in accuracy and efficiency all previous deep residual networks, achieving new state-of-the-art results on CIFAR, SVHN, and COCO",
+        "fullname": "Wide ResNet",
         "links": [
-            ["Wide Residual Networks", "http://arxiv.org/abs/1605.07146"]
-        ],
-        "code":[
-         ["Torch", "https://github.com/szagoruyko/wide-residual-networks"],
-         ["Keras", "https://github.com/titu1994/Wide-Residual-Networks"]   
-        ]
-    },
-    "RIR":{
-        "info":"Resnet in Resnet (RiR) is a deep dual-stream architecture that generalizes ResNets and standard CNNs. RiR is easily implemented with no computational overhead. RiR consistently improves performance over ResNets, outperforms architectures with similar amounts of augmentation on CIFAR-10, and establishes a new state-of-the-art on CIFAR-100.",
-        "fullname": "ResNet in ResNet",
-        "links":[
-            ["Resnet in Resnet: Generalizing Residual Architectures", "https://arxiv.org/abs/1603.08029"]
+            [
+                "Wide Residual Networks",
+                "http://arxiv.org/abs/1605.07146"
+            ]
         ],
         "code": [
-
+            [
+                "Torch",
+                "https://github.com/szagoruyko/wide-residual-networks"
+            ],
+            [
+                "Keras",
+                "https://github.com/titu1994/Wide-Residual-Networks"
+            ]
         ]
     },
-    "SRU":{
+    "RIR": {
+        "info": "Resnet in Resnet (RiR) is a deep dual-stream architecture that generalizes ResNets and standard CNNs. RiR is easily implemented with no computational overhead. RiR consistently improves performance over ResNets, outperforms architectures with similar amounts of augmentation on CIFAR-10, and establishes a new state-of-the-art on CIFAR-100.",
+        "fullname": "ResNet in ResNet",
+        "links": [
+            [
+                "Resnet in Resnet: Generalizing Residual Architectures",
+                "https://arxiv.org/abs/1603.08029"
+            ]
+        ],
+        "code": []
+    },
+    "SRU": {
         "info": "Simple Recurrent Unit (SRU) architecture is a recurrent unit that simplifies the computation by exposing more parallelism. In SRU, the majority of computation for each step is independent of the recurrence and can be easily parallelized. SRU is as fast as a convolutional layer and 5-10x faster than an optimized LSTM. SRUs can be used in a wide range of applications.",
         "fullname": "Simple Reccurent Unit",
-        "links":[
-            ["TRAINING RNNS AS FAST AS CNNS", "https://arxiv.org/pdf/1709.02755"]
+        "links": [
+            [
+                "TRAINING RNNS AS FAST AS CNNS",
+                "https://arxiv.org/pdf/1709.02755"
+            ]
         ],
-        "code":[
-            ["PyTorch", "https://github.com/taolei87/sru"],
-            ["CNTK", "https://github.com/taolei87/sru"]
+        "code": [
+            [
+                "PyTorch",
+                "https://github.com/taolei87/sru"
+            ],
+            [
+                "CNTK",
+                "https://github.com/taolei87/sru"
+            ]
         ]
     },
-    "LRU":{
+    "LRU": {
         "info": "Lattice Recurrent Unit(LRU) is an adaptation of GRUs to a lattice multi-dimensional architecture. LRU decouples the recurrent units to enable infomration flow for both time and depth dimensions. LRU enables better convergence and accuracy.",
         "fullname": "Lattice Recurrent Unit",
         "links": [
-            ["Lattice Recurrent Unit: Improving Convergence and Statistical Efficiency for Sequence Modeling", "https://arxiv.org/pdf/1710.02254"],
-            ["Lattice-Based Recurrent Neural Network Encoders for Neural Machine Translation","http://www.aaai.org/ocs/index.php/AAAI/AAAI17/paper/download/14320/14220"]
+            [
+                "Lattice Recurrent Unit: Improving Convergence and Statistical Efficiency for Sequence Modeling",
+                "https://arxiv.org/pdf/1710.02254"
+            ],
+            [
+                "Lattice-Based Recurrent Neural Network Encoders for Neural Machine Translation",
+                "http://www.aaai.org/ocs/index.php/AAAI/AAAI17/paper/download/14320/14220"
+            ]
         ],
-        "code":[
-         ["PyTorch", "https://github.com/chahuja/lru"]   
+        "code": [
+            [
+                "PyTorch",
+                "https://github.com/chahuja/lru"
+            ]
         ]
     },
-    "gridLSTM":{
+    "gridLSTM": {
         "info": "Grid Long Short-Term Memory is a network where LSTM cells are arranged in a multidimensional grid. It can be applied to vectors, sequences or higher dimensional data. 2D LSTM achieved the state-of-the-art performance on Wikipedia character prediction benchmark. ",
         "fullname": "Grid Long Short-term Memory",
         "links": [
-            ["Grid Long Short-Term Memory", "https://arxiv.org/abs/1507.01526"]
+            [
+                "Grid Long Short-Term Memory",
+                "https://arxiv.org/abs/1507.01526"
+            ]
         ]
+    },
+    "fast R-CNN": {
+        "info": "",
+        "fullname": "",
+        "links": []
+    },
+    "faster R-CNN": {
+        "info": "",
+        "fullname": "",
+        "links": []
+    },
+    "YOLO": {
+        "info": "",
+        "fullname": "",
+        "links": []
+    },
+    "SSD": {
+        "info": "",
+        "fullname": "",
+        "links": []
+    },
+    "DSSD": {
+        "info": "",
+        "fullname": "",
+        "links": []
+    },
+    "DSOD": {
+        "info": "",
+        "fullname": "",
+        "links": []
+    },
+    "R-FCN": {
+        "info": "",
+        "fullname": "",
+        "links": []
+    },
+    "FPN": {
+        "info": "",
+        "fullname": "",
+        "links": []
+    },
+    "Mask R-CNN": {
+        "info": "",
+        "fullname": "",
+        "links": []
     }
 }

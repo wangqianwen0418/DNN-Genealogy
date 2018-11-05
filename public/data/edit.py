@@ -31,10 +31,26 @@ key_order = [
     "names"
 ]
 
-evofile = open('./dnns.json','r')
-evo = json.load(evofile)
+dnnfile = open('./dnns.json','r')
+dnns = json.load(dnnfile)
 
-print(len(evo))
+textfile = open('./textInfo.json','r')
+texts = json.load(textfile)
+
+for dnn in dnns:
+    id = dnn['ID']
+    if not id in texts:
+        texts[id] = {
+        "info": "",
+        "fullname": "",
+        "links": [
+        ]
+    }
+
+newTextfile = open('./textInfo2.json','w')
+json.dump(texts, newTextfile)
+
+
 # new_nns = []
 # for nn in evo:
 #     new_nn = OrderedDict()

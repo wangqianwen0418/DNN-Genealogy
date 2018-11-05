@@ -53,8 +53,10 @@ export default class Box extends React.Component<Props, {}>{
                         data: models[variant],
                         tooltip:{
                             formatter:(params: Object|Array<any>, ticket: string) => {
-                                console.info(params)
-                                return `${params['seriesName']}</br>${variant}: ${params['value']}`
+                                // console.info(params)
+                                return `${params['seriesName']}</br>
+                                ${variant} </br>
+                                ${params['name']}: ${params['value']}`
                             }
                         }
                     })

@@ -49,9 +49,9 @@ export default class TextInfo extends React.Component<Props, State>{
         
         if (selectedNN.ID) {
             let currentNN: NodeTextInfo = this.state.textinfo[selectedNN.ID]
-            let links = currentNN.links.map(
+            let links = currentNN.links?currentNN.links.map(
                 (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
-            )
+            ):<span/>
             return (
                 <Card
                     bordered={false}
