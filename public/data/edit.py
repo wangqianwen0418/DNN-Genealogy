@@ -31,24 +31,44 @@ key_order = [
     "names"
 ]
 
-dnnfile = open('./dnns.json','r')
-dnns = json.load(dnnfile)
+train_file = open('./train.json')
+train_info = json.load(train_file)
+new_info = []
+for cate in train_info:
+    new_cate = OrderedDict()
+    new_cate['name'] = cate['name']
+    new_cate['children'] = []
+    for child in cate['children']:
+        new_child = OrderedDict()
+        new_child['name'] = child['name']
+        for key in child:
+            if key not in ['name', 'id', 'depth', 'size']:
+                new_child[key] = child[key]
+        new_cate['children'].append(new_child)
+    new_info.append(new_cate)
+    
+newfile = open('./train2.json', 'w')
+json.dump(new_info, newfile)
 
-textfile = open('./textInfo.json','r')
-texts = json.load(textfile)
+# dnnfile = open('./dnns.json','r')
+# dnns = json.load(dnnfile)
+# print(len(dnns))
 
-for dnn in dnns:
-    id = dnn['ID']
-    if not id in texts:
-        texts[id] = {
-        "info": "",
-        "fullname": "",
-        "links": [
-        ]
-    }
+# textfile = open('./textInfo.json','r')
+# texts = json.load(textfile)
 
-newTextfile = open('./textInfo2.json','w')
-json.dump(texts, newTextfile)
+# for dnn in dnns:
+#     id = dnn['ID']
+#     if not id in texts:
+#         texts[id] = {
+#         "info": "",
+#         "fullname": "",
+#         "links": [
+#         ]
+#     }
+
+# newTextfile = open('./textInfo2.json','w')
+# json.dump(texts, newTextfile)
 
 
 # new_nns = []

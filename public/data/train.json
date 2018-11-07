@@ -1,204 +1,159 @@
 [
-        {
-          "children": [
+    {
+        "name": "Initialization",
+        "info": "Define the way to set the initial random model parameters. ",
+        "children": [
             {
-              "depth": 3,
-              "id": "3.1.1.",
-              "name": "Orthogonal",
-              "size": 0,
-              "url": "http://arxiv.org/abs/1312.6120",
-              "latex": "W=A,AA^T=E"
+                "name": "Random Normal",
+                "info": "Initialization that generates tensors with a normal distribution."
             },
             {
-              "depth": 3,
-              "id": "3.1.2.",
-              "name": "Xavier Normal",
-              "size": 0,
-              "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf",
-              "latex":"W\\sim N\\left(0, \\frac{2}{n_l+n_{l+1}}\\right)"
+                "name": "Random Uniform",
+                "info": "Initialization that generates tensors with a uniform distribution."
             },
             {
-              "depth": 3,
-              "id": "3.1.3.",
-              "name": "Xavier Uniform",
-              "size": 0,
-              "url":"http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf",
-              "latex":"W\\sim U\\left(-\\sqrt{\\frac{6}{n_l+n_{l+1}}}, \\sqrt{\\frac{6}{n_l+n_{l+1}}}\\right)"
+                "name": "Orthogonal",
+                "url": "http://arxiv.org/abs/1312.6120",
+                "latex": "W=A,AA^T=E",
+                "info": "Initialization that generates a random orthogonal matrix."
             },
             {
-              "depth": 3,
-              "id": "3.1.4.",
-              "name": "He Normal",
-              "size": 0,
-              "url":"http://arxiv.org/abs/1502.01852",
-              "latex":"W\\sim N\\left(0, \\frac{2}{n_l}\\right)"
+                "name": "Xavier Normal",
+                "url": "http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf",
+                "latex": "W\\sim N\\left(0, \\frac{2}{n_l+n_{l+1}}\\right)",
+                "info": "It draws samples from a truncated normal distribution centered on 0 with  stddev = sqrt(2 / (fan_in + fan_out)) where fan_in is the number of input units and fan_out is the number of output units."
             },
             {
-              "depth": 3,
-              "id": "3.1.5.",
-              "name": "He Uniform",
-              "size": 0,
-              "url":"http://arxiv.org/abs/1502.01852",
-              "latex":"W\\sim U\\left(-\\sqrt{\\frac{6}{n_l}}, \\sqrt{\\frac{6}{n_l}}\\right)"
+                "name": "Xavier Uniform",
+                "url": "http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf",
+                "latex": "W\\sim U\\left(-\\sqrt{\\frac{6}{n_l+n_{l+1}}}, \\sqrt{\\frac{6}{n_l+n_{l+1}}}\\right)",
+                "info": "It draws samples from a uniform distribution within [-limit, limit] where limit is  sqrt(6 / (fan_in + fan_out)) where fan_in is the number of input units in the weight tensor and  fan_out is the number of output units in the weight tensor."
             },
             {
-              "depth": 3,
-              "id": "3.1.6.",
-              "name": "Lecun Normal",
-              "size": 0,
-              "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf",
-              "latex":"W\\sim N\\left(0, \\frac{1}{n_l}\\right)"
+                "name": "He Normal",
+                "url": "http://arxiv.org/abs/1502.01852",
+                "latex": "W\\sim N\\left(0, \\frac{2}{n_l}\\right)",
+                "info": "It draws samples from a truncated normal distribution centered on 0 with stddev = sqrt(2 / fan_in) where  fan_in is the number of input units in the weight tensor."
             },
             {
-              "depth": 3,
-              "id": "3.1.7.",
-              "name": "Lecun Uniform",
-              "size": 0,
-              "url":"http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf",
-              "latex":"W\\sim U\\left(-\\sqrt{\\frac{3}{n_l}}, \\sqrt{\\frac{3}{n_l}}\\right)"
+                "name": "He Uniform",
+                "url": "http://arxiv.org/abs/1502.01852",
+                "latex": "W\\sim U\\left(-\\sqrt{\\frac{6}{n_l}}, \\sqrt{\\frac{6}{n_l}}\\right)",
+                "info": "It draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(6 / fan_in) where  fan_in is the number of input units in the weight tensor."
+            },
+            {
+                "name": "Lecun Normal",
+                "url": "http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf",
+                "latex": "W\\sim N\\left(0, \\frac{1}{n_l}\\right)",
+                "info": "It draws samples from a truncated normal distribution centered on 0 with stddev = sqrt(1 / fan_in) where  fan_in is the number of input units in the weight tensor."
+            },
+            {
+                "name": "Lecun Uniform",
+                "url": "http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf",
+                "latex": "W\\sim U\\left(-\\sqrt{\\frac{3}{n_l}}, \\sqrt{\\frac{3}{n_l}}\\right)",
+                "info": "It draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(3 / fan_in) where  fan_in is the number of input units in the weight tensor."
             }
-          ],
-          "depth": 2,
-          "id": "3.1.",
-          "name": "Initialization",
-          "size": 0
-        },
-        {
-          "children": [
+        ]
+    },
+    {
+        "name": "Optimization",
+        "info": "Optimization modifies the model parameters to minimize the loss function.",
+        "children": [
             {
-              "depth": 3,
-              "id": "3.2.1.",
-              "name": "SGD",
-              "size": 0,
-              "url":"http://ufldl.stanford.edu/tutorial/supervised/OptimizationStochasticGradientDescent/"
+                "name": "SGD",
+                "url": "http://ufldl.stanford.edu/tutorial/supervised/OptimizationStochasticGradientDescent/",
+                "info": "Stochastic Gradient Descent (SGD) and its variants are probably the most usedoptimization algorithms for machine learning in general and for deep learningin particular. SGD is possible to obtain an unbiasedestimate of the gradient by taking the average gradient on a minibatch of examples. "
             },
             {
-              "depth": 3,
-              "id": "3.2.4.",
-              "name": "Momentum",
-              "size": 0,
-              "url":"http://proceedings.mlr.press/v28/sutskever13.html"
+                "name": "Adam",
+                "url": "http://arxiv.org/abs/1412.6980v8",
+                "info": "Adam stands for adaptive moment estimation, and is another way of using past gradients to calculate current gradients. Adam also utilizes the concept of momentum by adding fractions of previous gradients to the current one. This optimizer has become pretty widespread, and is practically accepted for use in training neural nets."
             },
             {
-              "depth": 3,
-              "id": "3.2.2.",
-              "name": "Adam",
-              "size": 0,
-              "url":"http://arxiv.org/abs/1412.6980v8"
+                "name": "Momentum",
+                "url": "http://proceedings.mlr.press/v28/sutskever13.html",
+                "info": "The method of momentum is designed to accelerate learning. The momentum algorithm accumulatesan exponentially decaying moving average of past gradients and continues to move in their direction."
             },
             {
-              "depth": 3,
-              "id": "3.2.3.",
-              "name": "RMSprop",
-              "size": 0,
-              "url":"http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf"
+                "name": "AdaGrad",
+                "info": "Adagrad adapts the learning rate specifically to individual features and works well for well for sparse datasets. However, the adaptive learning rate tends to vanish over time."
+            },
+            {
+                "name": "RMSprop",
+                "url": "http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf",
+                "info": "RMSprop is a special version of Adagrad. Instead of letting all of the gradients accumulate for momentum, it only accumulates gradients in a fixed window."
             }
-          ],
-          "depth": 2,
-          "id": "3.2.",
-          "name": "Optimization",
-          "size": 0
-        },
-        {
-          "children": [
+        ]
+    },
+    {
+        "name": "Loss Function",
+        "info": "A loss function (or objective function, or optimization score function) is a measure of how good a prediction model does in terms of being able to predict the expected outcome. ",
+        "children": [
             {
-              "depth": 3,
-              "id": "3.3.1.",
-              "name": "L1&L2",
-              "size": 0
+                "name": "Cross Entropy",
+                "info": "Cross-entropy loss measures the performance of a classification model whose output is probability values between 0 and 1. ",
+                "latex": "- \\sum_{c=1}^{C} y_c\\log(f(x_c)"
             },
             {
-              "depth": 3,
-              "id": "3.3.3.",
-              "name": "Hinge",
-              "size": 0
+                "name": "CTC",
+                "info": "Connectionist temporal classification (CTC) is used for training recurrent neural networks (RNNs) to tackle sequence problems where the timing is variable. It can be used for tasks like on-line handwriting recognition or recognizing phonemes in speech audio.",
+                "url": "https://www.cs.toronto.edu/~graves/icml_2006.pdf"
             },
             {
-              "depth": 3,
-              "id": "3.3.4.",
-              "name": "Cosine",
-              "size": 0
+                "name": "L1 & L2",
+                "info": "L1 and L2  are the two standard loss functions for regreesion problem. L2 loss function is highly sensitive to outliers. "
             },
             {
-              "depth": 3,
-              "id": "3.3.5.",
-              "name": "Cross Entropy",
-              "size": 0
+                "name": "Poisson",
+                "info": "Poisson loss function is a measure of how the predicted distribution diverges from the expected distribution, the poisson as loss function is a variant from Poisson Distribution, where the poisson distribution is widely used for modeling count data.",
+                "latex": "\\frac{1}{n} \\sum_1^n (f(x_i) - y\\log(f(x_i))"
             },
             {
-              "depth": 3,
-              "id": "3.3.6.",
-              "name": "CTC",
-              "size": 0
+                "name": "KL Divergence",
+                "latex": "KL(q\\parallel p) = \\sum  q(x)\\log{\\frac{q(x)}{p(x)}}",
+                "info": ""
+            },
+            {
+                "name": "Hinge",
+                "info": "Hinge loss is a loss function used for training classifiers.The hinge loss is used for 'maximum-margin' classification, most notably for SVMs. ",
+                "latex": "max(0, 1-yf(y))"
             }
-          ],
-          "depth": 2,
-          "id": "3.3.",
-          "name": "Loss Function",
-          "size": 0
-        },
-        {
-          "children": [
+        ]
+    },
+    {
+        "name": "Regularization",
+        "info": "Aim to address the problem of overfitting",
+        "children": [
             {
-              "depth": 3,
-              "id": "3.4.1.",
-              "name": "Dropout",
-              "size": 0,
-              "url": "http://www.jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf?utm_content=buffer79b43&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer"
+                "name": "Dropout",
+                "url": "http://jmlr.org/papers/v15/srivastava14a.html",
+                "info": "Dropout randomly drops units (along with their connections) from the neural network during training to prevent complex co-adaptations on training data"
             },
             {
-              "depth": 3,
-              "id": "3.4.2.",
-              "name": "Weight Decay",
-              "size": 0
+                "name": "Weight Decay",
+                "latex": "w_i \\Leftarrow w_i - \\eta (\\frac{\\delta E}{\\delta w_i} + \\lambda w_i) ",
+                "info": "The term \u03BBw_i is the weight decay regularization. \n It is the same thing as adding an L2 regularization term. ",
+                "url": "https://papers.nips.cc/paper/563-a-simple-weight-decay-can-improve-generalization.pdf"
             },
             {
-              "depth": 3,
-              "id": "3.4.3.",
-              "name": "Drop Path",
-              "size": 0
+                "name": "Data Augmentation",
+                "info": "Data Augmentation is an approach that seeks to directly augment the input data to the model in data space."
             },
             {
-              "depth": 3,
-              "id": "3.4.4.",
-              "name": "Data Augmentation",
-              "size": 0
+                "name": "Batch Normalization",
+                "url": "http://www.jmlr.org/proceedings/papers/v37/ioffe15.html",
+                "info": "The distribution of each layer's inputs changes during training, as the parameters of the previous layers change. This slows down the training by requiring lower learning rates and careful parameter initialization. Batch normalization addresses this problem by normalizing layer inputs. "
             },
             {
-              "depth": 3,
-              "id": "3.4.5.",
-              "name": "Batch Normalization",
-              "size": 0,
-              "url":"http://www.jmlr.org/proceedings/papers/v37/ioffe15.html"
+                "name": "Shake-Shake",
+                "url": "https://arxiv.org/abs/1705.07485",
+                "info": "It replace, in a multi-branch network, the standard summation of parallel branches with a stochastic affine combination."
             },
             {
-              "depth": 3,
-              "id": "3.4.6.",
-              "name": "Shake-Shake",
-              "size": 0
-            },
-            {
-              "depth": 3,
-              "id": "3.4.7.",
-              "name": "LSR",
-              "size": 0
-            },
-            {
-              "depth": 3,
-              "id": "3.4.8.",
-              "name": "DSD",
-              "size": 0
-            },
-            {
-              "depth": 3,
-              "id": "3.4.9.",
-              "name": "Swapout",
-              "size": 0
+                "name": "LSR",
+                "info": "Label Smooth Regularization (LSR) is first proposed in Inception V2. It regularizes the classifier layer by estimating the marginalized effect of label-dropout during training.",
+                "url": "https://arxiv.org/abs/1512.00567"
             }
-          ],
-          "depth": 2,
-          "id": "3.4.",
-          "name": "Regularization",
-          "size": 0
-        }
-      ]
+        ]
+    }
+]
