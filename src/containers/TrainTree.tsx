@@ -6,8 +6,9 @@ import { connect, Dispatch } from 'react-redux';
 export function mapStateToProps(state:StoreState) {
     return {
         treeType:'Train',
-        selectedNN: state.selectedNN,
-        trainInfo: state.trainInfo
+        trainInfo: state.trainInfo,
+        dnns: state.dnns,
+        selectedID: state.selectedNN.ID
     };
 }
 

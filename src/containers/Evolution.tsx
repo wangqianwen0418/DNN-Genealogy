@@ -9,7 +9,8 @@ export function mapStateToProps(state:StoreState) {
         arc:state.arc,
         app:state.app,
         train:state.train,
-        textInfo: state.textInfo
+        textInfo: state.textInfo,
+        dnns: state.dnns
     };
 }
 

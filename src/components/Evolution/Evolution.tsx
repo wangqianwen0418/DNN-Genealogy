@@ -25,6 +25,7 @@ export interface Props {
     app: string,
     train: string,
     textInfo: {[key:string]:NodeTextInfo},
+    dnns: any,
     onSelectNN: (currentNetworks: NN[], selectedNN: NN) => void,
     onSelectNNMotion: (op: number) => void,
     onSelectDatabase: (db: string) => void
@@ -178,8 +179,8 @@ export default class Evolution extends React.Component<Props, State>{
         // let resText = await axios.get('../../data/textInfo.json')
         // this.textInfo = resText.data
         // evolution data
-        let res = await axios.get('../../data/dnns.json'),
-            datum: NN[] = res.data,
+        // let res = await axios.get('../../data/dnns.json'),
+         let   datum: NN[] = this.props.dnns,
             { appValue } = this.state;
         
         datum = datum.filter((d: NN) => {

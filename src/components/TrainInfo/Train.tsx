@@ -1,16 +1,16 @@
 import { Tabs, Collapse, Icon, Card } from 'antd';
 import './Train.css'
 import * as React from 'react';
-import axios from 'axios';
-import {NN} from 'types';
+import {TrainItemInfo, TrainInfo} from 'types';
 
 const TabPane = Tabs.TabPane
 const Panel = Collapse.Panel;
 
 export interface Props {
     treeType: string;
-    selectedNN: NN,
-    trainInfo: any,
+    dnns: any,
+    selectedID: string,
+    trainInfo: TrainInfo[],
     onSelect: (node: string) => void
 }
 export interface State {
@@ -48,8 +48,26 @@ export default class Train extends React.Component<Props, State>{
     // componentWillMount() {
     //     this.getData()
     // }
+    highlight(a:TrainItemInfo){
+        let dnn = this.props.dnns.filter((nn:any)=>nn.ID == this.props.selectedID)[0]
+        let nnTrainInfo = dnn? dnn.training : []
+        
+        let flag = 0
+        if (a.highlight){
+            flag = 1
+        }else{
+            nnTrainInfo.forEach((item: string)=>{
+                item = item.toLowerCase()
+                console.info(item, a.name.toLowerCase(), item.includes(a.name.toLowerCase()))
+                if (item.includes(a.name.toLowerCase())){
+                    flag = 1
+                }
+            })
+        }
+        return flag
+    }
     render() {
-        let selectedNN = this.props
+        
         let panes = this.props.trainInfo.map((tab: any, i: number) => {
 
             return (
@@ -62,10 +80,10 @@ export default class Train extends React.Component<Props, State>{
                     <Collapse bordered={false}>
                         {
                             tab.children
-                            .sort((a: any, b: any) => {
-                                return b.highlight||0 - a.highlight||0 // put the highlight item in the front
+                            .sort((a: TrainItemInfo, b: TrainItemInfo) => {
+                                return this.highlight(b) - this.highlight(a) // put the highlight item in the front
                             }).map((pane: any) => {
-                                let paneStyle: React.CSSProperties = pane.highlight ? { fontWeight: "bold" } : {}
+                                let paneStyle: React.CSSProperties = this.highlight(pane) ? { fontWeight: "bold" } : {}
                                 return <Panel
                                     header={
                                         <span style={paneStyle}>{pane.name}</span>

@@ -10,6 +10,7 @@ import './index.css';
 
 import * as textInfo from './assets/textInfo.json'
 import * as trainInfo from './assets/train.json'
+import * as dnns from './assets/dnns.json'
 
 import 'antd/dist/antd.css';
 
@@ -29,6 +30,7 @@ let initState:StoreState = {
   trainInfo: trainInfo,
   textInfo: textInfo, 
   selectedNN: initNN, 
+  dnns: dnns,
   currentNNs: [initNN], 
   op: 0
 }

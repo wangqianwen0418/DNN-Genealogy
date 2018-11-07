@@ -7,6 +7,7 @@ export interface StoreState {
     currentNNs:NN[],
     selectedNN: NN,
     op:number // op=0:nothing 1:update corpus 2:update textinfo,
+    dnns: any
     [key:string]: any
 }
 
@@ -21,6 +22,8 @@ export interface EvoLink {
     link:string
 }
 
+
+
 // models=Array<model>
 
 export interface NodeTextInfo{
@@ -28,6 +31,21 @@ export interface NodeTextInfo{
     info:string,
     links:Array<string>,
     code?:Array<string>,
+    
+}
+
+export interface TrainItemInfo{
+    name:string,
+    url?:string,
+    info?:string,
+    latex?:string,
+    highlight?: boolean
+}
+
+export interface TrainInfo{
+    name: string,
+    info: string,
+    children: TrainItemInfo[]
 }
 
 export interface NN{
