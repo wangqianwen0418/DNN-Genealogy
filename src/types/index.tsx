@@ -1,11 +1,13 @@
 export interface StoreState {
     database:string,
     arc:string,
-    train:string,
+    trainInfo: any,
+    textInfo: any,
     app:string,
     currentNNs:NN[],
     selectedNN: NN,
-    op:number // op=0:nothing 1:update corpus 2:update textinfo
+    op:number // op=0:nothing 1:update corpus 2:update textinfo,
+    [key:string]: any
 }
 
 export interface EvoNode {

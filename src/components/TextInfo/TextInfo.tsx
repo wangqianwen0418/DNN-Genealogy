@@ -9,46 +9,47 @@ const { Content } = Layout;
 export interface Props{
     database: string,
     selectedNN: NN,
+    textInfo: any,
     op: number
 }
 
 export interface State{
-    textinfo: NodeTextInfo[]
+    // textinfo: NodeTextInfo[]
 }
 
 export default class TextInfo extends React.Component<Props, State>{
-    constructor(props: Props) {
-        super(props)
-        this.state = { textinfo:[] }
-        this.getData = this.getData.bind(this)
-    }
+    // constructor(props: Props) {
+    //     super(props)
+    //     // this.state = { textinfo:[] }
+    //     this.getData = this.getData.bind(this)
+    // }
 
-    async getData() {
-        let res = await axios.get('../../data/textInfo.json'),
-            textinfo = res.data
-        this.setState({ textinfo })
-    }
+    // async getData() {
+    //     let res = await axios.get('../../data/textInfo.json'),
+    //         textinfo = res.data
+    //     this.setState({ textinfo })
+    // }
 
-    shouldComponentUpdate(nextProps: Props, nextState: State) {
-        /*if (nextProps.op === 2) {
-            return true
-        } else {
-            return false
-        }*/
+    // shouldComponentUpdate(nextProps: Props, nextState: State) {
+    //     /*if (nextProps.op === 2) {
+    //         return true
+    //     } else {
+    //         return false
+    //     }*/
 
-        // always update
-        return true;
-    }
+    //     // always update
+    //     return true;
+    // }
 
-    componentWillMount() {
-        this.getData()
-    }
+    // componentWillMount() {
+    //     this.getData()
+    // }
 
     render(){
         let {selectedNN} = this.props
         
         if (selectedNN.ID) {
-            let currentNN: NodeTextInfo = this.state.textinfo[selectedNN.ID]
+            let currentNN: NodeTextInfo = this.props.textInfo[selectedNN.ID]
             let links = currentNN.links?currentNN.links.map(
                 (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
             ):<span/>

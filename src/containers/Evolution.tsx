@@ -8,7 +8,8 @@ export function mapStateToProps(state:StoreState) {
     return {
         arc:state.arc,
         app:state.app,
-        train:state.train
+        train:state.train,
+        textInfo: state.textInfo
     };
 }
 

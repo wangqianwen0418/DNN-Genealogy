@@ -7,7 +7,8 @@ export function mapStateToProps(state:StoreState) {
     return {
         database:state.database,
         selectedNN: state.selectedNN,
-        op:state.op
+        op:state.op,
+        textInfo: state.textInfo
     };
 }
 

@@ -37,6 +37,7 @@
             },
             {
                 "name": "He Uniform",
+                "highlight": true,
                 "url": "http://arxiv.org/abs/1502.01852",
                 "latex": "W\\sim U\\left(-\\sqrt{\\frac{6}{n_l}}, \\sqrt{\\frac{6}{n_l}}\\right)",
                 "info": "It draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(6 / fan_in) where  fan_in is the number of input units in the weight tensor."
@@ -125,19 +126,21 @@
         "info": "Aim to address the problem of overfitting",
         "children": [
             {
-                "name": "Dropout",
-                "url": "http://jmlr.org/papers/v15/srivastava14a.html",
-                "info": "Dropout randomly drops units (along with their connections) from the neural network during training to prevent complex co-adaptations on training data"
-            },
-            {
                 "name": "Weight Decay",
                 "latex": "w_i \\Leftarrow w_i - \\eta (\\frac{\\delta E}{\\delta w_i} + \\lambda w_i) ",
                 "info": "The term \u03BBw_i is the weight decay regularization. \n It is the same thing as adding an L2 regularization term. ",
-                "url": "https://papers.nips.cc/paper/563-a-simple-weight-decay-can-improve-generalization.pdf"
+                "url": "https://papers.nips.cc/paper/563-a-simple-weight-decay-can-improve-generalization.pdf",
+                "highlight": true
             },
             {
                 "name": "Data Augmentation",
-                "info": "Data Augmentation is an approach that seeks to directly augment the input data to the model in data space."
+                "info": "Data Augmentation is an approach that seeks to directly augment the input data to the model in data space.",
+                "highlight": true
+            },
+            {
+                "name": "Dropout",
+                "url": "http://jmlr.org/papers/v15/srivastava14a.html",
+                "info": "Dropout randomly drops units (along with their connections) from the neural network during training to prevent complex co-adaptations on training data"          
             },
             {
                 "name": "Batch Normalization",
@@ -145,14 +148,14 @@
                 "info": "The distribution of each layer's inputs changes during training, as the parameters of the previous layers change. This slows down the training by requiring lower learning rates and careful parameter initialization. Batch normalization addresses this problem by normalizing layer inputs. "
             },
             {
-                "name": "Shake-Shake",
-                "url": "https://arxiv.org/abs/1705.07485",
-                "info": "It replace, in a multi-branch network, the standard summation of parallel branches with a stochastic affine combination."
-            },
-            {
                 "name": "LSR",
                 "info": "Label Smooth Regularization (LSR) is first proposed in Inception V2. It regularizes the classifier layer by estimating the marginalized effect of label-dropout during training.",
                 "url": "https://arxiv.org/abs/1512.00567"
+            },
+            {
+                "name": "Shake-Shake",
+                "url": "https://arxiv.org/abs/1705.07485",
+                "info": "It replace, in a multi-branch network, the standard summation of parallel branches with a stochastic affine combination."
             }
         ]
     }

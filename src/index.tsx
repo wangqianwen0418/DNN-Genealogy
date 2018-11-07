@@ -8,6 +8,9 @@ import { Provider } from 'react-redux';
 // import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
+import * as textInfo from './assets/textInfo.json'
+import * as trainInfo from './assets/train.json'
+
 import 'antd/dist/antd.css';
 
 let initNN: NN = {
@@ -23,7 +26,8 @@ let initNN: NN = {
 let initState:StoreState = {
   database:'nonsequence', 
   arc:'', app:'', 
-  train:'', 
+  trainInfo: trainInfo,
+  textInfo: textInfo, 
   selectedNN: initNN, 
   currentNNs: [initNN], 
   op: 0

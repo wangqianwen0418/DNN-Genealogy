@@ -24,6 +24,7 @@ export interface Props {
     arc: string,
     app: string,
     train: string,
+    textInfo: {[key:string]:NodeTextInfo},
     onSelectNN: (currentNetworks: NN[], selectedNN: NN) => void,
     onSelectNNMotion: (op: number) => void,
     onSelectDatabase: (db: string) => void
@@ -132,7 +133,7 @@ const transitionStyles = {
 };
 
 export default class Evolution extends React.Component<Props, State>{
-    public updateEdge: boolean = true; textInfo:{[key:string]:NodeTextInfo}={};
+    public updateEdge: boolean = true; 
             ref: any; x0: number; y0: number; dragFlag = false
     constructor(props: Props) {
         super(props)
@@ -174,8 +175,8 @@ export default class Evolution extends React.Component<Props, State>{
     }
     async getData() {
         // textinfo data
-        let resText = await axios.get('../../data/textInfo.json')
-        this.textInfo = resText.data
+        // let resText = await axios.get('../../data/textInfo.json')
+        // this.textInfo = resText.data
         // evolution data
         let res = await axios.get('../../data/dnns.json'),
             datum: NN[] = res.data,
@@ -976,7 +977,7 @@ export default class Evolution extends React.Component<Props, State>{
 
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         let { train, arc } = this.props
-        let NNInfo = this.textInfo[glyphZoomLabel]
+        let NNInfo = this.props.textInfo[glyphZoomLabel]
         let info = '', links:JSX.Element[] = [], code:JSX.Element[] = []
         let paperTitle = ''
         if (NNInfo){
