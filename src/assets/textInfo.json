@@ -15,7 +15,7 @@
         "links": [
             [
                 "Fully Convolutional Networks for Semantic Segmentation",
-                "https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf"
+                "https://arxiv.org/abs/1411.4038"
             ]
         ]
     },
@@ -91,7 +91,7 @@
     },
     "DeepLab_v2": {
         "info": "This work makes three contributions for the image semantic segmentation task: highlight the importance of using atrous/dilated convolutions; propose atrous spatial pyramid pooling (ASPP); use Fully connected CRF",
-        "fullname": "DeepLab_v3",
+        "fullname": "DeepLab_v2",
         "links": [
             [
                 "DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs",
@@ -100,7 +100,7 @@
         ]
     },
     "GCN": {
-        "info": "This work proves that large kernel is important for segmentation tasks. Since large kernel is computationally expensive, k x k convolution is approximated with sum of 1 x k + k x 1 and k x 1 and 1 x k convolutions, which is called global convolutional networks (GCN).",
+        "info": "This work proves that large kernel is important for segmentation tasks. Since large kernel is computationally expensive, k x k convolution is approximated with sum of 1 x k + k x 1 and k x 1 and 1 x k convolutions, which is called global convolutional networks (GCN). It also suggests a residual-based boundary refinement to further refine the object boundaries. ",
         "fullname": "global convolutional network",
         "links": [
             [
@@ -903,16 +903,20 @@
         "info": "In contrast to previous region-based detectors such as Fast/Faster R-CNN that apply a costly per-region subnetwork hundreds of times, R-FCN is fully convolutional with almost all computation shared on the entire image. ",
         "fullname": "Region-based Fully Convolutional Networks",
         "links": [
-            "R-FCN: Object Detection via Region-based Fully Convolutional Networks",
-            "https://arxiv.org/abs/1605.06409"
+            [
+                "R-FCN: Object Detection via Region-based Fully Convolutional Networks",
+                "https://arxiv.org/abs/1605.06409"
+            ]
         ]
     },
     "FPN": {
         "info": "Feature pyramids are a basic component in recognition systems for detecting objects at different scales. But recent deep learning object detectors have avoided pyramid representations, in part because they are compute and memory intensive. In this paper, we exploit the inherent multi-scale, pyramidal hierarchy of deep convolutional networks to construct feature pyramids with marginal extra cost. ",
         "fullname": "Feature Pyramid Networks",
         "links": [
-            "Feature Pyramid Networks for Object Detection",
-            "https://arxiv.org/abs/1612.03144"
+            [
+                "Feature Pyramid Networks for Object Detection",
+                "https://arxiv.org/abs/1612.03144"
+            ]
         ]
     },
     "Mask R-CNN": {

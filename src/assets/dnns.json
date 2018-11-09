@@ -10,10 +10,12 @@
             "streamlined"
         ],
         "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "2.2.2.2.1.1.standard relu"
+            "dropout",
+            "SGD with momentum",
+            "weight decay",
+            "standard relu",
+            "random normal",
+            "cross entropy"
         ],
         "citation": "18438",
         "date": "2012.12.03",
@@ -26,6 +28,7 @@
                 "params": 60.0,
                 "cifar100": null,
                 "name": "alexNet"
+                
             }
         ]
     },
@@ -47,10 +50,12 @@
             "streamlined"
         ],
         "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "2.2.2.2.1.1.standard relu"
+            "dropout",
+            "SGD with momentum",
+            "weight decay",
+            "standard relu",
+            "xavier normal",
+            "cross entropy"
         ],
         "citation": "8205",
         "date": "2014.09.04",
@@ -92,7 +97,11 @@
         "architecture": [
             "skip connections"
         ],
-        "training": [],
+        "training": [
+            "SGD with momentum",
+            "he normal",
+            "cross entropy"
+        ],
         "citation": "320",
         "date": "2015.11.03",
         "names": [
@@ -125,10 +134,11 @@
             "multi-branch"
         ],
         "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "2.2.2.2.1.1.standard relu"
+            "dropout",
+            "SGD with momentum",
+            "weight decay",
+            "standard relu",
+            "data augmentation"
         ],
         "citation": "5591",
         "date": "2014.09.17",
@@ -180,10 +190,11 @@
             "skip connections"
         ],
         "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with nesterov momentum",
-            "3.4.2.weight decay",
-            "3.1.7.he_normal"
+            "dropout",
+            "SGD with nesterov momentum",
+            "weight decay",
+            "he_normal",
+            "data augmentation"
         ],
         "citation": "378",
         "date": "2016.08.25",
@@ -309,9 +320,9 @@
             "multi-branch"
         ],
         "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay"
+            "dropout",
+            "SGD with momentum",
+            "weight decay"
         ],
         "citation": "264",
         "date": "2016.02.24",
@@ -350,7 +361,10 @@
         "architecture": [
             "skip connections"
         ],
-        "training": [],
+        "training": [
+            "sgd",
+            "batch normalization"
+        ],
         "citation": "31",
         "date": "2017.06.06",
         "names": [
@@ -390,11 +404,10 @@
             "skip connections"
         ],
         "training": [
-            "3.2.3.RMSprop",
+            "RMSprop",
             "scaling of the residuals",
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay"
+            "dropout",
+            "weight decay"
         ],
         "citation": "480",
         "date": "2016.02.23",
@@ -440,7 +453,9 @@
             "depthwise separable conv",
             "streamlined"
         ],
-        "training": [],
+        "training": [
+            "RMSprop"
+        ],
         "citation": "149",
         "date": "2017.04.17",
         "names": [
@@ -482,10 +497,11 @@
             "skip connections"
         ],
         "training": [
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.4.1.dropout"
+            "batch normalization",
+            "SGD with momentum",
+            "weight decay",
+            "dropout",
+            "data augmentation"
         ],
         "citation": "62",
         "date": "2016.05.25",
@@ -519,10 +535,10 @@
             "skip connections"
         ],
         "training": [
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.4.1.dropout"
+            "batch normalization",
+            "SGD with momentum",
+            "weight decay",
+            "dropout"
         ],
         "citation": "285",
         "date": "2016.05.23",
@@ -585,7 +601,12 @@
         "architecture": [
             "skip connections"
         ],
-        "training": [],
+        "training": [
+            "SGD with momentum",
+            "weight decay",
+            "dropout",
+            "he normal"
+        ],
         "citation": "0",
         "date": "2018.02.06",
         "names": [
@@ -669,11 +690,11 @@
             "multi-branch"
         ],
         "training": [
-            "3.4.3.drop path",
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.4.1.dropout"
+            "drop path",
+            "batch normalization",
+            "SGD with momentum",
+            "weight decay",
+            "dropout"
         ],
         "citation": "71",
         "date": "2016.05.24",
@@ -717,10 +738,10 @@
             "skip connections"
         ],
         "training": [
-            "3.4.1.dropout",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "2.2.2.2.1.1.standard relu"
+            "dropout",
+            "SGD with momentum",
+            "weight decay",
+            "standard relu"
         ],
         "citation": "32",
         "date": "2016.12.17",
@@ -754,11 +775,11 @@
             "streamlined"
         ],
         "training": [
-            "3.1.11.dirac",
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.4.1.dropout"
+            "dirac",
+            "batch normalization",
+            "SGD with momentum",
+            "weight decay",
+            "dropout"
         ],
         "citation": "4",
         "date": "2017.06.07",
@@ -825,10 +846,10 @@
             "skip connections"
         ],
         "training": [
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay",
-            "3.1.7.he_normal"
+            "batch normalization",
+            "SGD with momentum",
+            "weight decay",
+            "he_normal"
         ],
         "citation": "5464",
         "date": "2015.12.10",
@@ -929,10 +950,10 @@
             "multi-branch"
         ],
         "training": [
-            "3.4.7.pre-activation",
-            "3.4.4.batch normalization",
-            "3.2.1.SGD with momentum",
-            "3.4.2.weight decay"
+            "pre-activation",
+            "batch normalization",
+            "SGD with momentum",
+            "weight decay"
         ],
         "citation": "134",
         "date": "2016.11.16",
@@ -965,7 +986,13 @@
         "architecture": [
             "skip connections"
         ],
-        "training": [],
+        "training": [
+            "SGD with momentum",
+            "he normal",
+            "batch normalization",
+            "dropout",
+            "cross entropy"
+        ],
         "citation": "48",
         "date": "2017.09.05",
         "names": [
@@ -1012,7 +1039,11 @@
             "depthwise separable conv"
         ],
         "training": [
-            "neural architecture search by reinforcement learning"
+            "neural architecture search by reinforcement learning",
+            "RMSProp",
+            "LSR",
+            "weight decay",
+            "dropout"
         ],
         "citation": "35",
         "date": "2017.12.01",
@@ -1056,7 +1087,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "sgd"
+        ],
         "citation": "9047",
         "date": "1990.03.01",
         "names": [
@@ -1628,7 +1661,14 @@
             "2.detection",
             "1.1.1.general recognition"
         ],
-        "parents": [],
+        "parents": [
+            {
+                "link_info_l": "extract the feature maps from the entire image only once and apply the spatial pyramid pooling on each candidate windows; can run orders of magnitude faster ",
+                "ID": "R-CNN",
+                "link_info_s": "SPP",
+                "link_category": "nan"
+            }
+        ],
         "architecture": [
             "xxx"
         ],
@@ -1647,9 +1687,9 @@
         ],
         "parents": [
             {
-                "link_info_l": "nan",
+                "link_info_l": "combine classification and bounding box regression into a multi-task leaning manner; replace the SVM with a softmax layer; improve the detection speed ",
                 "ID": "R-CNN",
-                "link_info_s": "",
+                "link_info_s": "multi-task",
                 "link_category": "nan"
             }
         ],
@@ -1671,9 +1711,9 @@
         ],
         "parents": [
             {
-                "link_info_l": "nan",
+                "link_info_l": "use convolutional feature maps to compute region proposals with a deep convolutional neural network",
                 "ID": "fast R-CNN",
-                "link_info_s": "",
+                "link_info_s": "region proposal network",
                 "link_category": "nan"
             }
         ],
@@ -1693,7 +1733,9 @@
         "application": [
             "2.detection"
         ],
-        "parents": [],
+        "parents": [
+
+        ],
         "architecture": [
             "xxx"
         ],
@@ -1712,15 +1754,15 @@
         ],
         "parents": [
             {
-                "link_info_l": "nan",
+                "link_info_l": "simultaneously predicting the bounding box and the class as it processes the image",
                 "ID": "faster R-CNN",
-                "link_info_s": "",
+                "link_info_s": "multi-task",
                 "link_category": "nan"
             },
             {
-                "link_info_l": "nan",
+                "link_info_l": "use a set of default anchor boxes with different aspect ratios and scales to discretize the output space of bounding boxes", 
                 "ID": "YOLO",
-                "link_info_s": "",
+                "link_info_s": "region proposal",
                 "link_category": "nan"
             }
         ],
@@ -1742,9 +1784,9 @@
         ],
         "parents": [
             {
-                "link_info_l": "nan",
+                "link_info_l": "combine ReseNet with SSD; use deconvolution layers to introduce additional large-scale context and improve accuracy ",
                 "ID": "SSD",
-                "link_info_s": "",
+                "link_info_s": "deconv",
                 "link_category": "nan"
             }
         ],
@@ -1766,9 +1808,9 @@
         ],
         "parents": [
             {
-                "link_info_l": "nan",
+                "link_info_l": "learn object detectors without pretrain; use dense layer-wise connection; use stem blocks inspired by inception ",
                 "ID": "SSD",
-                "link_info_s": "",
+                "link_info_s": "dense & stem",
                 "link_category": "nan"
             }
         ],
@@ -1782,30 +1824,7 @@
             {}
         ]
     },
-    {
-        "ID": "R-FCN",
-        "fullname": "R-FCN",
-        "application": [
-            "2.detection"
-        ],
-        "parents": [
-            {
-                "link_info_l": "nan",
-                "ID": "faster R-CNN",
-                "link_info_s": "",
-                "link_category": "nan"
-            }
-        ],
-        "architecture": [
-            "xxx"
-        ],
-        "training": [],
-        "citation": "757",
-        "date": "2016.05.20",
-        "names": [
-            {}
-        ]
-    },
+    
     {
         "ID": "FPN",
         "fullname": "Feature Pyramid Network",
@@ -1814,9 +1833,15 @@
         ],
         "parents": [
             {
-                "link_info_l": "nan",
+                "link_info_l": "compute a multi-scale feature representation using a feature pyramid network",
                 "ID": "faster R-CNN",
-                "link_info_s": "",
+                "link_info_s": "feature pyramid",
+                "link_category": "nan"
+            },
+            {
+                "link_info_l": "reuse the higher-resolution maps of the feature hierarchy",
+                "ID": "SSD",
+                "link_info_s": "feature pyramid",
                 "link_category": "nan"
             }
         ],
@@ -1830,10 +1855,31 @@
             {}
         ]
     },
+    {
+        "ID": "R-FCN",
+        "fullname": "R-FCN",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "no costly per-region subnetwork; region-based detector is fully convolutional with almost all computation shared on the entire image ",
+                "ID": "faster R-CNN",
+                "link_info_s": "fully convolution",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "757",
+        "date": "2016.05.20",
+        "names": [
+            {}
+        ]
+    },
 
-
-
-     
     {
         "ID": "FCN",
         "fullname": "Fully Convolutional Network",
@@ -1859,7 +1905,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "use concatenation instead of addition to fusion the information of previous tensor and up-sampling tensor; drop the ",
+                "link_info_l": "use concatenation instead of addition to fusion the information of previous tensor and up-sampling tensor; use FC layer to connect encoder and decoder ",
                 "ID": "FCN",
                 "link_info_s": "add => concate",
                 "link_category": "nan"
@@ -1907,7 +1953,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "change the convolution layer to deconvolution layer during up-sampling; ",
+                "link_info_l": "change the convolution layer to deconvolution layer during up-sampling ",
                 "ID": "SegNet",
                 "link_info_s": "learnable deconv layers",
                 "link_category": "nan"
@@ -1933,7 +1979,7 @@
             {
                 "link_info_l": "use convolution layers for down sample and upsample operation; use residual blocks;  propose a \u2018pyramid supervision\u2019 training scheme",
                 "ID": "SegNet",
-                "link_info_s": "no pooling;",
+                "link_info_s": "no pooling",
                 "link_category": "nan"
             }
         ],
@@ -1955,7 +2001,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "both use residual blocks; propose chained residual pooling; propose multi-path refinement;",
+                "link_info_l": "both use residual blocks; propose chained residual pooling; propose multi-path refinement",
                 "ID": "FCN",
                 "link_info_s": "multi-path refine",
                 "link_category": "nan"
@@ -1979,7 +2025,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "use dilated convolutions; no downsampling or upsampling;",
+                "link_info_l": "use dilated convolutions; no downsampling or upsampling",
                 "ID": "FCN",
                 "link_info_s": "dilated conv",
                 "link_category": "nan"
@@ -2025,7 +2071,14 @@
         "application": [
             "3.segmentation"
         ],
-        "parents": [],
+        "parents": [
+            {
+                "link_info_l": "use dense Conditional Random Field (CRF) to replace the softmax layer ",
+                "ID": "FCN",
+                "link_info_s": "CRF",
+                "link_category": "nan"
+            }
+        ],
         "architecture": [
             "xxx"
         ],
@@ -2042,7 +2095,20 @@
         "application": [
             "3.segmentation"
         ],
-        "parents": [],
+        "parents": [
+            {
+                "link_info_l": "Use atrous/dilated convolutions;Propose atrous spatial pyramid pooling (ASPP); Use Fully connected CRF",
+                "ID": "DeepLab",
+                "link_info_s": "atrous conv",
+                "link_category": "nan"
+            },
+            {
+                "link_info_l": "Propose atrous spatial pyramid pooling (ASPP); Use fully connected CRF",
+                "ID": "DilatedNet",
+                "link_info_s": "ASPP + FC-CRF",
+                "link_category": "nan"
+            }
+        ],
         "architecture": [
             "xxx"
         ],
@@ -2060,9 +2126,16 @@
             "3.segmentation"
         ],
         "parents": [
-
+            {
+                "link_info_l": "use large kernel to improve segmentation tasks",
+                "ID": "DeconvNet",
+                "link_info_s": "large kernel",
+                "link_category": "nan"
+            }
         ],
-        "architecture": [],
+        "architecture": [
+            "xxx"
+        ],
         "training": [],
         "citation": "99",
         "date": "2017.03.08",
@@ -2078,7 +2151,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "improve atrous spatial pyramid pooling (ASPP); employ atrous convolutions in cascade; ",
+                "link_info_l": "improve atrous spatial pyramid pooling (ASPP); employ atrous/dilated convolutions in cascade ",
                 "ID": "DeepLab_v2",
                 "link_info_s": "pyramid pooling",
                 "link_category": "nan"
@@ -2096,10 +2169,15 @@
         "ID": "Mask R-CNN",
         "fullname": "Mask R-CNN",
         "application": [
-            "3.segmentation"
+            "2.segmentation"
         ],
         "parents": [
-
+            {
+                "link_info_l": "extend fast r-cnn for instance segmentation",
+                "ID": "fast r-cnn",
+                "link_info_s": "mask",
+                "link_category": "nan"
+            }
         ],
         "architecture": [],
         "training": [],

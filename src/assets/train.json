@@ -37,7 +37,6 @@
             },
             {
                 "name": "He Uniform",
-                "highlight": true,
                 "url": "http://arxiv.org/abs/1502.01852",
                 "latex": "W\\sim U\\left(-\\sqrt{\\frac{6}{n_l}}, \\sqrt{\\frac{6}{n_l}}\\right)",
                 "info": "It draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(6 / fan_in) where  fan_in is the number of input units in the weight tensor."

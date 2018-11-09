@@ -1,5 +1,6 @@
 import json
 from collections import OrderedDict
+
 def cnn(name):
     if not name:
         return ''
@@ -31,24 +32,40 @@ key_order = [
     "names"
 ]
 
-train_file = open('./train.json')
-train_info = json.load(train_file)
+dnnfile = open('../../src/assets/dnns.json', 'r')
+dnns = json.load(dnnfile)
 new_info = []
-for cate in train_info:
-    new_cate = OrderedDict()
-    new_cate['name'] = cate['name']
-    new_cate['children'] = []
-    for child in cate['children']:
-        new_child = OrderedDict()
-        new_child['name'] = child['name']
-        for key in child:
-            if key not in ['name', 'id', 'depth', 'size']:
-                new_child[key] = child[key]
-        new_cate['children'].append(new_child)
-    new_info.append(new_cate)
-    
-newfile = open('./train2.json', 'w')
+
+for dnn in dnns:
+    new_dnn = OrderedDict()
+    new_dnn = dnn
+    new_dnn['training'] = [item.split('.')[-1] for item in dnn['training']]
+    new_info.append(new_dnn)
+
+
+newfile = open('../../src/assets/dnns2.json', 'w')
 json.dump(new_info, newfile)
+
+
+
+# train_file = open('./train.json')
+# train_info = json.load(train_file)
+# new_info = []
+# for cate in train_info:
+#     new_cate = OrderedDict()
+#     new_cate['name'] = cate['name']
+#     new_cate['children'] = []
+#     for child in cate['children']:
+#         new_child = OrderedDict()
+#         new_child['name'] = child['name']
+#         for key in child:
+#             if key not in ['name', 'id', 'depth', 'size']:
+#                 new_child[key] = child[key]
+#         new_cate['children'].append(new_child)
+#     new_info.append(new_cate)
+    
+# newfile = open('./train2.json', 'w')
+# json.dump(new_info, newfile)
 
 # dnnfile = open('./dnns.json','r')
 # dnns = json.load(dnnfile)

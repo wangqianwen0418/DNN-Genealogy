@@ -119,6 +119,7 @@ export default class Train extends React.Component<Props, State>{
                     // onChange={this.changeTab} 
                     className="train"
                     style={{ height: '100%' }}
+                    activeKey={'1'}
                 >
                     {panes}
                 </Tabs>

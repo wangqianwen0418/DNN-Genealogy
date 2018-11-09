@@ -59,8 +59,8 @@ const appData = [
         value: '2'
     },
     {
-        label: 'Segmentation',
-        key: 'Segmentation',
+        label: 'Semantic Segmentation',
+        key: 'Semantic Segmentation',
         value: '3'
     }
 ]
@@ -174,18 +174,18 @@ export default class Evolution extends React.Component<Props, State>{
             glyphZoomLabel: ''
         }
     }
-    async getData() {
+    getData(appValue: string) {
         // textinfo data
         // let resText = await axios.get('../../data/textInfo.json')
         // this.textInfo = resText.data
         // evolution data
         // let res = await axios.get('../../data/dnns.json'),
-         let   datum: NN[] = this.props.dnns,
-            { appValue } = this.state;
+         let   datum: NN[] = this.props.dnns
         
         datum = datum.filter((d: NN) => {
             return d.application[0].startsWith(appValue)
         })
+        console.info("check app value", appValue, datum)
         datum.forEach((d: NN) => {
 
             let pubDate = moment(d.date, 'YYYY-MM-DD'),
@@ -806,7 +806,7 @@ export default class Evolution extends React.Component<Props, State>{
         })
     }
     componentDidMount() {
-        this.getData()
+        this.getData(this.state.appValue)
     }
     // componentDidMount() {
 
@@ -827,7 +827,7 @@ export default class Evolution extends React.Component<Props, State>{
         }
         let legend = appValue === '1.1.' ? legendCNN : (appValue ==='1.2.'?legendRNN: {})
         this.setState({ appValue, legend });
-        this.getData()
+        this.getData(appValue)
         let { onSelectDatabase } = this.props
         if (appValue === '1.1.'){
             onSelectDatabase('nonsequence')
