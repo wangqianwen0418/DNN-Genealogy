@@ -71,7 +71,7 @@ export default class TextInfo extends React.Component<Props, State>{
                         </div>
                         {currentNN.code?'Code:':''}<br/>
                         {currentNN.code?currentNN.code.map((d,i)=>(
-                            <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
+                            <div className="TextInfo-Link" key={i}><a href={d[1]} target="_blank" >{d[0]}</a></div>
                         )):<div/>}
                     </div>
                 </Card>)

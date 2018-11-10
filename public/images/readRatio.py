@@ -1,6 +1,6 @@
 from PIL import Image
 import json
-jsonFile = '../data/dnns.json'
+jsonFile = '../../src/assets/dnns.json'
 with open(jsonFile, 'r') as json_file:
     data = json.load(json_file)
 ratio = dict() 

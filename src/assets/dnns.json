@@ -1687,9 +1687,15 @@
         ],
         "parents": [
             {
-                "link_info_l": "combine classification and bounding box regression into a multi-task leaning manner; replace the SVM with a softmax layer; improve the detection speed ",
+                "link_info_l": "combine classification and bounding box regression into a multi-task leaning manner; replace the SVM with a softmax layer; improve the detection speed;training is a single-stage using a multi-task loss; ",
                 "ID": "R-CNN",
                 "link_info_s": "multi-task",
+                "link_category": "nan"
+            },
+            {
+                "link_info_l": "combine classification and bounding box regression into a multi-task leaning manner; training is a single-stage using a multi-task loss; improve the detection speed ",
+                "ID": "SPP-Net",
+                "link_info_s": "single stage training",
                 "link_category": "nan"
             }
         ],
@@ -2173,8 +2179,8 @@
         ],
         "parents": [
             {
-                "link_info_l": "extend fast r-cnn for instance segmentation",
-                "ID": "fast r-cnn",
+                "link_info_l": "extend faster r-cnn for instance segmentation",
+                "ID": "faster R-CNN",
                 "link_info_s": "mask",
                 "link_category": "nan"
             }

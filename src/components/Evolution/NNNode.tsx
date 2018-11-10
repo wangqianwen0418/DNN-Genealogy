@@ -4,10 +4,7 @@ import { Tooltip, Tabs } from 'antd';
 import { getColor, capFirstLetter,cutLabel } from 'helper';
 const TabPane = Tabs.TabPane
 
-const margin = 40, nodeH = 20, nodeW = 100, labelL = 4,
-    expandH = 150, expandW = 200,
-    boxH = 10,
-    labelFont = 12
+const labelL = 8
 
 export interface Props {
     node: Node,

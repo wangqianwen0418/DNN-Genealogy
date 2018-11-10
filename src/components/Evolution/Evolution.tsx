@@ -24,7 +24,7 @@ export interface Props {
     arc: string,
     app: string,
     train: string,
-    textInfo: {[key:string]:NodeTextInfo},
+    textInfo: { [key: string]: NodeTextInfo },
     dnns: any,
     onSelectNN: (currentNetworks: NN[], selectedNN: NN) => void,
     onSelectNNMotion: (op: number) => void,
@@ -40,9 +40,9 @@ const appData = [
     {
         label: 'classification',
         key: 'classification',
-        value: '1',
+        value: '1.',
         selectable: false,
-        children:[{
+        children: [{
             label: 'Non-Sequential Data',
             key: 'Non-Sequential Data',
             value: '1.1.'
@@ -56,12 +56,12 @@ const appData = [
     {
         label: 'Object Detection',
         key: 'Object Detection',
-        value: '2'
+        value: '2.'
     },
     {
         label: 'Semantic Segmentation',
         key: 'Semantic Segmentation',
-        value: '3'
+        value: '3.'
     }
 ]
 
@@ -109,9 +109,9 @@ export interface State {
     glyphZoomLabel: string
 }
 
-const nodeH = 65, nodeW = 220, margin = 30, labelL = 20, tabH = 20,
+const nodeH = 100, nodeW = 400, margin = 30, labelL = 20, tabH = 20,
     // expandH = 180 + tabH, 
-    expandW = 180,
+    expandW = 300,
     glyphXmargin = 5,
     r = nodeH / 3,
     boxH = 10,
@@ -134,8 +134,8 @@ const transitionStyles = {
 };
 
 export default class Evolution extends React.Component<Props, State>{
-    public updateEdge: boolean = true; 
-            ref: any; x0: number; y0: number; dragFlag = false
+    public updateEdge: boolean = true;
+    ref: any; x0: number; y0: number; dragFlag = false
     constructor(props: Props) {
         super(props)
         this.getData = this.getData.bind(this)
@@ -180,12 +180,11 @@ export default class Evolution extends React.Component<Props, State>{
         // this.textInfo = resText.data
         // evolution data
         // let res = await axios.get('../../data/dnns.json'),
-         let   datum: NN[] = this.props.dnns
-        
+        let datum: NN[] = this.props.dnns
+
         datum = datum.filter((d: NN) => {
             return d.application[0].startsWith(appValue)
         })
-        console.info("check app value", appValue, datum)
         datum.forEach((d: NN) => {
 
             let pubDate = moment(d.date, 'YYYY-MM-DD'),
@@ -198,7 +197,7 @@ export default class Evolution extends React.Component<Props, State>{
             d.api = Math.log2((d.api || 1) / maxApi + 1)
             d.doi = d.api
         })
-        let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum)
+        let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum, appValue)
         // let appRes = await axios.get('../../data/taxonomy.json')
         // let appData = appRes.data.children[0]
 
@@ -243,17 +242,18 @@ export default class Evolution extends React.Component<Props, State>{
         }
         this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
     }
-    getDag(datum: NN[], selectedNode: Node | undefined = undefined) {
+    getDag(datum: NN[], appValue:string, selectedNode: Node | undefined = undefined) {
         let selectedID = selectedNode ? selectedNode.ID : undefined
-        let { pinNodes, appValue } = this.state
+        let { pinNodes} = this.state
         let dag = new dagre.graphlib.Graph();
+        
         dag.setGraph({
-            ranksep: appValue === '1.1.' ? nodeW * 1.5 : nodeW * 1.8,
+            ranksep: appValue === '1.1' ? nodeW * 1.1 : nodeW * 1.5,
             marginx: margin * 6,
             marginy: margin * 2,
             rankdir: 'LR',
-            edgesep: nodeH * .5,
-            nodesep: nodeH * 0.5,
+            edgesep: nodeH * .3,
+            nodesep: nodeH * 0.3,
             // ranker: "tight-tree"
             ranker: appValue === '1.1.' ? 'longest-path' : 'tight-tree'
         });
@@ -386,7 +386,7 @@ export default class Evolution extends React.Component<Props, State>{
                 pinned: boolean = (pinNodes.indexOf(v) !== -1)
             if (node) {
                 node.doi = (node.doi - minDoi) / (maxDoi - minDoi)
-                if (isNaN(node.doi)){
+                if (isNaN(node.doi)) {
                     node.doi = 1
                 }
                 dag.setNode(v, {
@@ -531,7 +531,7 @@ export default class Evolution extends React.Component<Props, State>{
             })
             return (
                 <ExtendNode
-                    key={'extended_'+node.ID}
+                    key={'extended_' + node.ID}
                     zoomed={zoomed}
                     hovered={hovered}
                     scale={scale}
@@ -606,8 +606,8 @@ export default class Evolution extends React.Component<Props, State>{
         }
 
         const getCurve = (points: Point[]) => {
-            let vias = [], 
-            len = points.length;
+            let vias = [],
+                len = points.length;
             const ratio = 0.5
             for (let i = 0; i < len - 2; i++) {
                 let p1, p2, p3, p4, p5;
@@ -643,30 +643,30 @@ export default class Evolution extends React.Component<Props, State>{
         let tooltipTxt = (
             <div>
                 <p><b>{from}->{to}:</b></p>
-                {label_l.split(';').map((line:string, lineIdx:number)=>{
-                    return <p key={lineIdx}>{lineIdx+1}: {line}</p>
+                {label_l.split(';').map((line: string, lineIdx: number) => {
+                    return <p key={lineIdx}>{lineIdx + 1}: {line}</p>
                 })}
-                </div>
-            )
+            </div>
+        )
         return (
-        <g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
-            {
-                <path
-                    className="Edge"
-                    id={`${from}->${to}`}
-                    d={pathData}
-                    stroke={hoverLegend?getColor(keyArc):'#999'}
-                    // stroke="#999"
-                    strokeWidth={2}
-                    // stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
-                    // stroke={clickLegend ? "gray" : getColor(key)}
-                    fill="none"
-                    // strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 2}
-                    // opacity={(hoverLegend|| hovered) ? 1 : (clickLegend ? 0.4 : .4)}
-                    opacity={(hoverLegend|| hovered) ? 1 : 0.3}
-                />
-            }
-            
+            <g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
+                {
+                    <path
+                        className="Edge"
+                        id={`${from}->${to}`}
+                        d={pathData}
+                        stroke={hoverLegend ? getColor(keyArc) : '#999'}
+                        // stroke="#999"
+                        strokeWidth={2}
+                        // stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
+                        // stroke={clickLegend ? "gray" : getColor(key)}
+                        fill="none"
+                        // strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 2}
+                        // opacity={(hoverLegend|| hovered) ? 1 : (clickLegend ? 0.4 : .4)}
+                        opacity={(hoverLegend || hovered) ? 1 : 0.3}
+                    />
+                }
+
                 <path
                     id={`mark_${from}->${to}`}
                     opacity={0}
@@ -678,74 +678,74 @@ export default class Evolution extends React.Component<Props, State>{
                     onMouseOver={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `${from}->${to}` })}
                     onMouseLeave={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `` })}
                 />
-            
-                <Tooltip 
-                    title={tooltipTxt} 
-                    mouseEnterDelay={.3} 
+
+                <Tooltip
+                    title={tooltipTxt}
+                    mouseEnterDelay={.3}
                     // placement="bottom" 
                     visible={hovered}
                 >
-                    <g 
-                        className="edgeLable" 
+                    <g
+                        className="edgeLable"
                         cursor="pointer"
                         opacity={hoverLegend ? 1 : 0.8}
                         onMouseOver={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `${from}->${to}` })}
                         onMouseLeave={(e: React.MouseEvent<any>) => this.setState({ hoverEdge: `` })}
-                    >   
-                        
-                        {showLabel? (
-                        <g className="labels">
-                            <Transition 
-                                in={this.updateEdge} 
-                                timeout={{ enter: duration, exit: 10 }}
-                            >
-                            {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
-                                // console.info(status)
-                                return <text
-                                    className="link_info fadeIn"
-                                    dy={-0.3 * labelFont}
-                                    scale={1 / scale}
-                                    textAnchor="middle"
-                                    style={{
-                                        fontSize: labelFont,
-                                        ...defaultStyle,
-                                        ...transitionStyles[status]
-                                    }}
-                                >
-                                    <textPath
-                                        xlinkHref={`#mark_${from}->${to}`}
-                                        startOffset="50%"
-                                    >
-                                        {label_s}
-                                    </textPath>
-                                </text>
-                            }}
-                            </Transition>
+                    >
 
-                        <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
-                            {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
-                                return <text
-                                    className="link_info fadeIn"
-                                    dy={-0.3 * labelFont}
-                                    scale={1 / scale}
-                                    textAnchor="middle"
-                                    style={{
-                                        fontSize: labelFont,
-                                        ...defaultStyle,
-                                        ...transitionStyles[status]
-                                    }}
+                        {showLabel ? (
+                            <g className="labels">
+                                <Transition
+                                    in={this.updateEdge}
+                                    timeout={{ enter: duration, exit: 10 }}
                                 >
-                                    <textPath
-                                        xlinkHref={`#mark_${from}->${to}`}
-                                        startOffset="50%"
-                                    >
-                                        {label_s}
-                                    </textPath>
-                                </text>
-                            }}
-                        </Transition>
-                        </g>
-                        ):(<g className="no labels">
+                                    {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
+                                        // console.info(status)
+                                        return <text
+                                            className="link_info fadeIn"
+                                            dy={-0.3 * labelFont}
+                                            scale={1 / scale}
+                                            textAnchor="middle"
+                                            style={{
+                                                fontSize: labelFont,
+                                                ...defaultStyle,
+                                                ...transitionStyles[status]
+                                            }}
+                                        >
+                                            <textPath
+                                                xlinkHref={`#mark_${from}->${to}`}
+                                                startOffset="50%"
+                                            >
+                                                {label_s}
+                                            </textPath>
+                                        </text>
+                                    }}
+                                </Transition>
+
+                                <Transition in={!this.updateEdge} timeout={{ enter: duration, exit: 10 }}>
+                                    {(status: 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted') => {
+                                        return <text
+                                            className="link_info fadeIn"
+                                            dy={-0.3 * labelFont}
+                                            scale={1 / scale}
+                                            textAnchor="middle"
+                                            style={{
+                                                fontSize: labelFont,
+                                                ...defaultStyle,
+                                                ...transitionStyles[status]
+                                            }}
+                                        >
+                                            <textPath
+                                                xlinkHref={`#mark_${from}->${to}`}
+                                                startOffset="50%"
+                                            >
+                                                {label_s}
+                                            </textPath>
+                                        </text>
+                                    }}
+                                </Transition>
+                            </g>
+                        ) : (<g className="no labels">
                             <text
                                 className="link_info fadeIn"
                                 dy={-0.3 * labelFont}
@@ -755,22 +755,22 @@ export default class Evolution extends React.Component<Props, State>{
                                     opacity: 0
                                 }}
                             >
-                            <textPath
-                                xlinkHref={`#mark_${from}->${to}`}
-                                startOffset="50%"
-                            >
-                                {'fake'}
-                            </textPath>
+                                <textPath
+                                    xlinkHref={`#mark_${from}->${to}`}
+                                    startOffset="50%"
+                                >
+                                    {'fake'}
+                                </textPath>
                             </text>
-                            </g>
-                        )
-                    }
-                    
-                    }
+                        </g>
+                            )
+                        }
+
+                        }
                     </g>
-                </Tooltip> 
-            
-        </g>
+                </Tooltip>
+
+            </g>
         )
 
     }
@@ -825,15 +825,15 @@ export default class Evolution extends React.Component<Props, State>{
         if (appValue === undefined) {
             return
         }
-        let legend = appValue === '1.1.' ? legendCNN : (appValue ==='1.2.'?legendRNN: {})
+        let legend = appValue === '1.1.' ? legendCNN : (appValue === '1.2.' ? legendRNN : {})
         this.setState({ appValue, legend });
         this.getData(appValue)
         let { onSelectDatabase } = this.props
-        if (appValue === '1.1.'){
+        if (appValue === '1.1.') {
             onSelectDatabase('nonsequence')
-        }else if (appValue === '1.2.'){
+        } else if (appValue === '1.2.') {
             onSelectDatabase('sequence')
-        }else{
+        } else {
             onSelectDatabase('all')
         }
     }
@@ -850,7 +850,7 @@ export default class Evolution extends React.Component<Props, State>{
         this.setState({ pinNodes })
     }
     selectNode(selectedNode: Node | undefined) {
-        let { datum } = this.state
+        let { datum, appValue } = this.state
         let { onSelectNN } = this.props
         // this.updateEdge = !this.updateEdge
         // datum.forEach((d: NN) => {
@@ -870,7 +870,10 @@ export default class Evolution extends React.Component<Props, State>{
         //         }
         //     }
         // })
-        let { nodes, edges, width: w, height: h, topDoi, scale, transX, transY } = this.getDag(datum, selectedNode)
+        let { 
+            nodes, edges, width: w, height: h, topDoi, scale, transX, transY 
+        } = this.getDag(datum, appValue, selectedNode)
+
         this.setState({
             nodes, edges, w, h, datum, selectedNode,
             topDoi, scale,
@@ -880,8 +883,8 @@ export default class Evolution extends React.Component<Props, State>{
         if (selectedNode) {
             for (let nn of datum) {
                 if (nn.ID === selectedNode.label) {
-                    let currentNNs = nodes.filter(n=>n.isZoomed).map(n=>n.ID)
-                    onSelectNN( this.state.datum.filter( n=>currentNNs.indexOf(n.ID)!==-1 ), nn )
+                    let currentNNs = nodes.filter(n => n.isZoomed).map(n => n.ID)
+                    onSelectNN(this.state.datum.filter(n => currentNNs.indexOf(n.ID) !== -1), nn)
                 }
             }
         }
@@ -933,8 +936,8 @@ export default class Evolution extends React.Component<Props, State>{
 
         for (let nn of datum) {
             if (nn.ID === selectedNode.label) {
-                let currentNNs = this.state.nodes.filter(n=>n.isZoomed).map(n=>n.ID)
-                onSelectNN( this.state.datum.filter( n=>currentNNs.indexOf(n.ID)!==-1 ), nn )
+                let currentNNs = this.state.nodes.filter(n => n.isZoomed).map(n => n.ID)
+                onSelectNN(this.state.datum.filter(n => currentNNs.indexOf(n.ID) !== -1), nn)
             }
         }
 
@@ -979,173 +982,173 @@ export default class Evolution extends React.Component<Props, State>{
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
         let { train, arc } = this.props
         let NNInfo = this.props.textInfo[glyphZoomLabel]
-        let info = '', links:JSX.Element[] = [], code:JSX.Element[] = []
+        let info = '', links: JSX.Element[] = [], code: JSX.Element[] = []
         let paperTitle = ''
-        if (NNInfo){
+        if (NNInfo) {
             paperTitle = NNInfo.links[0][0]
             info = NNInfo.info
             links = NNInfo.links.map(
-                (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
+                (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]} target="_blank">{d[0]}</a></div>
             )
-            if(NNInfo.code){
+            if (NNInfo.code) {
                 code = NNInfo.code.map(
-                    (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]}>{d[0]}</a></div>
+                    (d, i) => <div className="TextInfo-Link" key={i}><a href={d[1]} target="_blank">{d[0]}</a></div>
                 )
             }
         }
 
         return (
-        <div
-            className="Evolution View"
-            onWheel={this.handleMouseWheel}
-            onMouseDown={this.mouseDown}
-            onMouseUp={this.mouseUp}
-            onMouseLeave={this.mouseUp}
-            ref={(ref) => this.ref = ref}>
-            {/* <div style={{ position: "absolute", left: "20px", top: "20px" }}>
+            <div
+                className="Evolution View"
+                onWheel={this.handleMouseWheel}
+                onMouseDown={this.mouseDown}
+                onMouseUp={this.mouseUp}
+                onMouseLeave={this.mouseUp}
+                ref={(ref) => this.ref = ref}>
+                {/* <div style={{ position: "absolute", left: "20px", top: "20px" }}>
                 Training methods:{train}
             </div>
             <div style={{ position: "absolute", left: "20px", top: "40px" }}>
                 Architecture:{arc}
             </div> */}
-            <div 
-                className="controlPanel"
-                style={{
-                    position: 'absolute',
-                    left: '20px',
-                    top: '10px',
-                    zIndex: 100,
-                    padding: '5px'
-                }}
-            >
-                <TreeSelect
-                    value={appValue}
-                    // dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                    // treeData = {this.state.appData}
-                    style={{ width: 180 }}
-                    treeData={appData}
-                    placeholder="select your data type"
-                    // multiple
-                    onChange={this.onChange}
-                    treeDefaultExpandAll={true}
-                />
-                <div>
-                    <Button
+                <div
+                    className="controlPanel"
+                    style={{
+                        position: 'absolute',
+                        left: '20px',
+                        top: '10px',
+                        zIndex: 100,
+                        padding: '5px'
+                    }}
+                >
+                    <TreeSelect
+                        value={appValue}
+                        // dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                        // treeData = {this.state.appData}
+                        style={{ width: 180 }}
+                        treeData={appData}
+                        placeholder="select your data type"
+                        // multiple
+                        onChange={this.onChange}
+                        treeDefaultExpandAll={true}
+                    />
+                    <div>
+                        <Button
                             size="small"
                             onClick={() => this.selectNode(undefined)}
                             style={{ position: 'relative', top: '2px', marginRight: '3px' }}
-                    >
+                        >
                             Reset
                     </Button>
-                    <Switch
-                        // className="evoSwitch"
-                        checkedChildren="label" 
-                        unCheckedChildren="no label"
-                        onChange={() => this.setState({ showLabel: !this.state.showLabel })}
-                    />
+                        <Switch
+                            // className="evoSwitch"
+                            checkedChildren="label"
+                            unCheckedChildren="no label"
+                            onChange={() => this.setState({ showLabel: !this.state.showLabel })}
+                        />
+                    </div>
+                    <Legend items={legend} selectItem={this.selectItem} />
                 </div>
-                <Legend items={legend} selectItem={this.selectItem} />
-            </div>
-            <div className="container">
-                <div 
-                    className="extendNodes"
-                    style={{
-                        // height:this.ref?this.ref.clientHeight:0, 
-                        // width:this.ref?this.ref.clientWidth:0,
-                        position: 'relative'
-                    }}
+                <div className="container">
+                    <div
+                        className="extendNodes"
+                        style={{
+                            // height:this.ref?this.ref.clientHeight:0, 
+                            // width:this.ref?this.ref.clientWidth:0,
+                            position: 'relative'
+                        }}
+                    >
+                        {this.drawExtendNodes(nodes)}
+                    </div>
+                    <svg
+                        // alway show the whole dag
+                        width="100%"
+                        height="100%"
+                    // viewBox={`0 0 ${w} ${h}`}
+                    // or show part and let the users pan and zoom
+                    // width={w||1*scale} height={h||1*scale}
+
+                    >
+
+                        <defs>
+                            <marker
+                                id="red"
+                                orient="auto"
+                                markerWidth={4 * r}
+                                markerHeight={4 * r}
+                                refX={2 * r}
+                                refY={2 * r}
+                            >
+                                <circle r={r} fill="red" />
+                            </marker>
+                            <marker
+                                id="blue"
+                                orient="auto"
+                                markerWidth={4 * r}
+                                markerHeight={4 * r}
+                                refX={2 * r}
+                                refY={2 * r}
+                            >
+                                <circle r={r} fill="blue" />
+                            </marker>
+                            <marker
+                                id="black"
+                                orient="auto"
+                                markerWidth={4 * r}
+                                markerHeight={4 * r}
+                                refX={2 * r}
+                                refY={2 * r}
+                            >
+                                <circle r={r} fill="black" />
+                            </marker>
+                        </defs>{this.drawEdges(edges)}
+                        {this.drawNodes(nodes)}
+
+                    </svg>
+
+                </div>
+                <Modal
+                    className="CompareModal"
+                    style={{ top: '10%', transitionDuration: '0.3s', transitionTimingFunction: 'ease' }}
+                    width="40%"
+                    // bodyStyle={{ height: 'calc(100% - 48px)' }}
+                    title={`Detailed Structure of ${detailed}`}
+                    visible={modalVisible}
+                    footer={false}
+                    onCancel={() => this.setState({ modalVisible: false })}
+                    maskClosable={true}
+                    key={Math.random()}
+                    align=''
                 >
-                    {this.drawExtendNodes(nodes)}
-                </div>
-                <svg
-                    // alway show the whole dag
-                    width="100%" 
-                    height="100%"
-                // viewBox={`0 0 ${w} ${h}`}
-                // or show part and let the users pan and zoom
-                // width={w||1*scale} height={h||1*scale}
+                    <ArchitectureCompare network={detailed} />
+                </Modal>
+                <Modal
+                    title={glyphZoomLabel}
+                    visible={glyphZoom}
+                    onCancel={() => { this.setState({ glyphZoom: false }) }}
+                    footer={null}
+                    align=''
 
+                // onOk={this.handleOk}
+                // onCancel={this.handleCancel}
                 >
-
-                    <defs>
-                        <marker 
-                            id="red" 
-                            orient="auto" 
-                            markerWidth={4 * r} 
-                            markerHeight={4 * r}
-                            refX={2 * r} 
-                            refY={2 * r}
-                        >
-                            <circle r={r} fill="red" />
-                        </marker>
-                        <marker 
-                            id="blue" 
-                            orient="auto" 
-                            markerWidth={4 * r} 
-                            markerHeight={4 * r}
-                            refX={2 * r} 
-                            refY={2 * r}
-                        >
-                            <circle r={r} fill="blue" />
-                        </marker>
-                        <marker 
-                            id="black" 
-                            orient="auto" 
-                            markerWidth={4 * r} 
-                            markerHeight={4 * r}
-                            refX={2 * r} 
-                            refY={2 * r}
-                        >
-                            <circle r={r} fill="black" />
-                        </marker>
-                    </defs>{this.drawEdges(edges)}
-                    {this.drawNodes(nodes)}
-
-                </svg>
-
-            </div>
-            <Modal
-                className="CompareModal"
-                style={{ top: '10%', transitionDuration: '0.3s', transitionTimingFunction: 'ease' }}
-                width="40%"
-                // bodyStyle={{ height: 'calc(100% - 48px)' }}
-                title={`Detailed Structure of ${detailed}`}
-                visible={modalVisible}
-                footer={false}
-                onCancel={() => this.setState({ modalVisible: false })}
-                maskClosable={true}
-                key={Math.random()}
-                align=''
-            >
-                <ArchitectureCompare network={detailed} />
-            </Modal>
-            <Modal
-                title={glyphZoomLabel}
-                visible={glyphZoom}
-                onCancel={() => { this.setState({ glyphZoom: false }) }}
-                footer={null}
-                align=''
-                
-            // onOk={this.handleOk}
-            // onCancel={this.handleCancel}
-            >
-            <div className="content" style={{overflowY:'scroll'}}>
-                <img
-                    src={`../../images/${glyphZoomLabel}_.png`}
-                    style={{
-                        height: '80%',
-                        width: '80%',
-                        padding: '10%'
-                    }}
-                />
-                <div>
-                    <h3>{paperTitle}</h3>
-                    {info}
-                    <h4>related papers: </h4>
-                    {links}
-                </div>
-            </div> 
-            </Modal>
-        </div>)
+                    <div className="content" style={{ overflowY: 'scroll' }}>
+                        <img
+                            src={`../../images/${glyphZoomLabel}.png`}
+                            style={{
+                                height: '80%',
+                                width: '80%',
+                                padding: '10%'
+                            }}
+                        />
+                        <div>
+                            <h3>{paperTitle}</h3>
+                            {info}
+                            <h4>related papers: </h4>
+                            {links}
+                        </div>
+                    </div>
+                </Modal>
+            </div>)
     }
 }
