@@ -869,6 +869,16 @@
             ]
         ]
     },
+    "YOLO_2": {
+        "info": "YOLO v2 proposes various improvements to the YOLO detection method, including adding batch normalization, fine tuning high resolution classifier, using anchor boxes to predict bounding boxes, and adding a passthrough layer.",
+        "fullname": "You Only Look Once",
+        "links": [
+            [
+                "YOLO9000: Better, Faster, Stronger",
+                "https://arxiv.org/abs/1612.08242"
+            ]
+        ]
+    },
     "SSD": {
         "info": "SSD is a method for detecting objects in images using a single deep neural network. It discretizes the output space of bounding boxes into a set of default boxes over different aspect ratios and scales per feature map location. At prediction time, the network generates scores for the presence of each object category in each default box and produces adjustments to the box to better match the object shape. Additionally, the network combines predictions from multiple feature maps with different resolutions to naturally handle objects of various sizes. ",
         "fullname": "Single Shot MultiBox Detector",
@@ -919,7 +929,7 @@
             ]
         ]
     },
-    "Mask R-CNN": {
+    "mask R-CNN": {
         "info": "Mask R-CNN detects objects in an image while simultaneously generating a high-quality segmentation mask for each instance.",
         "fullname": "Mask R-CNN",
         "links": [
