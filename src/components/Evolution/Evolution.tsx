@@ -54,7 +54,7 @@ const appData = [
         }],
     },
     {
-        label: 'Object Detection',
+        label: 'Object Detection & Instance Segmentation',
         key: 'Object Detection',
         value: '2.'
     },

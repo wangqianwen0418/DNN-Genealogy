@@ -1753,6 +1753,37 @@
         ]
     },
     {
+        "ID": "YOLO_v2",
+        "fullname": "YOLO_v2",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "add adding batch on all of the convolutional layers; remove the fully connected layers from YOLO and use anchor boxes to predict bounding boxes", 
+                "ID": "YOLO",
+                "link_info_s": "anchor boxes",
+                "link_category": "nan"
+            },
+            {
+                "link_info_l": "use anchor boxes proposed in faster R-CNN", 
+                "ID": "faster R-CNN",
+                "link_info_s": "anchor boxes",
+                "link_category": "nan"
+            }
+
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [],
+        "citation": "1219",
+        "date": "2016.12.25",
+        "names": [
+            {}
+        ]
+    },
+    {
         "ID": "SSD",
         "fullname": "single shot detector",
         "application": [
@@ -1869,7 +1900,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "no costly per-region subnetwork; region-based detector is fully convolutional with almost all computation shared on the entire image ",
+                "link_info_l": "no costly per-region RoI-wise subnetwork; region-based detector is fully convolutional with almost all computation shared on the entire image ",
                 "ID": "faster R-CNN",
                 "link_info_s": "fully convolution",
                 "link_category": "nan"
@@ -2172,8 +2203,8 @@
         ]
     },
     {
-        "ID": "Mask R-CNN",
-        "fullname": "Mask R-CNN",
+        "ID": "mask R-CNN",
+        "fullname": "mask R-CNN",
         "application": [
             "2.segmentation"
         ],
