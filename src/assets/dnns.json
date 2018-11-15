@@ -1760,13 +1760,13 @@
         ],
         "parents": [
             {
-                "link_info_l": "simultaneously predicting the bounding box and the class as it processes the image",
+                "link_info_l": "simultaneously predicting the bounding box and the class as it processes the image; no object proposal network",
                 "ID": "faster R-CNN",
                 "link_info_s": "multi-task",
                 "link_category": "nan"
             },
             {
-                "link_info_l": "use a set of default anchor boxes with different aspect ratios and scales to discretize the output space of bounding boxes", 
+                "link_info_l": "use a set of default anchor boxes with different aspect ratios and scales to discretize the output space of bounding boxes; predict based on multiple feature maps with different resolutions; predict the offset of boxes", 
                 "ID": "YOLO",
                 "link_info_s": "region proposal",
                 "link_category": "nan"
@@ -2172,8 +2172,8 @@
         ]
     },
     {
-        "ID": "Mask R-CNN",
-        "fullname": "Mask R-CNN",
+        "ID": "mask R-CNN",
+        "fullname": "mask R-CNN",
         "application": [
             "2.segmentation"
         ],
