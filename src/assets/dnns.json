@@ -1651,7 +1651,12 @@
         "citation": "6532",
         "date": "2013.11.11",
         "names": [
-            {}
+            {
+                "name": "R-CNN",
+                "FPS": 0.08,
+                "PASCAL VOC 2007 (mAP)": 58.5,
+                "COCO 2015 (AP@.5)": 44.0
+            }
         ]
     },
     {
@@ -1676,7 +1681,12 @@
         "citation": "1337",
         "date": "2014.06.18",
         "names": [
-            {}
+            {
+                "name": "SPP-Net (ZF-5)",
+                "FPS": 2,
+                "PASCAL VOC 2007 (mAP)": 80.1,
+                "COCO 2015 (AP@.5)": null
+            }
         ]
     },
     {
@@ -1706,7 +1716,12 @@
         "citation": "3651",
         "date": "2015.04.30",
         "names": [
-            {}
+            {
+                "name": "fast R-CNN",
+                "FPS": 3.3,
+                "PASCAL VOC 2007 (mAP)": 70.0,
+                "COCO 2015 (AP@.5)": null
+            }
         ]
     },
     {
@@ -1730,7 +1745,18 @@
         "citation": "5061",
         "date": "2015.06.04",
         "names": [
-            {}
+            {
+                "name": "faster R_CNN (VGG16)",
+                "FPS": 7,
+                "PASCAL VOC 2007 (mAP)": 73.2,
+                "COCO 2015 (AP@.5)": 42.7
+            },
+            {
+                "name": "faster R_CNN (ResNet101)",
+                "FPS": 2.4,
+                "PASCAL VOC 2007 (mAP)": 76.4,
+                "COCO 2015 (AP@.5)": null
+            }
         ]
     },
     {
@@ -1749,7 +1775,12 @@
         "citation": "2444",
         "date": "2015.06.08",
         "names": [
-            {}
+            {
+                "name": "YOLO",
+                "FPS": 150,
+                "PASCAL VOC 2007 (mAP)": 70.7,
+                "COCO 2015 (AP@.5)": null
+            }
         ]
     },
     {
@@ -1780,7 +1811,12 @@
         "citation": "1219",
         "date": "2016.12.25",
         "names": [
-            {}
+            {
+                "name": "YOLO v2",
+                "FPS": 81,
+                "PASCAL VOC 2007 (mAP)": 73.4,
+                "COCO 2015 (AP@.5)": 44.0
+            }
         ]
     },
     {
@@ -1810,7 +1846,18 @@
         "citation": "2116",
         "date": "2015.12.08",
         "names": [
-            {}
+            {
+                "name": "SSD_321",
+                "FPS": 11.2,
+                "PASCAL VOC 2007 (mAP)": 77.1,
+                "COCO 2015 (AP@.5)": 45.4
+            },
+            {
+                "name": "SSD_513",
+                "FPS": 8.7,
+                "PASCAL VOC 2007 (mAP)": 80.6,
+                "COCO 2015 (AP@.5)": 50.4
+            }
         ]
     },
     {
@@ -1834,7 +1881,17 @@
         "citation": "132",
         "date": "2017.01.23",
         "names": [
-            {}
+            {
+                "name": "DSSD_321",
+                "FPS": 13.6,
+                "PASCAL VOC 2007 (mAP)": 78.6,
+                "COCO 2015 (AP@.5)": 46.1
+            },
+            {
+                "name": "DSSD_513",
+                "FPS": 6.6,
+                "PASCAL VOC 2007 (mAP)": 53.3
+            }
         ]
     },
     {
@@ -1858,7 +1915,18 @@
         "citation": "48",
         "date": "2017.08.03",
         "names": [
-            {}
+            {
+                "name": "DSOD_300 (plain)",
+                "FPS": 20.6,
+                "PASCAL VOC 2007 (mAP)": 77.3,
+                "COCO 2015 (AP@.5)": null
+            },
+            {
+                "name": "DSOD_300 (dense)",
+                "FPS": 17.4,
+                "PASCAL VOC 2007 (mAP)": 81.7,
+                "COCO 2015 (AP@.5)": 47.3
+            }
         ]
     },
     
@@ -1889,7 +1957,12 @@
         "citation": "531",
         "date": "2016.12.09",
         "names": [
-            {}
+            {
+                "name": "FPN (RPN)",
+                "FPS": 6,
+                "PASCAL VOC 2007 (mAP)": null,
+                "COCO 2015 (AP@.5)": 59.1
+            }
         ]
     },
     {
@@ -1913,7 +1986,12 @@
         "citation": "757",
         "date": "2016.05.20",
         "names": [
-            {}
+            {
+                "name": "R-FCN (ResNet)",
+                "FPS": 9,
+                "PASCAL VOC 2007 (mAP)": 80.5,
+                "COCO 2015 (AP@.5)": 55.7
+            }
         ]
     },
 

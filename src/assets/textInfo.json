@@ -869,9 +869,9 @@
             ]
         ]
     },
-    "YOLO_2": {
+    "YOLO_v2": {
         "info": "YOLO v2 proposes various improvements to the YOLO detection method, including adding batch normalization, fine tuning high resolution classifier, using anchor boxes to predict bounding boxes, and adding a passthrough layer.",
-        "fullname": "You Only Look Once",
+        "fullname": "You Only Look Once V2",
         "links": [
             [
                 "YOLO9000: Better, Faster, Stronger",
