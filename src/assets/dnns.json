@@ -2006,8 +2006,8 @@
             "xxx"
         ],
         "training": [],
-        "citation": "20",
-        "date": "",
+        "citation": "6557",
+        "date": "2014.12.14",
         "names": [
             {
                 "name": "FCN-AlexNet",
@@ -2326,7 +2326,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "improve atrous spatial pyramid pooling (ASPP); employ atrous/dilated convolutions in cascade ",
+                "link_info_l": "improve atrous spatial pyramid pooling (ASPP); employ atrous/dilated convolutions in cascade; remove CRF ",
                 "ID": "DeepLab_v2",
                 "link_info_s": "pyramid pooling",
                 "link_category": "nan"
