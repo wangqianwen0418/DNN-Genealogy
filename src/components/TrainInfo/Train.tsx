@@ -58,7 +58,6 @@ export default class Train extends React.Component<Props, State>{
         }else{
             nnTrainInfo.forEach((item: string)=>{
                 item = item.toLowerCase()
-                console.info(item, a.name.toLowerCase(), item.includes(a.name.toLowerCase()))
                 if (item.includes(a.name.toLowerCase())){
                     flag = 1
                 }

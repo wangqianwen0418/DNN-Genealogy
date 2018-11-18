@@ -20,9 +20,7 @@ export default class Box extends React.Component<Props, {}>{
     getOption() {
         let { models, datasets, modelIDs } = this.props.performances
         let option = {}
-
-        console.info(models, datasets, modelIDs, this.props.currentNNs)
-        let currentIDs = this.props.currentNNs.map(d=>d.ID)
+        let currentIDs = this.props.currentNNs.map(d => d.ID)
 
         let left = 25, right = 5, top = 10, bottom = 30,
             step = (100 - left - right) / (datasets.length - 1)
@@ -32,7 +30,7 @@ export default class Box extends React.Component<Props, {}>{
             bottom: `${bottom}%`,
             top: `${top}%`,
         }
-        let series:any[] = []
+        let series: any[] = []
         // this.props.currentNNs.forEach(nn=>{
         //     let id = nn.ID 
         //     modelIDs.forEach((k:any)=>{
@@ -44,20 +42,22 @@ export default class Box extends React.Component<Props, {}>{
         //         })
         //     })
         // })
-        modelIDs.forEach(d=>{
-            if (currentIDs.indexOf(d[0])!=-1){
-                d[1].forEach(variant=>{
+        modelIDs.forEach(d => {
+            if (currentIDs.indexOf(d[0]) != -1) {
+                d[1].forEach(variant => {
                     series.push({
                         name: d[0],
-                        type:"bar",
+                        type: "bar",
                         data: models[variant],
-                        tooltip:{
-                            formatter:(params: Object|Array<any>, ticket: string) => {
+                        tooltip: {
+                            formatter: (params: Object | Array<any>, ticket: string) => {
                                 // console.info(params)
-                                return `${params['seriesName']}</br>
-                                ${variant} </br>
+                                return `${variant} </br>
                                 ${params['name']}: ${params['value']}`
                             }
+                        },
+                        itemStyle:{
+                            color: getColor(d[0], 2)
                         }
                     })
                 })
@@ -72,17 +72,17 @@ export default class Box extends React.Component<Props, {}>{
         //     }
         // })
 
-        let selected = {}
-            currentIDs.forEach(id=>{
-                selected[id] = (id===this.props.selectedNN.ID)
-            })
+        // let selected = {}
+        //     currentIDs.forEach(id=>{
+        //         selected[id] = (id===this.props.selectedNN.ID)
+        //     })
 
         option = {
             legend: {
                 top: `${top / 2}%`,
                 orient: 'vertical',
                 left: 'left',
-                selected
+                // selected
             },
             tooltip: {},
             grid: { ...layout },

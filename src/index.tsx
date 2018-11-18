@@ -12,18 +12,10 @@ import * as textInfo from './assets/textInfo.json'
 import * as trainInfo from './assets/train.json'
 import * as dnns from './assets/dnns.json'
 
+import {initNN} from './constants/index'
+
 import 'antd/dist/antd.css';
 
-let initNN: NN = {
-  ID:'',
-  url:'',
-  date:'',
-  application:[],
-  training:[],
-  architecture:[],
-  names:[],
-  parents:[]
-}
 let initState:StoreState = {
   database:'nonsequence', 
   arc:'', app:'', 

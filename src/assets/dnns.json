@@ -1847,17 +1847,17 @@
         "date": "2015.12.08",
         "names": [
             {
-                "name": "SSD_321",
-                "FPS": 11.2,
-                "PASCAL VOC 2007 (mAP)": 77.1,
-                "COCO 2015 (AP@.5)": 45.4
+                "name": "SSD_300",
+                "FPS": 46,
+                "PASCAL VOC 2007 (mAP)": 74.3,
+                "COCO 2015 (AP@.5)": 41.2
             },
             {
-                "name": "SSD_513",
-                "FPS": 8.7,
-                "PASCAL VOC 2007 (mAP)": 80.6,
-                "COCO 2015 (AP@.5)": 50.4
-            }
+                "name": "SSD_512",
+                "FPS": 19,
+                "PASCAL VOC 2007 (mAP)": 76.8,
+                "COCO 2015 (AP@.5)": 46.5
+            } 
         ]
     },
     {
@@ -2009,7 +2009,22 @@
         "citation": "20",
         "date": "",
         "names": [
-            {}
+            {
+                "name": "FCN-AlexNet",
+                "PASCAL VOC 2012": 39.8
+            },
+            {
+                "name": "FCN-VGG",
+                "PASCAL VOC 2012": 56.0
+            },
+            {
+                "name": "FCN-GoogleNet",
+                "PASCAL VOC 2012": 42.5
+            },
+            {
+                "name": "FCN-VGG-8s",
+                "PASCAL VOC 2012": 62.7
+            }
         ]
     },
     {
@@ -2033,7 +2048,10 @@
         "citation": "3139",
         "date": "",
         "names": [
-            {}
+            {
+                "name": "U-Net",
+                "ISBI cell tracking": 0.9203
+            }
         ]
     },
     {
@@ -2057,7 +2075,14 @@
         "citation": "20",
         "date": "",
         "names": [
-            {}
+            {
+                "name": "SegNet",
+                "SUN RGB-D": 30.7
+            },
+            {
+                "name": "SegNet",
+                "CamVid 11 road": 60.1
+            }
         ]
     },
     {
@@ -2081,7 +2106,14 @@
         "citation": "20",
         "date": "",
         "names": [
-            {}
+            {
+                "name": "DeconvNet",
+                "PASCAL VOC 2012": 69.6
+            },
+            {
+                "name": "EDeconvNet-CRF",
+                "PASCAL VOC 2012": 72.5
+            }
         ]
     },
     {
@@ -2105,7 +2137,10 @@
         "citation": "20",
         "date": "2018.06.04",
         "names": [
-            {}
+            {
+                "name": "RedNet",
+                "SUN RGB-D":  47.8
+            }
         ]
     },
     {
@@ -2129,7 +2164,12 @@
         "citation": "20",
         "date": "",
         "names": [
-            {}
+            {
+                "name": "RefineNet(ResNet101)",
+                "Cityscapes (mIoU)": 73.6,
+                "PASCAL VOC 2012": 82.4,
+                "SUN RGB-D": 45.9
+            }
         ]
     },
     {
@@ -2153,7 +2193,11 @@
         "citation": "1104",
         "date": "2015.11.23",
         "names": [
-            {}
+            {
+                "name": "DilatedNet",
+                "Cityscapes": null,
+                "PASCAL VOC 2012": 71.3
+            }
         ]
     },
     {
@@ -2177,7 +2221,11 @@
         "citation": "576",
         "date": "2016.12.04",
         "names": [
-            {}
+            {
+                "name": "PSPNet",
+                "Cityscapes": 78.6,
+                "PASCAL VOC 2012": 82.6
+            }
         ]
     },
     {
@@ -2201,7 +2249,11 @@
         "citation": "411",
         "date": "2014.12.22",
         "names": [
-            {}
+            {
+                "name": "DeepLab-CRF",
+                "Cityscapes": null,
+                "PASCAL VOC 2012": 63.74 
+            }
         ]
     },
     {
@@ -2231,7 +2283,11 @@
         "citation": "1889",
         "date": "2016.05.12",
         "names": [
-            {}
+            {
+                "name": "DeepLab v2",
+                "Cityscapes": 70.4,
+                "PASCAL VOC 2012": 79.7
+            }
         ]
     },
     {
@@ -2255,7 +2311,11 @@
         "citation": "99",
         "date": "2017.03.08",
         "names": [
-            {}
+            {
+                "name": "GCN",
+                "Cityscapes": 76.9,
+                "PASCAL VOC 2012": 83.6
+            }
         ]
     },
     {
@@ -2277,14 +2337,18 @@
         "citation": "198",
         "date": "2017.06.17",
         "names": [
-            {}
+            {
+                "name": "DeepLab v3",
+                "Cityscapes": 81.3,
+                "PASCAL VOC 2012": 85.7
+            }
         ]
     },
     {
         "ID": "mask R-CNN",
         "fullname": "mask R-CNN",
         "application": [
-            "2.segmentation"
+            "2.instance segmentation"
         ],
         "parents": [
             {
@@ -2299,7 +2363,11 @@
         "citation": "938",
         "date": "2017.03.20",
         "names": [
-            {}
+            {
+                "name": "Mask R-CNN",
+                "Cityscapes": 81.3,
+                "PASCAL VOC 2012": 85.7
+            }
         ]
     }
 ]

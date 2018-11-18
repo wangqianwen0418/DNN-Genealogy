@@ -32,19 +32,19 @@ key_order = [
     "names"
 ]
 
-dnnfile = open('../../src/assets/dnns.json', 'r')
-dnns = json.load(dnnfile)
-new_info = []
+# dnnfile = open('../../src/assets/dnns.json', 'r')
+# dnns = json.load(dnnfile)
+# new_info = []
 
-for dnn in dnns:
-    new_dnn = OrderedDict()
-    new_dnn = dnn
-    new_dnn['training'] = [item.split('.')[-1] for item in dnn['training']]
-    new_info.append(new_dnn)
+# for dnn in dnns:
+#     new_dnn = OrderedDict()
+#     new_dnn = dnn
+#     new_dnn['training'] = [item.split('.')[-1] for item in dnn['training']]
+#     new_info.append(new_dnn)
 
 
-newfile = open('../../src/assets/dnns2.json', 'w')
-json.dump(new_info, newfile)
+# newfile = open('../../src/assets/dnns2.json', 'w')
+# json.dump(new_info, newfile)
 
 
 
@@ -100,43 +100,73 @@ json.dump(new_info, newfile)
 # new_nns.sort(key=lambda x: x['application'][0].split('.')[0])
 # json.dump(new_nns, newfile)
 
-# datasets=[
-#     "params",
-#     "imagenet val top5",        
-#     "imageNet val top1",
-#     "SVHN",
-#     "cifar10",        
-#     "cifar100"
-# ]
+dnns = open("src/assets/dnns.json")
 
-# cnnTable = {
-#     "name": 'image classification',
-#     "modelIDs": [],
-#     "datasets": datasets,
-#     "models": {}
-# }
+evo = json.load(dnns)
 
-# for nn in evo:
-#     if '1.1' in nn['application'][0]:
-#         cnnTable['modelIDs'].append([nn['ID'], [name['name'] for name in nn['names']] ])
-#         for model in nn['names']:
-#             scores = []
-#             for dataset in datasets:
-#                 if model[dataset] and dataset!="params":
-#                     scores.append(100-model[dataset])
-#                 elif dataset=="params":
-#                     scores.append(model[dataset])
-#                 else:
-#                     scores.append(0)
-#             cnnTable['models'][model['name']] = scores
+cnnTable1 = {
+    "name": 'object detection',
+    "modelIDs": [],
+    "models": {},
+    "datasets": []
+}
+
+for nn in evo:
+    if '2.' in nn['application'][0]:
+        for k in nn['names']:
+            for dataset in k:
+                if dataset not in cnnTable1['datasets'] and dataset != "name":
+                    cnnTable1['datasets'].append(dataset)
+
+
+
+cnnTable2 = {
+    "name": 'semantic segmentation',
+    "modelIDs": [],
+    "models": {},
+    "datasets": []
+}
+
+for nn in evo:
+    if '3.' in nn['application'][0]:
+        for k in nn['names']:
+            for dataset in k:
+                if dataset not in cnnTable2['datasets'] and dataset != "name":
+                    cnnTable2['datasets'].append(dataset)
+
+
+for nn in evo:
+    if '2.' in nn['application'][0]:
+        
+        cnnTable1['modelIDs'].append([nn['ID'], [name['name'] for name in nn['names']] ])
+        for model in nn['names']:
+            scores = []
+            for dataset in cnnTable1['datasets']:
+                try:
+                    scores.append(model[dataset])
+                except Exception:
+                    scores.append(0)
+            cnnTable1['models'][model['name']] = scores
+    
+    if '3.' in nn['application'][0]:
+        
+        cnnTable2['modelIDs'].append([nn['ID'], [name['name'] for name in nn['names']] ])
+        for model in nn['names']:
+            scores = []
+            for dataset in cnnTable2['datasets']:
+                try:
+                    scores.append(model[dataset])
+                except Exception:
+                    scores.append(0)
+            cnnTable2['models'][model['name']] = scores
           
-#     # else:
-#     #     for parent in nn['parents']:
-#     #         parent['link_category'] = ('=>').join(
-#     #             [rnn(arc) for arc in parent['link_category'].split('=>')]
-#     #         )
+    # else:
+    #     for parent in nn['parents']:
+    #         parent['link_category'] = ('=>').join(
+    #             [rnn(arc) for arc in parent['link_category'].split('=>')]
+    #         )
 
 
 
-# savefile = open('performances.json', 'w')
-# json.dump([cnnTable], savefile)
+savefile = open('test.json', 'w')
+json.dump([cnnTable1, cnnTable2], savefile)

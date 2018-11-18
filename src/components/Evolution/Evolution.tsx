@@ -15,8 +15,12 @@ import Legend, { LegendProps } from './Legend';
 import ExtendNode from './ExtendNode';
 // import { showDetailedStructure } from './ImageModel'
 import ArchitectureCompare from 'components/ArchitectureCompare/'
-import { nonsequenceDatasets, nonsequenceBenchmarks } from 'constants/';
+import { nonsequenceDatasets, nonsequenceBenchmarks} from 'constants/';
+import {initNN} from 'constants/index'
+
 let imgSize = require('assets/ratio.json')
+
+
 
 // const {TreeNode} = TreeSelect
 
@@ -828,6 +832,8 @@ export default class Evolution extends React.Component<Props, State>{
         let legend = appValue === '1.1.' ? legendCNN : (appValue === '1.2.' ? legendRNN : {})
         this.setState({ appValue, legend });
         this.getData(appValue)
+        this.props.onSelectNN([initNN], initNN)
+
         let { onSelectDatabase } = this.props
         if (appValue === '1.1.') {
             onSelectDatabase('nonsequence')
