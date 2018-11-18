@@ -42,7 +42,7 @@ export default class Box extends React.Component<Props, {}>{
         //         })
         //     })
         // })
-        modelIDs.forEach(d => {
+        modelIDs.forEach((d, idx) => {
             if (currentIDs.indexOf(d[0]) != -1) {
                 d[1].forEach(variant => {
                     series.push({
@@ -57,7 +57,7 @@ export default class Box extends React.Component<Props, {}>{
                             }
                         },
                         itemStyle:{
-                            color: getColor(d[0], 2)
+                            color: getColor(idx.toString(), 2)
                         }
                     })
                 })

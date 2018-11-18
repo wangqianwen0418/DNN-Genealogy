@@ -47,12 +47,12 @@ const appData = [
         value: '1.',
         selectable: false,
         children: [{
-            label: 'Non-Sequential Data',
+            label: 'classification/Non-Sequential Data',
             key: 'Non-Sequential Data',
             value: '1.1.'
         },
         {
-            label: 'Sequential Data',
+            label: 'classification/Sequential Data',
             key: 'Sequential Data',
             value: '1.2.'
         }],
@@ -1031,7 +1031,7 @@ export default class Evolution extends React.Component<Props, State>{
                         value={appValue}
                         // dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                         // treeData = {this.state.appData}
-                        style={{ width: 180 }}
+                        style={{ width: 250 }}
                         treeData={appData}
                         placeholder="select your data type"
                         // multiple
@@ -1045,7 +1045,7 @@ export default class Evolution extends React.Component<Props, State>{
                             style={{ position: 'relative', top: '2px', marginRight: '3px' }}
                         >
                             Reset
-                    </Button>
+                        </Button>
                         <Switch
                             // className="evoSwitch"
                             checkedChildren="label"

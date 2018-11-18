@@ -10,6 +10,7 @@
             "streamlined"
         ],
         "training": [
+            "SGD",
             "dropout",
             "SGD with momentum",
             "weight decay",
@@ -50,6 +51,7 @@
             "streamlined"
         ],
         "training": [
+            "SGD",
             "dropout",
             "SGD with momentum",
             "weight decay",
@@ -98,6 +100,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "SGD with momentum",
             "he normal",
             "cross entropy"
@@ -134,6 +137,7 @@
             "multi-branch"
         ],
         "training": [
+            "SGD",
             "dropout",
             "SGD with momentum",
             "weight decay",
@@ -190,6 +194,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "dropout",
             "SGD with nesterov momentum",
             "weight decay",
@@ -291,7 +296,9 @@
             "multi-branch",
             "depthwise separable conv"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "114",
         "date": "2016.10.07",
         "names": []
@@ -320,6 +327,7 @@
             "multi-branch"
         ],
         "training": [
+            "SGD",
             "dropout",
             "SGD with momentum",
             "weight decay"
@@ -362,6 +370,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "sgd",
             "batch normalization"
         ],
@@ -404,6 +413,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "RMSprop",
             "scaling of the residuals",
             "dropout",
@@ -454,6 +464,7 @@
             "streamlined"
         ],
         "training": [
+            "SGD",
             "RMSprop"
         ],
         "citation": "149",
@@ -497,6 +508,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "batch normalization",
             "SGD with momentum",
             "weight decay",
@@ -535,6 +547,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "batch normalization",
             "SGD with momentum",
             "weight decay",
@@ -602,6 +615,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "SGD with momentum",
             "weight decay",
             "dropout",
@@ -690,6 +704,7 @@
             "multi-branch"
         ],
         "training": [
+            "SGD",
             "drop path",
             "batch normalization",
             "SGD with momentum",
@@ -738,6 +753,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "dropout",
             "SGD with momentum",
             "weight decay",
@@ -775,6 +791,7 @@
             "streamlined"
         ],
         "training": [
+            "SGD",
             "dirac",
             "batch normalization",
             "SGD with momentum",
@@ -846,6 +863,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "batch normalization",
             "SGD with momentum",
             "weight decay",
@@ -950,6 +968,7 @@
             "multi-branch"
         ],
         "training": [
+            "SGD",
             "pre-activation",
             "batch normalization",
             "SGD with momentum",
@@ -987,6 +1006,7 @@
             "skip connections"
         ],
         "training": [
+            "SGD",
             "SGD with momentum",
             "he normal",
             "batch normalization",
@@ -1039,6 +1059,7 @@
             "depthwise separable conv"
         ],
         "training": [
+            "SGD",
             "neural architecture search by reinforcement learning",
             "RMSProp",
             "LSR",
@@ -1088,6 +1109,7 @@
             "xxx"
         ],
         "training": [
+            "SGD",
             "sgd"
         ],
         "citation": "9047",
@@ -1116,7 +1138,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "2081",
         "date": "2014.09.01",
         "names": []
@@ -1138,7 +1162,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "2829",
         "date": "2014.09.10",
         "names": [
@@ -1165,7 +1191,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "73",
         "date": "2017.05.08",
         "names": []
@@ -1187,7 +1215,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "1517",
         "date": "2004.04.02",
         "names": [
@@ -1220,7 +1250,9 @@
         "architecture": [
             "multiple time scale"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "414",
         "date": "2007.04.01",
         "names": []
@@ -1242,7 +1274,9 @@
         "architecture": [
             "multiple time scale"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "15",
         "date": "1998.10.15",
         "names": []
@@ -1264,7 +1298,9 @@
         "architecture": [
             "multiple time scale"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "135",
         "date": "2014.02.14",
         "names": []
@@ -1292,7 +1328,9 @@
         "architecture": [
             "multiple time scale"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "900",
         "date": "2013.02.13",
         "names": []
@@ -1320,7 +1358,9 @@
         "architecture": [
             "gated"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "8136",
         "date": "1997.12.15",
         "names": []
@@ -1342,7 +1382,9 @@
         "architecture": [
             "gated"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "25",
         "date": "2017.09.08",
         "names": []
@@ -1364,7 +1406,9 @@
         "architecture": [
             "gated"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "2069",
         "date": "2014.06.03",
         "names": [
@@ -1391,7 +1435,9 @@
         "architecture": [
             "gated"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "20",
         "date": "2017.10.06",
         "names": []
@@ -1413,7 +1459,9 @@
         "architecture": [
             "gated"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "150",
         "date": "2015.7.06",
         "names": []
@@ -1435,7 +1483,9 @@
         "architecture": [
             "tree-structured"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "1050",
         "date": "1990.11.01",
         "names": [
@@ -1469,7 +1519,9 @@
             "gated",
             "tree-structured"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "549",
         "date": "2015.02.28",
         "names": []
@@ -1498,7 +1550,9 @@
             "gated",
             "stacked"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "15",
         "date": "2015.08.01",
         "names": []
@@ -1520,7 +1574,9 @@
         "architecture": [
             "bidirectional"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "984",
         "date": "1997.12.01",
         "names": [
@@ -1547,7 +1603,9 @@
         "architecture": [
             "stacked"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "263",
         "date": "1992.03.01",
         "names": []
@@ -1583,7 +1641,9 @@
             "bidirectional",
             "stacked"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "1897",
         "date": "2013.03.22",
         "names": [
@@ -1610,7 +1670,9 @@
         "architecture": [
             "stacked"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "269",
         "date": "2013.12.20",
         "names": []
@@ -1632,7 +1694,9 @@
         "architecture": [
             "stacked"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "269",
         "date": "2013.12.20",
         "names": []
@@ -1647,7 +1711,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "6532",
         "date": "2013.11.11",
         "names": [
@@ -1677,7 +1743,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "1337",
         "date": "2014.06.18",
         "names": [
@@ -1712,7 +1780,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "3651",
         "date": "2015.04.30",
         "names": [
@@ -1741,7 +1811,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "5061",
         "date": "2015.06.04",
         "names": [
@@ -1771,7 +1843,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "2444",
         "date": "2015.06.08",
         "names": [
@@ -1807,7 +1881,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "1219",
         "date": "2016.12.25",
         "names": [
@@ -1842,7 +1918,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "2116",
         "date": "2015.12.08",
         "names": [
@@ -1877,7 +1955,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "132",
         "date": "2017.01.23",
         "names": [
@@ -1911,7 +1991,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "48",
         "date": "2017.08.03",
         "names": [
@@ -1953,7 +2035,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "531",
         "date": "2016.12.09",
         "names": [
@@ -1982,7 +2066,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "757",
         "date": "2016.05.20",
         "names": [
@@ -2005,7 +2091,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "6557",
         "date": "2014.12.14",
         "names": [
@@ -2044,7 +2132,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "3139",
         "date": "",
         "names": [
@@ -2071,7 +2161,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "20",
         "date": "",
         "names": [
@@ -2102,7 +2194,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "20",
         "date": "",
         "names": [
@@ -2133,7 +2227,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "20",
         "date": "2018.06.04",
         "names": [
@@ -2160,7 +2256,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "20",
         "date": "",
         "names": [
@@ -2189,7 +2287,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "1104",
         "date": "2015.11.23",
         "names": [
@@ -2217,7 +2317,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "576",
         "date": "2016.12.04",
         "names": [
@@ -2245,7 +2347,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "411",
         "date": "2014.12.22",
         "names": [
@@ -2279,7 +2383,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "1889",
         "date": "2016.05.12",
         "names": [
@@ -2307,7 +2413,9 @@
         "architecture": [
             "xxx"
         ],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "99",
         "date": "2017.03.08",
         "names": [
@@ -2333,7 +2441,9 @@
             }
         ],
         "architecture": [],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "198",
         "date": "2017.06.17",
         "names": [
@@ -2359,14 +2469,16 @@
             }
         ],
         "architecture": [],
-        "training": [],
+        "training": [
+            "SGD"
+        ],
         "citation": "938",
         "date": "2017.03.20",
         "names": [
             {
                 "name": "Mask R-CNN",
-                "Cityscapes": 81.3,
-                "PASCAL VOC 2012": 85.7
+                "Cityscapes (AP50)": 62.3,
+                "COCO (AP50)": 60.0
             }
         ]
     }

@@ -67,7 +67,7 @@ export default class PerformanceCompare extends React.Component<Props, State>{
 
         let res = await axios.get('../../data/performances.json')
         let tables = res.data
-        this.setState({tables})
+        this.setState({ tables })
 
     }
     getTables() {

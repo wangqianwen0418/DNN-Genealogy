@@ -1,4 +1,162 @@
 [
+    
+    {
+        "name": "object detection",
+        "modelIDs": [
+            [
+                "R-CNN",
+                [
+                    "R-CNN"
+                ]
+            ],
+            [
+                "SPP-Net",
+                [
+                    "SPP-Net (ZF-5)"
+                ]
+            ],
+            [
+                "fast R-CNN",
+                [
+                    "fast R-CNN"
+                ]
+            ],
+            [
+                "faster R-CNN",
+                [
+                    "faster R_CNN (VGG16)",
+                    "faster R_CNN (ResNet101)"
+                ]
+            ],
+            [
+                "YOLO",
+                [
+                    "YOLO"
+                ]
+            ],
+            [
+                "YOLO_v2",
+                [
+                    "YOLO v2"
+                ]
+            ],
+            [
+                "SSD",
+                [
+                    "SSD_300",
+                    "SSD_512"
+                ]
+            ],
+            [
+                "DSSD",
+                [
+                    "DSSD_321",
+                    "DSSD_513"
+                ]
+            ],
+            [
+                "DSOD",
+                [
+                    "DSOD_300 (plain)",
+                    "DSOD_300 (dense)"
+                ]
+            ],
+            [
+                "FPN",
+                [
+                    "FPN (RPN)"
+                ]
+            ],
+            [
+                "R-FCN",
+                [
+                    "R-FCN (ResNet)"
+                ]
+            ]
+        ],
+        "models": {
+            "R-CNN": [
+                0.08,
+                58.5,
+                44.0
+            ],
+            "SPP-Net (ZF-5)": [
+                2,
+                80.1,
+                null
+            ],
+            "fast R-CNN": [
+                3.3,
+                70.0,
+                null
+            ],
+            "faster R_CNN (VGG16)": [
+                7,
+                73.2,
+                42.7
+            ],
+            "faster R_CNN (ResNet101)": [
+                2.4,
+                76.4,
+                null
+            ],
+            "YOLO": [
+                150,
+                70.7,
+                null
+            ],
+            "YOLO v2": [
+                81,
+                73.4,
+                44.0
+            ],
+            "SSD_300": [
+                46,
+                74.3,
+                41.2
+            ],
+            "SSD_512": [
+                19,
+                76.8,
+                46.5
+            ],
+            "DSSD_321": [
+                13.6,
+                78.6,
+                46.1
+            ],
+            "DSSD_513": [
+                6.6,
+                53.3,
+                0
+            ],
+            "DSOD_300 (plain)": [
+                20.6,
+                77.3,
+                null
+            ],
+            "DSOD_300 (dense)": [
+                17.4,
+                81.7,
+                47.3
+            ],
+            "FPN (RPN)": [
+                6,
+                null,
+                59.1
+            ],
+            "R-FCN (ResNet)": [
+                9,
+                80.5,
+                55.7
+            ]
+        },
+        "datasets": [
+            "FPS",
+            "PASCAL VOC 2007 (mAP)",
+            "COCO 2015 (AP@.5)"
+        ]
+    },
     {
         "modelIDs": [
             [
@@ -559,383 +717,6 @@
         }
     },
     {
-        "name": "object detection",
-        "modelIDs": [
-            [
-                "RNN",
-                [
-                    "recurrent neural network"
-                ]
-            ],
-            [
-                "attention",
-                []
-            ],
-            [
-                "seq2seq",
-                [
-                    "squence to sequence"
-                ]
-            ],
-            [
-                "conv seq2seq",
-                []
-            ],
-            [
-                "ESN",
-                [
-                    "echo state network"
-                ]
-            ],
-            [
-                "ESN with leaky units",
-                []
-            ],
-            [
-                "time skip connections",
-                []
-            ],
-            [
-                "CW-RNN",
-                []
-            ],
-            [
-                "leaky units",
-                []
-            ],
-            [
-                "LSTM",
-                []
-            ],
-            [
-                "SRU",
-                []
-            ],
-            [
-                "GRU",
-                [
-                    "gated recurrent unit"
-                ]
-            ],
-            [
-                "LRU",
-                []
-            ],
-            [
-                "gridLSTM",
-                []
-            ],
-            [
-                "recursive",
-                [
-                    "recursive neural network"
-                ]
-            ],
-            [
-                "tree-LSTM",
-                []
-            ],
-            [
-                "DGLSTM",
-                []
-            ],
-            [
-                "BRNN",
-                [
-                    "bidirectional recurrent neural network"
-                ]
-            ],
-            [
-                "stacked RNN",
-                []
-            ],
-            [
-                "DB-LSTM",
-                [
-                    "deep bidirectional LSTM"
-                ]
-            ],
-            [
-                "DT-RNN",
-                []
-            ],
-            [
-                "DT(S)-RNN",
-                []
-            ],
-            [
-                "R-CNN",
-                [
-                    "R-CNN"
-                ]
-            ],
-            [
-                "SPP-Net",
-                [
-                    "SPP-Net (ZF-5)"
-                ]
-            ],
-            [
-                "fast R-CNN",
-                [
-                    "fast R-CNN"
-                ]
-            ],
-            [
-                "faster R-CNN",
-                [
-                    "faster R_CNN (VGG16)",
-                    "faster R_CNN (ResNet101)"
-                ]
-            ],
-            [
-                "YOLO",
-                [
-                    "YOLO"
-                ]
-            ],
-            [
-                "YOLO_v2",
-                [
-                    "YOLO v2"
-                ]
-            ],
-            [
-                "SSD",
-                [
-                    "SSD_300",
-                    "SSD_512"
-                ]
-            ],
-            [
-                "DSSD",
-                [
-                    "DSSD_321",
-                    "DSSD_513"
-                ]
-            ],
-            [
-                "DSOD",
-                [
-                    "DSOD_300 (plain)",
-                    "DSOD_300 (dense)"
-                ]
-            ],
-            [
-                "FPN",
-                [
-                    "FPN (RPN)"
-                ]
-            ],
-            [
-                "R-FCN",
-                [
-                    "R-FCN (ResNet)"
-                ]
-            ],
-            [
-                "mask R-CNN",
-                [
-                    "Mask R-CNN"
-                ]
-            ]
-        ],
-        "models": {
-            "recurrent neural network": [
-                0.0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "squence to sequence": [
-                0.0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "echo state network": [
-                0.0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "gated recurrent unit": [
-                0.0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "recursive neural network": [
-                0.0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "bidirectional recurrent neural network": [
-                0.0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "deep bidirectional LSTM": [
-                0.0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "R-CNN": [
-                0,
-                0.08,
-                58.5,
-                44.0,
-                0,
-                0
-            ],
-            "SPP-Net (ZF-5)": [
-                0,
-                2,
-                80.1,
-                null,
-                0,
-                0
-            ],
-            "fast R-CNN": [
-                0,
-                3.3,
-                70.0,
-                null,
-                0,
-                0
-            ],
-            "faster R_CNN (VGG16)": [
-                0,
-                7,
-                73.2,
-                42.7,
-                0,
-                0
-            ],
-            "faster R_CNN (ResNet101)": [
-                0,
-                2.4,
-                76.4,
-                null,
-                0,
-                0
-            ],
-            "YOLO": [
-                0,
-                150,
-                70.7,
-                null,
-                0,
-                0
-            ],
-            "YOLO v2": [
-                0,
-                81,
-                73.4,
-                44.0,
-                0,
-                0
-            ],
-            "SSD_300": [
-                0,
-                46,
-                74.3,
-                41.2,
-                0,
-                0
-            ],
-            "SSD_512": [
-                0,
-                19,
-                76.8,
-                46.5,
-                0,
-                0
-            ],
-            "DSSD_321": [
-                0,
-                13.6,
-                78.6,
-                46.1,
-                0,
-                0
-            ],
-            "DSSD_513": [
-                0,
-                6.6,
-                53.3,
-                0,
-                0,
-                0
-            ],
-            "DSOD_300 (plain)": [
-                0,
-                20.6,
-                77.3,
-                null,
-                0,
-                0
-            ],
-            "DSOD_300 (dense)": [
-                0,
-                17.4,
-                81.7,
-                47.3,
-                0,
-                0
-            ],
-            "FPN (RPN)": [
-                0,
-                6,
-                null,
-                59.1,
-                0,
-                0
-            ],
-            "R-FCN (ResNet)": [
-                0,
-                9,
-                80.5,
-                55.7,
-                0,
-                0
-            ],
-            "Mask R-CNN": [
-                0,
-                0,
-                0,
-                0,
-                81.3,
-                85.7
-            ]
-        },
-        "datasets": [
-            "params",
-            "FPS",
-            "PASCAL VOC 2007 (mAP)",
-            "COCO 2015 (AP@.5)",
-            "Cityscapes",
-            "PASCAL VOC 2012"
-        ]
-    },
-    {
         "name": "semantic segmentation",
         "modelIDs": [
             [
@@ -1194,6 +975,43 @@
             ["stacked RNN", ["sRNN"]]
         ],
         "name": "polyphonic music prediction"
+    },
+    {
+        "name": "instance segmentation",
+        "modelIDs": [
+            [
+                "mask R-CNN",
+                [
+                    "Mask R-CNN"
+                ]
+            ]
+        ],
+        "models": {
+            "Mask R-CNN": [
+                62.3,
+                60.0
+            ],
+            "MNC": [                
+                0,
+                44.3
+            ],
+            "FCIS": [
+                0,
+                54.5
+            ],
+            "DIN": [
+                38.8,
+                0
+            ],
+            "SGN": [
+                44.9,
+                0
+            ]
+        },
+        "datasets": [
+            "Cityscapes (AP50)",
+            "COCO (AP50)"
+        ]
     },
     {
         "models": {

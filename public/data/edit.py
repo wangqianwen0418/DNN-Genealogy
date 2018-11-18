@@ -100,7 +100,7 @@ key_order = [
 # new_nns.sort(key=lambda x: x['application'][0].split('.')[0])
 # json.dump(new_nns, newfile)
 
-dnns = open("src/assets/dnns.json")
+dnns = open("src/assets/dnns.json", 'r')
 
 evo = json.load(dnns)
 
@@ -112,7 +112,7 @@ cnnTable1 = {
 }
 
 for nn in evo:
-    if '2.' in nn['application'][0]:
+    if '2.detection' in nn['application'][0]:
         for k in nn['names']:
             for dataset in k:
                 if dataset not in cnnTable1['datasets'] and dataset != "name":
@@ -120,23 +120,23 @@ for nn in evo:
 
 
 
-cnnTable2 = {
-    "name": 'semantic segmentation',
-    "modelIDs": [],
-    "models": {},
-    "datasets": []
-}
+# cnnTable2 = {
+#     "name": 'semantic segmentation',
+#     "modelIDs": [],
+#     "models": {},
+#     "datasets": []
+# }
+
+# for nn in evo:
+#     if '3.' in nn['application'][0]:
+#         for k in nn['names']:
+#             for dataset in k:
+#                 if dataset not in cnnTable2['datasets'] and dataset != "name":
+#                     cnnTable2['datasets'].append(dataset)
+
 
 for nn in evo:
-    if '3.' in nn['application'][0]:
-        for k in nn['names']:
-            for dataset in k:
-                if dataset not in cnnTable2['datasets'] and dataset != "name":
-                    cnnTable2['datasets'].append(dataset)
-
-
-for nn in evo:
-    if '2.' in nn['application'][0]:
+    if '2.detection' in nn['application'][0]:
         
         cnnTable1['modelIDs'].append([nn['ID'], [name['name'] for name in nn['names']] ])
         for model in nn['names']:
@@ -148,17 +148,17 @@ for nn in evo:
                     scores.append(0)
             cnnTable1['models'][model['name']] = scores
     
-    if '3.' in nn['application'][0]:
+    # if '3.' in nn['application'][0]:
         
-        cnnTable2['modelIDs'].append([nn['ID'], [name['name'] for name in nn['names']] ])
-        for model in nn['names']:
-            scores = []
-            for dataset in cnnTable2['datasets']:
-                try:
-                    scores.append(model[dataset])
-                except Exception:
-                    scores.append(0)
-            cnnTable2['models'][model['name']] = scores
+    #     cnnTable2['modelIDs'].append([nn['ID'], [name['name'] for name in nn['names']] ])
+    #     for model in nn['names']:
+    #         scores = []
+    #         for dataset in cnnTable2['datasets']:
+    #             try:
+    #                 scores.append(model[dataset])
+    #             except Exception:
+    #                 scores.append(0)
+    #         cnnTable2['models'][model['name']] = scores
           
     # else:
     #     for parent in nn['parents']:
@@ -169,4 +169,4 @@ for nn in evo:
 
 
 savefile = open('test.json', 'w')
-json.dump([cnnTable1, cnnTable2], savefile)
+json.dump([cnnTable1], savefile)
