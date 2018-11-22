@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default class Box extends React.Component<Props, {}>{
-    public ref: ReactEcharts | null
+    public ref: ReactEcharts|null
     constructor(props: Props) {
         super(props)
 
@@ -91,7 +91,7 @@ export default class Box extends React.Component<Props, {}>{
                 data: datasets,
                 axisLabel: {
                     interval: 0,
-                    rotate: 45
+                    rotate: 30
                 },
                 axisTick: {
                     interval: 0
@@ -106,32 +106,33 @@ export default class Box extends React.Component<Props, {}>{
 
     }
     componentDidUpdate() {
-        // if(this.ref){
-        //     let myChart = this.ref.getEchartsInstance();
+        if(this.ref){
+            let myChart = this.ref.getEchartsInstance();
+            console.info(myChart)
 
-        //     myChart.on('legendselected', (params:any)=>{
-        //         console.info(params)
-        //     })
-        //     myChart.on('legendselectchanged', (params:any)=>{
-        //         console.info('legend select change', params)
+            myChart.on('legendselected', (params:any)=>{
+                console.info(params)
+            })
+            myChart.on('legendselectchanged', (params:any)=>{
+                console.info('legend select change', params)
 
-        //         myChart.dispatchAction({
-        //             type: 'highlight',
-        //             seriesIndex: 13,
-        //             dataIndex: 0
-        //         });
+                myChart.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 13,
+                    dataIndex: 0
+                });
 
-        //         myChart.dispatchAction({
-        //             type: 'legendUnSelect',
-        //             // 图例名称
-        //             name: 'resNet'
-        //         })
-        //     })
-        //     myChart.on('click', (params:any)=>{
-        //         console.info('click', params)
-        //     })
+                myChart.dispatchAction({
+                    type: 'legendUnSelect',
+                    // 图例名称
+                    name: 'resNet'
+                })
+            })
+            myChart.on('click', (params:any)=>{
+                console.info('click', params)
+            })
 
-        // }
+        }
     }
 
     render() {

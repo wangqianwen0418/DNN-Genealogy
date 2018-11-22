@@ -95,7 +95,6 @@ export default class PerformanceCompare extends React.Component<Props, State>{
     render() {
         let { currentNNs, selectedNN } = this.props
         let tables = this.getTables()
-        console.info("tables", tables)
         if (tables.length > 0 && selectedNN.ID) {
             // if (this.props.database === 'nonsequence') {
             //     return <Box performances={tables[0]}/>
