@@ -3,6 +3,7 @@ import * as React from 'react';
 import { prepareBoxplotData, getColor } from 'helper/';
 import ReactEcharts from 'echarts-for-react';
 import { NN } from 'types';
+import * as d3 from 'd3';
 
 interface Props {
     performances: Performances,
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export default class Box extends React.Component<Props, {}>{
-    public ref: ReactEcharts|null
+    public ref: any
     constructor(props: Props) {
         super(props)
 
@@ -105,32 +106,49 @@ export default class Box extends React.Component<Props, {}>{
         return option
 
     }
-    componentDidUpdate() {
+    componentDidMount() {
         if(this.ref){
             let myChart = this.ref.getEchartsInstance();
-            console.info(myChart)
 
-            myChart.on('legendselected', (params:any)=>{
-                console.info(params)
-            })
-            myChart.on('legendselectchanged', (params:any)=>{
-                console.info('legend select change', params)
+            myChart.on('mouseover', (params:any)=>{
 
-                myChart.dispatchAction({
-                    type: 'highlight',
-                    seriesIndex: 13,
-                    dataIndex: 0
-                });
+                let modelID = params.seriesId.replace(/\d+$/, '').replace(/\0/g,'')
+                
 
-                myChart.dispatchAction({
-                    type: 'legendUnSelect',
-                    // 图例名称
-                    name: 'resNet'
-                })
+                d3.selectAll(`g.NNNode`)
+                .style('opacity', 0.3)
+
+                d3.selectAll(`.ExtendNode`)
+                .style('opacity', 0.3)
+
+                d3.select(`#exnode_${modelID}`)
+                .style('opacity', 1)
+
             })
-            myChart.on('click', (params:any)=>{
-                console.info('click', params)
+
+            myChart.on('mouseout', (params:any)=>{
+                d3.selectAll(`.Node`)
+                .style('opacity', 1)
+
             })
+            // myChart.on('legendselectchanged', (params:any)=>{
+            //     console.info('legend select change', params)
+
+            //     myChart.dispatchAction({
+            //         type: 'highlight',
+            //         seriesIndex: 13,
+            //         dataIndex: 0
+            //     });
+
+            //     myChart.dispatchAction({
+            //         type: 'legendUnSelect',
+            //         // 图例名称
+            //         name: 'resNet'
+            //     })
+            // })
+            // myChart.on('click', (params:any)=>{
+            //     console.info('click', params)
+            // })
 
         }
     }
