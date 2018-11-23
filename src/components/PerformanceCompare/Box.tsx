@@ -31,39 +31,7 @@ export default class Box extends React.Component<Props, {}>{
             bottom: `${bottom}%`,
             top: `${top}%`,
         }
-        let series: any[] = []
-        // this.props.currentNNs.forEach(nn=>{
-        //     let id = nn.ID 
-        //     modelIDs.forEach((k:any)=>{
-        //         let variant = modelIDs[k]
-        //         series.push({
-        //             name: id,
-        //             type:"bar",
-        //             data: models[variant]
-        //         })
-        //     })
-        // })
-        modelIDs.forEach((d, idx) => {
-            if (currentIDs.indexOf(d[0]) != -1) {
-                d[1].forEach(variant => {
-                    series.push({
-                        name: d[0],
-                        type: "bar",
-                        data: models[variant],
-                        tooltip: {
-                            formatter: (params: Object | Array<any>, ticket: string) => {
-                                // console.info(params)
-                                return `${variant} </br>
-                                ${params['name']}: ${params['value']}`
-                            }
-                        },
-                        itemStyle:{
-                            color: getColor(idx.toString(), 2)
-                        }
-                    })
-                })
-            }
-        })
+
         // let series = Object.keys(models).map((modelName: string) => {
         //     let records = models[modelName]
         //     return {
@@ -78,11 +46,91 @@ export default class Box extends React.Component<Props, {}>{
         //         selected[id] = (id===this.props.selectedNN.ID)
         //     })
 
+        let boxData = prepareBoxplotData(
+            datasets.map((dataset, idx) => {
+                return Object.values(models)
+                    .map(model => model[idx])
+                    .filter(d => (d > 0))
+
+            })
+        )
+        // best performed DNN at each dataset
+        let bestDNNs = datasets.map((dataset: string, i) => {
+            let bestScore = (dataset === 'params' ? Infinity : -Infinity)
+            let bestDNN = ' '
+            Object.keys(models).forEach((k) => {
+                let scores = models[k]
+                let score = scores[i]
+                if (dataset !== 'params' && score > bestScore && score !== 0) {
+                    bestScore = score
+                    bestDNN = k
+                }else if(dataset === 'params' && score < bestScore && score !== 0 ){
+                    bestScore = score
+                    bestDNN = k
+                }
+            })
+            return { [bestDNN]: bestScore }
+        })
+
+        let boxSeries = {
+            name: 'boxplot',
+            type: 'boxplot',
+            boxWidth: ['90%', '95%'],
+            itemStyle: {
+                borderWidth: 1.4,
+                color: 'rgba(128, 128, 128, 0)',
+                borderColor: 'rgba(230, 137, 0, 0.5)',
+            },
+            data: boxData.boxData,
+            tooltip: {
+                formatter: (params: any, ticket: string) => {
+                    let dataIdx = params.dataIndex
+                    return `best in ${datasets[dataIdx]} </br>
+                        ${JSON.stringify(bestDNNs[dataIdx])}`
+                }
+            },
+        }
+
+        let barSeries: any[] = []
+        // this.props.currentNNs.forEach(nn=>{
+        //     let id = nn.ID 
+        //     modelIDs.forEach((k:any)=>{
+        //         let variant = modelIDs[k]
+        //         series.push({
+        //             name: id,
+        //             type:"bar",
+        //             data: models[variant]
+        //         })
+        //     })
+        // })
+        modelIDs.forEach((d, idx) => {
+            if (currentIDs.indexOf(d[0]) != -1) {
+                d[1].forEach(variant => {
+                    barSeries.push({
+                        name: d[0],
+                        type: "bar",
+                        data: models[variant],
+                        tooltip: {
+                            formatter: (params: Object | Array<any>, ticket: string) => {
+                                // console.info(params)
+                                return `${variant} </br>
+                                    ${params['name']}: ${params['value']}`
+                            }
+                        },
+                        itemStyle: {
+                            color: getColor(idx.toString(), 2)
+                        }
+                    })
+                })
+            }
+        })
+
         option = {
             legend: {
                 top: `${top / 2}%`,
                 orient: 'vertical',
                 left: 'left',
+                data: currentIDs
                 // selected
             },
             tooltip: {},
@@ -90,66 +138,58 @@ export default class Box extends React.Component<Props, {}>{
             xAxis: {
                 type: 'category',
                 data: datasets,
+                // data: boxData[0].axisData,
                 axisLabel: {
                     interval: 0,
                     rotate: 30
                 },
                 axisTick: {
                     interval: 0
-                }
+                },
+                splitArea: {
+                    show: true
+                },
+                // axisPointer:{
+                //     show: true,
+                //     type: 'none',
+                //     snap: false
+                // }
             },
             yAxis: {
                 type: 'value'
             },
-            series,
+            series: [boxSeries, ...barSeries],
         }
         return option
 
     }
     componentDidMount() {
-        if(this.ref){
+        if (this.ref) {
             let myChart = this.ref.getEchartsInstance();
 
-            myChart.on('mouseover', (params:any)=>{
+            myChart.on('mouseover', (params: any) => {
+                console.info('mouser over params', params)
+                if (params.seriesType === 'bar') {
+                    let modelID = params.seriesId.replace(/\d+$/, '').replace(/\0/g, '')
 
-                let modelID = params.seriesId.replace(/\d+$/, '').replace(/\0/g,'')
-                
+                    d3.selectAll(`g.NNNode`)
+                        .style('opacity', 0.3)
 
-                d3.selectAll(`g.NNNode`)
-                .style('opacity', 0.3)
+                    d3.selectAll(`.ExtendNode`)
+                        .style('opacity', 0.3)
 
-                d3.selectAll(`.ExtendNode`)
-                .style('opacity', 0.3)
+                    d3.select(`#exnode_${modelID}`)
+                        .style('opacity', 1)
+                }
 
-                d3.select(`#exnode_${modelID}`)
-                .style('opacity', 1)
 
             })
 
-            myChart.on('mouseout', (params:any)=>{
+            myChart.on('mouseout', (params: any) => {
                 d3.selectAll(`.Node`)
-                .style('opacity', 1)
+                    .style('opacity', 1)
 
             })
-            // myChart.on('legendselectchanged', (params:any)=>{
-            //     console.info('legend select change', params)
-
-            //     myChart.dispatchAction({
-            //         type: 'highlight',
-            //         seriesIndex: 13,
-            //         dataIndex: 0
-            //     });
-
-            //     myChart.dispatchAction({
-            //         type: 'legendUnSelect',
-            //         // 图例名称
-            //         name: 'resNet'
-            //     })
-            // })
-            // myChart.on('click', (params:any)=>{
-            //     console.info('click', params)
-            // })
-
         }
     }
 

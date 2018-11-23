@@ -14,7 +14,7 @@ var quantile = function(ascArr:number[], p:number) {
     return e ? v + e * (ascArr[h] - v) : v;
 };
 
-var prepareBoxplotData = function (rawData:any[], opt:any) {
+var prepareBoxplotData = function (rawData:any[], opt:any={layout: 'vertical'}) {
     opt = opt || [];
     var boxData = [];
     var outliers = [];

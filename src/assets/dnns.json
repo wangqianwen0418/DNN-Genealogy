@@ -234,15 +234,6 @@
             {
                 "imagenet val top5": null,
                 "imageNet val top1": null,
-                "SVHN": 1.76,
-                "cifar10": 4.51,
-                "params": 0.8,
-                "cifar100": 22.27,
-                "name": "denseNet-BC(l=100, k=12)"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
                 "SVHN": 1.74,
                 "cifar10": 3.62,
                 "params": 15.3,
@@ -872,24 +863,7 @@
         "citation": "5464",
         "date": "2015.12.10",
         "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 6.97,
-                "params": 0.86,
-                "cifar100": 25.16,
-                "name": "resNet_v1_56_cifar"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 6.43,
-                "params": 1.7,
-                "cifar100": 25.16,
-                "name": "resNet_v1_110_cifar"
-            },
+           
             {
                 "imagenet val top5": 7.1,
                 "imageNet val top1": 24.1,
