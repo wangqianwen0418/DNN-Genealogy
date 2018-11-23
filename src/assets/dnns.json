@@ -19,19 +19,7 @@
             "cross entropy"
         ],
         "citation": "18438",
-        "date": "2012.12.03",
-        "names": [
-            {
-                "imagenet val top5": 15.4,
-                "imageNet val top1": 36.7,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 60.0,
-                "cifar100": null,
-                "name": "alexNet"
-                
-            }
-        ]
+        "date": "2012.12.03"
     },
     {
         "ID": "VGG",
@@ -60,27 +48,7 @@
             "cross entropy"
         ],
         "citation": "8205",
-        "date": "2014.09.04",
-        "names": [
-            {
-                "imagenet val top5": 7.3,
-                "imageNet val top1": 25.5,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 144.0,
-                "cifar100": null,
-                "name": "vgg19"
-            },
-            {
-                "imagenet val top5": 8.1,
-                "imageNet val top1": 25.6,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 138.0,
-                "cifar100": null,
-                "name": "vgg16"
-            }
-        ]
+        "date": "2014.09.04"
     },
     {
         "ID": "highwayNets",
@@ -106,18 +74,7 @@
             "cross entropy"
         ],
         "citation": "320",
-        "date": "2015.11.03",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 7.76,
-                "params": 2.3,
-                "cifar100": null,
-                "name": "highwayNets"
-            }
-        ]
+        "date": "2015.11.03"
     },
     {
         "ID": "inception",
@@ -145,36 +102,7 @@
             "data augmentation"
         ],
         "citation": "5591",
-        "date": "2014.09.17",
-        "names": [
-            {
-                "imagenet val top5": 6.67,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 6.8,
-                "cifar100": null,
-                "name": "inception"
-            },
-            {
-                "imagenet val top5": 4.2,
-                "imageNet val top1": 18.77,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 23.8,
-                "cifar100": null,
-                "name": "inception_v3"
-            },
-            {
-                "imagenet val top5": 5.6,
-                "imageNet val top1": 21.2,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 23.8,
-                "cifar100": null,
-                "name": "inception_v2"
-            }
-        ]
+        "date": "2014.09.17"
     },
     {
         "ID": "denseNet",
@@ -202,72 +130,7 @@
             "data augmentation"
         ],
         "citation": "378",
-        "date": "2016.08.25",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": 1.79,
-                "cifar10": 5.24,
-                "params": 1.0,
-                "cifar100": 24.42,
-                "name": "denseNet_40_12"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": 1.67,
-                "cifar10": 4.1,
-                "params": 7.2,
-                "cifar100": 20.2,
-                "name": "denseNet_100_12"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": 1.59,
-                "cifar10": 3.74,
-                "params": 27.2,
-                "cifar100": 19.25,
-                "name": "denseNet_100_24"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": 1.74,
-                "cifar10": 3.62,
-                "params": 15.3,
-                "cifar100": 17.6,
-                "name": "denseNet-BC(l=250, k=24)"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 3.46,
-                "params": 25.6,
-                "cifar100": 17.18,
-                "name": "denseNet-BC(l=190, k=40)"
-            },
-            {
-                "imagenet val top5": 7.71,
-                "imageNet val top1": 25.02,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 8.1,
-                "cifar100": null,
-                "name": "denseNet_121"
-            },
-            {
-                "imagenet val top5": 6.34,
-                "imageNet val top1": 22.58,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 20.2,
-                "cifar100": null,
-                "name": "denseNet_201"
-            }
-        ]
+        "date": "2016.08.25"
     },
     {
         "ID": "xception",
@@ -291,8 +154,7 @@
             "SGD"
         ],
         "citation": "114",
-        "date": "2016.10.07",
-        "names": []
+        "date": "2016.10.07"
     },
     {
         "ID": "squeezeNet",
@@ -324,18 +186,7 @@
             "weight decay"
         ],
         "citation": "264",
-        "date": "2016.02.24",
-        "names": [
-            {
-                "imagenet val top5": 17.5,
-                "imageNet val top1": 39.6,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 1.24,
-                "cifar100": null,
-                "name": "squeezeNet"
-            }
-        ]
+        "date": "2016.02.24"
     },
     {
         "ID": "DPN",
@@ -366,18 +217,7 @@
             "batch normalization"
         ],
         "citation": "31",
-        "date": "2017.06.06",
-        "names": [
-            {
-                "imagenet val top5": 5.4,
-                "imageNet val top1": 20.8,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 145.0,
-                "cifar100": null,
-                "name": "DPN-92"
-            }
-        ]
+        "date": "2017.06.06"
     },
     {
         "ID": "inception_resNet",
@@ -411,18 +251,7 @@
             "weight decay"
         ],
         "citation": "480",
-        "date": "2016.02.23",
-        "names": [
-            {
-                "imagenet val top5": 3.7,
-                "imageNet val top1": 17.8,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 55.8,
-                "cifar100": null,
-                "name": "inception_resNet"
-            }
-        ]
+        "date": "2016.02.23"
     },
     {
         "ID": "mobileNet",
@@ -459,27 +288,7 @@
             "RMSprop"
         ],
         "citation": "149",
-        "date": "2017.04.17",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": 29.4,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 4.2,
-                "cifar100": null,
-                "name": "mobileNet-224"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": 39.8,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 1.32,
-                "cifar100": null,
-                "name": "mobileNet-160"
-            }
-        ]
+        "date": "2017.04.17"
     },
     {
         "ID": "RIR",
@@ -507,18 +316,7 @@
             "data augmentation"
         ],
         "citation": "62",
-        "date": "2016.05.25",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 5.01,
-                "params": 0.0,
-                "cifar100": 22.9,
-                "name": "resNet-in-resent"
-            }
-        ]
+        "date": "2016.05.25"
     },
     {
         "ID": "WRN",
@@ -545,36 +343,7 @@
             "dropout"
         ],
         "citation": "285",
-        "date": "2016.05.23",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": 1.64,
-                "cifar10": 5.24,
-                "params": 2.9,
-                "cifar100": 23.91,
-                "name": "wideResNet_16_4"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": 1.64,
-                "cifar10": 3.89,
-                "params": 36.0,
-                "cifar100": 18.85,
-                "name": "wideResNet_28_10"
-            },
-            {
-                "imagenet val top5": 5.79,
-                "imageNet val top1": 21.9,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 0.0,
-                "cifar100": null,
-                "name": "wideResNet-50-2"
-            }
-        ]
+        "date": "2016.05.23"
     },
     {
         "ID": "mixNet",
@@ -613,63 +382,7 @@
             "he normal"
         ],
         "citation": "0",
-        "date": "2018.02.06",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": 1.57,
-                "cifar10": 4.19,
-                "params": 1.5,
-                "cifar100": 21.12,
-                "name": "mixNet-100"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": 1.51,
-                "cifar10": 3.32,
-                "params": 29.0,
-                "cifar100": 17.06,
-                "name": "mixNet-250"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 3.13,
-                "params": 48.5,
-                "cifar100": 16.92,
-                "name": "mixNet-190"
-            },
-            {
-                "imagenet val top5": 6.7,
-                "imageNet val top1": 23.3,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 11.16,
-                "cifar100": null,
-                "name": "mixNet-105"
-            },
-            {
-                "imagenet val top5": 5.9,
-                "imageNet val top1": 21.9,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 21.86,
-                "cifar100": null,
-                "name": "mixNet-121"
-            },
-            {
-                "imagenet val top5": 5.3,
-                "imageNet val top1": 20.4,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 41.07,
-                "cifar100": null,
-                "name": "mixNet-141"
-            }
-        ]
+        "date": "2018.02.06"
     },
     {
         "ID": "fractalNet",
@@ -703,27 +416,7 @@
             "dropout"
         ],
         "citation": "71",
-        "date": "2016.05.24",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 5.24,
-                "params": 22.9,
-                "cifar100": 22.49,
-                "name": "fractalNet-40"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 5.22,
-                "params": 38.6,
-                "cifar100": 23.3,
-                "name": "fractalNet-20"
-            }
-        ]
+        "date": "2016.05.24"
     },
     {
         "ID": "polyInception",
@@ -751,18 +444,7 @@
             "standard relu"
         ],
         "citation": "32",
-        "date": "2016.12.17",
-        "names": [
-            {
-                "imagenet val top5": 4.25,
-                "imageNet val top1": 18.71,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 92,
-                "cifar100": null,
-                "name": "PolyNet"
-            }
-        ]
+        "date": "2016.12.17"
     },
     {
         "ID": "diracNet",
@@ -790,45 +472,7 @@
             "dropout"
         ],
         "citation": "4",
-        "date": "2017.06.07",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 3.16,
-                "params": 9.1,
-                "cifar100": 23.44,
-                "name": "diracNet-28-5"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 4.75,
-                "params": 36.5,
-                "cifar100": 21.54,
-                "name": "diracNet-28-10"
-            },
-            {
-                "imagenet val top5": 10.88,
-                "imageNet val top1": 30.37,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 11.7,
-                "cifar100": null,
-                "name": "diracNet-18"
-            },
-            {
-                "imagenet val top5": 9.34,
-                "imageNet val top1": 27.79,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 21.8,
-                "cifar100": null,
-                "name": "diracNet-34"
-            }
-        ]
+        "date": "2017.06.07"
     },
     {
         "ID": "resNet",
@@ -861,55 +505,7 @@
             "he_normal"
         ],
         "citation": "5464",
-        "date": "2015.12.10",
-        "names": [
-           
-            {
-                "imagenet val top5": 7.1,
-                "imageNet val top1": 24.1,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 25.6,
-                "cifar100": null,
-                "name": "resNet_v1_50"
-            },
-            {
-                "imagenet val top5": 5.71,
-                "imageNet val top1": 21.43,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 60.4,
-                "cifar100": null,
-                "name": "resNet_v1_152"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": 35.29,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 0.0,
-                "cifar100": null,
-                "name": "resNet_v2"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 6.99,
-                "params": 1.6,
-                "cifar100": null,
-                "name": "resNet_v2_56_cifar"
-            },
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 6.38,
-                "params": 3.3,
-                "cifar100": 24.64,
-                "name": "resNet_v2_110_cifar"
-            }
-        ]
+        "date": "2015.12.10"
     },
     {
         "ID": "resNeXt",
@@ -949,18 +545,7 @@
             "weight decay"
         ],
         "citation": "134",
-        "date": "2016.11.16",
-        "names": [
-            {
-                "imagenet val top5": 5.3,
-                "imageNet val top1": 20.4,
-                "SVHN": null,
-                "cifar10": 3.58,
-                "params": 25.0,
-                "cifar100": 17.31,
-                "name": "ResNeXt"
-            }
-        ]
+        "date": "2016.11.16"
     },
     {
         "ID": "SENet",
@@ -988,18 +573,7 @@
             "cross entropy"
         ],
         "citation": "48",
-        "date": "2017.09.05",
-        "names": [
-            {
-                "imagenet val top5": 4.79,
-                "imageNet val top1": 19.8,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 65.6,
-                "cifar100": null,
-                "name": "seNet_inception_resnetv2"
-            }
-        ]
+        "date": "2017.09.05"
     },
     {
         "ID": "nasNet",
@@ -1041,36 +615,7 @@
             "dropout"
         ],
         "citation": "35",
-        "date": "2017.12.01",
-        "names": [
-            {
-                "imagenet val top5": null,
-                "imageNet val top1": null,
-                "SVHN": null,
-                "cifar10": 2.65,
-                "params": 3.3,
-                "cifar100": null,
-                "name": "nasNet_cifar"
-            },
-            {
-                "imagenet val top5": 3.8,
-                "imageNet val top1": 17.3,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 11.1,
-                "cifar100": null,
-                "name": "nasNet_large"
-            },
-            {
-                "imagenet val top5": 8.4,
-                "imageNet val top1": 26.0,
-                "SVHN": null,
-                "cifar10": null,
-                "params": 5.3,
-                "cifar100": null,
-                "name": "nasNet_small"
-            }
-        ]
+        "date": "2017.12.01"
     },
     {
         "ID": "RNN",
@@ -1087,13 +632,7 @@
             "sgd"
         ],
         "citation": "9047",
-        "date": "1990.03.01",
-        "names": [
-            {
-                "params": 0.0,
-                "name": "recurrent neural network"
-            }
-        ]
+        "date": "1990.03.01"
     },
     {
         "ID": "attention",
@@ -1116,8 +655,7 @@
             "SGD"
         ],
         "citation": "2081",
-        "date": "2014.09.01",
-        "names": []
+        "date": "2014.09.01"
     },
     {
         "ID": "seq2seq",
@@ -1140,13 +678,7 @@
             "SGD"
         ],
         "citation": "2829",
-        "date": "2014.09.10",
-        "names": [
-            {
-                "params": 0.0,
-                "name": "squence to sequence"
-            }
-        ]
+        "date": "2014.09.10"
     },
     {
         "ID": "conv seq2seq",
@@ -1169,8 +701,7 @@
             "SGD"
         ],
         "citation": "73",
-        "date": "2017.05.08",
-        "names": []
+        "date": "2017.05.08"
     },
     {
         "ID": "ESN",
@@ -1193,13 +724,7 @@
             "SGD"
         ],
         "citation": "1517",
-        "date": "2004.04.02",
-        "names": [
-            {
-                "params": 0.0,
-                "name": "echo state network"
-            }
-        ]
+        "date": "2004.04.02"
     },
     {
         "ID": "ESN with leaky units",
@@ -1228,8 +753,7 @@
             "SGD"
         ],
         "citation": "414",
-        "date": "2007.04.01",
-        "names": []
+        "date": "2007.04.01"
     },
     {
         "ID": "time skip connections",
@@ -1252,8 +776,7 @@
             "SGD"
         ],
         "citation": "15",
-        "date": "1998.10.15",
-        "names": []
+        "date": "1998.10.15"
     },
     {
         "ID": "CW-RNN",
@@ -1276,8 +799,7 @@
             "SGD"
         ],
         "citation": "135",
-        "date": "2014.02.14",
-        "names": []
+        "date": "2014.02.14"
     },
     {
         "ID": "leaky units",
@@ -1306,8 +828,7 @@
             "SGD"
         ],
         "citation": "900",
-        "date": "2013.02.13",
-        "names": []
+        "date": "2013.02.13"
     },
     {
         "ID": "LSTM",
@@ -1336,8 +857,7 @@
             "SGD"
         ],
         "citation": "8136",
-        "date": "1997.12.15",
-        "names": []
+        "date": "1997.12.15"
     },
     {
         "ID": "SRU",
@@ -1360,8 +880,7 @@
             "SGD"
         ],
         "citation": "25",
-        "date": "2017.09.08",
-        "names": []
+        "date": "2017.09.08"
     },
     {
         "ID": "GRU",
@@ -1384,13 +903,7 @@
             "SGD"
         ],
         "citation": "2069",
-        "date": "2014.06.03",
-        "names": [
-            {
-                "params": 0.0,
-                "name": "gated recurrent unit"
-            }
-        ]
+        "date": "2014.06.03"
     },
     {
         "ID": "LRU",
@@ -1413,8 +926,7 @@
             "SGD"
         ],
         "citation": "20",
-        "date": "2017.10.06",
-        "names": []
+        "date": "2017.10.06"
     },
     {
         "ID": "gridLSTM",
@@ -1437,8 +949,7 @@
             "SGD"
         ],
         "citation": "150",
-        "date": "2015.7.06",
-        "names": []
+        "date": "2015.7.06"
     },
     {
         "ID": "recursive",
@@ -1461,13 +972,7 @@
             "SGD"
         ],
         "citation": "1050",
-        "date": "1990.11.01",
-        "names": [
-            {
-                "params": 0.0,
-                "name": "recursive neural network"
-            }
-        ]
+        "date": "1990.11.01"
     },
     {
         "ID": "tree-LSTM",
@@ -1497,8 +1002,7 @@
             "SGD"
         ],
         "citation": "549",
-        "date": "2015.02.28",
-        "names": []
+        "date": "2015.02.28"
     },
     {
         "ID": "DGLSTM",
@@ -1528,8 +1032,7 @@
             "SGD"
         ],
         "citation": "15",
-        "date": "2015.08.01",
-        "names": []
+        "date": "2015.08.01"
     },
     {
         "ID": "BRNN",
@@ -1552,13 +1055,7 @@
             "SGD"
         ],
         "citation": "984",
-        "date": "1997.12.01",
-        "names": [
-            {
-                "params": 0.0,
-                "name": "bidirectional recurrent neural network"
-            }
-        ]
+        "date": "1997.12.01"
     },
     {
         "ID": "stacked RNN",
@@ -1581,8 +1078,7 @@
             "SGD"
         ],
         "citation": "263",
-        "date": "1992.03.01",
-        "names": []
+        "date": "1992.03.01"
     },
     {
         "ID": "DB-LSTM",
@@ -1619,13 +1115,7 @@
             "SGD"
         ],
         "citation": "1897",
-        "date": "2013.03.22",
-        "names": [
-            {
-                "params": 0.0,
-                "name": "deep bidirectional LSTM"
-            }
-        ]
+        "date": "2013.03.22"
     },
     {
         "ID": "DT-RNN",
@@ -1648,8 +1138,7 @@
             "SGD"
         ],
         "citation": "269",
-        "date": "2013.12.20",
-        "names": []
+        "date": "2013.12.20"
     },
     {
         "ID": "DT(S)-RNN",
@@ -1672,8 +1161,7 @@
             "SGD"
         ],
         "citation": "269",
-        "date": "2013.12.20",
-        "names": []
+        "date": "2013.12.20"
     },
     {
         "ID": "R-CNN",
@@ -1689,15 +1177,7 @@
             "SGD"
         ],
         "citation": "6532",
-        "date": "2013.11.11",
-        "names": [
-            {
-                "name": "R-CNN",
-                "FPS": 0.08,
-                "PASCAL VOC 2007 (mAP)": 58.5,
-                "COCO 2015 (AP@.5)": 44.0
-            }
-        ]
+        "date": "2013.11.11"
     },
     {
         "ID": "SPP-Net",
@@ -1721,15 +1201,7 @@
             "SGD"
         ],
         "citation": "1337",
-        "date": "2014.06.18",
-        "names": [
-            {
-                "name": "SPP-Net (ZF-5)",
-                "FPS": 2,
-                "PASCAL VOC 2007 (mAP)": 80.1,
-                "COCO 2015 (AP@.5)": null
-            }
-        ]
+        "date": "2014.06.18"
     },
     {
         "ID": "fast R-CNN",
@@ -1758,15 +1230,7 @@
             "SGD"
         ],
         "citation": "3651",
-        "date": "2015.04.30",
-        "names": [
-            {
-                "name": "fast R-CNN",
-                "FPS": 3.3,
-                "PASCAL VOC 2007 (mAP)": 70.0,
-                "COCO 2015 (AP@.5)": null
-            }
-        ]
+        "date": "2015.04.30"
     },
     {
         "ID": "faster R-CNN",
@@ -1789,21 +1253,7 @@
             "SGD"
         ],
         "citation": "5061",
-        "date": "2015.06.04",
-        "names": [
-            {
-                "name": "faster R_CNN (VGG16)",
-                "FPS": 7,
-                "PASCAL VOC 2007 (mAP)": 73.2,
-                "COCO 2015 (AP@.5)": 42.7
-            },
-            {
-                "name": "faster R_CNN (ResNet101)",
-                "FPS": 2.4,
-                "PASCAL VOC 2007 (mAP)": 76.4,
-                "COCO 2015 (AP@.5)": null
-            }
-        ]
+        "date": "2015.06.04"
     },
     {
         "ID": "YOLO",
@@ -1811,9 +1261,7 @@
         "application": [
             "2.detection"
         ],
-        "parents": [
-
-        ],
+        "parents": [],
         "architecture": [
             "xxx"
         ],
@@ -1821,15 +1269,7 @@
             "SGD"
         ],
         "citation": "2444",
-        "date": "2015.06.08",
-        "names": [
-            {
-                "name": "YOLO",
-                "FPS": 150,
-                "PASCAL VOC 2007 (mAP)": 70.7,
-                "COCO 2015 (AP@.5)": null
-            }
-        ]
+        "date": "2015.06.08"
     },
     {
         "ID": "YOLO_v2",
@@ -1839,18 +1279,17 @@
         ],
         "parents": [
             {
-                "link_info_l": "add adding batch on all of the convolutional layers; remove the fully connected layers from YOLO and use anchor boxes to predict bounding boxes", 
+                "link_info_l": "add adding batch on all of the convolutional layers; remove the fully connected layers from YOLO and use anchor boxes to predict bounding boxes",
                 "ID": "YOLO",
                 "link_info_s": "anchor boxes",
                 "link_category": "nan"
             },
             {
-                "link_info_l": "use anchor boxes proposed in faster R-CNN", 
+                "link_info_l": "use anchor boxes proposed in faster R-CNN",
                 "ID": "faster R-CNN",
                 "link_info_s": "anchor boxes",
                 "link_category": "nan"
             }
-
         ],
         "architecture": [
             "xxx"
@@ -1859,15 +1298,7 @@
             "SGD"
         ],
         "citation": "1219",
-        "date": "2016.12.25",
-        "names": [
-            {
-                "name": "YOLO v2",
-                "FPS": 81,
-                "PASCAL VOC 2007 (mAP)": 73.4,
-                "COCO 2015 (AP@.5)": 44.0
-            }
-        ]
+        "date": "2016.12.25"
     },
     {
         "ID": "SSD",
@@ -1883,7 +1314,7 @@
                 "link_category": "nan"
             },
             {
-                "link_info_l": "use a set of default anchor boxes with different aspect ratios and scales to discretize the output space of bounding boxes; predict based on multiple feature maps with different resolutions; predict the offset of boxes", 
+                "link_info_l": "use a set of default anchor boxes with different aspect ratios and scales to discretize the output space of bounding boxes; predict based on multiple feature maps with different resolutions; predict the offset of boxes",
                 "ID": "YOLO",
                 "link_info_s": "region proposal",
                 "link_category": "nan"
@@ -1896,21 +1327,7 @@
             "SGD"
         ],
         "citation": "2116",
-        "date": "2015.12.08",
-        "names": [
-            {
-                "name": "SSD_300",
-                "FPS": 46,
-                "PASCAL VOC 2007 (mAP)": 74.3,
-                "COCO 2015 (AP@.5)": 41.2
-            },
-            {
-                "name": "SSD_512",
-                "FPS": 19,
-                "PASCAL VOC 2007 (mAP)": 76.8,
-                "COCO 2015 (AP@.5)": 46.5
-            } 
-        ]
+        "date": "2015.12.08"
     },
     {
         "ID": "DSSD",
@@ -1933,20 +1350,7 @@
             "SGD"
         ],
         "citation": "132",
-        "date": "2017.01.23",
-        "names": [
-            {
-                "name": "DSSD_321",
-                "FPS": 13.6,
-                "PASCAL VOC 2007 (mAP)": 78.6,
-                "COCO 2015 (AP@.5)": 46.1
-            },
-            {
-                "name": "DSSD_513",
-                "FPS": 6.6,
-                "PASCAL VOC 2007 (mAP)": 53.3
-            }
-        ]
+        "date": "2017.01.23"
     },
     {
         "ID": "DSOD",
@@ -1969,23 +1373,8 @@
             "SGD"
         ],
         "citation": "48",
-        "date": "2017.08.03",
-        "names": [
-            {
-                "name": "DSOD_300 (plain)",
-                "FPS": 20.6,
-                "PASCAL VOC 2007 (mAP)": 77.3,
-                "COCO 2015 (AP@.5)": null
-            },
-            {
-                "name": "DSOD_300 (dense)",
-                "FPS": 17.4,
-                "PASCAL VOC 2007 (mAP)": 81.7,
-                "COCO 2015 (AP@.5)": 47.3
-            }
-        ]
+        "date": "2017.08.03"
     },
-    
     {
         "ID": "FPN",
         "fullname": "Feature Pyramid Network",
@@ -2013,15 +1402,7 @@
             "SGD"
         ],
         "citation": "531",
-        "date": "2016.12.09",
-        "names": [
-            {
-                "name": "FPN (RPN)",
-                "FPS": 6,
-                "PASCAL VOC 2007 (mAP)": null,
-                "COCO 2015 (AP@.5)": 59.1
-            }
-        ]
+        "date": "2016.12.09"
     },
     {
         "ID": "R-FCN",
@@ -2044,17 +1425,8 @@
             "SGD"
         ],
         "citation": "757",
-        "date": "2016.05.20",
-        "names": [
-            {
-                "name": "R-FCN (ResNet)",
-                "FPS": 9,
-                "PASCAL VOC 2007 (mAP)": 80.5,
-                "COCO 2015 (AP@.5)": 55.7
-            }
-        ]
+        "date": "2016.05.20"
     },
-
     {
         "ID": "FCN",
         "fullname": "Fully Convolutional Network",
@@ -2069,25 +1441,7 @@
             "SGD"
         ],
         "citation": "6557",
-        "date": "2014.12.14",
-        "names": [
-            {
-                "name": "FCN-AlexNet",
-                "PASCAL VOC 2012": 39.8
-            },
-            {
-                "name": "FCN-VGG",
-                "PASCAL VOC 2012": 56.0
-            },
-            {
-                "name": "FCN-GoogleNet",
-                "PASCAL VOC 2012": 42.5
-            },
-            {
-                "name": "FCN-VGG-8s",
-                "PASCAL VOC 2012": 62.7
-            }
-        ]
+        "date": "2014.12.14"
     },
     {
         "ID": "U-Net",
@@ -2110,13 +1464,7 @@
             "SGD"
         ],
         "citation": "3139",
-        "date": "",
-        "names": [
-            {
-                "name": "U-Net",
-                "ISBI cell tracking": 0.9203
-            }
-        ]
+        "date": ""
     },
     {
         "ID": "SegNet",
@@ -2139,17 +1487,7 @@
             "SGD"
         ],
         "citation": "20",
-        "date": "",
-        "names": [
-            {
-                "name": "SegNet",
-                "SUN RGB-D": 30.7
-            },
-            {
-                "name": "SegNet",
-                "CamVid 11 road": 60.1
-            }
-        ]
+        "date": ""
     },
     {
         "ID": "DeconvNet",
@@ -2172,17 +1510,7 @@
             "SGD"
         ],
         "citation": "20",
-        "date": "",
-        "names": [
-            {
-                "name": "DeconvNet",
-                "PASCAL VOC 2012": 69.6
-            },
-            {
-                "name": "EDeconvNet-CRF",
-                "PASCAL VOC 2012": 72.5
-            }
-        ]
+        "date": ""
     },
     {
         "ID": "RedNet",
@@ -2205,13 +1533,7 @@
             "SGD"
         ],
         "citation": "20",
-        "date": "2018.06.04",
-        "names": [
-            {
-                "name": "RedNet",
-                "SUN RGB-D":  47.8
-            }
-        ]
+        "date": "2018.06.04"
     },
     {
         "ID": "RefineNet",
@@ -2234,15 +1556,7 @@
             "SGD"
         ],
         "citation": "20",
-        "date": "",
-        "names": [
-            {
-                "name": "RefineNet(ResNet101)",
-                "Cityscapes (mIoU)": 73.6,
-                "PASCAL VOC 2012": 82.4,
-                "SUN RGB-D": 45.9
-            }
-        ]
+        "date": ""
     },
     {
         "ID": "DilatedNet",
@@ -2265,14 +1579,7 @@
             "SGD"
         ],
         "citation": "1104",
-        "date": "2015.11.23",
-        "names": [
-            {
-                "name": "DilatedNet",
-                "Cityscapes": null,
-                "PASCAL VOC 2012": 71.3
-            }
-        ]
+        "date": "2015.11.23"
     },
     {
         "ID": "PSPNet",
@@ -2295,14 +1602,7 @@
             "SGD"
         ],
         "citation": "576",
-        "date": "2016.12.04",
-        "names": [
-            {
-                "name": "PSPNet",
-                "Cityscapes": 78.6,
-                "PASCAL VOC 2012": 82.6
-            }
-        ]
+        "date": "2016.12.04"
     },
     {
         "ID": "DeepLab",
@@ -2325,14 +1625,7 @@
             "SGD"
         ],
         "citation": "411",
-        "date": "2014.12.22",
-        "names": [
-            {
-                "name": "DeepLab-CRF",
-                "Cityscapes": null,
-                "PASCAL VOC 2012": 63.74 
-            }
-        ]
+        "date": "2014.12.22"
     },
     {
         "ID": "DeepLab_v2",
@@ -2361,14 +1654,7 @@
             "SGD"
         ],
         "citation": "1889",
-        "date": "2016.05.12",
-        "names": [
-            {
-                "name": "DeepLab v2",
-                "Cityscapes": 70.4,
-                "PASCAL VOC 2012": 79.7
-            }
-        ]
+        "date": "2016.05.12"
     },
     {
         "ID": "GCN",
@@ -2391,14 +1677,7 @@
             "SGD"
         ],
         "citation": "99",
-        "date": "2017.03.08",
-        "names": [
-            {
-                "name": "GCN",
-                "Cityscapes": 76.9,
-                "PASCAL VOC 2012": 83.6
-            }
-        ]
+        "date": "2017.03.08"
     },
     {
         "ID": "DeepLab_v3",
@@ -2419,14 +1698,7 @@
             "SGD"
         ],
         "citation": "198",
-        "date": "2017.06.17",
-        "names": [
-            {
-                "name": "DeepLab v3",
-                "Cityscapes": 81.3,
-                "PASCAL VOC 2012": 85.7
-            }
-        ]
+        "date": "2017.06.17"
     },
     {
         "ID": "mask R-CNN",
@@ -2447,13 +1719,6 @@
             "SGD"
         ],
         "citation": "938",
-        "date": "2017.03.20",
-        "names": [
-            {
-                "name": "Mask R-CNN",
-                "Cityscapes (AP50)": 62.3,
-                "COCO (AP50)": 60.0
-            }
-        ]
+        "date": "2017.03.20"
     }
 ]
