@@ -18,6 +18,28 @@ export default class Box extends React.Component<Props, {}>{
 
     }
 
+    getBestDNNs(){
+        let { models, datasets} = this.props.performances
+        let bestDNNs:Array<any> = datasets.map((dataset: string, i) => {
+            let bestScore = (dataset === 'params' ? Infinity : -Infinity)
+            let bestDNN = ' '
+            Object.keys(models).forEach((k) => {
+                let scores = models[k]
+                let score = scores[i]
+                if (dataset !== 'params' && score > bestScore && score !== 0) {
+                    bestScore = score
+                    bestDNN = k
+                }else if(dataset === 'params' && score < bestScore && score !== 0 ){
+                    bestScore = score
+                    bestDNN = k
+                }
+            })
+            return [bestDNN, bestScore ]
+        })
+
+        return bestDNNs
+    }
+
     getOption() {
         let { models, datasets, modelIDs } = this.props.performances
         let option = {}
@@ -55,23 +77,8 @@ export default class Box extends React.Component<Props, {}>{
             })
         )
         // best performed DNN at each dataset
-        let bestDNNs = datasets.map((dataset: string, i) => {
-            let bestScore = (dataset === 'params' ? Infinity : -Infinity)
-            let bestDNN = ' '
-            Object.keys(models).forEach((k) => {
-                let scores = models[k]
-                let score = scores[i]
-                if (dataset !== 'params' && score > bestScore && score !== 0) {
-                    bestScore = score
-                    bestDNN = k
-                }else if(dataset === 'params' && score < bestScore && score !== 0 ){
-                    bestScore = score
-                    bestDNN = k
-                }
-            })
-            return { [bestDNN]: bestScore }
-        })
-
+        
+        let bestDNNs = this.getBestDNNs()
         let boxSeries = {
             name: 'boxplot',
             type: 'boxplot',
@@ -86,7 +93,7 @@ export default class Box extends React.Component<Props, {}>{
                 formatter: (params: any, ticket: string) => {
                     let dataIdx = params.dataIndex
                     return `best in ${datasets[dataIdx]} </br>
-                        ${JSON.stringify(bestDNNs[dataIdx])}`
+                        ${bestDNNs[dataIdx][0]}: ${bestDNNs[dataIdx][1]}`
                 }
             },
         }
@@ -166,21 +173,32 @@ export default class Box extends React.Component<Props, {}>{
     componentDidMount() {
         if (this.ref) {
             let myChart = this.ref.getEchartsInstance();
+            let modelID = ' '
 
             myChart.on('mouseover', (params: any) => {
-                console.info('mouser over params', params)
+                // console.info('mouser over params', params)
+
                 if (params.seriesType === 'bar') {
-                    let modelID = params.seriesId.replace(/\d+$/, '').replace(/\0/g, '')
+                    modelID = params.seriesId.replace(/\d+$/, '').replace(/\0/g, '')
 
-                    d3.selectAll(`g.NNNode`)
-                        .style('opacity', 0.3)
-
-                    d3.selectAll(`.ExtendNode`)
-                        .style('opacity', 0.3)
-
-                    d3.select(`#exnode_${modelID}`)
-                        .style('opacity', 1)
+                } else if (params.seriesType === 'boxplot') {
+                    
+                    let idx = params.dataIndex
+                    let bestDNNs = this.getBestDNNs()
+                    modelID = bestDNNs[idx][0].split('\b')[0]
                 }
+
+                d3.selectAll(`g.NNNode`)
+                        .style('opacity', 0.3)
+
+                d3.selectAll(`.ExtendNode`)
+                    .style('opacity', 0.3)
+
+                d3.select(`#exnode_${modelID}`)
+                    .style('opacity', 1)
+
+                d3.select(`#nnnode_${modelID}`)
+                    .style('opacity', 1)
 
 
             })

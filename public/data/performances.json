@@ -12,7 +12,7 @@
             [
                 "SPP-Net",
                 [
-                    "SPP-Net (ZF-5)"
+                    "SPP-Net\b(ZF-5)"
                 ]
             ],
             [
@@ -24,8 +24,8 @@
             [
                 "faster R-CNN",
                 [
-                    "faster R_CNN (VGG16)",
-                    "faster R_CNN (ResNet101)"
+                    "faster R-CNN\b(VGG16)",
+                    "faster R-CNN\b(ResNet101)"
                 ]
             ],
             [
@@ -37,40 +37,40 @@
             [
                 "YOLO_v2",
                 [
-                    "YOLO v2"
+                    "YOLO_v2"
                 ]
             ],
             [
                 "SSD",
                 [
-                    "SSD_300",
-                    "SSD_512"
+                    "SSD\b_300",
+                    "SSD\b_512"
                 ]
             ],
             [
                 "DSSD",
                 [
-                    "DSSD_321",
-                    "DSSD_513"
+                    "DSSD\b_321",
+                    "DSSD\b_513"
                 ]
             ],
             [
                 "DSOD",
                 [
-                    "DSOD_300 (plain)",
-                    "DSOD_300 (dense)"
+                    "DSOD\b_300 (plain)",
+                    "DSOD\b_300 (dense)"
                 ]
             ],
             [
                 "FPN",
                 [
-                    "FPN (RPN)"
+                    "FPN\b(RPN)"
                 ]
             ],
             [
                 "R-FCN",
                 [
-                    "R-FCN (ResNet)"
+                    "R-FCN\b (ResNet)"
                 ]
             ]
         ],
@@ -80,7 +80,7 @@
                 58.5,
                 44.0
             ],
-            "SPP-Net (ZF-5)": [
+            "SPP-Net\b(ZF-5)": [
                 2,
                 80.1,
                 null
@@ -90,12 +90,12 @@
                 70.0,
                 null
             ],
-            "faster R_CNN (VGG16)": [
+            "faster R-CNN\b(VGG16)": [
                 7,
                 73.2,
                 42.7
             ],
-            "faster R_CNN (ResNet101)": [
+            "faster R-CNN\b(ResNet101)": [
                 2.4,
                 76.4,
                 null
@@ -105,47 +105,47 @@
                 70.7,
                 null
             ],
-            "YOLO v2": [
+            "YOLO_v2": [
                 81,
                 73.4,
                 44.0
             ],
-            "SSD_300": [
+            "SSD\b_300": [
                 46,
                 74.3,
                 41.2
             ],
-            "SSD_512": [
+            "SSD\b_512": [
                 19,
                 76.8,
                 46.5
             ],
-            "DSSD_321": [
+            "DSSD\b_321": [
                 13.6,
                 78.6,
                 46.1
             ],
-            "DSSD_513": [
+            "DSSD\b_513": [
                 6.6,
                 53.3,
                 0
             ],
-            "DSOD_300 (plain)": [
+            "DSOD\b_300 (plain)": [
                 20.6,
                 77.3,
                 null
             ],
-            "DSOD_300 (dense)": [
+            "DSOD\b_300 (dense)": [
                 17.4,
                 81.7,
                 47.3
             ],
-            "FPN (RPN)": [
+            "FPN\b(RPN)": [
                 6,
                 null,
                 59.1
             ],
-            "R-FCN (ResNet)": [
+            "R-FCN\b (ResNet)": [
                 9,
                 80.5,
                 55.7
@@ -160,10 +160,6 @@
     {
         "modelIDs": [
             [
-                "leNet",
-                []
-            ],
-            [
                 "alexNet",
                 [
                     "alexNet"
@@ -173,8 +169,8 @@
                 "inception",
                 [
                     "inception",
-                    "inception_v3",
-                    "inception_v2"
+                    "inception\b_v3",
+                    "inception\b_v2"
                 ]
             ],
             [
@@ -186,8 +182,8 @@
             [
                 "VGG",
                 [
-                    "vgg19",
-                    "vgg16"
+                    "VGG\b19",
+                    "VGG\b16"
                 ]
             ],
             [
@@ -199,10 +195,10 @@
             [
                 "resNet",
                 [
-                    "resNet_v1_50",
-                    "resNet_v1_152",
-                    "resNet_v2_56_cifar",
-                    "resNet_v2_110_cifar"
+                    "resNet\b_v1_50",
+                    "resNet\b_v1_152",
+                    "resNet\b_v2_56_cifar",
+                    "resNet\b_v2_110_cifar"
                 ]
             ],
             [
@@ -214,97 +210,99 @@
             [
                 "fractalNet",
                 [
-                    "fractalNet-40",
-                    "fractalNet-20"
+                    "fractalNet\b-40",
+                    "fractalNet\b-20"
                 ]
             ],
             [
                 "resNeXt",
                 [
-                    "ResNeXt"
+                    "resNeXt"
                 ]
             ],
             [
                 "denseNet",
                 [
-                    "denseNet_40_12",
-                    "denseNet_100_12",
-                    "denseNet_100_24",
-                    "denseNet-BC(l=250, k=24)",
-                    "denseNet-BC(l=190, k=40)",
-                    "denseNet_121",
-                    "denseNet_201"
+                    "denseNet\b_40_12",
+                    "denseNet\b_100_12",
+                    "denseNet\b_100_24",
+                    "denseNet\b-BC(l=250, k=24)",
+                    "denseNet\b-BC(l=190, k=40)",
+                    "denseNet\b_121",
+                    "denseNet\b_201"
                 ]
             ],
             [
                 "WRN",
                 [
-                    "wideResNet_16_4",
-                    "wideResNet_28_10",
-                    "wideResNet-50-2"
+                    "WRN\b_16_4",
+                    "WRN\b_28_10",
+                    "WRN\b_50_2"
                 ]
             ],
             [
                 "RIR",
                 [
-                    "resNet-in-resent"
+                    "RIR"
                 ]
             ],
             [
                 "diracNet",
                 [
-                    "diracNet-28-5",
-                    "diracNet-28-10",
-                    "diracNet-18",
-                    "diracNet-34"
+                    "diracNet\b-28-5",
+                    "diracNet\b-28-10",
+                    "diracNet\b-18",
+                    "diracNet\b-34"
                 ]
             ],
             [
                 "nasNet",
                 [
-                    "nasNet_cifar",
-                    "nasNet_large",
-                    "nasNet_small"
+                    "nasNet\b_cifar",
+                    "nasNet\b_large",
+                    "nasNet\b_small"
                 ]
             ],
             [
                 "SENet",
                 [
-                    "seNet_inception_resnetv2"
+                    "SENet\b_inception_resnetv2"
                 ]
             ],
             [
                 "mixNet",
                 [
-                    "mixNet-100",
-                    "mixNet-250",
-                    "mixNet-190",
-                    "mixNet-105",
-                    "mixNet-121",
-                    "mixNet-141"
+                    "mixNet\b-100",
+                    "mixNet\b-250",
+                    "mixNet\b-190",
+                    "mixNet\b-105",
+                    "mixNet\b-121",
+                    "mixNet\b-141"
                 ]
             ],
             [
                 "DPN",
                 [
-                    "DPN-92"
+                    "DPN\b-92"
                 ]
             ],
             [
                 "xception",
-                []
+                [
+                    "xception"
+                ]
             ],
             [
                 "mobileNet",
                 [
-                    "mobileNet-224",
-                    "mobileNet-160"
+                    "mobileNet\b-224",
+                    "mobileNet\b-160"
                 ]
             ],
             [
                 "polyInception",
                 [
-                    "PolyNet"
+                    "polyInception"
                 ]
             ]
         ],
@@ -318,7 +316,7 @@
             "cifar100"
         ],
         "models": {
-            "diracNet-28-5": [
+            "diracNet\b-28-5": [
                 9.1,
                 0,
                 0,
@@ -326,7 +324,7 @@
                 96.84,
                 76.56
             ],
-            "ResNeXt": [
+            "resNeXt": [
                 25.0,
                 94.7,
                 79.6,
@@ -334,7 +332,7 @@
                 96.42,
                 82.69
             ],
-            "vgg16": [
+            "VGG\b16": [
                 138.0,
                 91.9,
                 74.4,
@@ -342,7 +340,7 @@
                 0,
                 0
             ],
-            "mixNet-100": [
+            "mixNet\b-100": [
                 1.5,
                 0,
                 0,
@@ -350,7 +348,7 @@
                 95.81,
                 78.88
             ],
-            "vgg19": [
+            "VGG\b19": [
                 144.0,
                 92.7,
                 74.5,
@@ -358,7 +356,7 @@
                 0,
                 0
             ],
-            "diracNet-28-10": [
+            "diracNet\b-28-10": [
                 36.5,
                 0,
                 0,
@@ -366,7 +364,7 @@
                 95.25,
                 78.46000000000001
             ],
-            "denseNet_100_12": [
+            "denseNet\b_100_12": [
                 7.2,
                 0,
                 0,
@@ -374,7 +372,7 @@
                 95.9,
                 79.8
             ],
-            "DPN-92": [
+            "DPN\b-92": [
                 145.0,
                 94.6,
                 79.2,
@@ -390,7 +388,7 @@
                 0,
                 0
             ],
-            "mixNet-141": [
+            "mixNet\b-141": [
                 41.07,
                 94.7,
                 79.6,
@@ -398,7 +396,7 @@
                 0,
                 0
             ],
-            "resNet_v1_152": [
+            "resNet\b_v1_152": [
                 60.4,
                 94.29,
                 78.57,
@@ -406,7 +404,7 @@
                 0,
                 0
             ],
-            "mixNet-250": [
+            "mixNet\b-250": [
                 29.0,
                 0,
                 0,
@@ -422,7 +420,7 @@
                 0,
                 0
             ],
-            "seNet_inception_resnetv2": [
+            "SENet\b_inception_resnetv2": [
                 65.6,
                 95.21,
                 80.2,
@@ -430,7 +428,7 @@
                 0,
                 0
             ],
-            "nasNet_small": [
+            "nasNet\b_small": [
                 5.3,
                 91.6,
                 74.0,
@@ -438,7 +436,7 @@
                 0,
                 0
             ],
-            "diracNet-18": [
+            "diracNet\b-18": [
                 11.7,
                 89.12,
                 69.63,
@@ -446,7 +444,7 @@
                 0,
                 0
             ],
-            "mixNet-190": [
+            "mixNet\b-190": [
                 48.5,
                 0,
                 0,
@@ -454,7 +452,7 @@
                 96.87,
                 83.08
             ],
-            "fractalNet-20": [
+            "fractalNet\b-20": [
                 38.6,
                 0,
                 0,
@@ -462,7 +460,7 @@
                 94.78,
                 76.7
             ],
-            "mixNet-105": [
+            "mixNet\b-105": [
                 11.16,
                 93.3,
                 76.7,
@@ -470,7 +468,7 @@
                 0,
                 0
             ],
-            "inception_v2": [
+            "inception\b_v2": [
                 23.8,
                 94.4,
                 78.8,
@@ -478,7 +476,7 @@
                 0,
                 0
             ],
-            "inception_v3": [
+            "inception\b_v3": [
                 23.8,
                 95.8,
                 81.23,
@@ -486,7 +484,7 @@
                 0,
                 0
             ],
-            "resNet_v1_50": [
+            "resNet\b_v1_50": [
                 25.6,
                 92.9,
                 75.9,
@@ -494,7 +492,7 @@
                 0,
                 0
             ],
-            "denseNet_40_12": [
+            "denseNet\b_40_12": [
                 1.0,
                 0,
                 0,
@@ -526,7 +524,7 @@
                 0,
                 0
             ],
-            "denseNet_201": [
+            "denseNet\b_201": [
                 20.2,
                 93.66,
                 77.42,
@@ -534,7 +532,7 @@
                 0,
                 0
             ],
-            "diracNet-34": [
+            "diracNet\b-34": [
                 21.8,
                 90.66,
                 72.21000000000001,
@@ -542,7 +540,7 @@
                 0,
                 0
             ],
-            "denseNet-BC(l=250, k=24)": [
+            "denseNet\b-BC(l=250, k=24)": [
                 15.3,
                 0,
                 0,
@@ -550,7 +548,7 @@
                 96.38,
                 82.4
             ],
-            "mobileNet-224": [
+            "mobileNet\b-224": [
                 4.2,
                 0,
                 70.6,
@@ -558,7 +556,7 @@
                 0,
                 0
             ],
-            "nasNet_cifar": [
+            "nasNet\b_cifar": [
                 3.3,
                 0,
                 0,
@@ -566,7 +564,7 @@
                 97.35,
                 0
             ],
-            "mixNet-121": [
+            "mixNet\b-121": [
                 21.86,
                 94.1,
                 78.1,
@@ -574,7 +572,7 @@
                 0,
                 0
             ],
-            "wideResNet_16_4": [
+            "WRN\b_16_4": [
                 2.9,
                 0,
                 0,
@@ -582,7 +580,7 @@
                 94.76,
                 76.09
             ],
-            "mobileNet-160": [
+            "mobileNet\b-160": [
                 1.32,
                 0,
                 60.2,
@@ -590,7 +588,7 @@
                 0,
                 0
             ],
-            "fractalNet-40": [
+            "fractalNet\b-40": [
                 22.9,
                 0,
                 0,
@@ -598,7 +596,7 @@
                 94.76,
                 77.51
             ],
-            "nasNet_large": [
+            "nasNet\b_large": [
                 11.1,
                 96.2,
                 82.7,
@@ -606,7 +604,7 @@
                 0,
                 0
             ],
-            "denseNet-BC(l=190, k=40)": [
+            "denseNet\b-BC(l=190, k=40)": [
                 25.6,
                 0,
                 0,
@@ -614,7 +612,15 @@
                 96.54,
                 82.82
             ],
-            "denseNet_100_24": [
+            "xception":[
+                22.85,
+                94.5,
+                79,
+                0,
+                0,
+                0
+            ],
+            "denseNet\b_100_24": [
                 27.2,
                 0,
                 0,
@@ -622,7 +628,7 @@
                 96.26,
                 80.75
             ],
-            "wideResNet_28_10": [
+            "WRN\b_28_10": [
                 36.0,
                 0,
                 0,
@@ -630,7 +636,7 @@
                 96.11,
                 81.15
             ],
-            "denseNet_121": [
+            "denseNet\b_121": [
                 8.1,
                 92.29,
                 74.98,
@@ -638,7 +644,7 @@
                 0,
                 0
             ],
-            "resNet-in-resent": [
+            "RIR": [
                 0.0,
                 0,
                 0,
@@ -646,7 +652,7 @@
                 94.99,
                 77.1
             ],
-            "PolyNet": [
+            "polyInception": [
                 92,
                 95.75,
                 81.28999999999999,
@@ -654,7 +660,7 @@
                 0,
                 0
             ],
-            "resNet_v2_56_cifar": [
+            "resNet\b_v2_56_cifar": [
                 1.6,
                 0,
                 0,
@@ -662,7 +668,7 @@
                 93.01,
                 0
             ],
-            "resNet_v2_110_cifar": [
+            "resNet\b_v2_110_cifar": [
                 3.3,
                 0,
                 0,
@@ -670,7 +676,7 @@
                 93.62,
                 75.36
             ],
-            "wideResNet-50-2": [
+            "WRN\b_50_2": [
                 0.0,
                 94.21,
                 78.1,
@@ -686,10 +692,10 @@
             [
                 "FCN",
                 [
-                    "FCN-AlexNet",
-                    "FCN-VGG",
-                    "FCN-GoogleNet",
-                    "FCN-VGG-8s"
+                    "FCN\b-AlexNet",
+                    "FCN\b-VGG",
+                    "FCN\b-GoogleNet",
+                    "FCN\b-VGG-8s"
                 ]
             ],
             [
@@ -701,7 +707,6 @@
             [
                 "SegNet",
                 [
-                    "SegNet",
                     "SegNet"
                 ]
             ],
@@ -709,7 +714,7 @@
                 "DeconvNet",
                 [
                     "DeconvNet",
-                    "EDeconvNet-CRF"
+                    "DeconvNet\b-CRF"
                 ]
             ],
             [
@@ -721,7 +726,7 @@
             [
                 "RefineNet",
                 [
-                    "RefineNet(ResNet101)"
+                    "RefineNet\b(ResNet101)"
                 ]
             ],
             [
@@ -739,13 +744,13 @@
             [
                 "DeepLab",
                 [
-                    "DeepLab-CRF"
+                    "DeepLab\b-CRF"
                 ]
             ],
             [
                 "DeepLab_v2",
                 [
-                    "DeepLab v2"
+                    "DeepLab_v2"
                 ]
             ],
             [
@@ -757,12 +762,12 @@
             [
                 "DeepLab_v3",
                 [
-                    "DeepLab v3"
+                    "DeepLab_v3"
                 ]
             ]
         ],
         "models": {
-            "FCN-AlexNet": [
+            "FCN\b-AlexNet": [
                 39.8,
                 0,
                 0,
@@ -770,7 +775,7 @@
                 0,
                 0
             ],
-            "FCN-VGG": [
+            "FCN\b-VGG": [
                 56.0,
                 0,
                 0,
@@ -778,7 +783,7 @@
                 0,
                 0
             ],
-            "FCN-GoogleNet": [
+            "FCN\b-GoogleNet": [
                 42.5,
                 0,
                 0,
@@ -786,7 +791,7 @@
                 0,
                 0
             ],
-            "FCN-VGG-8s": [
+            "FCN\b-VGG-8s": [
                 62.7,
                 0,
                 0,
@@ -818,7 +823,7 @@
                 0,
                 0
             ],
-            "EDeconvNet-CRF": [
+            "DeconvNet\b-CRF": [
                 72.5,
                 0,
                 0,
@@ -834,7 +839,7 @@
                 0,
                 0
             ],
-            "RefineNet(ResNet101)": [
+            "RefineNet\b(ResNet101)": [
                 82.4,
                 0,
                 45.9,
@@ -858,7 +863,7 @@
                 0,
                 78.6
             ],
-            "DeepLab-CRF": [
+            "DeepLab\b-CRF": [
                 63.74,
                 0,
                 0,
@@ -866,7 +871,7 @@
                 0,
                 null
             ],
-            "DeepLab v2": [
+            "DeepLab_v2": [
                 79.7,
                 0,
                 0,
@@ -882,7 +887,7 @@
                 0,
                 76.9
             ],
-            "DeepLab v3": [
+            "DeepLab_v3": [
                 85.7,
                 0,
                 0,
@@ -923,10 +928,15 @@
                 8.338,
                 6.99
             ],
-            "sRNN": [
+            "stacked RNN": [
                 3.258,
                 8.367,
                 6.954
+            ],
+            "leaky units": [
+                3.57,
+                8.63,
+                6.99
             ]
         },
         "datasets": [
@@ -936,7 +946,8 @@
         ],
         "modelIDs": [
             ["DT(S)-RNN", ["DT(S)-RNN"]],
-            ["stacked RNN", ["sRNN"]]
+            ["stacked RNN", ["stacked RNN"]],
+            ["leaky units",["leaky units"]]
         ],
         "name": "polyphonic music prediction"
     },
@@ -946,12 +957,12 @@
             [
                 "mask R-CNN",
                 [
-                    "Mask R-CNN"
+                    "mask R-CNN"
                 ]
             ]
         ],
         "models": {
-            "Mask R-CNN": [
+            "mask R-CNN": [
                 62.3,
                 60.0
             ],
@@ -978,36 +989,6 @@
         ]
     },
     {
-        "models": {
-            "DT(S)-RNN": [
-                1.409
-            ],
-            "RNN": [
-                1.414
-            ],
-            "sRNN": [
-                1.412
-            ],
-            "LSTM best": [
-                1.24
-            ],
-            "RNN best": [
-                1.41
-            ],
-            "DOT(S)-RNN": [
-                1.386
-            ]
-        },
-        "datasets": [
-            "Penn Treebank Corpus"
-        ],
-        "modelIDs": [
-            ["DT(S)-RNN", ["DT(S)-RNN"]],
-            ["stacked RNN", ["sRNN"]]
-        ],
-        "name": "language model construction"
-    },
-    {
         "modelIDs":[
            [ "LRU", ["LRU"]],
             ["GRU",["GRU"]],
@@ -1024,76 +1005,19 @@
     },
     {
         "models": {
-            "DT(S)-RNN": [
-                112
-            ],
-            "RNN": [
-                117.7
-            ],
-            "sRNN": [
-                110
-            ],
-            "LSTM best": [
-                117
-            ],
-            "RNN best": [
-                123
-            ],
-            "DOT(S)-RNN": [
-                107.5
-            ]
-        },
-        "datasets": [
-            "Penn Treebank Corpus"
-        ],
-        "modelIDs": [
-            ["DT(S)-RNN", ["DT(S)-RNN"]],
-            ["stacked RNN", ["sRNN"]]
-        ],
-        "name": "language model construction"
-    },
-    {
-        "models": {
-            "CTC-5L-250H": [
-                18.4
-            ],
-            "CTC-1L-250H": [
-                23.9
-            ],
-            "CTC-2L-250H": [
-                21
-            ],
-            "CTC-3L-250H": [
-                18.6
-            ],
-            "CTC-1L-622H": [
-                23
-            ]
-        },
-        "datasets": [
-            "TIMIT"
-        ],
-        "modelIDs": [
-            ["DB-LSTM",["CTC-5L-250H", "CTC-2L-250H", "CTC-3L-250H"]],
-            ["LSTM",["CTC-1L-250H", "CTC-1L-622H"]]
-        ],
-        "name": "acoustics recognition (error)"
-    },
-    {
-        "models": {
-            "back-RNN": [
+            "RNN\b(back)": [
                 61.91,
                 70.94
             ],
-            "for-BRNN": [
+            "BRNN\b(for)": [
                 72.7,
                 79.08
             ],
-            "for-RNN(1-delay)": [
+            "RNN\b(for)(1-delay)": [
                 65.83,
                 73
             ],
-            "back-BRNN": [
+            "BRNN\b(back)": [
                 72.74,
                 77.44
             ],
@@ -1101,11 +1025,11 @@
                 68.53,
                 75.48
             ],
-            "for-RNN(2-delay)": [
+            "RNN\b(for)(2-delay)": [
                 63.27,
                 70.77
             ],
-            "for-RNN": [
+            "RNN\b(for)": [
                 63.2,
                 72.51
             ]
@@ -1115,8 +1039,8 @@
             "TIMIT 39-class"
         ],
         "modelIDs": [
-            ["BRNN", ["both mod. BRNN, log.", "for-BRNN", "BRNN", "back-BRNN"]],
-            ["RNN", ["for-RNN", "for-RNN(1-delay)", "for-RNN(2-delay)", "back-RNN"]]
+            ["BRNN", ["BRNN\b(both)", "BRNN\b(for)", "BRNN", "BRNN\b(back)"]],
+            ["RNN", ["RNN\b(for)", "RNN\b(for)(1-delay)", "RNN\b(for)(2-delay)", "RNN\b(back)"]]
         ],
         "name": "acoustics classification"
     },
@@ -1164,8 +1088,20 @@
             "RNN": [
                 123
             ],
-            "sRNN": [
+            "stacked RNN": [
                 110
+            ],
+            "leaky units": [
+                156
+            ],
+            "DT(S)-RNN": [
+                140.9
+            ],
+            "LSTM best": [
+                124
+            ],
+            "RNN best": [
+                141
             ]
         },
         "datasets": [
@@ -1175,54 +1111,112 @@
             ["DGLSTM",["DGLSTM"]],
             ["LSTM", ["LSTM"]],
             ["RNN", ["RNN"]],
-            ["LRU", ["LRU"]]
+            ["LRU", ["LRU"]],
+            ["leaky units",["leaky units"]],
+            ["DT(S)-RNN", ["DT(S)-RNN"]],
+            ["stacked RNN", ["stacked RNN"]]
         ],
         "name": "language model construction"
     },
     {
         "models": {
-            "Dependency Tree-LSTM": [
+            "tree-LSTM\b(dependency)": [
                 51,
-                88
+                88,
+                0,
+                0
             ],
-            "sRNN": [
+            "stacked RNN": [
                 49.8,
-                86.6
+                86.6,
+                0,
+                0
             ],
             "2-layer Bid-LSTM": [
                 48.5,
-                87.2
+                87.2,
+                0,
+                0
             ],
-            "2-layer LSTM": [
+            "LSTM\b(2 layer)": [
                 46,
-                86.3
+                86.3,
+                0,
+                0
             ],
             "Bid-LSTM": [
                 49.1,
-                87.5
+                87.5,
+                0,
+                0
             ],
             "LSTM": [
                 46.4,
-                84.9
+                84.9,
+                0,
+                0
             ],
-            "Constituency Tree-LSTM": [
+            "tree-LSTM\b(continue)": [
                 48.4,
-                85.7
+                85.7,
+                0,
+                0
+            ],
+            "MV-RNN": [
+                44.4,
+                82.9,
+                0,
+                0
+            ],
+            "recursive": [
+                45.7,
+                85.4,
+                0,
+                0
+            ],
+            "GRU": [
+                0,
+                0,
+                65.7,
+                41.6
+            ],
+            "BRNN": [
+                0,
+                0,
+                57.7,
+                37.2
+            ],
+            "RNN": [
+                43.2,
+                82.4,
+                59.7,
+                34.4
+            ],
+            "Bid-GRU": [
+                0,
+                0,
+                66,
+                42.5
             ]
         },
         "datasets": [
             "Stanford Sentiment Treebank fine-grained",
-            "Stanford Sentiment Treebank binary"
+            "Stanford Sentiment Treebank binary",
+            "Yelp2015",
+            "IMDB"
         ],
         "modelIDs": [
-            ["LSTM", ["LSTM", "2-layer LSTM"]],
-            ["tree-LSTM", ["Constituency Tree-LSTM", "Dependency Tree-LSTM"]]
+            ["LSTM", ["LSTM", "LSTM\b(2 layer)"]],
+            ["tree-LSTM", ["tree-LSTM\b(continue)", "tree-LSTM\b(dependency)"]],
+            ["recursive", ["recursive"]],
+            ["GRU",["GRU"]],
+            ["BRNN", "BRNN"]
         ],
         "name": "sentiment classification"
     },
     {
         "models": {
-            "Dependency Tree-LSTM": [
+            "tree-LSTM\b(dependency)": [
                 0.8676,
                 0.8083,
                 0.2532
@@ -1237,7 +1231,7 @@
                 0.7965,
                 0.2762
             ],
-            "2-layer LSTM": [
+            "LSTM\b(2 layer)": [
                 0.8515,
                 0.7896,
                 0.2838
@@ -1257,7 +1251,7 @@
                 0.7911,
                 0.2831
             ],
-            "Constituency Tree-LSTM": [
+            "tree-LSTM\b(continue)": [
                 0.8582,
                 0.7966,
                 0.2734
@@ -1269,135 +1263,46 @@
             "MSE on SICK"
         ],
         "modelIDs": [
-            ["LSTM", ["LSTM", "2-layer LSTM"]],
-            ["tree-LSTM", ["Constituency Tree-LSTM", "Dependency Tree-LSTM"]],
+            ["LSTM", ["LSTM", "LSTM\b(2 layer)"]],
+            ["tree-LSTM", ["tree-LSTM\b(continue)", "tree-LSTM\b(dependency)"]],
             ["DT-RNN",["DT-RNN"]]
         ],
         "name": "sentiment relatedness"
     },
     {
         "models": {
-            "MV-RNN": [
-                44.4,
-                82.9
-            ],
-            "RNN": [
-                43.2,
-                82.4
-            ],
-            "RNTN": [
-                45.7,
-                85.4
-            ]
-        },
-        "datasets": [
-            "Stanford Sentiment Treebank fine-grained",
-            "Stanford Sentiment Treebank binary"
-        ],
-        "modelIDs": [
-            ["recursive", ["RNTN"]]
-        ],
-        "name": "sentiment classification"
-    },
-    {
-        "models": {
-            "GRU": [
-                63.5,
-                65.9,
-                65.7,
-                41.6
-            ],
-            "BRNN": [
-                58.7,
-                59.7,
-                57.7,
-                37.2
-            ],
-            "RNN": [
-                58.2,
-                59.1,
-                59.7,
-                34.4
-            ],
-            "Bid-GRU": [
-                63.7,
-                65.5,
-                66,
-                42.5
-            ]
-        },
-        "datasets": [
-            "Yelp2013",
-            "Yelp2014",
-            "Yelp2015",
-            "IMDB"
-        ],
-        "modelIDs": [
-            ["GRU",["GRU"]],
-            ["BRNN", "BRNN"]
-        ],
-        "name": "sentiment classification"
-    },
-    {
-        "models": {
-            "RNN": [
-                7.86,
-                3.75,
-                7.2,
-                8.65
-            ],
-            "RNN+leaky units": [
-                7.57,
-                3.57,
-                6.99,
-                8.63
-            ]
-        },
-        "datasets": [
-            "Piano-midi.de",
-            "Nottingham",
-            "MuseData",
-            "JSB Chorales"
-        ],
-        "modelIDs": [
-            ["leaky units",["RNN+leaky units"]]
-        ],
-        "name": "polyphonic music prediction"
-    },
-    {
-        "models": {
-            "RNN": [
-                1.76
-            ],
-            "RNN+leaky units": [
-                1.56
-            ]
-        },
-        "datasets": [
-            "Penn Treebank Corpus"
-        ],
-        "modelIDs": [
-            ["leaky units",["RNN+leaky units"]]
-        ],
-        "name": "language model construction"
-    },
-    {
-        "models": {
             "CW-RNN": [
-                16.8
+                84.2
             ],
             "LSTM": [
-                34.2
+                65.8
             ],
             "RNN": [
-                66.8
+                33.2
+            ],
+            "DB-LSTM\bCTC-5L-250H": [
+                81.6
+            ],
+            "LSTM\bCTC-1L-250H": [
+                76.1
+            ],
+            "DB-LSTM\bCTC-2L-250H": [
+                79
+            ],
+            "DB-LSTM\bCTC-3L-250H": [
+                81.4
+            ],
+            "LSTM\bCTC-1L-622H": [
+                77
             ]
         },
         "datasets": [
             "TIMIT"
         ],
         "modelIDs": [
-            ["CW-RNN", ["CW-RNN"]]
+            ["CW-RNN", ["CW-RNN"]],
+            ["DB-LSTM",["DB-LSTM\bCTC-5L-250H", "DB-LSTM\bCTC-2L-250H", "DB-LSTM\bCTC-3L-250H"]],
+            ["LSTM",["LSTM\bCTC-1L-250H", "LSTM\bCTC-1L-622H"]]
         ],
         "name": "acoustics recognition"
     },
@@ -1412,6 +1317,26 @@
                 30.02,
                 25.16,
                 40.51
+            ],
+            "seq2seq\bRNNencdec-50": [
+                0,
+                0,
+                26.71
+            ],
+            "seq2seq\bRNNencdec-30": [
+                0,
+                0,
+                24.19
+            ],
+            "attention\bRNNsearch-50": [
+                0,
+                0,
+                34.16
+            ],
+            "attention\bRNNsearch-30": [
+                0,
+                0,
+                31.44
             ]
         },
         "datasets": [
@@ -1420,34 +1345,9 @@
             "WMT'14 English-French"
         ],
         "modelIDs": [
-            ["conv seq2seq", ["conv seq2seq"]]
-        ],
-        "name": "machine translation"
-    },
-    {
-        "models": {
-            "RNNencdec-50": [
-                26.71
-            ],
-            "RNNencdec-30": [
-                24.19
-            ],
-            "RNNsearch-50 best": [
-                36.15
-            ],
-            "RNNsearch-50": [
-                34.16
-            ],
-            "RNNsearch-30": [
-                31.44
-            ]
-        },
-        "datasets": [
-            "WMT'14 English-French"
-        ],
-        "modelIDs": [
-            ["seq2seq",[""]],
-            ["attention",[""]]
+            ["conv seq2seq", ["conv seq2seq"]],
+            ["seq2seq",["seq2seq\bRNNencdec-50", "seq2seq\bRNNencdec-30"]],
+            ["attention",["attention\bRNNsearch-50", "attention\bRNNsearch-30"]]
         ],
         "name": "machine translation"
     },
