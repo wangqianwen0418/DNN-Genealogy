@@ -53,9 +53,9 @@ from keras.layers import add
 from keras.regularizers import l2
 from keras.utils.data_utils import get_file
 from keras.engine.topology import get_source_inputs
-from keras.applications.imagenet_utils import _obtain_input_shape
-from keras.applications.inception_v3 import preprocess_input
-from keras.applications.imagenet_utils import decode_predictions
+from keras_applications.imagenet_utils import _obtain_input_shape
+from keras_applications.inception_v3 import preprocess_input
+from keras_applications.imagenet_utils import decode_predictions
 from keras import backend as K
 import json
 
@@ -790,14 +790,14 @@ if __name__ == "__main__":
 
     model = NASNetLarge()
     model.summary()
-    json_string = model.to_json()
-    summary = json.loads(json_string)
+    # json_string = model.to_json()
+    # summary = json.loads(json_string)
 
-    params = {}
-    for layer in model.layers:
-        params[layer.name] = layer.count_params()
-    summary['params'] = params
+    # params = {}
+    # for layer in model.layers:
+    #     params[layer.name] = layer.count_params()
+    # summary['params'] = params
 
-    with open("nasNet_large.json", "w") as jsonf:
-        jsonf.write(json.dumps(summary))
-    jsonf.close()
+    # with open("nasNet_large.json", "w") as jsonf:
+    #     jsonf.write(json.dumps(summary))
+    # jsonf.close()

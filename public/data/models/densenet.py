@@ -24,8 +24,8 @@ from keras.regularizers import l2
 from keras.utils.layer_utils import convert_all_kernels_in_model, convert_dense_weights_data_format
 from keras.utils.data_utils import get_file
 from keras.engine.topology import get_source_inputs
-from keras.applications.imagenet_utils import _obtain_input_shape
-from keras.applications.imagenet_utils import decode_predictions
+from keras_applications.imagenet_utils import _obtain_input_shape
+from keras_applications.imagenet_utils import decode_predictions
 import keras.backend as K
 
 DENSENET_121_WEIGHTS_PATH = r'https://github.com/titu1994/DenseNet/releases/download/v3.0/DenseNet-BC-121-32.h5'
@@ -530,7 +530,7 @@ if __name__ == '__main__':
                             growth_rate=growth_rate, nb_filter=nb_filter, dropout_rate=dropout_rate, weights=None)
 
     model.summary()
-    json_string = model.to_json()
-    with open("denseNet_bc_100_12.json", "w") as jsonf:
-        jsonf.write(json_string)
-    jsonf.close()
+    # json_string = model.to_json()
+    # with open("denseNet_bc_100_12.json", "w") as jsonf:
+    #     jsonf.write(json_string)
+    # jsonf.close()

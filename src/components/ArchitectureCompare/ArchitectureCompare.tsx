@@ -166,6 +166,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
 
     async getData(model: string, idx: number) {
         let res = await axios.get('../../data/models/' + model + '.json'), nodes: EvoNode[]
+        console.info(res.data)
         if (idx === 1) {
             this.setState({model1: model, nodes1: res.data.config.layers, params1: res.data.params?res.data.params:{}})
         } else if (idx === 2) {

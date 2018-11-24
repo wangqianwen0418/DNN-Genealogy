@@ -102,7 +102,7 @@ def AlexNet(weights_path=None):
     return model
 
 if __name__=="__main__":
-    model = keras.applications.inception_v3.InceptionV3(include_top=True, weights=None, input_tensor=None, input_shape=None, pooling=None, classes=1000)
+    model = keras_applications.inception_v3.InceptionV3(include_top=True, weights=None, input_tensor=None, input_shape=None, pooling=None, classes=1000)
     model.summary()
     json_string = model.to_json()
     summary = json.loads(json_string)
