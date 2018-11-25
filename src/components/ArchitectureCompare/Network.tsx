@@ -8,6 +8,8 @@ import * as d3 from 'd3';
 
 const node_w: number = 110, margin: number = 10;
 const nodeH = 40, nodeW = 200, expandMaxH = 200, dotBox = 20, dotRadius = 7.5
+let svgWidth = window.innerWidth * 0.35,
+    svgHeight = window.innerHeight * 0.65
 
 export interface Props {
     nodes: EvoNode[],
@@ -24,9 +26,13 @@ export interface State {
     h: number,
     w: number,
     selectedLayers: any[],
+    transX:number, 
+    transY: number
 }
 export default class Network extends React.Component<Props, State> {
     public graphWindow: any; shiftDown: boolean; isMountedZoom: boolean = false; rand: string;
+    updateEdge: boolean = true;
+    x0: number; y0: number; dragFlag = false;
     constructor(props: Props) {
         super(props)
         this.state = {
@@ -38,11 +44,16 @@ export default class Network extends React.Component<Props, State> {
             h: 0,
             w: 0,
             selectedLayers: [],
+            transX: svgWidth/2,
+            transY: 0
         }
         this.shiftDown = false
         this.selectLayer = this.selectLayer.bind(this)
         this.handleMouseWheel = this.handleMouseWheel.bind(this)
-        this.handleZoom = this.handleZoom.bind(this)
+        // this.handleZoom = this.handleZoom.bind(this)
+        this.pan = this.pan.bind(this)
+        this.mouseDown = this.mouseDown.bind(this)
+        this.mouseUp = this.mouseUp.bind(this)
     }
     getDag(layers: EvoNode[], params: object, selectedLayers: string[]) {
         
@@ -120,8 +131,17 @@ export default class Network extends React.Component<Props, State> {
             });
             let height = dag.graph().height,
                 width = dag.graph().width
-            // console.log(nodes)        
-            return { nodes, edges, height, width };
+            // console.log(nodes)     
+            let scaleX = svgWidth / (width),
+            scaleY = svgHeight / (height),
+            scale = Math.min(
+                scaleX,
+                scaleY
+            ),
+            transX = scaleX > scaleY ? (svgWidth - width * scale) / 2 : 0,
+            transY = scaleY > scaleX ? (svgHeight - height * scale) / 2 : 0
+   
+            return { nodes, edges, height, width, scale, transX, transY };
 
     }
     drawNodes(nodes: Node[]) {
@@ -335,64 +355,112 @@ export default class Network extends React.Component<Props, State> {
             selectedLayers.splice(idx, 1)
         }
         let { nodes: EvoNodes, params } = this.props
-        let { nodes, edges } = this.getDag(EvoNodes, params, selectedLayers.map((l: any) => l.label))
-        this.setState({ nodes, edges, selectedLayers })
+        let { nodes, edges} 
+        = this.getDag(EvoNodes, params, selectedLayers.map((l: any) => l.label))
+        
+        this.setState({ nodes, edges, selectedLayers})
     }
-    handleMouseWheel(evt: React.WheelEvent<any>) {
-        let g: any = evt.target
-        while (!g.getAttribute('class') || g.getAttribute('class').indexOf('layers') === -1) {
-            g = g.parentElement
-        }
-        let { selectedLayers } = this.state,
-            idx = this.state.selectedLayers
-                .map((l: any) => l.label).indexOf(g.id.substring(6))
-        if (idx !== -1) {
-            evt.preventDefault()
-            g = g.children[1].firstChild
-            var node = selectedLayers[idx]
-            var location = node.location + evt.deltaY, offset: number
-            if (location < 0) {
-                location = 0
-            } else if (node.height + location > node.textLength) {
-                location = node.textLength - node.height
-            }
-            g.setAttribute('transform', `translate (0, ${-location})`)
-            selectedLayers[idx].location = location
-            this.setState({ selectedLayers })
-        }
+    // handleMouseWheel(evt: React.WheelEvent<any>) {
+    //     let g: any = evt.target
+    //     while (!g.getAttribute('class') || g.getAttribute('class').indexOf('layers') === -1) {
+    //         g = g.parentElement
+    //     }
+    //     let { selectedLayers } = this.state,
+    //         idx = this.state.selectedLayers
+    //             .map((l: any) => l.label).indexOf(g.id.substring(6))
+    //     if (idx !== -1) {
+    //         evt.preventDefault()
+    //         g = g.children[1].firstChild
+    //         var node = selectedLayers[idx]
+    //         var location = node.location + evt.deltaY, offset: number
+    //         if (location < 0) {
+    //             location = 0
+    //         } else if (node.height + location > node.textLength) {
+    //             location = node.textLength - node.height
+    //         }
+    //         g.setAttribute('transform', `translate (0, ${-location})`)
+    //         selectedLayers[idx].location = location
+    //         this.setState({ selectedLayers })
+    //     }
 
+    // }
+    handleMouseWheel(evt: React.WheelEvent<any>) {
+        let { scale, transX, transY } = this.state
+        this.updateEdge = !this.updateEdge
+        if (evt.deltaY < 0) {
+            scale = scale * 1.1
+            // transX = transX * 1.1
+            // transY = transY * 1.1
+
+        } else if (evt.deltaY > 0) {
+            scale = scale * .9
+            // transX = transX * .9
+            // transY = transY * .9
+        }
+        this.setState({ scale });
     }
-    handleZoom() {
-        if (this.isMountedZoom) {
-            return
-        }
-        var svg = d3.select('#' + this.rand + ' svg'),
-            g = svg.select('.graph')
-        if (svg.empty()) {
-            return
-        }
-        var trans = svg.select('#layer_input_1').attr('transform'),
-            rectWidth = svg.select('#layer_input_1').select('rect').attr('width'),
-            offset = Number(trans.substring(11, trans.indexOf(','))) + Number(rectWidth) / 2
-        svg.select('.graph-offset')
-            .attr('transform', 'translate(' + (window.innerWidth * 0.35 / 2 - offset) + ', 0)')
-        svg.select('.zoom-rect')
-            .remove()
-        var zoom = d3.zoom()
-            .scaleExtent([0.001, 4])
-            .on('zoom', zoomed)
-        function zoomed() {
-            g.attr('transform', d3.event.transform)
-        }
-        svg.insert('rect', 'g')
-            .attr('width', window.innerWidth * 0.35)
-            .attr('height', window.innerHeight * 0.65)
-            .attr('class', 'zoom-rect')
-            .style('fill', 'none')
-            .style('pointer-events', 'all')
-            .call(zoom)
-        this.isMountedZoom = true
+    mouseDown(e: React.MouseEvent<any>) {
+        e.stopPropagation()
+        e.preventDefault()
+
+        console.info('detail architecture, mouse down')
+
+        document.addEventListener('mousemove', this.pan)
+        this.x0 = e.clientX
+        this.y0 = e.clientY
+        this.updateEdge = !this.updateEdge
     }
+    pan(e: any) {
+        let { transX, transY } = this.state
+        transX += e.clientX - this.x0
+        transY += e.clientY - this.y0
+        this.x0 = e.clientX
+        this.y0 = e.clientY
+        this.dragFlag = true
+        this.setState({ transX, transY })
+    }
+    mouseUp(e: React.MouseEvent<any>) {
+        e.stopPropagation()
+        e.preventDefault()
+        // if (this.dragFlag) {
+
+        //     this.dragFlag = false
+        // }
+
+        document.removeEventListener('mousemove', this.pan)
+    }
+    // handleZoom() {
+    //     if (this.isMountedZoom) {
+    //         return
+    //     }
+    //     var svg = d3.select('#' + this.rand + ' svg'),
+    //         g = svg.select('.graph')
+    //     if (svg.empty()) {
+    //         return
+    //     }
+    //     var trans = svg.select('.layers.node').attr('transform'),
+    //         rectWidth = svg.select('#layer_input_1').select('rect').attr('width'),
+    //         offset = Number(trans.substring(11, trans.indexOf(','))) + Number(rectWidth) / 2
+    //     svg.select('.graph-offset')
+    //         .attr('transform', 'translate(' + (window.innerWidth * 0.35 / 2 - offset) + ', 0)')
+    //     svg.select('.zoom-rect')
+    //         .remove()
+    //     var zoom = d3.zoom()
+    //         .scaleExtent([0.001, 4])
+    //         .on('zoom', zoomed)
+    //     function zoomed() {
+    //         g.attr('transform', d3.event.transform)
+    //     }
+    //     svg.insert('rect', 'g')
+    //         .attr('width', svgWidth)
+    //         .attr('height', svgHeight)
+    //         .attr('class', 'zoom-rect')
+    //         // .attr('transform', `scale(${this.state.scale})`)
+    //         .style('fill', 'none')
+    //         .style('pointer-events', 'all')
+    //         .call(zoom)
+    //     this.isMountedZoom = true
+    // }
     componentDidMount() {
         /*if (this.props.nodes.length !== nextProps.nodes.length) {
             let { nodes: EvoNodes } = nextProps
@@ -407,8 +475,8 @@ export default class Network extends React.Component<Props, State> {
         }*/
 
         let { nodes: EvoNodes, params } = this.props
-        let { nodes, edges } = this.getDag(EvoNodes, params, []);
-        this.setState({ nodes, edges })
+        let { nodes, edges, scale } = this.getDag(EvoNodes, params, []);
+        this.setState({ nodes, edges, scale })
         if (nodes.length > 0) {
             this.props.isReady(true)
         }
@@ -423,15 +491,15 @@ export default class Network extends React.Component<Props, State> {
         //         that.props.isReady(true)
         // })
     }
-    componentDidUpdate() {
-        this.handleZoom()
-    }
+    // componentDidUpdate() {
+    //     this.handleZoom()
+    // }
     componentWillReceiveProps(nextProps: Props) {
         if (nextProps.name !== this.props.name) {
             this.isMountedZoom = false
             let { nodes: EvoNodes, params } = nextProps
-            let { nodes, edges } = this.getDag(EvoNodes, params, [])
-            this.setState({ nodes, edges })
+            let { nodes, edges, scale, transX, transY } = this.getDag(EvoNodes, params, [])
+            this.setState({ nodes, edges, scale, transX, transY })
         }
     }
     // componentWillUpdate() {
@@ -451,11 +519,10 @@ export default class Network extends React.Component<Props, State> {
     //     }
     // }
     render() {
-        let { nodes, edges, x, y, scale } = this.state
+        let { nodes, edges, x, y, scale, transX, transY } = this.state
         // let svgWidth = Math.max.apply(null, nodes.map((node: Node) => node.x)) + 120,
         // svgHeight = Math.max.apply(null, nodes.map((node: Node) => node.y)) + 120
-        let svgWidth = window.innerWidth * 0.35,
-            svgHeight = window.innerHeight * 0.65
+        
 
         function randomString(length: number, chars: string) {
             var result = '';
@@ -471,14 +538,21 @@ export default class Network extends React.Component<Props, State> {
             // let svg_h = this.graphWindow.clientHeight
             // let svg_w = this.graphWindow.clientWidth
             return (
-                <div className="wrapped-graph" id={this.rand}>
+                <div 
+                    className="wrapped-graph" 
+                    id={this.rand}
+                    onMouseDown={this.mouseDown}
+                    onMouseUp={this.mouseUp}
+                    onMouseLeave={this.mouseUp}
+                >
                     <svg
-                        width={`${svgWidth}px`}
-                        height={`${svgHeight}px`}
+                        width={`${svgWidth}`}
+                        height={`${svgHeight}`}
                     >
-                        <g className="graph-offset">
+                        <g className="graph-offset" >
                             <g
                                 className="graph"
+                                transform={`scale(${scale}) translate(${transX}, ${transY})`}
                             // transform={`translate(${x+40}, ${y}) scale(${scale})`}
                             // transform={`translate(${svgWidth / 2 - Math.max.apply(null, nodes.map((node: Node) => node.x)) / 2 - 60}, 0)`}
                             >
