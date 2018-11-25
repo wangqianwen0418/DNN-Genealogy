@@ -84,10 +84,9 @@ export default class Train extends React.Component<Props, State>{
                             }).map((pane: any) => {
                                 let paneStyle: React.CSSProperties = this.highlight(pane) ? { fontWeight: "bold" } : {}
                                 return <Panel
-                                    header={
-                                        <span style={paneStyle}>{pane.name}</span>
-                                    }
-                                    key={pane.name}>
+                                    header={<span style={paneStyle}>{pane.name}</span>}
+                                    key={pane.name}
+                                    >
 
                                     {pane.latex ?
                                         <div style={{ marginTop: '15px' }}>
@@ -118,7 +117,7 @@ export default class Train extends React.Component<Props, State>{
                     // onChange={this.changeTab} 
                     className="train"
                     style={{ height: '100%' }}
-                    activeKey={'1'}
+                    defaultActiveKey={'1'}
                 >
                     {panes}
                 </Tabs>
