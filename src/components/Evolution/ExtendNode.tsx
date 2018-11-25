@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Button, Dropdown, Menu, Tooltip, Tabs, Icon, Modal } from 'antd';
+import { Button, Dropdown, Menu, Tooltip, Tabs, Icon, Modal, message } from 'antd';
 import { Transition } from 'react-transition-group';
 import { Node } from 'types';
 import './ExtendNode.css';
 import { capFirstLetter, cutLabel, getColor } from 'helper';
-import { mapNetworkToArcs } from 'components/ArchitectureCompare/';
+// import { mapNetworkToArcs } from 'components/ArchitectureCompare/';
 // import ImageModel from './ImageModel'
 
 const TabPane = Tabs.TabPane
@@ -269,8 +269,13 @@ export default class ExtendNode extends React.Component<Props, State>{
                             type="ellipsis"
                             style={{ cursor: 'pointer' }}
                             onClick={() => {
-                                if (mapNetworkToArcs.filter((d: any) => (d.label === node.ID)).length !== 0) {
+                                // if (mapNetworkToArcs.filter((d: any) => (d.label === node.ID)).length !== 0) {
+                                //     this.props.onclickMenu(node, 'detailed')
+                                // }
+                                if(node.models){
                                     this.props.onclickMenu(node, 'detailed')
+                                }else{
+                                    message.info('Cannot find the detailed architecture. Try another one.')
                                 }
                             }}
                         />

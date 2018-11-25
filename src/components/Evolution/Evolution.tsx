@@ -15,8 +15,8 @@ import Legend, { LegendProps } from './Legend';
 import ExtendNode from './ExtendNode';
 // import { showDetailedStructure } from './ImageModel'
 import ArchitectureCompare from 'components/ArchitectureCompare/'
-import { nonsequenceDatasets, nonsequenceBenchmarks} from 'constants/';
-import {initNN} from 'constants/index'
+import { nonsequenceDatasets, nonsequenceBenchmarks } from 'constants/';
+import { initNN } from 'constants/index'
 
 let imgSize = require('assets/ratio.json')
 
@@ -246,11 +246,11 @@ export default class Evolution extends React.Component<Props, State>{
         }
         this.setState({ nodes, edges, w, h, datum, topDoi, transX, transY, scale })
     }
-    getDag(datum: NN[], appValue:string, selectedNode: Node | undefined = undefined) {
+    getDag(datum: NN[], appValue: string, selectedNode: Node | undefined = undefined) {
         let selectedID = selectedNode ? selectedNode.ID : undefined
-        let { pinNodes} = this.state
+        let { pinNodes } = this.state
         let dag = new dagre.graphlib.Graph();
-        
+
         dag.setGraph({
             ranksep: appValue === '1.1' ? nodeW * 1.1 : nodeW * 1.5,
             marginx: margin * 6,
@@ -279,13 +279,11 @@ export default class Evolution extends React.Component<Props, State>{
             // let label = `${layer.name}:${layer.class_name}`
 
             dag.setNode(node.ID, {
+                ...node,
                 label: node.ID,
-                fullname: node.fullname,
-                ID: node.ID,
                 api: node.api,
                 doi: node.api,
-                arc: node.architecture,
-                variants: node.variants,
+                arc: node.architecture
                 // width: nodeW,
                 // height: nodeH,
             })
@@ -876,8 +874,8 @@ export default class Evolution extends React.Component<Props, State>{
         //         }
         //     }
         // })
-        let { 
-            nodes, edges, width: w, height: h, topDoi, scale, transX, transY 
+        let {
+            nodes, edges, width: w, height: h, topDoi, scale, transX, transY
         } = this.getDag(datum, appValue, selectedNode)
 
         this.setState({
@@ -986,7 +984,12 @@ export default class Evolution extends React.Component<Props, State>{
         // let screen_h = (window.innerHeight - HEADER_H - 2 * margin) / 2
 
         // let ratio = Math.min(screen_w/(w||1), screen_h/(h||1))
-        let { train, arc } = this.props
+        let { train, arc, dnns } = this.props
+        dnns = dnns.filter((d: NN) => {
+            return d.application[0].startsWith(appValue)
+        })
+        console.info(dnns)
+
         let NNInfo = this.props.textInfo[glyphZoomLabel]
         let info = '', links: JSX.Element[] = [], code: JSX.Element[] = []
         let paperTitle = ''
@@ -1126,7 +1129,7 @@ export default class Evolution extends React.Component<Props, State>{
                     key={Math.random()}
                     align=''
                 >
-                    <ArchitectureCompare network={detailed} />
+                    <ArchitectureCompare network={detailed} dnns={dnns} />
                 </Modal>
                 <Modal
                     title={glyphZoomLabel}

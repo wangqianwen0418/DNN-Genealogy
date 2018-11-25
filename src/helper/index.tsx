@@ -11,3 +11,15 @@ export let capFirstLetter = (name: string) => {
 }
 
 export let cutLabel = (name:string, l: number)=>(name.length>l?(name.slice(0,l)+'...'):name)
+
+export let generateOptions = (dnns:any[]) => {
+    return dnns.map(dnn => {
+        return {
+            label: dnn.ID,
+            value: dnn.ID,
+            children: (dnn.models) ? dnn.models.map((d:string)=>{
+                return {value:d, label: d}
+            }) : []
+        }
+    })
+}

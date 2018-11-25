@@ -1,6 +1,7 @@
 [
     {
         "ID": "alexNet",
+        "models": ["alexNet"],
         "fullname": "alexNet",
         "application": [
             "1.1.1.general recognition"
@@ -23,6 +24,7 @@
     },
     {
         "ID": "VGG",
+        "models": ["VGG19"],
         "fullname": "VGG",
         "application": [
             "1.1.1.general recognition"
@@ -78,6 +80,7 @@
     },
     {
         "ID": "inception",
+        "models": ["inception_v3"],
         "fullname": "inception",
         "application": [
             "1.1.1.general recognition"
@@ -106,6 +109,7 @@
     },
     {
         "ID": "denseNet",
+        "models": ["denseNet_121", "denseNet_169", "denseNet_201"],
         "fullname": "Densely Connected Networks",
         "application": [
             "1.1.1.general recognition"
@@ -134,6 +138,7 @@
     },
     {
         "ID": "xception",
+        "models": ["xception"],
         "fullname": "",
         "application": [
             "1.1.1.general recognition"
@@ -158,6 +163,7 @@
     },
     {
         "ID": "squeezeNet",
+        "models": ["sequeezeNet"],
         "fullname": "squeezeNet",
         "application": [
             "1.1.1.general recognition"
@@ -221,6 +227,7 @@
     },
     {
         "ID": "inception_resNet",
+        "models": ["inception_resNet"],
         "fullname": "inception_resNet",
         "application": [
             "1.1.1.general recognition"
@@ -255,6 +262,7 @@
     },
     {
         "ID": "mobileNet",
+        "models": ["mobileNet"],
         "fullname": "moblieNet",
         "application": [
             "1.1.1.general recognition"
@@ -320,6 +328,7 @@
     },
     {
         "ID": "WRN",
+        "models": ["WRN_16_4", "WRN_28_10"], 
         "fullname": "Wide ReseNet",
         "application": [
             "1.1.1.general recognition"
@@ -386,6 +395,7 @@
     },
     {
         "ID": "fractalNet",
+        "models": ["fractalNet_40"],
         "fullname": "fractalNet",
         "application": [
             "1.1.1.general recognition"
@@ -476,6 +486,7 @@
     },
     {
         "ID": "resNet",
+        "models": ["resNet_v1_50", "resNet_v1_152", "resNet_v2_56", "resNet_v2_110"],
         "fullname": "Residual Networks",
         "application": [
             "1.1.1.general recognition"
@@ -577,6 +588,7 @@
     },
     {
         "ID": "nasNet",
+        "models":["nasNet_large", "nasNet_small", "nasNet_cifar"],
         "fullname": "nasNet",
         "application": [
             "1.1.1.general recognition"
@@ -1429,6 +1441,7 @@
     },
     {
         "ID": "FCN",
+        "models": ["FCN_VGG_32s"],
         "fullname": "Fully Convolutional Network",
         "application": [
             "3.segmentation"
@@ -1445,6 +1458,7 @@
     },
     {
         "ID": "U-Net",
+        "models": ["U-Net"],
         "fullname": "U-Net",
         "application": [
             "3.segmentation"
