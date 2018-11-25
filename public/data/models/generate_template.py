@@ -14,7 +14,3 @@ def generate_json(model, filename):
     with open("{}.json".format(filename), "w") as jsonf:
         json.dump(summary, jsonf)
     jsonf.close()
-
-
-model = keras_applications.nasnet.NASNetMobile(input_shape=None, include_top=True, weights=None, input_tensor=None, pooling=None, classes=1000)
-generate_json(model, "nasNet_small")

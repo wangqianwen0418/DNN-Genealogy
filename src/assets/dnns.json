@@ -1482,6 +1482,7 @@
     },
     {
         "ID": "SegNet",
+        "models":["SegNet"],
         "fullname": "SegNet",
         "application": [
             "3.segmentation"
@@ -1574,6 +1575,7 @@
     },
     {
         "ID": "DilatedNet",
+        "models":["DilatedNet"],
         "fullname": "DilatedNet",
         "application": [
             "3.segmentation"
@@ -1597,6 +1599,7 @@
     },
     {
         "ID": "PSPNet",
+        "models": ["PSPNet"],
         "fullname": "PSPNet",
         "application": [
             "3.segmentation"

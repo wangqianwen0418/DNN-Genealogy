@@ -111,17 +111,17 @@ export default class Box extends React.Component<Props, {}>{
         //     })
         // })
         modelIDs.forEach((d, idx) => {
-            if (currentIDs.indexOf(d[0]) != -1) {
+            if (currentIDs.indexOf(d[0]) !== -1) {
                 d[1].forEach(variant => {
                     barSeries.push({
                         name: d[0],
-                        type: "bar",
+                        type: 'bar',
                         data: models[variant],
                         tooltip: {
-                            formatter: (params: Object | Array<any>, ticket: string) => {
-                                // console.info(params)
+                            formatter: (params: any, ticket: string) => {
+                                console.info(params)
                                 return `${variant} </br>
-                                    ${params['name']}: ${params['value']}`
+                                    ${params.name}: ${params.value}`
                             }
                         },
                         itemStyle: {
@@ -163,7 +163,10 @@ export default class Box extends React.Component<Props, {}>{
                 // }
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                splitLine: {
+                    show: false
+                }
             },
             series: [boxSeries, ...barSeries],
         }
@@ -199,7 +202,6 @@ export default class Box extends React.Component<Props, {}>{
 
                 d3.select(`#nnnode_${modelID}`)
                     .style('opacity', 1)
-
 
             })
 
