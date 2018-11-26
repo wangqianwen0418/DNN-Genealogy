@@ -1506,6 +1506,7 @@
     },
     {
         "ID": "DeconvNet",
+        "models": ["DeconvNet_vgg"],
         "fullname": "DeconvNet",
         "application": [
             "3.segmentation"
@@ -1552,6 +1553,7 @@
     },
     {
         "ID": "RefineNet",
+        "models": ["RefineNet_resNet50"],
         "fullname": "RefineNet",
         "application": [
             "3.segmentation"
