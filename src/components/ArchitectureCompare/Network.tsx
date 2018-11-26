@@ -138,8 +138,10 @@ export default class Network extends React.Component<Props, State> {
                 scaleX,
                 scaleY
             ),
-            transX = scaleX > scaleY ? (svgWidth - width * scale) / 2 : 0,
-            transY = scaleY > scaleX ? (svgHeight - height * scale) / 2 : 0
+            // transX = scaleX > scaleY ? (svgWidth - width * scale) / 2 : 0,
+            // transY = scaleY > scaleX ? (svgHeight - height * scale) / 2 : 0
+            transX = (svgWidth) / (2*scale) -width/2 ,
+            transY = 0
    
             return { nodes, edges, height, width, scale, transX, transY };
 
@@ -389,15 +391,15 @@ export default class Network extends React.Component<Props, State> {
         this.updateEdge = !this.updateEdge
         if (evt.deltaY < 0) {
             scale = scale * 1.1
-            // transX = transX * 1.1
-            // transY = transY * 1.1
+            transX = transX / 1.1
+            transY = transY / 1.1
 
         } else if (evt.deltaY > 0) {
             scale = scale * .9
-            // transX = transX * .9
-            // transY = transY * .9
+            transX = transX / .9
+            transY = transY / .9
         }
-        this.setState({ scale });
+        this.setState({ scale, transX, transY });
     }
     mouseDown(e: React.MouseEvent<any>) {
         e.stopPropagation()
@@ -411,9 +413,9 @@ export default class Network extends React.Component<Props, State> {
         this.updateEdge = !this.updateEdge
     }
     pan(e: any) {
-        let { transX, transY } = this.state
-        transX += e.clientX - this.x0
-        transY += e.clientY - this.y0
+        let { transX, transY, scale } = this.state
+        transX += (e.clientX - this.x0)/scale
+        transY += (e.clientY - this.y0)/scale
         this.x0 = e.clientX
         this.y0 = e.clientY
         this.dragFlag = true

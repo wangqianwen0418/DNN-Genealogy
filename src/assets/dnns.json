@@ -1698,6 +1698,7 @@
     },
     {
         "ID": "DeepLab_v3",
+        "models": ["DeepLab_v3_mobile"],
         "fullname": "DeepLab_v3",
         "application": [
             "3.segmentation"
