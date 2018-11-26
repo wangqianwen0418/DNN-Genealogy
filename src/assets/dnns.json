@@ -163,7 +163,7 @@
     },
     {
         "ID": "squeezeNet",
-        "models": ["sequeezeNet"],
+        "models": ["squeezeNet"],
         "fullname": "squeezeNet",
         "application": [
             "1.1.1.general recognition"
@@ -588,7 +588,7 @@
     },
     {
         "ID": "nasNet",
-        "models":["nasNet_large", "nasNet_small", "nasNet_cifar"],
+        "models":[ "nasNet_cifar", "nasNet_large", "nasNet_small"],
         "fullname": "nasNet",
         "application": [
             "1.1.1.general recognition"
