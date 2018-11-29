@@ -230,7 +230,7 @@ export default class ExtendNode extends React.Component<Props, State>{
                     style={{ margin: `0px ${glyphXmargin}px` }}
                     height={(node.height * scale - tabH) * 1}
                     width={(node.width * scale - 2 * glyphXmargin)}
-                    />
+                />
                 <div
                     className="floatIcon"
                     style={{
