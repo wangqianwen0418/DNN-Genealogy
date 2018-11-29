@@ -123,48 +123,16 @@ export default class ExtendNode extends React.Component<Props, State>{
                     height: node.height * scale + 'px',
                     width: node.width * scale + 'px',
                     visibility: zoomed ? 'visible' : 'hidden',
-                    outline: `${selected ? 3 : 0.5}px ${selected ? 'dashed' : 'solid'} #aaa`,
-                    // opacity: show?1:0.2,
+                    outline: `${selected ? 3 : 0.5}px ${selected ? 'dashed' : 'solid'} #aaa` 
+                    
+                    // zIndex: -1
+                    // opacity: parseInt(`${selected}?1:0`),
                     // borderRadius: "5px"
                     // ...defaultStyle,
                     // ...transitionStyles[status]
 
                 }}
             >
-                {/* <Tabs defaultActiveKey={`0`}>
-                <TabPane
-                    tab={
-                        <div style={{ height: "100%", display: "inline-block" }}>
-                            <div style={{
-
-                                width: "32px",
-                                height: "100%",
-                                display: "inline-block"
-                            }}>
-                                {node.arc.map((d: string) => (
-                                    <div style={{
-                                        backgroundColor: getColor(d),
-                                        width: "100%",
-                                        height: `${100 / (node.arc.length + 1)}%`
-                                    }} />
-                                ))}
-                            </div>
-                            {capFirstLetter(cutLabel(node.label, node.width * scale / 9))}
-                        </div>
-                    }
-                    key="0">
-                    <img
-                        className="abstract Node"
-                        src={`../../images/${node.label}.png`}
-                        // style={{
-                        //     border: `1px solid ${selected ? "red" : "gray"}`,
-                        // }}
-                        height={node.height * scale - tabH - 6}
-                            width={node.width * scale}
-                        />
-                    </TabPane>
-                })} 
-            </Tabs> */}
                 <Tooltip
                     title={node.fullname === '' ? node.label : node.fullname}
                     mouseEnterDelay={0.2}
@@ -227,9 +195,12 @@ export default class ExtendNode extends React.Component<Props, State>{
                     // style={{
                     //     margin:`${(node.width * scale) * .1}px  ${(node.height * scale - tabH) * .1}px`,
                     // }}
-                    style={{ margin: `0px ${glyphXmargin}px` }}
-                    height={(node.height * scale - tabH) * 1}
-                    width={(node.width * scale - 2 * glyphXmargin)}
+                    style={{ 
+                        padding: `0px ${glyphXmargin}px`,
+                        
+                    }}
+                    height={zoomed?(node.height * scale - tabH) * 1 : 0}
+                    width={(node.width * scale )}
                 />
                 <div
                     className="floatIcon"
