@@ -1246,6 +1246,7 @@
     },
     {
         "ID": "faster R-CNN",
+        "models": ["faster R-CNN"],
         "fullname": "faster R-CNN",
         "application": [
             "2.detection"
@@ -1269,6 +1270,7 @@
     },
     {
         "ID": "YOLO",
+        "models": ["YOLO_v1"],
         "fullname": "YOLO",
         "application": [
             "2.detection"
@@ -1285,6 +1287,7 @@
     },
     {
         "ID": "YOLO_v2",
+        "models": ["YOLO_v2"],
         "fullname": "YOLO_v2",
         "application": [
             "2.detection"
@@ -1418,6 +1421,7 @@
     },
     {
         "ID": "R-FCN",
+        "models":["R-FCN-resnet50", "R-FCN-resnet101"],
         "fullname": "R-FCN",
         "application": [
             "2.detection"

@@ -192,22 +192,27 @@ export default class Box extends React.Component<Props, {}>{
                 }
 
                 d3.selectAll(`g.NNNode`)
-                        .style('opacity', 0.3)
+                .classed('faded', true)
+                        // .style('opacity', 0.3)
 
                 d3.selectAll(`.ExtendNode`)
-                    .style('opacity', 0.3)
+                .classed('faded', true)
+                    // .style('opacity', 0.3)
 
                 d3.select(`#exnode_${modelID}`)
-                    .style('opacity', 1)
+                .classed('faded', false)
+                    // .style('opacity', 1)
 
                 d3.select(`#nnnode_${modelID}`)
-                    .style('opacity', 1)
+                .classed('faded', false)
+                    // .style('opacity', 1)
 
             })
 
             myChart.on('mouseout', (params: any) => {
                 d3.selectAll(`.Node`)
-                    .style('opacity', 1)
+                .classed('faded', false)
+                    // .style('opacity', 1)
 
             })
         }
