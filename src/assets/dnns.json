@@ -1317,6 +1317,7 @@
     },
     {
         "ID": "SSD",
+        "models": ["SSD_7", "SSD_300"],
         "fullname": "single shot detector",
         "application": [
             "2.detection"
@@ -1392,6 +1393,7 @@
     },
     {
         "ID": "FPN",
+        "models": ["FPN"],
         "fullname": "Feature Pyramid Network",
         "application": [
             "2.detection"
@@ -1726,6 +1728,7 @@
     },
     {
         "ID": "mask R-CNN",
+        "models": ["Mask R-CNN"],
         "fullname": "mask R-CNN",
         "application": [
             "2.instance segmentation"
