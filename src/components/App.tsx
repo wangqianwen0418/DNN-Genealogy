@@ -11,7 +11,9 @@ import Evolution from 'containers/Evolution';
 import TrainTree from 'containers/TrainTree';
 import CorpusCompare from 'containers/CorpusCompare';
 // import Navi from "./Navi";
-import { Col, Layout } from 'antd';
+import { Col, Layout, } from 'antd';
+import HeaderIcon from 'components/HeaderIcon';
+
 const { Header, Content } = Layout;
 
 class App extends React.Component{
@@ -25,7 +27,10 @@ class App extends React.Component{
     render() {
         return (
             <div className="app">
-                <Header className="header">DNN Genealogy</Header>
+                <Header className="header">
+                    DNN Genealogy
+                    <HeaderIcon/>
+                </Header>
                 <Content>
                     <Col span={24}> <Evolution />  </Col>
                 </Content>
