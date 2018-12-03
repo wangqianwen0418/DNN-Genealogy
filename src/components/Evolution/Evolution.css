@@ -68,6 +68,6 @@
 }
 
 /* modal  */
-.ant-modal-content{
+.EvoModal>.ant-modal-content{
     height:80vh;
 }

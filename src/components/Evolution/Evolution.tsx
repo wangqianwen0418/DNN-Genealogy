@@ -1117,7 +1117,7 @@ export default class Evolution extends React.Component<Props, State>{
 
                 </div>
                 <Modal
-                    className="CompareModal"
+                    className="CompareModal EvoModal"
                     style={{ top: '10%', transitionDuration: '0.3s', transitionTimingFunction: 'ease' }}
                     width="40%"
                     // bodyStyle={{ height: 'calc(100% - 48px)' }}
@@ -1132,6 +1132,7 @@ export default class Evolution extends React.Component<Props, State>{
                     <ArchitectureCompare network={detailed} dnns={dnns} />
                 </Modal>
                 <Modal
+                    className="GlyphModal EvoModal"
                     title={glyphZoomLabel}
                     visible={glyphZoom}
                     onCancel={() => { this.setState({ glyphZoom: false }) }}
