@@ -1245,30 +1245,6 @@
         "date": "2015.04.30"
     },
     {
-        "ID": "faster R-CNN",
-        "models": ["faster R-CNN"],
-        "fullname": "faster R-CNN",
-        "application": [
-            "2.detection"
-        ],
-        "parents": [
-            {
-                "link_info_l": "use convolutional feature maps to compute region proposals with a deep convolutional neural network",
-                "ID": "fast R-CNN",
-                "link_info_s": "region proposal network",
-                "link_category": "nan"
-            }
-        ],
-        "architecture": [
-            "xxx"
-        ],
-        "training": [
-            "SGD"
-        ],
-        "citation": "5061",
-        "date": "2015.06.04"
-    },
-    {
         "ID": "YOLO",
         "models": ["YOLO_v1"],
         "fullname": "YOLO",
@@ -1314,6 +1290,30 @@
         ],
         "citation": "1219",
         "date": "2016.12.25"
+    },
+    {
+        "ID": "faster R-CNN",
+        "models": ["faster R-CNN"],
+        "fullname": "faster R-CNN",
+        "application": [
+            "2.detection"
+        ],
+        "parents": [
+            {
+                "link_info_l": "use convolutional feature maps to compute region proposals with a deep convolutional neural network",
+                "ID": "fast R-CNN",
+                "link_info_s": "region proposal network",
+                "link_category": "nan"
+            }
+        ],
+        "architecture": [
+            "xxx"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "5061",
+        "date": "2015.06.04"
     },
     {
         "ID": "SSD",

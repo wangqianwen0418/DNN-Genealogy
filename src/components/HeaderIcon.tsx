@@ -23,7 +23,7 @@ export default class HeaderIcon extends React.Component<{}, { visible: boolean }
     render() {
         return (
             <div className="icon" style={{ float: 'right', padding: '2px' }}>
-                <span onClick={this.showModal} style={{marginRight: '10px'}}>
+                <span onClick={this.showModal} style={{marginRight: '10px'}} title="Contribute a new DNN">
                     <img width={35} className="github" src="suggestion.png" />
                 </span>
                 <a href="https://github.com/wangqianwen0418/DNN-Genealogy" target="_blank">
