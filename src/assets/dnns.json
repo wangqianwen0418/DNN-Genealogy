@@ -631,6 +631,7 @@
     },
     {
         "ID": "RNN",
+        "models":["RNN"],
         "fullname": "simple RNN",
         "application": [
             "1.2.NLP"
@@ -671,6 +672,7 @@
     },
     {
         "ID": "seq2seq",
+        "models": ["seq2seq"],
         "fullname": "sequence to sequence",
         "application": [
             "1.2.NLP"
@@ -844,6 +846,7 @@
     },
     {
         "ID": "LSTM",
+        "models": ["LSTM"],
         "fullname": "long short term memory",
         "application": [
             "1.2.NLP"
@@ -896,6 +899,7 @@
     },
     {
         "ID": "GRU",
+        "models": ["GRU"],
         "fullname": "gated recurrent unit",
         "application": [
             "1.2.NLP"
