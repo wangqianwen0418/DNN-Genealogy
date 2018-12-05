@@ -788,6 +788,7 @@ export default class Evolution extends React.Component<Props, State>{
     }
     handleMouseWheel(evt: React.WheelEvent<any>) {
         let { scale, transX, transY } = this.state
+        evt.preventDefault()
         this.updateEdge = !this.updateEdge
         if (evt.deltaY < 0) {
             scale = scale * 1.1

@@ -164,7 +164,6 @@ export default class Network extends React.Component<Props, State> {
                     key={`layer_${node.label}`}
                     transform={`translate (${node.x - node.width / 2}, ${node.y - node.height / 2})`}
                     onClick={() => this.selectLayer(node)}
-                    onWheel={this.handleMouseWheel}
                     style={{ cursor: 'pointer' }}
                 >
 
@@ -386,7 +385,9 @@ export default class Network extends React.Component<Props, State> {
     //     }
 
     // }
-    handleMouseWheel(evt: React.WheelEvent<any>) {
+    handleMouseWheel(evt: any) {
+        evt.preventDefault()
+        // evt.nativeEvent.stopImmediatePropagation()
         let { scale, transX, transY } = this.state
         this.updateEdge = !this.updateEdge
         if (evt.deltaY < 0) {
@@ -400,13 +401,11 @@ export default class Network extends React.Component<Props, State> {
             transY = transY / .9
         }
         this.setState({ scale, transX, transY });
+        return false
     }
     mouseDown(e: React.MouseEvent<any>) {
         e.stopPropagation()
         e.preventDefault()
-
-        console.info('detail architecture, mouse down')
-
         document.addEventListener('mousemove', this.pan)
         this.x0 = e.clientX
         this.y0 = e.clientY
@@ -546,6 +545,7 @@ export default class Network extends React.Component<Props, State> {
                     onMouseDown={this.mouseDown}
                     onMouseUp={this.mouseUp}
                     onMouseLeave={this.mouseUp}
+                    onWheel={(e)=>this.handleMouseWheel(e)}
                 >
                     <svg
                         width={`${svgWidth}`}
