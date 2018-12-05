@@ -1,0 +1,65 @@
+{
+    "ID": "VGG",
+    "models": ["VGG19"],
+    "fullname": "VGG",
+    "application": [
+        "1.1.1.general recognition"
+    ],
+    "parents": [
+        {
+            "link_info_l": "increasing depth using an architecture with very small (3x3) convolution filters",
+            "ID": "alexNet",
+            "link_info_s": "small filter size & deeper",
+            "link_category": "streamlined=>streamlined"
+        }
+    ],
+    "architecture": [
+        "streamlined"
+    ],
+    "training": [
+        "SGD",
+        "dropout",
+        "SGD with momentum",
+        "weight decay",
+        "standard relu",
+        "xavier normal",
+        "cross entropy"
+    ],
+    "citation": "8205",
+    "date": "2014.09.04",
+    "links": [
+        [
+            "ImageNet Classification with Deep Convolutional Neural Networks",
+            "https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks"
+        ]
+    ],
+    "info": "VGGNet consists of 16/19 convolutional layers and has a highly modularized architecture. It stacks small size convolutional layers to increase the depth. ",
+    "performance": {
+        "dataset": [
+            "params",
+            "imagenet top5",
+            "imageNet top1",
+            "SVHN",
+            "cifar10",
+            "cifar100"
+        ],
+        "scores": {
+            "VGG19": [
+                144.0,
+                92.7,
+                74.5,
+                0,
+                0,
+                0
+            ],
+            "VGG16": [
+                138.0,
+                91.9,
+                74.4,
+                0,
+                0,
+                0
+            ]
+        }
+    }
+}
