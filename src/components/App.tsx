@@ -35,9 +35,9 @@ class App extends React.Component{
                     <Col span={24}> <Evolution />  </Col>
                 </Content>
                 <Content>
-                    <Col span={8}><TrainTree/> </Col>
-                    <Col span={8}> <CorpusCompare /> </Col>
-                    <Col span={8}> <TextInfo /> </Col>
+                    <Col span={7}><TrainTree/> </Col>
+                    <Col span={11}> <CorpusCompare /> </Col>
+                    <Col span={6}> <TextInfo /> </Col>
                 </Content>
             </div>
         );

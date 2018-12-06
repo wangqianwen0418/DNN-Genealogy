@@ -256,7 +256,7 @@ export default class Evolution extends React.Component<Props, State>{
             marginx: margin * 6,
             marginy: margin * 2,
             rankdir: 'LR',
-            edgesep: nodeH * .3,
+            edgesep: nodeH * 1,
             nodesep: nodeH * 0.3,
             // ranker: "tight-tree"
             ranker: appValue === '1.1.' ? 'longest-path' : 'tight-tree'

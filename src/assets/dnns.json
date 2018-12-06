@@ -1336,7 +1336,7 @@
             {
                 "link_info_l": "use a set of default anchor boxes with different aspect ratios and scales to discretize the output space of bounding boxes; predict based on multiple feature maps with different resolutions; predict the offset of boxes",
                 "ID": "YOLO",
-                "link_info_s": "region proposal",
+                "link_info_s": "multiple feature maps",
                 "link_category": "nan"
             }
         ],

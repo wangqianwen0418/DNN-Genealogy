@@ -87,7 +87,7 @@
             ],
             "fast R-CNN": [
                 3.3,
-                70.0,
+                70,
                 null
             ],
             "faster R-CNN\b(VGG16)": [
@@ -128,7 +128,7 @@
             "DSSD\b_513": [
                 6.6,
                 53.3,
-                0
+                null
             ],
             "DSOD\b_300 (plain)": [
                 20.6,
@@ -226,8 +226,8 @@
                     "denseNet\b_40_12",
                     "denseNet\b_100_12",
                     "denseNet\b_100_24",
-                    "denseNet\b-BC(l=250, k=24)",
-                    "denseNet\b-BC(l=190, k=40)",
+                    "denseNet\b-BC(l=25null, k=24)",
+                    "denseNet\b-BC(l=19null, k=40)",
                     "denseNet\b_121",
                     "denseNet\b_201"
                 ]
@@ -311,16 +311,14 @@
             "params",
             "imagenet top5",
             "imageNet top1",
-            "SVHN",
             "cifar10",
             "cifar100"
         ],
         "models": {
             "diracNet\b-28-5": [
                 9.1,
-                0,
-                0,
-                0,
+                null,
+                null,
                 96.84,
                 76.56
             ],
@@ -328,7 +326,6 @@
                 25.0,
                 94.7,
                 79.6,
-                0,
                 96.42,
                 82.69
             ],
@@ -336,15 +333,13 @@
                 138.0,
                 91.9,
                 74.4,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "mixNet\b-100": [
                 1.5,
-                0,
-                0,
-                98.43,
+                null,
+                null,
                 95.81,
                 78.88
             ],
@@ -352,23 +347,20 @@
                 144.0,
                 92.7,
                 74.5,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "diracNet\b-28-10": [
                 36.5,
-                0,
-                0,
-                0,
+                null,
+                null,
                 95.25,
                 78.46000000000001
             ],
             "denseNet\b_100_12": [
                 7.2,
-                0,
-                0,
-                98.33,
+                null,
+                null,
                 95.9,
                 79.8
             ],
@@ -376,39 +368,34 @@
                 145.0,
                 94.6,
                 79.2,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "inception_resNet": [
                 55.8,
                 96.3,
                 82.2,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "mixNet\b-141": [
                 41.07,
                 94.7,
                 79.6,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "resNet\b_v1_152": [
                 60.4,
                 94.29,
                 78.57,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "mixNet\b-250": [
                 29.0,
-                0,
-                0,
-                98.49,
+                null,
+                null,
                 96.68,
                 82.94
             ],
@@ -416,47 +403,41 @@
                 1.24,
                 82.5,
                 60.4,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "SENet\b_inception_resnetv2": [
                 65.6,
                 95.21,
                 80.2,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "nasNet\b_small": [
                 5.3,
                 91.6,
                 74.0,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "diracNet\b-18": [
                 11.7,
                 89.12,
                 69.63,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "mixNet\b-190": [
                 48.5,
-                0,
-                0,
-                0,
+                null,
+                null,
                 96.87,
                 83.08
             ],
             "fractalNet\b-20": [
                 38.6,
-                0,
-                0,
-                0,
+                null,
+                null,
                 94.78,
                 76.7
             ],
@@ -464,135 +445,118 @@
                 11.16,
                 93.3,
                 76.7,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "inception\b_v2": [
                 23.8,
                 94.4,
                 78.8,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "inception\b_v3": [
                 23.8,
                 95.8,
                 81.23,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "resNet\b_v1_50": [
                 25.6,
                 92.9,
                 75.9,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "denseNet\b_40_12": [
                 1.0,
-                0,
-                0,
-                98.21,
+                null,
+                null,
                 94.76,
                 75.58
             ],
             "highwayNets": [
                 2.3,
-                0,
-                0,
-                0,
+                null,
+                null,
                 92.24,
-                0
+                null
             ],
             "alexNet": [
-                60.0,
+                60,
                 84.6,
                 63.3,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "inception": [
                 6.8,
                 93.33,
-                0,
-                0,
-                0,
-                0
+                null,
+                null,
+                null
             ],
             "denseNet\b_201": [
                 20.2,
                 93.66,
                 77.42,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "diracNet\b-34": [
                 21.8,
                 90.66,
                 72.21000000000001,
-                0,
-                0,
-                0
+                null,
+                null
             ],
-            "denseNet\b-BC(l=250, k=24)": [
+            "denseNet\b-BC(l=25null, k=24)": [
                 15.3,
-                0,
-                0,
-                98.26,
+                null,
+                null,
                 96.38,
                 82.4
             ],
             "mobileNet\b-224": [
                 4.2,
-                0,
+                null,
                 70.6,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "nasNet\b_cifar": [
                 3.3,
-                0,
-                0,
-                0,
+                null,
+                null,
                 97.35,
-                0
+                null
             ],
             "mixNet\b-121": [
                 21.86,
                 94.1,
                 78.1,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "WRN\b_16_4": [
                 2.9,
-                0,
-                0,
-                98.36,
+                null,
+                null,
                 94.76,
                 76.09
             ],
             "mobileNet\b-160": [
                 1.32,
-                0,
+                null,
                 60.2,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "fractalNet\b-40": [
                 22.9,
-                0,
-                0,
-                0,
+                null,
+                null,
                 94.76,
                 77.51
             ],
@@ -600,15 +564,13 @@
                 11.1,
                 96.2,
                 82.7,
-                0,
-                0,
-                0
+                null,
+                null
             ],
-            "denseNet\b-BC(l=190, k=40)": [
+            "denseNet\b-BC(l=19null, k=40)": [
                 25.6,
-                0,
-                0,
-                0,
+                null,
+                null,
                 96.54,
                 82.82
             ],
@@ -616,23 +578,20 @@
                 22.85,
                 94.5,
                 79,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "denseNet\b_100_24": [
                 27.2,
-                0,
-                0,
-                98.41,
+                null,
+                null,
                 96.26,
                 80.75
             ],
             "WRN\b_28_10": [
                 36.0,
-                0,
-                0,
-                98.36,
+                null,
+                null,
                 96.11,
                 81.15
             ],
@@ -640,15 +599,13 @@
                 8.1,
                 92.29,
                 74.98,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "RIR": [
-                0.0,
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
                 94.99,
                 77.1
             ],
@@ -656,33 +613,29 @@
                 92,
                 95.75,
                 81.28999999999999,
-                0,
-                0,
-                0
+                null,
+                null
             ],
             "resNet\b_v2_56_cifar": [
                 1.6,
-                0,
-                0,
-                0,
+                null,
+                null,
                 93.01,
-                0
+                null
             ],
             "resNet\b_v2_110_cifar": [
                 3.3,
-                0,
-                0,
-                0,
+                null,
+                null,
                 93.62,
                 75.36
             ],
             "WRN\b_50_2": [
-                0.0,
+                null,
                 94.21,
                 78.1,
-                0,
-                0,
-                0
+                null,
+                null
             ]
         }
     },
@@ -769,130 +722,130 @@
         "models": {
             "FCN\b-AlexNet": [
                 39.8,
-                0,
-                0,
-                0,
-                0,
-                0
+                null,
+                null,
+                null,
+                null,
+                null
             ],
             "FCN\b-VGG": [
                 56.0,
-                0,
-                0,
-                0,
-                0,
-                0
+                null,
+                null,
+                null,
+                null,
+                null
             ],
             "FCN\b-GoogleNet": [
                 42.5,
-                0,
-                0,
-                0,
-                0,
-                0
+                null,
+                null,
+                null,
+                null,
+                null
             ],
             "FCN\b-VGG-8s": [
                 62.7,
-                0,
-                0,
-                0,
-                0,
-                0
+                null,
+                null,
+                null,
+                null,
+                null
             ],
             "U-Net": [
-                0,
+                null,
                 0.9203,
-                0,
-                0,
-                0,
-                0
+                null,
+                null,
+                null,
+                null
             ],
             "SegNet": [
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
                 60.1,
-                0,
-                0
+                null,
+                null
             ],
             "DeconvNet": [
                 69.6,
-                0,
-                0,
-                0,
-                0,
-                0
+                null,
+                null,
+                null,
+                null,
+                null
             ],
             "DeconvNet\b-CRF": [
                 72.5,
-                0,
-                0,
-                0,
-                0,
-                0
+                null,
+                null,
+                null,
+                null,
+                null
             ],
             "RedNet": [
-                0,
-                0,
+                null,
+                null,
                 47.8,
-                0,
-                0,
-                0
+                null,
+                null,
+                null
             ],
             "RefineNet\b(ResNet101)": [
                 82.4,
-                0,
+                null,
                 45.9,
-                0,
+                null,
                 73.6,
-                0
+                null
             ],
             "DilatedNet": [
                 71.3,
-                0,
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
+                null,
                 null
             ],
             "PSPNet": [
                 82.6,
-                0,
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
+                null,
                 78.6
             ],
             "DeepLab\b-CRF": [
                 63.74,
-                0,
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
+                null,
                 null
             ],
             "DeepLab_v2": [
                 79.7,
-                0,
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
+                null,
                 70.4
             ],
             "GCN": [
                 83.6,
-                0,
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
+                null,
                 76.9
             ],
             "DeepLab_v3": [
                 85.7,
-                0,
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
+                null,
                 81.3
             ]
         },
@@ -967,20 +920,20 @@
                 60.0
             ],
             "MNC": [                
-                0,
+                null,
                 44.3
             ],
             "FCIS": [
-                0,
+                null,
                 54.5
             ],
             "DIN": [
                 38.8,
-                0
+                null
             ],
             "SGN": [
                 44.9,
-                0
+                null
             ]
         },
         "datasets": [
@@ -1123,66 +1076,66 @@
             "tree-LSTM\b(dependency)": [
                 51,
                 88,
-                0,
-                0
+                null,
+                null
             ],
             "stacked RNN": [
                 49.8,
                 86.6,
-                0,
-                0
+                null,
+                null
             ],
             "2-layer Bid-LSTM": [
                 48.5,
                 87.2,
-                0,
-                0
+                null,
+                null
             ],
             "LSTM\b(2 layer)": [
                 46,
                 86.3,
-                0,
-                0
+                null,
+                null
             ],
             "Bid-LSTM": [
                 49.1,
                 87.5,
-                0,
-                0
+                null,
+                null
             ],
             "LSTM": [
                 46.4,
                 84.9,
-                0,
-                0
+                null,
+                null
             ],
             "tree-LSTM\b(continue)": [
                 48.4,
                 85.7,
-                0,
-                0
+                null,
+                null
             ],
             "MV-RNN": [
                 44.4,
                 82.9,
-                0,
-                0
+                null,
+                null
             ],
             "recursive": [
                 45.7,
                 85.4,
-                0,
-                0
+                null,
+                null
             ],
             "GRU": [
-                0,
-                0,
+                null,
+                null,
                 65.7,
                 41.6
             ],
             "BRNN": [
-                0,
-                0,
+                null,
+                null,
                 57.7,
                 37.2
             ],
@@ -1193,8 +1146,8 @@
                 34.4
             ],
             "Bid-GRU": [
-                0,
-                0,
+                null,
+                null,
                 66,
                 42.5
             ]
@@ -1319,23 +1272,23 @@
                 40.51
             ],
             "seq2seq\bRNNencdec-50": [
-                0,
-                0,
+                null,
+                null,
                 26.71
             ],
             "seq2seq\bRNNencdec-30": [
-                0,
-                0,
+                null,
+                null,
                 24.19
             ],
             "attention\bRNNsearch-50": [
-                0,
-                0,
+                null,
+                null,
                 34.16
             ],
             "attention\bRNNsearch-30": [
-                0,
-                0,
+                null,
+                null,
                 31.44
             ]
         },
