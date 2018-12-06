@@ -43,8 +43,8 @@ export default class Box extends React.Component<Props, {}>{
         let { models, datasets, modelIDs } = this.props.performances,
             currentIDs = this.props.currentNNs.map(d => d.ID)
 
-        let left = 35, right = 5, top = 10, bottom = 30, margin = 2,
-            step = (100 - left - right) / (datasets.length - 1),
+        let left = 20, right = 0, top = 10, bottom = 30, margin = 2,
+            step = (100 - left - right) / (datasets.length ) ,
 
             layout = {
                 left: `${left}%`,
@@ -62,7 +62,7 @@ export default class Box extends React.Component<Props, {}>{
         for (let i = 0; i < datasets.length; i++) {
             grid.push({
                 left: `${left + i * step}%`,
-                right: `${100 - (left + (i - 1) * step)- margin}%`,
+                right: `${100 - (left + (i + 1) * step) + margin}%`,
                 bottom: `${bottom}%`,
                 top: `${top}%`,
                 id: i
