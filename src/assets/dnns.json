@@ -1187,7 +1187,7 @@
         ],
         "parents": [],
         "architecture": [
-            "xxx"
+            "streamlined"
         ],
         "training": [
             "SGD"
@@ -1211,7 +1211,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "multi-branch"
         ],
         "training": [
             "SGD"
@@ -1227,7 +1227,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "combine classification and bounding box regression into a multi-task leaning manner; replace the SVM with a softmax layer; improve the detection speed;training is a single-stage using a multi-task loss; ",
+                "link_info_l": "combine classification and bounding box regression into a multi-task leaning manner; replace the SVM with a softmax layer; improve the detection speed;training is a single-stage using a multi-task loss ",
                 "ID": "R-CNN",
                 "link_info_s": "multi-task",
                 "link_category": "nan"
@@ -1257,7 +1257,7 @@
         ],
         "parents": [],
         "architecture": [
-            "xxx"
+            "streamlined"
         ],
         "training": [
             "SGD"
@@ -1287,7 +1287,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "skip connections"
         ],
         "training": [
             "SGD"
@@ -1341,7 +1341,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "skip connections"
         ],
         "training": [
             "SGD"
@@ -1364,7 +1364,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "skip connections"
         ],
         "training": [
             "SGD"
@@ -1374,6 +1374,7 @@
     },
     {
         "ID": "DSOD",
+        "models":["DSOD"],
         "fullname": "DSOD",
         "application": [
             "2.detection"
@@ -1387,7 +1388,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "skip connections"
         ],
         "training": [
             "SGD"
@@ -1417,7 +1418,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "multi-branch"
         ],
         "training": [
             "SGD"
@@ -1458,7 +1459,7 @@
         ],
         "parents": [],
         "architecture": [
-            "xxx"
+            "skip connections"
         ],
         "training": [
             "SGD"
@@ -1482,7 +1483,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "skip connections"
         ],
         "training": [
             "SGD"
@@ -1577,7 +1578,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "skip connections"
         ],
         "training": [
             "SGD"
@@ -1601,7 +1602,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "streamlined"
         ],
         "training": [
             "SGD"
@@ -1612,7 +1613,7 @@
     {
         "ID": "PSPNet",
         "models": ["PSPNet"],
-        "fullname": "PSPNet",
+        "fullname": "pyramid scene parsing network",
         "application": [
             "3.segmentation"
         ],
@@ -1625,7 +1626,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "multi-branch"
         ],
         "training": [
             "SGD"
@@ -1648,7 +1649,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "streamlined"
         ],
         "training": [
             "SGD"
@@ -1677,7 +1678,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "multi-branch"
         ],
         "training": [
             "SGD"
@@ -1700,7 +1701,8 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "depthwise separable conv",
+            "skip connections"
         ],
         "training": [
             "SGD"
@@ -1723,7 +1725,9 @@
                 "link_category": "nan"
             }
         ],
-        "architecture": [],
+        "architecture": [
+            "multi-branch"
+        ],
         "training": [
             "SGD"
         ],
@@ -1745,7 +1749,9 @@
                 "link_category": "nan"
             }
         ],
-        "architecture": [],
+        "architecture": [
+            "streamlined"
+        ],
         "training": [
             "SGD"
         ],

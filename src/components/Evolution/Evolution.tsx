@@ -828,7 +828,7 @@ export default class Evolution extends React.Component<Props, State>{
         if (appValue === undefined) {
             return
         }
-        let legend = appValue === '1.1.' ? legendCNN : (appValue === '1.2.' ? legendRNN : {})
+        let legend = ( appValue === '1.2.' ? legendRNN : legendCNN )
         this.setState({ appValue, legend });
         this.getData(appValue)
         this.props.onSelectNN([initNN], initNN)

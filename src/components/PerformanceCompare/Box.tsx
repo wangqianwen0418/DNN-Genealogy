@@ -214,17 +214,24 @@ export default class Box extends React.Component<Props, {}>{
                 type: 'value',
                 gridIndex: i,
                 min: function(value:any) {
-                    return value.min*0.8
+                    return Math.max(value.min - (value.max-value.min)/3, 0)
                 },
                 max: 'dataMax',
                 // min: Math.min(...Object.values(models).map(d=>d[i]) ),
                 // max: Math.max(...Object.values(models).map(d=>d[i]) ),
                 // // max:i!==0?100:Math.max(...Object.values(models).map(d=>d[0])),
                 axisLine:{
-                    show: true
+                    show: true,
+                    margin: 0,
+                    rotate: 30,
+                    interval: 3
                 },
                 axisLabel:{
-                    show: false
+                    show: true,
+                    showMinLabel: false,
+                    showMaxLabel: false,
+                    margin: 3,
+                    rotate: -10
                 },
                 axisTick:{
                     show:false
