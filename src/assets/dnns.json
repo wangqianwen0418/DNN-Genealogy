@@ -1206,7 +1206,7 @@
             {
                 "link_info_l": "extract the feature maps from the entire image only once and apply the spatial pyramid pooling on each candidate windows; can run orders of magnitude faster ",
                 "ID": "R-CNN",
-                "link_info_s": "SPP",
+                "link_info_s": "spatial pyramid pooling",
                 "link_category": "nan"
             }
         ],
@@ -1240,7 +1240,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "streamlined"
         ],
         "training": [
             "SGD"
@@ -1311,7 +1311,7 @@
             }
         ],
         "architecture": [
-            "xxx"
+            "multi-branch"
         ],
         "training": [
             "SGD"

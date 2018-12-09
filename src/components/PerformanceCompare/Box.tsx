@@ -210,7 +210,7 @@ export default class Box extends React.Component<Props, {}>{
                 },
                 axisLabel: {
                     show: true,
-                    rotate: -20
+                    // rotate: -20
                 },
                 axisTick: {
                     show: false
@@ -305,7 +305,9 @@ export default class Box extends React.Component<Props, {}>{
                         emphasis: {
                             itemStyle: {
                                 borderColor: 'gray',
-                                borderWidth: 1.5
+                                borderWidth: 2,
+                                borderType:'dotted',
+                                color: '#fcc9e1'
                             }
                         },
                         data: [models[variant][datasetIdx]],

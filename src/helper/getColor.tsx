@@ -21,10 +21,11 @@ const GREEN: string[] = [
     '#C1D6D3'
 ]
 const BLUE: string[] = [
-    '#3E97C7',
-    '#72B3CF',
-    '#8FCCDD',
-    '#C8DADE'
+    '#3E97D7',
+    '#1a6eb2',
+    '#7FCCDD',
+    '#C8DADE',
+    '#2ec4cc'
 
 ]
 const ORANGE: string[] = [
