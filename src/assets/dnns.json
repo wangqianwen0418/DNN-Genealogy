@@ -33,7 +33,7 @@
             {
                 "link_info_l": "increasing depth using an architecture with very small (3x3) convolution filters",
                 "ID": "alexNet",
-                "link_info_s": "small filter size & deeper",
+                "link_info_s": "deeper",
                 "link_category": "streamlined=>streamlined"
             }
         ],
@@ -118,7 +118,7 @@
             {
                 "link_info_l": "dense residual connection; use concate instead of adding to combine mult-braches",
                 "ID": "resNet",
-                "link_info_s": "dense residual connections",
+                "link_info_s": "dense connections",
                 "link_category": "skip connections=>skip connections"
             }
         ],
@@ -147,7 +147,7 @@
             {
                 "link_info_l": "the inception modules are replaced with depthwise separable convolutions to improve parameter efficiency",
                 "ID": "inception",
-                "link_info_s": "depthwise seperable conv",
+                "link_info_s": "depthwise conv",
                 "link_category": "multi-branch=>multi-branch+depthwise separable conv"
             }
         ],
@@ -172,7 +172,7 @@
             {
                 "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
                 "ID": "inception",
-                "link_info_s": "split-transfer-merge",
+                "link_info_s": "squeeze",
                 "link_category": "multi-branch=>multi-branch"
             },
             {
@@ -202,15 +202,15 @@
         ],
         "parents": [
             {
-                "link_info_l": "combine the connections in DenseNet and ResNet",
+                "link_info_l": "combine the connections used in DenseNet (concatenate) and the connections used in ResNet (addition)",
                 "ID": "denseNet",
-                "link_info_s": "combine",
+                "link_info_s": "concat",
                 "link_category": "skip connections=>skip connections"
             },
             {
-                "link_info_l": "combine the connections in DenseNet and ResNet",
+                "link_info_l": "combine the connections used in DenseNet (concatenate) and the connections used in ResNet (addition)",
                 "ID": "resNet",
-                "link_info_s": "combine",
+                "link_info_s": "addition",
                 "link_category": "skip connections=>skip connections"
             }
         ],
@@ -283,7 +283,7 @@
             {
                 "link_info_l": "borrow the depthwise seperable convolutions used in xception",
                 "ID": "xception",
-                "link_info_s": "depthwise seperable conv",
+                "link_info_s": "depthwise conv",
                 "link_category": "depthwise separable conv=>depthwise separable conv"
             }
         ],
@@ -362,15 +362,15 @@
         ],
         "parents": [
             {
-                "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
+                "link_info_l": "combine the connection used in DenseNet (concatenate) and the connections used in ResNet (addition)",
                 "ID": "resNet",
-                "link_info_s": "generalize",
+                "link_info_s": "addition",
                 "link_category": "skip connections=>skip connections"
             },
             {
-                "link_info_l": "generalize the connections in ResNet, DenseNet and DPN",
+                "link_info_l": "combine the connection used in DenseNet (concatenate) and the connections used in ResNet (addition)",
                 "ID": "denseNet",
-                "link_info_s": "generalize",
+                "link_info_s": "concate",
                 "link_category": "skip connections=>skip connections"
             },
             {
@@ -597,19 +597,19 @@
             {
                 "link_info_l": "borrow the skip connections from ResNet and let neural architecture search (NAS) select from them",
                 "ID": "resNet",
-                "link_info_s": "borrow operations",
+                "link_info_s": "skip connections",
                 "link_category": "skip connections=>skip connections"
             },
             {
                 "link_info_l": "borrow the multi-brach, 1x7 then 7x1 convolution, 1x3 then 3x1 convolution from Inception and let neural architecture search (NAS) select from it",
                 "ID": "inception",
-                "link_info_s": "borrow operations",
+                "link_info_s": "multi-brach",
                 "link_category": "multi-branch=>multi-branch"
             },
             {
                 "link_info_l": "borrow the depthwise separable conv from mobileNet and let neural architecture search (NAS) select from them",
                 "ID": "mobileNet",
-                "link_info_s": "borrow operations",
+                "link_info_s": "depthwise conv",
                 "link_category": "depthwise separable conv=>depthwise separable conv"
             }
         ],
