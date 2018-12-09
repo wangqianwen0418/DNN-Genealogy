@@ -43,6 +43,8 @@ export default class Box extends React.Component<Props, {}>{
         let { models, datasets, modelIDs } = this.props.performances,
             currentIDs = this.props.currentNNs.map(d => d.ID)
 
+        
+
         let left = 20, right = 0, top = 10, bottom = 30, margin = 2,
             step = (100 - left - right) / (datasets.length ) ,
 
@@ -55,8 +57,15 @@ export default class Box extends React.Component<Props, {}>{
 
         let currentVariants: string[] = []
         currentIDs.forEach((ID, i) => {
-            currentVariants = currentVariants.concat(modelIDs.filter(d => (d[0] === ID))[0][1])
+            let modelID = modelIDs.filter(d => (d[0] === ID))[0]
+            if (modelID){
+                currentVariants = currentVariants.concat(modelID[1])
+            }
+            
         })
+        // if(currentIDs.length<4){
+        //     currentVariants = Object.keys(models).concat(currentVariants.filter(v=>!(v in  Object.keys(models))))
+        // }
 
         let grid = []
         for (let i = 0; i < datasets.length; i++) {
@@ -281,6 +290,9 @@ export default class Box extends React.Component<Props, {}>{
             // tslint:disable-next-line:forin
             currentIDs.forEach((ID, i) => {
                 let model = modelIDs.filter(d => (d[0] === ID))[0]
+                if(!model){
+                    return
+                }
                 let variants = model[1]
                 // tslint:disable-next-line:forin
                 for (let k in variants) {

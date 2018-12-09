@@ -60,7 +60,7 @@ export default class ExtendNode extends React.Component<Props, State>{
     mouseDown(e: React.MouseEvent<any>) {
         this.dragFlag = false
         document.addEventListener('mousemove', this.mouseMove)
-        console.info('click')
+        // console.info('click')
     }
     mouseMove(e: MouseEvent) {
         this.dragFlag = true

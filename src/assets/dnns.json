@@ -1330,7 +1330,7 @@
             {
                 "link_info_l": "simultaneously predicting the bounding box and the class as it processes the image; no object proposal network",
                 "ID": "faster R-CNN",
-                "link_info_s": "multi-task",
+                "link_info_s": "no object proposal",
                 "link_category": "nan"
             },
             {
@@ -1383,7 +1383,7 @@
             {
                 "link_info_l": "learn object detectors without pretrain; use dense layer-wise connection; use stem blocks inspired by inception ",
                 "ID": "SSD",
-                "link_info_s": "dense & stem",
+                "link_info_s": "dense connections",
                 "link_category": "nan"
             }
         ],

@@ -840,7 +840,7 @@
         ]
     },
     "fast R-CNN": {
-        "info": "ast R-CNN builds on previous work to efficiently classify object proposals using deep convolutional networks. Compared to previous work, Fast R-CNN employs several innovations to improve training and testing speed while also increasing detection accuracy. ",
+        "info": "Fast R-CNN fixes the disadvantages of R-CNN and SPPnet while improving on their speed and accuracy. The training of fast R-CNN is single-stage, uses a multi-task loss, can update all network layers",
         "fullname": "Fast R-CNN",
         "links": [
             [

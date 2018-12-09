@@ -989,7 +989,7 @@ export default class Evolution extends React.Component<Props, State>{
         dnns = dnns.filter((d: NN) => {
             return d.application[0].startsWith(appValue)
         })
-        console.info(dnns)
+        // console.info(dnns)
 
         let NNInfo = this.props.textInfo[glyphZoomLabel]
         let info = '', links: JSX.Element[] = [], code: JSX.Element[] = []
