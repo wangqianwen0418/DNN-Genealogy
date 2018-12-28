@@ -306,8 +306,8 @@ export default class Box extends React.Component<Props, {}>{
                             itemStyle: {
                                 borderColor: 'gray',
                                 borderWidth: 2,
-                                borderType:'dotted',
-                                color: '#fcc9e1'
+                                // borderType:'dotted',
+                                color: 'rgba(230, 137, 0, 0.5)'
                             }
                         },
                         data: [models[variant][datasetIdx]],
