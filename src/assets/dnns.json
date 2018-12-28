@@ -952,7 +952,7 @@
         ],
         "parents": [
             {
-                "link_info_l": "gridLSTM arranges LSTM cells in a multidimensional grid that can be applied to vectors, sequences or higher dimensional data",
+                "link_info_l": "gridLSTM arranges LSTM cells in a multidimensional grid; gridLSTM can be applied to vectors, sequences or higher dimensional data",
                 "ID": "LSTM",
                 "link_info_s": "multi-dimensions",
                 "link_category": "gated=>gated"
