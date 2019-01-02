@@ -992,7 +992,7 @@
             "TIMIT 39-class"
         ],
         "modelIDs": [
-            ["BRNN", ["BRNN\b(both)", "BRNN\b(for)", "BRNN", "BRNN\b(back)"]],
+            ["BRNN", ["BRNN\b(for)", "BRNN", "BRNN\b(back)"]],
             ["RNN", ["RNN\b(for)", "RNN\b(for)(1-delay)", "RNN\b(for)(2-delay)", "RNN\b(back)"]]
         ],
         "name": "acoustics classification"
@@ -1163,7 +1163,7 @@
             ["tree-LSTM", ["tree-LSTM\b(continue)", "tree-LSTM\b(dependency)"]],
             ["recursive", ["recursive"]],
             ["GRU",["GRU"]],
-            ["BRNN", "BRNN"]
+            ["BRNN", ["BRNN"]]
         ],
         "name": "sentiment classification"
     },
