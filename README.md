@@ -7,7 +7,7 @@ DNN Genealogy is an interactive visualization tool that offers a visual summary 
 
 The web demo is available at http://dnn.hkustvis.org
 
-![web_demo](https://github.com/wangqianwen0418/DNN-Genealogy/tree/master/public/images/dnn_contrib.png)
+![web_demo](https://github.com/wangqianwen0418/DNN-Genealogy/blob/master/public/images/dnn_demo.png)
 
 
 ## Requirements
@@ -40,4 +40,4 @@ You can contribute through our github repo
 
 OR,   
 you can directly submit a new DNN through our [website](dnn.hkustvis.org)
-![web_contrib](https://github.com/wangqianwen0418/DNN-Genealogy/tree/master/public/images/dnn_contrib.png)
+![web_contrib](https://github.com/wangqianwen0418/DNN-Genealogy/blob/master/public/images/dnn_contrib.png)
