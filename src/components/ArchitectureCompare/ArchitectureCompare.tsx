@@ -185,7 +185,7 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
         let res = await axios.get('../../data/models/' + model + '.json'),
             nodes: EvoNode[]
 
-        console.info(res.data)
+        // console.info(res.data)
         if (idx === 1) {
             this.setState({ 
                 model1: model, 
@@ -218,13 +218,14 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
     render() {
         let {network, dnns} = this.props
         let options = generateOptions(dnns)
-        console.info(this.props.dnns)
+        // console.info(this.props.dnns)
         if (!this.state.comparing) {
             return (
                 <div className="ArchitectureCompare" >
                     <Col span={24} className="ArchitectureColumn">
                         <Cascader
-                            options={options.filter((d: any) => network === d.label)}
+                            // options={options.filter((d: any) => network === d.label)}
+                            options={options}
                             placeholder={`Choose Model in ${network}`}
                             onChange={(value: any) => { this.getData(value[value.length - 1], 1) }}
                             expandTrigger="hover"
@@ -258,7 +259,8 @@ export default class ArchitectureCompare extends React.Component<Props, State> {
                 <div className="ArchitectureCompare" >
                     <Col span={12} className="ArchitectureColumn">
                         <Cascader
-                            options={options.filter((d: any) => network === d.label)}
+                            // options={options.filter((d: any) => network === d.label)}
+                            options={options}
                             placeholder={`Choose Model in ${network}`}
                             onChange={(value: any) => { this.getData(value[value.length - 1], 1) }}
                             expandTrigger="hover"

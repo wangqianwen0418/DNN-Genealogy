@@ -46,13 +46,13 @@ def alexnet_model(img_shape=(224, 224, 3), n_classes=1000, l2_reg=0.,
 	x = Dense(3072, activation='relu', name='fc1')(x)
 	# x = BatchNormalization()(x)
 	# x = Activation('relu')(x)
-	x = Dropout(0.5)(x)
+	# x = Dropout(0.5)(x)
 
 	# Layer 7
 	x = Dense(4096, activation='relu', name="fc2")(x)
 	# x = BatchNormalization()(x)
 	# x = Activation('relu')(x)
-	x = Dropout(0.5)(x)
+	# x = Dropout(0.5)(x)
 
 	# Layer 8
 	x = Dense(n_classes, activation='softmax', name="fc3")(x)

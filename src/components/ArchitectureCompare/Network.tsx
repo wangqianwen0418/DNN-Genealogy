@@ -9,7 +9,7 @@ import * as d3 from 'd3';
 const node_w: number = 110, margin: number = 10;
 const nodeH = 40, nodeW = 200, expandMaxH = 200, dotBox = 20, dotRadius = 7.5
 let svgWidth = window.innerWidth * 0.35,
-    svgHeight = window.innerHeight * 0.65
+    svgHeight = window.innerHeight * 0.6
 
 export interface Props {
     nodes: EvoNode[],
@@ -146,6 +146,28 @@ export default class Network extends React.Component<Props, State> {
             return { nodes, edges, height, width, scale, transX, transY };
 
     }
+    infoFilter(info:string){
+        if(
+            info.includes('trainable')||
+            info.includes('use_bias')||
+            info.includes('name')||
+            info.includes('data')||
+            info.includes('regularizer')||
+            info.includes('initializer')||
+            info.includes('null')||
+            info.includes('activation')
+            ){
+            return true
+        }else{
+            return false
+        }
+        // if (info.includes(/[0-9]/)){
+        //     return false
+        // }else{
+        //     return true
+        // }
+        
+    }
     drawNodes(nodes: Node[]) {
         let that = this
         return (<g className="nodes" >
@@ -253,12 +275,15 @@ export default class Network extends React.Component<Props, State> {
                                         width: node.textWidth, height: node.height - nodeH,
                                         // transform: `translate (${node.x - node.width / 2}, 
                                         //     ${node.y - node.height / 2})`,
-                                        overflowY: 'scroll',
-                                        overflowX: 'hidden'
+                                        // overflowY: 'scroll',
+                                        // overflowX: 'hidden'
                                     }}
                                 >
                                     {node.details.map((info:string, lineIdx:number) => {
-                                        return (<p
+                                        return (
+                                        this.infoFilter(info)?
+                                        <span/>:
+                                        <div
                                             key={'node_details_'+lineIdx}
                                             style={{
                                                 position: 'relative',
@@ -269,7 +294,8 @@ export default class Network extends React.Component<Props, State> {
                                             }}
                                         >
                                             {info}
-                                        </p>)
+                                        </div>
+                                        )
 
                                     })}
                                 </div>
