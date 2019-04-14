@@ -79,6 +79,69 @@
         "date": "2015.11.03"
     },
     {
+        "ID": "inception_resNet",
+        "models": ["inception_resNet"],
+        "fullname": "inception_resNet",
+        "application": [
+            "1.1.1.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "combine resnet with inception",
+                "ID": "resNet",
+                "link_info_s": "combine",
+                "link_category": "skip connections=>skip connections"
+            },
+            {
+                "link_info_l": "combine resnet with inception",
+                "ID": "inception",
+                "link_info_s": "combine",
+                "link_category": "multi-branch=>multi-branch"
+            }
+        ],
+        "architecture": [
+            "multi-branch",
+            "skip connections"
+        ],
+        "training": [
+            "SGD",
+            "RMSprop",
+            "scaling of the residuals",
+            "dropout",
+            "weight decay"
+        ],
+        "citation": "480",
+        "date": "2016.02.23"
+    },
+    {
+        "ID": "polyInception",
+        "fullname": "polyNet",
+        "application": [
+            "1.1.1.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "generalize the additive combination in Inception residual units via various forms of polynomial compositions; encourages the structural diversity and enhances the expressive power",
+                "ID": "inception_resNet",
+                "link_info_s": "generalize",
+                "link_category": "skip connections+multi-branch=>skip connections+multi-branch"
+            }
+        ],
+        "architecture": [
+            "multi-branch",
+            "skip connections"
+        ],
+        "training": [
+            "SGD",
+            "dropout",
+            "SGD with momentum",
+            "weight decay",
+            "standard relu"
+        ],
+        "citation": "32",
+        "date": "2016.12.17"
+    },
+    {
         "ID": "inception",
         "models": ["inception_v3"],
         "fullname": "inception",
@@ -106,6 +169,46 @@
         ],
         "citation": "5591",
         "date": "2014.09.17"
+    },
+    {
+        "ID": "resNeXt",
+        "fullname": "resNeXt",
+        "application": [
+            "1.1.1.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "similar architeccture; ResNeXt has fewer hyperparameters; ResNeXt is highly modulized",
+                "ID": "inception_resNet",
+                "link_info_s": "highly modulized",
+                "link_category": "skip connections+multi-branch=>skip connections+multi-branch"
+            },
+            {
+                "link_info_l": "add a new dimension called \"cardinality\"",
+                "ID": "resNet",
+                "link_info_s": "residual connections",
+                "link_category": "skip connections=>skip connections"
+            },
+            {
+                "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
+                "ID": "inception",
+                "link_info_s": "split-transfer-merge",
+                "link_category": "multi-branch=>multi-branch"
+            }
+        ],
+        "architecture": [
+            "skip connections",
+            "multi-branch"
+        ],
+        "training": [
+            "SGD",
+            "pre-activation",
+            "batch normalization",
+            "SGD with momentum",
+            "weight decay"
+        ],
+        "citation": "134",
+        "date": "2016.11.16"
     },
     {
         "ID": "denseNet",
@@ -224,41 +327,6 @@
         ],
         "citation": "31",
         "date": "2017.06.06"
-    },
-    {
-        "ID": "inception_resNet",
-        "models": ["inception_resNet"],
-        "fullname": "inception_resNet",
-        "application": [
-            "1.1.1.general recognition"
-        ],
-        "parents": [
-            {
-                "link_info_l": "combine resnet with inception",
-                "ID": "resNet",
-                "link_info_s": "combine",
-                "link_category": "skip connections=>skip connections"
-            },
-            {
-                "link_info_l": "combine resnet with inception",
-                "ID": "inception",
-                "link_info_s": "combine",
-                "link_category": "multi-branch=>multi-branch"
-            }
-        ],
-        "architecture": [
-            "multi-branch",
-            "skip connections"
-        ],
-        "training": [
-            "SGD",
-            "RMSprop",
-            "scaling of the residuals",
-            "dropout",
-            "weight decay"
-        ],
-        "citation": "480",
-        "date": "2016.02.23"
     },
     {
         "ID": "mobileNet",
@@ -429,34 +497,6 @@
         "date": "2016.05.24"
     },
     {
-        "ID": "polyInception",
-        "fullname": "polyNet",
-        "application": [
-            "1.1.1.general recognition"
-        ],
-        "parents": [
-            {
-                "link_info_l": "generalize the additive combination in Inception residual units via various forms of polynomial compositions; encourages the structural diversity and enhances the expressive power",
-                "ID": "inception_resNet",
-                "link_info_s": "generalize",
-                "link_category": "skip connections+multi-branch=>skip connections+multi-branch"
-            }
-        ],
-        "architecture": [
-            "multi-branch",
-            "skip connections"
-        ],
-        "training": [
-            "SGD",
-            "dropout",
-            "SGD with momentum",
-            "weight decay",
-            "standard relu"
-        ],
-        "citation": "32",
-        "date": "2016.12.17"
-    },
-    {
         "ID": "diracNet",
         "fullname": "diracNet",
         "application": [
@@ -517,46 +557,6 @@
         ],
         "citation": "5464",
         "date": "2015.12.10"
-    },
-    {
-        "ID": "resNeXt",
-        "fullname": "resNeXt",
-        "application": [
-            "1.1.1.general recognition"
-        ],
-        "parents": [
-            {
-                "link_info_l": "similar architeccture; ResNeXt has fewer hyperparameters; ResNeXt is highly modulized",
-                "ID": "inception_resNet",
-                "link_info_s": "highly modulized",
-                "link_category": "skip connections+multi-branch=>skip connections+multi-branch"
-            },
-            {
-                "link_info_l": "add a new dimension called \"cardinality\"",
-                "ID": "resNet",
-                "link_info_s": "residual connections",
-                "link_category": "skip connections=>skip connections"
-            },
-            {
-                "link_info_l": "exploiting the split-transform-merge strategy in an easy, extensible way",
-                "ID": "inception",
-                "link_info_s": "split-transfer-merge",
-                "link_category": "multi-branch=>multi-branch"
-            }
-        ],
-        "architecture": [
-            "skip connections",
-            "multi-branch"
-        ],
-        "training": [
-            "SGD",
-            "pre-activation",
-            "batch normalization",
-            "SGD with momentum",
-            "weight decay"
-        ],
-        "citation": "134",
-        "date": "2016.11.16"
     },
     {
         "ID": "SENet",
