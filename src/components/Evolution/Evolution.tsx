@@ -655,7 +655,7 @@ export default class Evolution extends React.Component<Props, State>{
                 })}
             </div>
         )
-        let strokeWidth = 1+edgeWeight*1, strokeOpacity = 0.25 + edgeWeight*0.6
+        let strokeWidth = 1+edgeWeight*1, strokeOpacity = 0.25 + edgeWeight*0.4
         return (
             <g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
                 {
@@ -665,8 +665,8 @@ export default class Evolution extends React.Component<Props, State>{
                         d={pathData}
                         // stroke={hoverLegend ? getColor(keyArc) : '#999'}
                         // stroke={hoverLegend|| hovered ? '#444' : strokeColor}
-                        stroke="#555"
-                        strokeWidth={strokeWidth}
+                        stroke={hoverLegend || hovered?'#0175d2':'#555'}
+                        strokeWidth={hoverLegend || hovered?2:strokeWidth}
                         // stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
                         // stroke={clickLegend ? "gray" : getColor(key)}
                         fill="none"
