@@ -453,7 +453,12 @@ export default class Evolution extends React.Component<Props, State>{
         })
         dag.edges().forEach((e: Edge) => {
             if (dag.node(e.v) && dag.node(e.w)) {
-                edges.push(dag.edge(e))
+                var edge = dag.edge(e), 
+                typesV = dag.node(e.v).architecture, 
+                typesW = dag.node(e.w).architecture,
+                VinW = typesV.filter((t:string)=>typesW.includes(t)).length
+                edge.weight = VinW/(typesV.length + typesW.length - VinW)
+                edges.push(edge)
             }
         })
 
@@ -553,7 +558,7 @@ export default class Evolution extends React.Component<Props, State>{
         })
     }
     oneEdge(edge: GraphEdge, i: number) {
-        let { points, from, to, label_s, label_l, cate } = edge,
+        let { points, from, to, label_s, label_l, cate, weight:edgeWeight } = edge,
             { selectedNode, hoverEdge, transX, transY, scale, showLabel, legend } = this.state,
             selectedID = selectedNode ? selectedNode.label : undefined,
             // clickLegend = this.state.legend[cate] ? this.state.legend[cate].click : false,
@@ -650,6 +655,7 @@ export default class Evolution extends React.Component<Props, State>{
                 })}
             </div>
         )
+        let strokeWidth = 1+edgeWeight*1, strokeOpacity = 0.25 + edgeWeight*0.6
         return (
             <g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
                 {
@@ -658,15 +664,15 @@ export default class Evolution extends React.Component<Props, State>{
                         id={`${from}->${to}`}
                         d={pathData}
                         // stroke={hoverLegend ? getColor(keyArc) : '#999'}
-                        stroke={hoverLegend ? '#555' : '#999'}
-                        // stroke="#999"
-                        strokeWidth={2}
+                        // stroke={hoverLegend|| hovered ? '#444' : strokeColor}
+                        stroke="#555"
+                        strokeWidth={strokeWidth}
                         // stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
                         // stroke={clickLegend ? "gray" : getColor(key)}
                         fill="none"
                         // strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 2}
                         // opacity={(hoverLegend|| hovered) ? 1 : (clickLegend ? 0.4 : .4)}
-                        opacity={(hoverLegend || hovered) ? 1 : 0.3}
+                        opacity={(hoverLegend || hovered) ? 1 : strokeOpacity}
                     />
                 }
 
