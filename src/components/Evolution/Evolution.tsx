@@ -46,16 +46,29 @@ const appData = [
         key: 'classification',
         value: '1.',
         selectable: false,
-        children: [{
-            label: 'classification/Non-Sequential Data',
-            key: 'Non-Sequential Data',
-            value: '1.1.'
-        },
-        {
-            label: 'classification/Sequential Data',
-            key: 'Sequential Data',
-            value: '1.2.'
-        }],
+        children:[
+            {
+                label:"non-euclidean data",
+                key: "non-euclidean data",
+                value:'1.0.'
+            },
+            {
+                label:'euclidean data',
+                key: 'euclidean data',
+                selectable: false,
+                value:'1.',
+                children: [{
+                    label: 'Non-Sequential Data',
+                    key: 'Non-Sequential Data',
+                    value: '1.1.'
+                },
+                {
+                    label: 'Sequential Data',
+                    key: 'Sequential Data',
+                    value: '1.2.'
+                }],
+            },
+        ],
     },
     {
         label: 'Object Detection & Instance Segmentation',
@@ -333,8 +346,8 @@ export default class Evolution extends React.Component<Props, State>{
                 //     }))
                 // ),
                 // doi = api_diff + r_dist * distance
-                let doi = api + r_dist * distance
-
+                let doi = api + r_dist * distance 
+                doi = isFinite(doi)?doi:0
                 dag.setNode(v, {
                     ...node,
                     api: api,
@@ -380,7 +393,6 @@ export default class Evolution extends React.Component<Props, State>{
         //     }
 
         // }
-
         // normalize doi to 0-1, resize the node
         dag.nodes().forEach((v: string) => {
             let node = dag.node(v),
@@ -655,7 +667,7 @@ export default class Evolution extends React.Component<Props, State>{
                 })}
             </div>
         )
-        let strokeWidth = 1+edgeWeight*1, strokeOpacity = 0.25 + edgeWeight*0.4
+        let strokeWidth = 1.5+edgeWeight*0.5, strokeOpacity = 0.15 + edgeWeight*0.8
         return (
             <g className="Edge EdgeGroup" key={`${i}_${from}->${to}`}>
                 {
@@ -665,14 +677,15 @@ export default class Evolution extends React.Component<Props, State>{
                         d={pathData}
                         // stroke={hoverLegend ? getColor(keyArc) : '#999'}
                         // stroke={hoverLegend|| hovered ? '#444' : strokeColor}
-                        stroke={hoverLegend || hovered?'#0175d2':'#555'}
+                        stroke={hoverLegend || hovered?getColor(keyArc):'#555'}
                         strokeWidth={hoverLegend || hovered?2:strokeWidth}
                         // stroke={(hoverLegend || hovered) && !clickLegend ? '#444' : '#999'}
                         // stroke={clickLegend ? "gray" : getColor(key)}
                         fill="none"
                         // strokeWidth={(hoverLegend || hovered) && !clickLegend ? 2 : 2}
                         // opacity={(hoverLegend|| hovered) ? 1 : (clickLegend ? 0.4 : .4)}
-                        opacity={(hoverLegend || hovered) ? 1 : strokeOpacity}
+                        // opacity={(hoverLegend || hovered) ? 1 : strokeOpacity}
+                        opacity={strokeOpacity}
                     />
                 }
 

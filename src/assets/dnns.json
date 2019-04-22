@@ -1,5 +1,233 @@
 [
     {
+        "ID": "ChebNet",
+        "models": ["ChebNet"],
+        "fullname": "Chebyshev Spectral CNN",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [],
+        "architecture": [
+            "streamlined"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "669",
+        "date": "2016.06.30"
+    },
+    {
+        "ID": "1stChebNet",
+        "models": ["1stChebNet"],
+        "fullname": "1st approximation of ChebNet",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "a first-order approximation of ChebNet; bridges the gap between spectral-based methods and spatial-based methods",
+                "ID": "ChebNet",
+                "link_info_s": "1st approximation",
+                "link_category": "streamlined=>streamlined"
+            }
+        ],
+        "architecture": [
+            "streamlined"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "956",
+        "date": "2017.02.22"
+    },
+    {
+        "ID": "fastGCN",
+        "models": ["fastGCN"],
+        "fullname": "fastGCN",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "Monte Carlo and variance reduction are used to facilitate the training process",
+                "ID": "1stChebNet",
+                "link_info_s": "faster",
+                "link_category": "streamlined=>streamlined"
+            }
+        ],
+        "architecture": [
+            "streamlined"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "41",
+        "date": "2018.01.30"
+    },
+    {
+        "ID": "AGCN",
+        "models": ["AGCN"],
+        "fullname": "Adaptive Graph Convolution Network",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "a task-driven adaptive graph is learned for each graph data while training",
+                "ID": "1stChebNet",
+                "link_info_s": "adaptive ",
+                "link_category": "streamlined=>streamlined"
+            }
+        ],
+        "architecture": [
+            "streamlined"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "21",
+        "date": "2018.01.10"
+    },
+    {
+        "ID": "MoNet",
+        "models": ["MoNet"],
+        "fullname": "mixture model networks",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "MoNet is a spatial framework and addresses the  domain-dependent criticism of spectral approaches",
+                "ID": "1stChebNet",
+                "link_info_s": "spatial domain",
+                "link_category": "streamlined=>streamlined"
+            }
+        ],
+        "architecture": [
+            "streamlined"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "201",
+        "date": "2016.11.25"
+    },
+    {
+        "ID": "GraphSage",
+        "models": ["GraphSage"],
+        "fullname": "graph sample and aggregate",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "extend GCNs to the task of inductive unsupervised learning",
+                "ID": "1stChebNet",
+                "link_info_s": " inductive",
+                "link_category": "streamlined=>streamlined"
+            }
+        ],
+        "architecture": [
+            " skip connections"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "313",
+        "date": "2017.06.07"
+    },
+    {
+        "ID": "GGNN",
+        "models": ["GGNN"],
+        "fullname": "gated graph neural network",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [],
+        "architecture": [
+            "gated"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "360",
+        "date": "2016.05.03"
+    },
+    {
+        "ID": "highway_GCN",
+        "models": ["highway_GCN"],
+        "fullname": "highway GCN",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "add highway network gates to controll the amount of useful neighbourhood expansion in GCN",
+                "ID": "1stChebNet",
+                "link_info_s": "gated skip",
+                "link_category": "streamlined=>gated"
+            }
+        ],
+        "architecture": [
+            "skip connections",
+            "gated"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "8",
+        "date": "2018.04.22"
+    },
+    {
+        "ID": "JKNet",
+        "models": ["JKNet"],
+        "fullname": "jump knowledge network",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "add highway network gates to controll the amount of useful neighbourhood expansion in GCN",
+                "ID": "GraphSage",
+                "link_info_s": "various neighborhood",
+                "link_category": "skip connections=>gated"
+            }
+        ],
+        "architecture": [
+            "skip connections",
+            "gated"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "16",
+        "date": "2018.06.09"
+    },
+    {
+        "ID": "graphLSTM",
+        "models": ["graphLSTM"],
+        "fullname": "graph LSTM",
+        "application": [
+            "1.0.general recognition"
+        ],
+        "parents": [
+            {
+                "link_info_l": "subsumes linear-chain and tree LSTMs",
+                "ID": "GGNN",
+                "link_info_s": "generalize lstm",
+                "link_category": "gated=>gated"
+            }
+        ],
+        "architecture": [
+            "gated"
+        ],
+        "training": [
+            "SGD"
+        ],
+        "citation": "67",
+        "date": "2017.08.12"
+    },
+    {
         "ID": "alexNet",
         "models": ["alexNet"],
         "fullname": "alexNet",

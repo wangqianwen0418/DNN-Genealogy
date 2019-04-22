@@ -958,5 +958,105 @@
                 "https://arxiv.org/abs/1406.4729"
             ]
         ]
+    },
+    "ChebNet":{
+        "info":"ChebNet generalizes convolutional neural networks (CNNs) from low-dimensional regular grids, where image, video and speech are represented, to high-dimensional irregular domains, such as social networks, brain connectomes or words' embedding, represented by graphs. This work presents a formulation of CNNs in the context of spectral graph theory and provides the necessary mathematical background and efficient numerical schemes to design fast localized convolutional filters on graphs.",
+        "fullname":"Chebyshev Spectral CNN",
+        "links":[
+            [
+                "Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering",
+                "https://arxiv.org/abs/1606.09375"
+            ]
+        ]
+    },
+    "1stChebNet":{
+        "info":"With a localized first-order approximation of spectral graph convolutions, 1stChebNet scales linearly in the number of graph edges and learns hidden layer representations that encode both local graph structure and features of nodes. 1stChebNet is simply termed as GCN and is considered as a strong baseline in the research community. ",
+        "fullname":"Chebyshev Spectral CNN",
+        "links":[
+            [
+                "Semi-Supervised Classification with Graph Convolutional Networks",
+                "https://arxiv.org/abs/1609.02907"
+            ]
+        ]
+    },
+    "fastGCN":{
+        "info":"The authors interpret graph convolutions as integral transforms of embedding functions under probability measures. Such an interpretation allows for the use of Monte Carlo approaches to consistently estimate the integrals, which in turn leads to a batched and fast training scheme.",
+        "fullname":"Fast Graph Convolutional Networks",
+        "links":[
+            [
+                "FastGCN: Fast Learning with Graph Convolutional Networks via Importance Sampling",
+                "https://arxiv.org/abs/1801.10247"
+            ]
+        ]
+    },
+    "AGCN":{
+        "info":"The authors interpret graph convolutions as integral transforms of embedding functions under probability measures. Such an interpretation allows for the use of Monte Carlo approaches to consistently estimate the integrals, which in turn leads to a batched and fast training scheme.",
+        "fullname":"Adaptive Graph Convolutional Networks",
+        "links":[
+            [
+                "Adaptive Graph Convolutional Neural Networks",
+                "https://arxiv.org/abs/1801.03226"
+            ]
+        ]
+    },
+    "MoNet":{
+        "info":"MoNet is a generic spatial domain framework for deep learning that allows to generalize CNN architectures to non-Euclidean domains (graphs and manifolds).",
+        "fullname":"mixture model networks",
+        "links":[
+            [
+                "Geometric deep learning on graphs and manifolds using mixture model CNNs",
+                "https://arxiv.org/abs/1611.08402"
+            ]
+        ]
+    },
+    "GraphSage":{
+        "info":"GraphSage generates embeddings by sampling and aggregating features from a node’s local neighborhood.",
+        "fullname":"graph sample and aggregate",
+        "links":[
+            [
+                "Inductive Representation Learning on Large Graphs",
+                "https://arxiv.org/abs/1706.02216"
+            ]
+        ]
+    },
+    "highway_GCN":{
+        "info":"Apply highway gates to GCN to controll the amount of useful neighbourhood expansion.",
+        "fullname":"highway GCN",
+        "links":[
+            [
+                "Semi-supervised User Geolocation via Graph Convolutional Networks",
+                "https://arxiv.org/abs/1804.08049"
+            ]
+        ]
+    },
+    "GGNN":{
+        "info":"Apply GRU to graph neural networks and then extend to output sequences.",
+        "fullname":"gated graph neural network",
+        "links":[
+            [
+                "Gated Graph Sequence Neural Networks",
+                "https://arxiv.org/abs/1511.05493"
+            ]
+        ]
+    },
+    "JKNet":{
+        "info":"Jumping knowledge (JK) networks flexibly leverages, for each node, different neighborhood ranges to enable better structure-aware representation.",
+        "fullname":"jump knowledge network",
+        "links":[
+            [
+                "Representation Learning on Graphs with Jumping Knowledge Networks",
+                "https://arxiv.org/abs/1806.03536"
+            ]
+        ]
+    },
+    "graphLSTM":{
+        "info":"Graph LSTM is the generalization of LSTM from sequential data or multi-dimensional data to general graph-structured data.",
+        "fullname":"graph LSTM",
+        "links":[
+            [
+                "Cross-Sentence N-ary Relation Extraction with Graph LSTMs",
+                "https://arxiv.org/abs/1708.03743"
+            ]
+        ]
     }
 }
