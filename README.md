@@ -27,7 +27,7 @@ npm start
 ```
 
 ## Contribution
-DNN Genealogy is extensible and will continue to be updated to reflect future advancements in DNNs.  
+DNN Genealogy is extensible web-based application and will continue to be updated to reflect future advancements in DNNs.  
 Your contributions are wellcomed!
 
 There are two ways to contribute.
