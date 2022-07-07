@@ -10,7 +10,7 @@
     "d3": "^4.12.2",
     "echarts": "^4.1.0",
     "echarts-for-react": "^2.0.14",
-    "moment": "^2.20.1",
+    "moment": "^2.29.4",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
