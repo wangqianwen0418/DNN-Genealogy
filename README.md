@@ -5,7 +5,7 @@ DNN Genealogy is an interactive visualization tool that offers a visual summary 
 
 
 
-The web demo is available at http://dnn.hkustvis.org
+The web demo is available at https://qianwen.info/demos/DNNGenealogy/
 
 ![web_demo](https://github.com/wangqianwen0418/DNN-Genealogy/blob/master/public/images/dnn_demo.png)
 
